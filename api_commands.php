@@ -222,6 +222,7 @@ function format_directory_contents(array $contents): string {
     $output = [];
     foreach ($contents as $name => $content) {
         if (is_array($content)) {
+            if ($name === "metadata") continue;
             $output[] = $name . "/";
         } else {
             $output[] = $name;
@@ -539,7 +540,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $output = "";
     switch ($cmd) {
         case 'ls':
-            $output = process_ls($fileSystem, $currentDir);
+            if ($arg === '-l') {
+                $output = process_ls_l($fileSystem, $currentDir);
+            }
+            else $output = process_ls($fileSystem, $currentDir);
             break;
         case 'cd':
             $output = process_cd($currentDir, $fileSystem, $arg);
