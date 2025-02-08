@@ -525,6 +525,27 @@ function delete_recursive(&$directory) {
     }
 }
 
+function process_chmod($fileSystem, $currentDirectory, $argument, $targetFile) : string {
+    $output = process_ls_l($fileSystem, $currentDirectory);
+    $lines = explode("\n", trim($output)); // Split output into lines
+   $found = false;
+    foreach ($lines as &$line) { // Use reference to modify $line directly
+        $words = preg_split('/\s+/', $line); // Split each line into words
+        if (empty($words)) continue;
+
+        // Check if this is the target file
+        if (end($words) === $targetFile) {
+            $found = true;
+            if ($argument === "u+x") {
+                $words[0] = substr_replace($words[0], 'x', 3, 1); // Modify execute bit for user
+            }
+        $line = implode(" ", $words); // Reconstruct modified line
+        }
+    }
+
+    if (!$found) return "Error: $targetFile Not Found\n";
+    else return implode("\n", $lines) . "\n"; // Return the updated output otherwise return error
+}
 
 
 // Handle the command
