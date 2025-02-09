@@ -21,7 +21,27 @@ $fileSystem = [
                 "created" => "2025-02-01 10:00:00",
                 "modified" => "2025-02-01 10:05:00"
             ],
-            "hello.txt" => "
+            "strawberryguy.txt" => "
+            I can tell that the grass is greener
+            On the other side, with you
+            I wouldn't know, what to do without you
+            Stay by my side eternally
+            
+            What would I do
+            Without someone like you?
+            What would I do
+            Without someone like you?
+            What would I do?
+            
+            I can tell, that the waters clearer
+            On the other side, with you
+            I know you care, about the faults in my life
+            Just promise me this, stay with me
+            
+            What would I do
+            Without someone like you
+            ",
+            "dino.txt" => "
                      __ 
                     / _) .. ROAR!!!
            _.----._/ /
@@ -38,95 +58,93 @@ $fileSystem = [
                 "modified" => "2025-02-01 10:10:00",
                 "size" => 1234 // file size in bytes
                 ],
-            "Subfolder" => [
-                "metadata" => [
-                    "2",
-                    "permissions" => "drwxr-xr-x",
-                    "owner" => "user1",
-                    "group" => "group1",
-                    "created" => "2025-02-01 10:05:00",
-                    "modified" => "2025-02-01 10:07:00"
-                ],
-                "file1.txt" => [
+                "Subfolder" => [
                     "metadata" => [
-                        "3",
-                        "permissions" => "-rw-r--r--",
+                        "2",
+                        "permissions" => "drwxr-xr-x",
                         "owner" => "user1",
                         "group" => "group1",
                         "created" => "2025-02-01 10:05:00",
-                        "modified" => "2025-02-01 10:06:00",
-                        "size" => 234
+                        "modified" => "2025-02-01 10:07:00"
+                    ],
+                    "file1.txt" => [
+                        "metadata" => [
+                            "3",
+                            "permissions" => "-rw-r--r--",
+                            "owner" => "user1",
+                            "group" => "group1",
+                            "created" => "2025-02-01 10:05:00",
+                            "modified" => "2025-02-01 10:06:00",
+                            "size" => 234
+                        ]
                     ]
                 ]
-            ]
-        ],
-        "Pictures" => [
-            "metadata" => [
-                "4",
-                "permissions" => "drwxr-xr-x",
-                "owner" => "user2",
-                "group" => "group2",
-                "created" => "2025-02-01 10:10:00",
-                "modified" => "2025-02-01 10:12:00"
             ],
-            "photo.jpg" => [
+            "Pictures" => [
                 "metadata" => [
-                    "5",
-                    "permissions" => "-rw-r--r--",
+                    "4",
+                    "permissions" => "drwxr-xr-x",
                     "owner" => "user2",
                     "group" => "group2",
                     "created" => "2025-02-01 10:10:00",
-                    "modified" => "2025-02-01 10:11:00",
-                    "size" => 789
+                    "modified" => "2025-02-01 10:12:00"
+                ],
+                "photo.jpg" => [
+                    "metadata" => [
+                        "5",
+                        "permissions" => "-rw-r--r--",
+                        "owner" => "user2",
+                        "group" => "group2",
+                        "created" => "2025-02-01 10:10:00",
+                        "modified" => "2025-02-01 10:11:00",
+                        "size" => 789
+                    ]
                 ]
-            ]
-        ],
-        "Videos" => [
-            "metadata" => [
-                "6",
-                "permissions" => "drwxr-xr-x",
-                "owner" => "user3",
-                "group" => "group3",
-                "created" => "2025-02-01 10:15:00",
-                "modified" => "2025-02-01 10:16:00"
             ],
-        ],
-        "Projects" => [
-            "metadata" => [
-                "7",
-                "permissions" => "drwxr-xr-x",
-                "owner" => "user1",
-                "group" => "group1",
-                "created" => "2025-02-01 10:20:00",
-                "modified" => "2025-02-01 10:21:00"
-            ],
-            "project1" => [
+            "Videos" => [
                 "metadata" => [
-                    "8",
+                    "6",
+                    "permissions" => "drwxr-xr-x",
+                    "owner" => "user3",
+                    "group" => "group3",
+                    "created" => "2025-02-01 10:15:00",
+                    "modified" => "2025-02-01 10:16:00"
+                ],
+            ],
+            "Projects" => [
+                "metadata" => [
+                    "7",
                     "permissions" => "drwxr-xr-x",
                     "owner" => "user1",
                     "group" => "group1",
                     "created" => "2025-02-01 10:20:00",
                     "modified" => "2025-02-01 10:21:00"
                 ],
-                "file2.txt" => [
+                "project1" => [
                     "metadata" => [
-                        "9",
-                        "permissions" => "-rw-r--r--",
+                        "8",
+                        "permissions" => "drwxr-xr-x",
                         "owner" => "user1",
                         "group" => "group1",
                         "created" => "2025-02-01 10:20:00",
-                        "modified" => "2025-02-01 10:21:00",
-                        "size" => 1012
+                        "modified" => "2025-02-01 10:21:00"
+                    ],
+                    "file2.txt" => [
+                        "metadata" => [
+                            "9",
+                            "permissions" => "-rw-r--r--",
+                            "owner" => "user1",
+                            "group" => "group1",
+                            "created" => "2025-02-01 10:20:00",
+                            "modified" => "2025-02-01 10:21:00",
+                            "size" => 1012
+                        ]
                     ]
                 ]
             ]
         ]
-    ]
-];
-
-
-
+    ];
+    
 if (!isset($_SESSION['fileSystem'])) {
     $_SESSION['fileSystem'] = $fileSystem;
 }
@@ -268,7 +286,7 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
         foreach ($pathParts as $part) {
                 // Check if the directory exists
                 if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-                    return "Error: Directory '$part' not found.\n";
+                    return "ErroR: Directory '$part' not found.\n";
                 }
                 $currentLevel = &$currentLevel[$part];
                 $newDirectory = rtrim($newDirectory, "/") . "/" . $part;
@@ -421,7 +439,7 @@ function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
     // Traverse to the current directory
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "Error: '$part' not found.\n";
+            return "ERror: '$part' not found.\n";
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
@@ -455,19 +473,19 @@ function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
     // Traverse to the current directory
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "Error: Directory '$part' not found.\n";
+            return "ErRor: Directory '$part' not found.\n";
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
 
     // Check if the target directory exists
     if (!isset($currentLevel[$argument])) {
-        return "Error: Directory '$argument' not found.\n";
+        return "ErRor: Directory '$argument' not found.\n";
     }
 
     // Check if it's actually a directory
     if (!is_array($currentLevel[$argument])) {
-        return "Error: '$argument' is not a directory.\n";
+        return "Eror: '$argument' is not a directory.\n";
     }
 
     // Check if the directory is empty before deleting
@@ -480,6 +498,7 @@ function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
 
     return "'$argument' has been removed.\n";
 }
+
 function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
     // Prevent deleting parent directory with "rm -rf .."
     if ($argument === "..") {
@@ -494,19 +513,19 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
     // Traverse to the current directory (without checking $argument yet)
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "Error: Directory '$part' not found.\n";
+            return "ErRor: Directory '$part' not found.\n";
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
 
     // Check if the target exists
     if (!isset($currentLevel[$argument])) {
-        return "Error: '$argument' not found.\n";
+        return "ErrRr: '$argument' not found.\n";
     }
 
     // Recursively delete if it's a directory
     if (is_array($currentLevel[$argument])) {
-        delete_recursive($currentLevel[$argument]); // 🔥 Recursively delete contents
+        delete_recursive($currentLevel[$argument]); // recursively delete
     }
 
     // Remove the target (file or now-empty directory)
@@ -525,47 +544,60 @@ function delete_recursive(&$directory) {
     }
 }
 
+function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) : string {
+    // Navigate to the target directory in $fileSystem
+    $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
+    $current = &$fileSystem['/']; // Start at root
 
-function process_chmod($fileSystem, $currentDirectory, $argument, $targetFile) : string {
-    $output = process_ls_l($fileSystem, $currentDirectory);
-    $lines = explode("\n", trim($output)); // Split output into lines
-    $found = false;
-    foreach ($lines as &$line) { // Use reference to modify $line directly
-        $words = preg_split('/\s+/', $line); // Split each line into words
-        if (empty($words)) continue;
-
-        // Check if this is the target file
-        if (end($words) === $targetFile) {
-            $found = true;
-            if ($argument === "u+x" || $argument === "+100") { // add execute permissions to the user
-                $words[0] = substr_replace($words[0], 'x', 3, 1); // Modify execute bit for user
-            }
-            if ($argument === "g-w" || $argument === "-020") //remove write permissions from the group
-                $words[0] = substr_replace($words[0], '-', 5, 1); // Modify execute bit for user
-            }
-            if ($argument === "o=r" || $argument === "=004") { // set only to read for others
-                $words[0] = substr_replace($words[0], '-', 8, 1); // Modify execute bit for user
-                $words[0] = substr_replace($words[0], '-', 9, 1); // Modify execute bit for user
-            }
-            if ($argument === "a+x" || $argument ===  "+111") { // set execution to all
-                $words[0] = substr_replace($words[0], 'x', 3, 1); // Modify execute bit for user
-                $words[0] = substr_replace($words[0], 'x', 6, 1); // Modify execute bit for user
-                $words[0] = substr_replace($words[0], '-', 9, 1); // Modify execute bit for user
-            }
-            if ($argument === "u=rw" || $argument === "=600") { // set only to read and write for user
-                $words[0] = substr_replace($words[0], 'x', 1, 1); // Modify execute bit for user
-                $words[0] = substr_replace($words[0], 'x', 2, 1); // Modify execute bit for user
-                $words[0] = substr_replace($words[0], '-', 3, 1); // Modify execute bit for user
-            }
-            if ($argument === "go-rwx" || $argument === "-077") { //remove permissions for group and others
-                    for ($i = 4; $i < 10; $i++) {
-                        $words[0] = substr_replace($words[0], '-', $i, 1);
-                   }
-               }
-        $line = implode(" ", $words); // Reconstruct modified line
+    foreach ($path as $part) {
+        if (!isset($current[$part]) || !is_array($current[$part])) {
+            return "Directory not found.\n";
         }
-    if (!$found) return "Error: Invalid Input\n";
-    else return implode("\n", $lines) . "\n"; // Return the updated output otherwise return error
+        $current = &$current[$part];
+    }
+
+    // Check if the target file exists and is a file
+    if (!isset($current[$targetFile]) || is_array($current[$targetFile])) {
+        return "File not found or is a directory.\n";
+    }
+
+    // Ensure metadata exists (convert string content to array with metadata)
+    if (is_string($current[$targetFile])) {
+        $content = $current[$targetFile];
+        $current[$targetFile] = [
+            'content' => $content,
+            'metadata' => [
+                'permissions' => '-rw-r--r--',
+                'owner' => 'user',
+                'group' => 'group',
+                'created' => '2025-02-01 10:00:00',
+                'modified' => '2025-02-01 10:10:00'
+            ]
+        ];
+    }
+
+    // Update permissions based on $argument
+    $permissions = str_split($current[$targetFile]['metadata']['permissions']);
+    switch ($argument) {
+        case 'u+x':
+            $permissions[3] = 'x'; // Set user execute
+            break;
+        case 'g-w':
+            $permissions[5] = '-'; // Remove group write
+            break;
+        case 'o=r':
+            // Set others to read-only: r-- (positions 7-9)
+            $permissions[7] = 'r';
+            $permissions[8] = '-';
+            $permissions[9] = '-';
+            break;
+        // Add other cases as needed...
+        default:
+            return "Invalid chmod argument.\n";
+    }
+
+    $current[$targetFile]['metadata']['permissions'] = implode('', $permissions);
+    return "Permissions updated for $targetFile.\n";
 }
 
 function process_grep($filesystem, $currentDirectory, $pattern, $file) : string {
@@ -595,14 +627,22 @@ function process_grep($filesystem, $currentDirectory, $pattern, $file) : string 
                         }
                 }
         return empty($results) ? "No matches found\n" : implode("\n", $results);
-    }
-
-
+}
 
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
-    $args = preg_split('/\s+/', $command); // Split by whitespac
+    
+    // Improved argument parsing with quote handling
+    preg_match_all('/"([^"]*)"|\'([^\']*)\'|(\S+)/', $command, $matches);
+    $args = [];
+    foreach ($matches[0] as $match) {
+        $trimmed = trim($match, "'\"");
+        if (!empty($trimmed)) {
+            $args[] = $trimmed;
+        }
+    }
+
     $fileSystem = &$_SESSION['fileSystem'];
     $currentDir = &$_SESSION['currentDirectory'];
 
@@ -610,7 +650,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arg = $args[1] ?? '';
     $arg2 = $args[2] ?? '';
     $output = "";
-    switch ($cmd) {
+
+ switch ($cmd) {
         case 'ls':
             if ($arg === '-l') {
                 $output = process_ls_l($fileSystem, $currentDir);
@@ -645,6 +686,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'refresh':
             $output = process_refresh();
+            break;
+        case 'chmod':
+            $output = process_chmod($fileSystem, $currentDir, $arg, $arg2);
+            break;
+        case 'grep':
+            if (str_starts_with($arg, '"')) continue; //ignore the sttring quotes
+            $output = process_grep($fileSystem, $currentDir, $arg, $arg2);
             break;
         default:
             $output = "Command not recognized: $cmd\n";
