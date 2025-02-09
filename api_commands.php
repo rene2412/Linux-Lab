@@ -525,10 +525,11 @@ function delete_recursive(&$directory) {
     }
 }
 
+
 function process_chmod($fileSystem, $currentDirectory, $argument, $targetFile) : string {
     $output = process_ls_l($fileSystem, $currentDirectory);
     $lines = explode("\n", trim($output)); // Split output into lines
-   $found = false;
+    $found = false;
     foreach ($lines as &$line) { // Use reference to modify $line directly
         $words = preg_split('/\s+/', $line); // Split each line into words
         if (empty($words)) continue;
@@ -536,16 +537,66 @@ function process_chmod($fileSystem, $currentDirectory, $argument, $targetFile) :
         // Check if this is the target file
         if (end($words) === $targetFile) {
             $found = true;
-            if ($argument === "u+x") {
+            if ($argument === "u+x" || $argument === "+100") { // add execute permissions to the user
                 $words[0] = substr_replace($words[0], 'x', 3, 1); // Modify execute bit for user
             }
+            if ($argument === "g-w" || $argument === "-020") //remove write permissions from the group
+                $words[0] = substr_replace($words[0], '-', 5, 1); // Modify execute bit for user
+            }
+            if ($argument === "o=r" || $argument === "=004") { // set only to read for others
+                $words[0] = substr_replace($words[0], '-', 8, 1); // Modify execute bit for user
+                $words[0] = substr_replace($words[0], '-', 9, 1); // Modify execute bit for user
+            }
+            if ($argument === "a+x" || $argument ===  "+111") { // set execution to all
+                $words[0] = substr_replace($words[0], 'x', 3, 1); // Modify execute bit for user
+                $words[0] = substr_replace($words[0], 'x', 6, 1); // Modify execute bit for user
+                $words[0] = substr_replace($words[0], '-', 9, 1); // Modify execute bit for user
+            }
+            if ($argument === "u=rw" || $argument === "=600") { // set only to read and write for user
+                $words[0] = substr_replace($words[0], 'x', 1, 1); // Modify execute bit for user
+                $words[0] = substr_replace($words[0], 'x', 2, 1); // Modify execute bit for user
+                $words[0] = substr_replace($words[0], '-', 3, 1); // Modify execute bit for user
+            }
+            if ($argument === "go-rwx" || $argument === "-077") { //remove permissions for group and others
+                    for ($i = 4; $i < 10; $i++) {
+                        $words[0] = substr_replace($words[0], '-', $i, 1);
+                   }
+               }
         $line = implode(" ", $words); // Reconstruct modified line
         }
-    }
-
-    if (!$found) return "Error: $targetFile Not Found\n";
+    if (!$found) return "Error: Invalid Input\n";
     else return implode("\n", $lines) . "\n"; // Return the updated output otherwise return error
 }
+
+function process_grep($filesystem, $currentDirectory, $pattern, $file) : string {
+    $currentDirectory = rtrim($currentDirectory, "/");
+    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+    $currentLevel = $filesystem["/"];
+    foreach ($pathParts as $part) {
+        if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            return "Error: Invalid directory path.\n";
+        }
+        $currentLevel = $currentLevel[$part];
+    }
+    if (!isset($currentLevel[$file])) {
+        return "Error: File not found.\n";
+    }
+    if (is_array($currentLevel[$file])) {
+        return "Error: '$file' is a directory.\n";
+    }
+    $output = $currentLevel[$file];
+    //split the file into lines 
+    $lines = explode("\n", trim($output));
+    //for every word in our lines, search for the pattern
+    $results = [];
+    foreach($lines as $line) {
+        if (strpos($line, $pattern) !== false) {
+                $results[] = $line;
+                        }
+                }
+        return empty($results) ? "No matches found\n" : implode("\n", $results);
+    }
+
 
 
 // Handle the command
