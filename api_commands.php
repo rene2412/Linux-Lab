@@ -21,26 +21,62 @@ $fileSystem = [
                 "created" => "2025-02-01 10:00:00",
                 "modified" => "2025-02-01 10:05:00"
             ],
-            "strawberryguy.txt" => "
-            I can tell that the grass is greener
-            On the other side, with you
-            I wouldn't know, what to do without you
-            Stay by my side eternally
+            "WhatWouldIdo.txt" => "
+I can tell that the grass is greener
+On the other side, with you
+I wouldn't know, what to do without you
+Stay by my side eternally
             
-            What would I do
-            Without someone like you?
-            What would I do
-            Without someone like you?
-            What would I do?
+What would I do
+Without someone like you?
+What would I do
+Without someone like you?
+What would I do?
             
-            I can tell, that the waters clearer
-            On the other side, with you
-            I know you care, about the faults in my life
-            Just promise me this, stay with me
+I can tell, that the waters clearer
+On the other side, with you
+I know you care, about the faults in my life
+Just promise me this, stay with me
             
-            What would I do
-            Without someone like you
-            ",
+What would I do
+Without someone like you",
+    
+            	 "BirchTree.txt" => "
+I could be my best if I spoke my own head for you
+You could see me now if you told yourself how you knew me
+Oh, are you not lonely?
+And oh, as you sit by the birch tree
+Come to the tree, bring a birthday card for you
+Seem a bit shocked, but crack a brief smile
+I notice
+Oh, you're not lonely
+And oh, as we sit by the birch tree
+As she goes in again
+I look at my own head
+Back from the blue, I know it's nothing new
+I know we're pretty young but I see what people grow into
+'Cause two years ahead I can see that you might not know me
+Oh, I could be lonely
+And oh, as I sit by the bitch tree",
+	    
+	 "WithoutYou.txt" => "
+Do you really have to talk
+About the things you do with him?
+Do you really have to talk about it love?
+Do you really have to talk
+About the way that you love him?
+Do you really have to talk about your love?
+Nah-nah-nah-nah...
+Living my life without you
+Nah-nah-nah-nah...
+Living my life without you
+Did you really have to do
+Those things you knew that could hurt me?
+Did you really have to do those things to me?
+But I know that I can't be
+The one you love that's in your life
+But I know that I can't be the one you love",
+
             "dino.txt" => "
                      __ 
                     / _) .. ROAR!!!
@@ -600,34 +636,74 @@ function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) 
     return "Permissions updated for $targetFile.\n";
 }
 
-function process_grep($filesystem, $currentDirectory, $pattern, $file) : string {
+
+function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
+        $files = []; // will hold all the files in current directory, the key will hold the file name and value will be its content
+         $currentDirectory = rtrim($currentDirectory, "/");
+        $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+        $currentLevel = $fileSystem["/"];
+        foreach ($pathParts as $part) {
+        if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            return [];
+                }
+        $currentLevel = $currentLevel[$part];
+        }
+        //for every thing in the current directory
+        foreach($currentLevel as $name => $content) {
+        //if the content is a directory, skip it
+        if (!is_array($content)) {
+                $files[$name] = $content;
+                }
+        }
+        return $files;
+}
+
+
+
+function process_grep($fileSystem, $currentDirectory, $pattern, $file) : string {
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
-    $currentLevel = $filesystem["/"];
+    $currentLevel = $fileSystem["/"];
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return "Error: Invalid directory path.\n";
         }
         $currentLevel = $currentLevel[$part];
     }
-    if (!isset($currentLevel[$file])) {
-        return "Error: File not found.\n";
-    }
-    if (is_array($currentLevel[$file])) {
-        return "Error: '$file' is a directory.\n";
-    }
-    $output = $currentLevel[$file];
-    //split the file into lines 
-    $lines = explode("\n", trim($output));
-    //for every word in our lines, search for the pattern
     $results = [];
+    //look for the pattern in every txt file in the current directory 
+    if ($file === "*.txt") {
+        $files = retrieve_files_from_directory($fileSystem, $currentDirectory); // check if .txt files exist    
+        foreach($files as $name => $content) {
+                if (str_ends_with($name, ".txt")) {
+                        $lines = explode("\n", trim($content));
+                        foreach($lines as $line) {
+                                if (strpos($line, $pattern) !== false) {
+                                        $results[] = "$name: $line";
+                                }
+                        }
+                }
+          }
+    }
+    else {
+     if (!isset($currentLevel[$file])) {
+        return "Error: File not found.\n";
+      }
+    if (is_array($currentLevel[$file])) {
+         return "Error: '$file' is a directory.\n";
+      }
+    //split the file into lines 
+    $lines = explode("\n", trim($currentLevel[$file]));
+    //for every word in our lines, search for the pattern
     foreach($lines as $line) {
         if (strpos($line, $pattern) !== false) {
                 $results[] = $line;
-                        }
                 }
+           }
+    }
         return empty($results) ? "No matches found\n" : implode("\n", $results);
-}
+  }
+
 
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
