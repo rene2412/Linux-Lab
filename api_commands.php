@@ -9,39 +9,66 @@ header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
-// Simulated file system
 $fileSystem = [
     "/" => [
         "Documents" => [
-            "metadata" => [
+            "metadata" => 	[
                  "0",
                 "permissions" => "drwxr-xr-x", // Directory permissions
                 "owner" => "user",
                 "group" => "group",
                 "created" => "2025-02-01 10:00:00",
                 "modified" => "2025-02-01 10:05:00"
-            ],
-            "WhatWouldIdo.txt" => "
-I can tell that the grass is greener
-On the other side, with you
-I wouldn't know, what to do without you
-Stay by my side eternally
-            
-What would I do
-Without someone like you?
-What would I do
-Without someone like you?
-What would I do?
-            
-I can tell, that the waters clearer
-On the other side, with you
-I know you care, about the faults in my life
-Just promise me this, stay with me
-            
-What would I do
-Without someone like you",
-    
-            	 "BirchTree.txt" => "
+	    ],
+	    "LoverIsADay.txt" => "
+Time changed, we're different
+But my mind still says redundant things
+Can I not think?
+Will you love this part of me?
+My lover is a day I can't forget
+Furthering my distance from you
+Realistically I can't leave now
+But I'm okay as long as you
+Keep me from going crazy
+Keep me from going crazy
+Straight up ahead you'll find a sign
+That says you can't get by with a lie
+But if I stayed away by a thread from the glory path
+And made my life harder, lying 'bout the stupid shit I say
+Then you wouldn't know a single thing about
+How I feel about you
+And those really dumb things people feel
+I'll take the bumpy road, it'll probably break my legs
+As long as I don't show you what's ruining my head
+Funny thing about you is you read me pretty well
+But you haven't found me yet at the bottom of the well
+Annoying you with smoke signals, asking you for help
+'Cause your immediate presence lifts me straight away from hell
+Me and Mr. Heart, we say the cutest things about you
+How you seem unreal and we'd probably die so quick without you
+Suffocated from the radiated air around us
+Full of happiness we don't have
+Brightness gone, so dark without you, girl
+Time changed, we're different
+But my mind still says redundant things
+Can I not think?
+Will you love this part of me?
+My lover is a day I can't forget
+Furthering my distance from you
+Realistically I can't leave now
+But I'm okay as long as you
+Keep me from going crazy
+Keep me from going crazy
+Can I not think?
+Will you love this part of me?
+My lover is a day I can't forget
+Furthering my distance from you
+Realistically I can't leave now
+But I'm okay as long as you
+Keep me from going crazy
+Keep me from going crazy",
+
+	 "BirchTree.txt" => "
 I could be my best if I spoke my own head for you
 You could see me now if you told yourself how you knew me
 Oh, are you not lonely?
@@ -62,8 +89,8 @@ And oh, as I sit by the bitch tree",
 	 "WithoutYou.txt" => "
 Do you really have to talk
 About the things you do with him?
-Do you really have to talk about it love?
-Do you really have to talk
+DO you really have to talk about it love?
+do you really have to talk
 About the way that you love him?
 Do you really have to talk about your love?
 Nah-nah-nah-nah...
@@ -77,11 +104,11 @@ But I know that I can't be
 The one you love that's in your life
 But I know that I can't be the one you love",
 
-            "dino.txt" => "
-                     __ 
+            "hello.txt" => "
+		     __ 
                     / _) .. ROAR!!!
            _.----._/ /
-          /          /
+        __/         /
      __/  (  |  (  |
     /__.-'|_|--|__|
     ",
@@ -94,92 +121,85 @@ But I know that I can't be the one you love",
                 "modified" => "2025-02-01 10:10:00",
                 "size" => 1234 // file size in bytes
                 ],
-                "Subfolder" => [
-                    "metadata" => [
-                        "2",
-                        "permissions" => "drwxr-xr-x",
-                        "owner" => "user1",
-                        "group" => "group1",
-                        "created" => "2025-02-01 10:05:00",
-                        "modified" => "2025-02-01 10:07:00"
-                    ],
-                    "file1.txt" => [
-                        "metadata" => [
-                            "3",
-                            "permissions" => "-rw-r--r--",
-                            "owner" => "user1",
-                            "group" => "group1",
-                            "created" => "2025-02-01 10:05:00",
-                            "modified" => "2025-02-01 10:06:00",
-                            "size" => 234
-                        ]
-                    ]
-                ]
-            ],
-            "Pictures" => [
+            "Subfolder" => [
                 "metadata" => [
-                    "4",
+                    "2",
                     "permissions" => "drwxr-xr-x",
+                    "owner" => "user1",
+                    "group" => "group1",
+                    "created" => "2025-02-01 10:05:00",
+                    "modified" => "2025-02-01 10:07:00"
+                ],
+                "something.txt" => "
+                    Hello World!",
+              ],
+        ],
+        "Pictures" => [
+            "metadata" => [
+                "4",
+                "permissions" => "drwxr-xr-x",
+                "owner" => "user2",
+                "group" => "group2",
+                "created" => "2025-02-01 10:10:00",
+                "modified" => "2025-02-01 10:12:00"
+            ],
+            "photo.jpg" => [
+                "metadata" => [
+                    "5",
+                    "permissions" => "-rw-r--r--",
                     "owner" => "user2",
                     "group" => "group2",
                     "created" => "2025-02-01 10:10:00",
-                    "modified" => "2025-02-01 10:12:00"
-                ],
-                "photo.jpg" => [
-                    "metadata" => [
-                        "5",
-                        "permissions" => "-rw-r--r--",
-                        "owner" => "user2",
-                        "group" => "group2",
-                        "created" => "2025-02-01 10:10:00",
-                        "modified" => "2025-02-01 10:11:00",
-                        "size" => 789
-                    ]
+                    "modified" => "2025-02-01 10:11:00",
+                    "size" => 789
                 ]
+            ]
+        ],
+        "Videos" => [
+            "metadata" => [
+                "6",
+                "permissions" => "drwxr-xr-x",
+                "owner" => "user3",
+                "group" => "group3",
+                "created" => "2025-02-01 10:15:00",
+                "modified" => "2025-02-01 10:16:00"
             ],
-            "Videos" => [
-                "metadata" => [
-                    "6",
-                    "permissions" => "drwxr-xr-x",
-                    "owner" => "user3",
-                    "group" => "group3",
-                    "created" => "2025-02-01 10:15:00",
-                    "modified" => "2025-02-01 10:16:00"
-                ],
+        ],
+        "Projects" => [
+            "metadata" => [
+                "7",
+                "permissions" => "drwxr-xr-x",
+                "owner" => "user1",
+                "group" => "group1",
+                "created" => "2025-02-01 10:20:00",
+                "modified" => "2025-02-01 10:21:00"
             ],
-            "Projects" => [
+            "project1" => [
                 "metadata" => [
-                    "7",
+                    "8",
                     "permissions" => "drwxr-xr-x",
                     "owner" => "user1",
                     "group" => "group1",
                     "created" => "2025-02-01 10:20:00",
                     "modified" => "2025-02-01 10:21:00"
                 ],
-                "project1" => [
+                "file2.txt" => [
                     "metadata" => [
-                        "8",
-                        "permissions" => "drwxr-xr-x",
+                        "9",
+                        "permissions" => "-rw-r--r--",
                         "owner" => "user1",
                         "group" => "group1",
                         "created" => "2025-02-01 10:20:00",
-                        "modified" => "2025-02-01 10:21:00"
-                    ],
-                    "file2.txt" => [
-                        "metadata" => [
-                            "9",
-                            "permissions" => "-rw-r--r--",
-                            "owner" => "user1",
-                            "group" => "group1",
-                            "created" => "2025-02-01 10:20:00",
-                            "modified" => "2025-02-01 10:21:00",
-                            "size" => 1012
-                        ]
+                        "modified" => "2025-02-01 10:21:00",
+                        "size" => 1012
                     ]
                 ]
             ]
         ]
-    ];
+    ]
+];
+
+
     
 if (!isset($_SESSION['fileSystem'])) {
     $_SESSION['fileSystem'] = $fileSystem;
@@ -660,49 +680,147 @@ function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
 
 
 
-function process_grep($fileSystem, $currentDirectory, $pattern, $file) : string {
+
+function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : string {
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
     $currentLevel = $fileSystem["/"];
+     $line_numbers = 0;
+     $count = 0;
+    // Navigate to the current directory
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return "Error: Invalid directory path.\n";
         }
         $currentLevel = $currentLevel[$part];
     }
+
     $results = [];
-    //look for the pattern in every txt file in the current directory 
+
+    // Look for the pattern in every txt file in the current directory 
     if ($file === "*.txt") {
-        $files = retrieve_files_from_directory($fileSystem, $currentDirectory); // check if .txt files exist    
+        $found = false;
+        $files = retrieve_files_from_directory($fileSystem, $currentDirectory); // Check if .txt files exist  
         foreach($files as $name => $content) {
-                if (str_ends_with($name, ".txt")) {
-                        $lines = explode("\n", trim($content));
-                        foreach($lines as $line) {
-                                if (strpos($line, $pattern) !== false) {
-                                        $results[] = "$name: $line";
-                                }
+                $lines = explode("\n", trim($content));
+                
+                foreach ($lines as $line) {
+                    $line_numbers ++;
+                    // Handle different flags
+                    if ($flag === "-n") {
+                        if (strpos($line, $pattern) !== false) {
+                            $found = true;
+                            $results[] = $line_numbers . ": " . $line; // Add the line number to line
                         }
+                    }
+                    if ($flag === "-c") {
+                        $found = true;
+                        if (strpos($line, $pattern) !== false) {
+                            $count++;
+                        }
+                    }
+                    if ($flag === "-i") {
+                        $found = true;
+                        if (stripos($line, $pattern) !== false) {
+                            $results[] = $line; // Add the matching line to results
+                        }
+                    }
+                    // Handle default case (no flag)
+                     if (strpos($line, $pattern) !== false && $found === false) {
+                         $results[] = $line;
                 }
-          }
+            }
+        }
     }
+    
+    // Else block for handling a specific file
     else {
-     if (!isset($currentLevel[$file])) {
-        return "Error: File not found.\n";
-      }
-    if (is_array($currentLevel[$file])) {
-         return "Error: '$file' is a directory.\n";
-      }
-    //split the file into lines 
-    $lines = explode("\n", trim($currentLevel[$file]));
-    //for every word in our lines, search for the pattern
-    foreach($lines as $line) {
-        if (strpos($line, $pattern) !== false) {
-                $results[] = $line;
+        if (!isset($currentLevel[$file])) {
+            return "Error: File not found.\n";
+        }
+        if (is_array($currentLevel[$file])) {
+            return "Error: '$file' is a directory.\n";
+        }
+        
+        // Split the file into lines
+        $lines = explode("\n", trim($currentLevel[$file]));
+        $found = false;
+        // Loop through the lines of the specific file
+        foreach ($lines as $line) {
+            $line_numbers++;
+            
+            if ($flag === "-n") {
+                if (strpos($line, $pattern) !== false) {
+                    $found = true;
+                    $results[] = $line_numbers . ": " . $line; // Add line number
                 }
-           }
+            }
+            if ($flag === "-c") {
+                $found = true;
+                if (strpos($line, $pattern) !== false) {
+                    $count++;
+                }
+            }
+            if ($flag === "-i") {
+                if (stripos($line, $pattern) !== false) {
+                    $found = true;
+                    $results[] = $line; // Case-insensitive match
+                }
+            }
+            // Default matching condition (without any specific flag)
+            if (strpos($line, $pattern) !== false && $found === false) {
+                $results[] = $line;
+            }
+        }
     }
-        return empty($results) ? "No matches found\n" : implode("\n", $results);
-  }
+
+    // Return the count if '-c' flag is used, otherwise return matched lines
+    if ($count > 0)  return $count;
+    else return empty($results) ? "No matches found\n" : implode("\n", $results);
+}
+
+
+function retrieve_files_from_subdirectories($fileSystem, $currentDirectory) : array {
+    $files = []; // Array to hold all the files found in the current directory and its subdirectories
+    $currentDirectory = rtrim($currentDirectory, "/");
+    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+    $currentLevel = $fileSystem["/"];
+    
+    // Navigate to the current directory level in the file system
+    foreach ($pathParts as $part) {
+        if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            return [];
+        }
+        $currentLevel = $currentLevel[$part];
+    }
+    
+    // For every item in the current directory
+    foreach ($currentLevel as $name => $content) {  
+        $fullPath = $currentDirectory . "/" . $name;  // Full path of the current file/directory
+        // If the content is a directory, recursively find files in it
+        if (is_array($content)) {
+            // Recursively call the function to get files from subdirectories
+            $files = array_merge($files, retrieve_files_from_subdirectories($fileSystem, $fullPath));
+            }
+        else {
+             if (str_ends_with($name, ".txt")) { //only proceed for .txt files
+                $files[$fullPath] = $content;
+        }
+    }
+}
+    return $files;
+}
+
+
+function process_find($fileSystem, $currentDirectory) {
+    $files = retrieve_files_from_subdirectories($fileSystem, $currentDirectory);
+
+// Loop through the files array and print each file and its content
+foreach ($files as $fileName => $content) {
+    echo "File: $fileName\n";
+    }
+}
+
 
 
 // Handle the command
