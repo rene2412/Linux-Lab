@@ -82,8 +82,8 @@ And oh, as I sit by the bitch tree",
 	 "WithoutYou.txt" => "
 Do you really have to talk
 About the things you do with him?
-Do you really have to talk about it love?
-Do you really have to talk
+DO you really have to talk about it love?
+do you really have to talk
 About the way that you love him?
 Do you really have to talk about your love?
 Nah-nah-nah-nah...
@@ -123,18 +123,9 @@ But I know that I can't be the one you love",
                     "created" => "2025-02-01 10:05:00",
                     "modified" => "2025-02-01 10:07:00"
                 ],
-                "file1.txt" => [
-                    "metadata" => [
-                        "3",
-                        "permissions" => "-rw-r--r--",
-                        "owner" => "user1",
-                        "group" => "group1",
-                        "created" => "2025-02-01 10:05:00",
-                        "modified" => "2025-02-01 10:06:00",
-                        "size" => 234
-                    ]
-                ]
-            ]
+                "something.txt" => "
+                    Hello World!",
+              ],
         ],
         "Pictures" => [
             "metadata" => [
@@ -517,7 +508,6 @@ function process_chmod($fileSystem, $currentDirectory, $argument, $targetFile) :
 }
 
 
-
 function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
 	$files = []; // will hold all the files in current directory, the key will hold the file name and value will be its content
 	 $currentDirectory = rtrim($currentDirectory, "/");
@@ -540,50 +530,146 @@ function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
 }
 
 
-function process_grep($fileSystem, $currentDirectory, $pattern, $file) : string {
+
+function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : string {
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
     $currentLevel = $fileSystem["/"];
+     $line_numbers = 0;
+     $count = 0;
+    // Navigate to the current directory
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return "Error: Invalid directory path.\n";
         }
         $currentLevel = $currentLevel[$part];
     }
-    $results = [];
-    //look for the pattern in every txt file in the current directory 
-    if ($file === "*.txt") {
-	$files = retrieve_files_from_directory($fileSystem, $currentDirectory); // check if .txt files exist  	
-    	foreach($files as $name => $content) {
-		if (str_ends_with($name, ".txt")) {
-			$lines = explode("\n", trim($content));
-			foreach($lines as $line) {
-				if (strpos($line, $pattern) !== false) {
-					$results[] = "$name: $line";
-				}
-			}
-		}
-          }
-    }
-    else {
-     if (!isset($currentLevel[$file])) {
-        return "Error: File not found.\n";
-      }
-    if (is_array($currentLevel[$file])) {
-         return "Error: '$file' is a directory.\n";
-      }
-    //split the file into lines 
-    $lines = explode("\n", trim($currentLevel[$file]));
-    //for every word in our lines, search for the pattern
-    foreach($lines as $line) {
-   	if (strpos($line, $pattern) !== false) {
-        	$results[] = $line;	    
-		}
-    	   }
-    }
-	return empty($results) ? "No matches found\n" : implode("\n", $results);
-  }
 
+    $results = [];
+
+    // Look for the pattern in every txt file in the current directory 
+    if ($file === "*.txt") {
+        $found = false;
+        $files = retrieve_files_from_directory($fileSystem, $currentDirectory); // Check if .txt files exist  
+        foreach($files as $name => $content) {
+                $lines = explode("\n", trim($content));
+                
+                foreach ($lines as $line) {
+                    $line_numbers ++;
+                    // Handle different flags
+                    if ($flag === "-n") {
+                        if (strpos($line, $pattern) !== false) {
+                            $found = true;
+                            $results[] = $line_numbers . ": " . $line; // Add the line number to line
+                        }
+                    }
+                    if ($flag === "-c") {
+                        $found = true;
+                        if (strpos($line, $pattern) !== false) {
+                            $count++;
+                        }
+                    }
+                    if ($flag === "-i") {
+                        $found = true;
+                        if (stripos($line, $pattern) !== false) {
+                            $results[] = $line; // Add the matching line to results
+                        }
+                    }
+                    // Handle default case (no flag)
+                     if (strpos($line, $pattern) !== false && $found === false) {
+                         $results[] = $line;
+                }
+            }
+        }
+    }
+    
+    // Else block for handling a specific file
+    else {
+        if (!isset($currentLevel[$file])) {
+            return "Error: File not found.\n";
+        }
+        if (is_array($currentLevel[$file])) {
+            return "Error: '$file' is a directory.\n";
+        }
+        
+        // Split the file into lines
+        $lines = explode("\n", trim($currentLevel[$file]));
+        $found = false;
+        // Loop through the lines of the specific file
+        foreach ($lines as $line) {
+            $line_numbers++;
+            
+            if ($flag === "-n") {
+                if (strpos($line, $pattern) !== false) {
+                    $found = true;
+                    $results[] = $line_numbers . ": " . $line; // Add line number
+                }
+            }
+            if ($flag === "-c") {
+                $found = true;
+                if (strpos($line, $pattern) !== false) {
+                    $count++;
+                }
+            }
+            if ($flag === "-i") {
+                if (stripos($line, $pattern) !== false) {
+                    $found = true;
+                    $results[] = $line; // Case-insensitive match
+                }
+            }
+            // Default matching condition (without any specific flag)
+            if (strpos($line, $pattern) !== false && $found === false) {
+                $results[] = $line;
+            }
+        }
+    }
+
+    // Return the count if '-c' flag is used, otherwise return matched lines
+    if ($count > 0)  return $count;
+    else return empty($results) ? "No matches found\n" : implode("\n", $results);
+}
+
+
+function retrieve_files_from_subdirectories($fileSystem, $currentDirectory) : array {
+    $files = []; // Array to hold all the files found in the current directory and its subdirectories
+    $currentDirectory = rtrim($currentDirectory, "/");
+    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+    $currentLevel = $fileSystem["/"];
+    
+    // Navigate to the current directory level in the file system
+    foreach ($pathParts as $part) {
+        if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            return [];
+        }
+        $currentLevel = $currentLevel[$part];
+    }
+    
+    // For every item in the current directory
+    foreach ($currentLevel as $name => $content) {  
+        $fullPath = $currentDirectory . "/" . $name;  // Full path of the current file/directory
+        // If the content is a directory, recursively find files in it
+        if (is_array($content)) {
+            // Recursively call the function to get files from subdirectories
+            $files = array_merge($files, retrieve_files_from_subdirectories($fileSystem, $fullPath));
+            }
+        else {
+             if (str_ends_with($name, ".txt")) { //only proceed for .txt files
+                $files[$fullPath] = $content;
+        }
+    }
+}
+    return $files;
+}
+
+
+function process_find($fileSystem, $currentDirectory) {
+    $files = retrieve_files_from_subdirectories($fileSystem, $currentDirectory);
+
+// Loop through the files array and print each file and its content
+foreach ($files as $fileName => $content) {
+    echo "File: $fileName\n";
+    }
+}
 
 // Main loop
 while (true) {
@@ -632,14 +718,25 @@ while (true) {
 	    $argument = explode(" ", $input);
 	    echo process_chmod($fileSystem, $currentDirectory, $argument[1], $argument[2]);
     }
-    else if (str_starts_with($input, "grep")) { 
-		preg_match('/grep\s+"?([^"]+)"?\s+(\S+)/', $input, $matches);
-    		if (count($matches) < 3) {
-        	echo "Error: Invalid grep syntax.\n";
-    		} else {
-        	echo process_grep($fileSystem, $currentDirectory, $matches[1], $matches[2]) . "\n";
-             }
-	}
+else if (str_starts_with($input, "grep")) {
+    // Corrected regex to handle optional flag without requiring extra spaces
+    preg_match('/grep\s+(-[^\s"]+)?\s*"?([^"]+)"?\s+(\S+)/', $input, $matches);
+    
+    // Check if matches are sufficient (minimum 3 groups: command, pattern, file)
+    if (count($matches) < 3) {
+        echo "Error: Invalid grep syntax.\n";
+    } else {
+        $flag = isset($matches[1]) ? $matches[1] : '';
+        $pattern = $matches[2];
+        $file = $matches[3];
+        
+        echo process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) . "\n";
+    }
+}
+    else if($input === "find") {
+        echo process_find($fileSystem, $currentDirectory) . "\n";
+    }
+
      else if ($input === "exit") {
         break;
     } else {
