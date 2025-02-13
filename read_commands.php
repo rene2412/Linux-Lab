@@ -630,13 +630,12 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
 }
 
 
-function retrieve_files_from_subdirectories($fileSystem, $currentDirectory) : array {
-    $files = []; // Array to hold all the files found in the current directory and its subdirectories
-    $currentDirectory = rtrim($currentDirectory, "/");
-    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+function retrieve_files_from_argument($fileSystem, $currentDirectory, $expression) : array {
+    $files = [];
+    $searchPath = rtrim($currentDirectory, "/");
+    $pathParts = array_filter(explode("/", $searchPath), 'strlen');
     $currentLevel = $fileSystem["/"];
     
-    // Navigate to the current directory level in the file system
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return [];
@@ -644,32 +643,31 @@ function retrieve_files_from_subdirectories($fileSystem, $currentDirectory) : ar
         $currentLevel = $currentLevel[$part];
     }
     
-    // For every item in the current directory
     foreach ($currentLevel as $name => $content) {  
-        $fullPath = $currentDirectory . "/" . $name;  // Full path of the current file/directory
-        // If the content is a directory, recursively find files in it
+        $fullPath = $searchPath . "/" . $name;
+
         if (is_array($content)) {
-            // Recursively call the function to get files from subdirectories
-            $files = array_merge($files, retrieve_files_from_subdirectories($fileSystem, $fullPath));
-            }
-        else {
-             if (str_ends_with($name, ".txt")) { //only proceed for .txt files
+            $files = array_merge($files, retrieve_files_from_argument($fileSystem, $fullPath, $expression));
+        } else {
+            if (fnmatch($expression, $name)) { 
                 $files[$fullPath] = $content;
+            }
         }
     }
-}
+    //if empty($files) echo "empty bozo";
     return $files;
 }
 
+function process_find($fileSystem, $currentDirectory, $path, $expression) {
+    // Strip quotes from the expression (e.g., "WithoutYou.txt" → WithoutYou.txt)
+    $expression = trim($expression, "\"'");
+    $files = retrieve_files_from_argument($fileSystem, $path, $expression);
 
-function process_find($fileSystem, $currentDirectory) {
-    $files = retrieve_files_from_subdirectories($fileSystem, $currentDirectory);
-
-// Loop through the files array and print each file and its content
-foreach ($files as $fileName => $content) {
-    echo "File: $fileName\n";
+    foreach ($files as $fileName => $content) {
+        echo "File: $fileName\n";
     }
 }
+
 
 // Main loop
 while (true) {
@@ -733,9 +731,17 @@ else if (str_starts_with($input, "grep")) {
         echo process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) . "\n";
     }
 }
-    else if($input === "find") {
-        echo process_find($fileSystem, $currentDirectory) . "\n";
+ elseif (str_starts_with($input, "find ")) {
+    // Use regex to parse "find <path> -name <pattern>"
+    preg_match('/find\s+(\S+)\s+-name\s+"([^"]*)"/', $input, $matches);
+    if (count($matches) !== 3) {
+        echo "Usage: find <path> -name \"<pattern>\"\n";
+        continue;
     }
+    $path = $matches[1];
+    $expression = $matches[2];
+    process_find($fileSystem, $currentDirectory, $path, $expression);
+}
 
      else if ($input === "exit") {
         break;
