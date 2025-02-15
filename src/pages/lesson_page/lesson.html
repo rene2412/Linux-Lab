@@ -7,31 +7,53 @@
     <link rel="stylesheet" href="./lesson.css">
 </head>
 <body>
+    <div open class="sidebar">
+        <div class="sidebar__top">
+            <h1 class="sidebar__logo">LOGO</h1>
+            <button type="button" class="button sidebar__button sidebar__button--close">X</button>
+        </div>
+        <nav class="sidebar__links">
+            <ul>
+                <li><a href="#"><h2>HOME</h2></a></li>
+                <ul class="sidebar__lessons">
+                    <h2>Lessons</h2>
+                    <li><a href="#">Lesson 1</a></li>
+                    <li><a href="#">Lesson 2</a></li>
+                    <li><a href="#">Lesson 3</a></li>
+                    <li><a href="#">Lesson 4</a></li>
+                    <li><a href="#">Lesson 5</a></li>
+                    <li><a href="#">Lesson 6</a></li>
+                </ul>
+                <li><a href="#"><h2>Sections</h2></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar__bottom">
+            <img src="#" alt="cog">
+        </div>
+    </div>
     <div class="layout">
         <div class="top">
             <button type="button" class="top__sidebar"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
-            <!-- <a href="#" class="top__logo"> -->
                 <span class="top__logo"><strong>LOGO</strong></span>
-            <!-- </a> -->
         </div>
         <article class="lesson">
-            <!-- <h3 class="lesson__subtitle">basics / navigation</h3> -->
             <h1 class="lesson__title">Cat</h1>
             <div class="lesson__content">
                 <p>Welcome to your first lesson this is the start of your mastery of the command line</p>
                 <p>The cat command is one of the most useful commands you might need</p>
                 <code>cat filename.file</code>
                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias a placeat porro sint sit quidem.</p>
+               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, accusantium temporibus! Laudantium sequi possimus, veritatis aut delectus vitae rerum optio vel, ullam officia earum. Fugit fuga ipsam placeat repellendus obcaecati.</p>
             </div>
         </article>
 
         <div class="progress-bar">
             <label for="progress-bar"></label>
-            <meter id="progress-bar" value="70" min="0" max="100"></meter>
+            <meter id="progress-bar" value="40" min="0" max="100"></meter>
 
         </div>
         <div class="lesson__util">
-            <button type="button" class="lesson__button">Previous</button>
+            <button type="button" class="lesson__button">Prev</button>
             <img class="lesson__status" src="../assets/SVGs/cross-svgrepo-com.svg" alt="X">
             <button type="button" class="lesson__button">Next</button>
         </div>
