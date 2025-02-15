@@ -1,0 +1,90 @@
+@import '../normalize.css';
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --color-background: #343a40;
+
+    --text-color-main: white;
+
+    --text-size-base: 1.3rem;
+    --text-size-lg: 1.5rem;
+
+    --spce-sm: 10px;
+    --spce-med: 17px;
+    --spce-lg: 30px;
+}
+
+.layout{
+    background-color: var(--color-background);
+    color: var(--text-color-main);
+}
+
+
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spce-lg);
+    height: 50px;
+    /* border: solid black; */
+}
+
+.top__sidebar{
+    border: none;
+    background-color: transparent;
+}
+
+/* LESSON STYLES */
+.lesson{
+    position: relative;
+    /* padding: var(--spce-lg); */
+    padding: 0 var(--spce-lg);
+    font-size: var(--text-size-base);
+    overflow: scroll;
+    height: 40vh;
+    margin-bottom: var(--spce-lg);
+}
+
+
+.lesson__title{
+    margin-bottom: var(--spce-med);
+    background-color: var(--color-background);
+}
+
+.lesson__content *{
+    margin: var(--spce-med) 0;
+    line-height: var(--spce-lg);
+}
+
+
+.svg{
+    height: 2rem;
+}
+
+.lesson__status{
+    height: 3rem;
+    position: relative;
+    top: 19px;
+}
+
+.terminal{
+    background-color: black;
+    color: white;
+    font-size: var(--text-size-base);
+    font-family: monospace;
+    /* height: calc(100vh - 40vh - 100px); */
+    height: 50vh;
+}
+
+.green{
+    color: limegreen;
+}
+
+.caret{
+    background-color: white;
+    white-space: pre;
+    min-width: 10px;
+}
