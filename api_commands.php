@@ -288,7 +288,6 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
     return $output;
 }
 
-
 function format_directory_contents(array $contents): string {
     if (empty($contents)) {
         return "This directory is empty.\n";
@@ -391,6 +390,7 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     $currentLevel[$newdir] = [];
     return $newdir . "\n";
 }
+
 function process_cat(&$filesystem, $currentDirectory, $file): string {
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -658,27 +658,25 @@ function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) 
 
 
 function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
-        $files = []; // will hold all the files in current directory, the key will hold the file name and value will be its content
-         $currentDirectory = rtrim($currentDirectory, "/");
-        $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
-        $currentLevel = $fileSystem["/"];
-        foreach ($pathParts as $part) {
+	$files = []; // will hold all the files in current directory, the key will hold the file name and value will be its content
+	 $currentDirectory = rtrim($currentDirectory, "/");
+    	$pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+    	$currentLevel = $fileSystem["/"];
+	foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return [];
-                }
+        	}
         $currentLevel = $currentLevel[$part];
-        }
-        //for every thing in the current directory
-        foreach($currentLevel as $name => $content) {
-        //if the content is a directory, skip it
-        if (!is_array($content)) {
-                $files[$name] = $content;
-                }
-        }
-        return $files;
+	}
+	//for every thing in the current directory
+	foreach($currentLevel as $name => $content) {
+	//if the content is a directory, skip it
+	if (!is_array($content)) {
+		$files[$name] = $content;
+		}
+	}
+	return $files;
 }
-
-
 
 
 function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : string {
@@ -702,15 +700,15 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
         $found = false;
         $files = retrieve_files_from_directory($fileSystem, $currentDirectory); // Check if .txt files exist  
         foreach($files as $name => $content) {
-                $lines = explode("\n", trim($content));
-                
+              $line_numbers = 0;  
+              $lines = explode("\n", trim($content)); 
                 foreach ($lines as $line) {
                     $line_numbers ++;
                     // Handle different flags
                     if ($flag === "-n") {
                         if (strpos($line, $pattern) !== false) {
                             $found = true;
-                            $results[] = $line_numbers . ": " . $line; // Add the line number to line
+                            $results[] = $name. "| Line: " . $line_numbers . ": " . $line; // Add the line number to line
                         }
                     }
                     if ($flag === "-c") {
@@ -779,14 +777,18 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
     else return empty($results) ? "No matches found\n" : implode("\n", $results);
 }
 
-
-function retrieve_files_from_subdirectories($fileSystem, $currentDirectory) : array {
-    $files = []; // Array to hold all the files found in the current directory and its subdirectories
-    $currentDirectory = rtrim($currentDirectory, "/");
-    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+function retrieve_files_from_argument($fileSystem, $currentDirectory, $expression) : array {
+    $files = [];
+    // Normalize the search path by removing trailing slash
+    $searchPath = rtrim($currentDirectory, "/");
+    
+    // Remove leading slash and filter out empty segments
+    $pathParts = array_filter(explode("/", ltrim($searchPath, "/")), 'strlen');
+    
+    // Always start from root
     $currentLevel = $fileSystem["/"];
     
-    // Navigate to the current directory level in the file system
+    // Navigate through the path parts
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return [];
@@ -794,31 +796,31 @@ function retrieve_files_from_subdirectories($fileSystem, $currentDirectory) : ar
         $currentLevel = $currentLevel[$part];
     }
     
-    // For every item in the current directory
+    // Search current level for matches
     foreach ($currentLevel as $name => $content) {  
-        $fullPath = $currentDirectory . "/" . $name;  // Full path of the current file/directory
-        // If the content is a directory, recursively find files in it
+        // Ensure the full path maintains the original format (with or without leading slash)
+        $fullPath = $searchPath . "/" . $name;
         if (is_array($content)) {
-            // Recursively call the function to get files from subdirectories
-            $files = array_merge($files, retrieve_files_from_subdirectories($fileSystem, $fullPath));
-            }
-        else {
-             if (str_ends_with($name, ".txt")) { //only proceed for .txt files
+            $files = array_merge($files, retrieve_files_from_argument($fileSystem, $fullPath, $expression));
+        } else {
+            if (fnmatch($expression, $name)) { 
                 $files[$fullPath] = $content;
+            }
         }
     }
-}
     return $files;
 }
 
 
-function process_find($fileSystem, $currentDirectory) {
-    $files = retrieve_files_from_subdirectories($fileSystem, $currentDirectory);
-
-// Loop through the files array and print each file and its content
-foreach ($files as $fileName => $content) {
-    echo "File: $fileName\n";
+function process_find($fileSystem, $currentDirectory, $path, $expression) : string {
+    // Strip quotes from the expression (e.g., "WithoutYou.txt" → WithoutYou.txt)
+    $expression = trim($expression, "\"'");
+    $files = retrieve_files_from_argument($fileSystem, $path, $expression);
+    $path = "";
+    foreach ($files as $fileName => $content) {
+                $path .= $fileName . "\n";
     }
+    return $path;
 }
 
 
@@ -843,6 +845,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cmd = $args[0] ?? '';
     $arg = $args[1] ?? '';
     $arg2 = $args[2] ?? '';
+    $arg3 = $args[3] ?? '';
     $output = "";
 
  switch ($cmd) {
@@ -885,8 +888,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $output = process_chmod($fileSystem, $currentDir, $arg, $arg2);
             break;
         case 'grep':
-            if (str_starts_with($arg, '"')) continue; //ignore the sttring quotes
-            $output = process_grep($fileSystem, $currentDir, $arg, $arg2);
+            $flag = ($arg && str_starts_with($arg, "-")) ? $arg : "";
+            $pattern = $flag ? $arg2 : $arg;
+            $file = $flag ? $arg3 : $arg2;
+            //$output = "flag: $flag\n pattern: $pattern\n file: $file";
+            $output = process_grep($fileSystem, $currentDir, $flag, $pattern, $file);
+            break;
+        case 'find':
+                // Parse "find <path> -name <pattern>"
+        if (count($args) < 4 || $args[2] !== '-n') {
+            $output = "Usage: find <path> -name \"<pattern>\"\n";
+            break;
+            }
+            $path = $args[1];
+            $expression = $args[3];
+            $output = process_find($fileSystem, $currentDir, $path, $expression);
             break;
         default:
             $output = "Command not recognized: $cmd\n";
