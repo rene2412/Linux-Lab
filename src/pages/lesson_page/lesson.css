@@ -6,7 +6,7 @@
 }
 :root{
     --color-background: #313538;
-    --color-background: #333c44;
+    --color-background: #324455;
     --color-background-light: #ffffff13;
     --color-highlight: #309e42;
     --color-inactive: #8b8c8d;
@@ -18,6 +18,7 @@
     --text-size-base: 1rem;
     --text-size-lg: 1.25rem;
 
+    --spce-xsm: 0.325rem;
     --spce-sm: 0.625rem;
     --spce-med: 1.0625rem;
     --spce-xmed: 1.5rem;
@@ -38,7 +39,8 @@ html{
     color: var(--text-color-main);
     display: flex;
     flex-direction: column;
-    gap: var(--spce-sm);
+    min-height: 100vw;
+    min-height: 100vh;
 }
 
 
@@ -53,16 +55,103 @@ code{
 }
 /* SIDEBAR STYLE */
 .sidebar{
-    position:fixed ;
+    position:fixed;
     top: 0;
     background-color: var(--color-overlay);
     color: var(--text-color-main);
     height: 100vh;
     width: 100vw;
     z-index: 1;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    padding: var(--spce-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* var this */
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+    box-shadow: 5px 0px 15px -1px #000000;
 }
 
+.sidebar__header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar__links{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spce-lg);
+}
+.sidebar__links ul, a{
+    list-style: none;
+    text-decoration: none;
+    color: var(--text-color-main);
+    /* font-size: var(--text-size-lg); */
+}
+
+.sidebar__links > ul {
+    /* background-color: red; */
+    padding-left: var(--spce-med);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spce-xsm);
+}
+
+
+.sidebar__dropdown{
+    padding-left: var(--spce-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spce-xsm);
+}
+
+.sidebar__dropdown__button{
+    border: none;
+    background-color: transparent;
+    color: var(--text-color-main);
+    /* font-size: var(--text-size-lg); */
+}
+
+.sidebar__bottom{
+    justify-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sidebar__bottom button{
+    border: none;
+    background-color: transparent;
+}
+
+.sidebar__button{
+    border: none;
+    background-color: transparent;
+    color: var(--text-color-main);
+}
+
+.selected{
+    /* transform: translateY(10px); */
+    scale: 1.1;
+    background-color: var(--color-highlight);
+}
+
+/* ======================== */
+/* LESSON SECTION STYLING */
+/* ======================== */
+.section--lesson{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spce-sm);
+}
+
+.section--terminal{
+    flex-grow: 1;
+    display: flex;
+}
+
+.terminal{
+    flex-grow: 1;
+}
 
 /* TOP styling */
 .top{
@@ -81,7 +170,7 @@ code{
 /* LESSON STYLES */
 .lesson{
     position: relative;
-    padding: var(--spce-sm) var(--spce-lg);
+    padding: var(--spce-sm) var(--spce-sm);
     margin: 0 var(--spce-lg);
     font-size: var(--text-size-base);
     overflow: scroll;
@@ -143,8 +232,6 @@ code{
     color: white;
     font-size: var(--text-size-base);
     font-family: monospace;
-    /* height: calc(100vh - 40vh - 100px); */
-    height: 50vh;
 }
 
 .green{
@@ -155,4 +242,58 @@ code{
     background-color: white;
     white-space: pre;
     min-width: 10px;
+}
+
+/* EFFECTS */
+.hidden{
+    display: none;
+}
+
+/* ================================= */
+/* MEDIA QUERY */
+/* ================================= */
+
+@media (min-width: 320px){
+    .sidebar{
+        /* background-color: blue; */
+        max-width: 300px;
+    }
+}
+
+@media (min-width: 769px){
+    .layout{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .section--lesson{
+        display: grid;
+        gap: 0;
+        max-height: 100vh;
+        grid-template-rows: 50px 10px 1fr 50px;
+    }
+    .top{
+        grid-row: 1 / 2;
+    }
+    .progress-bar{
+        grid-row: 2/3;
+    }
+    .lesson{
+        height: 90%;
+        max-width: 700px;
+        overflow: hidden;
+        margin-top: var(--spce-lg); 
+        justify-self: center;
+        font-size: var(--text-size-lg);
+    }
+
+    .progress-bar meter::-webkit-meter-bar{
+        width: 50vw;
+    }
+
+    .lesson__util{
+        background-color: var(--color-background-light);
+        /* justify-self: center; */
+    }
+    
 }
