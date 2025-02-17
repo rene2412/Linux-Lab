@@ -56,13 +56,14 @@
 
             <div class="progress-bar">
                 <label for="progress-bar"></label>
-                <meter id="progress-bar" value="40" min="0" max="100"></meter>
+                <meter id="progress-bar" class="progress-bar__meter" value="0" min="0" max="100"></meter>
 
             </div>
             <div class="lesson__util">
-                <button type="button" class="lesson__button">Prev</button>
-                <img class="lesson__status" src="../assets/SVGs/cross-svgrepo-com.svg" alt="X">
-                <button type="button" class="lesson__button">Next</button>
+                <button type="button" class="lesson__button lesson__button--prev">Prev</button>
+                <img class="lesson__status lesson__status--cross" src="../assets/SVGs/cross.svg" alt="X">
+                <img class="lesson__status lesson__status--check hidden" src="../assets/SVGs/check.svg" alt="X">
+                <button type="button" class="lesson__button lesson__button--next">Next</button>
             </div>
         </div>
 

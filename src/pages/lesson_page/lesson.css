@@ -6,7 +6,7 @@
 }
 :root{
     --color-background: #313538;
-    --color-background: #324455;
+    --color-background: #223549;
     --color-background-light: #ffffff13;
     --color-highlight: #309e42;
     --color-inactive: #8b8c8d;
@@ -177,6 +177,7 @@ code{
     height: 40vh;
     background-color: var(--color-background-light);
     border-radius: var(--radius-med);
+    align-self: stretch;
 }
 
 
@@ -279,8 +280,11 @@ code{
         grid-row: 2/3;
     }
     .lesson{
+        display: flex;
+        flex-direction: column;
         height: 90%;
-        max-width: 700px;
+        /* ideal 600px but if smaller rid the pad/margin and fill container for better use of space */
+        width: min(600px,100%);
         overflow: hidden;
         margin-top: var(--spce-lg); 
         justify-self: center;
