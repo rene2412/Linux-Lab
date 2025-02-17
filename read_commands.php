@@ -1,4 +1,7 @@
 <?php
+
+require_once "network.php";
+
 // Simulated file system
 session_start();
 
@@ -668,6 +671,21 @@ function process_find($fileSystem, $currentDirectory, $path, $expression) {
     }
 }
 
+function process_ping($host) : void {
+	$output = $GLOBALS['ping'];
+	$lines = explode("\n", $output);
+
+        for ($i = 0; $i < count($lines); $i++) {
+		echo $lines[$i] . "\n";
+		flush();
+		sleep(1);
+	}
+}
+
+function process_ip() : void {
+	echo $GLOBALS['ip'] . "\n";
+}
+
 
 // Main loop
 while (true) {
@@ -741,7 +759,23 @@ else if (str_starts_with($input, "grep")) {
     $path = $matches[1];
     $expression = $matches[2];
     process_find($fileSystem, $currentDirectory, $path, $expression);
-}
+ }
+ else if(str_starts_with($input, "ping")) {
+	 if (preg_match('/^ping\s+(google\.com)$/', $input, $matches)) {
+		 $host = $matches[1];
+        	  process_ping($host);
+    } else {
+        echo "Invalid ping command format.\n";
+    }
+ }
+    
+    else if (str_starts_with($input, "ip")) {
+    	if (preg_match('/^\s*ip\s+(a|addr)\s*$/', $input)) {
+    		process_ip();
+      } else {
+        echo "Invalid command. Only 'ip a' and 'ip addr' are allowed.\n";
+      }
+   }
 
      else if ($input === "exit") {
         break;
