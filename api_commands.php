@@ -1,5 +1,6 @@
 <?php
 require 'includes/config_session.inc.php';
+require_once "network.php";
 // Debugging: Log the request method and POST data
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
 error_log("POST Data: " . print_r($_POST, true));
@@ -823,6 +824,23 @@ function process_find($fileSystem, $currentDirectory, $path, $expression) : stri
     return $path;
 }
 
+function process_ping($host) : string {
+        $output = $GLOBALS['ping'];
+        $lines = explode("\n", $output);
+        $result;
+        for ($i = 0; $i < count($lines); $i++) {
+                $result .= $lines[$i] . "\n";
+                flush();
+                sleep(1);
+        }
+	return $result;
+}
+
+function process_ip() : string {
+        return $GLOBALS['ip'] . "\n";
+}
+
+
 
 
 // Handle the command
@@ -904,7 +922,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $expression = $args[3];
             $output = process_find($fileSystem, $currentDir, $path, $expression);
             break;
-        default:
+	case 'ping':
+        	 if (preg_match('/^ping\s+(google\.com)$/', $input, $matches)) {
+                  $host = $matches[1];
+                  $output = process_ping($host);
+    		} else {
+       			 $output = "Invalid ping command format.\n";
+    		}
+	   break;
+	case 'ip': 
+	  	if (preg_match('/^\s*ip\s+(a|addr)\s*$/', $input)) {
+                 $output = process_ip();
+          	} else {
+        	$output = "Invalid command. Only 'ip a' and 'ip addr' are allowed.\n";
+		}
+	    break;
+	default:
             $output = "Command not recognized: $cmd\n";
             break;
     }
