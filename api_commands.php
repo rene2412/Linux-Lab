@@ -822,16 +822,17 @@ function process_find($fileSystem, $currentDirectory, $path, $expression) : stri
                 $path .= $fileName . "\n";
     }
     return $path;
-}
+ }
 
 function process_ping($host) : string {
+    if ($host != "google.com") return "Invalid Ping Command: Try Host Name 'google.com'";
         $output = $GLOBALS['ping'];
         $lines = explode("\n", $output);
-        $result;
+        $result = "";
+        
         for ($i = 0; $i < count($lines); $i++) {
                 $result .= $lines[$i] . "\n";
                 flush();
-                sleep(1);
         }
 	return $result;
 }
@@ -923,14 +924,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $output = process_find($fileSystem, $currentDir, $path, $expression);
             break;
 	case 'ping':
-        	 if (preg_match('/^ping\s+(google\.com)$/', $input, $matches)) {
-                  $host = $matches[1];
-                  $output = process_ping($host);
-    		} else {
-       			 $output = "Invalid ping command format.\n";
-    		}
-	   break;
-	case 'ip': 
+        $output = process_ping($arg);
+        break;
+    case 'ip': 
 	  	if (preg_match('/^\s*ip\s+(a|addr)\s*$/', $input)) {
                  $output = process_ip();
           	} else {
