@@ -1,5 +1,5 @@
 <?php 
-global $ping, $ip;
+global $ping, $ip, $route, $traceroute;
 $ping = "PING google.com (2607:f8b0:4005:812::200e) 56 data bytes  
 64 bytes from nuq04s45-in-x0e.1e100.net (2607:f8b0:4005:812::200e): icmp_seq=1 ttl=250 time=139 ms
 64 bytes from nuq04s45-in-x0e.1e100.net (2607:f8b0:4005:812::200e): icmp_seq=2 ttl=250 time=161 ms
@@ -35,3 +35,25 @@ $ip = "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group
        valid_lft 86299sec preferred_lft 14299sec
     inet6 fe80::abcd:1234:5678:9abc/64 scope link noprefixroute 
        valid_lft forever preferred_lft forever";
+
+$route = "default via 192.168.X.1 dev eth0 proto dhcp src 192.168.X.100 metric 600  
+192.168.X.0/24 dev eth0 proto kernel scope link src 192.168.X.100 metric 600";
+
+$traceroute = "traceroute to google.com (142.251.46.206), 64 hops max
+  1   192.168.1.1  1.085ms  1.341ms  0.938ms 
+  2   10.200.50.1  300.480ms  310.785ms  303.548ms 
+  3   10.200.50.2  306.879ms  307.119ms  307.481ms 
+  4   *  10.200.50.3  68.641ms  * 
+  5   172.18.5.20  68.616ms  306.989ms  307.136ms 
+  6   69.100.200.50  102.962ms  101.976ms  102.214ms 
+  7   69.100.200.51  306.940ms  306.982ms  307.072ms 
+  8   *  *  * 
+  9   69.100.150.120  221.156ms  303.759ms  294.821ms 
+ 10   69.100.150.121  81.877ms  210.965ms  321.521ms";
+
+~                                                                                                                                               
+~                                                                                                                                               
+~                                                                                                                                               
+~                                                                                                                                               
+~            
+

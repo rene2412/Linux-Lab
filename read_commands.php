@@ -686,6 +686,27 @@ function process_ip() : void {
 	echo $GLOBALS['ip'] . "\n";
 }
 
+function process_ip($flag) : void {
+        if ($flag === "a" || $flag === "addr") {
+        echo $GLOBALS['ip'] . "\n";
+        }
+        elseif ($flag === "route") {
+        echo $GLOBALS['route'] . "\n";
+        }
+}
+
+function process_traceroute($host) : void {
+        $output = $GLOBALS['traceroute'];
+        $lines = explode("\n", $output);
+
+        for ($i = 0; $i < count($lines); $i++) {
+                echo $lines[$i] . "\n";
+                flush();
+                sleep(1);
+        }
+}
+
+
 
 // Main loop
 while (true) {
@@ -768,16 +789,27 @@ else if (str_starts_with($input, "grep")) {
         echo "Invalid ping command format.\n";
     }
  }
-    
     else if (str_starts_with($input, "ip")) {
-    	if (preg_match('/^\s*ip\s+(a|addr)\s*$/', $input)) {
-    		process_ip();
-      } else {
-        echo "Invalid command. Only 'ip a' and 'ip addr' are allowed.\n";
-      }
-   }
+    $args = explode(" ", $input); // Split input into words
+    $flag = $args[1] ?? ""; // Get second word or empty string if not provided
 
-     else if ($input === "exit") {
+    if ($flag === "a" || $flag === "addr" || $flag === "route") {
+        process_ip($flag); // Pass argument correctly
+    } else {
+        echo "Invalid command. Enter 'ip help' for more information.\n";
+    }
+ }
+
+ else if(str_starts_with($input, "traceroute")) {
+         if (preg_match('/^traceroute\s+(google\.com)$/', $input, $matches)) {
+                 $host = $matches[1];
+                 process_traceroute($host);
+    } else {
+        echo "Invalid traceroute command format.\n";
+    }
+ }
+ 
+else if ($input === "exit") {
         break;
     } else {
         echo "Command not recognized: $input\n";
