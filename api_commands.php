@@ -837,8 +837,27 @@ function process_ping($host) : string {
 	return $result;
 }
 
-function process_ip() : string {
-        return $GLOBALS['ip'] . "\n";
+function process_ip($flag) : string {
+    if ($flag === "a" || $flag === "addr") {
+    return $GLOBALS['ip'] . "\n";
+    }
+    elseif ($flag === "route") {
+    return $GLOBALS['route'] . "\n";
+    }
+    else return "";
+}
+
+function process_traceroute($host) : string {
+    if ($host != "google.com") return "Invalid traceroute Command: Try Host Name 'google.com'";
+    $output = $GLOBALS['traceroute'];
+    $lines = explode("\n", $output);
+    $result = "";
+    
+    for ($i = 0; $i < count($lines); $i++) {
+            $result .= $lines[$i] . "\n";
+            flush();
+    }
+return $result;
 }
 
 
@@ -927,11 +946,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $output = process_ping($arg);
         break;
     case 'ip': 
-	  	if (preg_match('/^\s*ip\s+(a|addr)\s*$/', $input)) {
-                 $output = process_ip();
+            $flag = $arg;
+            if ($flag === "a" || $flag === "addr" || $flag === "route") {
+                $output = process_ip($flag);
           	} else {
-        	$output = "Invalid command. Only 'ip a' and 'ip addr' are allowed.\n";
-		}
+        	    $output = "Invalid command. Only 'ip a' and 'ip addr' are allowed.\n";
+		    }
+    case 'traceroute':
+        $output = process_traceroute($arg);
 	    break;
 	default:
             $output = "Command not recognized: $cmd\n";
