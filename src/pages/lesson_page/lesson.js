@@ -59,8 +59,14 @@ const section = {
     ],
 }
 
+class lessonManager{
+    constructor(){
 
-class lesson{
+    }
+}
+
+
+class lessonDisplay{
     curLesson = 1;
     curSection = 'basics';
     sectionSize = 0;
@@ -69,16 +75,25 @@ class lesson{
         this.container = document.querySelector(container);
         this.nextButton = document.querySelector('.lesson__button--next');
         this.prevButton= document.querySelector('.lesson__button--prev');
-        this.nextButton.addEventListener('click',this.nextLesson);
-        this.prevButton.addEventListener('click',this.prevLesson);
         this.progBar = document.querySelector('.progress-bar__meter');
         this.misc = document.querySelector('.lesson');
-        this.misc.addEventListener('click',this.toggleLessonComplete);
         this.statusCross = document.querySelector('.lesson__status--cross');
         this.statusCheck = document.querySelector('.lesson__status--check');
 
+        this.initListeners();
         this.changeSection();
         this.updateMeter();
+    }
+
+    initListeners(){
+        this.nextButton.addEventListener('click',this.nextLesson);
+        this.prevButton.addEventListener('click',this.prevLesson);
+        this.misc.addEventListener('click',this.toggleLessonComplete);
+    }
+    update(){
+        this.render();
+        this.updateMeter();
+        this.updateStatus();
     }
     render(){
         this.container.replaceChildren();
@@ -88,16 +103,12 @@ class lesson{
     nextLesson= ()=>{
         if(this.curLesson >= this.sectionSize) return;
         ++this.curLesson;
-        this.render();
-        this.updateMeter();
-        this.updateStatus();
+        this.update();
     }
     prevLesson= ()=>{
         if(this.curLesson <= 1) return;
         --this.curLesson;
-        this.render();
-        this.updateMeter();
-        this.updateStatus();
+        this.update();
     }
     changeSection(){
        this.sectionSize = section[this.curSection][0]['section__size'];
@@ -126,5 +137,5 @@ class lesson{
     }
 };
 
-const lessonClass = new lesson('.lesson');
-lessonClass.render();
+const lessonDisplayController = new lessonDisplay('.lesson');
+lessonDisplayController.render();

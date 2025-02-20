@@ -10,7 +10,7 @@
     --color-background-light: #ffffff13;
     --color-highlight: #309e42;
     --color-inactive: #8b8c8d;
-    --color-overlay: #000000c7;
+    --color-overlay: #00000070;
 
     --text-color-main: rgba(255, 255, 255, 0.95);
 
@@ -25,7 +25,6 @@
     --spce-lg: 1.875rem;
 
     --spce-pad-base: 0.5rem;
-    
     --radius-med: 10px;
     --blur-base: 3px;
 }
@@ -90,11 +89,14 @@ code{
 }
 
 .sidebar__links > ul {
-    /* background-color: red; */
     padding-left: var(--spce-med);
     display: flex;
     flex-direction: column;
     gap: var(--spce-xsm);
+}
+
+.sidebar li:hover{
+    transform: scale(1.1);
 }
 
 
@@ -109,7 +111,6 @@ code{
     border: none;
     background-color: transparent;
     color: var(--text-color-main);
-    /* font-size: var(--text-size-lg); */
 }
 
 .sidebar__bottom{
