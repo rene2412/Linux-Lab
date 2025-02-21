@@ -1,0 +1,72 @@
+@import url('../normalize.css');
+@import url('../global.css');
+
+*{
+    box-sizing: border-box;
+}
+
+
+.content{
+    background-color: black ;
+    color: var(--text-color-main);
+    display: flex;
+    min-width: 100vw;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    background-color: black;
+    color: var(--text-color-main);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spce-xmed);
+    height: 100px;
+}
+
+.navbar__links{
+    list-style-type: none;
+    display: flex;
+    gap: var(--spce-lg);
+}
+
+.navbar__link a{
+    color: var(--text-color-main);
+    text-decoration: none;
+}
+
+.logo{
+    height: 2rem;
+}
+
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spce-lg);
+}
+
+.hero__title{
+    /* font-size: var(--text-size-lg); */
+    font-size: 4rem;
+}
+
+.hero__button{
+    background-color: var(--color-highlight);
+    color: var(--text-color-main);
+    border: solid white var(--border-base);
+    border-radius: var(--radius-med);
+    padding: var(--spce-sm);
+}
+
+.hero__button:hover{
+    transform: scale(1.1);
+}
+
+.green{
+    color: limegreen;
+}
+
