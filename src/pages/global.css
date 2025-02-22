@@ -29,3 +29,7 @@
     --blur-base: 3px;
     --border-base: 2.5px;
 }
+
+.hidden{
+    display: none;
+}
