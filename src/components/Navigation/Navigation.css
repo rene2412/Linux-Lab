@@ -97,7 +97,7 @@
 }
 
 .navbar{
-    width: 100vw;
+    max-width: 100vw;
     top: 0;
     background-color: black;
     color: var(--text-color-main);
