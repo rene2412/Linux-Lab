@@ -1,0 +1,64 @@
+@import '../../styles/index.css';
+@import '../../components/Navigation/Navigation.css';
+@import '../../components/Footer/Footer.css';
+
+
+*{
+    box-sizing: border-box;
+}
+
+.logo{
+    height: 2rem;
+}
+
+.content{
+    background-color: black ;
+    background-image: url(./matrix.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: var(--text-color-main);
+    display: flex;
+    min-width: 100vw;
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* HERO SECTION */
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spce-med);
+    background-color: var(--color-overlay);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: var(--spce-lg);
+    border-radius: var(--radius-med);
+    
+}
+
+.hero__title{
+    font-size: clamp(4rem, 5vw, 7rem);
+    text-align: center;
+}
+
+.hero__button{
+    background-color: var(--color-highlight);
+    color: var(--text-color-main);
+    border: solid white var(--border-base);
+    border-radius: var(--radius-med);
+    padding: var(--spce-sm);
+}
+
+.hero__button:hover{
+    transform: scale(1.1);
+}
+
+.green{
+    color: limegreen;
+}
+
