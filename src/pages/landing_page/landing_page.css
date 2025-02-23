@@ -38,11 +38,11 @@
     backdrop-filter: blur(10px);
     padding: var(--spce-lg);
     border-radius: var(--radius-med);
+    
 }
 
 .hero__title{
-    /* font-size: var(--text-size-lg); */
-    font-size: 4rem;
+    font-size: clamp(4rem, 5vw, 7rem);
     text-align: center;
 }
 
