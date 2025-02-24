@@ -39,8 +39,8 @@ export default class Navigation{
                 </div>
                 <nav class="sidebar__links">
                     <ul>
-                        <li class="navbar__link"><a href="#">Home</a></li>
-                        <li class="navbar__link"><a href="#">About Us</a></li>
+                        <li class="navbar__link"><a href="../../pages/landing_page/landing_page.html">Home</a></li>
+                        <li class="navbar__link"><a href="hi">About Us</a></li>
                         <li class="navbar__link"><a href="#">FAQ</a></li>
                         <li class="navbar__link"><a href="#">Contact Us</a></li>
                     </ul>
@@ -65,9 +65,9 @@ export default class Navigation{
             </div> 
             <div class="navbar__right">
                 <ul class="navbar__links">
-                    <li class="navbar__link"><a href="#">Home</a></li>
+                    <li class="navbar__link"><a href="../../pages/landing_page/landing_page.html">Home</a></li>
                     <li class="navbar__link"><a href="#">Learn More</a></li>
-                    <li class="navbar__link"><a href="#">About Us</a></li>
+                    <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
                     <li class="navbar__link"><a href="#">FAQ</a></li>
                     <li class="navbar__link"><a href="#">Contact Us</a></li>
                 </ul>

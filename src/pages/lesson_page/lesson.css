@@ -1,40 +1,7 @@
-@import '../normalize.css';
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-:root{
-    --color-background: #313538;
-    --color-background: #223549;
-    --color-background-light: #ffffff13;
-    --color-highlight: #309e42;
-    --color-inactive: #8b8c8d;
-    --color-overlay: #00000070;
-
-    --text-color-main: rgba(255, 255, 255, 0.95);
-
-    --text-size-s: 0.875rem;
-    --text-size-base: 1rem;
-    --text-size-lg: 1.25rem;
-
-    --spce-xsm: 0.325rem;
-    --spce-sm: 0.625rem;
-    --spce-med: 1.0625rem;
-    --spce-xmed: 1.5rem;
-    --spce-lg: 1.875rem;
-
-    --spce-pad-base: 0.5rem;
-    --radius-med: 10px;
-    --blur-base: 3px;
-}
+@import '../../styles/index.css';
 
 html{
     scroll-behavior: smooth;
-}
-
-.sidebar{
-    display: none;
 }
 
 .layout{

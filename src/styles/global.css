@@ -1,17 +1,16 @@
-/* @import './normalize.css'; */
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 :root{
-    --color-background: #313538;
     --color-background: #223549;
     --color-background-light: #ffffff13;
     --color-background-dark: black;
     --color-highlight: #309e42;
     --color-inactive: #8b8c8d;
-    --color-overlay: #0000009c;
+    --color-overlay: #7272723a;
+    --color-secondary: #d9d9d9;
 
     --text-color-main: rgba(255, 255, 255, 0.95);
     --text-color-secondary: rgba(201, 201, 201, 0.95);
@@ -25,6 +24,7 @@
     --spce-med: 1.0625rem;
     --spce-xmed: 1.5rem;
     --spce-lg: 1.875rem;
+    --spce-xlg: 2rem;
 
     --spce-pad-base: 0.5rem;
     --pad-lg:4.5rem;
@@ -33,6 +33,7 @@
     --border-base: 2.5px;
 
     --nav-height: 70px;
+    --text-line-height:1.5;
 }
 
 .hidden.hidden{
@@ -40,5 +41,9 @@
 }
 
 .svg{
-    height: 2rem;
+    height: 3rem;
+}
+
+.logo{
+    height: 3rem;
 }
