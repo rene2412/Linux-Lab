@@ -1038,12 +1038,53 @@ function process_curl($host) : string {
     if ($host === "https://www.apple.com/") return $GLOBALS['curl']; 
     else return $GLOBALS['curl_api'];
 }
-
-function process_wget($host) : string {
-    //for wget we are gunna have to put a file called index.html in the directory we are in right now
-
-    return "";
+function process_wget(&$fileSystem, $currentDirectory, $host) : string {
+    if ($host != "http://example.com") {
+        return "Invalid wget Command: Try Host Name 'http://example.com'";
+    }
+    
+    // Create index.html using the touch function
+    $result = process_touch($fileSystem, $currentDirectory, "index.html");
+    
+    // Check if the file was created successfully
+    if (strpos($result, "Successfully") === false) {
+        return $result; // Return the error message
+    }
+    
+    // Now update the content of the file we just created
+    $currentDirectory = rtrim($currentDirectory, "/");
+    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+    
+    // Initialize current level at root
+    if ($currentDirectory === "/" || empty($pathParts)) {
+        $currentLevel = &$fileSystem["/"];
+    } else {
+        $currentLevel = &$fileSystem["/"];
+        // Navigate to the current directory
+        foreach ($pathParts as $part) {
+            if (!isset($currentLevel[$part])) {
+                return "Error: Directory not found\n";
+            }
+            $currentLevel = &$currentLevel[$part];
+        }
+    }
+    
+    // Update the file with the HTML content
+    if (isset($currentLevel["index.html"]) && isset($currentLevel["index.html"]["file"])) {
+        $currentLevel["index.html"]["file"]["content"] = $GLOBALS['index'];
+        $currentLevel["index.html"]["file"]["size"] = strlen($GLOBALS['index']);
+        $currentLevel["index.html"]["file"]["modified"] = date("Y-m-d H:i:s");
+        
+        // Save changes to session
+        $_SESSION['fileSystem'] = $fileSystem;
+        
+        // Return wget output to show the download was successful
+        return $GLOBALS['wget'];
+    } else {
+        return "Error: Failed to update index.html\n";
+    }
 }
+
 
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -1174,7 +1215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $output = process_curl($arg);
         break;
     case 'wget':
-        $output = process_wget($arg);
+        $output = process_wget($fileSystem, $currentDir, $arg);
         break;
     default:
             $output = "Command not recognized: $cmd\n";
