@@ -1,5 +1,6 @@
 <?php
-require 'includes/config_session.inc.php';
+session_start();
+//require 'includes/config_session.inc.php';
 require_once "network.php";
 // Debugging: Log the request method and POST data
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
@@ -13,7 +14,7 @@ header('Content-Type: application/json');
 $fileSystem = [
     "/" => [
         "Documents" => [
-            "metadata" => 	[
+            "directory" => 	[
                  "0",
                 "permissions" => "drwxr-xr-x", // Directory permissions
                 "owner" => "user",
@@ -105,7 +106,7 @@ But I know that I can't be
 The one you love that's in your life
 But I know that I can't be the one you love",
 
-            "hello.txt" => "
+"hello.txt" => "
 		     __ 
                     / _) .. ROAR!!!
            _.----._/ /
@@ -113,7 +114,7 @@ But I know that I can't be the one you love",
      __/  (  |  (  |
     /__.-'|_|--|__|
     ",
-            "metadata" => [
+            "file" => [
                 "1",
                 "permissions" => "-rw-r--r--", // File permissions
                 "owner" => "user",
@@ -123,7 +124,7 @@ But I know that I can't be the one you love",
                 "size" => 1234 // file size in bytes
                 ],
             "Subfolder" => [
-                "metadata" => [
+                "file" => [
                     "2",
                     "permissions" => "drwxr-xr-x",
                     "owner" => "user1",
@@ -136,7 +137,7 @@ But I know that I can't be the one you love",
               ],
         ],
         "Pictures" => [
-            "metadata" => [
+            "directory" => [
                 "4",
                 "permissions" => "drwxr-xr-x",
                 "owner" => "user2",
@@ -145,7 +146,7 @@ But I know that I can't be the one you love",
                 "modified" => "2025-02-01 10:12:00"
             ],
             "photo.jpg" => [
-                "metadata" => [
+                "file" => [
                     "5",
                     "permissions" => "-rw-r--r--",
                     "owner" => "user2",
@@ -157,7 +158,7 @@ But I know that I can't be the one you love",
             ]
         ],
         "Videos" => [
-            "metadata" => [
+            "directory" => [
                 "6",
                 "permissions" => "drwxr-xr-x",
                 "owner" => "user3",
@@ -167,7 +168,7 @@ But I know that I can't be the one you love",
             ],
         ],
         "Projects" => [
-            "metadata" => [
+            "directory" => [
                 "7",
                 "permissions" => "drwxr-xr-x",
                 "owner" => "user1",
@@ -176,7 +177,7 @@ But I know that I can't be the one you love",
                 "modified" => "2025-02-01 10:21:00"
             ],
             "project1" => [
-                "metadata" => [
+                "directory" => [
                     "8",
                     "permissions" => "drwxr-xr-x",
                     "owner" => "user1",
@@ -185,7 +186,7 @@ But I know that I can't be the one you love",
                     "modified" => "2025-02-01 10:21:00"
                 ],
                 "file2.txt" => [
-                    "metadata" => [
+                    "file" => [
                         "9",
                         "permissions" => "-rw-r--r--",
                         "owner" => "user1",
@@ -200,16 +201,83 @@ But I know that I can't be the one you love",
     ]
 ];
 
-
-    
 if (!isset($_SESSION['fileSystem'])) {
     $_SESSION['fileSystem'] = $fileSystem;
-}
-
-if (!isset($_SESSION['currentDirectory'])) {
     $_SESSION['currentDirectory'] = "/";
+    $_SESSION['was_touched_used'] = false; // Initialize here
+        }
+function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): string {
+    if (empty($operator) && empty($file)) {
+        return $arg . "\n";
+    }
+    
+    if ($operator && $file) {
+        $currentDirectory = rtrim($currentDirectory, "/");
+        $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+        $currentLevel = &$fileSystem["/"];
+        
+        foreach ($pathParts as $part) {
+            if (!isset($currentLevel[$part])) {
+                return "Error: Invalid directory path.\n";
+            }
+            $currentLevel = &$currentLevel[$part];
+        }
+        
+        if ($operator === '>' || $operator === '>>') {
+            // If the file is a string (legacy format), convert it to new format
+            if (isset($currentLevel[$file]) && is_string($currentLevel[$file])) {
+                $oldContent = $currentLevel[$file];
+                $currentLevel[$file] = [
+                    "file" => [
+                        "permissions" => "-rw-r--r--",
+                        "owner" => "user",
+                        "group" => "group",
+                        "created" => date("Y-m-d H:i:s"),
+                        "modified" => date("Y-m-d H:i:s"),
+                        "size" => strlen($oldContent),
+                        "content" => $oldContent
+                    ]
+                ];
+            }
+            
+            // If file doesn't exist, create it
+            if (!isset($currentLevel[$file])) {
+                $currentLevel[$file] = [
+                    "file" => [
+                        "permissions" => "-rw-r--r--",
+                        "owner" => "user",
+                        "group" => "group",
+                        "created" => date("Y-m-d H:i:s"),
+                        "modified" => date("Y-m-d H:i:s"),
+                        "size" => 0,
+                        "content" => ""
+                    ]
+                ];
+            }
+            
+            // Check if it's a directory
+            if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
+                return "Error: '$file' is a directory.\n";
+            }
+            $content = $arg; // Add newline for both operators
+            // Update the content
+            if ($operator === '>') {
+                $currentLevel[$file]['file']['content'] = $content;
+            } else { // >>
+                $currentLevel[$file]['file']['content'] .= "\n" . $content;
+            }
+            
+            // Update metadata
+            $currentLevel[$file]['file']['modified'] = date("Y-m-d H:i:s");
+            $currentLevel[$file]['file']['size'] = strlen($currentLevel[$file]['file']['content']);
+            
+            $_SESSION['fileSystem'] = $fileSystem;
+            return "";
+        }
+    }
+    
+    return $arg . "\n";
 }
-
 function process_ls($fileSystem, $currentDirectory): string {
     if ($currentDirectory === "/") {
         $currentLevel = $fileSystem["/"];
@@ -227,7 +295,72 @@ function process_ls($fileSystem, $currentDirectory): string {
         }
         $currentLevel = $currentLevel[$part]; 
     }
+    //$was_touched_used = false;
     return format_directory_contents($currentLevel);
+}
+
+function process_touch(&$fileSystem, $currentDirectory, $arg) {    
+    // Handle root directory special case 
+    if ($currentDirectory === "/") {
+        if (isset($fileSystem["/"][$arg])) {
+            return "Error: '$arg' already exists\n";
+        }
+        // Create new file with metadata
+        $fileSystem["/"][$arg] = [
+            "file" => [
+                "permissions" => "-rw-r--r--",
+                "owner" => "user",
+                "group" => "group",
+                "created" => date("Y-m-d H:i:s"),
+                "modified" => date("Y-m-d H:i:s"),
+                "size" => 0,
+                "content" =>""
+            ]
+        ];
+        $_SESSION['fileSystem'] = $fileSystem;
+        $_SESSION['was_touched_used'] = true; // Set session flag
+        return "Successfully added $arg\n";
+    }
+ 
+    // Remove trailing slash if present
+    $currentDirectory = rtrim($currentDirectory, "/");
+    
+    // Split path into components
+    $path = array_filter(explode("/", $currentDirectory), 'strlen');
+    
+    // Start from root and maintain reference
+    $currentLevel = &$fileSystem["/"];
+    
+    // Navigate to current directory
+    foreach ($path as $part) {
+        if (!isset($currentLevel[$part]) || $part === 'file' || !is_array($currentLevel[$part])) {
+            return "Error: Directory not found\n";
+        }
+        $currentLevel = &$currentLevel[$part];
+    }
+ 
+    // Check if file already exists
+    if (isset($currentLevel[$arg])) {
+        return "Error: '$arg' already exists\n";
+    }
+ 
+    // Create new empty file with metadata
+    $currentLevel[$arg] = [
+        "file" => [
+            "permissions" => "-rw-r--r--",
+            "owner" => "user",
+            "group" => "group",
+            "created" => date("Y-m-d H:i:s"),
+            "modified" => date("Y-m-d H:i:s"),
+            "size" => 0,
+            "content" => ""
+        ]
+    ];
+    
+    // Make sure changes are saved to session
+    $_SESSION['fileSystem'] = $fileSystem;
+    $_SESSION['was_touched_used'] = true; // Set session flag
+    return "Successfully added $arg\n";
 }
 function process_ls_l($fileSystem, $currentDirectory) : string { 
        // Handle root directory special case
@@ -247,16 +380,13 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
         if (!isset($currentLevel[$part])) {
              return "Directory not found.\n";
         }
-        //if (!is_array($currentLevel[$part])) {
-          //  return "Not a directory.\n";
-       // }
       $currentLevel = $currentLevel[$part]; 
     }
         // Prepare output to hold directory contents
     $output = "";
     foreach ($currentLevel as $name => $content) {
         // Skip metadata and files inside it
-        if ($name === "metadata") {
+        if ($name === 'file') {
             continue;
         }
         
@@ -264,9 +394,9 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
         $line = "";
         
         // Check for metadata for files and directories
-        if (isset($content['metadata'])) {
+        if (isset($content['file'])) {
         // If it's a directory (or any array with metadata), display the metadata
-        $metadata = $content['metadata'];
+        $metadata = $content['file'];
         $line .= $metadata['permissions'] . " ";
         $line .= $metadata['owner'] . " ";
         $line .= $metadata['group'] . " ";
@@ -288,20 +418,32 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
 
     return $output;
 }
-
 function format_directory_contents(array $contents): string {
     if (empty($contents)) {
         return "This directory is empty.\n";
     }
+
     $output = [];
     foreach ($contents as $name => $content) {
         if (is_array($content)) {
-            if ($name === "metadata") continue;
-            $output[] = $name . "/";
+            // Skip metadata entries
+            if ($name === "file" || $name === "metadata") {
+                continue;
+            }
+            // Check if it's a file with metadata (has 'file' key) or a directory
+            if (isset($content['file'])) {
+                // It's a file with metadata
+                $output[] = $name;
+            } else {
+                // It's a directory
+                $output[] = $name . "/";
+            }
         } else {
             $output[] = $name;
         }
     }
+    
+    $_SESSION['was_touched_used'] = false; // Reset after processing
     sort($output);
     return implode(" ", $output) . "\n";
 }
@@ -396,20 +538,36 @@ function process_cat(&$filesystem, $currentDirectory, $file): string {
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
     $currentLevel = $filesystem["/"];
+
+    // Navigate to target directory
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return "Error: Invalid directory path.\n";
         }
         $currentLevel = $currentLevel[$part];
     }
+
+    // Check if file exists
     if (!isset($currentLevel[$file])) {
         return "Error: File not found.\n";
     }
-    if (is_array($currentLevel[$file])) {
+
+    // Handle directories
+    if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
         return "Error: '$file' is a directory.\n";
     }
-    return ($currentLevel[$file] ?? "[Empty File]") . "\n";
+
+    // Extract content based on format
+    if (isset($currentLevel[$file]['file']['content'])) {
+        // New metadata format
+        return $currentLevel[$file]['file']['content'] . "\n";
+    } elseif (is_string($currentLevel[$file])) {
+        // Legacy string format
+        return "here?" . $currentLevel[$file] . "\n";
+    }
+    return "empty?\n";
 }
+
 function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string {
     // Helper to resolve absolute paths
     $resolvePath = function ($baseDir, $path) {
@@ -481,7 +639,7 @@ function process_refresh() : string {
     // Reinitialize session variables to restore the default file system
     global $fileSystem; // Access the original file system structure
 
-    $_SESSION['fileSystem'] = &$fileSystem; // Reset the file system
+    $_SESSION['fileSystem'] = unserialize(serialize($fileSystem)); // Reset the file system
     $_SESSION['currentDirectory'] = "/";  // Reset to root directory
 
     return "File system has been reset to default.\n";
@@ -570,14 +728,14 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
     // Traverse to the current directory (without checking $argument yet)
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "ErRor: Directory '$part' not found.\n";
+            return "Error: Directory '$part' not found.\n";
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
 
     // Check if the target exists
     if (!isset($currentLevel[$argument])) {
-        return "ErrRr: '$argument' not found.\n";
+        return "Error: '$argument' not found.\n";
     }
 
     // Recursively delete if it's a directory
@@ -860,7 +1018,72 @@ function process_traceroute($host) : string {
 return $result;
 }
 
+function process_nslookup($host) : string {
+    if ($host != "google.com") return "Invalid nslookup Command: Try Host Name 'google.com'";
+    return $GLOBALS['nslookup'];
+}
 
+function process_dig($host) : string {
+    if ($host != "google.com") return "Invalid dig Command: Try Host Name 'google.com'";
+    return $GLOBALS['dig'];
+}
+
+function process_host($host) : string {
+    if ($host != "google.com") return "Invalid host Command: Try Host Name 'google.com'";
+    return $GLOBALS['host'];
+}
+
+function process_curl($host) : string {
+    if ($host !== "https://www.apple.com/" && $host !== "https://www.weather_api/") return "Invalid curl command: Try a valid host name";
+    if ($host === "https://www.apple.com/") return $GLOBALS['curl']; 
+    else return $GLOBALS['curl_api'];
+}
+function process_wget(&$fileSystem, $currentDirectory, $host) : string {
+    if ($host != "http://example.com") {
+        return "Invalid wget Command: Try Host Name 'http://example.com'";
+    }
+    
+    // Create index.html using the touch function
+    $result = process_touch($fileSystem, $currentDirectory, "index.html");
+    
+    // Check if the file was created successfully
+    if (strpos($result, "Successfully") === false) {
+        return $result; // Return the error message
+    }
+    
+    // Now update the content of the file we just created
+    $currentDirectory = rtrim($currentDirectory, "/");
+    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+    
+    // Initialize current level at root
+    if ($currentDirectory === "/" || empty($pathParts)) {
+        $currentLevel = &$fileSystem["/"];
+    } else {
+        $currentLevel = &$fileSystem["/"];
+        // Navigate to the current directory
+        foreach ($pathParts as $part) {
+            if (!isset($currentLevel[$part])) {
+                return "Error: Directory not found\n";
+            }
+            $currentLevel = &$currentLevel[$part];
+        }
+    }
+    
+    // Update the file with the HTML content
+    if (isset($currentLevel["index.html"]) && isset($currentLevel["index.html"]["file"])) {
+        $currentLevel["index.html"]["file"]["content"] = $GLOBALS['index'];
+        $currentLevel["index.html"]["file"]["size"] = strlen($GLOBALS['index']);
+        $currentLevel["index.html"]["file"]["modified"] = date("Y-m-d H:i:s");
+        
+        // Save changes to session
+        $_SESSION['fileSystem'] = $fileSystem;
+        
+        // Return wget output to show the download was successful
+        return $GLOBALS['wget'];
+    } else {
+        return "Error: Failed to update index.html\n";
+    }
+}
 
 
 // Handle the command
@@ -887,6 +1110,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $output = "";
 
  switch ($cmd) {
+        case 'echo':
+            $GetLine = "";
+            $operator = "";
+            $file = "";   
+        // Process args to handle redirection
+        for ($i = 0; $i < count($args); $i++) {
+            $word = $args[$i];
+            if ($word === $cmd) continue;    
+            // Check for redirection operators
+            if ($word === '>' || $word === '>>') {
+                $operator = $word;
+                if (isset($args[$i + 1])) {
+                    $file = $args[$i + 1];
+                        }
+                break;  // Stop adding to GetLine once we hit operator
+                    }
+                $GetLine .= $word . " ";
+                }
+                $GetLine = rtrim($GetLine);  // Remove trailing space
+                $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+            break;   
+        case 'touch':
+            $output = process_touch($fileSystem, $currentDir, $arg);
+            break;
         case 'ls':
             if ($arg === '-l') {
                 $output = process_ls_l($fileSystem, $currentDir);
@@ -955,7 +1202,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     case 'traceroute':
         $output = process_traceroute($arg);
 	    break;
-	default:
+	case 'nslookup':
+        $output = process_nslookup($arg);
+        break;
+    case 'dig':
+        $output = process_dig($arg);
+        break;
+    case 'host';
+        $output = process_host($arg);
+        break;
+    case 'curl':
+        $output = process_curl($arg);
+        break;
+    case 'wget':
+        $output = process_wget($fileSystem, $currentDir, $arg);
+        break;
+    default:
             $output = "Command not recognized: $cmd\n";
             break;
     }
