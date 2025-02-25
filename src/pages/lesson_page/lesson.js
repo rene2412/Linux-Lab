@@ -2,6 +2,22 @@ const sidebarBtn = document.querySelector('.top__sidebar');
 const sidebarBtnClose = document.querySelector('.sidebar__button')
 const sidebar = document.querySelector('.sidebar');
 
+const showDropdownButton = document.querySelector('.dropdown__button--open');
+const dropdown = document.querySelector('.top__dropdown')
+showDropdownButton.addEventListener('click',toggleDropdown)
+
+function toggleDropdown(e){
+    dropdown.classList.toggle('hidden');
+}
+
+function showDropdown(e){
+    dropdown.classList.remove('hidden');
+}
+function hideDropdown(e){
+    dropdown.classList.add('hidden');
+}
+
+
 sidebarBtn.addEventListener('click',()=>{
     sidebar.classList.toggle('hidden');
 })
@@ -18,7 +34,11 @@ const section = {
             completed: false,
             content: `<p>what should we do today or i dont even know im just tping</p>
                     <p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p>
-                    <code>ls directory</code>`,
+                    <p>blahballhlsldajflalf salfjsafljflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf asfjflalf jflalf jflalf jflalf </p>
+                    <code>ls directory</code>
+                    <p>blahballhlsldajflalf sjflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf jflalf asfjflalf jflalf jflalf jflalf </p>
+                    
+                    `,
         },
         {
             id: 2,
@@ -67,9 +87,11 @@ class lessonManager{
 
 
 class lessonDisplay{
-    curLesson = 1;
     curSection = 'basics';
+    // LESSONS START FROM 1
+    curLesson = 1;
     sectionSize = 0;
+    lessons = [];
     
     constructor(container,lessons = null){
         this.container = document.querySelector(container);
@@ -80,10 +102,12 @@ class lessonDisplay{
         this.statusCross = document.querySelector('.lesson__status--cross');
         this.statusCheck = document.querySelector('.lesson__status--check');
 
+        this.getLessons();
         this.initListeners();
         this.changeSection();
         this.updateMeter();
     }
+
 
     initListeners(){
         this.nextButton.addEventListener('click',this.nextLesson);
@@ -134,6 +158,42 @@ class lessonDisplay{
         section[this.curSection][this.curLesson][`completed`] = !section[this.curSection][this.curLesson][`completed`];
         this.updateMeter();
         this.updateStatus();
+    }
+
+    // this will need to be done in DB or something to keep track of user info
+    // async getInfo(){
+    //     try{
+    //         const request = await fetch('../../testAPI/userInfo.json');
+    //         if(!request.ok){
+    //             throw new Error('Could not load user info');
+    //         }
+    //         const data = await request.json();
+    //         console.log(data.);
+    //     }        
+    //     catch(error){
+    //         console.log(`error ${error}`);
+    //     }
+    // }
+    
+    //fetch the lesson after user info
+    // SETUP MY GETTER MAKE EVERTHING RUN AND BUILD AFTER THE GET LESSON FETCHES ELSE LOAD
+    async getLessons(){
+        try{
+            const request = await fetch('../../testAPI/lessons.json');
+            if(!request.ok){
+                throw new Error('Could not load lesson');
+            }
+            const data = await request.json();
+            console.log(data[this.curSection]);
+            return data[this.curSection];
+        }        
+        catch(error){
+            console.log(`error ${error}`);
+        }
+    }
+
+    async postLessons(){
+
     }
 };
 

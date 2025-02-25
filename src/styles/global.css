@@ -4,10 +4,12 @@
     box-sizing: border-box;
 }
 :root{
+    --color-user-color: #000000;
+    --color-terminal: var(--color-user-color);
     --color-background: #223549;
     --color-background-light: #ffffff13;
-    --color-background-dark: black;
-    --color-highlight: #309e42;
+    --color-background-dark: rgb(0, 0, 0);
+    --color-highlight: #299c3c;
     --color-inactive: #8b8c8d;
     --color-overlay: #7272723a;
     --color-secondary: #d9d9d9;
@@ -29,8 +31,9 @@
     --spce-pad-base: 0.5rem;
     --pad-lg:4.5rem;
     --radius-med: 10px;
+    --radius-sm: 3px;
     --blur-base: 3px;
-    --border-base: 2.5px;
+    --border-base: 2px;
 
     --nav-height: 70px;
     --text-line-height:1.5;

@@ -1,0 +1,43 @@
+{
+    "basics": [
+      {
+        "section__size": 5,
+        "section__completed": false
+      },
+      {
+        "id": 1,
+        "section": "basics",
+        "title": "ITS ALIVE",
+        "completed": false,
+        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      },
+      {
+        "id": 2,
+        "section": "basics",
+        "title": "ls",
+        "completed": false,
+        "content": "<p>should we do today or i dont even know im just tping</p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      },
+      {
+        "id": 3,
+        "section": "basics",
+        "title": "pwd",
+        "completed": false,
+        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      },
+      {
+        "id": 4,
+        "section": "basics",
+        "title": "whoami",
+        "completed": false,
+        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      },
+      {
+        "id": 5,
+        "section": "basics",
+        "title": "cd",
+        "completed": false,
+        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      }
+    ]
+  }

@@ -1,4 +1,14 @@
 @import '../../styles/index.css';
+@import '../../components/Navigation/Navigation.css';
+
+* {
+    /* border: 1px solid blue; */
+}
+
+:root{
+    --nav-height-lesson: 50px;
+    --color-background-dark: rgb(40, 52, 73);
+}
 
 html{
     scroll-behavior: smooth;
@@ -9,104 +19,21 @@ html{
     color: var(--text-color-main);
     display: flex;
     flex-direction: column;
-    min-height: 100vw;
-    min-height: 100vh;
+    max-height: 100vw;
+    height: 100%;
+    max-height: 100vh;
+    height: 100vh;
 }
 
 
 code{
     font-family: monospace;
-    background-color: rgba(255, 255, 255, 0.247);
-    border-radius: 5px;
-    padding: var(--spce-pad-base);
-    color: var(--text-color-main);
-    font-size: var(--text-size-xs);
-
+    display: block;
+    padding: var(--spce-sm);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-overlay);
 }
 /* SIDEBAR STYLE */
-.sidebar{
-    position:fixed;
-    top: 0;
-    background-color: var(--color-overlay);
-    color: var(--text-color-main);
-    height: 100vh;
-    width: 100vw;
-    z-index: 1;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    padding: var(--spce-lg);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* var this */
-    font-size: clamp(1.1rem, 5vw, 1.5rem);
-    box-shadow: 5px 0px 15px -1px #000000;
-}
-
-.sidebar__header{
-    display: flex;
-    justify-content: space-between;
-}
-
-.sidebar__links{
-    display: flex;
-    flex-direction: column;
-    gap: var(--spce-lg);
-}
-.sidebar__links ul, a{
-    list-style: none;
-    text-decoration: none;
-    color: var(--text-color-main);
-    /* font-size: var(--text-size-lg); */
-}
-
-.sidebar__links > ul {
-    padding-left: var(--spce-med);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spce-xsm);
-}
-
-.sidebar li:hover{
-    transform: scale(1.1);
-}
-
-
-.sidebar__dropdown{
-    padding-left: var(--spce-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spce-xsm);
-}
-
-.sidebar__dropdown__button{
-    border: none;
-    background-color: transparent;
-    color: var(--text-color-main);
-}
-
-.sidebar__bottom{
-    justify-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.sidebar__bottom button{
-    border: none;
-    background-color: transparent;
-}
-
-.sidebar__button{
-    border: none;
-    background-color: transparent;
-    color: var(--text-color-main);
-}
-
-.selected{
-    /* transform: translateY(10px); */
-    scale: 1.1;
-    background-color: var(--color-highlight);
-}
 
 /* ======================== */
 /* LESSON SECTION STYLING */
@@ -114,17 +41,10 @@ code{
 .section--lesson{
     display: flex;
     flex-direction: column;
-    gap: var(--spce-sm);
+    background-color: var(--color-background-dark);
+    height: 65%;
 }
 
-.section--terminal{
-    flex-grow: 1;
-    display: flex;
-}
-
-.terminal{
-    flex-grow: 1;
-}
 
 /* TOP styling */
 .top{
@@ -132,32 +52,78 @@ code{
     justify-content: space-between;
     align-items: center;
     padding: var(--spce-lg);
-    height: 50px;
+    height: var(--nav-height-lesson);
 }
+
 
 .top__sidebar{
     border: none;
     background-color: transparent;
 }
 
+/* DROPDOWN STYLES */
+.dropdown__container{
+    position: relative;
+    z-index: 1;
+}
+
+.dropdown{
+    position: absolute;
+    min-width: 120px;
+    max-width: fit-content;
+    background-color: var(--color-background-dark);
+    border-radius: var(--radius-med);
+    border: var(--border-base) var(--color-secondary) solid;
+}
+
+
+.dropdown__button{
+    background-color: transparent;
+    border: none;
+    border-radius: var(--radius-med);
+    color: var(--text-color-main);
+    width: 100%;
+    text-align: start;
+}
+
+.dropdown__buttons{
+    list-style-type: none;
+    font-size: var(--text-size-lg);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spce-sm);
+    /* justify-content: stretch;
+    align-items: stretch; */
+}
+
+.dropdown__button li{
+    display: flex;
+}
+
+.dropdown__button:hover{
+    background-color: var(--color-background-light);
+    padding: var(--spce-xsm);
+}
+.dropdown__button--open{
+    padding: var(--spce-xsm);
+}
+
 /* LESSON STYLES */
 .lesson{
     position: relative;
-    padding: var(--spce-sm) var(--spce-sm);
-    margin: 0 var(--spce-lg);
-    font-size: var(--text-size-base);
     overflow: scroll;
-    height: 40vh;
-    background-color: var(--color-background-light);
-    border-radius: var(--radius-med);
-    align-self: stretch;
+    /* height: 400px; */
+    width: min(600px,100%);
+    align-self: center;
+    padding: 0 var(--spce-lg);
 }
 
 
 .lesson__content *{
+    line-height: var(--text-line-height);
     margin: var(--spce-sm) 0;
-    line-height: var(--spce-xmed);
 }
+
 
 
 .svg{
@@ -168,14 +134,24 @@ code{
     height: 3rem;
 }
 
-/* PROG BAR */
-.progress-bar meter::-webkit-meter-bar{
-    background: var(--color-inactive);
-    height: 3px;
-    border: none;
-    width: 100vw;
-    border-radius: 1000px;
+.util__container{
+    margin-top: auto;
 }
+
+/* PROG BAR */
+.progress-bar{
+    margin: 0;
+    padding: 0;
+    height: 20px;
+}
+
+.progress-bar meter::-webkit-meter-bar{
+    background: var(--color-secondary);
+    border: none;
+    height: 3px;
+    width: 100vw;
+}
+
 .progress-bar meter::-webkit-meter-optimum-value{
     background-color: var(--color-highlight);
     border-radius: var(--radius-med);
@@ -183,29 +159,38 @@ code{
 
 
 /* LESSON UTIL */
+
 .lesson__util{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--spce-lg);
+    padding: var(--spce-sm) var(--spce-lg);
+    padding-top: 0;
 }
 
 .lesson__button{
     color: var(--text-color-main);
-    
     background-color: var(--color-highlight);
-    border: none;
-    border-radius: var(--radius-med);
     padding: var(--spce-sm);
+    border-radius: var(--radius-med);
+    border: white var(--border-base);
 }
 
 
 /* TERMINAL */
 .terminal{
-    background-color: black;
+    background-color: var(--color-terminal);
+    padding: var(--spce-sm);
     color: white;
     font-size: var(--text-size-base);
     font-family: monospace;
+    /* height: 100px; */
+    width: 100vw;
+    z-index: 1;
+}
+.section--terminal{
+    flex-grow: 1;
+    display: flex;
 }
 
 .green{
@@ -244,24 +229,23 @@ code{
         display: grid;
         gap: 0;
         max-height: 100vh;
-        grid-template-rows: 50px 10px 1fr 50px;
+        height: 100%;
+        grid-template-rows: 50px  5fr ;
     }
     .top{
         grid-row: 1 / 2;
-    }
-    .progress-bar{
-        grid-row: 2/3;
+        border-bottom: solid var(--border-base) var(--color-secondary);
     }
     .lesson{
         display: flex;
         flex-direction: column;
-        height: 90%;
-        /* ideal 600px but if smaller rid the pad/margin and fill container for better use of space */
         width: min(600px,100%);
-        overflow: hidden;
+        overflow-y: auto;
         margin-top: var(--spce-lg); 
         justify-self: center;
         font-size: var(--text-size-lg);
+        height: 90%;
+        grid-row: 2/3;
     }
 
     .progress-bar meter::-webkit-meter-bar{
@@ -269,8 +253,11 @@ code{
     }
 
     .lesson__util{
-        background-color: var(--color-background-light);
-        /* justify-self: center; */
+
+    }
+
+    .terminal{
+        width: 100%;
     }
     
 }

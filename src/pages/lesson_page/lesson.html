@@ -10,7 +10,8 @@
     <div class="sidebar hidden">
         <div class="sidebar__top">
             <div class="sidebar__header">
-                <h1 class="sidebar__logo">LOGO</h1>
+                <h2 class="sidebar__logo">Linux-Lab</h2>
+                <img src="../assets/SVGs/Tux.svg.png" alt="tux" class="logo">
                 <button type="button" class="button sidebar__button sidebar__button--close">X</button>
             </div>
             <nav class="sidebar__links">
@@ -37,11 +38,24 @@
             </button>
         </div>
     </div>
+
     <div class="layout">
         <div class="section--lesson">
             <div class="top">
                 <button type="button" class="top__sidebar"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
-                    <span class="top__logo"><strong>LOGO</strong></span>
+                <div class="dropdown__container">
+                    <button type="button" class="dropdown__button dropdown__button--open"><h2>Basics - cat +</h2></button>
+                    <div class="top__dropdown dropdown hidden">
+                        <ul class="dropdown__buttons">
+                            <li><button type="button" class="dropdown__button l1">cat</button></li>
+                            <li><button type="button" class="dropdown__button l2">ls</button></li>
+                            <li><button type="button" class="dropdown__button l3">pwd</button></li>
+                            <li><button type="button" class="dropdown__button l4">whoami</button></li>
+                            <li><button type="button" class="dropdown__button l4">cd</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <img src="../assets/SVGs/Tux.svg.png" alt="tux the penguin" class="svg">
             </div>
             <article class="lesson">
                 <h1 class="lesson__title">Cat</h1>
@@ -54,16 +68,19 @@
                 </div>
             </article>
 
-            <div class="progress-bar">
-                <label for="progress-bar"></label>
-                <meter id="progress-bar" class="progress-bar__meter" value="0" min="0" max="100"></meter>
+            <div class="util__container">
+                <div class="progress-bar">
+                    <label for="progress-bar"></label>
+                    <meter id="progress-bar" class="progress-bar__meter" value="0" min="0" max="100"></meter>
 
-            </div>
-            <div class="lesson__util">
-                <button type="button" class="lesson__button lesson__button--prev">Prev</button>
-                <img class="lesson__status lesson__status--cross" src="../assets/SVGs/cross.svg" alt="X">
-                <img class="lesson__status lesson__status--check hidden" src="../assets/SVGs/check.svg" alt="X">
-                <button type="button" class="lesson__button lesson__button--next">Next</button>
+                </div>
+                <div class="lesson__util">
+                    <button type="button" class="lesson__button lesson__button--prev">Prev</button>
+                    <img class="lesson__status lesson__status--cross svg" src="../assets/SVGs/cross.svg" alt="X">
+                    <img class="lesson__status lesson__status--check hidden svg" src="../assets/SVGs/check.svg" alt="X">
+                    <button type="button" class="lesson__button lesson__button--next">Next</button>
+                </div>
+
             </div>
         </div>
 
