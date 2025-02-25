@@ -7,7 +7,7 @@
       {
         "id": 1,
         "section": "basics",
-        "title": "ITS ALIVE",
+        "title": "whattamean",
         "completed": false,
         "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
       },
@@ -38,6 +38,26 @@
         "title": "cd",
         "completed": false,
         "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      }
+    ],
+    "networking": [
+      {
+        "section__size": 2,
+        "section__completed": false
+      },
+      {
+        "id": 1,
+        "section": "networking",
+        "title": "plug da wifi in",
+        "completed": false,
+        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
+      },
+      {
+        "id": 2,
+        "section": "networking",
+        "title": "turn the rouer off",
+        "completed": false,
+        "content": "<p>should we do today or i dont even know im just tping</p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>"
       }
     ]
   }

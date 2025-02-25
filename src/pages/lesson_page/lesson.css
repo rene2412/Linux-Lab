@@ -1,5 +1,7 @@
 @import '../../styles/index.css';
 @import '../../components/Navigation/Navigation.css';
+@import './termC/term.css';
+
 
 * {
     /* border: 1px solid blue; */
@@ -178,29 +180,10 @@ code{
 
 
 /* TERMINAL */
-.terminal{
-    background-color: var(--color-terminal);
-    padding: var(--spce-sm);
-    color: white;
-    font-size: var(--text-size-base);
-    font-family: monospace;
-    /* height: 100px; */
-    width: 100vw;
-    z-index: 1;
-}
-.section--terminal{
-    flex-grow: 1;
-    display: flex;
-}
 
-.green{
-    color: limegreen;
-}
-
-.caret{
-    background-color: white;
-    white-space: pre;
-    min-width: 10px;
+#terminal__container{
+    width: 100%;
+    height: 100%;
 }
 
 /* EFFECTS */
@@ -257,6 +240,7 @@ code{
     }
 
     .terminal{
+        max-width: 50vw;
         width: 100%;
     }
     

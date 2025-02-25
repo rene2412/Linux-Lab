@@ -69,7 +69,6 @@ html{
 .active.active{
     background-color: var(--color-highlight);
     border-radius: 3px;
-    border: solid var(--border-base) var(--text-color-main);
     color: var(--text-color-main);
     color: var(--text-color-main);
 }
