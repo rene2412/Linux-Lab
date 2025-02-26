@@ -45,11 +45,6 @@ const section = {
     ],
 }
 
-class lessonManager{
-    constructor(){
-
-    }
-}
 
 
 class lessonDisplay{
@@ -67,15 +62,17 @@ class lessonDisplay{
         this.misc = document.querySelector('.lesson');
         this.statusCross = document.querySelector('.lesson__status--cross');
         this.statusCheck = document.querySelector('.lesson__status--check');
+        // bind the async function to use our locals;
+        this.postInfo = this.postInfo.bind(this);
 
         this.getInfo();
+        this.initListeners();
 
         // this.initListeners();
         // this.changeSection();
         // this.updateMeter();
     }
     initialize(){
-        this.initListeners();
         this.changeSection();
         this.updateMeter();
         this.render();
@@ -101,11 +98,15 @@ class lessonDisplay{
     nextLesson= ()=>{
         if(this.curLesson >= this.sectionSize) return;
         ++this.curLesson;
+        // update user cur lesson
+        this.postInfo();
         this.update();
     }
     prevLesson= ()=>{
         if(this.curLesson <= 1) return;
         --this.curLesson;
+        // update user cur lesson
+        this.postInfo();
         this.update();
     }
     changeSection(){
@@ -147,7 +148,7 @@ class lessonDisplay{
                 throw new Error('Could not load user info');
             }
             const data = await request.json();
-            // at 0 simply refers to a certain user
+            // at 0 simply refers to first user in our case 
             this.curLesson = data[0].lesson;
             this.curSection= data[0].section;
             this.getLessons();
@@ -168,7 +169,6 @@ class lessonDisplay{
             this.modules = data;
             console.log(this.modules)
             this.initialize();
-            // return data[this.curSection];
         }        
         catch(error){
             console.log(`error ${error}`);
@@ -176,11 +176,28 @@ class lessonDisplay{
     }
     // we should send back this lesson and this
     async postInfo(){
-
-    }
-
-    async postLessons(){
-
+        try{
+            const response = await fetch('../../testAPI/updateUserInfo.php',{
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                // we want to update the user info current lesson and section 
+                // for demonstration basics is hardcoded
+                // we are seinding this json string
+                body: JSON.stringify({
+                    section: this.curSection,
+                    lesson: this.curLesson,
+                })
+            })
+            if(!response.ok){
+                throw new Error(`response error`,response.status);
+            }
+            const data = await response.json();
+        }
+        catch(error){
+            console.log(`error saving ${error}`)
+        }
     }
 };
 
@@ -191,3 +208,6 @@ const terminal = new VanillaTerminal({
     apiEndpoint:'../../../api_commands.php',
 });
 terminal.mount('#terminal__container');
+
+const tux = document.querySelector('#tuxlogo');
+tux.addEventListener('click',lessonDisplayController.postInfo);

@@ -14,9 +14,11 @@ export default class VanillaTerminal {
       this.caretPos = 0;
       this.inputLeft = '';
       this.inputRight = '';
-      this.commandHistoryIndex = 0;
-      this.commandHistory = [''];
-      this.commandHistoryClean = [''];
+      // history index at 1 is the latest
+      // edge case: cannot be empty array
+      this.commandHistoryIndex = 1;
+      this.commandHistory = ['',''];
+      this.commandHistoryClean = ['',''];
   
       // DOM elements (will be set in mount())
       this.terminal = null;
@@ -140,6 +142,9 @@ export default class VanillaTerminal {
         console.log("Server response:", data);
         this.output(actualPrevCommand, data.output);
         this.updatePrompt(data.currentDirectory);
+
+
+
         this.temp = "";
         this.caretPos = 0;
         this.renderCaret();
