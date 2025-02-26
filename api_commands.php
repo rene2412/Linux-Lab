@@ -22,7 +22,16 @@ $fileSystem = [
                 "created" => "2025-02-01 10:00:00",
                 "modified" => "2025-02-01 10:05:00"
 	    ],
-	    "LoverIsADay.txt" => "
+	    "LoverIsADay.txt" => [ 
+            "file" => [
+            "1",
+            "permissions" => "-rw-r--r--", // File permissions
+            "owner" => "user",
+            "group" => "group",
+            "created" => "2025-02-01 10:00:00",
+            "modified" => "2025-02-01 10:10:00",
+            "size" => 1234 // file size in bytes
+            ], "
 Time changed, we're different
 But my mind still says redundant things
 Can I not think?
@@ -68,9 +77,18 @@ Furthering my distance from you
 Realistically I can't leave now
 But I'm okay as long as you
 Keep me from going crazy
-Keep me from going crazy",
+Keep me from going crazy"] ,
 
-	 "BirchTree.txt" => "
+	 "BirchTree.txt" => [
+         "file" => [
+        "2",
+        "permissions" => "-rw-r--r--", // File permissions
+        "owner" => "user",
+        "group" => "group",
+        "created" => "2025-02-01 10:10:00",
+        "modified" => "2025-02-01 10:20:00",
+        "size" => 1234 // file size in bytes
+        ],"
 I could be my best if I spoke my own head for you
 You could see me now if you told yourself how you knew me
 Oh, are you not lonely?
@@ -86,10 +104,19 @@ Back from the blue, I know it's nothing new
 I know we're pretty young but I see what people grow into
 'Cause two years ahead I can see that you might not know me
 Oh, I could be lonely
-And oh, as I sit by the bitch tree",
+And oh, as I sit by the bitch tree" ],
 	    
-	 "WithoutYou.txt" => "
-Do you really have to talk
+	 "WithoutYou.txt" => [
+        "file" => [
+        "3",
+        "permissions" => "-rw-r--r--", // File permissions
+        "owner" => "user",
+        "group" => "group",
+        "created" => "2025-02-01 10:00:00",
+        "modified" => "2025-02-01 10:10:00",
+        "size" => 1234 // file size in bytes
+        ], 
+"Do you really have to talk
 About the things you do with him?
 DO you really have to talk about it love?
 do you really have to talk
@@ -104,27 +131,27 @@ Those things you knew that could hurt me?
 Did you really have to do those things to me?
 But I know that I can't be
 The one you love that's in your life
-But I know that I can't be the one you love",
+But I know that I can't be the one you love" ],
 
-"hello.txt" => "
-		     __ 
+"hello.txt" => [
+    "file" => [
+    "4",
+    "permissions" => "-rw-r--r--", // File permissions
+    "owner" => "user",
+    "group" => "group",
+    "created" => "2025-02-01 10:00:00",
+    "modified" => "2025-02-01 10:10:00",
+    "size" => 1234 // file size in bytes
+    ], "
+		             __ 
                     / _) .. ROAR!!!
            _.----._/ /
         __/         /
      __/  (  |  (  |
     /__.-'|_|--|__|
-    ",
-            "file" => [
-                "1",
-                "permissions" => "-rw-r--r--", // File permissions
-                "owner" => "user",
-                "group" => "group",
-                "created" => "2025-02-01 10:00:00",
-                "modified" => "2025-02-01 10:10:00",
-                "size" => 1234 // file size in bytes
-                ],
+    "],
             "Subfolder" => [
-                "file" => [
+                "directory" => [
                     "2",
                     "permissions" => "drwxr-xr-x",
                     "owner" => "user1",
@@ -299,6 +326,37 @@ function process_ls($fileSystem, $currentDirectory): string {
     return format_directory_contents($currentLevel);
 }
 
+function format_directory_contents(array $contents): string {
+    if (empty($contents)) {
+        return "This directory is empty.\n";
+    }
+
+    $output = [];
+    foreach ($contents as $name => $content) {
+        if (is_array($content)) {
+            // Skip metadata entries
+            if ($name === "file" || $name === "metadata") {
+                continue;
+            }
+            // Check if it's a file with metadata (has 'file' key) or a directory
+            if (isset($content['file'])) {
+                // It's a file with metadata
+                $output[] = $name;
+            } else {
+                // It's a directory
+                $output[] = $name . "/";
+            }
+        } else {
+            $output[] = $name;
+        }
+    }
+    
+  //  $_SESSION['was_touched_used'] = false; // Reset after processing
+    sort($output);
+    return implode(" ", $output) . "\n";
+}
+
+
 function process_touch(&$fileSystem, $currentDirectory, $arg) {    
     // Handle root directory special case 
     if ($currentDirectory === "/") {
@@ -418,35 +476,7 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
 
     return $output;
 }
-function format_directory_contents(array $contents): string {
-    if (empty($contents)) {
-        return "This directory is empty.\n";
-    }
 
-    $output = [];
-    foreach ($contents as $name => $content) {
-        if (is_array($content)) {
-            // Skip metadata entries
-            if ($name === "file" || $name === "metadata") {
-                continue;
-            }
-            // Check if it's a file with metadata (has 'file' key) or a directory
-            if (isset($content['file'])) {
-                // It's a file with metadata
-                $output[] = $name;
-            } else {
-                // It's a directory
-                $output[] = $name . "/";
-            }
-        } else {
-            $output[] = $name;
-        }
-    }
-    
-    $_SESSION['was_touched_used'] = false; // Reset after processing
-    sort($output);
-    return implode(" ", $output) . "\n";
-}
 
 function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
     if ($dir === "..") {
