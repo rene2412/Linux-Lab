@@ -3,10 +3,16 @@
     height: 100%;
     width: 100%;
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: rgb(255, 255, 255);
     padding: 10px;
     overflow-y:auto;
+}
+
+#terminal__container{
+    max-height: 40%;
+    width: 100%;
+    height: 100%;
 }
 
 .history-command{

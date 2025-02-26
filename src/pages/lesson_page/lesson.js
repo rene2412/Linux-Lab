@@ -62,11 +62,13 @@ class lessonDisplay{
         this.misc = document.querySelector('.lesson');
         this.statusCross = document.querySelector('.lesson__status--cross');
         this.statusCheck = document.querySelector('.lesson__status--check');
+
         // bind the async function to use our locals;
         this.postInfo = this.postInfo.bind(this);
 
         this.getInfo();
         this.initListeners();
+        this.getLessons();
 
         // this.initListeners();
         // this.changeSection();
@@ -75,6 +77,7 @@ class lessonDisplay{
     initialize(){
         this.changeSection();
         this.updateMeter();
+        this.updateStatus();
         this.render();
 
     }
@@ -84,6 +87,8 @@ class lessonDisplay{
         this.nextButton.addEventListener('click',this.nextLesson);
         this.prevButton.addEventListener('click',this.prevLesson);
         this.misc.addEventListener('click',this.toggleLessonComplete);
+        // custom command success event
+        document.addEventListener('command-success',this.handleCorrectEvent);
     }
     update(){
         this.render();
@@ -111,6 +116,7 @@ class lessonDisplay{
     }
     changeSection(){
     //    this.sectionSize = section[this.curSection][0]['section__size'];
+        // the 0 part of the section is the meta data [0]
        this.sectionSize = this.modules[this.curSection][0]['section__size'];
        console.log(this.sectionSize);
     }
@@ -151,7 +157,7 @@ class lessonDisplay{
             // at 0 simply refers to first user in our case 
             this.curLesson = data[0].lesson;
             this.curSection= data[0].section;
-            this.getLessons();
+            // this.getLessons();
         }        
         catch(error){
             console.log(`error ${error}`);
@@ -168,6 +174,7 @@ class lessonDisplay{
             const data = await request.json();
             this.modules = data;
             console.log(this.modules)
+            // call init because we will update everything
             this.initialize();
         }        
         catch(error){
@@ -198,6 +205,18 @@ class lessonDisplay{
         catch(error){
             console.log(`error saving ${error}`)
         }
+    }
+    handleCorrectEvent= (e)=>{
+        console.log(e);
+        this.showSuccessMessage();
+        // get lessons will update everything
+        // will also update 
+        this.getLessons();
+    }
+
+    showSuccessMessage() {
+        // Create a simple popup or notification
+        console.log(`showing success message`);
     }
 };
 

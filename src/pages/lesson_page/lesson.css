@@ -114,7 +114,6 @@ code{
 .lesson{
     position: relative;
     overflow: scroll;
-    /* height: 400px; */
     width: min(600px,100%);
     align-self: center;
     padding: 0 var(--spce-lg);
@@ -181,10 +180,6 @@ code{
 
 /* TERMINAL */
 
-#terminal__container{
-    width: 100%;
-    height: 100%;
-}
 
 /* EFFECTS */
 .hidden{
@@ -238,9 +233,14 @@ code{
     .lesson__util{
 
     }
+    #terminal__container{
+        max-height: 100vh;
+        width: 100%;
+    }
 
     .terminal{
         max-width: 50vw;
+        max-height: 100vh;
         width: 100%;
     }
     
