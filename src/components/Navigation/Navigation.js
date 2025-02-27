@@ -21,10 +21,14 @@ export default class Navigation{
     closeSidebar = ()=>{
         this.sidebar.classList.add('hidden');
 
+        this.sidebar.classList.remove('sidebar--open');
+        this.sidebar.classList.add('sidebar--close');
     }
 
     openSidebar = ()=>{
         this.sidebar.classList.remove('hidden');
+        this.sidebar.classList.remove('sidebar--close');
+        this.sidebar.classList.add('sidebar--open');
     }
 
     createSidebarTemplate(){
@@ -34,7 +38,7 @@ export default class Navigation{
         sidebar.innerHTML = `
             <div class="sidebar__top">
                 <div class="sidebar__header">
-                    <h2 class="sidebar__logo">lab</h2>
+                    <h2 class="sidebar__logo">Linux-Lab</h2>
                     <button type="button" class="button sidebar__button sidebar__button--close">X</button>
                 </div>
                 <nav class="sidebar__links">
