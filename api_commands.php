@@ -10,29 +10,12 @@ header('Access-Control-Allow-Origin: *'); // Allow all origins (for development)
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
-
+/*
 $fileSystem = [
     "/" => [
         "Documents" => [
-            "directory" => 	[
-                 "0",
-                "permissions" => "drwxr-xr-x", // Directory permissions
-                "owner" => "user",
-                "group" => "group",
-                "created" => "2025-02-01 10:00:00",
-                "modified" => "2025-02-01 10:05:00"
-	    ],
-	    "LoverIsADay.txt" => [ 
-            "file" => [
-            "1",
-            "permissions" => "-rw-r--r--", // File permissions
-            "owner" => "user",
-            "group" => "group",
-            "created" => "2025-02-01 10:00:00",
-            "modified" => "2025-02-01 10:10:00",
-            "size" => 1234 // file size in bytes
-            ], "
-Time changed, we're different
+	        "LoverIsADay.txt" => [ 
+"Time changed, we're different
 But my mind still says redundant things
 Can I not think?
 Will you love this part of me?
@@ -77,19 +60,10 @@ Furthering my distance from you
 Realistically I can't leave now
 But I'm okay as long as you
 Keep me from going crazy
-Keep me from going crazy"] ,
+Keep me from going crazy"],
 
 	 "BirchTree.txt" => [
-         "file" => [
-        "2",
-        "permissions" => "-rw-r--r--", // File permissions
-        "owner" => "user",
-        "group" => "group",
-        "created" => "2025-02-01 10:10:00",
-        "modified" => "2025-02-01 10:20:00",
-        "size" => 1234 // file size in bytes
-        ],"
-I could be my best if I spoke my own head for you
+"I could be my best if I spoke my own head for you
 You could see me now if you told yourself how you knew me
 Oh, are you not lonely?
 And oh, as you sit by the birch tree
@@ -107,15 +81,6 @@ Oh, I could be lonely
 And oh, as I sit by the bitch tree" ],
 	    
 	 "WithoutYou.txt" => [
-        "file" => [
-        "3",
-        "permissions" => "-rw-r--r--", // File permissions
-        "owner" => "user",
-        "group" => "group",
-        "created" => "2025-02-01 10:00:00",
-        "modified" => "2025-02-01 10:10:00",
-        "size" => 1234 // file size in bytes
-        ], 
 "Do you really have to talk
 About the things you do with him?
 DO you really have to talk about it love?
@@ -131,18 +96,10 @@ Those things you knew that could hurt me?
 Did you really have to do those things to me?
 But I know that I can't be
 The one you love that's in your life
-But I know that I can't be the one you love" ],
+But I know that I can't be the one you love"],
 
-"hello.txt" => [
-    "file" => [
-    "4",
-    "permissions" => "-rw-r--r--", // File permissions
-    "owner" => "user",
-    "group" => "group",
-    "created" => "2025-02-01 10:00:00",
-    "modified" => "2025-02-01 10:10:00",
-    "size" => 1234 // file size in bytes
-    ], "
+"hello.txt" => [ 
+"
 		             __ 
                     / _) .. ROAR!!!
            _.----._/ /
@@ -151,77 +108,124 @@ But I know that I can't be the one you love" ],
     /__.-'|_|--|__|
     "],
             "Subfolder" => [
-                "directory" => [
-                    "2",
-                    "permissions" => "drwxr-xr-x",
-                    "owner" => "user1",
-                    "group" => "group1",
-                    "created" => "2025-02-01 10:05:00",
-                    "modified" => "2025-02-01 10:07:00"
-                ],
-                "something.txt" => "
-                    Hello World!",
+                "something.txt" => 
+                    "Hello World!",
               ],
         ],
         "Pictures" => [
-            "directory" => [
-                "4",
-                "permissions" => "drwxr-xr-x",
-                "owner" => "user2",
-                "group" => "group2",
-                "created" => "2025-02-01 10:10:00",
-                "modified" => "2025-02-01 10:12:00"
-            ],
             "photo.jpg" => [
+                ]
+            ],
+        "Videos" => [
+            ],
+        "Projects" => [
+            "project1" => [
+                ],
+                "file2.txt" => [
+                    ]
+                ]
+        ]
+];
+*/
+
+$fileSystem = [
+    "/" => [
+        "Documents" => [
+            "directory" => [
+                "permissions" => "drw-r--r--",
+                "owner" => "user",
+                "group" => "group",
+                "created" => "2025-02-27 01:24:04",
+                "modified" => "2025-02-27 01:24:04",
+                "size" => 648,
+            ],
+            "BirchTree.txt" => [
                 "file" => [
-                    "5",
                     "permissions" => "-rw-r--r--",
-                    "owner" => "user2",
-                    "group" => "group2",
-                    "created" => "2025-02-01 10:10:00",
-                    "modified" => "2025-02-01 10:11:00",
-                    "size" => 789
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 648,
+                    "content" => [
+                        "I could be my best if I spoke my own head for you",
+                        "You could see me now if you told yourself how you knew me",
+                        "And oh, as I sit by the bitch tree"
+                    ]
+                ]
+            ],
+            "WithoutYou.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 585,
+                    "content" => [
+                        "Do you really have to talk",
+                        "About the things you do with him?",
+                        "But I know that I can't be the one you love"
+                    ]
+                ]
+            ],
+            "hello.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 148,
+                    "content" => [
+                        "		              __ ",
+                        "                    / _) .. ROAR!!!",
+                        "           _.----._/ /",
+                        "        __/         /",
+                        "     __/  (  |  (  |",
+                        "    /__.-'|_|--|__|"
+                    ]
+                ]
+            ],
+            "Subfolder" => [
+                "something.txt" => [
+                    "file" => [
+                        "permissions" => "-rw-r--r--",
+                        "owner" => "user",
+                        "group" => "group",
+                        "created" => "2025-02-27 01:24:04",
+                        "modified" => "2025-02-27 01:24:04",
+                        "size" => 12,
+                        "content" => ["Hello World!"]
+                    ]
                 ]
             ]
         ],
-        "Videos" => [
-            "directory" => [
-                "6",
-                "permissions" => "drwxr-xr-x",
-                "owner" => "user3",
-                "group" => "group3",
-                "created" => "2025-02-01 10:15:00",
-                "modified" => "2025-02-01 10:16:00"
-            ],
+        "Pictures" => [
+            "photo.jpg" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 0,
+                    "content" => []
+                ]
+            ]
         ],
+        "Videos" => [],
         "Projects" => [
-            "directory" => [
-                "7",
-                "permissions" => "drwxr-xr-x",
-                "owner" => "user1",
-                "group" => "group1",
-                "created" => "2025-02-01 10:20:00",
-                "modified" => "2025-02-01 10:21:00"
-            ],
-            "project1" => [
-                "directory" => [
-                    "8",
-                    "permissions" => "drwxr-xr-x",
-                    "owner" => "user1",
-                    "group" => "group1",
-                    "created" => "2025-02-01 10:20:00",
-                    "modified" => "2025-02-01 10:21:00"
-                ],
-                "file2.txt" => [
-                    "file" => [
-                        "9",
-                        "permissions" => "-rw-r--r--",
-                        "owner" => "user1",
-                        "group" => "group1",
-                        "created" => "2025-02-01 10:20:00",
-                        "modified" => "2025-02-01 10:21:00",
-                        "size" => 1012
-                    ]
+            "project1" => [],
+            "file2.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 0,
+                    "content" => []
                 ]
             ]
         ]
@@ -229,10 +233,10 @@ But I know that I can't be the one you love" ],
 ];
 
 if (!isset($_SESSION['fileSystem'])) {
+    // Initialize new session with file system
     $_SESSION['fileSystem'] = $fileSystem;
     $_SESSION['currentDirectory'] = "/";
-    $_SESSION['was_touched_used'] = false; // Initialize here
-        }
+}
 function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): string {
     if (empty($operator) && empty($file)) {
         return $arg . "\n";
@@ -251,60 +255,39 @@ function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): 
         }
         
         if ($operator === '>' || $operator === '>>') {
-            // If the file is a string (legacy format), convert it to new format
-            if (isset($currentLevel[$file]) && is_string($currentLevel[$file])) {
-                $oldContent = $currentLevel[$file];
-                $currentLevel[$file] = [
-                    "file" => [
-                        "permissions" => "-rw-r--r--",
-                        "owner" => "user",
-                        "group" => "group",
-                        "created" => date("Y-m-d H:i:s"),
-                        "modified" => date("Y-m-d H:i:s"),
-                        "size" => strlen($oldContent),
-                        "content" => $oldContent
-                    ]
-                ];
-            }
-            
-            // If file doesn't exist, create it
+            // Create the file if it doesn't exist using `touch`
             if (!isset($currentLevel[$file])) {
-                $currentLevel[$file] = [
-                    "file" => [
-                        "permissions" => "-rw-r--r--",
-                        "owner" => "user",
-                        "group" => "group",
-                        "created" => date("Y-m-d H:i:s"),
-                        "modified" => date("Y-m-d H:i:s"),
-                        "size" => 0,
-                        "content" => ""
-                    ]
-                ];
+                $touchResult = process_touch($fileSystem, $currentDirectory, $file);
+                if (str_starts_with($touchResult, "Error")) {
+                    return $touchResult; // Propagate errors (e.g., invalid extension)
+                }
             }
             
-            // Check if it's a directory
+            // Check if target is a directory
             if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
                 return "Error: '$file' is a directory.\n";
             }
-            $content = $arg; // Add newline for both operators
-            // Update the content
+            
+            // Update content (now guaranteed to be in array format)
+            $fileContent = &$currentLevel[$file]['file']['content'];
             if ($operator === '>') {
-                $currentLevel[$file]['file']['content'] = $content;
+                $fileContent = [$arg]; // Overwrite with new content
             } else { // >>
-                $currentLevel[$file]['file']['content'] .= "\n" . $content;
+                $fileContent[] = $arg; // Append new line
             }
             
             // Update metadata
             $currentLevel[$file]['file']['modified'] = date("Y-m-d H:i:s");
-            $currentLevel[$file]['file']['size'] = strlen($currentLevel[$file]['file']['content']);
+            $contentString = implode("\n", $fileContent);
+            $currentLevel[$file]['file']['size'] = strlen($contentString);
             
             $_SESSION['fileSystem'] = $fileSystem;
             return "";
         }
     }
-    
     return $arg . "\n";
 }
+
 function process_ls($fileSystem, $currentDirectory): string {
     if ($currentDirectory === "/") {
         $currentLevel = $fileSystem["/"];
@@ -322,7 +305,6 @@ function process_ls($fileSystem, $currentDirectory): string {
         }
         $currentLevel = $currentLevel[$part]; 
     }
-    //$was_touched_used = false;
     return format_directory_contents($currentLevel);
 }
 
@@ -330,34 +312,24 @@ function format_directory_contents(array $contents): string {
     if (empty($contents)) {
         return "This directory is empty.\n";
     }
-
     $output = [];
     foreach ($contents as $name => $content) {
-        if (is_array($content)) {
-            // Skip metadata entries
-            if ($name === "file" || $name === "metadata") {
-                continue;
-            }
-            // Check if it's a file with metadata (has 'file' key) or a directory
-            if (isset($content['file'])) {
-                // It's a file with metadata
-                $output[] = $name;
-            } else {
-                // It's a directory
+            //if its an array that doesnt end with a .txt then its a directory
+            if (is_array($content) && !str_ends_with($name, ".txt")) {
                 $output[] = $name . "/";
             }
-        } else {
-            $output[] = $name;
+            else {
+                $output[] = $name;
+            }
         }
-    }
-    
-  //  $_SESSION['was_touched_used'] = false; // Reset after processing
     sort($output);
     return implode(" ", $output) . "\n";
 }
 
-
-function process_touch(&$fileSystem, $currentDirectory, $arg) {    
+function process_touch(&$fileSystem, $currentDirectory, $arg) {   
+    if (!str_ends_with($arg, ".txt")) {
+        return "Error: Files must end in .txt";
+    }
     // Handle root directory special case 
     if ($currentDirectory === "/") {
         if (isset($fileSystem["/"][$arg])) {
@@ -372,23 +344,20 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
                 "created" => date("Y-m-d H:i:s"),
                 "modified" => date("Y-m-d H:i:s"),
                 "size" => 0,
-                "content" =>""
+                "content" => []
             ]
         ];
         $_SESSION['fileSystem'] = $fileSystem;
-        $_SESSION['was_touched_used'] = true; // Set session flag
         return "Successfully added $arg\n";
     }
- 
+
+
     // Remove trailing slash if present
     $currentDirectory = rtrim($currentDirectory, "/");
-    
     // Split path into components
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
-    
     // Start from root and maintain reference
     $currentLevel = &$fileSystem["/"];
-    
     // Navigate to current directory
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || $part === 'file' || !is_array($currentLevel[$part])) {
@@ -396,7 +365,7 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
         }
         $currentLevel = &$currentLevel[$part];
     }
- 
+
     // Check if file already exists
     if (isset($currentLevel[$arg])) {
         return "Error: '$arg' already exists\n";
@@ -411,15 +380,17 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
             "created" => date("Y-m-d H:i:s"),
             "modified" => date("Y-m-d H:i:s"),
             "size" => 0,
-            "content" => ""
+            "content" => []
         ]
     ];
     
     // Make sure changes are saved to session
     $_SESSION['fileSystem'] = $fileSystem;
-    $_SESSION['was_touched_used'] = true; // Set session flag
     return "Successfully added $arg\n";
 }
+
+
+/*
 function process_ls_l($fileSystem, $currentDirectory) : string { 
        // Handle root directory special case
     if ($currentDirectory === "/") {
@@ -443,40 +414,72 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
         // Prepare output to hold directory contents
     $output = "";
     foreach ($currentLevel as $name => $content) {
-        // Skip metadata and files inside it
-        if ($name === 'file') {
-            continue;
-        }
-        
         // Build the ls -l format
         $line = "";
-        
-        // Check for metadata for files and directories
-        if (isset($content['file'])) {
-        // If it's a directory (or any array with metadata), display the metadata
-        $metadata = $content['file'];
-        $line .= $metadata['permissions'] . " ";
-        $line .= $metadata['owner'] . " ";
-        $line .= $metadata['group'] . " ";
-        $line .= $metadata['created'] . " ";
-        $line .= $metadata['modified'] . " ";
-        $line .= $name . "\n";
-        } elseif (is_string($content)) {
-        // If it's a file (content is a string), display default file metadata
+        if (str_ends_with($name, ".txt")) {
         $line .= "-rw-r--r-- "; // Default permissions for files
         $line .= "user "; // Default owner
         $line .= "group "; // Default group
-        $line .= "2025-02-01 10:00:00 "; // Default created timestamp
-        $line .= "2025-02-01 10:10:00 "; // Default modified timestamp
-        $line .= $name . "\n";
-}
-        // Append the line to the output
+        $line .= date("Y-m-d H:i:s");
+        $line .= date("Y-m-d H:i:s"); // Default modified timestamp
+        $line .= " " . $name . "\n";
+        }
+        else {
+            $line .= "drw-r--r-- "; // Default permissions for files
+            $line .= "user "; // Default owner
+            $line .= "group "; // Default group
+            $line .= date("Y-m-d H:i:s");
+            $line .= date("Y-m-d H:i:s"); // Default modified timestamp
+            $line .= " " . $name . "\n";
+        }
         $output .= $line . "\n";
     }
-
     return $output;
 }
+*/
+function process_ls_l($fileSystem, $currentDirectory) : string { 
+    // Navigate to the target directory
+    if ($currentDirectory === "/") {
+        $currentLevel = $fileSystem["/"];
+    } else {
+        $currentDirectory = rtrim($currentDirectory, "/");
+        $path = array_filter(explode("/", $currentDirectory), 'strlen');
+        $currentLevel = $fileSystem["/"];
+        foreach ($path as $part) {
+            if (!isset($currentLevel[$part])) {
+                return "Directory not found.\n";
+            }
+            $currentLevel = $currentLevel[$part];
+        }
+    }
 
+    $output = "";
+    foreach ($currentLevel as $name => $content) {
+        // Files: Use metadata from 'file' key
+        if (is_array($content) && isset($content['file'])) {
+            $file = $content['file'];
+            $line = sprintf(
+                "%s %s %s %s %d %s\n",
+                $file['permissions'],
+                $file['owner'],
+                $file['group'],
+                $file['modified'],
+                $file['size'],
+                $name
+            );
+        } 
+        // Directories: Default metadata
+        else {
+            $line = sprintf(
+                "drw-r--r-- user group %s 4096 %s/\n",
+                date("Y-m-d H:i:s"), // Placeholder timestamp
+                $name
+            );
+        }
+        $output .= $line;
+    }
+    return $output;
+}
 
 function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
     if ($dir === "..") {
@@ -490,7 +493,7 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
         }
         return "";
     }  
-        
+    
     $targetPath = trim($dir, "/");
     $pathParts = explode("/", $targetPath);
 
@@ -504,23 +507,22 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
         $currentLevel = $fileSystem["/"]; //basically initialzing to zero
         // Traverse the file system to the current directory
         foreach ($path as $part) {
-            if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
                 return "Error: Invalid directory path.\n";
             }
             $currentLevel = &$currentLevel[$part];
         }
-        
         //for every directory in the path
         foreach ($pathParts as $part) {
                 // Check if the directory exists
-                if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-                    return "ErroR: Directory '$part' not found.\n";
+                if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+                    return "Error: '$part' is not a directory";
                 }
                 $currentLevel = &$currentLevel[$part];
                 $newDirectory = rtrim($newDirectory, "/") . "/" . $part;
             }
         // Update the current directory
-        $currentDirectory = $newDirectory;    
+        $currentDirectory = $newDirectory;  
     }
     else {    
         $path = array_filter(explode("/", trim($currentDirectory, "/")), 'strlen');
@@ -534,8 +536,8 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
                 $currentLevel = $currentLevel[$part];
         }
         // Check if the target directory exists
-        if ($dir === "metadata" || !isset($currentLevel[$dir]) || !is_array($currentLevel[$dir])) {
-            return "Error: Directory not found.\n";
+        if (str_ends_with($dir, ".txt") || !isset($currentLevel[$dir]) || !is_array($currentLevel[$dir])) {
+            return "Error: '$dir' is not a directory.\n";
         }
         // Update the current directory path
         $currentDirectory = rtrim($currentDirectory, "/") . "/" . $dir;
@@ -590,12 +592,12 @@ function process_cat(&$filesystem, $currentDirectory, $file): string {
     // Extract content based on format
     if (isset($currentLevel[$file]['file']['content'])) {
         // New metadata format
-        return $currentLevel[$file]['file']['content'] . "\n";
+        return implode("\n", $currentLevel[$file]['file']['content']) . "\n";
     } elseif (is_string($currentLevel[$file])) {
         // Legacy string format
-        return "here?" . $currentLevel[$file] . "\n";
+        return $currentLevel[$file] . "\n";
     }
-    return "empty?\n";
+    return "File Is Empty?\n";
 }
 
 function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string {
