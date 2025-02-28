@@ -1,0 +1,28 @@
+{
+  "articles": [
+    {
+      "id": "TLL",
+      "title": "The Linux-Lab",
+      "content": [
+        "The Linux-Lab provides a simple, browser-based environment to learn command line skills without any installation or setup. Our interactive terminal simulator helps beginners build confidence through guided exercises and immediate feedback.",
+        "Created by two college students passionate about making tech education more accessible, we focus on teaching practical commands you'll actually use in real-world scenarios."
+      ]
+    },
+    {
+      "id": "Why",
+      "title": "Why Learn the Command Line?",
+      "content": [
+        "Command line skills open doors to powerful computing capabilities that simply aren't available through graphical interfaces. From faster workflows to automation possibilities, these skills are fundamental for developers, IT professionals, and tech enthusiasts.",
+        "Many programming courses assume command line knowledge without teaching it properly. We're here to fill that gap."
+      ]
+    },
+    {
+      "id": "How",
+      "title": "How It Works",
+      "content": [
+        "Our platform features a simulated Linux environment right in your browser. Start with basic commands and progress through carefully designed lessons that build on each other. Practice in a safe environment where mistakes become learning opportunities, not frustrations.",
+        "Each lesson includes clear explanations, examples, and interactive challenges to reinforce your learning."
+      ]
+    }
+  ]
+}

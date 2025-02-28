@@ -34,6 +34,21 @@ html{
     color: var(--text-color-main);
 }
 
+/* .animation--popup{
+    animation: popup 0.7s ease;
+}
+
+@keyframes popup{
+    from{
+        opacity: 0;
+        transform: translateY(30px) rotateX(30deg);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px) rotateX(0deg);
+    }
+
+} */
 /*=== article  sidebar Styles=== */
 
 .articles__sidebar{
