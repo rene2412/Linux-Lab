@@ -686,7 +686,7 @@ function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
     // Traverse to the current directory
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "ERror: '$part' not found.\n";
+            return "Error: '$part' not found.\n";
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
@@ -697,7 +697,7 @@ function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
     }
 
     // Check if the target is a directory
-    if (is_array($currentLevel[$argument])) {
+    if ((!str_ends_with($argument, ".txt"))) {
         return "Error: '$argument' is a directory. Use 'rmdir' to remove directories.\n";
     }
 
@@ -720,19 +720,19 @@ function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
     // Traverse to the current directory
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "ErRor: Directory '$part' not found.\n";
+            return "Error: Directory '$part' not found.\n";
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
 
     // Check if the target directory exists
     if (!isset($currentLevel[$argument])) {
-        return "ErRor: Directory '$argument' not found.\n";
+        return "Error: Directory '$argument' not found.\n";
     }
 
     // Check if it's actually a directory
     if (!is_array($currentLevel[$argument])) {
-        return "Eror: '$argument' is not a directory.\n";
+        return "Error: '$argument' is not a directory.\n";
     }
 
     // Check if the directory is empty before deleting
@@ -790,12 +790,10 @@ function delete_recursive(&$directory) {
         unset($directory[$key]); // Delete files or now-empty directories
     }
 }
-
 function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) : string {
-    // Navigate to the target directory in $fileSystem
+    // Navigate to the target directory
     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
-    $current = &$fileSystem['/']; // Start at root
-
+    $current = &$fileSystem['/'];
     foreach ($path as $part) {
         if (!isset($current[$part]) || !is_array($current[$part])) {
             return "Directory not found.\n";
@@ -803,50 +801,38 @@ function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) 
         $current = &$current[$part];
     }
 
-    // Check if the target file exists and is a file
-    if (!isset($current[$targetFile]) || is_array($current[$targetFile])) {
+    // Check if the target is a valid file (not a directory)
+    if (
+        !isset($current[$targetFile]) || 
+        (is_array($current[$targetFile]) && !isset($current[$targetFile]['file']))
+    ) {
         return "File not found or is a directory.\n";
     }
 
-    // Ensure metadata exists (convert string content to array with metadata)
-    if (is_string($current[$targetFile])) {
-        $content = $current[$targetFile];
-        $current[$targetFile] = [
-            'content' => $content,
-            'metadata' => [
-                'permissions' => '-rw-r--r--',
-                'owner' => 'user',
-                'group' => 'group',
-                'created' => '2025-02-01 10:00:00',
-                'modified' => '2025-02-01 10:10:00'
-            ]
-        ];
-    }
-
-    // Update permissions based on $argument
-    $permissions = str_split($current[$targetFile]['metadata']['permissions']);
+    // Update permissions (no need for legacy conversion; files use 'file' key)
+    $file = &$current[$targetFile]['file'];
+    $permissions = str_split($file['permissions']);
+    
     switch ($argument) {
         case 'u+x':
-            $permissions[3] = 'x'; // Set user execute
+            $permissions[3] = 'x'; // User execute (e.g., -rwxr--r--
             break;
         case 'g-w':
-            $permissions[5] = '-'; // Remove group write
+            $permissions[5] = '-'; // Remove group write (e.g., -rw-r-----
             break;
         case 'o=r':
-            // Set others to read-only: r-- (positions 7-9)
             $permissions[7] = 'r';
             $permissions[8] = '-';
             $permissions[9] = '-';
             break;
-        // Add other cases as needed...
         default:
             return "Invalid chmod argument.\n";
     }
 
-    $current[$targetFile]['metadata']['permissions'] = implode('', $permissions);
+    $file['permissions'] = implode('', $permissions);
+    $file['modified'] = date("Y-m-d H:i:s");
     return "Permissions updated for $targetFile.\n";
 }
-
 
 function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
 	$files = []; // will hold all the files in current directory, the key will hold the file name and value will be its content
@@ -874,9 +860,10 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
     $currentLevel = $fileSystem["/"];
-     $line_numbers = 0;
-     $count = 0;
-    // Navigate to the current directory
+    $line_numbers = 0;
+    $count = 0;
+
+    // Navigate to current directory
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return "Error: Invalid directory path.\n";
@@ -886,133 +873,119 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
 
     $results = [];
 
-    // Look for the pattern in every txt file in the current directory 
     if ($file === "*.txt") {
-        $found = false;
-        $files = retrieve_files_from_directory($fileSystem, $currentDirectory); // Check if .txt files exist  
-        foreach($files as $name => $content) {
-              $line_numbers = 0;  
-              $lines = explode("\n", trim($content)); 
+        foreach ($currentLevel as $name => $entry) {
+            if (str_ends_with($name, ".txt") && isset($entry['file']['content'])) { 
+                $lines = $entry['file']['content']; 
+                $line_numbers = 0;
+                
                 foreach ($lines as $line) {
-                    $line_numbers ++;
-                    // Handle different flags
+                    $line_numbers++;
+                    // Flag logic
                     if ($flag === "-n") {
                         if (strpos($line, $pattern) !== false) {
-                            $found = true;
-                            $results[] = $name. "| Line: " . $line_numbers . ": " . $line; // Add the line number to line
+                            $results[] = "$name | Line: $line_numbers: $line";
                         }
+                    } 
+                    elseif ($flag === "-c") {
+                        if (strpos($line, $pattern) !== false) $count++; 
                     }
-                    if ($flag === "-c") {
-                        $found = true;
-                        if (strpos($line, $pattern) !== false) {
-                            $count++;
-                        }
-                    }
-                    if ($flag === "-i") {
-                        $found = true;
+                    elseif ($flag === "-i") {
                         if (stripos($line, $pattern) !== false) {
-                            $results[] = $line; // Add the matching line to results
+                            $results[] = $line;
                         }
                     }
-                    // Handle default case (no flag)
-                     if (strpos($line, $pattern) !== false && $found === false) {
-                         $results[] = $line;
+                    else {
+                        if (strpos($line, $pattern) !== false) {
+                            $results[] = "$name: $line";
+                        }
+                    }
                 }
             }
         }
     }
     
-    // Else block for handling a specific file
     else {
         if (!isset($currentLevel[$file])) {
             return "Error: File not found.\n";
         }
-        if (is_array($currentLevel[$file])) {
-            return "Error: '$file' is a directory.\n";
+        if (!str_ends_with($file, ".txt") || !isset($currentLevel[$file]['file']['content'])) {
+            return "Error: Not a .txt file.\n";
         }
-        
-        // Split the file into lines
-        $lines = explode("\n", trim($currentLevel[$file]));
-        $found = false;
-        // Loop through the lines of the specific file
+
+        $lines = $currentLevel[$file]['file']['content'];
+        $line_numbers = 0;
+
         foreach ($lines as $line) {
             $line_numbers++;
-            
+            // Flag logic
             if ($flag === "-n") {
                 if (strpos($line, $pattern) !== false) {
-                    $found = true;
-                    $results[] = $line_numbers . ": " . $line; // Add line number
+                    $results[] = "Line: $line_numbers | $line";
                 }
+            } 
+            elseif ($flag === "-c") {
+                if (strpos($line, $pattern) !== false) $count++;
             }
-            if ($flag === "-c") {
-                $found = true;
-                if (strpos($line, $pattern) !== false) {
-                    $count++;
-                }
-            }
-            if ($flag === "-i") {
+            elseif ($flag === "-i") {
                 if (stripos($line, $pattern) !== false) {
-                    $found = true;
-                    $results[] = $line; // Case-insensitive match
+                    $results[] = $line;
                 }
             }
-            // Default matching condition (without any specific flag)
-            if (strpos($line, $pattern) !== false && $found === false) {
-                $results[] = $line;
+            else {
+                if (strpos($line, $pattern) !== false) {
+                    $results[] = "Line: $line_numbers | $line";
+                }
             }
         }
     }
 
-    // Return the count if '-c' flag is used, otherwise return matched lines
-    if ($count > 0)  return $count;
-    else return empty($results) ? "No matches found\n" : implode("\n", $results);
+    // Return results
+    if ($flag === "-c") return ($count > 0) ? "$count\n" : "0\n";
+    return empty($results) ? "No matches found\n" : implode("\n", $results) . "\n";
 }
 
-function retrieve_files_from_argument($fileSystem, $currentDirectory, $expression) : array {
+
+function retrieve_files_from_argument($fileSystem, $currentDirectory, $expression): array {
     $files = [];
-    // Normalize the search path by removing trailing slash
     $searchPath = rtrim($currentDirectory, "/");
-    
-    // Remove leading slash and filter out empty segments
     $pathParts = array_filter(explode("/", ltrim($searchPath, "/")), 'strlen');
-    
-    // Always start from root
     $currentLevel = $fileSystem["/"];
-    
-    // Navigate through the path parts
+
+    // Navigate to target directory
     foreach ($pathParts as $part) {
-        if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+        if (!isset($currentLevel[$part])) {
             return [];
         }
         $currentLevel = $currentLevel[$part];
     }
-    
-    // Search current level for matches
-    foreach ($currentLevel as $name => $content) {  
-        // Ensure the full path maintains the original format (with or without leading slash)
+
+    foreach ($currentLevel as $name => $entry) {
         $fullPath = $searchPath . "/" . $name;
-        if (is_array($content)) {
-            $files = array_merge($files, retrieve_files_from_argument($fileSystem, $fullPath, $expression));
-        } else {
-            if (fnmatch($expression, $name)) { 
-                $files[$fullPath] = $content;
+
+        // Handle directories (arrays without 'file' key)
+        if (is_array($entry) && !isset($entry['file'])) {
+            $files = array_merge(
+                $files,
+                retrieve_files_from_argument($fileSystem, $fullPath, $expression)
+            );
+        } 
+        // Handle files (arrays with 'file' key)
+        elseif (is_array($entry) && isset($entry['file'])) {
+            if (fnmatch($expression, $name)) {
+                $files[$fullPath] = $entry['file']['content'];
             }
         }
     }
+
     return $files;
 }
 
-
-function process_find($fileSystem, $currentDirectory, $path, $expression) : string {
-    // Strip quotes from the expression (e.g., "WithoutYou.txt" → WithoutYou.txt)
+function process_find($fileSystem, $currentDirectory, $path, $expression): string {
     $expression = trim($expression, "\"'");
     $files = retrieve_files_from_argument($fileSystem, $path, $expression);
-    $path = "";
-    foreach ($files as $fileName => $content) {
-                $path .= $fileName . "\n";
-    }
-    return $path;
- }
+    return empty($files) ? "No files found.\n" : implode("\n", array_keys($files)) . "\n";
+}
 
 function process_ping($host) : string {
     if ($host != "google.com") return "Invalid Ping Command: Try Host Name 'google.com'";
@@ -1213,12 +1186,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         case 'find':
                 // Parse "find <path> -name <pattern>"
-        if (count($args) < 4 || $args[2] !== '-n') {
+        if (count($args) < 3) {
             $output = "Usage: find <path> -name \"<pattern>\"\n";
             break;
             }
             $path = $args[1];
+            $expression = $args[count($args) - 1];
+            // If "-name" is provided, adjust path and expression
+            if ($args[2] === '-name' && count($args) >= 4) {
+            $path = $args[1];
             $expression = $args[3];
+            }
+            // Trim quotes from the expression (e.g., "*.txt" → *.txt)
+            $expression = trim($expression, "\"'");
             $output = process_find($fileSystem, $currentDir, $path, $expression);
             break;
 	case 'ping':
