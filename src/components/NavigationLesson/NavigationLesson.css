@@ -1,0 +1,5 @@
+@import '../Navigation/Navigation.css';
+
+.sidebar__button--open{
+    display: inline;
+}

@@ -1,11 +1,8 @@
 @import '../../styles/index.css';
-@import '../../components/Navigation/Navigation.css';
 @import './termC/term.css';
+@import '../../components/NavigationLesson/NavigationLesson.css';
 
 
-* {
-    /* border: 1px solid blue; */
-}
 
 :root{
     --nav-height-lesson: 50px;
@@ -36,6 +33,9 @@ code{
     background-color: var(--color-overlay);
 }
 /* SIDEBAR STYLE */
+.sidebar__button--open{
+    background-color: transparent;
+}
 
 /* ======================== */
 /* LESSON SECTION STYLING */
@@ -230,9 +230,6 @@ code{
         width: 50vw;
     }
 
-    .lesson__util{
-
-    }
     #terminal__container{
         max-height: 100vh;
         width: 100%;
@@ -245,3 +242,4 @@ code{
     }
     
 }
+
