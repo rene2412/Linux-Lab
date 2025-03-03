@@ -1,15 +1,15 @@
-export default class Navigation{
-    constructor(container){
+export default class NavigationLesson{
+    constructor(container,button){
         this.container = document.querySelector(container);
-
+        this.container.classList.remove('hidden');
+        this.sidebarBtnOpen = document.querySelector(button);
         this.render();
         this.setElements();
         this.setListeners();
     }
 
     setElements(){
-        this.sidebarBtnOpen = document.querySelector('.sidebar__button--open');
-        this.sidebarBtnClose = document.querySelector('.sidebar__button')
+        this.sidebarBtnClose = document.querySelector('.sidebar__button--close')
         this.sidebar = document.querySelector('.sidebar');
 
     }
@@ -29,10 +29,8 @@ export default class Navigation{
     }
 
     createSidebarTemplate(){
-        const sidebar = document.createElement('div');
-        sidebar.classList.add('sidebar');
-        sidebar.classList.add('sidebar--close');
-        sidebar.innerHTML = `
+        this.container.classList.add('sidebar');
+        this.container.innerHTML = `
             <div class="sidebar__top">
                 <div class="sidebar__header">
                     <h2 class="sidebar__logo">Linux-Lab</h2>
@@ -42,7 +40,6 @@ export default class Navigation{
                     <ul>
                         <li class="navbar__link"><a href="../../pages/landing_page/landing_page.html">Home</a></li>
                         <li class="navbar__link"><a href="#">Learn More</a></li>
-                        <li class="navbar__link"><a href="../../pages/lesson_page/lesson.html">Try It</a></li>
                         <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
                         <li class="navbar__link"><a href="#">Contact Us</a></li>
                     </ul>
@@ -54,32 +51,10 @@ export default class Navigation{
                 </button>
             </div>
         `;
-        return sidebar;
-    }
-
-    createNavbarTemplate(){
-        const nav = document.createElement('nav');
-        nav.classList.add('navbar');
-        nav.innerHTML = `
-            <button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
-            <div class="navbar__left">
-                    <img src="../assets/SVGs/Tux.svg.png" class="logo" alt="Linux-Lab logo">
-            </div> 
-            <div class="navbar__right">
-                <ul class="navbar__links">
-                    <li class="navbar__link"><a href="../../pages/landing_page/landing_page.html">Home</a></li>
-                    <li class="navbar__link"><a href="#">Learn More</a></li>
-                    <li class="navbar__link"><a href="../../pages/lesson_page/lesson.html">Try It</a></li>
-                    <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
-                    <li class="navbar__link"><a href="#">Contact Us</a></li>
-                </ul>
-            </div> 
-        `;
-        return nav;
+        // return sidebar;
     }
 
     render(){
-        this.container.appendChild(this.createSidebarTemplate());
-        this.container.appendChild(this.createNavbarTemplate());
+        this.createSidebarTemplate();
     }
 }

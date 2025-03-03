@@ -21,10 +21,6 @@
     transition: transform 0.2s ease-in-out;
 }
 
-.hidden.hidden.hidden{
-    display: flex;
-}
-
 .sidebar--open{
     transform: translate(0%);
 }
@@ -159,7 +155,7 @@
 @media (max-width: 768px){
     .sidebar__button--open{
         display: inline;
-        background-color: black;
+        background-color: transparent;
         border: none;
     }
 }

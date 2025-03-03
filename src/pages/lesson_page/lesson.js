@@ -1,31 +1,9 @@
 import VanillaTerminal from "./termC/term.js";
-
-const sidebarBtn = document.querySelector('.top__sidebar');
-const sidebarBtnClose = document.querySelector('.sidebar__button')
-const sidebar = document.querySelector('.sidebar');
-
-const showDropdownButton = document.querySelector('.dropdown__button--open');
-const dropdown = document.querySelector('.top__dropdown')
-showDropdownButton.addEventListener('click',toggleDropdown)
-
-function toggleDropdown(e){
-    dropdown.classList.toggle('hidden');
-}
-
-function showDropdown(e){
-    dropdown.classList.remove('hidden');
-}
-function hideDropdown(e){
-    dropdown.classList.add('hidden');
-}
+import { NavigationLesson } from "../../components/NavigationLesson/index.js";
 
 
-sidebarBtn.addEventListener('click',()=>{
-    sidebar.classList.toggle('hidden');
-})
-sidebarBtnClose.addEventListener('click',()=>{
-    sidebar.classList.toggle('hidden');
-})
+
+
 // this is no longer in use and is reference for structure of the json
 const section = {
     basics:[
@@ -221,11 +199,11 @@ class lessonDisplay{
 };
 
 const lessonDisplayController = new lessonDisplay('.lesson');
-// lessonDisplayController.render();
-
 const terminal = new VanillaTerminal({
     apiEndpoint:'../../../api_commands.php',
 });
+const sidebarLesson = new NavigationLesson('.sidebar__container','.sidebar__button--open');
+
 terminal.mount('#terminal__container');
 
 const tux = document.querySelector('#tuxlogo');
