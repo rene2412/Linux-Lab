@@ -44,7 +44,7 @@ export default class Navigation{
                         <li class="navbar__link"><a href="#">Learn More</a></li>
                         <li class="navbar__link"><a href="../../pages/lesson_page/lesson.html">Try It</a></li>
                         <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
-                        <li class="navbar__link"><a href="#">Contact Us</a></li>
+                        <li class="navbar__link"><a href="../../pages/contact_page/contact.html">Contact Us</a></li>
                     </ul>
                 </nav>
             </div>
@@ -71,7 +71,7 @@ export default class Navigation{
                     <li class="navbar__link"><a href="#">Learn More</a></li>
                     <li class="navbar__link"><a href="../../pages/lesson_page/lesson.html">Try It</a></li>
                     <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
-                    <li class="navbar__link"><a href="#">Contact Us</a></li>
+                    <li class="navbar__link"><a href="../../pages/contact_page/contact.html">Contact Us</a></li>
                 </ul>
             </div> 
         `;

@@ -1,38 +1,13 @@
 @import '../../styles/index.css';
 @import '../../components/Footer/Footer.css';
 @import '../../components/Navigation/Navigation.css';
+@import '../../components/PageTitle/PageTitle.css';
 
 html{
     scroll-behavior: smooth;
 }
 
 
-.section__container{
-    background-image: url('../landing_page/matrix.gif');
-    max-width:100vw ;
-    width: 100%;
-    height: 220px;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.section__container div{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-overlay);
-    -webkit-backdrop-filter: blur(var(--blur-base));
-    backdrop-filter: blur(var(--blur-base));
-}
-
-.section__title{
-    font-size: 4rem;
-    color: var(--text-color-main);
-}
 
 /* .animation--popup{
     animation: popup 0.7s ease;
