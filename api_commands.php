@@ -10,123 +10,6 @@ header('Access-Control-Allow-Origin: *'); // Allow all origins (for development)
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
-/*
-$fileSystem = [
-    "/" => [
-        "Documents" => [
-	        "LoverIsADay.txt" => [ 
-"Time changed, we're different
-But my mind still says redundant things
-Can I not think?
-Will you love this part of me?
-My lover is a day I can't forget
-Furthering my distance from you
-Realistically I can't leave now
-But I'm okay as long as you
-Keep me from going crazy
-Keep me from going crazy
-Straight up ahead you'll find a sign
-That says you can't get by with a lie
-But if I stayed away by a thread from the glory path
-And made my life harder, lying 'bout the stupid shit I say
-Then you wouldn't know a single thing about
-How I feel about you
-And those really dumb things people feel
-I'll take the bumpy road, it'll probably break my legs
-As long as I don't show you what's ruining my head
-Funny thing about you is you read me pretty well
-But you haven't found me yet at the bottom of the well
-Annoying you with smoke signals, asking you for help
-'Cause your immediate presence lifts me straight away from hell
-Me and Mr. Heart, we say the cutest things about you
-How you seem unreal and we'd probably die so quick without you
-Suffocated from the radiated air around us
-Full of happiness we don't have
-Brightness gone, so dark without you, girl
-Time changed, we're different
-But my mind still says redundant things
-Can I not think?
-Will you love this part of me?
-My lover is a day I can't forget
-Furthering my distance from you
-Realistically I can't leave now
-But I'm okay as long as you
-Keep me from going crazy
-Keep me from going crazy
-Can I not think?
-Will you love this part of me?
-My lover is a day I can't forget
-Furthering my distance from you
-Realistically I can't leave now
-But I'm okay as long as you
-Keep me from going crazy
-Keep me from going crazy"],
-
-	 "BirchTree.txt" => [
-"I could be my best if I spoke my own head for you
-You could see me now if you told yourself how you knew me
-Oh, are you not lonely?
-And oh, as you sit by the birch tree
-Come to the tree, bring a birthday card for you
-Seem a bit shocked, but crack a brief smile
-I notice
-Oh, you're not lonely
-And oh, as we sit by the birch tree
-As she goes in again
-I look at my own head
-Back from the blue, I know it's nothing new
-I know we're pretty young but I see what people grow into
-'Cause two years ahead I can see that you might not know me
-Oh, I could be lonely
-And oh, as I sit by the bitch tree" ],
-	    
-	 "WithoutYou.txt" => [
-"Do you really have to talk
-About the things you do with him?
-DO you really have to talk about it love?
-do you really have to talk
-About the way that you love him?
-Do you really have to talk about your love?
-Nah-nah-nah-nah...
-Living my life without you
-Nah-nah-nah-nah...
-Living my life without you
-Did you really have to do
-Those things you knew that could hurt me?
-Did you really have to do those things to me?
-But I know that I can't be
-The one you love that's in your life
-But I know that I can't be the one you love"],
-
-"hello.txt" => [ 
-"
-		             __ 
-                    / _) .. ROAR!!!
-           _.----._/ /
-        __/         /
-     __/  (  |  (  |
-    /__.-'|_|--|__|
-    "],
-            "Subfolder" => [
-                "something.txt" => 
-                    "Hello World!",
-              ],
-        ],
-        "Pictures" => [
-            "photo.jpg" => [
-                ]
-            ],
-        "Videos" => [
-            ],
-        "Projects" => [
-            "project1" => [
-                ],
-                "file2.txt" => [
-                    ]
-                ]
-        ]
-];
-*/
 
 $fileSystem = [
     "/" => [
@@ -389,54 +272,6 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
     return "Successfully added $arg\n";
 }
 
-
-/*
-function process_ls_l($fileSystem, $currentDirectory) : string { 
-       // Handle root directory special case
-    if ($currentDirectory === "/") {
-        $currentLevel = $fileSystem["/"];
-        return format_directory_contents($currentLevel);
-    }
-    // Remove trailing slash if present
-    $currentDirectory = rtrim($currentDirectory, "/");
-    
-    // Split path into components
-    $path = array_filter(explode("/", $currentDirectory), 'strlen');
-    // Start from root
-    $currentLevel = $fileSystem["/"];
-    // Traverse the path
-    foreach ($path as $part) {
-        if (!isset($currentLevel[$part])) {
-             return "Directory not found.\n";
-        }
-      $currentLevel = $currentLevel[$part]; 
-    }
-        // Prepare output to hold directory contents
-    $output = "";
-    foreach ($currentLevel as $name => $content) {
-        // Build the ls -l format
-        $line = "";
-        if (str_ends_with($name, ".txt")) {
-        $line .= "-rw-r--r-- "; // Default permissions for files
-        $line .= "user "; // Default owner
-        $line .= "group "; // Default group
-        $line .= date("Y-m-d H:i:s");
-        $line .= date("Y-m-d H:i:s"); // Default modified timestamp
-        $line .= " " . $name . "\n";
-        }
-        else {
-            $line .= "drw-r--r-- "; // Default permissions for files
-            $line .= "user "; // Default owner
-            $line .= "group "; // Default group
-            $line .= date("Y-m-d H:i:s");
-            $line .= date("Y-m-d H:i:s"); // Default modified timestamp
-            $line .= " " . $name . "\n";
-        }
-        $output .= $line . "\n";
-    }
-    return $output;
-}
-*/
 function process_ls_l($fileSystem, $currentDirectory) : string { 
     // Navigate to the target directory
     if ($currentDirectory === "/") {
@@ -1090,7 +925,6 @@ function process_wget(&$fileSystem, $currentDirectory, $host) : string {
     }
 }
 
-
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1108,13 +942,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fileSystem = &$_SESSION['fileSystem'];
     $currentDir = &$_SESSION['currentDirectory'];
 
+    
     $cmd = $args[0] ?? '';
     $arg = $args[1] ?? '';
     $arg2 = $args[2] ?? '';
     $arg3 = $args[3] ?? '';
     $output = "";
+    $isCorrect = false;
+    $jsonString = file_get_contents('/Applications/XAMPP/xamppfiles/htdocs/Linux-Lab/src/testAPI/lessons.json');
+    $jsonData = json_decode($jsonString, true);
+    // Check for JSON parsing errors
+    if (json_last_error() !== JSON_ERROR_NONE) {
+      $output = "JSON Error: " . json_last_error_msg();
+    }
 
- switch ($cmd) {
+switch ($cmd) {
         case 'echo':
             $GetLine = "";
             $operator = "";
@@ -1129,12 +971,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($args[$i + 1])) {
                     $file = $args[$i + 1];
                         }
-                break;  // Stop adding to GetLine once we hit operator
+            break;  // Stop adding to GetLine once we hit operator
                     }
                 $GetLine .= $word . " ";
                 }
                 $GetLine = rtrim($GetLine);  // Remove trailing space
-                $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+               
+               // Try accessing the correct index
+                $json .= $jsonData['basics'][1]['answer'] . "\n";  // or [2], or find the correct index 
+                $output = "JSON: ". $json;
+                $full_command = $cmd . " " . $GetLine;
+                $output .= "GetLine: $full_command\n";
+                // Trim and normalize the strings before comparing
+                $normalizedJson = trim($json);
+                $normalizedCommand = trim($full_command);
+
+        if (strtolower($normalizedJson) === strtolower($normalizedCommand)) {
+                //$output .= "User Input and Json MATCH!\n";
+                //we need change and override the is completed key variable in the json file to true
+                //Update the completed status in the JSON data
+                $jsonData['basics'][1]['completed'] = true;
+                 // Convert the updated data back to JSON
+                $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
+                // Write the updated JSON back to the file
+                file_put_contents('/Applications/XAMPP/xamppfiles/htdocs/Linux-Lab/src/testAPI/lessons.json', $updatedJsonString);
+                $isCorrect = true;
+            }   
+                $output .= "JSON File: " . $jsonData['basics'][1]['completed'] . "\n";   
+                $output .= process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+                $output .= "Bool: $isCorrect\n";
             break;   
         case 'touch':
             $output = process_touch($fileSystem, $currentDir, $arg);
@@ -1237,6 +1102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Return the output as JSON
     echo json_encode([
         'output' => $output,
+        'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir
     ]);
 } 

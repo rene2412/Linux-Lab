@@ -1,70 +1,70 @@
 {
     "basics": [
-      {
-        "section__size": 5,
-        "section__completed": false
-      },
-      {
-        "id": 1,
-        "section": "basics",
-        "title": "cat",
-        "completed": false,
-        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "cat"
-      },
-      {
-        "id": 2,
-        "section": "basics",
-        "title": "ls",
-        "completed": false,
-        "content": "<p>should we do today or i dont even know im just tping</p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "ls"
-      },
-      {
-        "id": 3,
-        "section": "basics",
-        "title": "pwd",
-        "completed": false,
-        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "pwd"
-      },
-      {
-        "id": 4,
-        "section": "basics",
-        "title": "whoami",
-        "completed": false,
-        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "whoami"
-      },
-      {
-        "id": 5,
-        "section": "basics",
-        "title": "cd",
-        "completed": false,
-        "content": "<p>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "cd"
-      }
+        {
+            "section__size": 5,
+            "section__completed": false
+        },
+        {
+            "id": 1,
+            "section": "basics",
+            "title": "echo",
+            "completed": true,
+            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "echo Hello World"
+        },
+        {
+            "id": 2,
+            "section": "basics",
+            "title": "ls",
+            "completed": false,
+            "content": "<p>should we do today or i dont even know im just tping<\/p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "ls"
+        },
+        {
+            "id": 3,
+            "section": "basics",
+            "title": "pwd",
+            "completed": false,
+            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "pwd"
+        },
+        {
+            "id": 4,
+            "section": "basics",
+            "title": "whoami",
+            "completed": false,
+            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "whoami"
+        },
+        {
+            "id": 5,
+            "section": "basics",
+            "title": "cd",
+            "completed": false,
+            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "cd"
+        }
     ],
     "networking": [
-      {
-        "section__size": 2,
-        "section__completed": false
-      },
-      {
-        "id": 1,
-        "section": "networking",
-        "title": "wget",
-        "completed": false,
-        "content": "<p da wifi in>what should we do today or i dont even know im just tping</p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "wget"
-      },
-      {
-        "id": 2,
-        "section": "networking",
-        "title": "curl",
-        "completed": false,
-        "content": "<p>should we do today or i dont even know im just tping</p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf</p><code>ls directory</code>",
-        "answer": "curl"
-      }
+        {
+            "section__size": 2,
+            "section__completed": false
+        },
+        {
+            "id": 1,
+            "section": "networking",
+            "title": "wget",
+            "completed": false,
+            "content": "<p da wifi in>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "wget"
+        },
+        {
+            "id": 2,
+            "section": "networking",
+            "title": "curl",
+            "completed": false,
+            "content": "<p>should we do today or i dont even know im just tping<\/p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
+            "answer": "curl"
+        }
     ]
-  }
+}

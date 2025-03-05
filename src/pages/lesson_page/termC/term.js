@@ -143,12 +143,11 @@ export default class VanillaTerminal {
       this.output(actualPrevCommand, data.output);
       this.updatePrompt(data.currentDirectory);
 
-      // =========== return a  commandSuccess boolean in your api ==============
-      // like this -> if(data.commandSuccess)
       // in your api you need to return this new property and also you need
       // need to make a update completed based on a getInfo command too!
-      if(1==2){
+      if(data.commandSuccess) {
         // ^^^ THIS IS PLACEHOLDER USE data.commandSuccess once implemented
+        console.log("COMMAND SUCCESS DETECTED");
         const successEvent = new CustomEvent('command-success', {
           // detail object 
           detail:{
@@ -156,6 +155,7 @@ export default class VanillaTerminal {
             output: data.output
           }
         });
+        console.log("success sent")
         document.dispatchEvent(successEvent);
       }
       this.temp = "";
