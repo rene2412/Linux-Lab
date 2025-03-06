@@ -139,7 +139,6 @@ export default class VanillaTerminal {
     })
     .then(response => response.json())
     .then(data => {
-      console.log("Server response:", data);
       this.output(actualPrevCommand, data.output);
       this.updatePrompt(data.currentDirectory);
 
@@ -147,7 +146,6 @@ export default class VanillaTerminal {
       // need to make a update completed based on a getInfo command too!
       if(data.commandSuccess) {
         // ^^^ THIS IS PLACEHOLDER USE data.commandSuccess once implemented
-        console.log("COMMAND SUCCESS DETECTED");
         const successEvent = new CustomEvent('command-success', {
           // detail object 
           detail:{
@@ -155,7 +153,6 @@ export default class VanillaTerminal {
             output: data.output
           }
         });
-        console.log("success sent")
         document.dispatchEvent(successEvent);
       }
       this.temp = "";

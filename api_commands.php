@@ -977,6 +977,7 @@ switch ($cmd) {
                 $GetLine = rtrim($GetLine);  // Remove trailing space
                
                // Try accessing the correct index
+                $json = '';
                  $json .= $jsonData['basics'][1]['answer'] . "\n";  // or [2], or find the correct index 
                  $output = "JSON: ". $json;
                  $full_command = $cmd . " " . $GetLine;
@@ -1101,7 +1102,7 @@ switch ($cmd) {
     // Return the output as JSON
     echo json_encode([
         'output' => $output,
-        //'commandSuccess' => $isCorrect,
+        'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir
     ]);
 } 

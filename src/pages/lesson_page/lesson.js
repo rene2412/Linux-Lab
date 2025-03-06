@@ -24,6 +24,7 @@ const section = {
 }
 
 
+const sectionLesson = document.querySelector('.section--lesson');
 
 class lessonDisplay{
     curSection = 'basics';
@@ -185,7 +186,6 @@ class lessonDisplay{
         }
     }
     handleCorrectEvent= (e)=>{
-        console.log(e);
         this.showSuccessMessage();
         // get lessons will update everything
         // will also update 
@@ -193,8 +193,29 @@ class lessonDisplay{
     }
 
     showSuccessMessage() {
-        // Create a simple popup or notification
-        console.log(`showing success message`);
+        console.log("showing success message");
+        const successMessage = (
+            `
+            <div class="overlay--success">
+                <img src="../assets/SVGs/Tux.svg.png" alt="tux" class="logo">
+                <h3 class="overlay__message">well done!</h3> 
+            </div>
+            `
+        );
+        const overlayContainer = document.createElement('div');
+        overlayContainer.classList.add('overlay__container');
+        overlayContainer.classList.add('overlay-popup');
+        overlayContainer.innerHTML = successMessage;
+        console.log(this.container);
+        console.log(overlayContainer);
+        sectionLesson.prepend(overlayContainer);
+        setTimeout(() => {
+            overlayContainer.classList.remove('overlay-popout')
+          overlayContainer.classList.add('overlay-fadeout');
+        }, 1000 * 2);
+        setTimeout(() => {
+          overlayContainer.remove();
+        }, 1000 * 3);
     }
 };
 
