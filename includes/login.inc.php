@@ -39,6 +39,8 @@
 		$_SESSION["last_regeneration"] = time();
 		
 		header("Location: ../index.php?login=success");
+		//on success, send the user to the lesson page
+		header('Location: ../src/pages/lesson_page/lesson.html');
 		$pdo = null;
 		$statement = null;
 		die();
