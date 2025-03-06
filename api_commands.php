@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 //require 'includes/config_session.inc.php';
 require_once "network.php";
 // Debugging: Log the request method and POST data
@@ -501,7 +502,6 @@ function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string
     return "Successfully moved '$oldname' to '$newname'.";
 }
 
-
 function process_refresh() : string {
     // Reinitialize session variables to restore the default file system
     global $fileSystem; // Access the original file system structure
@@ -941,7 +941,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $fileSystem = &$_SESSION['fileSystem'];
     $currentDir = &$_SESSION['currentDirectory'];
-
     
     $cmd = $args[0] ?? '';
     $arg = $args[1] ?? '';
@@ -949,7 +948,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arg3 = $args[3] ?? '';
     $output = "";
     $isCorrect = false;
-    $jsonString = file_get_contents('/Applications/XAMPP/xamppfiles/htdocs/Linux-Lab/src/testAPI/lessons.json');
+    $jsonString = file_get_contents('src/testAPI/lessons.json');
     $jsonData = json_decode($jsonString, true);
     // Check for JSON parsing errors
     if (json_last_error() !== JSON_ERROR_NONE) {
@@ -978,23 +977,23 @@ switch ($cmd) {
                 $GetLine = rtrim($GetLine);  // Remove trailing space
                
                // Try accessing the correct index
-                $json .= $jsonData['basics'][1]['answer'] . "\n";  // or [2], or find the correct index 
-                $output = "JSON: ". $json;
-                $full_command = $cmd . " " . $GetLine;
-                $output .= "GetLine: $full_command\n";
+                 $json .= $jsonData['basics'][1]['answer'] . "\n";  // or [2], or find the correct index 
+                 $output = "JSON: ". $json;
+                 $full_command = $cmd . " " . $GetLine;
+                 $output .= "GetLine: $full_command\n";
                 // Trim and normalize the strings before comparing
                 $normalizedJson = trim($json);
                 $normalizedCommand = trim($full_command);
 
         if (strtolower($normalizedJson) === strtolower($normalizedCommand)) {
-                //$output .= "User Input and Json MATCH!\n";
+                 $output .= "User Input and Json MATCH!\n";
                 //we need change and override the is completed key variable in the json file to true
                 //Update the completed status in the JSON data
                 $jsonData['basics'][1]['completed'] = true;
                  // Convert the updated data back to JSON
                 $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                 // Write the updated JSON back to the file
-                file_put_contents('/Applications/XAMPP/xamppfiles/htdocs/Linux-Lab/src/testAPI/lessons.json', $updatedJsonString);
+                file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                 $isCorrect = true;
             }   
                 $output .= "JSON File: " . $jsonData['basics'][1]['completed'] . "\n";   
@@ -1102,7 +1101,7 @@ switch ($cmd) {
     // Return the output as JSON
     echo json_encode([
         'output' => $output,
-        'commandSuccess' => $isCorrect,
+        //'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir
     ]);
 } 
