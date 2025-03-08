@@ -41,7 +41,8 @@ export default class NavigationLesson{
                         <li class="navbar__link"><a href="../../pages/landing_page/landing_page.html">Home</a></li>
                         <li class="navbar__link"><a href="#">Learn More</a></li>
                         <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
-                        <li class="navbar__link"><a href="#">Contact Us</a></li>
+                        <li class="navbar__link"><a href="../../pages/contact_page/contact.html">Contact Us</a></li>
+                        <li class="navbar__link"><a href="../../pages/login/login.php">login</a></li>
                     </ul>
                 </nav>
             </div>

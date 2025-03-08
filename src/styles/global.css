@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+body {
+  font-family: 'Fira Code', monospace;
+}
+
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+
 :root{
     --color-user-color: #000000;
     --color-terminal: var(--color-user-color);
@@ -16,6 +23,7 @@
 
     --text-color-main: rgba(255, 255, 255, 0.95);
     --text-color-secondary: rgba(201, 201, 201, 0.95);
+    --text-color-inactive: rgba(104, 104, 104, 0.95);
 
     --text-size-s: 0.875rem;
     --text-size-base: 1rem;

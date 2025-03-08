@@ -63,9 +63,13 @@
     gap: var(--spce-xsm);
 }
 
+.sidebar li{
+    transition: transform 0.1 ease-out;
+}
+
 .sidebar li:hover{
     transform: scale(1.1);
-    border: solid var(--border-base) var(--color-highlight);
+    outline: solid var(--border-base) var(--color-highlight);
     border-radius: var(--radius-med);
 }
 
@@ -143,8 +147,15 @@
     text-decoration: none;
 }
 
+.navbar__link{
+    transition: transform 0.3s ease;
+}
+
 .navbar__link:hover {
     transform: scale(1.1);
+}
+.navbar__link:active{
+    transform: scale(0.9);
 }
 
 .svg{

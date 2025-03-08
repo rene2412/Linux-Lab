@@ -164,6 +164,7 @@ code{
 .lesson{
     position: relative;
     overflow: scroll;
+    overflow-x: hidden;
     width: min(600px,100%);
     align-self: center;
     padding: 0 var(--spce-lg);

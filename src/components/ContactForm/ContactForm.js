@@ -14,11 +14,11 @@ export default class ContactForm{
             <fieldset>
                 <legend>Contact Information</legend>
                 <label for="contact__name">Name:</label>
-                <input type="text" name="contact__name" id="contact__name" required placeholder="Enter name here...">
+                <input type="text" name="contact__name" id="contact__name" class="input--single" required placeholder="Enter name here...">
                 <label for="contact__email">Email:</label>
-                <input type="email" name="contact__email" id="contact__email" required placeholder="Enter email here...">
+                <input type="email" class="input--single" name="contact__email" id="contact__email" required placeholder="Enter email here...">
                 <label for="contact__message">Message:</label>
-                <textarea required name="contact__message" id="contact__message" maxlength="100" placeholder="Enter message here..."></textarea>
+                <textarea required class="input--single" name="contact__message" id="contact__message" maxlength="100" placeholder="Enter message here..."></textarea>
                 <button type="submit" class="contact__button button styled-button">Submit</button>
             </fieldset>
             </form>
