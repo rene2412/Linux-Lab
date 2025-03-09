@@ -62,12 +62,26 @@ $fileSystem = [
                     "modified" => "2025-02-27 01:24:04",
                     "size" => 148,
                     "content" => [
-                        "		              __ ",
-                        "                    / _) .. ROAR!!!",
-                        "           _.----._/ /",
-                        "        __/         /",
-                        "     __/  (  |  (  |",
-                        "    /__.-'|_|--|__|"
+      "  ___                                      .-~. /_\"-._",
+      "`-._~-.                                  / /_ \"~o\\  :Y",
+      "      \\  \\                                / : \\~x.  ` ')",
+      "      ]  Y                              /  |  Y< ~-.__j",
+      "     /   !                        _.--~T : l  l<  /.-~",
+      "    /   /                 ____.--~ .   ` l /~\\ \\<|Y",
+      "   /   /             .-~~\"        /| .    ',-~\\ \\L| .... ROARRR!",
+      "  /   /             /     .^   \\ Y~Y \\.^>/l_   \"--'",
+      " /   Y           .-\"(  .  l__  j_j l_/ /~_.-~    .",
+      "Y    l          /    \\  )    ~~~.\" / `/\"~ / \\.__/l_",
+      "|     \\     _.-\"      ~-{__     l  :  l._Z~-.___.--~",
+      "|      ~---~           /   ~~\"---\\_  ' __[>",
+      "l  .                _.^   ___     _>-y~",
+      " \\  \\     .      .-~   .-~   ~>--\"  /",
+      "  \\  ~---\"            /     ./  _.-'",
+      "   \"-.,_____.,_  _.--~\\     _.-~",
+      "               ~~     (   _}  ",
+      "                      `. ~(",
+      "                        )  \\",
+      "                  /,`--'~\\--'~\\",
                     ]
                 ]
             ],
@@ -87,7 +101,7 @@ $fileSystem = [
         ],
         "Pictures" => [
             "photo.jpg" => [
-                "file" => [
+                "file.txt" => [
                     "permissions" => "-rw-r--r--",
                     "owner" => "user",
                     "group" => "group",
@@ -925,6 +939,10 @@ function process_wget(&$fileSystem, $currentDirectory, $host) : string {
     }
 }
 
+function process_date() : string {
+    return date();
+}
+
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -947,6 +965,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arg2 = $args[2] ?? '';
     $arg3 = $args[3] ?? '';
     $output = "";
+    $json = '';
     $isCorrect = false;
     $jsonString = file_get_contents('src/testAPI/lessons.json');
     $jsonData = json_decode($jsonString, true);
@@ -977,47 +996,64 @@ switch ($cmd) {
                 $GetLine = rtrim($GetLine);  // Remove trailing space
                
                // Try accessing the correct index
-                $json = '';
-                 $json .= $jsonData['basics'][1]['answer'] . "\n";  // or [2], or find the correct index 
-                 $output = "JSON: ". $json;
+                 $json = $jsonData['Hello World'][1]['answer'] . "\n";  // or [2], or find the correct index 
                  $full_command = $cmd . " " . $GetLine;
-                 $output .= "GetLine: $full_command\n";
                 // Trim and normalize the strings before comparing
                 $normalizedJson = trim($json);
                 $normalizedCommand = trim($full_command);
 
         if (strtolower($normalizedJson) === strtolower($normalizedCommand)) {
-                 $output .= "User Input and Json MATCH!\n";
                 //we need change and override the is completed key variable in the json file to true
                 //Update the completed status in the JSON data
-                $jsonData['basics'][1]['completed'] = true;
+                $jsonData['Hello_World'][1]['completed'] = true;
                  // Convert the updated data back to JSON
                 $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                 $isCorrect = true;
             }   
-                $output .= "JSON File: " . $jsonData['basics'][1]['completed'] . "\n";   
                 $output .= process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
-                $output .= "Bool: $isCorrect\n";
             break;   
         case 'touch':
+                $jsonData['File Navigation'][7]['completed'] = true;
+                $isCorrect = true;
             $output = process_touch($fileSystem, $currentDir, $arg);
             break;
         case 'ls':
             if ($arg === '-l') {
                 $output = process_ls_l($fileSystem, $currentDir);
+                break;
             }
-            else $output = process_ls($fileSystem, $currentDir);
+                
+                 $output = process_ls($fileSystem, $currentDir);
+                 $jsonData['File Navigation'][3]['completed'] = true;
+                 $isCorrect = true;
             break;
         case 'cd':
-            $output = process_cd($currentDir, $fileSystem, $arg);
+            if ($arg === "..") {
+                 $jsonData['File Navigation'][5]['completed'] = true;
+                $output = process_cd($currentDir, $fileSystem, $arg);
+                $isCorrect = true;
+            }
+            else {
+                 $jsonData['File Navigation'][4]['completed'] = true;
+                 $output = process_cd($currentDir, $fileSystem, $arg);
+                 $isCorrect = true;
+            }
+            break;
+        case 'date':
+                 $jsonData['File Navigation'][2]['completed'] = true;
+                 $isCorrect = true;
+                 $output = date();
             break;
         case 'cat':
             $output = process_cat($fileSystem, $currentDir, $arg);
             break;
         case 'pwd':
-            $output = process_pwd($currentDir);
+                 $json .= $jsonData['File Navigation'][3]['answer'] . "\n";  
+                 $jsonData['basics'][3]['completed'] = true;
+                 $isCorrect = true;
+                $output = process_pwd($currentDir);
             break;
         case 'mkdir':
             $output = process_mkdir($fileSystem, $currentDir, $arg);

@@ -1,51 +1,66 @@
 {
     "basics": [
         {
-            "section__size": 5,
+            "section__size": 20,
             "section__completed": false
         },
-        {
-            "id": 1,
-            "section": "basics",
-            "title": "echo",
-            "completed": true,
-            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "echo Hello World"
-        },
-        {
-            "id": 2,
-            "section": "basics",
-            "title": "ls",
-            "completed": false,
-            "content": "<p>should we do today or i dont even know im just tping<\/p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "ls"
-        },
-        {
-            "id": 3,
-            "section": "basics",
-            "title": "pwd",
-            "completed": false,
-            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "pwd"
-        },
-        {
-            "id": 4,
-            "section": "basics",
-            "title": "whoami",
-            "completed": false,
-            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "whoami"
-        },
-        {
-            "id": 5,
-            "section": "basics",
-            "title": "cd",
-            "completed": false,
-            "content": "<p>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "cd"
-        }
-    ],
-    "networking": [
+       
+    { "id": 1,
+        "section": "Hello World",
+        "title": "echo",
+        "completed": false,
+        "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"example string\"<\/code>",
+        "answer": "echo Hello World"
+    },
+        { "id": 2,
+        "section": "File Navigation",
+        "title": "date",
+        "completed": false,
+        "content": "<p>Lets find out through the command line what time it is and get todays date by using the <br>date</br> command<code>date</code>",
+        "answer": "date"
+    },
+    {
+        "id": 3,
+        "section": "File Navigation",
+        "title": "pwd",
+        "completed": false,
+        "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy flowing navigation throughout your system <\/p> The command line is where you input commands into your system and it all begins in your root directory<p> The directory is just another term for folder. Lets see what current directory we are in by using the command pwd (print working directory)<\/p><code>pwd<\/code>",
+        "answer": "pwd"
+    },
+    {
+        "id": 3,
+        "section": "File Navigation",
+        "title": "ls",
+        "completed": false,
+        "content": "<p>By using pwd we can see that our current directory is the root directory represented by the '\/' symbol.<\/p><p>The root directory is the head of the filesystem, it all begins here.<\/p><p>To see what lives in the our current directory at any given time, we can use the ls command, which stands for \"list\"<\/p><code>ls<\/code>",
+        "answer": "ls"
+    },
+    {
+        "id": 4,
+        "section": "File Navigation",
+        "title": "cd",
+        "completed": false,
+        "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Example_Directory\/<\/code>",
+        "answer": "cd Documents"
+    },
+    {
+        "id": 5,
+        "section": "File Navigation",
+        "title": "cd",
+        "completed": false,
+        "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Example_Directory\/<\/code>",
+        "answer": "cd .."
+    },
+    {
+        "id": 6,
+        "section": "File Navigation",
+        "title": "cat",
+        "completed": false,
+        "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command, which stands for concatenate.<\/p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
+        "answer": "cat hello.txt"
+    }
+],       
+  "networking": [
         {
             "section__size": 2,
             "section__completed": false
