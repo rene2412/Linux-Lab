@@ -332,6 +332,7 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
 }
 
 function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
+    $GLOBALS['commandSuccess'] = false;
     if ($dir === "..") {
         if ($currentDirectory !== "/") {
             $pathParts = explode("/", trim($currentDirectory, "/"));
@@ -344,6 +345,8 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
         return "";
     }  
     
+    // Trim any trailing slashes from the directory name
+    $dir = rtrim($dir, "/"); 
     $targetPath = trim($dir, "/");
     $pathParts = explode("/", $targetPath);
 
@@ -371,6 +374,7 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
                 $currentLevel = &$currentLevel[$part];
                 $newDirectory = rtrim($newDirectory, "/") . "/" . $part;
             }
+            $GLOBALS['commandSuccess'] = true;
         // Update the current directory
         $currentDirectory = $newDirectory;  
     }
@@ -389,6 +393,7 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
         if (str_ends_with($dir, ".txt") || !isset($currentLevel[$dir]) || !is_array($currentLevel[$dir])) {
             return "Error: '$dir' is not a directory.\n";
         }
+        $GLOBALS['commandSuccess'] = true;
         // Update the current directory path
         $currentDirectory = rtrim($currentDirectory, "/") . "/" . $dir;
     }
@@ -974,7 +979,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (json_last_error() !== JSON_ERROR_NONE) {
       $output = "JSON Error: " . json_last_error_msg();
     }
-
+    
+    function GetCurrentLesson() : int {
+        $jsonUser = file_get_contents('src/testAPI/userInfo.json');
+        // Decode the JSON into a PHP array
+        $userData = json_decode($jsonUser, true);
+        $value = (int)$userData[0]['lesson'];
+        return $value;
+    }
+    $GLOBALS['commandSuccess'] = false;
+ 
 switch ($cmd) {
         case 'echo':
             $GetLine = "";
@@ -999,8 +1013,7 @@ switch ($cmd) {
                 $full_command = $cmd . " " . $GetLine;
                 // Trim and normalize the strings before comparing
                 $normalizedJson = trim($json);
-                $normalizedCommand = trim($full_command);
-
+               
         if (strtolower($normalizedJson) === strtolower($normalizedCommand)) {
                 //we need change and override the is completed key variable in the json file to true
                 //Update the completed status in the JSON data
@@ -1009,9 +1022,12 @@ switch ($cmd) {
                 $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                $isCorrect = true;
+                //if we are in this first lesson then send the bool
+                if (GetCurrentLesson() === 3) {
+                    $isCorrect = true;
+                }   
             }   
-             $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+            // $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
             break;   
         case 'touch':
                 $jsonData['File Navigation'][7]['completed'] = true;
@@ -1019,7 +1035,10 @@ switch ($cmd) {
                 $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                $isCorrect = true;
+               
+                if (GetCurrentLesson() === 13) {
+                    $isCorrect = true;
+                }
                 $output = process_touch($fileSystem, $currentDir, $arg);
             break;
         case 'ls':
@@ -1033,46 +1052,62 @@ switch ($cmd) {
             $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
             // Write the updated JSON back to the file
             file_put_contents('src/testAPI/lessons.json', $updatedJsonString);          
-            $isCorrect = true;
+            
+            if (GetCurrentLesson() === 6) {
+                $isCorrect = true;
+            }
             $output = process_ls($fileSystem, $currentDir);
             break;
         case 'cd':
+                 $output = process_cd($currentDir, $fileSystem, $arg);
             if ($arg === "..") {
                  $jsonData['basics'][6]['completed'] = true;
                  //Convert the updated data back to JSON
                  $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                  //Write the updated JSON back to the file
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                 $isCorrect = true;
-                 $output = process_cd($currentDir, $fileSystem, $arg);
+                 
+                if (GetCurrentLesson() === 8) {
+                    $isCorrect = true;
+                }
                  break;
             } else {
+                if ($GLOBALS['commandSuccess']) {
                  // Convert the updated data back to JSON
                  $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                  //Write the updated JSON back to the file
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                 $isCorrect = true;
                  $jsonData['basics'][5]['completed'] = true;
-                 $output = process_cd($currentDir, $fileSystem, $arg);
+                if (GetCurrentLesson() === 7) {
+                    $isCorrect = true;
+                }
+               }
             }
             break;
         case 'date':
                  $jsonData['basics'][2]['completed'] = true;
-                 $isCorrect = true;
-                 $output = process_date();
+                 
+                if (GetCurrentLesson() === 4) {
+                    $isCorrect = true;
+                }
+                $output = process_date();
             break;
         case 'cat':
                    //Convert the updated data back to JSON
                    $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                    //Write the updated JSON back to the file
-                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                $isCorrect = true; 
+                   file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
+                if (GetCurrentLesson() === 9) {
+                    $isCorrect = true;
+                }
                  $output = process_cat($fileSystem, $currentDir, $arg);
             break;
         case 'pwd':
                  $jsonData['basics'][3]['completed'] = true;
-                 $isCorrect = true;
-                $output = process_pwd($currentDir);
+                if (GetCurrentLesson() === 5) {
+                    $isCorrect = true;
+                }
+                 $output = process_pwd($currentDir);
             break;
         case 'mkdir':
             $output = process_mkdir($fileSystem, $currentDir, $arg);
