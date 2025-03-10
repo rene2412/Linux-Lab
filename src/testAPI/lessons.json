@@ -28,7 +28,7 @@
         "answer": "pwd"
     },
     {
-        "id": 3,
+        "id": 4,
         "section": "File Navigation",
         "title": "ls",
         "completed": false,
@@ -36,7 +36,7 @@
         "answer": "ls"
     },
     {
-        "id": 4,
+        "id": 5,
         "section": "File Navigation",
         "title": "cd",
         "completed": false,
@@ -44,7 +44,7 @@
         "answer": "cd Documents"
     },
     {
-        "id": 5,
+        "id": 6,
         "section": "File Navigation",
         "title": "cd",
         "completed": false,
@@ -52,12 +52,20 @@
         "answer": "cd .."
     },
     {
-        "id": 6,
+        "id": 7,
         "section": "File Navigation",
         "title": "cat",
         "completed": false,
         "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command, which stands for concatenate.<\/p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
         "answer": "cat hello.txt"
+    },
+    {
+        "id": 8,
+        "section": "File Modifications",
+        "title": "touch",
+        "completed": false,
+        "content": "<p>Now that we know how to move around the filesystem</p>Lets create our own file using the <b>touch</b> command and make a file called \"linux.txt\"</p><code>touch linux.txt<\/code>",
+        "answer": "touch linux.txt"
     }
 ],       
   "networking": [
