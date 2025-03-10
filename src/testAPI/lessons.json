@@ -4,71 +4,103 @@
             "section__size": 20,
             "section__completed": false
         },
-       
-    { "id": 1,
-        "section": "Hello World",
-        "title": "echo",
-        "completed": false,
-        "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"example string\"<\/code>",
-        "answer": "echo Hello World"
-    },
-        { "id": 2,
-        "section": "File Navigation",
-        "title": "date",
-        "completed": false,
-        "content": "<p>Lets find out through the command line what time it is and get todays date by using the <br>date</br> command<code>date</code>",
-        "answer": "date"
-    },
-    {
-        "id": 3,
-        "section": "File Navigation",
-        "title": "pwd",
-        "completed": false,
-        "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy flowing navigation throughout your system <\/p> The command line is where you input commands into your system and it all begins in your root directory<p> The directory is just another term for folder. Lets see what current directory we are in by using the command pwd (print working directory)<\/p><code>pwd<\/code>",
-        "answer": "pwd"
-    },
-    {
-        "id": 4,
-        "section": "File Navigation",
-        "title": "ls",
-        "completed": false,
-        "content": "<p>By using pwd we can see that our current directory is the root directory represented by the '\/' symbol.<\/p><p>The root directory is the head of the filesystem, it all begins here.<\/p><p>To see what lives in the our current directory at any given time, we can use the ls command, which stands for \"list\"<\/p><code>ls<\/code>",
-        "answer": "ls"
-    },
-    {
-        "id": 5,
-        "section": "File Navigation",
-        "title": "cd",
-        "completed": false,
-        "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Example_Directory\/<\/code>",
-        "answer": "cd Documents"
-    },
-    {
-        "id": 6,
-        "section": "File Navigation",
-        "title": "cd",
-        "completed": false,
-        "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Example_Directory\/<\/code>",
-        "answer": "cd .."
-    },
-    {
-        "id": 7,
-        "section": "File Navigation",
-        "title": "cat",
-        "completed": false,
-        "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command, which stands for concatenate.<\/p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
-        "answer": "cat hello.txt"
-    },
-    {
-        "id": 8,
-        "section": "File Modifications",
-        "title": "touch",
-        "completed": false,
-        "content": "<p>Now that we know how to move around the filesystem</p>Lets create our own file using the <b>touch</b> command and make a file called \"linux.txt\"</p><code>touch linux.txt<\/code>",
-        "answer": "touch linux.txt"
-    }
-],       
-  "networking": [
+        {
+            "id": 0,
+            "section": "Prelude",
+            "title": "The Command Line",
+            "content": "<code>example_user@LinuxLab:/$</code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.</p><p>In other words, the command line allows you speak to your computer at a powerful level!</p>This all happens in a text based user interface called the <b>terminal</b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.</p><p>As your knowledge of Linux grows, you will see terms like the <b>shell</b>, <b>distros</b>, <b>kernel</b>, etc....</p><p>But to understand these terms we must start at the begining, the <b>filesystem</b>.</p>"
+        },
+        {
+            "id": 0,
+            "section": "Prelude",
+            "title": "The Filesystem",
+            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.</p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.</p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.</p><p>Let's take a look how it visually works with this example below:</p> I WANT A ANIMATION GIF RIGHT HERE OF THE FILESYSTEM. I WAS TRYNNA DO IT BUT GOT COOKED</p>"
+        
+        },
+        {
+            "id": 1,
+            "section": "Hello World",
+            "title": "echo",
+            "completed": false,
+            "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"Hello World\"<\/code>",
+            "answer": "echo Hello World"
+        },
+        {
+            "id": 2,
+            "section": "File Navigation",
+            "title": "date",
+            "completed": false,
+            "content": "<p>Lets find out through the command line what time it is and get todays date by using the <b>date</b> command<code>date<\/code>",
+            "answer": "date"
+        },
+        {
+            "id": 3,
+            "section": "File Navigation",
+            "title": "pwd",
+            "completed": false,
+            "content": "<p>Lets see what current directory we are in by using the command pwd (print working directory)<\/p><code>pwd<\/code>",
+            "answer": "pwd"
+        },
+        {
+            "id": 4,
+            "section": "File Navigation",
+            "title": "ls",
+            "completed": true,
+            "content": "<p>By using pwd we can see that our current directory is the root directory represented by the '\/' symbol.<\/p><p>The root directory is the head of the filesystem, it all begins here.<\/p><p>To see what lives in our current directory at any given time, we can use the ls command, which stands for \"list\"<\/p><code>ls<\/code>",
+            "answer": "ls"
+        },
+        {
+            "id": 5,
+            "section": "File Navigation",
+            "title": "cd",
+            "completed": false,
+            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Documents\/</code>",
+            "answer": "cd Documents/"
+        },
+        {
+            "id": 6,
+            "section": "File Navigation",
+            "title": "cd ..",
+            "completed": false,
+            "content": "<p>cd will be one your most used commands since it is the main command to navigate around<p><p>There is a lot more to cd and another major part of cd is to go back up one level in your filestem.</p><p>To accomplish this we need to adjust the syntax and add a argument to the command</p><p> An argument is just an additional command that tells the base command what exactly to do. As we get more advanced we will be using arguments to do a lot more cooler stuff!</p><p>Let's use the '..' argument to send our directory up a level</p><code>cd ..</code>",
+            "answer": "cd .."
+        },
+        {
+            "id": 7,
+            "section": "File Navigation",
+            "title": "cat",
+            "completed": false,
+            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command, which stands for concatenate.<\/p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
+            "answer": "cat hello.txt"
+        },
+        {
+            "id": 8,
+            "section": "File Modifications",
+            "title": "touch",
+            "completed": false,
+            "content": "<p>Now that we know how to move around the filesystem</p>Lets create our own file using the <b>touch<\/b> command and make a file called \"linux.txt\"<\/p><code>touch linux.txt<\/code>",
+            "answer": "touch linux.txt"
+        },
+        {
+            "id": 9,
+            "section": "File Modifications",
+            "title": "mkdir",
+            "completed": false,
+            "content": "<p>As you may have realized so far, the command line allows us to quickly and conviniently navigate and modify our filesystem.</p>Lets continue by adding a new directory (folder) to our filestem with the <b>mkdir<\/b> command called \"ubuntu/\"</p><code>mkdir ubuntu/</code>",
+            "answer": "mkdir "
+        },
+        {
+            "id": 10,
+            "section": "Checkpoints",
+            "title": "Knowlegde Check #1",
+            "completed": false,
+            "content": "<p>It's time for your first knowledge check</p>",
+            "answer": ""
+        }
+
+
+    ],
+    "networking": [
         {
             "section__size": 2,
             "section__completed": false
