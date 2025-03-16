@@ -38,7 +38,7 @@ $fileSystem = [
                     ]
                 ]
             ],
-            "WithoutYou.txt" => [
+            "penguin.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
                     "owner" => "user",
@@ -47,9 +47,7 @@ $fileSystem = [
                     "modified" => "2025-02-27 01:24:04",
                     "size" => 585,
                     "content" => [
-                        "Do you really have to talk",
-                        "About the things you do with him?",
-                        "But I know that I can't be the one you love"
+                        "Penguins are cool"
                     ]
                 ]
             ],
@@ -212,6 +210,7 @@ function format_directory_contents(array $contents): string {
     }
     $output = [];
     foreach ($contents as $name => $content) {
+            if ($name === "directory") continue; //skip the directory meta data
             //if its an array that doesnt end with a .txt then its a directory
             if (is_array($content) && !str_ends_with($name, ".txt")) {
                 $output[] = $name . "/";
@@ -225,6 +224,7 @@ function format_directory_contents(array $contents): string {
 }
 
 function process_touch(&$fileSystem, $currentDirectory, $arg) {   
+    $GLOBALS['commandSuccess'] = false;
     if (!str_ends_with($arg, ".txt")) {
         return "Error: Files must end in .txt";
     }
@@ -246,7 +246,7 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
             ]
         ];
         $_SESSION['fileSystem'] = $fileSystem;
-        return "Successfully added $arg\n";
+        $GLOBALS['commandSuccess'] = true;
     }
 
 
@@ -284,7 +284,7 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
     
     // Make sure changes are saved to session
     $_SESSION['fileSystem'] = $fileSystem;
-    return "Successfully added $arg\n";
+    $GLOBALS['commandSuccess'] = true; 
 }
 
 function process_ls_l($fileSystem, $currentDirectory) : string { 
@@ -331,101 +331,97 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
     return $output;
 }
 
-function process_cd(&$currentDirectory, $fileSystem, $dir): string  {
+function process_cd(&$currentDirectory, $fileSystem, $dir): string {
     $GLOBALS['commandSuccess'] = false;
-    if ($dir === "..") {
-        if ($currentDirectory !== "/") {
-            $pathParts = explode("/", trim($currentDirectory, "/"));
-            array_pop($pathParts); 
-            $currentDirectory = "/" . implode("/", $pathParts);
-            if ($currentDirectory === "") {
-                $currentDirectory = "/";
-            }
-        }
-        return "";
-    }  
-    
-    // Trim any trailing slashes from the directory name
-    $dir = rtrim($dir, "/"); 
-    $targetPath = trim($dir, "/");
-    $pathParts = explode("/", $targetPath);
 
-    // Handle the chaining of cd, ex: cd Documents/Subfolder/temp
-     if (count($pathParts) > 1) {
-        // Start from the root if it's an absolute path, otherwise start from the current directory
-        $newDirectory = (substr($dir, 0, 1) === "/") ? "/" : rtrim($currentDirectory, "/");
-        // Split current directory into parts
-        $path = array_filter(explode("/", trim($newDirectory, "/")), 'strlen');
-        // Start from the root of the file system
-        $currentLevel = $fileSystem["/"]; //basically initialzing to zero
-        // Traverse the file system to the current directory
-        foreach ($path as $part) {
-            if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-                return "Error: Invalid directory path.\n";
-            }
-            $currentLevel = &$currentLevel[$part];
-        }
-        //for every directory in the path
-        foreach ($pathParts as $part) {
-                // Check if the directory exists
-                if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-                    return "Error: '$part' is not a directory";
-                }
-                $currentLevel = &$currentLevel[$part];
-                $newDirectory = rtrim($newDirectory, "/") . "/" . $part;
-            }
-            $GLOBALS['commandSuccess'] = true;
-        // Update the current directory
-        $currentDirectory = $newDirectory;  
-    }
-    else {    
-        $path = array_filter(explode("/", trim($currentDirectory, "/")), 'strlen');
-        // Start from the root of the file system
-        $currentLevel = $fileSystem["/"];
-        // Traverse the file system to the current directory
-        foreach ($path as $part) {
-            if (!isset($currentLevel[$part]) || $part === 'metadata') {
-                return "Error: Directory not found.\n";
-            }
-                $currentLevel = $currentLevel[$part];
-        }
-        // Check if the target directory exists
-        if (str_ends_with($dir, ".txt") || !isset($currentLevel[$dir]) || !is_array($currentLevel[$dir])) {
-            return "Error: '$dir' is not a directory.\n";
-        }
+    // Handle root directory access: cd /
+    if ($dir === "/") {
+        $currentDirectory = "/";
         $GLOBALS['commandSuccess'] = true;
-        // Update the current directory path
-        $currentDirectory = rtrim($currentDirectory, "/") . "/" . $dir;
+        return "";
     }
+
+    // Convert relative path into an array
+    $newPath = explode("/", trim($dir, "/"));
+    $pathParts = explode("/", trim($currentDirectory, "/"));
+
+    foreach ($newPath as $part) {
+        if ($part === "..") {
+            if (!empty($pathParts)) {
+                array_pop($pathParts); // Move up one directory
+            }
+        } else {
+            $pathParts[] = $part; // Move into the next directory
+        }
+    }
+
+    // Resolve final path
+    $resolvedPath = implode("/", $pathParts);
+    if ($resolvedPath === "/") {
+        $resolvedPath = "/";
+    }
+
+    // Traverse filesystem to validate the path
+    $currentLevel = &$fileSystem["/"];
+    $traversePath = array_filter(explode("/", trim($resolvedPath, "/")), 'strlen');
+
+    foreach ($traversePath as $part) {
+        if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            return "Error: '$part' is not a directory.\n";
+        }
+        $currentLevel = &$currentLevel[$part];
+    }
+
+    // If successful, update current directory
+    $currentDirectory = $resolvedPath;
+    $GLOBALS['commandSuccess'] = true;
     return "";
 }
+
+
 
 function process_pwd($currentDirectory) : string {
     return $currentDirectory . "\n";
 }
 function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
+    $GLOBALS['commandSuccess'] = false;
+    // Remove any trailing slashes from the directory name
+    $newdir = rtrim($newdir, "/");
+    
+    // Check if directory name is empty after removing slashes
+    if (empty($newdir) || str_ends_with($newdir, ".txt")) {
+        return "Invalid directory name\n";
+    }
+    
     // Traverse to the current directory in the file system
     $path = array_filter(explode("/", trim($currentDirectory, "/")), 'strlen');
     $currentLevel = &$fileSystem["/"]; // Start from root
-
+    
     // Traverse the path to reach the current directory
     foreach ($path as $part) {
-        $currentLevel = &$currentLevel[$part];
-    // Check if the directory already exists
-    if (isset($currentLevel[$newdir])) {
-        return "Directory already exists: $newdir\n";
+        if (!array_key_exists($part, $currentLevel)) {
+            return "Error: Invalid Path\n";
         }
+        $currentLevel = &$currentLevel[$part];
     }
+    
+    // Check if the directory already exists
+    if (array_key_exists($newdir, $currentLevel)) {
+        return "Error: directory already exists: $newdir\n";
+    }
+    
     // Create the new directory
     $currentLevel[$newdir] = [];
-    return $newdir . "\n";
+    $GLOBALS['commandSuccess'] = true;
+    return "\n";
 }
 
 function process_cat(&$filesystem, $currentDirectory, $file): string {
+    $GLOBALS['commandSuccess'] = false;
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
     $currentLevel = $filesystem["/"];
-
+    
     // Navigate to target directory
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
@@ -447,12 +443,14 @@ function process_cat(&$filesystem, $currentDirectory, $file): string {
     // Extract content based on format
     if (isset($currentLevel[$file]['file']['content'])) {
         // New metadata format
+        $GLOBALS['commandSuccess'] = true;
         return implode("\n", $currentLevel[$file]['file']['content']) . "\n";
     } elseif (is_string($currentLevel[$file])) {
         // Legacy string format
+        $GLOBALS['commandSuccess'] = true;
         return $currentLevel[$file] . "\n";
     }
-    return "File Is Empty?\n";
+    return "";
 }
 
 function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string {
@@ -517,7 +515,6 @@ function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string
     // Perform the move/rename
     $targetLevel[$targetName] = $sourceLevel[$sourceName];
     unset($sourceLevel[$sourceName]);
-
     return "Successfully moved '$oldname' to '$newname'.";
 }
 
@@ -532,6 +529,7 @@ function process_refresh() : string {
 }
 
 function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
+    $GLOBALS['commandSuccess'] = false;
     // Trim and split the current directory path
     $currentDirectory = rtrim($currentDirectory, "/");
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -557,15 +555,18 @@ function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
 
     // Remove the file
     unset($currentLevel[$argument]);
+    $GLOBALS['commandSuccess'] = true;
     return "File '$argument' has been removed.\n"; // Removed incorrect session save
 }
 
 function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
+    $GLOBALS['commandSuccess'] = false;
     // Prevent deleting parent directory with "rmdir .."
-    if ($argument === "..") {
+    if ($argument === "..") { 
         return "Error: Cannot remove parent directory.\n";
     }
-
+    //ignore the arguement trail slash
+    $argument = rtrim($argument, "/");
     // Trim and split the current directory path
     $currentDirectory = rtrim($currentDirectory, "/");
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -596,7 +597,7 @@ function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
 
     // Otherwise remove the empty directory or file
     unset($currentLevel[$argument]);
-
+    $GLOBALS['commandSuccess'] = true;
     return "'$argument' has been removed.\n";
 }
 
@@ -1027,19 +1028,18 @@ switch ($cmd) {
                     $isCorrect = true;
                 }   
             }   
-            // $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+             $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
             break;   
         case 'touch':
+                $output = process_touch($fileSystem, $currentDir, $arg);    
                 $jsonData['File Navigation'][7]['completed'] = true;
                  // Convert the updated data back to JSON
                 $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-               
-                if (GetCurrentLesson() === 13) {
+                if (GetCurrentLesson() === 13 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
                     $isCorrect = true;
                 }
-                $output = process_touch($fileSystem, $currentDir, $arg);
             break;
         case 'ls':
             if ($arg === '-l') {
@@ -1067,7 +1067,7 @@ switch ($cmd) {
                  //Write the updated JSON back to the file
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                  
-                if (GetCurrentLesson() === 8) {
+                if (GetCurrentLesson() === 9) {
                     $isCorrect = true;
                 }
                  break;
@@ -1086,21 +1086,20 @@ switch ($cmd) {
             break;
         case 'date':
                  $jsonData['basics'][2]['completed'] = true;
-                 
                 if (GetCurrentLesson() === 4) {
                     $isCorrect = true;
                 }
                 $output = process_date();
             break;
         case 'cat':
+                   $output = process_cat($fileSystem, $currentDir, $arg);
                    //Convert the updated data back to JSON
                    $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                    //Write the updated JSON back to the file
                    file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                if (GetCurrentLesson() === 9) {
+                if (GetCurrentLesson() === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt") {
                     $isCorrect = true;
                 }
-                 $output = process_cat($fileSystem, $currentDir, $arg);
             break;
         case 'pwd':
                  $jsonData['basics'][3]['completed'] = true;
@@ -1111,6 +1110,9 @@ switch ($cmd) {
             break;
         case 'mkdir':
             $output = process_mkdir($fileSystem, $currentDir, $arg);
+            if (GetCurrentLesson() == 14 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
+                    $isCorrect = true;
+            }
             break;
         case 'mv':
             $output = process_mv($fileSystem, $currentDir, $arg, $arg2);
@@ -1121,10 +1123,16 @@ switch ($cmd) {
             }
             else {
             $output = process_rm($fileSystem, $currentDir, $arg);
-            }
+                if (GetCurrentLesson() === 15 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
+                    $isCorrect = true;
+                }
+        }
             break;
         case 'rmdir':
             $output = process_rmdir( $fileSystem, $currentDir, $arg);
+            if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
+                $isCorrect = true; 
+            }
             break;
         case 'refresh':
             $output = process_refresh();
