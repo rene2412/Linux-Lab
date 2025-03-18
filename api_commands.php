@@ -1,7 +1,7 @@
 <?php
-session_start();
 
-//require 'includes/config_session.inc.php';
+require 'includes/config_session.inc.php';
+//session_unset();
 require_once "network.php";
 // Debugging: Log the request method and POST data
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
@@ -388,7 +388,16 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     // Remove any trailing slashes from the directory name
     $newdir = rtrim($newdir, "/");
     
+    
+    $special_chars = ['$', '~', '!', '@', '#', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '|', '{', '}', ':', ';', '"', ',', '<', '>', '.', '?', '/', '\''];
     // Check if directory name is empty after removing slashes
+
+    foreach($special_chars as $chars) {
+        if (str_contains($newdir, $chars)) {
+            return "Error: Special Characters Not Allowed To Make Directory";
+        }
+    }
+
     if (empty($newdir) || str_ends_with($newdir, ".txt")) {
         return "Invalid directory name\n";
     }

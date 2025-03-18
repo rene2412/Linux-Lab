@@ -1,7 +1,7 @@
 {
     "basics": [
         {
-            "section__size": 24,
+            "section__size": 35,
             "section__completed": false
         },
         {
@@ -76,10 +76,11 @@
         {
             "id": 8,
             "section": "File Navigation",
-            "title": "cd path/subpath/source",
+            "title": "cd path/to/source",
             "completed": false,
-            "content": "<p> Lets go back to cd and introduce a new technique</p><p>Notice how we can go into directories but how can we go back?</p><p>For example, if we are in our Documents/ directory, we should also be able go back to our root directory, or any other directory that lives on top of our curent directory<p>To accomplish this we need to adjust the syntax and add a argument to the command</p><p> An argument is just an additional command that tells the base command what exactly to do. As we get more advanced we will be using arguments to do a lot more cooler stuff!</p><p>Let's use the '..' argument to send our directory up a level</p><code>cd ..</code><p>Note: If you type cd .. into the command line while in your root directory, nothing happens since nothing exists on top of the root directory</p>",
-            "answer": "cd .."
+            "content": "Navigating around your filesystem in the command line can be done more efficiently with cd.</p><p>For example, lets say we were in our Documents/ dirctory. But we needed to go into our project1/ directory that lives in Projects/. The brute force approach would look something like:</p><code>cd ..</code/><code>cd Projects/</code><code>cd project1/</code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.</p> Lets look at the example again, we start in our Documents/ dirctory and have to access Projects/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects/ which has access to projects1/ which was our target directory.</p>Adding it all up we get the source path as <b>../Projects/projects1</b>. Lets try this out on the command line!</p><code> cd ../Projects/project1</code>",
+            "answer": "cd ../Projects/project1"
+            
         },
         {
             "id": 9,
@@ -167,41 +168,80 @@
             "title": "mv",
             "completed": false,
             "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem</p><p>For example, in our Documents/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects/ directory instead?</p> Well <b>mv</b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects/ directory</p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects/ from our Documents/ directory, we need to ask who can directly access Projects/? Well the root can since Projects/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ../Projects/</code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.</p>",
-            "answer": "mv hello.txt ../Projects/"
+            "answer": "mv hello.txt ../Projects"
         },
         {
             "id": 20,
             "section": "Checkpoint",
-            "title": "mv",
+            "title": "Knowlegde Check #4",
             "completed": false,
-            "content": "",
-            "answer": ""
+            "content": "<p>Since we can moves around files with <b>mv</b>, we can also move around directories the same way!</p><p>Enter the command line argument to move the Projects/ directory into Subfolder/ which lives in Documents</p><code>mv Directory/ path/to/source</code>",
+            "answer": "mv Projects/ Documents/Subfolder"
         },
         {
             "id": 21,
             "section": "Checkpoint",
-            "title": "Knowlegde Check #4",
+            "title": "Knowledge Check #5",
             "completed": false,
-            "content": "",
-            "answer": ""
+            "content": "<p>How does the <b>mv</b> command know whether to rename a file/directory or change its location?</p><p>A) It always renames files, never moves them.</p><p>B) If the destination is a directory, it moves the file/directory; otherwise, it renames it.</p><p>C) It depends on the size of the file/directory.</p><p>D) The mv command always moves files, never renames them.</p>",
+            "answer": "B)"
         },
-        {
-            "id": 22,
-            "section": "Checkpoints",
-            "title": "Knowlegde Check #5",
-            "completed": false,
-            "content": "",
-            "answer": ""
-        },
-        {
-            "id": 23,
-            "section": "Checkpoint",
-            "title": "Knowlegde Check #6",
-            "completed": false,
-            "content": "",
-            "answer": ""
-        }
-        
+            {
+                "id": 22,
+                "section": "Checkpoints",
+                "title": "Knowledge Check #6",
+                "completed": false,
+                "content": "<p>Which command would you use to create a new file called 'notes.txt' in the 'Documents/' directory?</p><p>A) mkdir Documents/notes.txt</p><p>B) touch Documents/notes.txt</p><p>C) rm Documents/notes.txt</p><p>D) mv Documents/notes.txt</p>",
+                "answer": "B)"
+            },
+            {
+                "id": 23,
+                "section": "Checkpoint",
+                "title": "Knowledge Check #7",
+                "completed": false,
+                "content": "<p>You have an empty directory called 'OldFiles/'. Which command would you use to safely remove it?</p><p>A) rm OldFiles/</p><p>B) rm -rf OldFiles/</p><p>C) rmdir OldFiles/</p><p>D) mv OldFiles/</p>",
+                "answer": "C)"
+            },
+            {
+                "id": 24,
+                "section": "Checkpoint",
+                "title": "Knowledge Check #8",
+                "completed": false,
+                "content": "<p>You are inside the 'Projects/' directory and need to move 'report.txt' to 'Documents/Reports/'. Which command should you use?</p><p>A) mv report.txt Documents/Reports/</p><p>B) mv report.txt ../Documents/Reports/</p><p>C) mv report.txt ~/Documents/Reports/</p><p>D) mv report.txt /home/user/Documents/Reports/</p>",
+                "answer": "B)"
+            },
+            {
+                "id": 25,
+                "section": "Checkpoint",
+                "title": "Knowledge Check #9",
+                "completed": false,
+                "content": "<p>Which command will permanently delete a directory called 'Backup/' and all of its contents without confirmation?</p><p>A) rm Backup/</p><p>B) rmdir Backup/</p><p>C) rm -rf Backup/</p><p>D) mv Backup/ /dev/null</p>",
+                "answer": "C)"
+            },
+            {
+                "id": 26,
+                "section": "Checkpoint",
+                "title": "Knowledge Check #10",
+                "completed": false,
+                "content": "Create a new directory called \"Work/\" and in that new directory create a file called \"log.txt\"</p><p>Now enter a command that deletes your new Work/ directory that you made.</p>",
+                "answer": "rm -rf Work/"
+            },
+            {
+                "id": 27,
+                "section": "Searching & Filtering",
+                "title": "Searching & Filtering",
+                "completed": false, 
+                "content": "So far we learned how to navigate around our filestem, along with adding and removing to it. Well now we can begin to tackle the cool and exiting parts of Linux!</p><p> Suppose we wanted to look for a file, directory, a word, or any other specific pattern in our filesystem, it would be too long and ineficient to go through every possbile location manually. For example, lets say I wanted to look for a word called \"Errors\" in a file but the file contains thousands of lines, how can we do this efficiently?</p> Well the command line allows us to easily solve this problem, one way to solve is with the <b>grep</b> command</p>",
+                "answer": ""
+            },
+            {
+                "section": "Searching & Filtering",
+                "title": "grep",
+                "completed": false,
+                "content": "The grep command allows us to search and filter specific patterns in files</p><code>grep -options \"pattern\" file</code><p>-The options flag is an optional command that is used for an additional level of filtering, somne of these flags include:</p><p>    - -i: Case insensitive search</p><p>    - -v: Invert match (show lines that don't match)</p><p>     - -r: Search recursively through directories</p><p>- -n: Show line numbers</p><p>- The pattern is the text or regular expression you want to search for, which is usually under quatation marks</p><p>- The file argument simply specifies which file(s) to search in</p>", 
+                "answer": ""
+            }
+         
     ],
     "networking": [
         {
