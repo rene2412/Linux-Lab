@@ -45,7 +45,7 @@ code{
     display: flex;
     flex-direction: column;
     background-color: var(--color-background-dark);
-    height: 65%;
+    min-height: 65%;
     position: relative;
 }
 
@@ -220,13 +220,6 @@ code{
     padding-top: 0;
 }
 
-.lesson__button{
-    color: var(--text-color-main);
-    background-color: var(--color-highlight);
-    padding: var(--spce-sm);
-    border-radius: var(--radius-med);
-    border: white var(--border-base);
-}
 
 
 /* TERMINAL */

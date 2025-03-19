@@ -1,24 +1,24 @@
 {
     "basics": [
         {
-            "section__size": 24,
+            "section__size": 25,
             "section__completed": false
         },
         {
-            "id": 0,
+            "id": 1,
             "section": "Prelude",
             "title": "The Command Line",
             "content": "<code>example_user@LinuxLab:/$</code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.</p><p>In other words, the command line allows you speak to your computer at a powerful level!</p>This all happens in a text based user interface called the <b>terminal</b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.</p><p>As your knowledge of Linux grows, you will see terms like the <b>shell</b>, <b>scripting</b>, <b>kernel</b>, etc....</p><p>But to understand these terms we must start at the begining, the <b>filesystem</b>.</p>"
         },
         {
-            "id": 0,
+            "id": 2,
             "section": "Prelude",
             "title": "The Filesystem",
             "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.</p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.</p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.</p><p>Let's take a look how it visually works with this example below:</p> I WANT A ANIMATION GIF RIGHT HERE OF THE FILESYSTEM. I WAS TRYNNA DO IT BUT GOT COOKED</p>"
         
         },
         {
-            "id": 1,
+            "id": 3,
             "section": "Hello World",
             "title": "echo",
             "completed": false,
@@ -26,7 +26,7 @@
             "answer": "echo Hello World"
         },
         {
-            "id": 2,
+            "id": 4,
             "section": "File Navigation",
             "title": "date",
             "completed": false,
@@ -34,7 +34,7 @@
             "answer": "date"
         },
         {
-            "id": 3,
+            "id": 5,
             "section": "File Navigation",
             "title": "pwd",
             "completed": false,
@@ -42,7 +42,7 @@
             "answer": "pwd"
         },
         {
-            "id": 4,
+            "id": 6,
             "section": "File Navigation",
             "title": "ls",
             "completed": false,
@@ -50,7 +50,7 @@
             "answer": "ls"
         },
         {
-            "id": 5,
+            "id": 7,
             "section": "File Navigation",
             "title": "cd",
             "completed": false,
@@ -58,7 +58,7 @@
             "answer": "cd Documents/"
         },
         {
-            "id": 6,
+            "id": 8,
             "section": "File Navigation",
             "title": "cat",
             "completed": false,
@@ -66,7 +66,7 @@
             "answer": "cat hello.txt"
         },
         {
-            "id": 7,
+            "id": 9,
             "section": "File Navigation",
             "title": "cd ..",
             "completed": false,
@@ -74,7 +74,7 @@
             "answer": "cd .."
         },
         {
-            "id": 8,
+            "id": 10,
             "section": "File Navigation",
             "title": "cd path/subpath/source",
             "completed": false,
@@ -82,7 +82,7 @@
             "answer": "cd .."
         },
         {
-            "id": 9,
+            "id": 11,
             "section": "Checkpoint",
             "title": "Knowlegde Check #1",
             "completed": false,
@@ -90,7 +90,7 @@
             "answer": "B"
         },
         {
-            "id": 10,
+            "id": 12,
             "section": "Checkpoints",
             "title": "Knowlegde Check #2",
             "completed": false,
@@ -98,7 +98,7 @@
             "answer": "C"
         },
         {
-            "id": 11,
+            "id": 13,
             "section": "Checkpoint",
             "title": "Knowlegde Check #3",
             "completed": false,
@@ -106,7 +106,7 @@
             "answer": "D"
         },
         {
-            "id": 12,
+            "id": 14,
             "section": "File Modifications",
             "title": "touch",
             "completed": false,
@@ -114,7 +114,7 @@
             "answer": "touch linux.txt"
         },
         {
-            "id": 13,
+            "id": 15,
             "section": "File Modifications",
             "title": "mkdir",
             "completed": false,
@@ -122,7 +122,7 @@
             "answer": "mkdir ubuntu/"
         },
         {
-            "id": 14,
+            "id": 16,
             "section": "File Modifications",
             "title": "rm",
             "completed": false,
@@ -130,7 +130,7 @@
             "answer": "rm penguin.txt "
         },
         {
-            "id": 15,
+            "id": 17,
             "section": "File Modifications",
             "title": "rmdir",
             "completed": false,
@@ -138,7 +138,7 @@
             "answer": "rmdir project1/"
         },
         {
-            "id": 16,
+            "id": 18,
             "section": "File Modifications",
             "title": "rm -rf",
             "completed": false,
@@ -146,7 +146,7 @@
             "answer": "rm -rf Subfolder/ "
         },
         {
-            "id": 17,
+            "id": 19,
             "section": "File Modifications",
             "title": "mv",
             "completed": false,
@@ -154,7 +154,7 @@
             "answer": "mv file2.txt kali.txt "
         },
         {
-            "id": 18,
+            "id": 20,
             "section": "File Modifications",
             "title": "mv",
             "completed": false,
@@ -162,7 +162,7 @@
             "answer": "mv Documents/ Debian/"
         },
         {
-            "id": 19,
+            "id": 21,
             "section": "File Modifications",
             "title": "mv",
             "completed": false,
@@ -170,7 +170,7 @@
             "answer": "mv hello.txt ../Projects/"
         },
         {
-            "id": 20,
+            "id": 22,
             "section": "Checkpoint",
             "title": "mv",
             "completed": false,
@@ -178,7 +178,7 @@
             "answer": ""
         },
         {
-            "id": 21,
+            "id": 23,
             "section": "Checkpoint",
             "title": "Knowlegde Check #4",
             "completed": false,
@@ -186,7 +186,7 @@
             "answer": ""
         },
         {
-            "id": 22,
+            "id": 24,
             "section": "Checkpoints",
             "title": "Knowlegde Check #5",
             "completed": false,
@@ -194,7 +194,7 @@
             "answer": ""
         },
         {
-            "id": 23,
+            "id": 25,
             "section": "Checkpoint",
             "title": "Knowlegde Check #6",
             "completed": false,

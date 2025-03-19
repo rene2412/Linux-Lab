@@ -3,8 +3,126 @@ import { NavigationLesson } from "../../components/NavigationLesson/index.js";
 
 const sectionLesson = document.querySelector(".section--lesson");
 
-class lessonManager {
-  constructor() {}
+class LessonManager {
+  lesson = 0;
+  currentSection = 'basics';
+  currentSectionSize = 0;
+  user = 0;
+  lessons = [];
+  constructor() {
+    this.lesson = 0;
+    this.currentSection = 'basics'
+    // may change this later to identify user
+    this.user = 0;
+    this.fetchUserInfoInit();
+    this.fetchLessons();
+
+  }
+
+  setupListeners(){
+    document.addEventListener('section:update',this.handleLessonSectionChange)
+  }
+
+  async fetchUserInfoInit(){
+    try{
+      const request = await fetch("../../testAPI/userInfo.json");
+      if(!request.ok){
+        throw new Error('Could not load user info');
+      }
+      const data = await request.json();
+      this.lesson = data[this.user]['lesson'];
+      this.currentSection =  data[this.user]['section'];
+    }
+
+    catch(error){
+      console.error(error);
+    }
+  }
+
+  async fetchUserInfo(){
+    try{
+      const request = await fetch("../../testAPI/userInfo.json");
+      if(!request.ok){
+        throw new Error('Could not load user info');
+      }
+      const data = await request.json()
+      this.lesson = data[this.user]['lesson'];
+      this.currentSection =  data[this.user]['section'];
+      this.broadcastUpdate();
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
+
+  // this should only run once at the beginning
+  async fetchLessons(){
+    try{
+      const request = await fetch("../../testAPI/lessons.json")
+      if(!request.ok){throw new Error(`could not get lessons ${request.status}`)}
+      const data = await request.json();
+      this.lessons = data;
+      console.log(this.lessons);
+      this.currentSectionsectionSize = this.lessons[this.currentSection][0][`section__size`];
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
+
+  broadcastUpdate(){
+    const event = new CustomEvent(`state:update`,{
+      detail:{
+        user:{
+          currentLessonId: this.lesson,
+          currentSection: this.currentSection,
+        },
+        lessons:this.lessons,
+      }
+    })
+    console.log(detail);
+    document.dispatchEvent(event);
+  }
+
+  // handle lesson and section changes bundled
+  handleLessonSectionChange = async (e)=>{
+    const { section, lessonId, action} = e.detail;
+    if(action = 'next'){
+      // if we are at last lesson or beyond lesson scope
+      if(lessonId >= this.sectionSize){
+        lessonId = this.sectionSize;
+        console.log(`cant go over section size`)
+      }
+    }
+  
+    try {
+      const response = await fetch("../../testAPI/updateUserInfo.php", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          section:section,
+          lesson: lessonId,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`response error`, response.status);
+      }
+      this.fetchUserInfo();
+    } catch (error) {
+      console.log(`error saving ${error}`);
+    }
+  }
+
+  
+
+  eventNewInfo(data){
+    const eventNewInfo = new CustomEvent("userinfo:update", { detail: {
+      
+    }});
+    dispatchEvent(eventNewInfo);
+  }
 }
 
 class lessonDisplay {
@@ -29,10 +147,6 @@ class lessonDisplay {
     this.getInfo();
     this.initListeners();
     this.getLessons();
-
-    // this.initListeners();
-    // this.changeSection();
-    // this.updateMeter();
   }
   initialize() {
     this.changeSection();
@@ -168,12 +282,10 @@ class lessonDisplay {
   handleCorrectEvent = (e) => {
     this.showSuccessMessage();
     // get lessons will update everything
-    // will also update
     this.getLessons();
   };
 
   showSuccessMessage() {
-    console.log("showing success message");
     const successMessage = `
             <div class="overlay--success">
                 <img src="../assets/SVGs/Tux.svg.png" alt="tux" class="logo">
@@ -206,5 +318,5 @@ const sidebarLesson = new NavigationLesson(
 
 terminal.mount("#terminal__container");
 
-const tux = document.querySelector("#tuxlogo");
-tux.addEventListener("click", lessonDisplayController.postInfo);
+
+const lessonManager = new LessonManager();
