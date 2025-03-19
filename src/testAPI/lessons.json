@@ -8,14 +8,13 @@
             "id": 1,
             "section": "Prelude",
             "title": "The Command Line",
-            "content": "<code>example_user@LinuxLab:/$</code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.</p><p>In other words, the command line allows you speak to your computer at a powerful level!</p>This all happens in a text based user interface called the <b>terminal</b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.</p><p>As your knowledge of Linux grows, you will see terms like the <b>shell</b>, <b>scripting</b>, <b>kernel</b>, etc....</p><p>But to understand these terms we must start at the begining, the <b>filesystem</b>.</p>"
+            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.<\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge of Linux grows, you will see terms like the <b>shell<\/b>, <b>scripting<\/b>, <b>kernel<\/b>, etc....<\/p><p>But to understand these terms we must start at the begining, the <b>filesystem<\/b>.<\/p>"
         },
         {
             "id": 2,
             "section": "Prelude",
             "title": "The Filesystem",
-            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.</p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.</p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.</p><p>Let's take a look how it visually works with this example below:</p> I WANT A ANIMATION GIF RIGHT HERE OF THE FILESYSTEM. I WAS TRYNNA DO IT BUT GOT COOKED</p>"
-        
+            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.<\/p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.<\/p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.<\/p><p>Let's take a look how it visually works with this example below:<\/p> I WANT A ANIMATION GIF RIGHT HERE OF THE FILESYSTEM. I WAS TRYNNA DO IT BUT GOT COOKED<\/p>"
         },
         {
             "id": 3,
@@ -29,8 +28,8 @@
             "id": 4,
             "section": "File Navigation",
             "title": "date",
-            "completed": false,
-            "content": "<p>Lets find out through the command line what time it is and get todays date by using the <b>date</b> command<code>date<\/code>",
+            "completed": true,
+            "content": "<p>Lets find out through the command line what time it is and get todays date by using the <b>date<\/b> command<code>date<\/code>",
             "answer": "date"
         },
         {
@@ -38,7 +37,7 @@
             "section": "File Navigation",
             "title": "pwd",
             "completed": false,
-            "content": "<p>As we discussed earlier, a directory is just a folder and the command line has access to your current directory, as well as more.</p><p>Lets see what current directory we are in by using the command pwd (print working directory)</p><code>pwd</code>",
+            "content": "<p>As we discussed earlier, a directory is just a folder and the command line has access to your current directory, as well as more.<\/p><p>Lets see what current directory we are in by using the command pwd (print working directory)<\/p><code>pwd<\/code>",
             "answer": "pwd"
         },
         {
@@ -54,15 +53,15 @@
             "section": "File Navigation",
             "title": "cd",
             "completed": false,
-            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders</p><p> To see what is inside, lets go into our Documents/ directory with the cd command, which stands for \"change directory\".<code>cd Documents\/</code>",
-            "answer": "cd Documents/"
+            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
+            "answer": "cd Documents\/"
         },
         {
             "id": 8,
             "section": "File Navigation",
             "title": "cat",
             "completed": false,
-            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command (concatenate), followed by the file name.</p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!</p><code>cat hello.txt</code>",
+            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command (concatenate), followed by the file name.<\/p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
             "answer": "cat hello.txt"
         },
         {
@@ -70,15 +69,15 @@
             "section": "File Navigation",
             "title": "cd ..",
             "completed": false,
-            "content": "<p> Lets go back to cd and introduce a new technique</p><p>Notice how we can go into directories but how can we go back?</p><p>For example, if we are in our Documents/ directory, we should also be able go back to our root directory, or any other directory that lives on top of our curent directory<p>To accomplish this we need to adjust the syntax and add a argument to the command</p><p> An argument is just an additional command that tells the base command what exactly to do. As we get more advanced we will be using arguments to do a lot more cooler stuff!</p><p>Let's use the '..' argument to send our directory up a level</p><code>cd ..</code><p>Note: If you type cd .. into the command line while in your root directory, nothing happens since nothing exists on top of the root directory</p>",
+            "content": "<p> Lets go back to cd and introduce a new technique<\/p><p>Notice how we can go into directories but how can we go back?<\/p><p>For example, if we are in our Documents\/ directory, we should also be able go back to our root directory, or any other directory that lives on top of our curent directory<p>To accomplish this we need to adjust the syntax and add a argument to the command<\/p><p> An argument is just an additional command that tells the base command what exactly to do. As we get more advanced we will be using arguments to do a lot more cooler stuff!<\/p><p>Let's use the '..' argument to send our directory up a level<\/p><code>cd ..<\/code><p>Note: If you type cd .. into the command line while in your root directory, nothing happens since nothing exists on top of the root directory<\/p>",
             "answer": "cd .."
         },
         {
             "id": 10,
             "section": "File Navigation",
-            "title": "cd path/subpath/source",
+            "title": "cd path\/subpath\/source",
             "completed": false,
-            "content": "<p> Lets go back to cd and introduce a new technique</p><p>Notice how we can go into directories but how can we go back?</p><p>For example, if we are in our Documents/ directory, we should also be able go back to our root directory, or any other directory that lives on top of our curent directory<p>To accomplish this we need to adjust the syntax and add a argument to the command</p><p> An argument is just an additional command that tells the base command what exactly to do. As we get more advanced we will be using arguments to do a lot more cooler stuff!</p><p>Let's use the '..' argument to send our directory up a level</p><code>cd ..</code><p>Note: If you type cd .. into the command line while in your root directory, nothing happens since nothing exists on top of the root directory</p>",
+            "content": "<p> Lets go back to cd and introduce a new technique<\/p><p>Notice how we can go into directories but how can we go back?<\/p><p>For example, if we are in our Documents\/ directory, we should also be able go back to our root directory, or any other directory that lives on top of our curent directory<p>To accomplish this we need to adjust the syntax and add a argument to the command<\/p><p> An argument is just an additional command that tells the base command what exactly to do. As we get more advanced we will be using arguments to do a lot more cooler stuff!<\/p><p>Let's use the '..' argument to send our directory up a level<\/p><code>cd ..<\/code><p>Note: If you type cd .. into the command line while in your root directory, nothing happens since nothing exists on top of the root directory<\/p>",
             "answer": "cd .."
         },
         {
@@ -86,7 +85,7 @@
             "section": "Checkpoint",
             "title": "Knowlegde Check #1",
             "completed": false,
-            "content": "<p>It's time for your first knowledge check!</p><p>What is the command thats shows the content of a directory?</p><p>A) cd</p><p>B) ls</p><p>C) cat</p><p> D) echo",
+            "content": "<p>It's time for your first knowledge check!<\/p><p>What is the command thats shows the content of a directory?<\/p><p>A) cd<\/p><p>B) ls<\/p><p>C) cat<\/p><p> D) echo",
             "answer": "B"
         },
         {
@@ -94,7 +93,7 @@
             "section": "Checkpoints",
             "title": "Knowlegde Check #2",
             "completed": false,
-            "content": "<p>Which command allows you to change to a different directory?</p><p>A) echo</p><p>B) ls</p><p>C) cd</p><p>D) pwd",
+            "content": "<p>Which command allows you to change to a different directory?<\/p><p>A) echo<\/p><p>B) ls<\/p><p>C) cd<\/p><p>D) pwd",
             "answer": "C"
         },
         {
@@ -102,7 +101,7 @@
             "section": "Checkpoint",
             "title": "Knowlegde Check #3",
             "completed": false,
-            "content": "<p>What command would you use to view the contents of a text file?</p><p>A) pwd</p><p>B) ls</p><p>C) date</p><p>D) cat",
+            "content": "<p>What command would you use to view the contents of a text file?<\/p><p>A) pwd<\/p><p>B) ls<\/p><p>C) date<\/p><p>D) cat",
             "answer": "D"
         },
         {
@@ -110,7 +109,7 @@
             "section": "File Modifications",
             "title": "touch",
             "completed": false,
-            "content": "<p>Now that we know how to navigate around the filesystem</p><p>We can now begin to modify the filesystem through the command line</p><p>Lets create our own file using the <b>touch</b> command and make a file called \"linux.txt\"</p><code>touch linux.txt</code>",
+            "content": "<p>Now that we know how to navigate around the filesystem<\/p><p>We can now begin to modify the filesystem through the command line<\/p><p>Lets create our own file using the <b>touch<\/b> command and make a file called \"linux.txt\"<\/p><code>touch linux.txt<\/code>",
             "answer": "touch linux.txt"
         },
         {
@@ -118,15 +117,15 @@
             "section": "File Modifications",
             "title": "mkdir",
             "completed": false,
-            "content": "<p>As you may have realized so far, the command line allows us to quickly and conviniently navigate and modify our filesystem.</p>Lets continue by adding a new directory to our filestem with the <b>mkdir</b> command (make directory) called \"ubuntu/\"</p><code>mkdir ubuntu/</code>",
-            "answer": "mkdir ubuntu/"
+            "content": "<p>As you may have realized so far, the command line allows us to quickly and conviniently navigate and modify our filesystem.<\/p>Lets continue by adding a new directory to our filestem with the <b>mkdir<\/b> command (make directory) called \"ubuntu\/\"<\/p><code>mkdir ubuntu\/<\/code>",
+            "answer": "mkdir ubuntu\/"
         },
         {
             "id": 16,
             "section": "File Modifications",
             "title": "rm",
             "completed": false,
-            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files</p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.</p>To delete a file we use the <b>rm</b> command (remove) followed the file name</p><p>Lets try this out by going into our Documents/ directory and deleting the penguin.txt file<code>rm penguin.txt</code>",
+            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>",
             "answer": "rm penguin.txt "
         },
         {
@@ -134,23 +133,23 @@
             "section": "File Modifications",
             "title": "rmdir",
             "completed": false,
-            "content": "<p>To remove a directory is a bit more complex and dangerous!.</p><p> To remove a empty directory we can use <b>rmdir</b>. Let's try it out by going into our Projects/ directory (from the root directory) and removing project1/ from it</p><code> rmdir project1/ </code> <p>Note: If the directory was not empty then we would have to delete all the content manually with rm and rmdir.</p> <p> However that is inconvienent, to know how to do it with one command we can move on to the next lesson</p>",
-            "answer": "rmdir project1/"
+            "content": "<p>To remove a directory is a bit more complex and dangerous!.<\/p><p> To remove a empty directory we can use <b>rmdir<\/b>. Let's try it out by going into our Projects\/ directory (from the root directory) and removing project1\/ from it<\/p><code> rmdir project1\/ <\/code> <p>Note: If the directory was not empty then we would have to delete all the content manually with rm and rmdir.<\/p> <p> However that is inconvienent, to know how to do it with one command we can move on to the next lesson<\/p>",
+            "answer": "rmdir project1\/"
         },
         {
             "id": 18,
             "section": "File Modifications",
             "title": "rm -rf",
             "completed": false,
-            "content": "<p>Now, what if the dirctory was not empty and contained files or sub-directories?</p><p>To accomplish this we use the <b>rm -rf</b> command, followed by the directory name.</p><p> The dash character '-' is a flag argmument that tells the rm command to do something specfic, but what exactly?</p><p> Well in this case the 'rf' stands for 'recursive force' which tels the operating system to recursively remove everythning starting at this directory and do it forcefully so we dont get a warning. Lets go into our Documents/ directory to remove the Subfolder/ directory with its content</p><p>WARNING: ONLY DO THIS IF YOU ARE 100% SURE YOU DONT NEED THIS DIRECTORY. IF YOU WERE TO RUN THIS COMMAND ON THE ROOT DIRECTORY, EVERYTHING WE BE DELETED<p><code>rm -rf Subfolder/</code>",
-            "answer": "rm -rf Subfolder/ "
+            "content": "<p>Now, what if the dirctory was not empty and contained files or sub-directories?<\/p><p>To accomplish this we use the <b>rm -rf<\/b> command, followed by the directory name.<\/p><p> The dash character '-' is a flag argmument that tells the rm command to do something specfic, but what exactly?<\/p><p> Well in this case the 'rf' stands for 'recursive force' which tels the operating system to recursively remove everythning starting at this directory and do it forcefully so we dont get a warning. Lets go into our Documents\/ directory to remove the Subfolder\/ directory with its content<\/p><p>WARNING: ONLY DO THIS IF YOU ARE 100% SURE YOU DONT NEED THIS DIRECTORY. IF YOU WERE TO RUN THIS COMMAND ON THE ROOT DIRECTORY, EVERYTHING WE BE DELETED<p><code>rm -rf Subfolder\/<\/code>",
+            "answer": "rm -rf Subfolder\/ "
         },
         {
             "id": 19,
             "section": "File Modifications",
             "title": "mv",
             "completed": false,
-            "content": "<p>So far in our file modifcation section, we have gone over how to add and remove from our filesystem, but what about changing a file or directories name? Or possibly changing the location where a file lives?</p>To begin with, if we want to change the name of a file or directory we use the <b>mv</b> command to rename it, followed by the name of the file or directory, which is followed by the new name you have chosen.</p><p>Lets go into our Projects/ directory and rename file2.txt to kali.txt</p><code> mv file2.txt kali.txt</code>",
+            "content": "<p>So far in our file modifcation section, we have gone over how to add and remove from our filesystem, but what about changing a file or directories name? Or possibly changing the location where a file lives?<\/p>To begin with, if we want to change the name of a file or directory we use the <b>mv<\/b> command to rename it, followed by the name of the file or directory, which is followed by the new name you have chosen.<\/p><p>Lets go into our Projects\/ directory and rename file2.txt to kali.txt<\/p><code> mv file2.txt kali.txt<\/code>",
             "answer": "mv file2.txt kali.txt "
         },
         {
@@ -158,16 +157,16 @@
             "section": "File Modifications",
             "title": "mv",
             "completed": false,
-            "content": "<p>Like how we discussed in the previous lesson, just like how we can rename files, we can do the same with directories</p><p>Lets try it out by renaming our Documents/ directory to 'Debian/</p><code>mv Documents/ Debian/</code>",
-            "answer": "mv Documents/ Debian/"
+            "content": "<p>Like how we discussed in the previous lesson, just like how we can rename files, we can do the same with directories<\/p><p>Lets try it out by renaming our Documents\/ directory to 'Debian\/<\/p><code>mv Documents\/ Debian\/<\/code>",
+            "answer": "mv Documents\/ Debian\/"
         },
         {
             "id": 21,
             "section": "File Modifications",
             "title": "mv",
             "completed": false,
-            "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem</p><p>For example, in our Documents/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects/ directory instead?</p> Well <b>mv</b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects/ directory</p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects/ from our Documents/ directory, we need to ask who can directly access Projects/? Well the root can since Projects/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ../Projects/</code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.</p>",
-            "answer": "mv hello.txt ../Projects/"
+            "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
+            "answer": "mv hello.txt ..\/Projects\/"
         },
         {
             "id": 22,
@@ -201,7 +200,6 @@
             "content": "",
             "answer": ""
         }
-        
     ],
     "networking": [
         {

@@ -6,17 +6,18 @@ const sectionLesson = document.querySelector(".section--lesson");
 class LessonManager {
   lesson = 0;
   currentSection = 'basics';
-  currentSectionSize = 0;
+  sectionSize= 0;
   user = 0;
   lessons = [];
   constructor() {
     this.lesson = 0;
     this.currentSection = 'basics'
     // may change this later to identify user
+    this.setupListeners();
     this.user = 0;
     this.fetchUserInfoInit();
-    this.fetchLessons();
-
+    this.fetchLessonsInit();
+    
   }
 
   setupListeners(){
@@ -55,6 +56,20 @@ class LessonManager {
     }
   }
 
+  async fetchLessonsInit(){
+    try{
+      const request = await fetch("../../testAPI/lessons.json")
+      if(!request.ok){throw new Error(`could not get lessons ${request.status}`)}
+      const data = await request.json();
+      this.lessons = data;
+      this.currentSectionsectionSize = this.lessons[this.currentSection][0][`section__size`];
+      this.broadcastUpdate();
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
+
   // this should only run once at the beginning
   async fetchLessons(){
     try{
@@ -80,14 +95,14 @@ class LessonManager {
         lessons:this.lessons,
       }
     })
-    console.log(detail);
     document.dispatchEvent(event);
   }
 
   // handle lesson and section changes bundled
   handleLessonSectionChange = async (e)=>{
     const { section, lessonId, action} = e.detail;
-    if(action = 'next'){
+    console.log(`detail is ${e}`);
+    if(action === 'next'){
       // if we are at last lesson or beyond lesson scope
       if(lessonId >= this.sectionSize){
         lessonId = this.sectionSize;
@@ -142,12 +157,22 @@ class lessonDisplay {
     this.statusCheck = document.querySelector(".lesson__status--check");
 
     // bind the async function to use our locals;
-    this.postInfo = this.postInfo.bind(this);
-
-    this.getInfo();
+    // this.postInfo = this.postInfo.bind(this);
+    // this.getInfo();
     this.initListeners();
-    this.getLessons();
+    // this.getLessons();
+    document.addEventListener('state:update',this.handleChange);
   }
+
+  handleChange = (e)=>{
+    const data = e.detail;
+    this.currentSection = data[`user`][`currentSection`];
+    this.currentLessonId = data['user']['currentLessonId'];
+    this.modules = data['lessons'];
+    // this.update();
+    this.initialize();
+  }
+
   initialize() {
     this.changeSection();
     this.updateMeter();
@@ -159,7 +184,6 @@ class lessonDisplay {
     this.nextButton.addEventListener("click", this.nextLesson);
     this.prevButton.addEventListener("click", this.prevLesson);
     this.misc.addEventListener("click", this.toggleLessonComplete);
-    // custom command success event
     document.addEventListener("command-success", this.handleCorrectEvent);
   }
   update() {
@@ -177,24 +201,25 @@ class lessonDisplay {
         }</div>`;
   }
   nextLesson = () => {
-    if (this.curLesson >= this.sectionSize) return;
+    // if (this.curLesson >= this.sectionSize) return;
     ++this.curLesson;
-    // update user cur lesson
-    this.postInfo();
-    this.update();
+    document.dispatchEvent(new CustomEvent('section:update',{detail:{
+      action:'next',
+      section:this.curSection,
+      lesson:this.curLesson,
+    }}))
+    document.addEventListener('section:update',(e)=>console.log(e));
+    // this.postInfo();
+    // this.update();
   };
   prevLesson = () => {
     if (this.curLesson <= 1) return;
     --this.curLesson;
-    // update user cur lesson
-    this.postInfo();
-    this.update();
+    // this.postInfo();
+    // this.update();
   };
   changeSection() {
-    //    this.sectionSize = section[this.curSection][0]['section__size'];
-    // the 0 part of the section is the meta data [0]
     this.sectionSize = this.modules[this.curSection][0]["section__size"];
-    console.log(this.sectionSize);
   }
   updateMeter() {
     let completedCount = this.modules[this.curSection].reduce((sum, lesson) => {
@@ -255,6 +280,7 @@ class lessonDisplay {
       console.log(`error ${error}`);
     }
   }
+
   // we should send back this lesson and this
   async postInfo() {
     try {
@@ -263,9 +289,6 @@ class lessonDisplay {
         headers: {
           "Content-type": "application/json",
         },
-        // we want to update the user info current lesson and section
-        // for demonstration basics is hardcoded
-        // we are seinding this json string
         body: JSON.stringify({
           section: this.curSection,
           lesson: this.curLesson,
@@ -279,6 +302,7 @@ class lessonDisplay {
       console.log(`error saving ${error}`);
     }
   }
+
   handleCorrectEvent = (e) => {
     this.showSuccessMessage();
     // get lessons will update everything
@@ -289,7 +313,7 @@ class lessonDisplay {
     const successMessage = `
             <div class="overlay--success">
                 <img src="../assets/SVGs/Tux.svg.png" alt="tux" class="logo">
-                <h3 class="overlay__message">well done!</h3> 
+                <h3 class="overlay__message">Well done!</h3> 
             </div>
             `;
     const overlayContainer = document.createElement("div");
@@ -320,3 +344,7 @@ terminal.mount("#terminal__container");
 
 
 const lessonManager = new LessonManager();
+
+document.addEventListener('section:update',()=>{
+  console.log('section update event');
+} )
