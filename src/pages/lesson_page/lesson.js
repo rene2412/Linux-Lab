@@ -62,7 +62,7 @@ class LessonManager {
       if(!request.ok){throw new Error(`could not get lessons ${request.status}`)}
       const data = await request.json();
       this.lessons = data;
-      this.currentSectionsectionSize = this.lessons[this.currentSection][0][`section__size`];
+      this.sectionSize = this.lessons[this.currentSection][0][`section__size`];
       this.broadcastUpdate();
     }
     catch(error){
@@ -78,7 +78,7 @@ class LessonManager {
       const data = await request.json();
       this.lessons = data;
       console.log(this.lessons);
-      this.currentSectionsectionSize = this.lessons[this.currentSection][0][`section__size`];
+      this.sectionsectionSize = this.lessons[this.currentSection][0][`section__size`];
     }
     catch(error){
       console.error(error);
@@ -100,8 +100,8 @@ class LessonManager {
 
   // handle lesson and section changes bundled
   handleLessonSectionChange = async (e)=>{
-    const { section, lessonId, action} = e.detail;
-    console.log(`detail is ${e}`);
+    let { section, lessonId, action} = e.detail;
+    console.log(e.detail);
     if(action === 'next'){
       // if we are at last lesson or beyond lesson scope
       if(lessonId >= this.sectionSize){
@@ -169,12 +169,13 @@ class lessonDisplay {
     this.currentSection = data[`user`][`currentSection`];
     this.currentLessonId = data['user']['currentLessonId'];
     this.modules = data['lessons'];
+    this.sectionSize = this.modules[this.curSection][0]['section__size'];
     // this.update();
     this.initialize();
   }
 
   initialize() {
-    this.changeSection();
+    // this.changeSection();
     this.updateMeter();
     this.updateStatus();
     this.render();
@@ -206,9 +207,8 @@ class lessonDisplay {
     document.dispatchEvent(new CustomEvent('section:update',{detail:{
       action:'next',
       section:this.curSection,
-      lesson:this.curLesson,
+      lessonId:this.curLesson,
     }}))
-    document.addEventListener('section:update',(e)=>console.log(e));
     // this.postInfo();
     // this.update();
   };
