@@ -117,6 +117,10 @@ class LessonManager {
         console.log(`cant go under section size`);
       }
     }
+    if( action === "change"){
+      // make sure for new section change lessonid is within the new bounds
+      if(this.lessons[section][0].section__size<=lessonId)lessonId = this.lessons[section][0].section__size;
+    }
 
     // update our user info json
     try {
@@ -170,10 +174,28 @@ class LessonNav{
   initListeners(){
     document.addEventListener('state:update',this.render);
     this.openCloseButton.addEventListener('click',this.handleToggle);
+    this.dropdownContainer.addEventListener('click',this.handleClick);
+  }
+
+  handleClick = (e)=>{
+    const idStr = e.target.id;
+    const id = parseInt(idStr.slice(idStr.indexOf(':')+1,idStr.length)) 
+    const subSection = idStr.slice(0,idStr.indexOf(':'));
+    console.log(id);
+    console.log(subSection);
+    document.dispatchEvent(new CustomEvent('section:update',{
+      detail:{
+        lessonId:id,
+        // this is temporary as i will have to add more info to list elements
+        // shoudl be the section belonging to that list element
+        section:'basics',
+        action:'change',
+      }
+    }))
+
   }
 
   handleToggle = (e)=>{
-    console.log(this.isOpen)
     if(!this.isOpen){
       this.dropdownContainer.classList.remove('hidden');
       this.isOpen = true;

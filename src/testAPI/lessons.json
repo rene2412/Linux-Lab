@@ -6,6 +6,7 @@
         },
         {
             "id": 1,
+            "parent":"basics",
             "section": "Prelude",
             "title": "The Command Line",
             "content_type": "article",
@@ -14,6 +15,7 @@
         },
         {
             "id": 2,
+            "parent":"basics",
             "section": "Prelude",
             "title": "The Filesystem",
             "content_type": "article",
@@ -22,6 +24,7 @@
         {
             "id": 3,
             "section": "Hello World",
+            "parent":"basics",
             "title": "echo",
             "completed": false,
             "content_type": "interactive",
@@ -31,6 +34,7 @@
         {
             "id": 4,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "date",
             "completed": false,
             "content_type": "interactive",
@@ -40,6 +44,7 @@
         {
             "id": 5,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "pwd",
             "completed": false,
             "content_type": "interactive",
@@ -49,6 +54,7 @@
         {
             "id": 6,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "ls",
             "completed": false,
             "content_type": "interactive",
@@ -58,6 +64,7 @@
         {
             "id": 7,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "cd",
             "completed": false,
             "content_type": "interactive",
@@ -67,6 +74,7 @@
         {
             "id": 8,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "cat",
             "completed": false,
             "content_type": "interactive",
@@ -76,6 +84,7 @@
         {
             "id": 9,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "cd ..",
             "completed": false,
             "content_type": "interactive",
@@ -85,6 +94,7 @@
         {
             "id": 10,
             "section": "File Navigation",
+            "parent":"basics",
             "title": "cd path\/subpath\/source",
             "completed": false,
             "content_type": "interactive",
@@ -94,6 +104,7 @@
         {
             "id": 11,
             "section": "Checkpoint",
+            "parent":"basics",
             "title": "Knowlegde Check #1",
             "completed": false,
             "content_type": "multichoice",
@@ -103,6 +114,7 @@
         {
             "id": 12,
             "section": "Checkpoint",
+            "parent":"basics",
             "title": "Knowlegde Check #2",
             "completed": false,
             "content_type": "multichoice",
@@ -112,6 +124,7 @@
         {
             "id": 13,
             "section": "Checkpoint",
+            "parent":"basics",
             "title": "Knowlegde Check #3",
             "completed": false,
             "content_type": "multichoice",
@@ -121,6 +134,7 @@
         {
             "id": 14,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "touch",
             "completed": false,
             "content_type": "interactive",
@@ -130,6 +144,7 @@
         {
             "id": 15,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "mkdir",
             "completed": false,
             "content_type": "interactive",
@@ -139,6 +154,7 @@
         {
             "id": 16,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "rm",
             "completed": false,
             "content_type": "interactive",
@@ -148,6 +164,7 @@
         {
             "id": 17,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "rmdir",
             "completed": false,
             "content_type": "interactive",
@@ -157,6 +174,7 @@
         {
             "id": 18,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "rm -rf",
             "completed": false,
             "content_type": "interactive",
@@ -166,6 +184,7 @@
         {
             "id": 19,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "mv",
             "content_type": "interactive",
             "completed": false,
@@ -175,6 +194,7 @@
         {
             "id": 20,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "mv",
             "content_type": "interactive",
             "completed": false,
@@ -184,6 +204,7 @@
         {
             "id": 21,
             "section": "File Modifications",
+            "parent":"basics",
             "title": "mv",
             "content_type": "interactive",
             "completed": false,
@@ -193,6 +214,7 @@
         {
             "id": 22,
             "section": "Checkpoint",
+            "parent":"basics",
             "title": "mv",
             "completed": false,
             "content_type": "multichoice",
@@ -202,24 +224,38 @@
     ],
     "networking": [
         {
-            "section__size": 2,
+            "section__size": 3,
             "section__completed": false
         },
         {
             "id": 1,
-            "section": "networking",
-            "title": "wget",
+            "section": "Checkpoint",
+            "parent":"basics",
+            "title": "mv",
             "completed": false,
-            "content": "<p da wifi in>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "wget"
+            "content_type": "multichoice",
+            "content": "<p> this is a dumb test </p>",
+            "answer": "none"
         },
         {
             "id": 2,
-            "section": "networking",
-            "title": "curl",
+            "section": "Checkpoint",
+            "parent":"networking",
+            "title": "dsajf",
             "completed": false,
-            "content": "<p>should we do today or i dont even know im just tping<\/p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "curl"
+            "content_type": "multichoice",
+            "content": "<p> tha dumb test </p>",
+            "answer": "none"
+        },
+        {
+            "id": 3,
+            "section": "Checkpoint",
+            "parent":"networking",
+            "title": "ldsajfals",
+            "completed": false,
+            "content_type": "multichoice",
+            "content": "<p> this dfa</p>",
+            "answer": "none"
         }
     ]
 }

@@ -165,10 +165,11 @@ code{
 
 /* LESSON NAVIGATION STYLES */
 .lesson__nav{
+    flex: 1;
     position: relative;
     z-index: 2;
-    min-width: 200px;
     max-width: 300px;
+    margin: 0 var(--spce-lg) 0 var(--spce-lg);
 }
 
 .lesson__nav__button--open{
@@ -176,8 +177,9 @@ code{
     color: var(--text-color-main);
     border: none;
     border-radius: var(--radius-sm);
-    padding: var(--spce-sm);
+    padding: var(--spce-xsm);
     max-width: 100%;
+    width: 100%;
 }
 
 .lesson__nav__button--open span{
