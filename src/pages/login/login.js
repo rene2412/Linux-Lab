@@ -6,10 +6,8 @@ const signupForm = document.querySelector('#signup__form');
 const loginForm = document.querySelector('#login__form');
 
 signupForm.addEventListener('submit',(e)=>{
-    e.preventDefault();
 })
 loginForm.addEventListener('submit',(e)=>{
-    e.preventDefault();
 })
 
 buttonLogin.addEventListener('click',()=>{
