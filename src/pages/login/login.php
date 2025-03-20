@@ -23,7 +23,7 @@ require_once "../../../includes/login_view.inc.php";
                 <button type="button" class="auth__option auth__option--signup">Sign Up</button>
             </div>
             <div class="auth__form auth__form--login  ">
-                <form action="../../../includes/login.inc.php" method="post" class="">
+                <form id="login__form" action="../../../includes/login.inc.php" method="post" class="">
                     <label for="username" class="input__label">Username:</label>
                     <input required class="input--single" type="text" id="username" name="username" placeholder="Username">
                     <label for="pwd" class="input__label">Password:</label>
@@ -36,7 +36,7 @@ require_once "../../../includes/login_view.inc.php";
                 ?>
             </div>
             <div class="auth__form auth__form--signup hidden ">
-                <form action="../../../includes/signup.inc.php" method="post" >
+                <form id="signup__form" action="../../../includes/signup.inc.php" method="post" >
                     <label for="username-signup">Username:</label>
                     <input required type="text" id="username-signup" class="input--single" name="username" placeholder="Username">
                     <label for="email-signup">Email:</label>
@@ -57,5 +57,5 @@ require_once "../../../includes/login_view.inc.php";
     </div>
 
     <script src="./login.js" defer></script>
-</body>
+/body>
 </html>

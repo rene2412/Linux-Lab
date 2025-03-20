@@ -2,6 +2,15 @@ const buttonLogin = document.querySelector('.auth__option--login');
 const buttonSignup= document.querySelector('.auth__option--signup');
 const loginSection = document.querySelector('.auth__form--login')
 const signupSection= document.querySelector('.auth__form--signup')
+const signupForm = document.querySelector('#signup__form');
+const loginForm = document.querySelector('#login__form');
+
+signupForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+})
+loginForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+})
 
 buttonLogin.addEventListener('click',()=>{
     buttonLogin.classList.add('active')
