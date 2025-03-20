@@ -193,7 +193,10 @@ class LessonNav{
       }
     }))
 
+    this.dropdownContainer.classList.add('hidden')
+    this.isOpen=false;
   }
+
 
   handleToggle = (e)=>{
     if(!this.isOpen){

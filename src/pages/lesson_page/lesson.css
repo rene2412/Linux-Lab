@@ -167,7 +167,7 @@ code{
 .lesson__nav{
     flex: 1;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     max-width: 300px;
     margin: 0 var(--spce-lg) 0 var(--spce-lg);
 }
