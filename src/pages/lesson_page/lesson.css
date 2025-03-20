@@ -7,6 +7,9 @@
 :root{
     --nav-height-lesson: 50px;
     --color-background-dark: rgb(40, 52, 73);
+    --color-overlay-full: #394252;
+    --color-background-highlight: #1c2a42;
+    --color-background-highlight-half: #1c2a4258;
 }
 
 html{
@@ -45,7 +48,7 @@ code{
     display: flex;
     flex-direction: column;
     background-color: var(--color-background-dark);
-    height: 65%;
+    min-height: 65%;
     position: relative;
 }
 
@@ -160,6 +163,91 @@ code{
     padding: var(--spce-xsm);
 }
 
+/* LESSON NAVIGATION STYLES */
+.lesson__nav{
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 var(--spce-lg) 0 var(--spce-lg);
+}
+
+.lesson__nav__button--open{
+    background-color: var(--color-overlay-full);
+    color: var(--text-color-main);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--spce-xsm);
+    max-width: 100%;
+    width: 100%;
+}
+
+.lesson__nav__button--open span{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.lesson__nav__subtitle{
+    background-color: var(--color-background-highlight);
+    padding: var(--spce-xsm);
+    padding-left: var(--spce-sm);
+    position: sticky;
+    top: 0;
+}
+
+
+.lesson__nav__dropdown{
+    position: absolute;
+    z-index: 2;
+    background-color: var(--color-overlay-half);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: fit-content;
+    max-height: calc(40vh);
+    box-shadow: 1px 1px 10px black;
+    border-radius: var(--radius-sm);
+    overflow-y: overlay;
+    overflow-y: auto;
+    scrollbar-color: rgba(0,0,0,0.25) transparent;
+    font-size: var(--text-size-s);
+}
+
+.lesson__nav__button{
+    background-color: var(--color-background-highlight-half);
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-color-main);
+    padding: var(--spce-xsm);
+    padding-left: var(--spce-med);
+    width: 100%;
+    text-align: start;
+}
+
+.lesson__nav__button:hover{
+    box-shadow: inset 100px 100px rgba(255, 255, 255, 0.121);
+}
+
+
+.lesson__nav__links{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.lesson__nav__lesson{
+    background-color: transparent;
+    width: 100%;
+}
+
+.active{
+    background-color: var(--color-highlight);
+}
+
 /* LESSON STYLES */
 .lesson{
     position: relative;
@@ -220,13 +308,6 @@ code{
     padding-top: 0;
 }
 
-.lesson__button{
-    color: var(--text-color-main);
-    background-color: var(--color-highlight);
-    padding: var(--spce-sm);
-    border-radius: var(--radius-med);
-    border: white var(--border-base);
-}
 
 
 /* TERMINAL */
