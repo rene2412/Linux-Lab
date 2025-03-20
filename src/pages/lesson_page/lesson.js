@@ -3,113 +3,122 @@ import { NavigationLesson } from "../../components/NavigationLesson/index.js";
 
 const sectionLesson = document.querySelector(".section--lesson");
 
+
 class LessonManager {
-  lesson = 0;
-  currentSection = 'basics';
-  sectionSize= 0;
+  lesson = 1;
+  currentSection = "basics";
+  sectionSize = 0;
   user = 0;
   lessons = [];
   constructor() {
-    this.lesson = 0;
-    this.currentSection = 'basics'
+    this.lesson = 1;
+    this.currentSection = "basics";
     // may change this later to identify user
     this.setupListeners();
     this.user = 0;
     this.fetchUserInfoInit();
     this.fetchLessonsInit();
-    
   }
 
-  setupListeners(){
-    document.addEventListener('section:update',this.handleLessonSectionChange)
+  setupListeners() {
+    document.addEventListener("section:update", this.handleLessonSectionChange);
   }
 
-  async fetchUserInfoInit(){
-    try{
+  async fetchUserInfoInit() {
+    try {
       const request = await fetch("../../testAPI/userInfo.json");
-      if(!request.ok){
-        throw new Error('Could not load user info');
+      if (!request.ok) {
+        throw new Error("Could not load user info");
       }
       const data = await request.json();
-      this.lesson = data[this.user]['lesson'];
-      this.currentSection =  data[this.user]['section'];
-    }
-
-    catch(error){
+      this.lesson = data[this.user]["lesson"];
+      this.currentSection = data[this.user]["section"];
+    } catch (error) {
       console.error(error);
     }
   }
 
-  async fetchUserInfo(){
-    try{
+  async fetchUserInfo() {
+    try {
       const request = await fetch("../../testAPI/userInfo.json");
-      if(!request.ok){
-        throw new Error('Could not load user info');
+      if (!request.ok) {
+        throw new Error("Could not load user info");
       }
-      const data = await request.json()
-      this.lesson = data[this.user]['lesson'];
-      this.currentSection =  data[this.user]['section'];
+      const data = await request.json();
+      this.lesson = data[this.user]["lesson"];
+      this.currentSection = data[this.user]["section"];
       this.broadcastUpdate();
-    }
-    catch(error){
+    } catch (error) {
       console.error(error);
     }
   }
 
-  async fetchLessonsInit(){
-    try{
-      const request = await fetch("../../testAPI/lessons.json")
-      if(!request.ok){throw new Error(`could not get lessons ${request.status}`)}
+  async fetchLessonsInit() {
+    try {
+      const request = await fetch("../../testAPI/lessons.json");
+      if (!request.ok) {
+        throw new Error(`could not get lessons ${request.status}`);
+      }
       const data = await request.json();
       this.lessons = data;
       this.sectionSize = this.lessons[this.currentSection][0][`section__size`];
       this.broadcastUpdate();
-    }
-    catch(error){
+    } catch (error) {
       console.error(error);
     }
   }
 
   // this should only run once at the beginning
-  async fetchLessons(){
-    try{
-      const request = await fetch("../../testAPI/lessons.json")
-      if(!request.ok){throw new Error(`could not get lessons ${request.status}`)}
+  async fetchLessons() {
+    try {
+      const request = await fetch("../../testAPI/lessons.json");
+      if (!request.ok) {
+        throw new Error(`could not get lessons ${request.status}`);
+      }
       const data = await request.json();
       this.lessons = data;
       console.log(this.lessons);
-      this.sectionsectionSize = this.lessons[this.currentSection][0][`section__size`];
-    }
-    catch(error){
+      this.sectionsectionSize =
+        this.lessons[this.currentSection][0][`section__size`];
+    } catch (error) {
       console.error(error);
     }
   }
 
-  broadcastUpdate(){
-    const event = new CustomEvent(`state:update`,{
-      detail:{
-        user:{
+  broadcastUpdate() {
+    const event = new CustomEvent(`state:update`, {
+      detail: {
+        user: {
           currentLessonId: this.lesson,
           currentSection: this.currentSection,
         },
-        lessons:this.lessons,
-      }
-    })
+        lessons: this.lessons,
+      },
+    });
     document.dispatchEvent(event);
   }
 
   // handle lesson and section changes bundled
-  handleLessonSectionChange = async (e)=>{
-    let { section, lessonId, action} = e.detail;
+  handleLessonSectionChange = async (e) => {
+    let { section, lessonId, action } = e.detail;
     console.log(e.detail);
-    if(action === 'next'){
+    if (action === "next") {
       // if we are at last lesson or beyond lesson scope
-      if(lessonId >= this.sectionSize){
+      if (lessonId >= this.sectionSize) {
         lessonId = this.sectionSize;
-        console.log(`cant go over section size`)
+        console.log(`cant go over section size`);
       }
     }
-  
+
+    if (action === "prev") {
+      // if we are at last lesson or beyond lesson scope
+      if (lessonId <= 1) {
+        lessonId = 1;
+        console.log(`cant go under section size`);
+      }
+    }
+
+    // update our user info json
     try {
       const response = await fetch("../../testAPI/updateUserInfo.php", {
         method: "POST",
@@ -117,7 +126,7 @@ class LessonManager {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          section:section,
+          section: section,
           lesson: lessonId,
         }),
       });
@@ -128,21 +137,83 @@ class LessonManager {
     } catch (error) {
       console.log(`error saving ${error}`);
     }
-  }
+  };
 
-  
-
-  eventNewInfo(data){
-    const eventNewInfo = new CustomEvent("userinfo:update", { detail: {
-      
-    }});
+  eventNewInfo(data) {
+    const eventNewInfo = new CustomEvent("userinfo:update", { detail: {} });
     dispatchEvent(eventNewInfo);
   }
 }
 
+
+class LessonNav{
+  isOpen = false;
+  constructor(container=".lesson__nav"){
+    this.container = document.querySelector(container);
+    this.mount();
+    this.openCloseButton = document.querySelector('.lesson__nav__button--open');
+    this.dropdownContainer = document.querySelector('.lesson__nav__dropdown');
+    this.listContainer = document.querySelector('.lesson__nav__links')
+    this.initListeners();
+  }
+
+  mount(){
+    this.container.innerHTML = (`
+      <button class="lesson__nav__button--open"><span>loading...</span></button>
+      <div class="lesson__nav__dropdown hidden">
+          <ul class="lesson__nav__links">
+          </ul>
+      </div>
+    `);
+  }
+
+  initListeners(){
+    document.addEventListener('state:update',this.render);
+    this.openCloseButton.addEventListener('click',this.handleToggle);
+  }
+
+  handleToggle = (e)=>{
+    console.log(this.isOpen)
+    if(!this.isOpen){
+      this.dropdownContainer.classList.remove('hidden');
+      this.isOpen = true;
+    }
+    else if(this.isOpen){
+      this.dropdownContainer.classList.add('hidden');
+      this.isOpen = false;
+    } 
+  }
+
+  render =(e)=>{
+    const lessons = e.detail.lessons;
+    const lesson = e.detail.user.currentLessonId;
+    const section = e.detail.user.currentSection;
+    const openButtonText = `${lessons[section][lesson].section} - ${lessons[section][lesson].title}`;
+    let lastSection = "";
+    const listElements = lessons[section].filter(item => item.id>0).map((lessonData)=>{
+      let returnString = '';
+      if(lastSection != lessonData.section){
+        lastSection = lessonData.section;
+        returnString = `<li class="lesson__nav__subtitle"><h4>${lessonData.section}</h4></li>`
+      }
+      if(lesson === lessonData.id){
+        return(returnString + `<li class="lesson__nav__lesson "><button class="lesson__nav__button active" id="${`${lessonData.section}:${lessonData.id}`}"" >${lessonData.title}</button></li>`);
+      }
+      else return(returnString + `<li class="lesson__nav__lesson "><button class="lesson__nav__button" id="${`${lessonData.section}:${lessonData.id}`}"" >${lessonData.title}</button></li>`);
+    });
+    let listElementsString = listElements.join('');
+    this.openCloseButton.innerHTML = `<span>${openButtonText}</span>`;
+    this.listContainer.innerHTML = `${listElementsString}`;
+
+
+  }
+
+
+
+}
+
 class lessonDisplay {
   curSection = "basics";
-  // LESSONS START FROM 1
   curLesson = 1;
   sectionSize = 0;
   modules = {};
@@ -155,31 +226,25 @@ class lessonDisplay {
     this.misc = document.querySelector(".lesson");
     this.statusCross = document.querySelector(".lesson__status--cross");
     this.statusCheck = document.querySelector(".lesson__status--check");
+    this.lessonNavContainer = document.querySelector(".lesson__nav");
 
-    // bind the async function to use our locals;
-    // this.postInfo = this.postInfo.bind(this);
-    // this.getInfo();
+
     this.initListeners();
-    // this.getLessons();
-    document.addEventListener('state:update',this.handleChange);
+    document.addEventListener("state:update", this.handleChange);
   }
 
-  handleChange = (e)=>{
+  handleChange = (e) => {
+    console.log("state update signal received");
+    console.log(e.detail);
     const data = e.detail;
-    this.currentSection = data[`user`][`currentSection`];
-    this.currentLessonId = data['user']['currentLessonId'];
-    this.modules = data['lessons'];
-    this.sectionSize = this.modules[this.curSection][0]['section__size'];
-    // this.update();
-    this.initialize();
-  }
+    this.curSection = data[`user`][`currentSection`];
+    this.curLesson = data["user"]["currentLessonId"];
+    this.modules = data["lessons"];
+    this.sectionSize = this.modules[this.curSection][0]["section__size"];
+    this.update();
+  };
 
-  initialize() {
-    // this.changeSection();
-    this.updateMeter();
-    this.updateStatus();
-    this.render();
-  }
+
 
   initListeners() {
     this.nextButton.addEventListener("click", this.nextLesson);
@@ -187,11 +252,13 @@ class lessonDisplay {
     this.misc.addEventListener("click", this.toggleLessonComplete);
     document.addEventListener("command-success", this.handleCorrectEvent);
   }
+
   update() {
     this.render();
     this.updateMeter();
     this.updateStatus();
   }
+
   render() {
     this.container.replaceChildren();
     this.container.innerHTML = `<h1 class="lesson__title">${
@@ -201,36 +268,62 @@ class lessonDisplay {
           this.modules[this.curSection][this.curLesson][`content`]
         }</div>`;
   }
+
   nextLesson = () => {
     // if (this.curLesson >= this.sectionSize) return;
     ++this.curLesson;
-    document.dispatchEvent(new CustomEvent('section:update',{detail:{
-      action:'next',
-      section:this.curSection,
-      lessonId:this.curLesson,
-    }}))
-    // this.postInfo();
-    // this.update();
+    document.dispatchEvent(
+      new CustomEvent("section:update", {
+        detail: {
+          action: "next",
+          section: this.curSection,
+          lessonId: this.curLesson,
+        },
+      })
+    );
   };
+
   prevLesson = () => {
     if (this.curLesson <= 1) return;
     --this.curLesson;
-    // this.postInfo();
-    // this.update();
+    document.dispatchEvent(
+      new CustomEvent("section:update", {
+        detail: {
+          action: "prev",
+          section: this.curSection,
+          lessonId: this.curLesson,
+        },
+      })
+    );
   };
+
   changeSection() {
     this.sectionSize = this.modules[this.curSection][0]["section__size"];
+    this.sectionSizeInteractive
   }
+
   updateMeter() {
+    let interactiveCount = this.modules[this.curSection].reduce((sum,lesson)=>{
+      let value = 0;
+      if(lesson.content_type === 'interactive' || lesson.content_type === 'multichoice') value = 1;
+      return sum + value;
+    }, 0);
     let completedCount = this.modules[this.curSection].reduce((sum, lesson) => {
+      if(lesson.content_type !='interactive' && lesson.content_type !='multichoice') return sum;
       return sum + (lesson.completed ? 1 : 0);
     }, 0);
-    let progValue = (completedCount / this.sectionSize) * 100;
+    let progValue = (completedCount / interactiveCount) * 100;
     this.progBar.value = progValue;
     if (progValue === 100) {
-      // change section stustua
+      document.dispatchEvent(new CustomEvent('section:isComplete',{detail:{
+        userInfo:{
+          section: this.curSection,
+          lesson: this.curLesson,
+        }
+      }}))
     }
   }
+
   updateStatus() {
     if (this.modules[this.curSection][this.curLesson][`completed`] === true) {
       this.statusCheck.classList.remove(`hidden`);
@@ -240,6 +333,7 @@ class lessonDisplay {
       this.statusCross.classList.remove(`hidden`);
     }
   }
+
   toggleLessonComplete = () => {
     this.modules[this.curSection][this.curLesson][`completed`] =
       !this.modules[this.curSection][this.curLesson][`completed`];
@@ -247,66 +341,8 @@ class lessonDisplay {
     this.updateStatus();
   };
 
-  // this will need to be done in DB or something to keep track of user info
-  async getInfo() {
-    try {
-      const request = await fetch("../../testAPI/userInfo.json");
-      if (!request.ok) {
-        throw new Error("Could not load user info");
-      }
-      const data = await request.json();
-      // at 0 simply refers to first user in our case
-      this.curLesson = data[0].lesson;
-      this.curSection = data[0].section;
-      // this.getLessons();
-    } catch (error) {
-      console.log(`error ${error}`);
-    }
-  }
-
-  //fetch the lesson after user info
-  async getLessons() {
-    try {
-      const request = await fetch("../../testAPI/lessons.json");
-      if (!request.ok) {
-        throw new Error("Could not load lesson");
-      }
-      const data = await request.json();
-      this.modules = data;
-      console.log(this.modules);
-      // call init because we will update everything
-      this.initialize();
-    } catch (error) {
-      console.log(`error ${error}`);
-    }
-  }
-
-  // we should send back this lesson and this
-  async postInfo() {
-    try {
-      const response = await fetch("../../testAPI/updateUserInfo.php", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          section: this.curSection,
-          lesson: this.curLesson,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`response error`, response.status);
-      }
-      const data = await response.json();
-    } catch (error) {
-      console.log(`error saving ${error}`);
-    }
-  }
-
   handleCorrectEvent = (e) => {
     this.showSuccessMessage();
-    // get lessons will update everything
-    this.getLessons();
   };
 
   showSuccessMessage() {
@@ -335,6 +371,9 @@ const lessonDisplayController = new lessonDisplay(".lesson");
 const terminal = new VanillaTerminal({
   apiEndpoint: "../../../api_commands.php",
 });
+
+const lessonNav = new LessonNav();
+
 const sidebarLesson = new NavigationLesson(
   ".sidebar__container",
   ".sidebar__button--open"
@@ -342,9 +381,4 @@ const sidebarLesson = new NavigationLesson(
 
 terminal.mount("#terminal__container");
 
-
 const lessonManager = new LessonManager();
-
-document.addEventListener('section:update',()=>{
-  console.log('section update event');
-} )
