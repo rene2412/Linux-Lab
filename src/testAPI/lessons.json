@@ -299,6 +299,15 @@
             "content_type": "article",
             "content": "The grep command allows us to search and filter specific patterns in files</p><code>grep -options \"pattern\" file</code><p>-The options flag is an optional command that is used for an additional level of filtering, somne of these flags include:</p><p>    - -i: Case insensitive search</p><p>    - -v: Invert match (show lines that don't match)</p><p>     - -r: Search recursively through directories</p><p>- -n: Show line numbers</p><p>- The pattern is the text or regular expression you want to search for, which is usually under quatation marks</p><p>- The file argument simply specifies which file(s) to search in</p>", 
             "completed": false
+        },
+        {
+            "id": 31, 
+            "parent": "basics",
+            "section": "Searching & Filtering",
+            "title": "grep ",
+            "content_type": "article",
+            "content": "The grep command allows us to search and filter specific patterns in files</p><code>grep -options \"pattern\" file</code><p>-The options flag is an optional command that is used for an additional level of filtering, somne of these flags include:</p><p>    - -i: Case insensitive search</p><p>    - -v: Invert match (show lines that don't match)</p><p>     - -r: Search recursively through directories</p><p>- -n: Show line numbers</p><p>- The pattern is the text or regular expression you want to search for, which is usually under quatation marks</p><p>- The file argument simply specifies which file(s) to search in</p>", 
+            "completed": false
         }
     ],
     "networking": [
