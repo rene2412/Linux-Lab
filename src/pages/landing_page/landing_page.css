@@ -7,10 +7,6 @@
     box-sizing: border-box;
 }
 
-.logo{
-    height: 2rem;
-}
-
 .content{
     background-color: black ;
     background-image: url(./matrix.gif);
