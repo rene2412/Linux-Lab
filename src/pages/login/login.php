@@ -32,7 +32,7 @@ require_once "../../../includes/login_view.inc.php";
                     <a href="../lesson_page/lesson.html" class="login--guest">continue as guest</a>
                 </form>
                 <?php 
-                    check_login_errors();
+                check_login_errors();
                 ?>
             </div>
             <div class="auth__form auth__form--signup hidden ">
@@ -57,5 +57,4 @@ require_once "../../../includes/login_view.inc.php";
     </div>
 
     <script src="./login.js" defer></script>
-/body>
 </html>

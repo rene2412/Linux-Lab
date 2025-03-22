@@ -1,6 +1,6 @@
 <?php
-
-require 'includes/config_session.inc.php';
+session_start();
+//require 'includes/config_session.inc.php';
 //session_unset();
 require_once "network.php";
 // Debugging: Log the request method and POST data
@@ -247,6 +247,7 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
         ];
         $_SESSION['fileSystem'] = $fileSystem;
         $GLOBALS['commandSuccess'] = true;
+        return "";
     }
 
 

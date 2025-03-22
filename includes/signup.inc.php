@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         require_once 'database.inc.php';
-		require_once 'config_session.inc.php';
+//		require_once 'config_session.inc.php';
         require_once 'signup_model.inc.php';
         require_once 'signup_contr.inc.php';	
 	 
@@ -30,22 +30,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
 		if (is_passsword_valid($pwd) === false) {
-			$errors["password_ invalid"] = "Invalid Password! Passwords Must Contain:<br>
-			- At Least 10 Characters<br>
-			- 1 Number<br>
-			- 1 Uppercase Character<br>
-			- 1 Lowercase Character<br>
-			- 1 Special Character<br>";
+			$errors["password_ invalid"] = "Invalid Password!";
 		}
 
+	session_start();
+    
 	if ($errors) {
 		$_SESSION["errors_signup"] = $errors; 
-		 header("Location: ../index.php");	
+		 header("Location: ../src/pages/login/login.php");	
 		 die();
 		}
 
 	 create_user($pdo, $pwd, $username, $email);
-	 header("Location: ../index.php?signup=success");
+	 header("Location: ../src/pages/landing_page/landing_page.html");
 	 $pdo = null;
 	 $stmt = null;	 
 	 die();
