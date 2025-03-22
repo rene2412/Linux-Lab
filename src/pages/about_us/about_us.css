@@ -74,8 +74,8 @@ html{
     display: flex;
     justify-content: center;
     position: relative;
-    border-top: 4px solid var(--color-secondary);
-    border-bottom: 4px solid var(--color-secondary);
+    border-top: var(--border-base) solid var(--color-secondary);
+    border-bottom: var(--border-base) solid var(--color-secondary);
 }
 
 .articles__title{

@@ -13,6 +13,7 @@ body{
     align-items: center;
     border-top: var(--color-secondary) solid var(--border-base);
     border-bottom: var(--color-secondary) solid var(--border-base);
+    border-width: var(--border-base);
     padding-left: var(--spce-xlg);
     padding-right: var(--spce-xlg);
 }
