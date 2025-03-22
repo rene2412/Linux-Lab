@@ -17,7 +17,6 @@ class LessonManager {
     this.setupListeners();
     this.user = 0;
     this.fetchUserInfoInit();
-    this.fetchLessonsInit();
   }
 
   setupListeners() {
@@ -33,6 +32,7 @@ class LessonManager {
       const data = await request.json();
       this.lesson = data[this.user]["lesson"];
       this.currentSection = data[this.user]["section"];
+      this.fetchLessonsInit();
     } catch (error) {
       console.error(error);
     }
@@ -68,23 +68,6 @@ class LessonManager {
     }
   }
 
-  // this should only run once at the beginning
-  async fetchLessons() {
-    try {
-      const request = await fetch("../../testAPI/lessons.json");
-      if (!request.ok) {
-        throw new Error(`could not get lessons ${request.status}`);
-      }
-      const data = await request.json();
-      this.lessons = data;
-      console.log(this.lessons);
-      this.sectionsectionSize =
-        this.lessons[this.currentSection][0][`section__size`];
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   broadcastUpdate() {
     const event = new CustomEvent(`state:update`, {
       detail: {
@@ -101,7 +84,6 @@ class LessonManager {
   // handle lesson and section changes bundled
   handleLessonSectionChange = async (e) => {
     let { section, lessonId, action } = e.detail;
-    console.log(e.detail);
     if (action === "next") {
       // if we are at last lesson or beyond lesson scope
       if (lessonId >= this.sectionSize) {
@@ -181,8 +163,6 @@ class LessonNav{
     const idStr = e.target.id;
     const id = parseInt(idStr.slice(idStr.indexOf(':')+1,idStr.length)) 
     const subSection = idStr.slice(0,idStr.indexOf(':'));
-    console.log(id);
-    console.log(subSection);
     document.dispatchEvent(new CustomEvent('section:update',{
       detail:{
         lessonId:id,
@@ -254,13 +234,11 @@ class lessonDisplay {
     this.lessonNavContainer = document.querySelector(".lesson__nav");
 
 
-    this.initListeners();
     document.addEventListener("state:update", this.handleChange);
+    this.initListeners();
   }
 
   handleChange = (e) => {
-    console.log("state update signal received");
-    console.log(e.detail);
     const data = e.detail;
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
@@ -391,6 +369,7 @@ class lessonDisplay {
     }, 1000 * 3);
   }
 }
+const lessonManager = new LessonManager();
 
 const lessonDisplayController = new lessonDisplay(".lesson");
 const terminal = new VanillaTerminal({
@@ -405,5 +384,3 @@ const sidebarLesson = new NavigationLesson(
 );
 
 terminal.mount("#terminal__container");
-
-const lessonManager = new LessonManager();
