@@ -23,7 +23,7 @@ $fileSystem = [
                 "modified" => "2025-02-27 01:24:04",
                 "size" => 648,
             ],
-            "BirchTree.txt" => [
+            "Shakespeare.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
                     "owner" => "user",
@@ -32,12 +32,114 @@ $fileSystem = [
                     "modified" => "2025-02-27 01:24:04",
                     "size" => 648,
                     "content" => [
-                        "I could be my best if I spoke my own head for you",
-                        "You could see me now if you told yourself how you knew me",
-                        "And oh, as I sit by the bitch tree"
+"Shall I compare thee to a summer’s day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer’s lease hath all too short a date;
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimm'd;
+And every fair from fair sometime declines,
+By chance or nature’s changing course untrimm'd;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow’st;
+Nor shall death brag thou wander’st in his shade,
+When in eternal lines to time thou grow’st:
+So long as men can breathe or eyes can see,
+So long lives this, and this gives life to thee.
+",
+                    
                     ]
                 ]
             ],
+            "Declaration.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-28 01:24:04",
+                    "modified" => "2025-02-28 01:24:04",
+                    "size" => 3043,
+                    "content" => [
+"When, in the course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume, among the powers of the earth, the separate and equal station to which the laws of nature and of nature's God entitle them, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.
+We hold these truths to be self-evident, that all men are created equal, that they are endowed, by their Creator, with certain unalienable rights, that among these are life, liberty, and the pursuit of happiness.--That to secure these rights, governments are instituted among men, deriving their just powers from the consent of the governed, that whenever any form of government becomes destructive of these ends, it is the right of the people to alter or to abolish it, and to institute new government, laying its foundation on such principles, and organizing its powers in such form, as to them shall seem most likely to effect their safety and happiness. Prudence, indeed, will dictate, that governments long established, should not be changed for light and transient causes; and accordingly all experience hath shown, that mankind are more disposed to suffer, while evils are sufferable, than to right themselves by abolishing the forms to which they are accustomed. But when a long train of abuses and usurpations, pursuing invariably the same object, evinces a design to reduce them under absolute despotism, it is their right, it is their duty, to throw off such government, and to provide new guards for their future security. Such has been the patient sufferance of these Colonies; and such is now the necessity which constrains them to alter their former systems of government. The history of the present King of Great Britain is a history of repeated injuries and usurpations, all having in direct object the establishment of an absolute tyranny over these States. To prove this, let facts be submitted to a candid world.
+He has refused his assent to laws, the most wholesome and necessary for the public good.
+He has forbidden his governors to pass laws of immediate and pressing importance, unless suspended in their operations till his assent should be obtained; and when so suspended, he has utterly neglected to attend to them.
+He has refused to pass other laws for the accommodation of large districts of people, unless those people would relinquish the right of representation in the legislature, a right inestimable to them, and formidable to tyrants only.
+He has called together legislative bodies at places unusual, uncomfortable, and distant from the depository of their public records, for the sole purpose of fatiguing them into compliance with his measures.
+He has dissolved representative houses repeatedly, for opposing with manly firmness his invasions on the rights of the people.
+He has refused for a long time, after such dissolutions, to cause others to be elected; whereby the legislative powers, incapable of annihilation, have returned to the people at large for their exercise; the State remaining, in the meantime, exposed to all the dangers of invasion from without, and convulsions within.
+He has endeavored to prevent the population of these States; for that purpose obstructing the laws for naturalization of foreigners; refusing to pass others to encourage their migrations hither, and raising the conditions of new appropriations of lands.
+He has obstructed the administration of justice, by refusing his assent to laws for establishing judiciary powers.
+He has made judges dependent on his will alone, for the tenure of their offices, and the amount and payment of their salaries.
+He has erected a multitude of new offices, and sent hither swarms of officers to harass our people, and eat out their substance.
+He has kept among us, in times of peace, standing armies, without the consent of our legislatures.
+He has affected to render the military independent of and superior to the civil power.
+He has combined with others to subject us to a jurisdiction foreign to our constitution, and unacknowledged by our laws; giving his assent to their acts of pretended legislation:
+For quartering large bodies of armed troops among us:
+For protecting them, by a mock trial, from punishment for any murders which they should commit on the inhabitants of these States:
+For cutting off our trade with all parts of the world:
+For imposing taxes on us without our consent:
+For depriving us, in many cases, of the benefits of trial by jury:
+For transporting us beyond seas to be tried for pretended offences:
+For abolishing the free system of English laws in a neighboring province, establishing therein an arbitrary government, and enlarging its boundaries, so as to render it at once an example and fit instrument for introducing the same absolute rule into these Colonies:
+For taking away our charters, abolishing our most valuable laws, and altering fundamentally the forms of our governments:
+For suspending our own legislatures, and declaring themselves invested with power to legislate for us in all cases whatsoever.
+He has abdicated government here, by declaring us out of his protection, and waging war against us.
+He has plundered our seas, ravaged our coasts, burnt our towns, and destroyed the lives of our people.
+He is, at this time, transporting large armies of foreign mercenaries to complete the works of death, desolation, and tyranny, already begun with circumstances of cruelty and perfidy, scarcely paralleled in the most barbarous ages, and totally unworthy the head of a civilized nation.
+He has constrained our fellow-citizens, taken captive on the high seas, to bear arms against their country, to become the executioners of their friends and brethren, or to fall themselves by their hands.
+He has excited domestic insurrections amongst us, and has endeavored to bring on the inhabitants of our frontiers, the merciless Indian savages, whose known rule of warfare is an undistinguished destruction of all ages, sexes, and conditions.
+In every stage of these oppressions we have petitioned for redress in the most humble terms: our repeated petitions have been answered only by repeated injury. A prince, whose character is thus marked by every act which may define a tyrant, is unfit to be the ruler of a free people.
+Nor have we been wanting in attentions to our British brethren. We have warned them, from time to time, of attempts by their legislature to extend an unwarrantable jurisdiction over us. We have reminded them of the circumstances of our emigration and settlement here. We have appealed to their native justice and magnanimity, and we have conjured them by the ties of our common kindred to disavow these usurpations, which would inevitably interrupt our connections and correspondence. They, too, have been deaf to the voice of justice and of consanguinity. We must, therefore, acquiesce in the necessity, which denounces our separation, and hold them, as we hold the rest of mankind, enemies in war, in peace friends.
+We, therefore, the Representatives of the United States of America, in General Congress assembled, appealing to the Supreme Judge of the world for the rectitude of our intentions, do, in the name, and by the authority of the good people of these Colonies, solemnly publish and declare, that these United Colonies are, and of right ought to be, free and independent States; that they are absolved from all allegiance to the British crown, and that all political connection between them and the State of Great Britain is, and ought to be, totally dissolved; and that as free and independent States, they have full power to levy war, conclude peace, contract alliances, establish commerce, and to do all other acts and things which independent States may of right do. And for the support of this declaration, with a firm reliance on the protection of Divine Providence, we mutually pledge to each other our lives, our fortunes, and our sacred honour ",
+                    ]
+                ]
+            ],
+        "Kennedy.txt" => [
+            "file" => [
+                "permissions" => "-rw-r--r--",
+                "owner" => "user",
+                "group" => "group",
+                "created" => "2025-02-29 01:44:04",
+                "modified" => "2025-02-29 01:54:04",
+                "size" => 1040,
+                "content" => [
+"President Pitzer, Mr. Vice President, Governor, Congressman Thomas, Senator Wiley, and Congressman Miller, Mr. Webb, Mr. Bell, scientists, distinguished guests, and ladies and gentlemen:
+I appreciate your president having made me an honorary visiting professor, and I will assure you that my first lecture will be very brief.
+I am delighted to be here, and I’m particularly delighted to be here on this occasion.
+We meet at a college noted for knowledge, in a city noted for progress, in a state noted for strength, and we stand in need of all three, for we meet in an hour of change and challenge, in a decade of hope and fear, in an age of both knowledge and ignorance. The greater our knowledge increases, the greater our ignorance unfolds.
+Despite the striking fact that most of the scientists that the world has ever known are alive and working today, despite the fact that this nation’s own scientific manpower is doubling every 12 years in a rate of growth more than three times that of our population as a whole, despite that, the vast stretches of the unknown and the unanswered and the unfinished still far outstrip our collective comprehension. 
+No man can fully grasp how far and how fast we have come, but condense, if you will, the 50,000 years of man’s recorded history in a time span of but a half-century. Stated in these terms, we know very little about the first 40 years, except at the end of them advanced man had learned to use the skins of animals to cover them. Then about 10 years ago, under this standard, man emerged from his caves to construct other kinds of shelter. Only five years ago man learned to write and use a cart with wheels. Christianity began less than two years ago. The printing press came this year, and then less than two months ago, during this whole 50-year span of human history, the steam engine provided a new source of power. 
+Newton explored the meaning of gravity. Last month electric lights and telephones and automobiles and airplanes became available. Only last week did we develop penicillin and television and nuclear power, and now if America’s new spacecraft succeeds in reaching Venus, we will have literally reached the stars before midnight tonight.
+This is a breathtaking pace, and such a pace cannot help but create new ills as it dispels old, new ignorance, new problems, new dangers. Surely the opening vistas of space promise high costs and hardships, as well as high reward. 
+So it is not surprising that some would have us stay where we are a little longer to rest, to wait. But this city of Houston, this State of Texas, this country of the United States was not built by those who waited and rested and wished to look behind them. This country was conquered by those who moved forward — and so will space. 
+William Bradford, speaking in 1630 of the founding of the Plymouth Bay Colony, said that all great and honorable actions are accompanied with great difficulties, and both must be enterprised and overcome with answerable courage. 
+If this capsule history of our progress teaches us anything, it is that man, in his quest for knowledge and progress, is determined and cannot be deterred. The exploration of space will go ahead, whether we join in it or not, and it is one of the great adventures of all time, and no nation which expects to be the leader of other nations can expect to stay behind in the race for space. 
+Those who came before us made certain that this country rode the first waves of the industrial revolutions, the first waves of modern invention, and the first wave of nuclear power, and this generation does not intend to founder in the backwash of the coming age of space. We mean to be a part of it — we mean to lead it. For the eyes of the world now look into space, to the moon and to the planets beyond, and we have vowed that we shall not see it governed by a hostile flag of conquest, but by a banner of freedom and peace. We have vowed that we shall not see space filled with weapons of mass destruction, but with instruments of knowledge and understanding.
+Yet the vows of this nation can only be fulfilled if we in this nation are first, and, therefore, we intend to be first. In short, our leadership in science and in industry, our hopes for peace and security, our obligations to ourselves as well as others, all require us to make this effort, to solve these mysteries, to solve them for the good of all men, and to become the world’s leading space-faring nation.
+We set sail on this new sea because there is new knowledge to be gained, and new rights to be won, and they must be won and used for the progress of all people. For space science, like nuclear science and all technology, has no conscience of its own. Whether it will become a force for good or ill depends on man, and only if the United States occupies a position of pre-eminence can we help decide whether this new ocean will be a sea of peace or a new terrifying theater of war. I do not say the we should or will go unprotected against the hostile misuse of space any more than we go unprotected against the hostile use of land or sea, but I do say that space can be explored and mastered without feeding the fires of war, without repeating the mistakes that man has made in extending his writ around this globe of ours.
+There is no strife, no prejudice, no national conflict in outer space as yet. Its hazards are hostile to us all. Its conquest deserves the best of all mankind, and its opportunity for peaceful cooperation may never come again. But why, some say, the moon? Why choose this as our goal? And they may well ask why climb the highest mountain? Why, 35 years ago, fly the Atlantic? Why does Rice play Texas? 
+We choose to go to the moon. We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard, because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one which we intend to win, and the others, too. 
+It is for these reasons that I regard the decision last year to shift our efforts in space from low to high gear as among the most important decisions that will be made during my incumbency in the office of the presidency. 
+In the last 24 hours, we have seen facilities now being created for the greatest and most complex exploration in man’s history. We have felt the ground shake and the air shattered by the testing of a Saturn C-1 booster rocket, many times as powerful as the Atlas which launched John Glenn, generating power equivalent to 10,000 automobiles with their accelerators on the floor. We have seen the site where five F-1 rocket engines, each one as powerful as all eight engines of the Saturn combined, will be clustered together to make the advanced Saturn missile, assembled in a new building to be built at Cape Canaveral as tall as a 48-story structure, as wide as a city block, and as long as two lengths of this field.
+Within these last 19 months at least 45 satellites have circled the earth. Some 40 of them were “made in the United States of America,” and they were far more sophisticated and supplied far more knowledge to the people of the world than those of the Soviet Union.
+The Mariner spacecraft now on its way to Venus is the most intricate instrument in the history of space science. The accuracy of that shot is comparable to firing a missile from Cape Canaveral and dropping it in this stadium between the 40-yard lines.
+Transit satellites are helping our ships at sea to steer a safer course. Tiros satellites have given us unprecedented warnings of hurricanes and storms, and will do the same for forest fires and icebergs.
+We have had our failures, but so have others, even if they do not admit them. And they may be less public.
+To be sure, we are behind, and will be behind for some time in manned flight. But we do not intend to stay behind, and in this decade, we shall make up and move ahead.
+The growth of our science and education will be enriched by new knowledge of our universe and environment, by new techniques of learning and mapping and observation, by new tools and computers for industry, medicine, the home as well as the school. Technical institutions, such as Rice, will reap the harvest of these gains.
+And finally, the space effort itself, while still in its infancy, has already created a great number of new companies, and tens of thousands of new jobs. Space and related industries are generating new demands in investment and skilled personnel, and this city and this state, and this region, will share greatly in this growth. What was once the furthest outpost on the old frontier of the West will be the furthest outpost on the new frontier of science and space. Houston, your city of Houston, with its Manned Spacecraft Center, will become the heart of a large scientific and engineering community. During the next five years the National Aeronautics and Space Administration expects to double the number of scientists and engineers in this area, to increase its outlays for salaries and expenses to $60 million a year; to invest some $200 million in plant and laboratory facilities; and to direct or contract for new space efforts over $1 billion from this center in this city.
+To be sure, all of this costs us all a good deal of money. This year’s space budget is three times what it was in January 1961, and it is greater than the space budget of the previous eight years combined. That budget now stands at $5,400,000 a year — a staggering sum, though somewhat less than we pay for cigarettes and cigars every year. Space expenditures will soon rise some more, from 40 cents per person per week to more than 50 cents a week for every man, woman and child in the United States, for we have given this program a high national priority — even though I realize that this is in some measure an act of faith and vision, for we do not now know what benefits await us. 
+But if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial body, and then return it safely to Earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun — almost as hot as it is here today — and do all this, and do it right, and do it first before this decade is out — then we must be bold. 
+I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter]
+However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade.
+I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America.
+Many years ago, the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he want to climb it? He said, “Because it is there.” 
+Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. 
+Thank you.",
+                ]
+            ]
+        ],
             "penguin.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
