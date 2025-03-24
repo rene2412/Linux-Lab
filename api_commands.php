@@ -1,6 +1,7 @@
 <?php
 session_start();
 //require 'includes/config_session.inc.php';
+require_once "includes/database.inc.php";
 //session_unset();
 require_once "network.php";
 // Debugging: Log the request method and POST data
@@ -1100,8 +1101,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $value = (int)$userData[0]['lesson'];
         return $value;
     }
+    
+function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
+      $stmt = $pdo->prepare("
+        INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
+        VALUES (?, ?, 1, ?) 
+        ON DUPLICATE KEY UPDATE 
+        lessons_completed = CASE 
+        WHEN lesson_id <> VALUES(lesson_id) THEN lessons_completed + 1 
+        ELSE lessons_completed 
+        END, 
+        current_lesson = VALUES(current_lesson)
+        ");
+        try {
+            $stmt->execute([$userId, $lessonId, $nextLesson]);
+        } catch (PDOException $e) {
+           echo "SQL Error: " . $e->getMessage();
+       }
+    }
+
     $GLOBALS['commandSuccess'] = false;
- 
+    $userId = $_SESSION["user_id"]; 
 switch ($cmd) {
         case 'echo':
             $GetLine = "";
@@ -1136,10 +1156,16 @@ switch ($cmd) {
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                 //if we are in this first lesson then send the bool
-                if (GetCurrentLesson() === 3) {
-                    $isCorrect = true;
-                }   
-            }   
+                //file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
+                //chmod('src/testAPI/lessons.json', 0666);
+                //if we are in this first lesson l AND the user gets it right then send the bool
+               if (GetCurrentLesson() === 3  && ($GetLine === "Hello World" || $Getline === "\"Hello World\"" || $Getline === "'Hello World'"))  {
+                     $isCorrect = true;
+                    //update to mysql here the users updated progress and their current lesson 
+                 update_mysql($pdo, $userId, 3, 4);            
+                }            
+             }   
+            
              $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
             break;   
         case 'touch':
@@ -1149,7 +1175,9 @@ switch ($cmd) {
                 $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
+                chmod('src/testAPI/lessons.json', 0666);
                 if (GetCurrentLesson() === 13 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
+                    update_mysql($pdo, $userId, 13, 14);  
                     $isCorrect = true;
                 }
             break;
@@ -1164,9 +1192,10 @@ switch ($cmd) {
             $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
             // Write the updated JSON back to the file
             file_put_contents('src/testAPI/lessons.json', $updatedJsonString);          
-            
+            chmod('src/testAPI/lessons.json', 0666);
             if (GetCurrentLesson() === 6) {
                 $isCorrect = true;
+                update_mysql($pdo, $userId, 6, 7); 
             }
             $output = process_ls($fileSystem, $currentDir);
             break;
@@ -1178,8 +1207,9 @@ switch ($cmd) {
                  $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                  //Write the updated JSON back to the file
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-                 
-                if (GetCurrentLesson() === 9) {
+                 chmod('src/testAPI/lessons.json', 0666); 
+                 update_mysql($pdo, $userId, 9, 10);
+                 if (GetCurrentLesson() === 9) {
                     $isCorrect = true;
                 }
                  break;
@@ -1189,9 +1219,11 @@ switch ($cmd) {
                  $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                  //Write the updated JSON back to the file
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
+                 chmod('src/testAPI/lessons.json', 0666);
                  $jsonData['basics'][5]['completed'] = true;
                 if (GetCurrentLesson() === 7) {
                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 7, 8);
                 }
                }
             }
@@ -1200,6 +1232,7 @@ switch ($cmd) {
                  $jsonData['basics'][2]['completed'] = true;
                 if (GetCurrentLesson() === 4) {
                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 4, 5); 
                 }
                 $output = process_date();
             break;
@@ -1209,14 +1242,17 @@ switch ($cmd) {
                    $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                    //Write the updated JSON back to the file
                    file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
+                   chmod('src/testAPI/lessons.json', 0666);
                 if (GetCurrentLesson() === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt") {
                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 8, 9); 
                 }
             break;
         case 'pwd':
                  $jsonData['basics'][3]['completed'] = true;
                 if (GetCurrentLesson() === 5) {
                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 5, 6); 
                 }
                  $output = process_pwd($currentDir);
             break;
@@ -1224,19 +1260,32 @@ switch ($cmd) {
             $output = process_mkdir($fileSystem, $currentDir, $arg);
             if (GetCurrentLesson() == 14 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 14, 15);
             }
             break;
         case 'mv':
             $output = process_mv($fileSystem, $currentDir, $arg, $arg2);
+            $GetLine = $arg . $arg2;
+          
+            if (GetCurrentLesson() === 19 && $arg === "file2.txt" && $arg2 === "kali.txt") {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 14, 15);            
+            }                
             break;
         case 'rm':
             if ($arg == "-rf") {
                 $output = process_rm_rf($fileSystem, $currentDir, $arg2);
+                if (GetCurrentLesson() === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
+                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 18, 19);
+                }
+                break;
             }
             else {
             $output = process_rm($fileSystem, $currentDir, $arg);
                 if (GetCurrentLesson() === 15 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
                     $isCorrect = true;
+                    update_mysql($pdo, $userId, 15, 16);
                 }
         }
             break;
@@ -1244,6 +1293,7 @@ switch ($cmd) {
             $output = process_rmdir( $fileSystem, $currentDir, $arg);
             if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
                 $isCorrect = true; 
+                update_mysql($pdo, $userId, 16, 17); 
             }
             break;
         case 'refresh':
