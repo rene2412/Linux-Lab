@@ -24,6 +24,7 @@ class LessonManager {
   }
   handleLessonCompleted = async () => {
     // update our user completed json
+        this.lessons[this.currentSection][this.lesson].completed = true;
     try {
       const response = await fetch("../../testAPI/updateLessonCompleted.php", {
         method: "POST",
@@ -271,6 +272,7 @@ class lessonDisplay {
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
+    console.log('data updated');
     this.sectionSize = this.modules[this.curSection][0]["section__size"];
     this.update();
   };
@@ -278,17 +280,18 @@ class lessonDisplay {
   initListeners() {
     this.nextButton.addEventListener("click", this.nextLesson);
     this.prevButton.addEventListener("click", this.prevLesson);
-    this.misc.addEventListener("click", this.toggleLessonComplete);
+    // this.misc.addEventListener("click", this.toggleLessonComplete);
     document.addEventListener("command-success", this.handleCorrectEvent);
   }
 
   update() {
-    this.render();
     this.updateMeter();
     this.updateStatus();
+    this.render();
   }
 
   render() {
+    console.log('rendering')
     this.container.replaceChildren();
     this.container.innerHTML = `<h1 class="lesson__title">${
       this.modules[this.curSection][this.curLesson]["title"]
