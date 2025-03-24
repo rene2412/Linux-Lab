@@ -132,7 +132,7 @@
             },
             "content": "<p>Which command allows you to change to a different directory?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
-            "completed":false 
+            "completed": false
         },
         {
             "id": 13,
