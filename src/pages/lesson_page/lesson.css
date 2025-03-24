@@ -228,7 +228,7 @@ code{
     text-align: start;
 }
 
-.lesson__nav__button:hover{
+.lesson__nav__button:hover, .lesson__nav__button--open:hover{
     box-shadow: inset 100px 100px rgba(255, 255, 255, 0.121);
 }
 
@@ -279,7 +279,86 @@ code{
     margin-top: auto;
 }
 
-/* PROG BAR */
+/* ================================= */
+/* question styling */
+/* ================================= */
+
+.question__container{
+    background-color: var(--color-overlay);
+    padding: var(--spce-sm);
+    border-radius: var(--radius-med);
+    display: flex;
+    flex-direction: column;
+}
+
+.question__container--correct{
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.question__button{
+    color: var(--text-color-main);
+    background-color: transparent;
+    margin: 0;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--spce-xsm);
+    display: flex;
+    gap: var(--spce-lg);
+    transition: transform 0.2s ease;
+}
+
+.question__button:hover{
+    background-color: rgba(255, 255, 255, 0.089);
+    transform: scale(1.02);
+}
+
+.question__button:active{
+    background-color: rgba(0, 0, 0, 0.158);
+    transform:scale(0.98);
+}
+
+.question--wrong{
+    outline: solid 2px red;
+    pointer-events: none;
+}
+
+.question--correct{
+    outline: solid 3px var(--color-highlight);
+    transform: scale(1.02);
+}
+
+
+
+.animate-shake{
+    animation: shake 0.3s ease-in-out alternate;
+}
+
+
+@keyframes shake{
+    0%{
+        transform: translateX(-2px);
+    }
+    25%{
+        transform: translateX(1px);
+    }
+    50%{
+        transform: translateX(-3px);
+    }
+    75%{
+        transform: translateX(4px);
+    }
+    100%{
+        transform: translateX(-1px);
+    }
+}
+
+
+
+
+/* ================================= */
+/* Progress Bar */
+/* ================================= */
 .progress-bar{
     margin: 0;
     padding: 0;
@@ -310,8 +389,6 @@ code{
 }
 
 
-
-/* TERMINAL */
 
 
 /* EFFECTS */

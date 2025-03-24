@@ -21,6 +21,29 @@ class LessonManager {
 
   setupListeners() {
     document.addEventListener("section:update", this.handleLessonSectionChange);
+    document.addEventListener("completed:update", this.handleLessonCompleted);
+  }
+  handleLessonCompleted = async()=>{
+    // update our user completed json
+    try {
+      const response = await fetch("../../testAPI/updateLessonCompleted.php", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          section: this.currentSection,
+          lesson: this.lesson,
+          completed:true,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`response error`, response.status);
+      }
+      this.fetchUserInfo();
+    } catch (error) {
+      console.log(`error completing ${error}`);
+    }
   }
 
   async fetchUserInfoInit() {
@@ -264,12 +287,61 @@ class lessonDisplay {
 
   render() {
     this.container.replaceChildren();
-    this.container.innerHTML = `<h1 class="lesson__title">${
+    this.container.innerHTML = (`<h1 class="lesson__title">${
       this.modules[this.curSection][this.curLesson]["title"]
     }</h1>
         <div class="lesson__content">${
           this.modules[this.curSection][this.curLesson][`content`]
-        }</div>`;
+        }</div>
+    `);
+    // conditional render multichoice questions
+    if(this.modules[this.curSection][this.curLesson].content_type === 'multichoice'){
+      const questionsContainer = document.querySelector('.question__container');
+      const questionEntries = Object.entries(this.modules[this.curSection][this.curLesson].questions);
+      const questions = [];
+      for ( const [key, value] of questionEntries){
+        questions.push(`
+          <button type="button" id="${key}" class="question__button"><span class="question__key">${key})</span><span class="question__value">${value}</span></button>
+        `);
+      }
+      questionsContainer.innerHTML = questions.join('');
+      questionsContainer.addEventListener('click',this.handleQuestion);
+    }
+  }
+
+  handleQuestion = (e) =>{
+    let button = e.target;
+    
+    if(e.target.parentNode.tagName === "BUTTON" ) button = e.target.parentNode;
+    button.classList.remove('question--wrong');
+    button.classList.remove('animate-shake')
+    if(button.tagName === 'BUTTON'){
+      console.log(button.id);
+      if(this.modules[this.curSection][this.curLesson].answer === button.id){
+        button.classList.add('question--correct');
+        button.parentNode.classList.add('question__container--correct');
+        this.showSuccessMessage();
+        document.dispatchEvent(
+          new CustomEvent('completed:update'),{
+            detail:{
+              section: this.curSection,
+              lessonId: this.curLesson,
+              copmleted: true,
+            }
+          }
+        )
+      }
+      else{
+        button.classList.add('question--wrong');
+        button.classList.add('animate-shake');
+        console.log('wrong');
+        setTimeout(()=>{
+          button.classList.remove('question--wrong')
+          button.classList.remove('animate-shake');
+          console.log('wrong done')
+        },1000*2);
+      }
+    }
   }
 
   nextLesson = () => {

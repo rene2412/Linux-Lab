@@ -108,9 +108,15 @@
             "section": "Checkpoint",
             "title": "Knowlegde Check #1",
             "content_type": "multichoice",
-            "content": "<p>It's time for your first knowledge check!<\/p><p>What is the command thats shows the content of a directory?<\/p><p>A) cd<\/p><p>B) ls<\/p><p>C) cat<\/p><p> D) echo<\/p>",
+            "questions": {
+                "A": "cd",
+                "B": "ls",
+                "C": "cat",
+                "D": "echo"
+            },
+            "content": "<p>It's time for your first knowledge check!<\/p><p>What is the command thats shows the content of a directory?<div class=\"question__container\"><\/div>",
             "answer": "B",
-            "completed": false
+            "completed":false 
         },
         {
             "id": 12,
@@ -118,9 +124,15 @@
             "section": "Checkpoint",
             "title": "Knowlegde Check #2",
             "content_type": "multichoice",
-            "content": "<p>Which command allows you to change to a different directory?<\/p><p>A) echo<\/p><p>B) ls<\/p><p>C) cd<\/p><p>D) pwd<\/p>",
+            "questions": {
+                "A": "echo",
+                "B": "ls",
+                "C": "cd",
+                "D": "pwd"
+            },
+            "content": "<p>Which command allows you to change to a different directory?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
-            "completed": false
+            "completed":false 
         },
         {
             "id": 13,
@@ -128,7 +140,13 @@
             "section": "Checkpoint",
             "title": "Knowlegde Check #3",
             "content_type": "multichoice",
-            "content": "<p>What command would you use to view the contents of a text file?<\/p><p>A) pwd<\/p><p>B) ls<\/p><p>C) date<\/p><p>D) cat<\/p>",
+            "questions": {
+                "A": "pwd",
+                "B": "ls",
+                "C": "date",
+                "D": "cat"
+            },
+            "content": "<p>What command would you use to view the contents of a text file?<\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
             "completed": false
         },
@@ -228,8 +246,14 @@
             "section": "Checkpoint",
             "title": "Knowledge Check #5",
             "content_type": "multichoice",
-            "content": "<p>How does the <b>mv<\/b> command know whether to rename a file\/directory or change its location?<\/p><p>A) It always renames files, never moves them.<\/p><p>B) If the destination is a directory, it moves the file\/directory; otherwise, it renames it.<\/p><p>C) It depends on the size of the file\/directory.<\/p><p>D) The mv command always moves files, never renames them.<\/p>",
-            "answer": "B)",
+            "questions": {
+                "A": "It always renames files, never moves them.",
+                "B": "If the destination is a directory, it moves the file\/directory; otherwise, it renames it.",
+                "C": "It depends on the size of the file\/directory.",
+                "D": "The mv command always moves files, never renames them."
+            },
+            "content": "<p>How does the <b>mv<\/b> command know whether to rename a file\/directory or change its location?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
             "completed": false
         },
         {
@@ -238,8 +262,14 @@
             "section": "Checkpoint",
             "title": "Knowledge Check #6",
             "content_type": "multichoice",
-            "content": "<p>Which command would you use to create a new file called 'notes.txt' in the 'Documents\/' directory?<\/p><p>A) mkdir Documents\/notes.txt<\/p><p>B) touch Documents\/notes.txt<\/p><p>C) rm Documents\/notes.txt<\/p><p>D) mv Documents\/notes.txt<\/p>",
-            "answer": "B)",
+            "questions": {
+                "A": "mkdir Documents\/notes.txt",
+                "B": "touch Documents\/notes.txt",
+                "C": "rm Documents\/notes.txt",
+                "D": "mv Documents\/notes.txt"
+            },
+            "content": "<p>Which command would you use to create a new file called 'notes.txt' in the 'Documents\/' directory?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
             "completed": false
         },
         {
@@ -248,8 +278,14 @@
             "section": "Checkpoint",
             "title": "Knowledge Check #7",
             "content_type": "multichoice",
-            "content": "<p>You have an empty directory called 'OldFiles\/'. Which command would you use to safely remove it?<\/p><p>A) rm OldFiles\/<\/p><p>B) rm -rf OldFiles\/<\/p><p>C) rmdir OldFiles\/<\/p><p>D) mv OldFiles\/<\/p>",
-            "answer": "C)",
+            "questions": {
+                "A": "rm OldFiles\/",
+                "B": "rm -rf OldFiles\/",
+                "C": "rmdir OldFiles\/",
+                "D": "mv OldFiles\/"
+            },
+            "content": "<p>You have an empty directory called 'OldFiles\/'. Which command would you use to safely remove it?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
@@ -258,8 +294,14 @@
             "section": "Checkpoint",
             "title": "Knowledge Check #8",
             "content_type": "multichoice",
-            "content": "<p>You are inside the 'Projects\/' directory and need to move 'report.txt' to 'Documents\/Reports\/'. Which command should you use?<\/p><p>A) mv report.txt Documents\/Reports\/<\/p><p>B) mv report.txt ..\/Documents\/Reports\/<\/p><p>C) mv report.txt ~\/Documents\/Reports\/<\/p><p>D) mv report.txt \/home\/user\/Documents\/Reports\/<\/p>",
-            "answer": "B)",
+            "questions": {
+                "A": "mv report.txt Documents\/Reports\/",
+                "B": "mv report.txt ..\/Documents\/Reports\/",
+                "C": "mv report.txt ~\/Documents\/Reports\/",
+                "D": "mv report.txt \/home\/user\/Documents\/Reports\/"
+            },
+            "content": "<p>You are inside the 'Projects\/' directory and need to move 'report.txt' to 'Documents\/Reports\/'. Which command should you use?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
             "completed": false
         },
         {
@@ -268,8 +310,14 @@
             "section": "Checkpoint",
             "title": "Knowledge Check #9",
             "content_type": "multichoice",
-            "content": "<p>Which command will permanently delete a directory called 'Backup\/' and all of its contents without confirmation?<\/p><p>A) rm Backup\/<\/p><p>B) rmdir Backup\/<\/p><p>C) rm -rf Backup\/<\/p><p>D) mv Backup\/ \/dev\/null<\/p>",
-            "answer": "C)",
+            "questions": {
+                "A": "rm Backup\/",
+                "B": "rmdir Backup\/",
+                "C": "rm -rf Backup\/",
+                "D": "mv Backup\/ \/dev\/null"
+            },
+            "content": "<p>Which command will permanently delete a directory called 'Backup\/' and all of its contents without confirmation?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
@@ -301,47 +349,45 @@
             "completed": false
         },
         {
-            "id": 31, 
+            "id": 31,
             "parent": "basics",
             "section": "Searching & Filtering",
             "title": "grep \"pattern\" file",
             "content_type": "interactive",
-            "content": "<p>The grep command is one of the more exciting commands to use since it will basically automate a task. Lets take a look at using the grep command at its most basic form</p><p>Traverse to our Documents/ directory and find how many times \"And\" appears in Shakespeare.txt, which contains Shakespeare's \"Sonnet 18\" poem, try it out!</p><code>grep \"And\" Shakespeare.txt</code>",
+            "content": "<p>The grep command is one of the more exciting commands to use since it will basically automate a task. Lets take a look at using the grep command at its most basic form<\/p><p>Traverse to our Documents\/ directory and find how many times \"And\" appears in Shakespeare.txt, which contains Shakespeare's \"Sonnet 18\" poem, try it out!<\/p><code>grep \"And\" Shakespeare.txt<\/code>",
             "answer": "grep \"And\" Shakespeare.txt",
             "completed": false
-
         },
         {
-            "id": 32, 
+            "id": 32,
             "parent": "basics",
             "section": "Searching & Filtering",
             "title": "grep -n \"pattern\" file",
             "content_type": "interactive",
-            "content": "<p>As mentioned before, the grep command can take in optional flags. One of these optional flags is '-n'.</p><p> The -n flag will output the number line(s) the pattern was in, lets take a look at this with an example.</p>In the same Documents/ directory lets observe how many times \"in\" appears in Declaration.txt, which contains the United States Declaration of Independece</p><code>grep -n \"in\" Declaration.txt</code>",
+            "content": "<p>As mentioned before, the grep command can take in optional flags. One of these optional flags is '-n'.<\/p><p> The -n flag will output the number line(s) the pattern was in, lets take a look at this with an example.<\/p>In the same Documents\/ directory lets observe how many times \"in\" appears in Declaration.txt, which contains the United States Declaration of Independece<\/p><code>grep -n \"in\" Declaration.txt<\/code>",
             "answer": "grep -n \"in\" Declaration.txt",
             "completed": false
         },
         {
-            "id": 33, 
+            "id": 33,
             "parent": "basics",
             "section": "Searching & Filtering",
             "title": "grep -c \"pattern\" file",
             "content_type": "interactive",
-            "content": "<p>Continuing on with grep, another common flag that is used is '-c', which is used to return the total count of appearences a pattern matches too. </p><p>To test this, in the same Documents directory, lets retrieve the total count where \"moon\" appears in John F Kennedy's \"We choose to go to the moon\" speech under Kennedy.txt</p><code> grep -c \"moon\" Kennedy.txt</code>",
+            "content": "<p>Continuing on with grep, another common flag that is used is '-c', which is used to return the total count of appearences a pattern matches too. <\/p><p>To test this, in the same Documents directory, lets retrieve the total count where \"moon\" appears in John F Kennedy's \"We choose to go to the moon\" speech under Kennedy.txt<\/p><code> grep -c \"moon\" Kennedy.txt<\/code>",
             "answer": "grep -c \"moon\" Kennedy.txt",
             "completed": false
         },
         {
-            "id": 34, 
+            "id": 34,
             "parent": "basics",
             "section": "Searching & Filtering",
             "title": "wildcard*",
             "content_type": "interactive",
-            "content": "<p>By now we can see how useful the grep command is, but what if we needed to search our entire directory for a pattern in all of our .txt files? We could individually look at every file with grep, but what if we had hundreds of files to look at?</p><p> Well this special syntax called the \"wildcard\" character represented in the command line by a star '*' allows us to do just that.</p> The wildcard character works by grabbing everything that satisfies its pattern. So instead of looking through every file that ends in .txt, we can call the wildcard character on those .txt files represented syntatically as '*.txt'</p> The wildcard character is a very powerful tool that you should keep in your Linux arsenal. Lets run through a quick example in our Documents/ directory to see it in action.</p><code>grep \"all\" *.txt</code><p>The command here will look for all instances of \"All\" in every file that ends in .txt in our Documents/ directory</p>",
+            "content": "<p>By now we can see how useful the grep command is, but what if we needed to search our entire directory for a pattern in all of our .txt files? We could individually look at every file with grep, but what if we had hundreds of files to look at?<\/p><p> Well this special syntax called the \"wildcard\" character represented in the command line by a star '*' allows us to do just that.<\/p> The wildcard character works by grabbing everything that satisfies its pattern. So instead of looking through every file that ends in .txt, we can call the wildcard character on those .txt files represented syntatically as '*.txt'<\/p> The wildcard character is a very powerful tool that you should keep in your Linux arsenal. Lets run through a quick example in our Documents\/ directory to see it in action.<\/p><code>grep \"all\" *.txt<\/code><p>The command here will look for all instances of \"All\" in every file that ends in .txt in our Documents\/ directory<\/p>",
             "answer": "grep \"all\" *.txt",
             "completed": false
         }
-
     ],
     "networking": [
         {
@@ -374,8 +420,14 @@
             "section": "Checkpoint",
             "title": "ldsajfals",
             "content_type": "multichoice",
-            "content": "<p> this dfa<\/p>",
-            "answer": "none",
+            "questions": {
+                "A": "Option A",
+                "B": "Option B",
+                "C": "Option C",
+                "D": "Option D"
+            },
+            "content": "<p> this dfa<\/p><div class=\"question__container\"><\/div>",
+            "answer": "A",
             "completed": false
         }
     ]
