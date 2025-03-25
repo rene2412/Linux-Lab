@@ -74,7 +74,12 @@ Linux Lab is an educational web application designed to teach users Linux comman
   **Solution:** Built fetch-based content system that loads lesson content on demand from JSON API
 
 ## Screenshots
-(Note: Add screenshots of your application here when applying)
+<img width="1435" alt="Screenshot 2025-03-24 at 4 48 03 PM" src="https://github.com/user-attachments/assets/e5a282b1-7cad-48cc-b63d-75352459b324" />
+<img width="1434" alt="Screenshot 2025-03-24 at 4 52 20 PM" src="https://github.com/user-attachments/assets/508268bd-d017-444b-938c-ee5237c270e4" />
+<img width="1432" alt="Screenshot 2025-03-24 at 4 53 26 PM" src="https://github.com/user-attachments/assets/073fc6c8-ffed-49a8-885c-016d4daf55d0" />
+<img width="490" alt="Screenshot 2025-03-24 at 4 53 49 PM" src="https://github.com/user-attachments/assets/7790ea3a-32d9-4dde-9de3-0e696a7ced4c" />
+<img width="489" alt="Screenshot 2025-03-24 at 4 54 09 PM" src="https://github.com/user-attachments/assets/e93438ac-b31f-42bb-ad2b-686efca9ad11" />
+<img width="492" alt="Screenshot 2025-03-24 at 4 54 53 PM" src="https://github.com/user-attachments/assets/b8b6ee6c-52e5-4a3c-aadf-96bdc8d236f4" />
 
 ## Current Development Status
 - **Browser Compatibility:** The terminal currently works best in Chrome/Edge. Firefox compatibility is in development (issue with plaintext-only contentEditable implementation).
