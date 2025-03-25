@@ -1062,7 +1062,69 @@ function process_date() : string {
     return date('Y-m-d H:i:s');
 }
 
+function GetCurrentLesson() : int {
+    $jsonUser = file_get_contents('src/testAPI/userInfo.json');
+    // Decode the JSON into a PHP array
+    $userData = json_decode($jsonUser, true);
+    $value = (int)$userData[0]['lesson'];
+    return $value;
+}
 
+
+function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
+  $stmt = $pdo->prepare("
+    INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
+    VALUES (?, ?, 1, ?) 
+    ON DUPLICATE KEY UPDATE 
+    lessons_completed = CASE 
+    WHEN lesson_id <> VALUES(lesson_id) THEN lessons_completed + 1 
+    ELSE lessons_completed 
+    END, 
+    current_lesson = VALUES(current_lesson)
+    ");
+    try {
+        $stmt->execute([$userId, $lessonId, $nextLesson]);
+    } catch (PDOException $e) {
+       echo "SQL Error: " . $e->getMessage();
+   }
+}
+
+function updateUserProgress($pdo, $userId, $lesson_id) {
+    // Check if the user already completed the lesson
+    $checkSql = "
+    SELECT COUNT(*) FROM user_lessons 
+    WHERE user_id = :userId AND lesson_id = :lesson_id;
+    ";
+    $stmt = $pdo->prepare($checkSql);
+    $stmt->execute([
+        ':userId' => $userId,
+        ':lesson_id' => $lesson_id
+    ]);
+    $exists = $stmt->fetchColumn();
+
+    // If no record exists, insert it
+    if ($exists == 0) {
+        $insertSql = "
+        INSERT INTO user_lessons (user_id, lesson_id) 
+        VALUES (:userId, :lesson_id);
+        ";
+        $stmt = $pdo->prepare($insertSql);
+        $stmt->execute([
+            ':userId' => $userId,
+            ':lesson_id' => $lesson_id
+        ]);
+    }
+}
+//api to send the user progress to the front, in json, 
+//we will do that by getting all the lessons ids the current user has and sending those keys to json
+function send_user_progress(PDO $pdo, int $userId) : string {
+    $sql = "
+    SELECT lesson_id FROM user_lessons WHERE user_id = ?";
+    $stmt = $pdo->prepare($sql);
+        $stmt->execute([$userId]);
+        $lessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        return json_encode(["completed_lessons" => $lessons]);
+    }
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1093,35 +1155,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (json_last_error() !== JSON_ERROR_NONE) {
       $output = "JSON Error: " . json_last_error_msg();
     }
-    
-    function GetCurrentLesson() : int {
-        $jsonUser = file_get_contents('src/testAPI/userInfo.json');
-        // Decode the JSON into a PHP array
-        $userData = json_decode($jsonUser, true);
-        $value = (int)$userData[0]['lesson'];
-        return $value;
-    }
-    
-function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
-      $stmt = $pdo->prepare("
-        INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
-        VALUES (?, ?, 1, ?) 
-        ON DUPLICATE KEY UPDATE 
-        lessons_completed = CASE 
-        WHEN lesson_id <> VALUES(lesson_id) THEN lessons_completed + 1 
-        ELSE lessons_completed 
-        END, 
-        current_lesson = VALUES(current_lesson)
-        ");
-        try {
-            $stmt->execute([$userId, $lessonId, $nextLesson]);
-        } catch (PDOException $e) {
-           echo "SQL Error: " . $e->getMessage();
-       }
-    }
-
     $GLOBALS['commandSuccess'] = false;
     $userId = $_SESSION["user_id"]; 
+
 switch ($cmd) {
         case 'echo':
             $GetLine = "";
@@ -1230,9 +1266,10 @@ switch ($cmd) {
             break;
         case 'date':
                  $jsonData['basics'][2]['completed'] = true;
-                if (GetCurrentLesson() === 4) {
+                if (GetCurrentLesson() === 4){
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 4, 5); 
+                    updateUserProgress($pdo, $userId, 4);
                 }
                 $output = process_date();
             break;
@@ -1246,6 +1283,7 @@ switch ($cmd) {
                 if (GetCurrentLesson() === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt") {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 8, 9); 
+                    updateUserProgress($pdo, $userId, 8);
                 }
             break;
         case 'pwd':
@@ -1253,9 +1291,10 @@ switch ($cmd) {
                 if (GetCurrentLesson() === 5) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 5, 6); 
+                    updateUserProgress($pdo, $userId, 5);
                 }
-                 $output = process_pwd($currentDir);
-            break;
+                $output = process_pwd($currentDir);
+                break;
         case 'mkdir':
             $output = process_mkdir($fileSystem, $currentDir, $arg);
             if (GetCurrentLesson() == 14 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
@@ -1363,6 +1402,7 @@ switch ($cmd) {
     echo json_encode([
         'output' => $output,
         'commandSuccess' => $isCorrect,
-        'currentDirectory' => $currentDir
+        'currentDirectory' => $currentDir,
+        'userProgress' => json_decode(send_user_progress($pdo, $userId))
     ]);
 } 
