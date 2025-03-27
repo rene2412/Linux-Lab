@@ -9,7 +9,6 @@ try {
 	$pdo = new PDO("mysql:host=$host;dbname=$dbname", $dbusername, $dbpassword); 
 	//->setAttribute will set the php object to look for errors in the connection
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	echo "Connected successfully!"; // 
 } catch(PDOException $e) {  
 	die("Connection Failed: " . $e->getMessage());
 } 

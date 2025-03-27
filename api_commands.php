@@ -1073,15 +1073,16 @@ function GetCurrentLesson() : int {
 
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
   $stmt = $pdo->prepare("
-    INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
-    VALUES (?, ?, 1, ?) 
-    ON DUPLICATE KEY UPDATE 
-    lessons_completed = CASE 
-    WHEN lesson_id <> VALUES(lesson_id) THEN lessons_completed + 1 
-    ELSE lessons_completed 
-    END, 
-    current_lesson = VALUES(current_lesson)
-    ");
+  INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
+        VALUES (?, ?, 1, ?) 
+        ON DUPLICATE KEY UPDATE 
+        lessons_completed = CASE 
+            WHEN lessons_completed = 0 THEN 1  -- Ensure it starts at 1
+            WHEN current_lesson <> VALUES(current_lesson) THEN lessons_completed + 1  
+            ELSE lessons_completed 
+        END, 
+        current_lesson = VALUES(current_lesson)  
+  ");
     try {
         $stmt->execute([$userId, $lessonId, $nextLesson]);
     } catch (PDOException $e) {
@@ -1125,6 +1126,7 @@ function send_user_progress(PDO $pdo, int $userId) : string {
         $lessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return json_encode(["completed_lessons" => $lessons]);
     }
+
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1197,8 +1199,8 @@ switch ($cmd) {
                 //if we are in this first lesson l AND the user gets it right then send the bool
                if (GetCurrentLesson() === 3  && ($GetLine === "Hello World" || $Getline === "\"Hello World\"" || $Getline === "'Hello World'"))  {
                      $isCorrect = true;
-                    //update to mysql here the users updated progress and their current lesson 
-                 update_mysql($pdo, $userId, 3, 4);            
+                //update to mysql here the users updated progress and their current lesson 
+                update_mysql($pdo, $userId, 3, 4);            
                 }            
              }   
             
@@ -1213,7 +1215,7 @@ switch ($cmd) {
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                 chmod('src/testAPI/lessons.json', 0666);
                 if (GetCurrentLesson() === 13 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
-                    update_mysql($pdo, $userId, 13, 14);  
+                   update_mysql($pdo, $userId, 13, 14);  
                     $isCorrect = true;
                 }
             break;
@@ -1271,8 +1273,8 @@ switch ($cmd) {
                     update_mysql($pdo, $userId, 4, 5); 
                     updateUserProgress($pdo, $userId, 4);
                 }
-                $output = process_date();
-            break;
+                $output = send_user_progress($pdo, $userId);
+                break;
         case 'cat':
                    $output = process_cat($fileSystem, $currentDir, $arg);
                    //Convert the updated data back to JSON
@@ -1316,7 +1318,7 @@ switch ($cmd) {
                 $output = process_rm_rf($fileSystem, $currentDir, $arg2);
                 if (GetCurrentLesson() === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
                      $isCorrect = true;
-                    update_mysql($pdo, $userId, 18, 19);
+                     update_mysql($pdo, $userId, 18, 19);
                 }
                 break;
             }
@@ -1332,7 +1334,7 @@ switch ($cmd) {
             $output = process_rmdir( $fileSystem, $currentDir, $arg);
             if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
                 $isCorrect = true; 
-                update_mysql($pdo, $userId, 16, 17); 
+               update_mysql($pdo, $userId, 16, 17); 
             }
             break;
         case 'refresh':
@@ -1397,12 +1399,12 @@ switch ($cmd) {
             $output = "Command not recognized: $cmd\n";
             break;
     }
-
+    $progress = send_user_progress($pdo, $userId);
     // Return the output as JSON
     echo json_encode([
         'output' => $output,
         'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir,
-        'userProgress' => json_decode(send_user_progress($pdo, $userId))
+        'userProgress' => json_decode($progress)
     ]);
 } 

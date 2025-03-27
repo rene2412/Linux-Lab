@@ -138,7 +138,9 @@ export default class VanillaTerminal {
       body: `command=${encodeURIComponent(commandToSend)}`,
     })
     .then(response => response.json())
+    
     .then(data => {
+      console.log(data);
       this.output(actualPrevCommand, data.output);
       this.updatePrompt(data.currentDirectory);
 

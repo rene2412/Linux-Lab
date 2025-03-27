@@ -72,7 +72,7 @@ function output(command, result) {
     prevCommand.classList.toggle("history-command");
     prevOutput.classList.toggle("history-output");
 
-    const prompt = `<span class="prompt">example_user@LinuxLab:${currentDirectory}$</span>`;
+    const prompt = `<span class="prompt">example_user@Linux-Lab:${currentDirectory}$</span>`;
 
     const actualPrevCommand = command.replace(/ /g, '&nbsp')
 
@@ -92,7 +92,7 @@ function updatePrompt(newDirectory) {
     currentDirectory = newDirectory; // Update JS directory
     // Update visible prompt in command line
     document.querySelector('.command-line .prompt').textContent = 
-        `example_user@LinuxLab:${currentDirectory}$`;
+        `example_user@Linux-Lab:${currentDirectory}$`;
 }
 
 function arrowUp(){

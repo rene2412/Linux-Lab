@@ -116,7 +116,7 @@
             },
             "content": "<p>It's time for your first knowledge check!<\/p><p>What is the command thats shows the content of a directory?<div class=\"question__container\"><\/div>",
             "answer": "B",
-            "completed":false 
+            "completed": false
         },
         {
             "id": 12,
@@ -132,7 +132,7 @@
             },
             "content": "<p>Which command allows you to change to a different directory?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
-            "completed":false 
+            "completed": false
         },
         {
             "id": 13,
@@ -148,7 +148,7 @@
             },
             "content": "<p>What command would you use to view the contents of a text file?<\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
-            "completed":false 
+            "completed": false
         },
         {
             "id": 14,
@@ -270,7 +270,7 @@
             },
             "content": "<p>Which command would you use to create a new file called 'notes.txt' in the 'Documents\/' directory?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
-            "completed":false 
+            "completed": false
         },
         {
             "id": 25,
