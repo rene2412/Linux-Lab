@@ -1127,6 +1127,14 @@ function send_user_progress(PDO $pdo, int $userId) : string {
         return json_encode(["completed_lessons" => $lessons]);
     }
 
+function send_current_lesson(PDO $pdo, int $userId) : string {
+    $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
+    $stmt->execute([$userId]);
+    $progress = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
+return $current_lesson . "\n";
+}
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1400,11 +1408,13 @@ switch ($cmd) {
             break;
     }
     $progress = send_user_progress($pdo, $userId);
+    $currentLesson = send_current_lesson($pdo, $userId);
     // Return the output as JSON
     echo json_encode([
         'output' => $output,
         'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir,
-        'userProgress' => json_decode($progress)
+        'userProgress' => json_decode($progress),
+        'userCurrentLesson' => json_decode($currentLesson)
     ]);
 } 

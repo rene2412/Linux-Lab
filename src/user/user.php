@@ -16,7 +16,6 @@ $progress = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $lessons_completed = $progress ? $progress["lessons_completed"] : 0;
 $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

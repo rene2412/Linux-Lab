@@ -158,6 +158,7 @@ export default class VanillaTerminal {
       this.caretPos = 0;
       this.renderCaret();
     })
+    
     .catch(error => {
       console.error('Error:', error);
       // Handle error gracefully - maybe output to terminal
