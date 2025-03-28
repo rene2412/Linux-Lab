@@ -6,9 +6,10 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: ../src/pages/login/login.php"); // Redirect if not logged in
     exit();
 }
+
 $username = $_SESSION["user_username"]; // Get stored username
 $user_id = $_SESSION["user_id"];
-
+$isLoggedIn = $_SESSION["isLoggedIn"];
 
 $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
 $stmt->execute([$user_id]);
@@ -16,6 +17,7 @@ $progress = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $lessons_completed = $progress ? $progress["lessons_completed"] : 0;
 $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,9 +28,9 @@ $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
 </head>
 <body>
     <h1>Welcome, <?php echo $username; ?></h1>  <!-- Display username -->
-    <p> You have completed <?php echo $lessons_completed; ?> lessons and left off at lesson <?php echo $current_lesson; ?></p>
+    <p> You have completed <?php echo $lessons_completed; ?> lessons and left off at lesson <?php echo $current_lesson; ?></p><p>User Logged In Status: <?php echo $isLoggedIn ?></p>
     <p>Continue at <a href="../pages/lesson_page/lesson.html"><button>Lessons</button></a></p>
     <p>Log Out <a href="logout.php"><button>Logout</button></a></p>
-
+    
 </body>
 </html>

@@ -483,9 +483,13 @@ function process_cd(&$currentDirectory, $fileSystem, $dir): string {
 }
 
 
+// Ensure session start time is initialized correctly
+if (!isset($_SESSION['start_time'])) {
+    $_SESSION['start_time'] = time();
+}
 
 function process_pwd($currentDirectory) : string {
-    return $currentDirectory . "\n";
+    return $currentDirectory;
 }
 function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     $GLOBALS['commandSuccess'] = false;
@@ -1127,13 +1131,24 @@ function send_user_progress(PDO $pdo, int $userId) : string {
         return json_encode(["completed_lessons" => $lessons]);
     }
 
+    function send_user_status(PDO $pdo, string $username): int {
+          $sql = "SELECT is_logged_in FROM users WHERE username = ?";
+          $stmt = $pdo->prepare($sql); 
+          $stmt->execute([$username]);
+          $user_status = $stmt->fetchColumn(); // Fetch single value
+        // Check if fetchColumn returned a valid value
+         if ($user_status === false) {
+            // If no user is found, return a special value (e.g., -1 for user not found)
+            return -1;
+        }
+        return ($user_status === 1) ? 1 : 0;
+} 
 function send_current_lesson(PDO $pdo, int $userId) : string {
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$userId]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
-return $current_lesson . "\n";
+    $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
+    return $current_lesson . "\n";
 }
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -1167,6 +1182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $GLOBALS['commandSuccess'] = false;
     $userId = $_SESSION["user_id"]; 
+    $username = $_SESSION["user_username"];
 
 switch ($cmd) {
         case 'echo':
@@ -1409,12 +1425,16 @@ switch ($cmd) {
     }
     $progress = send_user_progress($pdo, $userId);
     $currentLesson = send_current_lesson($pdo, $userId);
-    // Return the output as JSON
+    $status = send_user_status($pdo, $username);
+    //$output .= "username: ". $username . "| $status";  
+   
+   // Return the output as JSON
     echo json_encode([
         'output' => $output,
         'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir,
-        'userProgress' => json_decode($progress),
-        'userCurrentLesson' => json_decode($currentLesson)
+        'userProgress' => $progress,
+        'userCurrentLesson' => $currentLesson,
+        'userStatus' => $status
     ]);
 } 
