@@ -1,21 +1,34 @@
 export default class NavigationLesson{
-    constructor(container,button){
+    LINKS = [
+        {title:'Dashboard',link:'#',svg:'../../pages/assets/SVGs/Control Panel.svg', tag:'#'},
+        {title:'Home',link:'../../pages/landing_page/landing_page.html',tag:'landing_page.html',svg:'../../pages/assets/SVGs/Home.svg'},
+        {title:'Terminal',link:'../../pages/lesson_page/lesson.html',tag:'lesson.html',svg:'../../pages/assets/SVGs/Console.svg'},
+        {title:'About',link:'../../pages/about_us/about_us.html',tag:'about_us.html',svg:'../../pages/assets/SVGs/Info Squared.svg'},
+        {title:'Contact',link:'../../pages/contact_page/contact.html',tag:'contact.html',svg:'../../pages/assets/SVGs/Address Book.svg'},
+    ]
+    path=""
+
+    // need to set this up
+    isLoggedIn = false;
+    constructor(container){
         this.container = document.querySelector(container);
-        this.container.classList.remove('hidden');
-        this.sidebarBtnOpen = document.querySelector(button);
+        this.fullPath = window.location.pathname;
+        this.path = this.fullPath.substring(this.fullPath.lastIndexOf('/')+1)
         this.render();
         this.setElements();
         this.setListeners();
     }
 
     setElements(){
-        this.sidebarBtnClose = document.querySelector('.sidebar__button--close')
+        this.sidebarBtnOpen = document.querySelector('.sidebar__button--open');
+        this.sidebarBtnClose = document.querySelector('.sidebar__button')
         this.sidebar = document.querySelector('.sidebar');
 
     }
     setListeners(){
         this.sidebarBtnOpen.addEventListener('click',this.openSidebar);
         this.sidebarBtnClose.addEventListener('click',this.closeSidebar);
+        console.log(this.sidebarBtnOpen)
     }
 
     closeSidebar = ()=>{
@@ -29,33 +42,77 @@ export default class NavigationLesson{
     }
 
     createSidebarTemplate(){
-        this.container.classList.add('sidebar');
-        this.container.innerHTML = `
+        const listElem = this.LINKS.map((elem)=>{
+            let cssClass= '';
+            if(!this.isLoggedIn && elem.title === 'Dashboard') return '';
+            if(this.path === elem.tag){
+                cssClass = 'link--active';
+            }
+            
+            return(`
+                <li class="navbar__link ${cssClass} "><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
+                `);
+        })
+
+        let cssClass = '';
+        let loginText = 'Login'
+        // user should go here
+        if(this.isLoggedIn){cssClass='--auth'; loginText=`<span class="green">@</span>herb`};
+
+        const sidebar = document.createElement('div');
+        sidebar.classList.add('sidebar');
+        sidebar.classList.add('sidebar--close');
+        sidebar.innerHTML = `
             <div class="sidebar__top">
                 <div class="sidebar__header">
                     <h2 class="sidebar__logo">Linux-Lab</h2>
-                    <button type="button" class="button sidebar__button sidebar__button--close">X</button>
+                    <button type="button" class="button sidebar__button sidebar__button--close"><img src="../../pages/assets/SVGs/Close.svg" /></button>
                 </div>
                 <nav class="sidebar__links">
                     <ul>
-                        <li class="navbar__link"><a href="../../pages/landing_page/landing_page.html">Home</a></li>
-                        <li class="navbar__link"><a href="#">Learn More</a></li>
-                        <li class="navbar__link"><a href="../../pages/about_us/about_us.html">About Us</a></li>
-                        <li class="navbar__link"><a href="../../pages/contact_page/contact.html">Contact Us</a></li>
-                        <li class="navbar__link"><a href="../../pages/login/login.php">login</a></li>
+                    ${listElem.join('')}
                     </ul>
                 </nav>
             </div>
             <div class="sidebar__bottom">
-                <button type="button">
-                    <img src="../assets/SVGs/cog-outline.svg " class="svg" alt="cog">
+                <button class="sidebar__button--user${cssClass}"><a href="../../pages/login/login.php">${loginText}</a></button>
+                <button type="button sidebar__button--settings">
+                    <img class="sidebar__img--settings" src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
                 </button>
             </div>
         `;
-        // return sidebar;
+        return sidebar;
+    }
+
+    createNavbarTemplate(){
+        const listElem = this.LINKS.map((elem)=>{
+            let cssClass= '';
+            if(!this.isLoggedIn && elem.title === 'Dashboard') return '';
+            if(this.path === elem.tag){
+                cssClass = 'link--active--desktop';
+            }
+            
+            return(`
+                <li class="navbar__link navbar--link--desktop  ${cssClass} "><a href="${elem.link}">${elem.title}</a></li>
+                `);
+        })
+        const nav = document.createElement('nav');
+        nav.classList.add('navbar');
+        nav.innerHTML = `
+            <button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
+            <div class="navbar__left">
+                    <img src="../assets/SVGs/Tux.svg.png" class="logo" alt="Linux-Lab logo">
+            </div> 
+            <div class="navbar__right">
+                <ul class="navbar__links">
+                ${listElem.join('')}
+                </ul>
+            </div> 
+        `;
+        return nav;
     }
 
     render(){
-        this.createSidebarTemplate();
+        this.container.appendChild(this.createSidebarTemplate());
     }
 }
