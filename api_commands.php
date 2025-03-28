@@ -1076,6 +1076,7 @@ function GetCurrentLesson() : int {
 
 
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
+ if ($userId === null) return;
   $stmt = $pdo->prepare("
   INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
         VALUES (?, ?, 1, ?) 
@@ -1094,7 +1095,8 @@ function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : v
    }
 }
 
-function updateUserProgress($pdo, $userId, $lesson_id) {
+function updateUserProgress($pdo, $userId, $lesson_id) : void {
+ if ($userId === null) return;
     // Check if the user already completed the lesson
     $checkSql = "
     SELECT COUNT(*) FROM user_lessons 
@@ -1122,16 +1124,18 @@ function updateUserProgress($pdo, $userId, $lesson_id) {
 }
 //api to send the user progress to the front, in json, 
 //we will do that by getting all the lessons ids the current user has and sending those keys to json
-function send_user_progress(PDO $pdo, int $userId) : string {
+function send_user_progress(PDO $pdo, int $userId) : array {
+    if ($userId === null) return ["completed_lessons" => []];
     $sql = "
     SELECT lesson_id FROM user_lessons WHERE user_id = ?";
     $stmt = $pdo->prepare($sql);
         $stmt->execute([$userId]);
         $lessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
-        return json_encode(["completed_lessons" => $lessons]);
-    }
+        return ["completed_lessons" => $lessons];
+}
 
     function send_user_status(PDO $pdo, string $username): int {
+         if (empty($username)) return -1;
           $sql = "SELECT is_logged_in FROM users WHERE username = ?";
           $stmt = $pdo->prepare($sql); 
           $stmt->execute([$username]);
@@ -1143,13 +1147,16 @@ function send_user_progress(PDO $pdo, int $userId) : string {
         }
         return ($user_status === 1) ? 1 : 0;
 } 
+
 function send_current_lesson(PDO $pdo, int $userId) : string {
+    if ($userId === null) return "Not Started";
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$userId]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
     $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
     return $current_lesson . "\n";
 }
+
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1426,7 +1433,6 @@ switch ($cmd) {
     $progress = send_user_progress($pdo, $userId);
     $currentLesson = send_current_lesson($pdo, $userId);
     $status = send_user_status($pdo, $username);
-    //$output .= "username: ". $username . "| $status";  
    
    // Return the output as JSON
     echo json_encode([
