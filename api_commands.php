@@ -33,22 +33,20 @@ $fileSystem = [
                     "modified" => "2025-02-27 01:24:04",
                     "size" => 648,
                     "content" => [
-"Shall I compare thee to a summer’s day?
-Thou art more lovely and more temperate:
-Rough winds do shake the darling buds of May,
-And summer’s lease hath all too short a date;
-Sometime too hot the eye of heaven shines,
-And often is his gold complexion dimm'd;
-And every fair from fair sometime declines,
-By chance or nature’s changing course untrimm'd;
-But thy eternal summer shall not fade,
-Nor lose possession of that fair thou ow’st;
-Nor shall death brag thou wander’st in his shade,
-When in eternal lines to time thou grow’st:
-So long as men can breathe or eyes can see,
-So long lives this, and this gives life to thee.
-",
-                    
+"Shall I compare thee to a summer’s day?",
+"Thou art more lovely and more temperate:",
+"Rough winds do shake the darling buds of May,",
+"And summer’s lease hath all too short a date;",
+"Sometime too hot the eye of heaven shines,",
+"And often is his gold complexion dimm'd;",
+"And every fair from fair sometime declines,",
+"By chance or nature’s changing course untrimm'd;",
+"But thy eternal summer shall not fade,",
+"Nor lose possession of that fair thou ow’st;",
+"Nor shall death brag thou wander’st in his shade,",
+ "When in eternal lines to time thou grow’st:",
+ "So long as men can breathe or eyes can see,",
+"So long lives this, and this gives life to thee."
                     ]
                 ]
             ],
@@ -437,7 +435,6 @@ function process_ls_l($fileSystem, $currentDirectory) : string {
 
 function process_cd(&$currentDirectory, $fileSystem, $dir): string {
     $GLOBALS['commandSuccess'] = false;
-
     // Handle root directory access: cd /
     if ($dir === "/") {
         $currentDirectory = "/";
@@ -495,7 +492,6 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     $GLOBALS['commandSuccess'] = false;
     // Remove any trailing slashes from the directory name
     $newdir = rtrim($newdir, "/");
-    
     
     $special_chars = ['$', '~', '!', '@', '#', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '|', '{', '}', ':', ';', '"', ',', '<', '>', '.', '?', '/', '\''];
     // Check if directory name is empty after removing slashes
@@ -1076,12 +1072,11 @@ function GetCurrentLesson() : int {
 
 
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
- if ($userId === null) return;
-  $stmt = $pdo->prepare("
-  INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
-        VALUES (?, ?, 1, ?) 
-        ON DUPLICATE KEY UPDATE 
-        lessons_completed = CASE 
+        $stmt = $pdo->prepare("
+            INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
+            VALUES (?, ?, 1, ?) 
+            ON DUPLICATE KEY UPDATE 
+            lessons_completed = CASE 
             WHEN lessons_completed = 0 THEN 1  -- Ensure it starts at 1
             WHEN current_lesson <> VALUES(current_lesson) THEN lessons_completed + 1  
             ELSE lessons_completed 
@@ -1096,7 +1091,7 @@ function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : v
 }
 
 function updateUserProgress($pdo, $userId, $lesson_id) : void {
- if ($userId === null) return;
+    if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
     // Check if the user already completed the lesson
     $checkSql = "
     SELECT COUNT(*) FROM user_lessons 
@@ -1119,43 +1114,37 @@ function updateUserProgress($pdo, $userId, $lesson_id) : void {
         $stmt->execute([
             ':userId' => $userId,
             ':lesson_id' => $lesson_id
-        ]);
+            ]);
+        }
     }
+    else return;
 }
 //api to send the user progress to the front, in json, 
 //we will do that by getting all the lessons ids the current user has and sending those keys to json
 function send_user_progress(PDO $pdo, int $userId) : array {
-    if ($userId === null) return ["completed_lessons" => []];
-    $sql = "
-    SELECT lesson_id FROM user_lessons WHERE user_id = ?";
-    $stmt = $pdo->prepare($sql);
+        $sql = "
+        SELECT lesson_id FROM user_lessons WHERE user_id = ?";
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([$userId]);
         $lessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
         return ["completed_lessons" => $lessons];
 }
 
-    function send_user_status(PDO $pdo, string $username): int {
-         if (empty($username)) return -1;
+    function send_user_status(PDO $pdo, string $username) : int {
           $sql = "SELECT is_logged_in FROM users WHERE username = ?";
           $stmt = $pdo->prepare($sql); 
           $stmt->execute([$username]);
           $user_status = $stmt->fetchColumn(); // Fetch single value
-        // Check if fetchColumn returned a valid value
-         if ($user_status === false) {
-            // If no user is found, return a special value (e.g., -1 for user not found)
-            return -1;
-        }
-        return ($user_status === 1) ? 1 : 0;
-} 
+          return 1;
+  } 
 
 function send_current_lesson(PDO $pdo, int $userId) : string {
-    if ($userId === null) return "Not Started";
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$userId]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
     $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
     return $current_lesson . "\n";
-}
+    }
 
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -1188,8 +1177,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $output = "JSON Error: " . json_last_error_msg();
     }
     $GLOBALS['commandSuccess'] = false;
-    $userId = $_SESSION["user_id"]; 
+//get the user and id global variables from the session array
+if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
     $username = $_SESSION["user_username"];
+} else {
+    $output .= "No valid user found.\n";
+}
+
+if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
+    $userId = $_SESSION["user_id"]; 
+ }  
+ else { $output .= "No valid id found.\n";
+}
 
 switch ($cmd) {
         case 'echo':
@@ -1266,7 +1265,7 @@ switch ($cmd) {
                 $isCorrect = true;
                 update_mysql($pdo, $userId, 6, 7); 
             }
-            $output = process_ls($fileSystem, $currentDir);
+            $output .= process_ls($fileSystem, $currentDir);
             break;
         case 'cd':
                  $output = process_cd($currentDir, $fileSystem, $arg);
@@ -1378,7 +1377,6 @@ switch ($cmd) {
             $flag = ($arg && str_starts_with($arg, "-")) ? $arg : "";
             $pattern = $flag ? $arg2 : $arg;
             $file = $flag ? $arg3 : $arg2;
-            //$output = "flag: $flag\n pattern: $pattern\n file: $file";
             $output = process_grep($fileSystem, $currentDir, $flag, $pattern, $file);
             break;
         case 'find':
@@ -1430,9 +1428,11 @@ switch ($cmd) {
             $output = "Command not recognized: $cmd\n";
             break;
     }
-    $progress = send_user_progress($pdo, $userId);
-    $currentLesson = send_current_lesson($pdo, $userId);
-    $status = send_user_status($pdo, $username);
+    if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
+        $progress = send_user_progress($pdo, $userId);
+        $currentLesson = send_current_lesson($pdo, $userId);
+        $status = send_user_status($pdo, $username);
+    }
    
    // Return the output as JSON
     echo json_encode([
