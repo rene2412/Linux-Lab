@@ -184,8 +184,8 @@ Thank you.",
                     ]
                 ]
             ],
-            "Subfolder" => [
-                "something.txt" => [
+            "Lyrics" => [
+                "LetItHappen.txt" => [
                     "file" => [
                         "permissions" => "-rw-r--r--",
                         "owner" => "user",
@@ -193,7 +193,57 @@ Thank you.",
                         "created" => "2025-02-27 01:24:04",
                         "modified" => "2025-02-27 01:24:04",
                         "size" => 12,
-                        "content" => ["Hello World!"]
+                        "content" => [
+                            "It's always around me, all this noise",
+                            "But not nearly as loud as the voice saying",
+                            "\"Let it happen, let it happen\" (it's gonna feel so good)",
+                            "\"Just let it happen, let it happen\"",
+                            "All this running around",
+                            "Tryin' to cover my shadow",
+                            "A notion growing inside",
+                            "Now all the others seem shallow",
+                            "All this running around",
+                            "Bearing down on my shoulders",
+                            "I can hear an alarm",
+                            "Must be a morning",
+                            "I heard about a whirlwind that's coming 'round",
+                            "It's gonna carry off all that isn't bound",
+                            "And when it happens, when it happens (I won't be holding on)",
+                            "So let it happen, let it happen",
+                            "All this running around",
+                            "I can't fight it much longer",
+                            "Something's tryin' to get out",
+                            "And it's never been closer",
+                            "If my take-off fails",
+                            "Make up some other story",
+                            "If I never come back",
+                            "Tell my mother I'm sorry",
+                            "I cannot vanish, you will not scare me",
+                            "Try to get through it, try to push through it",
+                            "You were not thinking that I will not do it",
+                            "They be lovin' someone and I'm another story",
+                            "Take the next ticket, get the next train",
+                            "Why would I do it? Anyone'd think that",
+                            "I cannot vanish, you will not scare me",
+                            "Try to get through it, try to push through it",
+                            "You were not thinking that I will not do it",
+                            "They be lovin' someone and I'm another story",
+                            "Take the next ticket, get the next train",
+                            "Why would I do it? Anyone'd think that",
+                            "Try to get through it, try to push through it",
+                            "You were not thinking that I will not do it",
+                            "They be lovin' someone and I'm another story",
+                            "Take the next ticket, get the next train",
+                            "Why would I do it? Anyone'd think that",
+                            "Baby, now I'm ready, moving on",
+                            "Oh, but maybe I was ready all along",
+                            "Oh, I'm ready for the moment and the sound",
+                            "Oh, but maybe I was ready all along",
+                            "Baby, now I'm ready, moving on",
+                            "Oh, but maybe I was ready all along",
+                            "Oh, I'm ready for the moment and the sound",
+                            "Oh, but maybe I was ready all along"
+                        ]
                     ]
                 ]
             ]
@@ -1180,15 +1230,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //get the user and id global variables from the session array
 if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
     $username = $_SESSION["user_username"];
-} else {
-    $output .= "No valid user found.\n";
-}
+} 
 
 if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
  }  
- else { $output .= "No valid id found.\n";
-}
 
 switch ($cmd) {
         case 'echo':
@@ -1428,19 +1474,19 @@ switch ($cmd) {
             $output = "Command not recognized: $cmd\n";
             break;
     }
-    if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
-        $progress = send_user_progress($pdo, $userId);
-        $currentLesson = send_current_lesson($pdo, $userId);
-        $status = send_user_status($pdo, $username);
-    }
+   // if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
+     //   $progress = send_user_progress($pdo, $userId);
+       // $currentLesson = send_current_lesson($pdo, $userId);
+        //$status = send_user_status($pdo, $username);
+    //}
    
    // Return the output as JSON
     echo json_encode([
         'output' => $output,
         'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir,
-        'userProgress' => $progress,
-        'userCurrentLesson' => $currentLesson,
-        'userStatus' => $status
+      //  'userProgress' => $progress,
+        //'userCurrentLesson' => $currentLesson,
+        //'userStatus' => $status
     ]);
 } 
