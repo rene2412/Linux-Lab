@@ -1,6 +1,6 @@
 export default class Navigation{
     LINKS = [
-        {title:'Dashboard',link:'#',svg:'../../pages/assets/SVGs/Control Panel.svg', tag:'#'},
+        {title:'Dashboard',link:'../../pages/dashboard/dashboard.html',svg:'../../pages/assets/SVGs/Control Panel.svg', tag:'dashboard.html'},
         {title:'Home',link:'../../pages/landing_page/landing_page.html',tag:'landing_page.html',svg:'../../pages/assets/SVGs/Home.svg'},
         {title:'Terminal',link:'../../pages/lesson_page/lesson.html',tag:'lesson.html',svg:'../../pages/assets/SVGs/Console.svg'},
         {title:'About',link:'../../pages/about_us/about_us.html',tag:'about_us.html',svg:'../../pages/assets/SVGs/Info Squared.svg'},
@@ -9,7 +9,7 @@ export default class Navigation{
     path=""
 
     // need to set this up
-    isLoggedIn = false;
+    isLoggedIn = true;
     constructor(container){
         this.container = document.querySelector(container);
         this.fullPath = window.location.pathname;

@@ -4,6 +4,7 @@ body {
   font-family: 'Fira Code', monospace;
   -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-user-color);
 }
 
 *{
@@ -24,7 +25,7 @@ body {
     --color-secondary: #d9d9d9;
 
     --text-color-main: rgba(255, 255, 255, 0.95);
-    --text-color-secondary: rgba(201, 201, 201, 0.95);
+    --text-color-secondary: rgba(173, 173, 173, 0.95);
     --text-color-inactive: rgba(104, 104, 104, 0.95);
 
     --text-size-s: 0.875rem;
@@ -48,7 +49,12 @@ body {
     --border-base: 2px;
 
     --nav-height: 70px;
+    --sidebar-width:300px;
     --text-line-height:1.5;
+}
+
+.no-select{
+    user-select: none;
 }
 
 .hidden.hidden{
@@ -79,4 +85,8 @@ body {
 .styled-button:active{
     transform: scale(0.9);
     box-shadow: inset 0 8px 100px rgba(0, 0, 0, 0.191);
+}
+
+.green{
+    color: lime;
 }

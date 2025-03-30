@@ -26,3 +26,16 @@
     }
 
 }
+
+.animate-pulse{
+    animation: pulse infinite 2s ease-in-out alternate;
+}
+
+@keyframes pulse{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0.2;
+    }
+}

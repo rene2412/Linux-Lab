@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="navigation__container"></div>
+    <div class="layout">
+        <div class="sidebar__placeholder"></div>
+        <main class="dashboard__container">
+            <p class="greeting__text">Hello, <span class="green">@</span>herb</p>
+            <div class="dashboard__cards">
+                <div class="dashboard__column--1 dashboard__column">
+                    <div class="dashboard__card">
+                        <h3 class="card__title">Continue Learning:</h3>
+                        <div class="card__content">
+                            <a href="#" class="card__link">
+                                <p class="card__text">The Basics</p>
+                                <p class="card__text">Lesson: cat</p>
+                            </a>
+                            <button class="styled-button card__button">continue</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard__card">
+                        <h3 class="no-select">Modules:</h3>
+                        <div class="card__content">
+                            <ul class="card__ul">
+                                <li class="card__subtitle"><a href="#" class="card__link">The Basics</a></li>
+                            </ul>
+                            <p class="card__message no-select animate-pulse">Coming Soon...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard__column--2 dashboard__column">
+                    <div class="dashboard__card dashboard__card--progress">
+                        <h3>Your Progress:</h3>
+                        <div class="card__content">
+                            <div class="card__content--progress">
+                                <p class="card__text">The Basics</p>
+                                <span class="card__progress-bar">[<span class="green">███████████████</span>░░░░░░]</span>
+                                <p class="card__text">13/21</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </main>
+
+    </div>
+    
+    <script src="dashboard.js" type="module"></script>
+</body>
+</html>

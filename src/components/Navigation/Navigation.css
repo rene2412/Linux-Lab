@@ -6,7 +6,7 @@
     background-color: var(--color-background-dark);
     color: var(--text-color-main);
     height: 100vh;
-    width: 300px;
+    width: var(--sidebar-width);
     padding: var(--spce-med);
     z-index: 2;
     /* padding: var(--spce-lg); */
