@@ -1,7 +1,7 @@
 {
     "basics": [
         {
-            "section__size": 34,
+            "section__size": 40,
             "section__completed": false
         },
         {
@@ -386,6 +386,44 @@
             "content_type": "interactive",
             "content": "<p>By now we can see how useful the grep command is, but what if we needed to search our entire directory for a pattern in all of our .txt files? We could individually look at every file with grep, but what if we had hundreds of files to look at?<\/p><p> Well this special syntax called the \"wildcard\" character represented in the command line by a star '*' allows us to do just that.<\/p> The wildcard character works by grabbing everything that satisfies its pattern. So instead of looking through every file that ends in .txt, we can call the wildcard character on those .txt files represented syntatically as '*.txt'<\/p> The wildcard character is a very powerful tool that you should keep in your Linux arsenal. Lets run through a quick example in our Documents\/ directory to see it in action.<\/p><code>grep \"all\" *.txt<\/code><p>The command here will look for all instances of \"All\" in every file that ends in .txt in our Documents\/ directory<\/p>",
             "answer": "grep \"all\" *.txt",
+            "completed": false
+        },
+        {
+            "id": 35,
+            "parent": "basics",
+            "section": "Searching & Filtering",
+            "title": "find",
+            "content_type": "article",
+            "content": "<p>We have gone over how to search for patterns with grep and how useful that can be, but what about looking for specific files or directrories in  your filesystem?<\/p><p> Well the <b>find<\/b> command is a powerful tool for searching through your file system that helps you locate the actual files themselves based on certain criteria like the size of the file, permissions, and more.<\/p> The find command takes in 3 arguments, the first being the source path to your desired file or directory you are looking for, the 2nd is an optional flag that is just an additional filter that helps specifies what we are looking for like an exact name, size, permission, and more. The 3rd argument is simply the exact filename  or directory name you are looking for<\/p><p>Lets take a look at how the find command looks like syntatically<\/p> <code>find \/path\/to\/source -options -filename <\/code>",
+            "completed": false
+        },
+        {
+            "id": 36,
+            "parent": "basics",
+            "section": "Searching & Filtering",
+            "title": "find path\/to\/source filename.txt",
+            "content_type": "article",
+            "content": "<p>In our root directory lets run through a basic find command to see how it works! We are going to look for a file named \"LetItHappen.txt\" that lives in Documents\/Lyrics.<\/p><code>find Documents\/Lyrics \"LetItHappen.txt\"<\/code>",
+            "answer": "find Documents\/Lyrics \"LetItHappen.txt\"",
+            "completed": false
+        },
+        {
+            "id": 37,
+            "parent": "basics",
+            "section": "Searching & Filtering",
+            "title": "find path\/to\/source directory",
+            "content_type": "article",
+            "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ \"projects1\"<\/code>",
+            "answer": "find Projects\/ \"projects1\"",
+            "completed": false
+        },
+        {
+            "id": 38,
+            "parent": "basics",
+            "section": "File Redirection",
+            "title": "The Output Redirection Operators: '>', '>>' ",
+            "content_type": "article",
+            "content": "<p>Excitingley, Linux allows you to redirect output to an existing file or even a new file on the fly!<\/p><p> Suppose we are outputting content to the terminal, but what if we we wanted that contnent to go inside a file instead? Well there are 2 operators that allow us to do that.<\/p><p>The '>' operator overwrites existing content to a file, so the old content that lived in that file will now only contain the new content.\/p><p>The '>>' operator appends to a file, so it will add on to the existing content instead of overwriting it.<\/p><p>There are several Linux commands that support these redirection operators like: grep, ls, echo, find, cat, and more.<\/p><p> Overwrite content: <code>[command] > [file] <\/code><\/p><p>Append to contnent: <code>[command] >> [file]<\/code><\/p><p>Lets start with a basic example using echo to demonstrate more clearly.<\/p>",
             "completed": false
         }
     ],
