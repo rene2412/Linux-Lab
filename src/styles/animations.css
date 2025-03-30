@@ -39,3 +39,17 @@
         opacity: 0.2;
     }
 }
+
+
+.animate-blink-alt{
+    animation: blink-alt 2s steps(1,end) infinite;
+}
+
+@keyframes blink-alt {
+    0%, 50%{
+        opacity: 0;
+    }
+    25%, 75%{
+        opacity: 1;
+    }
+}

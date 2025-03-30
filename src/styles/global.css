@@ -80,7 +80,7 @@ body {
 }
 
 .styled-button:hover{
-    transform: scale(1.2);
+    transform: scale(1.05);
 }
 .styled-button:active{
     transform: scale(0.9);

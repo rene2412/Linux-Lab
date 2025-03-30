@@ -44,14 +44,13 @@
     white-space: pre;
 }
 
+
 @keyframes blink {
     0%, 50%{
-        /* opacity: 1; */
         background-color: white;
         color: black;
     }
     25%, 75%{
-        /* opacity: 0; */
         background-color: transparent;
         color: white;
     }
