@@ -1293,18 +1293,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //get the user and id global variables from the session array
 if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
     $username = $_SESSION["user_username"];
-<<<<<<< HEAD
 } 
 
 if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
  }  
-=======
-}
-if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
-    $userId = $_SESSION["user_id"]; 
-}
->>>>>>> ba2c2c73f9c821e7cb4e93a1c880ea50931b73bd
 
 switch ($cmd) {
         case 'echo':
@@ -1347,6 +1340,7 @@ switch ($cmd) {
                      $isCorrect = true;
                 //update to mysql here the users updated progress and their current lesson 
                 update_mysql($pdo, $userId, 3, 4);            
+                updateUserProgress($pdo, $userId, 3);
                 }            
              }   
             
@@ -1362,6 +1356,7 @@ switch ($cmd) {
                 chmod('src/testAPI/lessons.json', 0666);
                 if (GetCurrentLesson() === 13 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
                    update_mysql($pdo, $userId, 13, 14);  
+                    updateUserProgress($pdo, $userId, 13);
                     $isCorrect = true;
                 }
             break;
@@ -1380,6 +1375,7 @@ switch ($cmd) {
             if (GetCurrentLesson() === 6) {
                 $isCorrect = true;
                 update_mysql($pdo, $userId, 6, 7); 
+                updateUserProgress($pdo, $userId, 6);
             }
             $output .= process_ls($fileSystem, $currentDir);
             break;
@@ -1392,8 +1388,9 @@ switch ($cmd) {
                  //Write the updated JSON back to the file
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                  chmod('src/testAPI/lessons.json', 0666); 
-                 update_mysql($pdo, $userId, 9, 10);
                  if (GetCurrentLesson() === 9) {
+                    updateUserProgress($pdo, $userId, 9);
+                     update_mysql($pdo, $userId, 9, 10);
                     $isCorrect = true;
                 }
                  break;
@@ -1408,6 +1405,7 @@ switch ($cmd) {
                 if (GetCurrentLesson() === 7) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 7, 8);
+                    updateUserProgress($pdo, $userId, 8);
                 }
                }
             }
@@ -1419,7 +1417,7 @@ switch ($cmd) {
                     update_mysql($pdo, $userId, 4, 5); 
                     updateUserProgress($pdo, $userId, 4);
                 }
-                $output = send_user_progress($pdo, $userId);
+                $output = process_date();
                 break;
         case 'cat':
                    $output = process_cat($fileSystem, $currentDir, $arg);
@@ -1448,6 +1446,7 @@ switch ($cmd) {
             if (GetCurrentLesson() == 14 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 14, 15);
+                    updateUserProgress($pdo, $userId, 14);
             }
             break;
         case 'mv':
@@ -1456,7 +1455,8 @@ switch ($cmd) {
           
             if (GetCurrentLesson() === 19 && $arg === "file2.txt" && $arg2 === "kali.txt") {
                 $isCorrect = true;
-                update_mysql($pdo, $userId, 14, 15);            
+                update_mysql($pdo, $userId, 19, 15);            
+                    updateUserProgress($pdo, $userId, 19);
             }                
             break;
         case 'rm':
@@ -1465,6 +1465,7 @@ switch ($cmd) {
                 if (GetCurrentLesson() === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
                      $isCorrect = true;
                      update_mysql($pdo, $userId, 18, 19);
+                    updateUserProgress($pdo, $userId, 18);
                 }
                 break;
             }
@@ -1473,6 +1474,7 @@ switch ($cmd) {
                 if (GetCurrentLesson() === 15 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 15, 16);
+                    updateUserProgress($pdo, $userId, 15);
                 }
         }
             break;
@@ -1481,6 +1483,7 @@ switch ($cmd) {
             if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
                 $isCorrect = true; 
                update_mysql($pdo, $userId, 16, 17); 
+                    updateUserProgress($pdo, $userId, 16);
             }
             break;
         case 'refresh':
@@ -1544,19 +1547,19 @@ switch ($cmd) {
             $output = "Command not recognized: $cmd\n";
             break;
     }
-   // if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
-     //   $progress = send_user_progress($pdo, $userId);
-       // $currentLesson = send_current_lesson($pdo, $userId);
-        //$status = send_user_status($pdo, $username);
-    //}
+    if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
+        $progress = send_user_progress($pdo, $userId);
+        $currentLesson = send_current_lesson($pdo, $userId);
+        $status = send_user_status($pdo, $username);
+    }
    
    // Return the output as JSON
     echo json_encode([
         'output' => $output,
         'commandSuccess' => $isCorrect,
         'currentDirectory' => $currentDir,
-      //  'userProgress' => $progress,
-        //'userCurrentLesson' => $currentLesson,
-        //'userStatus' => $status
+        'userProgress' => $progress,
+        'userCurrentLesson' => $currentLesson,
+        'userStatus' => $status
     ]);
 } 
