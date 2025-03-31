@@ -14,28 +14,30 @@ class DashboardManager{
         cards.classList.add('dashboard__cards');
         const col1 = document.createElement('div');
         const col2 = document.createElement('div');
-        col1.classList.add(['dashboard__column--1', 'dashboard__column']);
-        col2.classList.add(['dashboard__column--2', 'dashboard__column']);
+        col1.classList.add('dashboard__column--1');
+        col1.classList.add('dashboard__column');
+        col2.classList.add('dashboard__column--2');
+        col2.classList.add('dashboard__column');
 
         col1.innerHTML = this.getCol1Cards();
-        console.log(col1);
-        // col2.innerHTML = this.getCol2Cards();
-        cards.appendChild(col1);
-        console.log(cards);
-        this.container.appendChild(cards);
+        col2.innerHTML = this.getCol2Cards();
 
-        
+        cards.appendChild(col1);
+        cards.appendChild(col2);
+
+        this.container.appendChild(cards);
     }
 
     getCol1Cards(){
-        const card = new CardProgress(this.data.modules);
-        const cardHTML = card.getCardTemplate();
-        console.log(cardHTML);
-        return cardHTML;
+        const cardContinueLearning = new CardContinueLearning(this.data.currentModule);
+        const cardModules = new CardModules(this.data.modules);
+        return (cardContinueLearning.getCardTemplate() + cardModules.getCardTemplate())
     }
 
     getCol2Cards(){
-
+        const cardProgress = new CardProgress(this.data.modules);
+        const cardHTML = cardProgress.getCardTemplate();
+        return cardHTML;
     }
 
     async initialize(){
@@ -87,8 +89,8 @@ class CardContinueLearning{
                 <h3 class="card__title">Continue Learning:</h3>
                 <div class="card__content">
                     <a href="../lesson_page/lesson.js" class="card__link">
-                        <p class="card__text">${this.data.currentModule.name}</p>
-                        <p class="card__text">Lesson:${this.data.currentModule.lessonName}</p>
+                        <p class="card__text">${this.data.name}</p>
+                        <p class="card__text">Lesson:${this.data.lessonName}</p>
                     </a>
                     <button class="styled-button card__button"><a href="../lesson_page/lesson.js">continue</a></button>
                 </div>
@@ -103,13 +105,23 @@ class CardModules{
         this.data = data;
     }
 
+    getElements(data){
+        const elements = data.map((section)=>{
+            return (`<li class="card__subtitle"><a href="#" class="card__link">${section.name}</a></li>`);
+        })
+        return elements;
+    }
+
     getCardTemplate(){
+        const elements = this.getElements(this.data);
+
+
         return(`
             <div class="dashboard__card dashboard__card--modules">
                 <h3 class="no-select">Modules:</h3>
                 <div class="card__content">
                     <ul class="card__ul">
-                        <li class="card__subtitle"><a href="#" class="card__link">${this.data.modules[0].name}</a></li>
+                    ${elements.join('')}
                     </ul>
                     <p class="card__message no-select animate-pulse">Coming Soon...</p>
                 </div>
