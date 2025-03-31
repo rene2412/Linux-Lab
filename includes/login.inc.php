@@ -43,6 +43,9 @@
 		$_SESSION["user_id"] = $result["id"];
 		$_SESSION["user_username"] = htmlspecialchars($result["username"]);
 		$_SESSION["last_regeneration"] = time();
+
+        $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
+        $stmt->execute([$_SESSION["user_id"]]);
 		//header("Location: ../index.php?login=success");
 		//on success, send the user to the lesson page
 		header('Location: ../src/user/user.php');
