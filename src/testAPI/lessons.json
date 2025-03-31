@@ -425,6 +425,26 @@
             "content_type": "article",
             "content": "<p>Excitingley, Linux allows you to redirect output to an existing file or even a new file on the fly!<\/p><p> Suppose we are outputting content to the terminal, but what if we we wanted that contnent to go inside a file instead? Well there are 2 operators that allow us to do that.<\/p><p>The '>' operator overwrites existing content to a file, so the old content that lived in that file will now only contain the new content.\/p><p>The '>>' operator appends to a file, so it will add on to the existing content instead of overwriting it.<\/p><p>There are several Linux commands that support these redirection operators like: grep, ls, echo, find, cat, and more.<\/p><p> Overwrite content: <code>[command] > [file] <\/code><\/p><p>Append to contnent: <code>[command] >> [file]<\/code><\/p><p>Lets start with a basic example using echo to demonstrate more clearly.<\/p>",
             "completed": false
+        },
+        {
+            "id": 39,
+            "parent": "basics",
+            "section": "File Redirection",
+            "title": "The Overwrite Operator: '>'",
+            "content_type": "interative",
+            "content": "<p>Lets enter our Documents directory and overwrite Shakespeare.txt with new content we will provide as an argument<\/p><code> echo \"I Love Linux!\" > Shakespeare.txt<\/code><p>This command will completely erase the existing content and replace it with the argument \"I  Love Linux!\". Try it out!<\/p>",
+            "answer": "echo \"I love Linux!\" > Shakespeare.txt",
+            "completed": false
+        },
+        {
+            "id": 40,
+            "parent": "basics",
+            "section": "File Redirection",
+            "title": "The Appending Operator: '>>'",
+            "content_type": "interative",
+            "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
+            "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
+            "completed": false
         }
     ],
     "networking": [
