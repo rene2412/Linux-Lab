@@ -1,15 +1,36 @@
 import { Navigation } from "../../components/Navigation/index.js";
 
 async function AuthCheck(){
+    try{
+        const response = await fetch('../../user/user.php');
+        if(!response.ok){
+            throw new Error('Fail fetching auth info');
+        }
+        const data = await response.json()
+        console.log(data);
+        if(!data.isLoggedIn){
+            window.location.href = `../login/login.php`;
+        }
+        else{
+            const nav = new Navigation('.navigation__container', data.isLoggedIn,data )
+            const dashboard = new DashboardManager('.dashboard__container',data);
+        }
+    }
+    catch(error){
+        console.error(error);
+    }
 }
 
-const nav = new Navigation('.navigation__container');
+AuthCheck();
+
 
 class DashboardManager{
 
-    constructor(container = '.dashboard__container',isLoggedIn,data){
+    constructor(container = '.dashboard__container',data){
         this.container = document.querySelector(container); 
-        this.data=data;
+        this.greeting = document.querySelector('.greeting__text')
+        // change this line when JSON is fixed
+        // this.data=data;
         this.initialize();
 
     }
@@ -31,6 +52,7 @@ class DashboardManager{
         cards.appendChild(col2);
 
         this.container.appendChild(cards);
+        this.greeting.innerHTML = `Welcome, <span class="green">@</span>${this.data.username}`
     }
 
     getCol1Cards(){
@@ -99,6 +121,7 @@ class CardContinueLearning{
 class CardModules{
     constructor(data){
         this.data = data;
+        console.log(data);
     }
 
     getElements(data){
@@ -188,6 +211,5 @@ const DATA = [
     },
 ]
 
-const card = new CardProgress(DATA);
-
-const dashboard = new DashboardManager();
+// const nav = new Navigation('.navigation__container');
+// const dashboard = new DashboardManager();

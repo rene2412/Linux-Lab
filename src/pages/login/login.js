@@ -5,10 +5,6 @@ const signupSection= document.querySelector('.auth__form--signup')
 const signupForm = document.querySelector('#signup__form');
 const loginForm = document.querySelector('#login__form');
 
-signupForm.addEventListener('submit',(e)=>{
-})
-loginForm.addEventListener('submit',(e)=>{
-})
 
 buttonLogin.addEventListener('click',()=>{
     buttonLogin.classList.add('active')
@@ -31,3 +27,26 @@ function showSignup(){
     signupSection.classList.remove('hidden');
 
 }
+
+
+async function AuthCheck(){
+    try{
+        const response = await fetch('../../user/user.php');
+        if(!response.ok){
+            throw new Error('Fail fetching auth info');
+        }
+        const data = await response.json()
+        console.log(data);
+        if(data.isLoggedIn){
+            window.location.href = `../../pages/dashboard/dashboard.html`;
+        }
+        else{
+            return;
+        }
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+AuthCheck();

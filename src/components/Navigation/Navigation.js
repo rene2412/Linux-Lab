@@ -12,7 +12,9 @@ export default class Navigation{
 
     // need to set this up
     isLoggedIn = true;
-    constructor(container){
+    constructor(container,isLoggedIn=false,data){
+        this.data = data;
+        this.isLoggedIn = isLoggedIn;
         this.container = document.querySelector(container);
         this.fullPath = window.location.pathname;
         this.path = this.fullPath.substring(this.fullPath.lastIndexOf('/')+1)
@@ -72,7 +74,7 @@ export default class Navigation{
         let cssClass = '';
         let loginText = 'Login'
         // user should go here
-        if(this.isLoggedIn){cssClass='--auth'; loginText=`<span class="green">@</span>herb`};
+        if(this.isLoggedIn){cssClass='--auth'; loginText=`<span class="green">@</span>${this.data.username}`};
 
         const sidebar = document.createElement('div');
         sidebar.classList.add('sidebar');

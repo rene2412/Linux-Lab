@@ -488,5 +488,10 @@
             "answer": "A",
             "completed": false
         }
-    ]
+    ],
+    "File Navigation": {
+        "7": {
+            "completed": true
+        }
+    }
 }

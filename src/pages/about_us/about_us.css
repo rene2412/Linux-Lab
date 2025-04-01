@@ -76,6 +76,7 @@ html{
     position: relative;
     border-top: var(--border-base) solid var(--color-secondary);
     border-bottom: var(--border-base) solid var(--color-secondary);
+    min-height: 100vh;
 }
 
 .articles__title{
