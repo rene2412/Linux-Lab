@@ -87,11 +87,23 @@ $response = array(
         "lessonId" => $lessonId,
         "lessonName" => $lessonName  
     ),
-    "modules" => array(
+    "modules" => [
+        [
             "name" => "The Basics",
             "completed" => $lessons_completed,
             "total" => 40
-    )
+        ],
+        [
+            "name" => "Networking",
+            "completed" => 18,
+            "total" => 21
+        ],
+        [
+            "name" => "IDK",
+            "completed" => 1,
+            "total" => 17 
+        ]
+    ]
 );
 
 // Convert to JSON with pretty printing
