@@ -1,12 +1,17 @@
 import { Navigation } from "../../components/Navigation/index.js";
 
+async function AuthCheck(){
+}
+
 const nav = new Navigation('.navigation__container');
 
 class DashboardManager{
 
-    constructor(container = '.dashboard__container',isLoggedIn){
+    constructor(container = '.dashboard__container',isLoggedIn,data){
         this.container = document.querySelector(container); 
+        this.data=data;
         this.initialize();
+
     }
 
     render(){
@@ -61,16 +66,7 @@ class DashboardManager{
                         completed: 13,
                         total:21,
                     },
-                    {
-                        name:'Networking',
-                        completed: 18,
-                        total:21,
-                    },
-                    {
-                        name:'IDK',
-                        completed: 1,
-                        total:17,
-                    },
+                    
                 ]
             }
         );
@@ -88,7 +84,7 @@ class CardContinueLearning{
             <div class="dashboard__card dashboard__card--continue">
                 <h3 class="card__title">Continue Learning:</h3>
                 <div class="card__content">
-                    <a href="../lesson_page/lesson.js" class="card__link">
+                    <a href="../lesson_page/lesson.html" class="card__link">
                         <p class="card__text">${this.data.name}</p>
                         <p class="card__text">Lesson:${this.data.lessonName}</p>
                     </a>
