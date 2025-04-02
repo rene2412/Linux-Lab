@@ -939,11 +939,11 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
 
     $results = [];
 
-    if (str_ends_with($file, ".txt")) {    
+    if ($file === "*.txt") {    
+                $count = 0;
     foreach ($currentLevel as $name => $entry) {
             if (str_ends_with($name, ".txt") && isset($entry['file']['content'])) { 
                 $lines = $entry['file']['content']; 
-                $count = 0;
                 
                 foreach ($lines as $lineNum => $line) {
                     $line_numbers = $lineNum + 1;
