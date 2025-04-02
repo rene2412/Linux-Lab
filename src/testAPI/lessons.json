@@ -1,7 +1,7 @@
 {
     "basics": [
         {
-            "section__size": 40,
+            "section__size": 46,
             "section__completed": false
         },
         {
@@ -444,6 +444,91 @@
             "content_type": "interative",
             "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
             "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
+            "completed": false
+        },        
+        {
+            "id": 41,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Knowledge Check #11",
+            "content_type": "multichoice",
+            "content": "What does the wildcard* character allow us to do?",
+            "options": [
+                "A) Redirects output to a file",
+                "B) Matches any number of characters in a filename or pattern",
+                "C) Searches for specific patterns in files",
+                "D) Creates new directories recursively"
+            ],
+            "correct": "B",
+            "explanation": "The wildcard character (*) is used to match any number of characters in a filename or pattern. This allows us to perform operations on multiple files that match a certain pattern without having to specify each file individually.",
+            "completed": false
+        },
+        {
+            "id": 42,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Knowledge Check #12",
+            "content_type": "multichoice",
+            "content": "Which grep flag would you use to display the line numbers where the pattern appears?",
+            "options": [
+                "A) -i",
+                "B) -v",
+                "C) -n",
+                "D) -c"
+            ],
+            "correct": "C",
+            "explanation": "The -n flag with grep displays the line numbers where the pattern is found in the file. This is useful for quickly locating where specific patterns appear in a document.",
+            "completed": false
+        },
+        {
+            "id": 43,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Knowledge Check #13",
+            "content_type": "multichoice",
+            "content": "What is the correct syntax for the find command?",
+            "options": [
+                "A) find filename /path/to/source",
+                "B) find -options filename",
+                "C) find /path/to/source -options -filename",
+                "D) find -filename -options"
+            ],
+            "correct": "C",
+            "explanation": "The correct syntax for the find command is 'find /path/to/source -options -filename'. The path specifies where to start searching, options provide additional filtering criteria, and filename specifies what you're looking for.",
+            "completed": false
+        },
+        {
+            "id": 44,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Knowledge Check #14",
+            "content_type": "multichoice",
+            "content": "What is the difference between the '>' and '>>' operators?",
+            "options": [
+                "A) '>' reads from a file while '>>' writes to a file",
+                "B) '>' overwrites existing content while '>>' appends to existing content",
+                "C) '>' redirects standard output while '>>' redirects standard error",
+                "D) '>' works with text files while '>>' works with binary files"
+            ],
+            "correct": "B",
+            "explanation": "The '>' operator overwrites existing content in a file, replacing everything that was there before. The '>>' operator appends to the file, adding new content after the existing content without erasing what was already there.",
+            "completed": false
+        },
+        {
+            "id": 45,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Knowledge Check #15",
+            "content_type": "multichoice",
+            "content": "Which command would correctly count the number of occurrences of the word 'Linux' in a file called notes.txt?",
+            "options": [
+                "A) find notes.txt 'Linux'",
+                "B) grep 'Linux' notes.txt > count.txt",
+                "C) grep -c 'Linux' notes.txt",
+                "D) cat notes.txt | Linux -count"
+            ],
+            "correct": "C",
+            "explanation": "The command 'grep -c 'Linux' notes.txt' uses the -c flag with grep to count the number of lines containing the pattern 'Linux' in the file notes.txt, rather than displaying the matching lines themselves.",
             "completed": false
         }
     ],
