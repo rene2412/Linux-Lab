@@ -48,7 +48,7 @@
         $stmt->execute([$_SESSION["user_id"]]);
 		//header("Location: ../index.php?login=success");
 		//on success, send the user to the lesson page
-		header('Location: ../src/user/user.php');
+		header('Location: ../src/pages/dashboard/dashboard.html');
 		$pdo = null;
 		$statement = null;
 		die();
