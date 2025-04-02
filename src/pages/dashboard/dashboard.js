@@ -30,7 +30,7 @@ class DashboardManager{
         this.container = document.querySelector(container); 
         this.greeting = document.querySelector('.greeting__text')
         // change this line when JSON is fixed
-        // this.data=data;
+        this.data=data;
         this.initialize();
 
     }
@@ -68,7 +68,7 @@ class DashboardManager{
     }
 
     async initialize(){
-        this.data = await this.fetchData();
+        // this.data = await this.fetchData();
         this.render();
     }
 
