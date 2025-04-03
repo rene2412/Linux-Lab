@@ -630,18 +630,18 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     return "\n";
 }
 
-function process_cat(&$filesystem, $currentDirectory, $file): string {
+function process_cat(&$filesystem, $currentDirectory, $file, $args, $targetFile) : string {
     $GLOBALS['commandSuccess'] = false;
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
-    $currentLevel = $filesystem["/"];
+    $currentLevel = &$filesystem["/"];
     
     // Navigate to target directory
     foreach ($pathParts as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
             return "Error: Invalid directory path.\n";
         }
-        $currentLevel = $currentLevel[$part];
+        $currentLevel = &$currentLevel[$part];
     }
 
     // Check if file exists
@@ -653,17 +653,37 @@ function process_cat(&$filesystem, $currentDirectory, $file): string {
     if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
         return "Error: '$file' is a directory.\n";
     }
+    if ($args === '>') {
+        if (!isset($currentLevel[$targetFile]['file']['content'])) {
+            //return "Target File: '$targetFile' does not exist!";
+            process_touch($filesystem, $currentDirectory, $targetFile);
+            $_SESSION['fileSystem'] = $filesystem;
+            session_write_close();        
+    }      
 
+        //Copy content
+         $currentLevel[$targetFile]['file']['content'] = $currentLevel[$file]['file']['content'];
+        // Update metadata
+        $currentLevel[$targetFile]['file']['modified'] = date("Y-m-d H:i:s");
+        $currentLevel[$targetFile]['file']['size'] = count($currentLevel[$targetFile]['file']['content']);
+
+        $GLOBALS['commandSuccess'] = true;
+        return "";
+        }
+    
+    //its a regular cat command
+    else {
     // Extract content based on format
     if (isset($currentLevel[$file]['file']['content'])) {
         // New metadata format
         $GLOBALS['commandSuccess'] = true;
-        return implode("\n", $currentLevel[$file]['file']['content']) . "\n";
+       return implode("\n", $currentLevel[$file]['file']['content']) . "\n";
     } elseif (is_string($currentLevel[$file])) {
         // Legacy string format
         $GLOBALS['commandSuccess'] = true;
         return $currentLevel[$file] . "\n";
     }
+}
     return "";
 }
 
@@ -859,6 +879,13 @@ function delete_recursive(&$directory) {
         unset($directory[$key]); // Delete files or now-empty directories
     }
 }
+
+function process_sudo($fileSystem, $currentDirectory, $argument) : string {
+    
+
+    return "";
+} 
+
 function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) : string {
     // Navigate to the target directory
     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
@@ -1420,7 +1447,7 @@ switch ($cmd) {
                 $output = process_date();
                 break;
         case 'cat':
-                   $output = process_cat($fileSystem, $currentDir, $arg);
+                   $output = process_cat($fileSystem, $currentDir, $arg, $arg2, $arg3);
                    //Convert the updated data back to JSON
                    $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                    //Write the updated JSON back to the file

@@ -1,7 +1,7 @@
 {
     "basics": [
         {
-            "section__size": 46,
+            "section__size": 50,
             "section__completed": false
         },
         {
@@ -530,7 +530,27 @@
             "correct": "C",
             "explanation": "The command 'grep -c 'Linux' notes.txt' uses the -c flag with grep to count the number of lines containing the pattern 'Linux' in the file notes.txt, rather than displaying the matching lines themselves.",
             "completed": false
-        }
+        },
+        {
+            "id": 46,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Lab #5",
+            "content_type": "lab",
+            "content": "<p>In our Documents/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.</p><p>We will need a flag to output the number line where the pattern appears.</p>",
+            "answer": "grep -n \"we\" Declaration.txt",
+            "completed": false
+        },
+        {
+            "id": 47,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Lab #6",
+            "content_type": "lab",
+            "content": "<p>Lets traverse to the Lyrics/ directory that lives in the Documents/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt</p>",
+            "answer": "grep -c \"happen\" LetItHappen.txt", 
+            "completed": false
+        } 
     ],
     "networking": [
         {
