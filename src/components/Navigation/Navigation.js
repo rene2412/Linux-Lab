@@ -84,22 +84,27 @@ export default class Navigation {
     }
   }
 
-  handleDocumentClick = ()=>{
-
+  handleDocumentClick = (e)=>{
+    if(this.userDropdownIsOpen){
+      this.closeUserDropdown();
+    };
   }
 
   openUserDropdown(){
     this.userDropdown.classList.remove('hidden');
+    this.userDropdownIsOpen = true;
   }
 
   closeUserDropdown(){
     this.userDropdown.classList.add('hidden');
+    this.userDropdownIsOpen = false;
   }
 
   handleUserButtonClick = (e) => {
-    console.log("IVE BEEN CLICKED");
-    if(this.userDropdownIsOpen){this.closeUserDropdown};
-    if(!this.userDropdownIsOpen){this.openUserDropdown};
+    // make sure this doesnt instanly close the dropdown
+    e.stopPropagation()
+    if(this.userDropdownIsOpen){this.closeUserDropdown()}
+    else this.openUserDropdown();
   };
 
   closeSidebar = () => {
@@ -118,6 +123,7 @@ export default class Navigation {
       if (this.path === elem.tag) {
         cssClass = "link--active";
       }
+      if(elem.title ==='Dashboard' && !this.isLoggedIn)return '';
 
       return `
                 <li class="navbar__link ${cssClass} "><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
@@ -158,7 +164,7 @@ export default class Navigation {
                 </nav>
             </div>
             <div class="sidebar__bottom">
-                <div class=" sidebar__bottom__dropdown">
+                <div class=" sidebar__bottom__dropdown hidden">
                 ${userDropdownElem}
                 </div>
                 <div class="sidebar__bottom--user__container">
