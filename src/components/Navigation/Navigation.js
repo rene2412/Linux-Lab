@@ -39,7 +39,8 @@ export default class Navigation {
 
   // need to set this up
   isLoggedIn = false;
-  constructor(container, isLoggedIn = false, data) {
+  constructor(container, isLoggedIn = false, data, showNavbar=true){
+    this.showNavbar = showNavbar;
     this.data = data;
     this.isLoggedIn = isLoggedIn;
     this.container = document.querySelector(container);
@@ -191,6 +192,7 @@ export default class Navigation {
                 `;
     });
     const nav = document.createElement("nav");
+    if(!this.showNavbar) nav.classList.add('hidden');
     nav.classList.add("navbar");
     nav.innerHTML = `
             <button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>

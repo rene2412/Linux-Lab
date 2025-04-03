@@ -12,7 +12,7 @@ async function AuthCheck(){
             window.location.href = `../login/login.php`;
         }
         else{
-            const nav = new Navigation('.navigation__container', data.isLoggedIn,data )
+            const nav = new Navigation('.navigation__container', data.isLoggedIn,data)
             const dashboard = new DashboardManager('.dashboard__container',data);
         }
     }
