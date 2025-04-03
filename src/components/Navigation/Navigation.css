@@ -103,6 +103,7 @@
 .sidebar__bottom{
     align-self: stretch;
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     background-color: var(--color-overlay);
@@ -123,6 +124,54 @@
 }
 
 /* LOGIN BUTTON SIDEBAR */
+
+
+.sidebar__bottom__dropdown{
+    box-sizing: border-box;
+    position: absolute;
+    min-width: fit-content;
+    bottom: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    margin-bottom: var(--spce-xsm);
+
+}
+
+.sidebar__bottom__dropdown >*:first-child{
+    border-top-right-radius: var(--radius-med);
+    border-top-left-radius: var(--radius-med);
+}
+
+.sidebar__bottom__dropdown>:not(:first-child){
+    border-top: var(--text-color-secondary) solid 1px;
+}
+
+.sidebar__bottom__dropdown >*:last-child{
+    border-bottom-right-radius: var(--radius-med);
+    border-bottom-left-radius: var(--radius-med);
+}
+
+.sidebar__bottom__dropdown >*{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-overlay);
+    color: var(--text-color-main);
+    padding: var(--spce-xsm)var(--spce-med)var(--spce-xsm)var(--spce-med);
+    margin: 0;
+}
+
+.user-dropdown--profile.user-dropdown--profile{
+    background-color: var(--color-overlay);
+}
+
+.sidebar__bottom__dropdown >*:hover{
+    background-color: rgba(255, 255, 255, 0.19);
+}
+
+
 .sidebar__button--user{
     font-size: var(--text-size-xl);
     transition: transform 0.1s ease-in;
@@ -132,6 +181,7 @@
 }
 
 .sidebar__button--user--auth{
+    color: var(--text-color-main);
     font-size: var(--text-size-xl);
     transition: transform 0.1s ease;
 }
