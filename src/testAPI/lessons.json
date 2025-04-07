@@ -1,7 +1,7 @@
 {
     "basics": [
         {
-            "section__size": 50,
+            "section__size": 55,
             "section__completed": false
         },
         {
@@ -550,7 +550,59 @@
             "content": "<p>Lets traverse to the Lyrics/ directory that lives in the Documents/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt</p>",
             "answer": "grep -c \"happen\" LetItHappen.txt", 
             "completed": false
-        } 
+        },
+        {
+            "id": 48,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Lab #6",
+            "content_type": "lab",
+            "content": "<p>In the same Lyrics/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt</p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>" ,
+            "completed": false
+        },
+        {
+            "id": 49,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Lab #7",
+            "content_type": "lab",
+            "completed": false
+        }, 
+        {
+            "id": 50,
+            "parent": "basics",
+            "section": "checkpoint",
+            "title": "Lab #8",
+            "content_type": "lab",
+            "completed": false
+        },
+        {
+            "id": 51,
+            "parent": "basics",
+            "section": "File Permissions",
+            "title": "Permissions In Linux",
+            "content_type": "article",
+            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br><br>    r – Read (can view the file or list the folder)</br><br>w –  Write (can modify the file or folder)</br><br>  x – Execute (can run the file if it’s a program or enter the folder)</br></p><br><p>Then there are permissions for 3 type of users:<br><br>Owner – the person who owns the file</br><br>Group – a group of users assigned to the file</br><br>Others – everyone else</p>",
+            "completed": false
+        },
+        {
+            "id": 52,
+            "parent": "basics",
+            "section": "File Permissions",
+            "title": "ls -l",
+            "content_type": "interative",
+            "content": "<p>To see the output of your file permisions we can use the <b>ls -l</b> command, lets walk through the output!</p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt</code></p><p>Here's what each part means:</p><ul><li><b>-</b> This indicates it's a regular file. If it were a directory, it would show <b>d</b>.</li><li><b>rw-</b> The owner can read and write the file.</li><li><b>r--</b> The group can only read the file.</li><li><b>r--</b> Others (everyone else) can also only read the file.</li><li><b>user</b> The name of the file's owner.</li><li><b>group</b> The group assigned to the file.</li><li><b>2025-02-27 01:24:04</b> The last modified date and time.</li><li><b>648</b> The file size in bytes.</li><li><b>Shakespeare.txt</b>: The name of the file.</li></ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.</p>",
+            "completed": false
+        },
+        {
+            "id": 53,
+            "parent": "basics",
+            "section": "File Permissions",
+            "title": "chmod",
+            "content_type": "interative",
+            "content": "coming soon",
+            "completed": false
+        }                    
     ],
     "networking": [
         {
@@ -593,10 +645,6 @@
             "answer": "A",
             "completed": false
         }
-    ],
-    "File Navigation": {
-        "7": {
-            "completed": true
-        }
-    }
+        
+    ]
 }
