@@ -331,12 +331,12 @@ $fileSystem = [
         "Work" => [
             "daily_logs.txt" => [
                 "file" => [
-                    "permissions" => "-rw-r--r--",
+                    "permissions" => "--w-r--r--",
                     "owner" => "user",
                     "group" => "group",
                     "created" => "2025-03-24 01:24:04",
                     "modified" => "2025-03-25 04:04:04",
-                    "size" => 0,
+                    "size" => 15,
                     "content" => [
                         " [09:00] Opened store.",
                         "[09:15] Customer purchased 'Fender Stratocaster'.",
@@ -357,7 +357,7 @@ $fileSystem = [
                     "group" => "group",
                     "created" => "2025-02-20 01:24:04",
                     "modified" => "2025-02-27 01:24:04",
-                    "size" => 34,
+                    "size" => 44,
                     "content" => [ 
                     "Weekly Sales Report",
                     "Date Range: 2025-02-20 to 2025-02-27",
@@ -734,21 +734,34 @@ function process_cat(&$filesystem, $currentDirectory, $file, $args, $targetFile)
     if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
         return "Error: '$file' is a directory.\n";
     }
-    if ($args === '>') {
-        if (!isset($currentLevel[$targetFile]['file']['content'])) {
-            //return "Target File: '$targetFile' does not exist!";
-            process_touch($filesystem, $currentDirectory, $targetFile);
-            $_SESSION['fileSystem'] = $filesystem;
-            session_write_close();        
-    }      
-
-        //Copy content
-         $currentLevel[$targetFile]['file']['content'] = $currentLevel[$file]['file']['content'];
+    if ($args === '>' || $args === '>>') {
+        // Create the file if it doesn't exist using `touch`
+        if (!isset($currentLevel[$file])) {
+            $touchResult = process_touch($fileSystem, $currentDirectory, $file);
+            if (str_starts_with($touchResult, "Error")) {
+                return $touchResult; // Propagate errors (e.g., invalid extension)
+            }
+        }
+        
+        // Check if target is a directory
+        if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
+            return "Error: '$file' is a directory.\n";
+        }
+        
+        // Update content (now guaranteed to be in array format)
+        $fileContent = &$currentLevel[$file]['file']['content'];
+        if ($args === '>') {
+            $fileContent = [$arg]; // Overwrite with new content
+        } else { // >>
+            $fileContent[] = $arg; // Append new line
+        }
+        
         // Update metadata
-        $currentLevel[$targetFile]['file']['modified'] = date("Y-m-d H:i:s");
-        $currentLevel[$targetFile]['file']['size'] = count($currentLevel[$targetFile]['file']['content']);
-
-        $GLOBALS['commandSuccess'] = true;
+        $currentLevel[$file]['file']['modified'] = date("Y-m-d H:i:s");
+        $contentString = implode("\n", $fileContent);
+        $currentLevel[$file]['file']['size'] = strlen($contentString);
+        
+        $_SESSION['fileSystem'] = $fileSystem;
         return "";
         }
     
