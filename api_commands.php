@@ -323,9 +323,90 @@ $fileSystem = [
                     "created" => "2025-02-27 01:24:04",
                     "modified" => "2025-02-27 01:24:04",
                     "size" => 0,
-                    "content" => []
+                    "content" => [ 
+                    ]
                 ]
             ]
+        ],
+        "Work" => [
+            "daily_logs.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-03-24 01:24:04",
+                    "modified" => "2025-03-25 04:04:04",
+                    "size" => 0,
+                    "content" => [
+                        " [09:00] Opened store.",
+                        "[09:15] Customer purchased 'Fender Stratocaster'.",
+                        "[10:22] Inventory updated: +10 Guitar Strings (Ernie Ball 10-46).",
+                        "[11:05] Customer asked about piano lesson availability.",
+                        "[12:00] Lunch break.",
+                        "[13:35] Sold: 'Yamaha P-125 Digital Piano'.",
+                        "[14:20] Returned item: 'Boss DS-1 Distortion Pedal'.",
+                        "[16:45] Stock check completed for drum kits.",
+                        "[18:00] Closed store."
+                    ]
+                ]
+            ],
+            "sales_report.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-20 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 34,
+                    "content" => [ 
+                    "Weekly Sales Report",
+                    "Date Range: 2025-02-20 to 2025-02-27",
+                    "---------------------------------------------",
+                    "2025-02-20",
+                    " - Sold: Gibson Les Paul Standard        - $2,499.00",
+                    " - Sold: D'Addario Strings (3-pack)      - $29.97",
+                    " - Sold: Roland TD-1DMK Drum Kit         - $699.99",
+                    "",
+                    "2025-02-21",
+                    " - Sold: Taylor GS Mini Acoustic Guitar  - $599.00",
+                    " - Sold: Shure SM58 Microphone           - $99.00",
+                    " - Sold: Vox AC15 Amp                    - $749.00",
+                    "",
+                    "2025-02-22",
+                    " - Sold: Fender Jazz Bass                - $899.00",
+                    " - Sold: Drumsticks (Vic Firth 5A)       - $11.99",
+                    " - Returned: Vox AC15 Amp                - -$749.00",
+                    "",
+                    "2025-02-23",
+                    " - No sales (Store closed for maintenance)",
+                    "",
+                    "2025-02-24",
+                    " - Sold: Casio CT-S1 Keyboard            - $199.00",
+                    " - Sold: Audio-Technica AT2020 Mic       - $99.00",
+                    " - Sold: XLR Cable (15ft)                - $19.99",
+                    "",
+                    "2025-02-25",
+                    " - Sold: Ibanez RG450DX Electric Guitar  - $499.00",
+                    " - Sold: Pedalboard Case (Gator)         - $89.00",
+                    " - Sold: Boss RE-2 Space Echo Pedal      - $249.99",
+                    "",
+                    "2025-02-26",
+                    " - Sold: Ludwig Breakbeats Drum Set      - $449.00",
+                    " - Sold: Guitar Strap (Levy's)           - $29.99",
+                    "",
+                    "2025-02-27",
+                    " - Sold: Yamaha P-125 Digital Piano      - $649.00",
+                    " - Sold: Ernie Ball Strings (10pk)       - $69.90",
+                    " - Returned: Boss DS-1 Distortion Pedal  - -$49.99",
+                    "",
+                    "---------------------------------------------",
+                    "Notes:",
+                    " - Increased sales in entry-level keyboards and microphones.",
+                    " - Two returns processed: Vox AC15 Amp, Boss DS-1 Pedal.",
+                    " - Drum kits and accessories performing steadily."
+                    ]
+                ]
+            ] 
         ]
     ]
 ];

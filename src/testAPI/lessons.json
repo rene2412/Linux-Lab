@@ -566,6 +566,7 @@
             "section": "checkpoint",
             "title": "Lab #7",
             "content_type": "lab",
+            "content": "<p>In your new copy.txt file write a command that takes the string \"Unicorns are real\" and APPENDS to copy.txt</p>",
             "completed": false
         }, 
         {
@@ -574,6 +575,7 @@
             "section": "checkpoint",
             "title": "Lab #8",
             "content_type": "lab",
+            "content": "<p>Write a command that returns all the .txt files in the Projects/ directory?</p>",
             "completed": false
         },
         {
@@ -600,7 +602,7 @@
             "section": "File Permissions",
             "title": "chmod",
             "content_type": "interative",
-            "content": "coming soon",
+            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?</p><p>The <b>chmod</b> (change mode) command allows us to modify file permissions. The basic syntax is:</p><code>chmod [options] mode file</code><p>There are two ways to specify permissions:</p><h4>Symbolic Method:</h4><ul><li><b>u</b>: user/owner</li><li><b>g</b>: group</li><li><b>o</b>: others</li><li><b>a</b>: all (equivalent to ugo)</li><li><b>+</b>: add permission</li><li><b>-</b>: remove permission</li><li><b>=</b>: set exact permission</li><li><b>r</b>: read permission</li><li><b>w</b>: write permission</li><li><b>x</b>: execute permission</li></ul><h4>Examples:</h4><ul><li><code>chmod u+x script.sh</code> - Add execute permission for the owner</li><li><code>chmod go-w file.txt</code> - Remove write permission for group and others</li><li><code>chmod a=r document.pdf</code> - Set read-only permission for everyone</li></ul><h4>Numeric Method:</h4><p>Permissions can also be represented by numbers:</p><ul><li><b>4</b>: read permission</li><li><b>2</b>: write permission</li><li><b>1</b>: execute permission</li></ul><p>We add these numbers for each category (owner, group, others):</p><ul><li><code>chmod 755 script.sh</code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)</li><li><code>chmod 644 file.txt</code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)</li><li><code>chmod 600 private.key</code> - Owner: rw- (6), Group: --- (0), Others: --- (0)</li></ul><p>Common permission patterns:</p><ul><li><b>755</b>: Standard for executable files (rwxr-xr-x)</li><li><b>644</b>: Standard for data files (rw-r--r--)</li><li><b>700</b>: Private executable files (rwx------)</li><li><b>600</b>: Private data files (rw-------)</li></ul><p> However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo </b> command to override the existing permission, which we will discuss in detail later on.</p>",
             "completed": false
         }                    
     ],
