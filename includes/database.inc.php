@@ -1,11 +1,11 @@
 <?php
-$host = "localhost"; 
+$host = "3.tcp.ngrok.io"; 
 $dbname = "Linux_Lab";  
 $dbusername = "root";
-$dbpassword = "";
+$dbpassword = "pandas_024";
 try {
 	//create a php data object called php that represents the parameters to connect to the database
-	$pdo = new PDO("mysql:host=$host;port=26632;dbname=$dbname", $dbusername, $dbpassword); 
+	$pdo = new PDO("mysql:host=$host;port=29657;dbname=$dbname", $dbusername, $dbpassword); 
 	//->setAttribute will set the php object to look for errors in the connection
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {  
