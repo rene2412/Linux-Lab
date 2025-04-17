@@ -94,7 +94,7 @@ $response = [
         [
             "name" => "The Basics",
             "completed" => $lessons_completed,
-            "total" => 40
+            "total" => 60
         ],
         [
             "name" => "Networking",
@@ -108,6 +108,9 @@ $response = [
         ]
     ]
 ];
+error_log("Lesson ID: " . $lessonId);
+error_log("Current Lesson: " . $current_lesson);
+error_log(json_encode($response));  // This will output the API response for debugging purposes.
 
 // Output JSON
 echo json_encode($response);
