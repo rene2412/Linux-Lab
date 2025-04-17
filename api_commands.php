@@ -333,7 +333,7 @@ $fileSystem = [
                 "file" => [
                     "permissions" => "--w-r--r--",
                     "owner" => "user",
-                    "group" => "group",
+                    "group" => "Steve",
                     "created" => "2025-03-24 01:24:04",
                     "modified" => "2025-03-25 04:04:04",
                     "size" => 15,
@@ -353,7 +353,7 @@ $fileSystem = [
             "sales_report.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
-                    "owner" => "user",
+                    "owner" => "John",
                     "group" => "group",
                     "created" => "2025-02-20 01:24:04",
                     "modified" => "2025-02-27 01:24:04",
@@ -711,11 +711,11 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     return "\n";
 }
 
-function process_cat(&$filesystem, $currentDirectory, $file, $args, $targetFile) : string {
+function process_cat(&$fileSystem, $currentDirectory, $file, $args, $targetFile) : string {
     $GLOBALS['commandSuccess'] = false;
     $currentDirectory = rtrim($currentDirectory, "/");
     $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
-    $currentLevel = &$filesystem["/"];
+    $currentLevel = &$fileSystem["/"];
     
     // Navigate to target directory
     foreach ($pathParts as $part) {
@@ -734,32 +734,47 @@ function process_cat(&$filesystem, $currentDirectory, $file, $args, $targetFile)
     if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
         return "Error: '$file' is a directory.\n";
     }
+
     if ($args === '>' || $args === '>>') {
+     //    $currentLevel = &$fileSystem["/"];
         // Create the file if it doesn't exist using `touch`
-        if (!isset($currentLevel[$file])) {
-            $touchResult = process_touch($fileSystem, $currentDirectory, $file);
+        if (!isset($currentLevel[$targetFile])) {
+            $touchResult = process_touch($fileSystem, $currentDirectory, $targetFile);
             if (str_starts_with($touchResult, "Error")) {
                 return $touchResult; // Propagate errors (e.g., invalid extension)
             }
         }
         
         // Check if target is a directory
-        if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
-            return "Error: '$file' is a directory.\n";
+        if (is_array($currentLevel[$targetFile]) && !isset($currentLevel[$targetFile]['file'])) {
+            return "Error: '$targetFile' is a directory.\n";
         }
-        
-        // Update content (now guaranteed to be in array format)
-        $fileContent = &$currentLevel[$file]['file']['content'];
-        if ($args === '>') {
-            $fileContent = [$arg]; // Overwrite with new content
-        } else { // >>
-            $fileContent[] = $arg; // Append new line
-        }
+
+            $text = "";
+            foreach ($currentLevel[$file]['file']['content'] as $lineNum => $lineText) {
+                $words = explode(' ', $lineText); // Split line into words by spaces
+                foreach ($words as $wordIndex => $word) {
+                   $text .= $word . ' ';     
+               }
+                $text .= "\n";
+            }
+            if ($args == '>') {
+                 // Write to target file
+            $currentLevel[$targetFile]['file']['content'] = explode("\n", trim($text));
+            }
+         else { // >>
+             // Append new content as lines
+         $newLines = explode("\n", trim($text));
+         $currentLevel[$targetFile]['file']['content'] = array_merge(
+        $currentLevel[$targetFile]['file']['content'],
+        $newLines
+    );
+ }
         
         // Update metadata
-        $currentLevel[$file]['file']['modified'] = date("Y-m-d H:i:s");
-        $contentString = implode("\n", $fileContent);
-        $currentLevel[$file]['file']['size'] = strlen($contentString);
+       // $currentLevel[$targetFile]['file']['modified'] = date("Y-m-d H:i:s");
+        $contentString = implode("\n",  $currentLevel[$targetFile]['file']['content']);;
+        $currentLevel[$targetFile]['file']['size'] = strlen($contentString);
         
         $_SESSION['fileSystem'] = $fileSystem;
         return "";
@@ -769,13 +784,17 @@ function process_cat(&$filesystem, $currentDirectory, $file, $args, $targetFile)
     else {
     // Extract content based on format
     if (isset($currentLevel[$file]['file']['content'])) {
-        // New metadata format
-        $GLOBALS['commandSuccess'] = true;
-       return implode("\n", $currentLevel[$file]['file']['content']) . "\n";
+        $filePermissions = $currentLevel[$file]['file']['permissions'];
+    if ($filePermissions[1] !== 'r') {
+        return "Error: User does not have permission to read the file";
+    }
+      // New metadata format
+      $GLOBALS['commandSuccess'] = true;
+      return  implode("\n", $currentLevel[$file]['file']['content']) . "\n";
     } elseif (is_string($currentLevel[$file])) {
         // Legacy string format
         $GLOBALS['commandSuccess'] = true;
-        return $currentLevel[$file] . "\n";
+        return "String" . $currentLevel[$file] . "\n";
     }
 }
     return "";
@@ -852,7 +871,10 @@ function process_refresh() : string {
 
     $_SESSION['fileSystem'] = unserialize(serialize($fileSystem)); // Reset the file system
     $_SESSION['currentDirectory'] = "/";  // Reset to root directory
-
+     // Clear the session data
+     session_unset();   // Unset all session variables
+     session_destroy(); // Destroy the session
+     session_start();
     return "File system has been reset to default.\n";
 }
 
@@ -974,11 +996,6 @@ function delete_recursive(&$directory) {
     }
 }
 
-function process_sudo($fileSystem, $currentDirectory, $argument) : string {
-    
-
-    return "";
-} 
 
 function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) : string {
     // Navigate to the target directory
@@ -1006,6 +1023,8 @@ function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) 
     switch ($argument) {
         case 'u+x':
             $permissions[3] = 'x'; // User execute (e.g., -rwxr--r--
+        case 'u+r':
+            $permissions[1] = 'r';
             break;
         case 'g-w':
             $permissions[5] = '-'; // Remove group write (e.g., -rw-r-----
@@ -1419,13 +1438,16 @@ if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
 if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
  }  
-
 switch ($cmd) {
         case 'echo':
             $GetLine = "";
             $operator = "";
             $file = "";   
         // Process args to handle redirection
+        if (count($args) > 4) {
+            $output = "Erorr: Invalid echo command\n";
+            break;
+        }
         for ($i = 0; $i < count($args); $i++) {
             $word = $args[$i];
             if ($word === $cmd) continue;    
@@ -1464,10 +1486,14 @@ switch ($cmd) {
                 updateUserProgress($pdo, $userId, 3);
                 }            
              }   
-            
-             $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+             
+             $output .= process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
             break;   
         case 'touch':
+                if (count($args) > 2) {
+                    $output = "Error: Invalid touch command\n";
+                    break;
+                }
                 $output = process_touch($fileSystem, $currentDir, $arg);    
                 $jsonData['File Navigation'][7]['completed'] = true;
                  // Convert the updated data back to JSON
@@ -1475,18 +1501,25 @@ switch ($cmd) {
                 // Write the updated JSON back to the file
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                 chmod('src/testAPI/lessons.json', 0666);
-                if (GetCurrentLesson() === 13 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
-                   update_mysql($pdo, $userId, 13, 14);  
-                    updateUserProgress($pdo, $userId, 13);
+                if (GetCurrentLesson() === 14 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
+                   update_mysql($pdo, $userId, 14, 15);  
+                    updateUserProgress($pdo, $userId, 14);
                     $isCorrect = true;
                 }
             break;
         case 'ls':
             if ($arg === '-l') {
+                if (count($args) > 2) {
+                    $output = "Error: Invalid ls -l command";
+                    break;
+                }
                 $output = process_ls_l($fileSystem, $currentDir);
                 break;
             }
-                
+            if (count($args) > 1) {
+                $output = "Error: Invalid ls command";
+                break;
+            }    
             $jsonData['basics'][4]['completed'] = true;
              // Convert the updated data back to JSON
             $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
@@ -1498,9 +1531,13 @@ switch ($cmd) {
                 update_mysql($pdo, $userId, 6, 7); 
                 updateUserProgress($pdo, $userId, 6);
             }
-            $output .= process_ls($fileSystem, $currentDir);
+            $output = process_ls($fileSystem, $currentDir);
             break;
         case 'cd':
+            if  (count($args) > 2) {
+                $output = "Error: Invalid cd command";
+                break;
+                }
                  $output = process_cd($currentDir, $fileSystem, $arg);
             if ($arg === "..") {
                  $jsonData['basics'][6]['completed'] = true;
@@ -1510,7 +1547,7 @@ switch ($cmd) {
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                  chmod('src/testAPI/lessons.json', 0666); 
                  if (GetCurrentLesson() === 9) {
-                    updateUserProgress($pdo, $userId, 9);
+                     updateUserProgress($pdo, $userId, 9);
                      update_mysql($pdo, $userId, 9, 10);
                     $isCorrect = true;
                 }
@@ -1523,15 +1560,24 @@ switch ($cmd) {
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                  chmod('src/testAPI/lessons.json', 0666);
                  $jsonData['basics'][5]['completed'] = true;
-                if (GetCurrentLesson() === 7) {
+                if (GetCurrentLesson() === 10  && ($arg === "../Projects/project1" ||  $arg === "../Projects/project1/")) {
+                    $isCorrect = true;
+                    update_mysql($pdo, $userId, 10, 11);
+                    updateUserProgress($pdo, $userId, 10);
+                    }
+                if (GetCurrentLesson() === 7 && ($arg === "Documents" || $arg === "Documents/")) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 7, 8);
-                    updateUserProgress($pdo, $userId, 8);
+                    updateUserProgress($pdo, $userId, 7);
+                   }
                 }
-               }
             }
             break;
         case 'date':
+            if (count($args) > 1) {
+                $output = "Error: Invalid date command";
+                break;
+            }
                  $jsonData['basics'][2]['completed'] = true;
                 if (GetCurrentLesson() === 4){
                     $isCorrect = true;
@@ -1541,13 +1587,21 @@ switch ($cmd) {
                 $output = process_date();
                 break;
         case 'cat':
+                if (count($args) > 4) {
+                    $output = "Error: Invalid cat command";
+                    break;
+                 }
+                 if (GetCurrentLesson() === 8 && count($args) > 2) {
+                    $output = "Error: Invalid cat command"; 
+                    break;
+                }
                    $output = process_cat($fileSystem, $currentDir, $arg, $arg2, $arg3);
                    //Convert the updated data back to JSON
                    $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
                    //Write the updated JSON back to the file
                    file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                    chmod('src/testAPI/lessons.json', 0666);
-                if (GetCurrentLesson() === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt") {
+                if (GetCurrentLesson() === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt" ) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 8, 9); 
                     updateUserProgress($pdo, $userId, 8);
@@ -1555,6 +1609,10 @@ switch ($cmd) {
             break;
         case 'pwd':
                  $jsonData['basics'][3]['completed'] = true;
+                 if (count($args) > 1) {
+                    $output = "Error: Invalid pwd command";
+                    break;
+                }
                 if (GetCurrentLesson() === 5) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 5, 6); 
@@ -1563,48 +1621,92 @@ switch ($cmd) {
                 $output = process_pwd($currentDir);
                 break;
         case 'mkdir':
+            if (count($args) > 2) {
+                $output = "Error: Invalid mkdir command";
+                break;
+            }
             $output = process_mkdir($fileSystem, $currentDir, $arg);
-            if (GetCurrentLesson() == 14 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
+            if (GetCurrentLesson() == 15 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
                     $isCorrect = true;
                     update_mysql($pdo, $userId, 14, 15);
                     updateUserProgress($pdo, $userId, 14);
             }
             break;
         case 'mv':
+            if (count($args) > 3) {
+                $output = "Error: Invalid mv command";
+                break;
+            }
             $output = process_mv($fileSystem, $currentDir, $arg, $arg2);
             $GetLine = $arg . $arg2;
           
-            if (GetCurrentLesson() === 19 && $arg === "file2.txt" && $arg2 === "kali.txt") {
+            if (GetCurrentLesson() === 19 && $arg === "file2.txt" && $arg2 === "kali.txt" && $GLOBALS['commandSuccess']) {
                 $isCorrect = true;
-                update_mysql($pdo, $userId, 19, 15);            
-                    updateUserProgress($pdo, $userId, 19);
-            }                
+                update_mysql($pdo, $userId, 19, 20);            
+                updateUserProgress($pdo, $userId, 19);
+            } 
+            if (GetCurrentLesson() === 20 && $arg === "Documents/" && $arg2 === "Debian/" && $GLOBALS['commandSuccess']) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 20, 21);            
+                updateUserProgress($pdo, $userId, 20);
+            }  
+            if (GetCurrentLesson() === 21 && $arg === "hello.txt" && ($arg2 === "../Projects/" || $arg2 === "../Projects") && $GLOBALS['commandSuccess']) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 21, 22);            
+                updateUserProgress($pdo, $userId, 21);
+            } 
+            if (GetCurrentLesson() === 22 && ($arg === "Projects" || $args === "Projects/") && ($arg2 === "Documents/Subfolder/" || $arg2 === "Documents/Subfolder")) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 22, 23);            
+                updateUserProgress($pdo, $userId, 22);
+            }
+            
             break;
         case 'rm':
             if ($arg == "-rf") {
+                if (count($args) > 3) {
+                    $output = "Error: Invalid rm -rf command";
+                    break;
+                }
                 $output = process_rm_rf($fileSystem, $currentDir, $arg2);
+                if (str_starts_with($output, "Error:")) {
+                    break;
+                }
                 if (GetCurrentLesson() === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
                      $isCorrect = true;
                      update_mysql($pdo, $userId, 18, 19);
-                    updateUserProgress($pdo, $userId, 18);
+                     updateUserProgress($pdo, $userId, 18);
                 }
+                if (GetCurrentLesson() === 28 && ($arg2 === "School/" || $arg2 === "School")) {
+                    $isCorrect = true;
+                    update_mysql($pdo, $userId, 28, 29);
+                   updateUserProgress($pdo, $userId, 28);
+               }
                 break;
             }
             else {
+                if (count($args) > 2) {
+                    $output = "Error: Invalid rm command";
+                    break;
+                }
             $output = process_rm($fileSystem, $currentDir, $arg);
-                if (GetCurrentLesson() === 15 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
+                if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
                     $isCorrect = true;
-                    update_mysql($pdo, $userId, 15, 16);
-                    updateUserProgress($pdo, $userId, 15);
+                    update_mysql($pdo, $userId, 16, 17);
+                    updateUserProgress($pdo, $userId, 16);
                 }
         }
             break;
         case 'rmdir':
+            if (count($args) > 2) {
+                $output = "Error: Invalid rmdir command";
+                break;
+            }
             $output = process_rmdir( $fileSystem, $currentDir, $arg);
             if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
                 $isCorrect = true; 
-               update_mysql($pdo, $userId, 16, 17); 
-                    updateUserProgress($pdo, $userId, 16);
+               update_mysql($pdo, $userId, 17, 18); 
+                    updateUserProgress($pdo, $userId, 17);
             }
             break;
         case 'refresh':
@@ -1617,7 +1719,28 @@ switch ($cmd) {
             $flag = ($arg && str_starts_with($arg, "-")) ? $arg : "";
             $pattern = $flag ? $arg2 : $arg;
             $file = $flag ? $arg3 : $arg2;
+            if (GetCurrentLesson() === 31 ) {
+                if (count($args) > 3) {
+                    $output = "Error: Invalid grep command\n";
+                    break;
+                }
+            }
             $output = process_grep($fileSystem, $currentDir, $flag, $pattern, $file);
+            if (GetCurrentLesson() === 31 && $pattern === "And" && $file === "Shakespeare.txt" && !str_starts_with($output, "Error:")) {
+                  $isCorrect = true;
+                  update_mysql($pdo, $userId, 31, 32);
+                  updateUserProgress($pdo, $userId, 31); 
+            }
+            if (GetCurrentLesson() === 32 && $flag === "-n" && $pattern === "in" && $file === "Declaration.txt" && !str_starts_with($output, "Error:")) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 32, 33);
+                updateUserProgress($pdo, $userId, 32); 
+            }
+          if (GetCurrentLesson() === 33 && $flag === "-c" && $pattern === "moon" && $file === "Kennedy.txt" && !str_starts_with($output, "Error:")) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 33, 34);
+                updateUserProgress($pdo, $userId, 33); 
+            }
             break;
         case 'find':
                 // Parse "find <path> -name <pattern>"
@@ -1668,6 +1791,8 @@ switch ($cmd) {
             $output = "Command not recognized: $cmd\n";
             break;
     }
+    
+
     if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
         $progress = send_user_progress($pdo, $userId);
         $currentLesson = send_current_lesson($pdo, $userId);

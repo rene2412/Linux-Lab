@@ -53,6 +53,7 @@ class LessonManager {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
+      console.log()
       this.lesson = data[this.user]["lesson"];
       this.currentSection = data[this.user]["section"];
       this.fetchLessonsInit();
@@ -435,17 +436,16 @@ class lessonDisplay {
       );
     }
   }
-
   updateStatus() {
+    console.log(this.modules);
     if (this.modules[this.curSection][this.curLesson][`completed`] === true) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
     } else {
       this.statusCheck.classList.add(`hidden`);
       this.statusCross.classList.remove(`hidden`);
+     }
     }
-  }
-
   toggleLessonComplete = () => {
     this.modules[this.curSection][this.curLesson][`completed`] =
       !this.modules[this.curSection][this.curLesson][`completed`];

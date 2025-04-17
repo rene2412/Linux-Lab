@@ -49,6 +49,7 @@
 		//header("Location: ../index.php?login=success");
 		//on success, send the user to the lesson page
 		header('Location: ../src/pages/dashboard/dashboard.html');
+		//header('Location: ../src/user/user.php');
 		$pdo = null;
 		$statement = null;
 		die();
