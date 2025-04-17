@@ -1163,10 +1163,10 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
 
     // Return results
     if ($flag === "-c") return ($count > 0) ? "$count\n" : "0\n";
-    return empty($results) ? "No matches found\n" : implode("\n", $results) . "\n";
+    return empty($results) ? "Error: No matches found\n" : implode("\n", $results) . "\n";
 }
 
-
+/*
 function retrieve_files_from_argument($fileSystem, $currentDirectory, $expression): array {
     $files = [];
     $searchPath = rtrim($currentDirectory, "/");
@@ -1205,9 +1205,50 @@ function retrieve_files_from_argument($fileSystem, $currentDirectory, $expressio
 function process_find($fileSystem, $currentDirectory, $path, $expression): string {
     $expression = trim($expression, "\"'");
     $files = retrieve_files_from_argument($fileSystem, $path, $expression);
-    return empty($files) ? "No files found.\n" : implode("\n", array_keys($files)) . "\n";
+    return empty($files) ? "Error: No files found.\n" : implode("\n", array_keys($files)) . "\n";
 }
-
+*/
+function retrieve_files_from_argument($fileSystem, $currentDirectory, $path, $expression): array {
+    $files = [];
+    // Handle absolute or relative path
+    $searchPath = $path;
+    if (!str_starts_with($path, '/')) {
+        $searchPath = rtrim($currentDirectory, "/") . "/" . $path;
+    }
+    $searchPath = rtrim($searchPath, "/");
+    
+    // Navigate to search directory
+    $pathParts = array_filter(explode("/", ltrim($searchPath, "/")), 'strlen');
+    $currentLevel = $fileSystem["/"];
+    foreach ($pathParts as $part) {
+        if (!isset($currentLevel[$part])) {
+            return [];
+        }
+        $currentLevel = $currentLevel[$part];
+    }
+    
+    // Search through this directory
+    foreach ($currentLevel as $name => $entry) {
+        $fullPath = $searchPath . "/" . $name;
+        
+        // If the name matches our expression, add it regardless of type
+        if (fnmatch($expression, $name)) {
+            $files[] = $fullPath;
+        }
+        
+        // If it's a directory, also search inside it recursively
+        if (is_array($entry) && !isset($entry['file'])) {
+            $subFiles = retrieve_files_from_argument($fileSystem, "", $fullPath, $expression);
+            $files = array_merge($files, $subFiles);
+        }
+    }
+    
+    return $files;
+}
+function process_find($fileSystem, $currentDirectory, $path, $expression): string {
+    $files = retrieve_files_from_argument($fileSystem, $currentDirectory, $path, $expression);
+    return empty($files) ? "Error: No files found.\n" : implode("\n", $files) . "\n";
+}
 function process_ping($host) : string {
     if ($host != "google.com") return "Invalid Ping Command: Try Host Name 'google.com'";
         $output = $GLOBALS['ping'];
@@ -1741,11 +1782,16 @@ switch ($cmd) {
                 update_mysql($pdo, $userId, 33, 34);
                 updateUserProgress($pdo, $userId, 33); 
             }
+            if (GetCurrentLesson() === 34 && $pattern === "all" && $file === "*.txt" && !str_starts_with($output, "Error:")) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 34, 35);
+                updateUserProgress($pdo, $userId, 34); 
+            }
             break;
         case 'find':
                 // Parse "find <path> -name <pattern>"
-        if (count($args) < 3) {
-            $output = "Usage: find <path> -name \"<pattern>\"\n";
+        if (count($args) < 3 || count($args) > 4) {
+            $output = "Error: Invalid find command\"\n";
             break;
             }
             $path = $args[1];
@@ -1758,6 +1804,17 @@ switch ($cmd) {
             // Trim quotes from the expression (e.g., "*.txt" → *.txt)
             $expression = trim($expression, "\"'");
             $output = process_find($fileSystem, $currentDir, $path, $expression);
+            $match .= $output;
+            if (GetCurrentLesson() === 36 && strpos($match, "Documents/Lyrics/LetItHappen.txt") !== false) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 36, 37);
+                updateUserProgress($pdo, $userId, 36);
+            }
+            if (GetCurrentLesson() === 37 && strpos($match, 'Projects/project') !== false) {
+                $isCorrect = true;
+                update_mysql($pdo, $userId, 37, 38);
+                updateUserProgress($pdo, $userId, 37);
+            }
             break;
 	case 'ping':
         $output = process_ping($arg);
