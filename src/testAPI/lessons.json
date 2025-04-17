@@ -413,8 +413,8 @@
             "section": "Searching & Filtering",
             "title": "find path\/to\/source directory",
             "content_type": "article",
-            "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ \"projects1\"<\/code>",
-            "answer": "find Projects\/ \"projects1\"",
+            "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ -name \"project1\"<\/code>",
+            "answer": "find Projects\/ -name \"project1\"",
             "completed": false
         },
         {
