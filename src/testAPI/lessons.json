@@ -394,16 +394,16 @@
             "section": "Searching & Filtering",
             "title": "find",
             "content_type": "article",
-            "content": "<p>We have gone over how to search for patterns with grep and how useful that can be, but what about looking for specific files or directrories in  your filesystem?<\/p><p> Well the <b>find<\/b> command is a powerful tool for searching through your file system that helps you locate the actual files themselves based on certain criteria like the size of the file, permissions, and more.<\/p> The find command takes in 3 arguments, the first being the source path to your desired file or directory you are looking for, the 2nd is an optional flag that is just an additional filter that helps specifies what we are looking for like an exact name, size, permission, and more. The 3rd argument is simply the exact filename  or directory name you are looking for<\/p><p>Lets take a look at how the find command looks like syntatically<\/p> <code>find \/path\/to\/source -options -filename <\/code>",
+             "content": "<p>We have gone over how to search for patterns with grep and how useful that can be, but what about looking for specific files or directrories in your filesystem?<\/p><p>Well the <b>find<\/b> command is a powerful tool for searching through your file system that helps you locate the actual files themselves based on certain criteria like the size of the file, permissions, and more.<\/p><p>The find command takes in 3 arguments:<\/p><ul><li><b>1st argument:</b> the source path to your desired file or directory you are looking for. <i>Remember, the source path is the relative path since <b>find</b> will start at your current directory.</i><\/li><li><b>2nd argument:</b> an optional flag that is just an additional filter that helps specify what we are looking for like an exact name, size, permission, and more.<\/li><li><b>3rd argument:</b> simply the exact filename or directory name you are looking for.<\/li><\/ul><p>Lets take a look at how the find command looks syntactically:<\/p><code>find \/path\/to\/source -options -filename<\/code>",
             "completed": false
         },
         {
             "id": 36,
             "parent": "basics",
             "section": "Searching & Filtering",
-            "title": "find path\/to\/source filename.txt",
+            "title": "find path\/to\/source -name filename.txt",
             "content_type": "article",
-            "content": "<p>In our root directory lets run through a basic find command to see how it works! We are going to look for a file named \"LetItHappen.txt\" that lives in Documents\/Lyrics.<\/p><code>find Documents\/Lyrics \"LetItHappen.txt\"<\/code>",
+            "content": "<p>In our root directory lets run through a basic find command to see how it works! We are going to look for a file named \"LetItHappen.txt\" that lives in Documents\/Lyrics.<\/p><code>find Documents\/Lyrics -name \"LetItHappen.txt\"<\/code>",
             "answer": "find Documents\/Lyrics \"LetItHappen.txt\"",
             "completed": false
         },
@@ -449,86 +449,81 @@
         {
             "id": 41,
             "parent": "basics",
-            "section": "checkpoint",
+            "section": "Checkpoint",
             "title": "Knowledge Check #11",
             "content_type": "multichoice",
-            "content": "What does the wildcard* character allow us to do?",
-            "options": [
-                "A) Redirects output to a file",
-                "B) Matches any number of characters in a filename or pattern",
-                "C) Searches for specific patterns in files",
-                "D) Creates new directories recursively"
-            ],
-            "correct": "B",
-            "explanation": "The wildcard character (*) is used to match any number of characters in a filename or pattern. This allows us to perform operations on multiple files that match a certain pattern without having to specify each file individually.",
+            "questions": {
+                "A": "Redirects output to a file",
+                "B": "Matches any number of characters in a filename or pattern",
+                "C": "Searches for specific patterns in files",
+                "D": "Creates new directories recursively"
+            },
+            "content": "<p>What does the wildcard* character allow us to do?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
             "completed": false
         },
         {
             "id": 42,
             "parent": "basics",
-            "section": "checkpoint",
+            "section": "Checkpoint",
             "title": "Knowledge Check #12",
             "content_type": "multichoice",
-            "content": "Which grep flag would you use to display the line numbers where the pattern appears?",
-            "options": [
-                "A) -i",
-                "B) -v",
-                "C) -n",
-                "D) -c"
-            ],
-            "correct": "C",
-            "explanation": "The -n flag with grep displays the line numbers where the pattern is found in the file. This is useful for quickly locating where specific patterns appear in a document.",
+            "questions": {
+                "A": "-i",
+                "B": "-v",
+                "C": "-n",
+                "D": "-c"
+            },
+            "content": "<p>Which grep flag would you use to display the line numbers where the pattern appears?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
             "id": 43,
             "parent": "basics",
-            "section": "checkpoint",
+            "section": "Checkpoint",
             "title": "Knowledge Check #13",
             "content_type": "multichoice",
-            "content": "What is the correct syntax for the find command?",
-            "options": [
-                "A) find filename /path/to/source",
-                "B) find -options filename",
-                "C) find /path/to/source -options -filename",
-                "D) find -filename -options"
-            ],
-            "correct": "C",
-            "explanation": "The correct syntax for the find command is 'find /path/to/source -options -filename'. The path specifies where to start searching, options provide additional filtering criteria, and filename specifies what you're looking for.",
+            "questions": {
+                "A": "find filename /path/to/source",
+                "B": "find -options filename",
+                "C": "find /path/to/source -options -filename",
+                "D": "find -filename -options"
+            },
+            "content": "<p>What is the correct syntax for the find command?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
             "id": 44,
             "parent": "basics",
-            "section": "checkpoint",
+            "section": "Checkpoint",
             "title": "Knowledge Check #14",
             "content_type": "multichoice",
-            "content": "What is the difference between the '>' and '>>' operators?",
-            "options": [
-                "A) '>' reads from a file while '>>' writes to a file",
-                "B) '>' overwrites existing content while '>>' appends to existing content",
-                "C) '>' redirects standard output while '>>' redirects standard error",
-                "D) '>' works with text files while '>>' works with binary files"
-            ],
-            "correct": "B",
-            "explanation": "The '>' operator overwrites existing content in a file, replacing everything that was there before. The '>>' operator appends to the file, adding new content after the existing content without erasing what was already there.",
+            "questions": {
+                "A": "> reads from a file while >> writes to a file",
+                "B": "> overwrites existing content while >> appends to existing content",
+                "C": "> redirects standard output while >> redirects standard error",
+                "D": "> works with text files while >> works with binary files"
+            },
+            "content": "<p>What is the difference between the '>' and '>>' operators?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
             "completed": false
         },
         {
             "id": 45,
             "parent": "basics",
-            "section": "checkpoint",
+            "section": "Checkpoint",
             "title": "Knowledge Check #15",
             "content_type": "multichoice",
-            "content": "Which command would correctly count the number of occurrences of the word 'Linux' in a file called notes.txt?",
-            "options": [
-                "A) find notes.txt 'Linux'",
-                "B) grep 'Linux' notes.txt > count.txt",
-                "C) grep -c 'Linux' notes.txt",
-                "D) cat notes.txt | Linux -count"
-            ],
-            "correct": "C",
-            "explanation": "The command 'grep -c 'Linux' notes.txt' uses the -c flag with grep to count the number of lines containing the pattern 'Linux' in the file notes.txt, rather than displaying the matching lines themselves.",
+            "questions": {
+                "A": "find notes.txt 'Linux'",
+                "B": "grep 'Linux' notes.txt > count.txt",
+                "C": "grep -c 'Linux' notes.txt",
+                "D": "cat notes.txt | Linux -count"
+            },
+            "content": "<p>Which command would correctly count the number of occurrences of the word 'Linux' in a file called notes.txt?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
@@ -555,7 +550,7 @@
             "id": 48,
             "parent": "basics",
             "section": "checkpoint",
-            "title": "Lab #6",
+            "title": "Lab #7",
             "content_type": "lab",
             "content": "<p>In the same Lyrics/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt</p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>" ,
             "completed": false
@@ -564,18 +559,18 @@
             "id": 49,
             "parent": "basics",
             "section": "checkpoint",
-            "title": "Lab #7",
+            "title": "Lab #8",
             "content_type": "lab",
-            "content": "<p>In your new copy.txt file write a command that takes the string \"Unicorns are real\" and APPENDS to copy.txt</p>",
+            "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt</p>",
             "completed": false
         }, 
         {
             "id": 50,
             "parent": "basics",
             "section": "checkpoint",
-            "title": "Lab #8",
+            "title": "Lab #9",
             "content_type": "lab",
-            "content": "<p>Write a command that returns all the .txt files in the Projects/ directory?</p>",
+            "content": "<p>Write a command that returns all the .txt files in the Documents/ directory?</p>",
             "completed": false
         },
         {
@@ -584,7 +579,7 @@
             "section": "File Permissions",
             "title": "Permissions In Linux",
             "content_type": "article",
-            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br><br>    r – Read (can view the file or list the folder)</br><br>w –  Write (can modify the file or folder)</br><br>  x – Execute (can run the file if it’s a program or enter the folder)</br></p><br><p>Then there are permissions for 3 type of users:<br><br>Owner – the person who owns the file</br><br>Group – a group of users assigned to the file</br><br>Others – everyone else</p>",
+            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br>    <b>r</b> – Read (can view the file or list the folder)</br><b>w</b> –  Write (can modify the file or folder)</br> <b>x</b> – Execute (can run the file if it’s a program or enter the folder)</br></p><br><p>Also, there are permissions for 3 type of users:<br><b>Owner</b> – the person who owns the file<br><b>Group</b> – a group of users assigned to the file</br><b>Others</b> – everyone else</p>",
             "completed": false
         },
         {

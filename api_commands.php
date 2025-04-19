@@ -332,8 +332,8 @@ $fileSystem = [
             "daily_logs.txt" => [
                 "file" => [
                     "permissions" => "--w-r--r--",
-                    "owner" => "user",
-                    "group" => "Steve",
+                    "owner" => "Steve",
+                    "group" => "group",
                     "created" => "2025-03-24 01:24:04",
                     "modified" => "2025-03-25 04:04:04",
                     "size" => 15,
@@ -997,7 +997,7 @@ function delete_recursive(&$directory) {
 }
 
 
-function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) : string {
+function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
     // Navigate to the target directory
     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
     $current = &$fileSystem['/'];
@@ -1019,25 +1019,35 @@ function process_chmod(&$fileSystem, $currentDirectory, $argument, $targetFile) 
     // Update permissions (no need for legacy conversion; files use 'file' key)
     $file = &$current[$targetFile]['file'];
     $permissions = str_split($file['permissions']);
-    
+    $owner = $file['owner'];
+
+    // Check permission to modify
+    if ($owner !== "owner" && $sudo !== "sudo") {
+        return "Error: User does not own this file.\n";
+    }
+
+    // At this point, either user owns it or used sudo — safe to proceed
     switch ($argument) {
         case 'u+x':
-            $permissions[3] = 'x'; // User execute (e.g., -rwxr--r--
+            $permissions[3] = 'x'; // User execute
+            break;
         case 'u+r':
-            $permissions[1] = 'r';
+            $permissions[1] = 'r'; // User read
+            break;
+        case 'u-r':
+            $permissions[1] = '-'; // Remove user read
             break;
         case 'g-w':
-            $permissions[5] = '-'; // Remove group write (e.g., -rw-r-----
+            $permissions[5] = '-'; // Remove group write
             break;
         case 'o=r':
-            $permissions[7] = 'r';
-            $permissions[8] = '-';
-            $permissions[9] = '-';
+            $permissions[7] = 'r'; // Others read
+            $permissions[8] = '-'; // Others write
+            $permissions[9] = '-'; // Others execute
             break;
         default:
             return "Invalid chmod argument.\n";
     }
-
     $file['permissions'] = implode('', $permissions);
     $file['modified'] = date("Y-m-d H:i:s");
     return "Permissions updated for $targetFile.\n";
@@ -1166,48 +1176,7 @@ function process_grep($fileSystem, $currentDirectory, $flag, $pattern, $file) : 
     return empty($results) ? "Error: No matches found\n" : implode("\n", $results) . "\n";
 }
 
-/*
-function retrieve_files_from_argument($fileSystem, $currentDirectory, $expression): array {
-    $files = [];
-    $searchPath = rtrim($currentDirectory, "/");
-    $pathParts = array_filter(explode("/", ltrim($searchPath, "/")), 'strlen');
-    $currentLevel = $fileSystem["/"];
 
-    // Navigate to target directory
-    foreach ($pathParts as $part) {
-        if (!isset($currentLevel[$part])) {
-            return [];
-        }
-        $currentLevel = $currentLevel[$part];
-    }
-
-    foreach ($currentLevel as $name => $entry) {
-        $fullPath = $searchPath . "/" . $name;
-
-        // Handle directories (arrays without 'file' key)
-        if (is_array($entry) && !isset($entry['file'])) {
-            $files = array_merge(
-                $files,
-                retrieve_files_from_argument($fileSystem, $fullPath, $expression)
-            );
-        } 
-        // Handle files (arrays with 'file' key)
-        elseif (is_array($entry) && isset($entry['file'])) {
-            if (fnmatch($expression, $name)) {
-                $files[$fullPath] = $entry['file']['content'];
-            }
-        }
-    }
-
-    return $files;
-}
-
-function process_find($fileSystem, $currentDirectory, $path, $expression): string {
-    $expression = trim($expression, "\"'");
-    $files = retrieve_files_from_argument($fileSystem, $path, $expression);
-    return empty($files) ? "Error: No files found.\n" : implode("\n", array_keys($files)) . "\n";
-}
-*/
 function retrieve_files_from_argument($fileSystem, $currentDirectory, $path, $expression): array {
     $files = [];
     // Handle absolute or relative path
@@ -1366,6 +1335,7 @@ function GetCurrentLesson() : int {
 
 
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
+        if ($userId === null) return;
         $stmt = $pdo->prepare("
             INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson)
             VALUES (?, ?, 1, ?) 
@@ -1385,6 +1355,7 @@ function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : v
 }
 
 function updateUserProgress($pdo, $userId, $lesson_id) : void {
+    if ($userId === null) return;
     if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
     // Check if the user already completed the lesson
     $checkSql = "
@@ -1416,6 +1387,7 @@ function updateUserProgress($pdo, $userId, $lesson_id) : void {
 //api to send the user progress to the front, in json, 
 //we will do that by getting all the lessons ids the current user has and sending those keys to json
 function send_user_progress(PDO $pdo, int $userId) : array {
+    if ($userId === null) return null;
         $sql = "
         SELECT lesson_id FROM user_lessons WHERE user_id = ?";
         $stmt = $pdo->prepare($sql);
@@ -1425,7 +1397,8 @@ function send_user_progress(PDO $pdo, int $userId) : array {
 }
 
     function send_user_status(PDO $pdo, string $username) : int {
-          $sql = "SELECT is_logged_in FROM users WHERE username = ?";
+        if (empty($username)) return 0;
+        $sql = "SELECT is_logged_in FROM users WHERE username = ?";
           $stmt = $pdo->prepare($sql); 
           $stmt->execute([$username]);
           $user_status = $stmt->fetchColumn(); // Fetch single value
@@ -1433,6 +1406,7 @@ function send_user_progress(PDO $pdo, int $userId) : array {
   } 
 
 function send_current_lesson(PDO $pdo, int $userId) : string {
+    if ($userId === null) return null;
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$userId]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -1456,7 +1430,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $fileSystem = &$_SESSION['fileSystem'];
     $currentDir = &$_SESSION['currentDirectory'];
-    
+    $sudo = false;
     $cmd = $args[0] ?? '';
     $arg = $args[1] ?? '';
     $arg2 = $args[2] ?? '';
@@ -1523,13 +1497,35 @@ switch ($cmd) {
                if (GetCurrentLesson() === 3  && ($GetLine === "Hello World" || $Getline === "\"Hello World\"" || $Getline === "'Hello World'"))  {
                      $isCorrect = true;
                 //update to mysql here the users updated progress and their current lesson 
+                if ($userId !== null) {
                 update_mysql($pdo, $userId, 3, 4);            
                 updateUserProgress($pdo, $userId, 3);
-                }            
+                  }
+                }             
              }   
-             
-             $output .= process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
-            break;   
+             $output = process_echo($fileSystem, $currentDir, $GetLine, $operator, $file);
+             if (GetCurrentLesson() === 39 && $GetLine === "I Love Linux!" && $operator === '>' && $file === "Shakespeare.txt") {
+                $isCorrect = true;
+                if ($userId !== null) {
+                update_mysql($pdo, $userId, 39, 40);            
+                updateUserProgress($pdo, $userId, 40);
+                }
+            }
+             if (GetCurrentLesson() === 40 && $GetLine === "Dinosaur!" && $operator === '>>' && $file === "Shakespeare.txt") {
+                $isCorrect = true;
+                if ($userId !== null) {
+                update_mysql($pdo, $userId, 40, 41);            
+                updateUserProgress($pdo, $userId, 41);
+                }
+            }
+             if (GetCurrentLesson() === 49 && $GetLine === "Earth, Moon, Sun" && $operator === '>>' && $file === "Copy.txt" && !str_starts_with($output, "Error")) {
+                $isCorrect = true;
+                if ($userId !== null) {
+                update_mysql($pdo, $userId, 49, 50);            
+                updateUserProgress($pdo, $userId, 50);
+                }
+            }
+             break;   
         case 'touch':
                 if (count($args) > 2) {
                     $output = "Error: Invalid touch command\n";
@@ -1543,10 +1539,12 @@ switch ($cmd) {
                 file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                 chmod('src/testAPI/lessons.json', 0666);
                 if (GetCurrentLesson() === 14 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
-                   update_mysql($pdo, $userId, 14, 15);  
-                    updateUserProgress($pdo, $userId, 14);
                     $isCorrect = true;
+                    if ($userId !== null) {
+                    update_mysql($pdo, $userId, 14, 15);  
+                    updateUserProgress($pdo, $userId, 14);
                 }
+            }
             break;
         case 'ls':
             if ($arg === '-l') {
@@ -1555,6 +1553,13 @@ switch ($cmd) {
                     break;
                 }
                 $output = process_ls_l($fileSystem, $currentDir);
+                if (GetCurrentLesson() === 52) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                    update_mysql($pdo, $userId, 52, 53);  
+                    updateUserProgress($pdo, $userId, 52);
+                }
+            }
                 break;
             }
             if (count($args) > 1) {
@@ -1569,9 +1574,11 @@ switch ($cmd) {
             chmod('src/testAPI/lessons.json', 0666);
             if (GetCurrentLesson() === 6) {
                 $isCorrect = true;
+                if ($userId !== null) {
                 update_mysql($pdo, $userId, 6, 7); 
                 updateUserProgress($pdo, $userId, 6);
-            }
+               }
+           }
             $output = process_ls($fileSystem, $currentDir);
             break;
         case 'cd':
@@ -1588,10 +1595,12 @@ switch ($cmd) {
                  file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                  chmod('src/testAPI/lessons.json', 0666); 
                  if (GetCurrentLesson() === 9) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
                      updateUserProgress($pdo, $userId, 9);
                      update_mysql($pdo, $userId, 9, 10);
-                    $isCorrect = true;
                 }
+            }
                  break;
             } else {
                 if ($GLOBALS['commandSuccess']) {
@@ -1603,14 +1612,18 @@ switch ($cmd) {
                  $jsonData['basics'][5]['completed'] = true;
                 if (GetCurrentLesson() === 10  && ($arg === "../Projects/project1" ||  $arg === "../Projects/project1/")) {
                     $isCorrect = true;
+                    if ($userId !== null) {
                     update_mysql($pdo, $userId, 10, 11);
                     updateUserProgress($pdo, $userId, 10);
                     }
+                }
                 if (GetCurrentLesson() === 7 && ($arg === "Documents" || $arg === "Documents/")) {
                     $isCorrect = true;
+                    if ($userId !== null) {
                     update_mysql($pdo, $userId, 7, 8);
                     updateUserProgress($pdo, $userId, 7);
                    }
+                }
                 }
             }
             break;
@@ -1622,10 +1635,13 @@ switch ($cmd) {
                  $jsonData['basics'][2]['completed'] = true;
                 if (GetCurrentLesson() === 4){
                     $isCorrect = true;
+                    if ($userId !== null) {
                     update_mysql($pdo, $userId, 4, 5); 
                     updateUserProgress($pdo, $userId, 4);
                 }
+            }
                 $output = process_date();
+            
                 break;
         case 'cat':
                 if (count($args) > 4) {
@@ -1644,9 +1660,19 @@ switch ($cmd) {
                    chmod('src/testAPI/lessons.json', 0666);
                 if (GetCurrentLesson() === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt" ) {
                     $isCorrect = true;
+                    if ($userId !== null) {
                     update_mysql($pdo, $userId, 8, 9); 
                     updateUserProgress($pdo, $userId, 8);
                 }
+            }
+                if (GetCurrentLesson() === 48 && $arg === "LetItHappen.txt" && $arg2 === ">" && $arg3 === "copy.txt" && $GLOBALS['commandSuccess']) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                    update_mysql($pdo, $userId, 48, 49);
+                    updateUserProgress($pdo, $userId, 49); 
+                }
+            }
+
             break;
         case 'pwd':
                  $jsonData['basics'][3]['completed'] = true;
@@ -1656,9 +1682,11 @@ switch ($cmd) {
                 }
                 if (GetCurrentLesson() === 5) {
                     $isCorrect = true;
-                    update_mysql($pdo, $userId, 5, 6); 
-                    updateUserProgress($pdo, $userId, 5);
+                    if ($userId !== null) {
+                         update_mysql($pdo, $userId, 5, 6); 
+                        updateUserProgress($pdo, $userId, 5);
                 }
+            }
                 $output = process_pwd($currentDir);
                 break;
         case 'mkdir':
@@ -1669,153 +1697,205 @@ switch ($cmd) {
             $output = process_mkdir($fileSystem, $currentDir, $arg);
             if (GetCurrentLesson() == 15 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
                     $isCorrect = true;
+                    if ($userId !== null) {
                     update_mysql($pdo, $userId, 14, 15);
                     updateUserProgress($pdo, $userId, 14);
-            }
+                    }
+                }
             break;
         case 'mv':
-            if (count($args) > 3) {
-                $output = "Error: Invalid mv command";
+                if (count($args) > 3) {
+                    $output = "Error: Invalid mv command";
+                    break;
+                }
+                $output = process_mv($fileSystem, $currentDir, $arg, $arg2);
+                $GetLine = $arg . $arg2;
+              
+                if (GetCurrentLesson() === 19 && $arg === "file2.txt" && $arg2 === "kali.txt" && $GLOBALS['commandSuccess']) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 19, 20);            
+                        updateUserProgress($pdo, $userId, 19);
+                    }
+                } 
+                if (GetCurrentLesson() === 20 && $arg === "Documents/" && $arg2 === "Debian/" && $GLOBALS['commandSuccess']) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 20, 21);            
+                        updateUserProgress($pdo, $userId, 20);
+                    }
+                }  
+                if (GetCurrentLesson() === 21 && $arg === "hello.txt" && ($arg2 === "../Projects/" || $arg2 === "../Projects") && $GLOBALS['commandSuccess']) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 21, 22);            
+                        updateUserProgress($pdo, $userId, 21);
+                    }
+                } 
+                if (GetCurrentLesson() === 22 && ($arg === "Projects" || $args === "Projects/") && ($arg2 === "Documents/Subfolder/" || $arg2 === "Documents/Subfolder")) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 22, 23);            
+                        updateUserProgress($pdo, $userId, 22);
+                    }
+                }
+                
                 break;
-            }
-            $output = process_mv($fileSystem, $currentDir, $arg, $arg2);
-            $GetLine = $arg . $arg2;
-          
-            if (GetCurrentLesson() === 19 && $arg === "file2.txt" && $arg2 === "kali.txt" && $GLOBALS['commandSuccess']) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 19, 20);            
-                updateUserProgress($pdo, $userId, 19);
-            } 
-            if (GetCurrentLesson() === 20 && $arg === "Documents/" && $arg2 === "Debian/" && $GLOBALS['commandSuccess']) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 20, 21);            
-                updateUserProgress($pdo, $userId, 20);
-            }  
-            if (GetCurrentLesson() === 21 && $arg === "hello.txt" && ($arg2 === "../Projects/" || $arg2 === "../Projects") && $GLOBALS['commandSuccess']) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 21, 22);            
-                updateUserProgress($pdo, $userId, 21);
-            } 
-            if (GetCurrentLesson() === 22 && ($arg === "Projects" || $args === "Projects/") && ($arg2 === "Documents/Subfolder/" || $arg2 === "Documents/Subfolder")) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 22, 23);            
-                updateUserProgress($pdo, $userId, 22);
-            }
-            
-            break;
+        
         case 'rm':
-            if ($arg == "-rf") {
-                if (count($args) > 3) {
-                    $output = "Error: Invalid rm -rf command";
+                if ($arg == "-rf") {
+                    if (count($args) > 3) {
+                        $output = "Error: Invalid rm -rf command";
+                        break;
+                    }
+                    $output = process_rm_rf($fileSystem, $currentDir, $arg2);
+                    if (str_starts_with($output, "Error:")) {
+                        break;
+                    }
+                    if (GetCurrentLesson() === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
+                         $isCorrect = true;
+                         if ($userId !== null) {
+                             update_mysql($pdo, $userId, 18, 19);
+                             updateUserProgress($pdo, $userId, 18);
+                         }
+                    }
+                    if (GetCurrentLesson() === 28 && ($arg2 === "School/" || $arg2 === "School")) {
+                        $isCorrect = true;
+                        if ($userId !== null) {
+                            update_mysql($pdo, $userId, 28, 29);
+                            updateUserProgress($pdo, $userId, 28);
+                        }
+                   }
                     break;
+                } else {
+                    if (count($args) > 2) {
+                        $output = "Error: Invalid rm command";
+                        break;
+                    }
+                    $output = process_rm($fileSystem, $currentDir, $arg);
+                    if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
+                        $isCorrect = true;
+                        if ($userId !== null) {
+                            update_mysql($pdo, $userId, 16, 17);
+                            updateUserProgress($pdo, $userId, 16);
+                        }
+                    }
                 }
-                $output = process_rm_rf($fileSystem, $currentDir, $arg2);
-                if (str_starts_with($output, "Error:")) {
-                    break;
-                }
-                if (GetCurrentLesson() === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
-                     $isCorrect = true;
-                     update_mysql($pdo, $userId, 18, 19);
-                     updateUserProgress($pdo, $userId, 18);
-                }
-                if (GetCurrentLesson() === 28 && ($arg2 === "School/" || $arg2 === "School")) {
-                    $isCorrect = true;
-                    update_mysql($pdo, $userId, 28, 29);
-                   updateUserProgress($pdo, $userId, 28);
-               }
                 break;
-            }
-            else {
-                if (count($args) > 2) {
-                    $output = "Error: Invalid rm command";
-                    break;
-                }
-            $output = process_rm($fileSystem, $currentDir, $arg);
-                if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
-                    $isCorrect = true;
-                    update_mysql($pdo, $userId, 16, 17);
-                    updateUserProgress($pdo, $userId, 16);
-                }
-        }
-            break;
+        
         case 'rmdir':
-            if (count($args) > 2) {
-                $output = "Error: Invalid rmdir command";
-                break;
-            }
-            $output = process_rmdir( $fileSystem, $currentDir, $arg);
-            if (GetCurrentLesson() === 16 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
-                $isCorrect = true; 
-               update_mysql($pdo, $userId, 17, 18); 
-                    updateUserProgress($pdo, $userId, 17);
-            }
-            break;
-        case 'refresh':
-            $output = process_refresh();
-            break;
-        case 'chmod':
-            $output = process_chmod($fileSystem, $currentDir, $arg, $arg2);
-            break;
-        case 'grep':
-            $flag = ($arg && str_starts_with($arg, "-")) ? $arg : "";
-            $pattern = $flag ? $arg2 : $arg;
-            $file = $flag ? $arg3 : $arg2;
-            if (GetCurrentLesson() === 31 ) {
-                if (count($args) > 3) {
-                    $output = "Error: Invalid grep command\n";
+                if (count($args) > 2) {
+                    $output = "Error: Invalid rmdir command";
                     break;
                 }
-            }
-            $output = process_grep($fileSystem, $currentDir, $flag, $pattern, $file);
-            if (GetCurrentLesson() === 31 && $pattern === "And" && $file === "Shakespeare.txt" && !str_starts_with($output, "Error:")) {
-                  $isCorrect = true;
-                  update_mysql($pdo, $userId, 31, 32);
-                  updateUserProgress($pdo, $userId, 31); 
-            }
-            if (GetCurrentLesson() === 32 && $flag === "-n" && $pattern === "in" && $file === "Declaration.txt" && !str_starts_with($output, "Error:")) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 32, 33);
-                updateUserProgress($pdo, $userId, 32); 
-            }
-          if (GetCurrentLesson() === 33 && $flag === "-c" && $pattern === "moon" && $file === "Kennedy.txt" && !str_starts_with($output, "Error:")) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 33, 34);
-                updateUserProgress($pdo, $userId, 33); 
-            }
-            if (GetCurrentLesson() === 34 && $pattern === "all" && $file === "*.txt" && !str_starts_with($output, "Error:")) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 34, 35);
-                updateUserProgress($pdo, $userId, 34); 
-            }
-            break;
+                $output = process_rmdir($fileSystem, $currentDir, $arg);
+                if (GetCurrentLesson() === 17 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
+                    $isCorrect = true; 
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 17, 18); 
+                        updateUserProgress($pdo, $userId, 17);
+                    }
+                }
+                break;
+        
+         case 'grep':
+                $flag = ($arg && str_starts_with($arg, "-")) ? $arg : "";
+                $pattern = $flag ? $arg2 : $arg;
+                $file = $flag ? $arg3 : $arg2;
+                if (GetCurrentLesson() === 31) {
+                    if (count($args) > 3) {
+                        $output = "Error: Invalid grep command\n";
+                        break;
+                    }
+                }
+                $output = process_grep($fileSystem, $currentDir, $flag, $pattern, $file);
+                if (GetCurrentLesson() === 31 && $pattern === "And" && $file === "Shakespeare.txt" && !str_starts_with($output, "Error:")) {
+                      $isCorrect = true;
+                      if ($userId !== null) {
+                          update_mysql($pdo, $userId, 31, 32);
+                          updateUserProgress($pdo, $userId, 31);
+                      }
+                }
+                if (GetCurrentLesson() === 32 && $flag === "-n" && $pattern === "in" && $file === "Declaration.txt" && !str_starts_with($output, "Error:")) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 32, 33);
+                        updateUserProgress($pdo, $userId, 32);
+                    }
+                }
+                if (GetCurrentLesson() === 33 && $flag === "-c" && $pattern === "moon" && $file === "Kennedy.txt" && !str_starts_with($output, "Error:")) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 33, 34);
+                        updateUserProgress($pdo, $userId, 33);
+                    }
+                }
+                if (GetCurrentLesson() === 34 && $pattern === "all" && $file === "*.txt" && !str_starts_with($output, "Error:")) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 34, 35);
+                        updateUserProgress($pdo, $userId, 34);
+                    }
+                }
+                break;
+        
         case 'find':
-                // Parse "find <path> -name <pattern>"
-        if (count($args) < 3 || count($args) > 4) {
-            $output = "Error: Invalid find command\"\n";
+                if (count($args) < 3 || count($args) > 4) {
+                    $output = "Error: Invalid find command\"\n";
+                    break;
+                }
+                $path = $args[1];
+                $expression = $args[count($args) - 1];
+                if ($args[2] === '-name' && count($args) >= 4) {
+                    $expression = $args[3];
+                }
+                $expression = trim($expression, "\"'");
+                $output = process_find($fileSystem, $currentDir, $path, $expression);
+                if (GetCurrentLesson() === 36 && strpos($output, "Documents/Lyrics/LetItHappen.txt") !== false) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 36, 37);
+                        updateUserProgress($pdo, $userId, 36);
+                    }
+                }
+        
+                if (GetCurrentLesson() === 37 && strpos($output, 'Projects/project1') !== false) {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 37, 38);
+                        updateUserProgress($pdo, $userId, 37);
+                    }
+                }
+        
+                if (GetCurrentLesson() === 50 && ($path === "Documents" || $path === "Documents/") && $expression === "*.txt") {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 50, 51);
+                        updateUserProgress($pdo, $userId, 51);
+                    }
+                }
+                break;
+        case 'chmod':
+            $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);
             break;
-            }
-            $path = $args[1];
-            $expression = $args[count($args) - 1];
-            // If "-name" is provided, adjust path and expression
-            if ($args[2] === '-name' && count($args) >= 4) {
-            $path = $args[1];
-            $expression = $args[3];
-            }
-            // Trim quotes from the expression (e.g., "*.txt" → *.txt)
-            $expression = trim($expression, "\"'");
-            $output = process_find($fileSystem, $currentDir, $path, $expression);
-            $match .= $output;
-            if (GetCurrentLesson() === 36 && strpos($match, "Documents/Lyrics/LetItHappen.txt") !== false) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 36, 37);
-                updateUserProgress($pdo, $userId, 36);
-            }
-            if (GetCurrentLesson() === 37 && strpos($match, 'Projects/project') !== false) {
-                $isCorrect = true;
-                update_mysql($pdo, $userId, 37, 38);
-                updateUserProgress($pdo, $userId, 37);
-            }
-            break;
+        case 'sudo':
+                if ($arg !== "chmod" && $arg !== "chown") {
+                    $output = "Only chmod and chown are supported with sudo in this setting";
+                    break;
+                }
+            
+                if (count($args) !== 4) {
+                    $output = "Usage: sudo $arg <mode> <file>";
+                    break;
+                }
+            
+                if ($arg === "chmod") {
+                    $output = process_chmod($fileSystem, $currentDir, "sudo", $arg2, $arg3);
+                }
+        break;
+    case 'refresh':
+        $output = process_refresh();
+        break;
 	case 'ping':
         $output = process_ping($arg);
         break;
@@ -1856,6 +1936,11 @@ switch ($cmd) {
         $status = send_user_status($pdo, $username);
     }
    
+    if (!isset($_SESSION["user_username"]) || empty($_SESSION["user_username"])) {
+        $progress = null;
+        $currentLesson = null;
+        $status = null;
+    }
    // Return the output as JSON
     echo json_encode([
         'output' => $output,
