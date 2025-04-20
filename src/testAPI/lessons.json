@@ -606,7 +606,7 @@
             "section": "File Permissions",
             "title": "sudo",
             "content_type": "interative",
-            "content": "<p>The <b>sudo</b> command is one of the more important commands in Linux as it allows you to execute commands with the security privileges of another user, typically known as the superuser (root).</p><p>This gives you temporary administrative access to perform tasks that regular users cannot do.</p><p>The name 'sudo' stands for 'superuser do' or 'substitute user do'. When you run a command with sudo, the system will typically ask for your password to verify your identity.</p><p>Basic syntax:</p><code>sudo command_to_run</code><p>Common examples:</p><p>- Installing software: <code>sudo apt install package_name</code></p><p>- Editing system files: <code>sudo nano /etc/hosts</code></p><p>- Restarting the system: <code>sudo reboot</code></p><p>Always use sudo with caution, as it gives you the power to modify critical system files and settings that could potentially damage your system if used incorrectly.</p>",
+            "content": "<p>The <b>sudo</b> command is one of the more important commands in Linux as it allows you to execute commands with the security privileges of another user, typically known as the superuser (root).</p><p>This gives you temporary administrative access to perform tasks that regular users cannot do.</p><p>The name 'sudo' stands for 'superuser do' or 'substitute user do'. When you run a command with sudo, the system will typically ask for your password to verify your identity.</p><p>Basic syntax:</p><code>sudo command_to_run</code><p>Common examples:</p><p>Modifying File Permissions: <code>sudo chmod [options] file_name></code></p><p>- Installing software: <code>sudo apt install package_name</code></p><p>- Editing system files: <code>sudo nano /etc/hosts</code></p><p>- Restarting the system: <code>sudo reboot</code></p><p>Always use sudo with caution, as it gives you the power to modify critical system files and settings that could potentially damage your system if used incorrectly.</p>",
             "completed": false
         },
         {
@@ -615,7 +615,7 @@
             "section": "File Permissions",
             "title": "chmod: change user permissions",
             "content_type": "interative",
-            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work/ directory.</p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.</p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cant cat the content to view it since we don't have the permissions for it!</p>Also, notice how we dont have authorization to modifiy the file since we are not the user.</p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r</code></p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!</p><p>Try it out!</p>", 
+            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work/ directory.</p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.</p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cant cat the content to view it since we don't have the permissions for it!</p>Also, notice how we dont have authorization to modifiy the file since we are not the user.</p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt</code></p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!</p><p>Try it out!</p>", 
             "answer": "sudo chmod u+r",
             "completed": false
         },
@@ -625,8 +625,8 @@
             "section": "File Permissions",
             "title": "chmod: change group permissions",
             "content_type": "interactive",
-            "content": "Let's explore how to change group permissions for files.</p><p>Navigate to the Projects/ directory and run ls -l to see the current permissions on the files there.</p><p>Take a look at 'team_notes.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!</p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.</p><p>The syntax is: <code>sudo chmod g+w</code></p><p>Which means \"Hey Linux, treat me as the root user, so please add write permissions for the group!\"</p><p>Try it out on 'team_notes.txt' and then use ls -l again to see how the permissions have changed.</p>",
-            "answer": "sudo chmod g+w",
+            "content": "Let's explore how to change group permissions for files.</p><p>In the same Work/ directory that we were just in, run ls -l to see the current files again</p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!</p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.</p><p>The syntax is: <code>sudo chmod g+w sales_report.txt</code><pTry it and then use ls -l again to see how the permissions have changed.</p>",
+            "answer": "sudo chmod g+w sales_report.txt",
             "completed": false
         },
         {
@@ -635,7 +635,16 @@
             "section": "File Permissions",
             "title": "chown",
             "content_type": "article",
-            "content": "<p>The <code>chown</code> command changes the owner and group of files and directories in Linux systems.</p><p>Basic syntax: <code>chown [options] new_owner[:new_group] file(s)</code></p><p>Common examples:</p><ul><li><code>chown alice file.txt</code> - Changes owner to alice</li><li><code>chown bob:developers project.py</code> - Changes owner to bob and group to developers</li><li><code>chown -R www-data:www-data /var/www/</code> - Recursively changes ownership for all files in directory</li></ul><p>While <code>sudo</code> provides temporary elevated privileges, <code>chown</code> makes permanent ownership changes that remain after your session ends. This is especially useful for:</p><ul><li>Setting proper ownership for service accounts (like web servers)</li><li>Delegating file management without giving sudo access</li><li>Enabling collaboration in multi-user environments</li><li>Following security best practices</li></ul><p>Since changing ownership often requires elevated privileges, you'll typically use it with sudo: <code>sudo chown root:root /etc/config.conf</code></p><p>Remember that ownership (who owns the file) is separate from permissions (what actions they can perform), which are managed with <code>chmod</code>.</p>",
+            "content": "<p>The <b>chown</b> command changes the owner and group of files and directories in Linux systems.</p><p>Basic syntax: <code>chown [options] new_owner[:new_group] file(s)</code></p><p>Common examples:</p><ul><li><code>chown alice file.txt</code> - Changes owner to alice</li><li><code>chown bob:developers project.py</code> - Changes owner to bob and group to developers</li><li><code>chown -R www-data:www-data /var/www/</code> - Recursively changes ownership for all files in directory</li></ul><p>While <b>sudo</b> provides temporary elevated privileges, <b>chown</b> makes permanent ownership changes that remain after your session ends. This is especially useful for:</p><ul><li>Setting proper ownership for service accounts (like web servers)</li><li>Delegating file management without giving sudo access</li><li>Enabling collaboration in multi-user environments</li><li>Following security best practices</li></ul><p>Since changing ownership often requires elevated privileges, you'll typically use it with sudo: <code>sudo chown [option] /path/to/source</code>",
+            "completed": false
+        }, 
+        {
+            "id": 58,
+            "parent": "basics",
+            "section": "File Permissions",
+            "title": "chown: change owner of a file",
+            "content_type": "article",
+            "content": "",
             "completed": false
         }
     ],

@@ -1053,6 +1053,39 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
     return "Permissions updated for $targetFile.\n";
 }
 
+function process_chown($fileSystem, $currentDirectory, $sudo, $newuser, $targetFile) : string {
+     // Navigate to the target directory
+     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
+     $current = &$fileSystem['/'];
+     foreach ($path as $part) {
+         if (!isset($current[$part]) || !is_array($current[$part])) {
+             return "Directory not found.\n";
+         }
+         $current = &$current[$part];
+     }
+ 
+     // Check if the target is a valid file (not a directory)
+     if (
+         !isset($current[$targetFile]) || 
+         (is_array($current[$targetFile]) && !isset($current[$targetFile]['file']))
+     ) {
+         return "File not found or is a directory.\n";
+     }
+ 
+     // Update permissions (no need for legacy conversion; files use 'file' key)
+     $file = &$current[$targetFile]['file'];
+     $owner = $file['owner'];
+     //user does not have access to change it, must use sudo 
+     if ($owner !== "user" && $sudo !== "sudo") {
+        return "Error: User does not own this file";
+     }
+     //else user has permission or ran sudo
+     $file['owner'] = $newuser;
+     $file['modified'] = date("Y-m-d H:i:s");
+     return "";
+}
+
+
 function retrieve_files_from_directory($fileSystem, $currentDirectory) : array {
 	$files = []; // will hold all the files in current directory, the key will hold the file name and value will be its content
 	 $currentDirectory = rtrim($currentDirectory, "/");
