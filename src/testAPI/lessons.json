@@ -1,7 +1,7 @@
 {
     "basics": [
         {
-            "section__size": 60,
+            "section__size": 65,
             "section__completed": false
         },
         {
@@ -105,7 +105,7 @@
         {
             "id": 11,
             "parent": "basics",
-            "section": "Checkpoint",
+            "section": "Checkpoint - File Navigation",
             "title": "Knowlegde Check #1",
             "content_type": "multichoice",
             "questions": {
@@ -121,7 +121,7 @@
         {
             "id": 12,
             "parent": "basics",
-            "section": "Checkpoint",
+            "section": "Checkpoint - File Navigation",
             "title": "Knowlegde Check #2",
             "content_type": "multichoice",
             "questions": {
@@ -137,7 +137,7 @@
         {
             "id": 13,
             "parent": "basics",
-            "section": "Checkpoint",
+            "section": "Checkpoint - File Navigation",
             "title": "Knowlegde Check #3",
             "content_type": "multichoice",
             "questions": {
@@ -204,7 +204,7 @@
             "id": 19,
             "parent": "basics",
             "section": "File Modifications",
-            "title": "mv",
+            "title": "mv - rename files",
             "content_type": "interactive",
             "content": "<p>So far in our file modifcation section, we have gone over how to add and remove from our filesystem, but what about changing a file or directories name? Or possibly changing the location where a file lives?<\/p>To begin with, if we want to change the name of a file or directory we use the <b>mv<\/b> command to rename it, followed by the name of the file or directory, which is followed by the new name you have chosen.<\/p><p>Lets go into our Projects\/ directory and rename file2.txt to kali.txt<\/p><code> mv file2.txt kali.txt<\/code>",
             "answer": "mv file2.txt kali.txt",
@@ -214,7 +214,7 @@
             "id": 20,
             "parent": "basics",
             "section": "File Modifications",
-            "title": "mv",
+            "title": "mv - rename directories",
             "content_type": "interactive",
             "content": "<p>Like how we discussed in the previous lesson, just like how we can rename files, we can do the same with directories<\/p><p>Lets try it out by renaming our Documents\/ directory to 'Debian\/<\/p><code>mv Documents\/ Debian\/<\/code>",
             "answer": "mv Documents\/ Debian\/",
@@ -224,7 +224,7 @@
             "id": 21,
             "parent": "basics",
             "section": "File Modifications",
-            "title": "mv",
+            "title": "mv - move files/directories",
             "content_type": "interactive",
             "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
             "answer": "mv hello.txt ..\/Projects",
@@ -233,8 +233,8 @@
         {
             "id": 22,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowlegde Check #4",
+            "section": "Checkpoint - File Modifications",
+            "title": "Lab #1",
             "content_type": "interactive",
             "content": "<p>Since we can moves around files with <b>mv<\/b>, we can also move around directories the same way!<\/p><p>Enter the command line argument to move the Projects\/ directory into Subfolder\/ which lives in Documents<\/p><code>mv Directory\/ path\/to\/source<\/code>",
             "answer": "mv Projects\/ Documents\/Subfolder",
@@ -243,8 +243,8 @@
         {
             "id": 23,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #5",
+            "section": "Checkpoint - File Modifications",
+            "title": "Knowledge Check #4",
             "content_type": "multichoice",
             "questions": {
                 "A": "It always renames files, never moves them.",
@@ -259,8 +259,8 @@
         {
             "id": 24,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #6",
+            "section": "Checkpoint - File Modifications",
+            "title": "Knowledge Check #5",
             "content_type": "multichoice",
             "questions": {
                 "A": "mkdir Documents\/notes.txt",
@@ -275,8 +275,8 @@
         {
             "id": 25,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #7",
+            "section": "Checkpoint - File Modifications",
+            "title": "Knowledge Check #6",
             "content_type": "multichoice",
             "questions": {
                 "A": "rm OldFiles\/",
@@ -291,8 +291,8 @@
         {
             "id": 26,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #8",
+            "section": "Checkpoint - File Modifications",
+            "title": "Knowledge Check #7",
             "content_type": "multichoice",
             "questions": {
                 "A": "mv report.txt Documents\/Reports\/",
@@ -307,8 +307,8 @@
         {
             "id": 27,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #9",
+            "section": "Checkpoint - File Modifications",
+            "title": "Knowledge Check #8",
             "content_type": "multichoice",
             "questions": {
                 "A": "rm Backup\/",
@@ -323,8 +323,8 @@
         {
             "id": 28,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #10",
+            "section": "Checkpoint - File Modifications",
+            "title": "Lab #2",
             "content_type": "interactive",
             "content": "Create a new directory called \"School\/\" and in that new directory create a file called \"log.txt\"<\/p><p>Now enter a command that deletes your new School\/ directory that you made.<\/p>",
             "answer": "rm -rf School\/",
@@ -336,7 +336,7 @@
             "section": "Searching & Filtering",
             "title": "Searching & Filtering",
             "content_type": "article",
-            "content": "So far we learned how to navigate around our filestem, along with adding and removing to it. Well now we can begin to tackle the cool and exiting parts of Linux!<\/p><p> Suppose we wanted to look for a file, directory, a word, or any other specific pattern in our filesystem, it would be too long and ineficient to go through every possbile location manually. For example, lets say I wanted to look for a word called \"Errors\" in a file but the file contains thousands of lines, how can we do this efficiently?<\/p> Well the command line allows us to easily solve this problem, one way to solve is with the <b>grep<\/b> command<\/p>",
+            "content": "So far we learned how to navigate around our filesystem, along with adding and removing to it. Well now we can begin to tackle the cool and exiting parts of Linux!<\/p><p> Suppose we wanted to look for a file, directory, a word, or any other specific pattern in our filesystem, it would be too long and ineficient to go through every possbile location manually. For example, lets say I wanted to look for a word called \"Errors\" in a file but the file contains thousands of lines, how can we do this efficiently?<\/p> Well the command line allows us to easily solve this problem, one way to solve is with the <b>grep<\/b> command<\/p>",
             "completed": false
         },
         {
@@ -449,8 +449,8 @@
         {
             "id": 41,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #11",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Knowledge Check #10",
             "content_type": "multichoice",
             "questions": {
                 "A": "Redirects output to a file",
@@ -465,8 +465,8 @@
         {
             "id": 42,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #12",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Knowledge Check #11",
             "content_type": "multichoice",
             "questions": {
                 "A": "-i",
@@ -481,8 +481,8 @@
         {
             "id": 43,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #13",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Knowledge Check #12",
             "content_type": "multichoice",
             "questions": {
                 "A": "find filename /path/to/source",
@@ -497,8 +497,8 @@
         {
             "id": 44,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #14",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Knowledge Check #13",
             "content_type": "multichoice",
             "questions": {
                 "A": "> reads from a file while >> writes to a file",
@@ -513,8 +513,8 @@
         {
             "id": 45,
             "parent": "basics",
-            "section": "Checkpoint",
-            "title": "Knowledge Check #15",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Knowledge Check #14",
             "content_type": "multichoice",
             "questions": {
                 "A": "find notes.txt 'Linux'",
@@ -529,8 +529,8 @@
         {
             "id": 46,
             "parent": "basics",
-            "section": "checkpoint",
-            "title": "Lab #5",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Lab #3",
             "content_type": "lab",
             "content": "<p>In our Documents/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.</p><p>We will need a flag to output the number line where the pattern appears.</p>",
             "answer": "grep -n \"we\" Declaration.txt",
@@ -539,8 +539,8 @@
         {
             "id": 47,
             "parent": "basics",
-            "section": "checkpoint",
-            "title": "Lab #6",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Lab #4",
             "content_type": "lab",
             "content": "<p>Lets traverse to the Lyrics/ directory that lives in the Documents/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt</p>",
             "answer": "grep -c \"happen\" LetItHappen.txt", 
@@ -549,8 +549,8 @@
         {
             "id": 48,
             "parent": "basics",
-            "section": "checkpoint",
-            "title": "Lab #7",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Lab #5",
             "content_type": "lab",
             "content": "<p>In the same Lyrics/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt</p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>" ,
             "completed": false
@@ -558,8 +558,8 @@
         {
             "id": 49,
             "parent": "basics",
-            "section": "checkpoint",
-            "title": "Lab #8",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Lab #6",
             "content_type": "lab",
             "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt</p>",
             "completed": false
@@ -567,8 +567,8 @@
         {
             "id": 50,
             "parent": "basics",
-            "section": "checkpoint",
-            "title": "Lab #9",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Lab #7",
             "content_type": "lab",
             "content": "<p>Write a command that returns all the .txt files in the Documents/ directory?</p>",
             "completed": false
@@ -635,7 +635,7 @@
             "section": "File Permissions",
             "title": "chown",
             "content_type": "article",
-            "content": "<p>The <b>chown</b> command changes the owner and group of files and directories in Linux systems.</p><p>Basic syntax: <code>chown [options] new_owner[:new_group] file(s)</code></p><p>Common examples:</p><ul><li><code>chown alice file.txt</code> - Changes owner to alice</li><li><code>chown bob:developers project.py</code> - Changes owner to bob and group to developers</li><li><code>chown -R www-data:www-data /var/www/</code> - Recursively changes ownership for all files in directory</li></ul><p>While <b>sudo</b> provides temporary elevated privileges, <b>chown</b> makes permanent ownership changes that remain after your session ends. This is especially useful for:</p><ul><li>Setting proper ownership for service accounts (like web servers)</li><li>Delegating file management without giving sudo access</li><li>Enabling collaboration in multi-user environments</li><li>Following security best practices</li></ul><p>Since changing ownership often requires elevated privileges, you'll typically use it with sudo: <code>sudo chown [option] /path/to/source</code>",
+            "content": "<p>The <b>chown</b> command changes the owner and group of files and directories in Linux systems. It is another solution to change your file permissions wihout using sudo, since the owner will now be you. However if you don't own the file at first, you will need to use sudo to allow the chown command to take use. After this, you would no longer need sudo</p><p>Basic syntax: <code>chown [newowner] filename </code></p><p>Common examples:</p><ul><li><code>chown alice file.txt</code> - Changes owner to alice</li><li><code>chown bob:devlopers project.py</code> - Changes owner to bob and group to developers</li><li><code>chown -R www-data:www-data /var/www/</code> - Recursively changes ownership for all files in a directory</li></ul><p>Overall, while <b>sudo</b> provides temporary elevated privileges, <b>chown</b> makes permanent ownership changes that remain after your session ends. This is especially useful for:</p><ul><li>Setting proper ownership for service accounts (like web servers)</li><li>Delegating file management without giving sudo access</li><li>Enabling collaboration in multi-user environments</li><li>Following security best practices</li></ul><p>Since changing ownership often requires elevated privileges, you'll typically use it with sudo: <code>sudo chown [newuser] /path/to/source</code>",
             "completed": false
         }, 
         {
@@ -643,10 +643,100 @@
             "parent": "basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
-            "content_type": "article",
-            "content": "",
+            "content_type": "interactive",
+            "content": "<p>In the Work/ directory, lets take a look how chown can be used and how it affects your system.</p><p>Run ls -l and you will notice that the owner for daily_logs.txt isn't you. Which means you wouldn't be allowed to alter the state of the system without constanly using sudo.</p>The permanment solution to this is to use chown with sudo to change ownership back to you. Lets see how it works by running this command</p><code>sudo chown user daily_logs.txt</code>",
             "completed": false
-        }
+        },
+        {
+            "id": 59,
+            "parent": "basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Knowledge Check #15",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "chmod +rwx file.txt",
+              "B": "chmod 777 file.txt",
+              "C": "chmod a+rwx file.txt",
+              "D": "Both B and C are correct"
+            },
+            "content": "<p>Which command(s) would give read, write, and execute permissions to all users (owner, group, and others) for file.txt?</p><div class=\"question__container\"></div>",
+            "answer": "D",
+            "completed": false
+        },
+        {
+            "id": 60,
+            "parent": "basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Knowledge Check #16",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "chmod 644 report.txt",
+              "B": "chmod u=rw,go=r report.txt",
+              "C": "chmod a-wx,u+w report.txt",
+              "D": "All of the above"
+            },
+            "content": "<p>Which command(s) would set permissions so that the owner can read and write a file, while the group and others can only read it?</p><div class=\"question__container\"></div>",
+            "answer": "D",
+            "completed": false
+           },
+           {
+            "id": 61,
+            "parent": "basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Knowledge Check #17",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "chown user:group file.txt",
+              "B": "chown user.group file.txt",
+              "C": "chmod user:group file.txt",
+              "D": "chmod user.group file.txt"
+            },
+            "content": "<p>Which command correctly changes both the owner and group of a file?</p><div class=\"question__container\"></div>",
+            "answer": "A",
+            "completed": false
+           },
+           {
+            "id": 62,
+            "parent": "basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Knowledge Check #18",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "drwxr-xr-x",
+              "B": "-rwxr-xr-x",
+              "C": "-rw-r--r--",
+              "D": "drw-r--r--"
+            },
+            "content": "<p>In the output of 'ls -l', which permission string represents a regular file (not a directory) with read and write permissions for the owner, and only read permissions for group and others?</p><div class=\"question__container\"></div>",
+            "answer": "C",
+            "completed": false
+           },
+           {
+            "id": 63,
+            "parent": "basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Knowledge Check #19",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "chmod",
+              "B": "chown",
+              "C": "sudo",
+              "D": "ls -l"
+            },
+            "content": "<p>Which command should be used when you need to execute a command with elevated privileges, such as changing the ownership of a system file?</p><div class=\"question__container\"></div>",
+            "answer": "C",
+            "completed": false
+           },
+           {
+            "id": 64,
+            "parent": "basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Lab #8",
+            "content_type": "interative",
+            "content": "<p>In the Work/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.</p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py</code>",
+            "completed": false
+         }
+
     ],
     "networking": [
         {

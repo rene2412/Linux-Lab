@@ -406,9 +406,31 @@ $fileSystem = [
                     " - Drum kits and accessories performing steadily."
                     ]
                 ]
-            ] 
-        ]
-    ]
+            ],
+        "revenue.py" => [
+            "file" => [
+                "permissions" => "-r--r--r--",
+                "owner" => "John",
+                "group" => "group",
+                "created" => "2025-04-20 01:24:04",
+                "modified" => "2025-04-21 00:24:04",
+                "size" => 12,
+                "content" => [ 
+"sold = [2499.0, 29.97, 699.99, 599.0, 99.0, 749.0, 899.0, 11.99, 199.0, 99.0, 19.99, 499.0, 89.0, 249.99, 449.0, 29.99, 649.0, 69.9]
+                
+def totalSales(sold):
+    result = 0
+    for price in sold:
+        result += price;
+    return round(result, 2)
+                
+print(totalSales(sold))
+"
+                     ]
+                 ]
+             ]
+         ]
+     ]
 ];
 
 if (!isset($_SESSION['fileSystem'])) {
@@ -417,10 +439,14 @@ if (!isset($_SESSION['fileSystem'])) {
     $_SESSION['currentDirectory'] = "/";
 }
 function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): string {
+    if (!in_array($operator, ['>', '>>'])) {
+        return "Error: Invalid operator";
+    }
+    
     if (empty($operator) && empty($file)) {
         return $arg . "\n";
     }
-    
+
     if ($operator && $file) {
         $currentDirectory = rtrim($currentDirectory, "/");
         $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -432,7 +458,6 @@ function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): 
             }
             $currentLevel = &$currentLevel[$part];
         }
-        
         if ($operator === '>' || $operator === '>>') {
             // Create the file if it doesn't exist using `touch`
             if (!isset($currentLevel[$file])) {
@@ -441,12 +466,13 @@ function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): 
                     return $touchResult; // Propagate errors (e.g., invalid extension)
                 }
             }
-            
             // Check if target is a directory
             if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
                 return "Error: '$file' is a directory.\n";
             }
-            
+            if (str_contains($file, "revenue.py")) {
+                return "Error: Can't write into revenue.py";
+            }
             // Update content (now guaranteed to be in array format)
             $fileContent = &$currentLevel[$file]['file']['content'];
             if ($operator === '>') {
@@ -495,7 +521,7 @@ function format_directory_contents(array $contents): string {
     foreach ($contents as $name => $content) {
             if ($name === "directory") continue; //skip the directory meta data
             //if its an array that doesnt end with a .txt then its a directory
-            if (is_array($content) && !str_ends_with($name, ".txt")) {
+            if (is_array($content) && !str_ends_with($name, ".txt")  && !str_ends_with($name, ".py")) {
                 $output[] = $name . "/";
             }
             else {
@@ -1053,7 +1079,7 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
     return "Permissions updated for $targetFile.\n";
 }
 
-function process_chown($fileSystem, $currentDirectory, $sudo, $newuser, $targetFile) : string {
+function process_chown(&$fileSystem, $currentDirectory, $sudo, $newuser, $targetFile) : string {
      // Navigate to the target directory
      $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
      $current = &$fileSystem['/'];
@@ -1358,6 +1384,31 @@ function process_date() : string {
     return date('Y-m-d H:i:s');
 }
 
+function GetFilePermissions($fileSystem, $currentDirectory, $targetFile) : string {
+    // Navigate to the target directory
+    $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
+    $current = &$fileSystem['/'];
+    foreach ($path as $part) {
+        if (!isset($current[$part]) || !is_array($current[$part])) {
+            return "Directory not found.\n";
+        }
+        $current = &$current[$part];
+    }
+
+    // Check if the target is a valid file (not a directory)
+    if (
+        !isset($current[$targetFile]) || 
+        (is_array($current[$targetFile]) && !isset($current[$targetFile]['file']))
+    ) {
+        return "File not found or is a directory.\n";
+    }
+
+    // Update permissions (no need for legacy conversion; files use 'file' key)
+    $file = &$current[$targetFile]['file'];
+    $permissions = str_split($file['permissions']); 
+    return $permissions[3];
+}
+
 function GetCurrentLesson() : int {
     $jsonUser = file_get_contents('src/testAPI/userInfo.json');
     // Decode the JSON into a PHP array
@@ -1500,6 +1551,7 @@ switch ($cmd) {
             $word = $args[$i];
             if ($word === $cmd) continue;    
             // Check for redirection operators
+            
             if ($word === '>' || $word === '>>') {
                 $operator = $word;
                 if (isset($args[$i + 1])) {
@@ -1911,6 +1963,9 @@ switch ($cmd) {
         case 'chmod':
             $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);
             break;
+        case 'chown':
+            $output = process_chown($fileSystem, $currentDir, "no_sudo", $arg,  $arg2);
+            break;
         case 'sudo':
                 if ($arg !== "chmod" && $arg !== "chown") {
                     $output = "Only chmod and chown are supported with sudo in this setting";
@@ -1924,7 +1979,49 @@ switch ($cmd) {
             
                 if ($arg === "chmod") {
                     $output = process_chmod($fileSystem, $currentDir, "sudo", $arg2, $arg3);
+                    if (GetCurrentLesson() === 55 && $arg2 === "u+r" && $arg3 === "daily_logs.txt") {
+                        $isCorrect = true;
+                        if ($userId !== null) {
+                            update_mysql($pdo, $userId, 55, 56);
+                            updateUserProgress($pdo, $userId, 55);
+                        }
+                    }
+                    if (GetCurrentLesson() === 56 && $arg2 === "g+w" && $arg3 === "sales_report.txt") {
+                        $isCorrect = true;
+                        if ($userId !== null) {
+                            update_mysql($pdo, $userId, 56, 57);
+                            updateUserProgress($pdo, $userId, 57);
+                        }
+                    }
                 }
+                if ($arg === "chown") {
+                    $output = process_chown($fileSystem, $currentDir, "sudo", $arg2,  $arg3);
+                      if (GetCurrentLesson() === 58 && $arg3 === "daily_logs.txt") {
+                        $isCorrect = true;
+                        if ($userId !== null) {
+                            update_mysql($pdo, $userId, 58, 59);
+                            updateUserProgress($pdo, $userId, 59);
+                        }
+                    }
+                }
+        break;
+    case 'python3': 
+        $perms = GetFilePermissions($fileSystem, $currentDir, "revenue.py");
+        if ($perms === "-") { 
+            $output = "Error: User does not have permission to execute revenue.py";
+            break;
+        }
+        if (GetCurrentLesson() === 64 && $arg === "revenue.py") { 
+               $output = shell_exec('python3 sales.py');
+               $isCorrect = true;
+               if ($userId !== null) {
+                   update_mysql($pdo, $userId, 64, 64);
+                   updateUserProgress($pdo, $userId, 64);
+            }
+        }
+        else {
+                $output = "Error: File Does Not Exist";
+        }
         break;
     case 'refresh':
         $output = process_refresh();
@@ -1957,6 +2054,7 @@ switch ($cmd) {
     case 'wget':
         $output = process_wget($fileSystem, $currentDir, $arg);
         break;
+    
     default:
             $output = "Command not recognized: $cmd\n";
             break;
