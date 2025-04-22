@@ -439,13 +439,13 @@ if (!isset($_SESSION['fileSystem'])) {
     $_SESSION['currentDirectory'] = "/";
 }
 function process_echo(&$fileSystem, $currentDirectory, $arg, $operator, $file): string {
-    if (!in_array($operator, ['>', '>>'])) {
+    if ( !empty($operator) && !in_array($operator, ['>', '>>'])) {
         return "Error: Invalid operator";
     }
-    
+   
     if (empty($operator) && empty($file)) {
         return $arg . "\n";
-    }
+    } 
 
     if ($operator && $file) {
         $currentDirectory = rtrim($currentDirectory, "/");
