@@ -9,7 +9,7 @@
         require_once 'login_contr.inc.php';	
         require_once 'login_model.inc.php';
 		require_once 'login_view.inc.php';
-		require_once '../src/user/user.php';
+
 		$errors= [];
     
 		if (is_input_empty($username, $pwd)) {
@@ -47,12 +47,11 @@
 
         $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
         $stmt->execute([$_SESSION["user_id"]]);
-		//on success, send the cookie and send user to the lesson page 
-		// Convert the $response array to a JSON string
-		$json_response = json_encode($response);
-
-		// Set the cookie to expire in 30 days
-		setcookie('user_info', $json_response, 0, "/");
+		if ($_SESSION["user_id"] !== null) {
+			require_once 'cookies.inc.php';
+			$json_response = json_encode($response);
+			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
+		}
 		header('Location: ../src/pages/dashboard/dashboard.html');
 		$pdo = null;
 		$statement = null;
@@ -63,7 +62,6 @@
     }
 }
 	else {
-		//header("Location: ../index.php");
 		die();
 	}
 
