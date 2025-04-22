@@ -35,27 +35,33 @@ if ($user_id) {
 }
 
 // Section Mapping
-$sections = ["Prelude", "Hello World", "File Navigation", "Checkpoint", "File Modifications", "Checkpoint", "Searching & Filtering", "Checkpoint", "File Permissions", ];
+$sections = ["Prelude", "Hello World", "File Navigation", "Checkpoint - File Navigation", "File Modifications", "Checkpoint - File Modifations", "Searching & Filtering", "File Redirection", "Checkpoint- Searching, Filtering, ", "File Permissions", "Checkpoint - File Permissions"];
 
 if ($current_lesson >= 2 && $current_lesson < 3) {
     $current_section = $sections[0]; // Prelude
 } elseif ($current_lesson === 3) {
     $current_section = $sections[1]; // Hello World
-} elseif ($current_lesson >= 4 && $current_lesson < 10) {
+} elseif ($current_lesson >= 4 && $current_lesson <=10) {
     $current_section = $sections[2]; // File Navigation
-} elseif ($current_lesson >= 10 && $current_lesson < 13) {
+} elseif ($current_lesson >= 11 && $current_lesson <= 13) {
     $current_section = $sections[3]; // Checkpoint
-} elseif ($current_lesson >= 13 && $current_lesson < 21) {
+} elseif ($current_lesson >= 14 && $current_lesson <= 21) {
     $current_section = $sections[4]; // File Modifications
-} elseif ($current_lesson >= 21 && $current_lesson < 28) {
-    $current_section = $sections[5]; // Checkpoint
-} elseif ($current_lesson >= 28 && $current_lesson < 37) {
+} elseif ($current_lesson >= 22 && $current_lesson <= 28) {
+    $current_section = $sections[5]; // Checkpoint - File Modifations
+} elseif ($current_lesson >= 29 && $current_lesson <= 37) {
     $current_section = $sections[6]; // Searching & Filtering
-} elseif ($current_lesson >= 37) {
-    $current_section = $sections[7]; // Checkpoint
+} elseif ($current_lesson >= 38 && $current_lesson <= 40 ) {
+    $current_section = $sections[7]; // File Redirection
 }
-elseif ($current_lesson >= 51) {
-    $current_section = $sections[8];
+elseif ($current_lesson >= 41 && $current_lesson >= 50) {
+    $current_section = $sections[8]; // Checkpoint - Searching, Filtering, Redirection
+}
+elseif ($current_lesson >= 51 && $current_lesson >= 58) {
+    $current_section = $sections[9]; // File Permissions
+}
+elseif ($current_lesson >= 59 && $current_lesson >= 64) {
+    $current_section = $sections[10]; // Checkpoint - File Permissions
 }
 
 // Get Lesson Name if a valid lessonId exists
