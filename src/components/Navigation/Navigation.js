@@ -39,7 +39,7 @@ export default class Navigation {
 
   // need to set this up
   isLoggedIn = false;
-  constructor(container, isLoggedIn = false, data, showNavbar=true){
+  constructor(container, isLoggedIn = false, data, showNavbar=true, sidebarBtnOpenContainer=".sidebar__button--open"){
     this.showNavbar = showNavbar;
     this.data = data;
     this.isLoggedIn = isLoggedIn;
