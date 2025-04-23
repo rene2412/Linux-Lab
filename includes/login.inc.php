@@ -8,7 +8,8 @@
         require_once 'database.inc.php';
         require_once 'login_contr.inc.php';	
         require_once 'login_model.inc.php';
-		require_once 'login_view.inc.php';	
+		require_once 'login_view.inc.php';
+
 		$errors= [];
     
 		if (is_input_empty($username, $pwd)) {
@@ -46,10 +47,12 @@
 
         $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
         $stmt->execute([$_SESSION["user_id"]]);
-		//header("Location: ../index.php?login=success");
-		//on success, send the user to the lesson page
+		if ($_SESSION["user_id"] !== null) {
+			require_once 'cookies.inc.php';
+			$json_response = json_encode($response);
+			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
+		}
 		header('Location: ../src/pages/dashboard/dashboard.html');
-		//header('Location: ../src/user/user.php');
 		$pdo = null;
 		$statement = null;
 		die();
@@ -59,7 +62,6 @@
     }
 }
 	else {
-		//header("Location: ../index.php");
 		die();
 	}
 

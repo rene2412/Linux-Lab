@@ -1,8 +1,6 @@
 <?php
 session_start();
-// Set the content type to JSON
-header('Content-Type: application/json');
-require_once "../../includes/database.inc.php";
+require_once "database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
 
 $username = $_SESSION["user_username"] ?? null; // Get stored username
@@ -65,6 +63,7 @@ elseif ($current_lesson >= 51 && $current_lesson >= 58) {
 elseif ($current_lesson >= 59 && $current_lesson >= 64) {
     $current_section = $sections[10]; // Checkpoint - File Permissions
 }
+
 // Get Lesson Name if a valid lessonId exists
 if ($lessonId) {
     $sql2 = $pdo->prepare("SELECT lesson_name FROM lessons WHERE id = ?");
@@ -79,7 +78,7 @@ if ($lessonId) {
 // Determine module
 $modules = ["The Basics", "Networking", "Bash Scripting (Coming Soon)"];
 if ($lessonId !== null) {
-    if ($lessonId <= 65) {
+    if ($lessonId <= 60) {
         $current_module = $modules[0];
     } elseif ($lessonId <= 100) {
         $current_module = $modules[1];
@@ -87,8 +86,7 @@ if ($lessonId !== null) {
         $current_module = $modules[2];
     }
 }
-
-// The file will return the user info in JSON
+// the cookie
 $response = [
     "username" => $username,
     "isLoggedIn" => $logged,
@@ -117,9 +115,3 @@ $response = [
     ]
 ];
 
-error_log("Lesson ID: " . $lessonId);
-error_log("Current Lesson: " . $current_lesson);
-error_log(json_encode($response));  // This will output the API response for debugging purposes.
-
-// Output JSON
-echo json_encode($response);
