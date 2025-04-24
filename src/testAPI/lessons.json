@@ -224,7 +224,7 @@
             "id": 21,
             "parent": "basics",
             "section": "File Modifications",
-            "title": "mv - move files/directories",
+            "title": "mv - move files\/directories",
             "content_type": "interactive",
             "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
             "answer": "mv hello.txt ..\/Projects",
@@ -394,7 +394,7 @@
             "section": "Searching & Filtering",
             "title": "find",
             "content_type": "article",
-             "content": "<p>We have gone over how to search for patterns with grep and how useful that can be, but what about looking for specific files or directrories in your filesystem?<\/p><p>Well the <b>find<\/b> command is a powerful tool for searching through your file system that helps you locate the actual files themselves based on certain criteria like the size of the file, permissions, and more.<\/p><p>The find command takes in 3 arguments:<\/p><ul><li><b>1st argument:</b> the source path to your desired file or directory you are looking for. <i>Remember, the source path is the relative path since <b>find</b> will start at your current directory.</i><\/li><li><b>2nd argument:</b> an optional flag that is just an additional filter that helps specify what we are looking for like an exact name, size, permission, and more.<\/li><li><b>3rd argument:</b> simply the exact filename or directory name you are looking for.<\/li><\/ul><p>Lets take a look at how the find command looks syntactically:<\/p><code>find \/path\/to\/source -options -filename<\/code>",
+            "content": "<p>We have gone over how to search for patterns with grep and how useful that can be, but what about looking for specific files or directrories in your filesystem?<\/p><p>Well the <b>find<\/b> command is a powerful tool for searching through your file system that helps you locate the actual files themselves based on certain criteria like the size of the file, permissions, and more.<\/p><p>The find command takes in 3 arguments:<\/p><ul><li><b>1st argument:<\/b> the source path to your desired file or directory you are looking for. <i>Remember, the source path is the relative path since <b>find<\/b> will start at your current directory.<\/i><\/li><li><b>2nd argument:<\/b> an optional flag that is just an additional filter that helps specify what we are looking for like an exact name, size, permission, and more.<\/li><li><b>3rd argument:<\/b> simply the exact filename or directory name you are looking for.<\/li><\/ul><p>Lets take a look at how the find command looks syntactically:<\/p><code>find \/path\/to\/source -options -filename<\/code>",
             "completed": false
         },
         {
@@ -445,7 +445,7 @@
             "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
             "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
             "completed": false
-        },        
+        },
         {
             "id": 41,
             "parent": "basics",
@@ -485,9 +485,9 @@
             "title": "Knowledge Check #12",
             "content_type": "multichoice",
             "questions": {
-                "A": "find filename /path/to/source",
+                "A": "find filename \/path\/to\/source",
                 "B": "find -options filename",
-                "C": "find /path/to/source -options -filename",
+                "C": "find \/path\/to\/source -options -filename",
                 "D": "find -filename -options"
             },
             "content": "<p>What is the correct syntax for the find command?<\/p><div class=\"question__container\"><\/div>",
@@ -532,7 +532,7 @@
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #3",
             "content_type": "lab",
-            "content": "<p>In our Documents/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.</p><p>We will need a flag to output the number line where the pattern appears.</p>",
+            "content": "<p>In our Documents\/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.<\/p><p>We will need a flag to output the number line where the pattern appears.<\/p>",
             "answer": "grep -n \"we\" Declaration.txt",
             "completed": false
         },
@@ -542,8 +542,8 @@
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #4",
             "content_type": "lab",
-            "content": "<p>Lets traverse to the Lyrics/ directory that lives in the Documents/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt</p>",
-            "answer": "grep -c \"happen\" LetItHappen.txt", 
+            "content": "<p>Lets traverse to the Lyrics\/ directory that lives in the Documents\/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt<\/p>",
+            "answer": "grep -c \"happen\" LetItHappen.txt",
             "completed": false
         },
         {
@@ -552,7 +552,7 @@
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #5",
             "content_type": "lab",
-            "content": "<p>In the same Lyrics/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt</p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>" ,
+            "content": "<p>In the same Lyrics\/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt<\/p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>",
             "completed": false
         },
         {
@@ -561,16 +561,16 @@
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #6",
             "content_type": "lab",
-            "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt</p>",
+            "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt<\/p>",
             "completed": false
-        }, 
+        },
         {
             "id": 50,
             "parent": "basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #7",
             "content_type": "lab",
-            "content": "<p>Write a command that returns all the .txt files in the Documents/ directory?</p>",
+            "content": "<p>Write a command that returns all the .txt files in the Documents\/ directory?<\/p>",
             "completed": false
         },
         {
@@ -579,7 +579,7 @@
             "section": "File Permissions",
             "title": "Permissions In Linux",
             "content_type": "article",
-            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br>    <b>r</b> – Read (can view the file or list the folder)</br><b>w</b> –  Write (can modify the file or folder)</br> <b>x</b> – Execute (can run the file if it’s a program or enter the folder)</br></p><br><p>Also, there are permissions for 3 type of users:<br><b>Owner</b> – the person who owns the file<br><b>Group</b> – a group of users assigned to the file</br><b>Others</b> – everyone else</p>",
+            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br>    <b>r<\/b> \u2013 Read (can view the file or list the folder)<\/br><b>w<\/b> \u2013  Write (can modify the file or folder)<\/br> <b>x<\/b> \u2013 Execute (can run the file if it\u2019s a program or enter the folder)<\/br><\/p><br><p>Also, there are permissions for 3 type of users:<br><b>Owner<\/b> \u2013 the person who owns the file<br><b>Group<\/b> \u2013 a group of users assigned to the file<\/br><b>Others<\/b> \u2013 everyone else<\/p>",
             "completed": false
         },
         {
@@ -588,7 +588,7 @@
             "section": "File Permissions",
             "title": "ls -l",
             "content_type": "interative",
-            "content": "<p>To see the output of your file permisions we can use the <b>ls -l</b> command, lets walk through the output!</p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt</code></p><p>Here's what each part means:</p><ul><li><b>-</b> This indicates it's a regular file. If it were a directory, it would show <b>d</b>.</li><li><b>rw-</b> The owner can read and write the file.</li><li><b>r--</b> The group can only read the file.</li><li><b>r--</b> Others (everyone else) can also only read the file.</li><li><b>user</b> The name of the file's owner.</li><li><b>group</b> The group assigned to the file.</li><li><b>2025-02-27 01:24:04</b> The last modified date and time.</li><li><b>648</b> The file size in bytes.</li><li><b>Shakespeare.txt</b>: The name of the file.</li></ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.</p>",
+            "content": "<p>To see the output of your file permisions we can use the <b>ls -l<\/b> command, lets walk through the output!<\/p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt<\/code><\/p><p>Here's what each part means:<\/p><ul><li><b>-<\/b> This indicates it's a regular file. If it were a directory, it would show <b>d<\/b>.<\/li><li><b>rw-<\/b> The owner can read and write the file.<\/li><li><b>r--<\/b> The group can only read the file.<\/li><li><b>r--<\/b> Others (everyone else) can also only read the file.<\/li><li><b>user<\/b> The name of the file's owner.<\/li><li><b>group<\/b> The group assigned to the file.<\/li><li><b>2025-02-27 01:24:04<\/b> The last modified date and time.<\/li><li><b>648<\/b> The file size in bytes.<\/li><li><b>Shakespeare.txt<\/b>: The name of the file.<\/li><\/ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.<\/p>",
             "completed": false
         },
         {
@@ -597,7 +597,7 @@
             "section": "File Permissions",
             "title": "chmod",
             "content_type": "article",
-            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?</p><p>The <b>chmod</b> (change mode) command allows us to modify file permissions. The basic syntax is:</p><code>chmod [options] mode file</code><p>There are two ways to specify permissions:</p><h4>Symbolic Method:</h4><ul><li><b>u</b>: user/owner</li><li><b>g</b>: group</li><li><b>o</b>: others</li><li><b>a</b>: all (equivalent to ugo)</li><li><b>+</b>: add permission</li><li><b>-</b>: remove permission</li><li><b>=</b>: set exact permission</li><li><b>r</b>: read permission</li><li><b>w</b>: write permission</li><li><b>x</b>: execute permission</li></ul><h4>Examples:</h4><ul><li><code>chmod u+x script.sh</code> - Add execute permission for the owner</li><li><code>chmod go-w file.txt</code> - Remove write permission for group and others</li><li><code>chmod a=r document.pdf</code> - Set read-only permission for everyone</li></ul><h4>Numeric Method:</h4><p>Permissions can also be represented by numbers:</p><ul><li><b>4</b>: read permission</li><li><b>2</b>: write permission</li><li><b>1</b>: execute permission</li></ul><p>We add these numbers for each category (owner, group, others):</p><ul><li><code>chmod 755 script.sh</code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)</li><li><code>chmod 644 file.txt</code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)</li><li><code>chmod 600 private.key</code> - Owner: rw- (6), Group: --- (0), Others: --- (0)</li></ul><p>Common permission patterns:</p><ul><li><b>755</b>: Standard for executable files (rwxr-xr-x)</li><li><b>644</b>: Standard for data files (rw-r--r--)</li><li><b>700</b>: Private executable files (rwx------)</li><li><b>600</b>: Private data files (rw-------)</li></ul><p> However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo </b> command to override the existing permission, which we will discuss in detail later on.</p>",
+            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>There are two ways to specify permissions:<\/p><h4>Symbolic Method:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Numeric Method:<\/h4><p>Permissions can also be represented by numbers:<\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p> However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission, which we will discuss in detail later on.<\/p>",
             "completed": false
         },
         {
@@ -606,7 +606,7 @@
             "section": "File Permissions",
             "title": "sudo",
             "content_type": "interative",
-            "content": "<p>The <b>sudo</b> command is one of the more important commands in Linux as it allows you to execute commands with the security privileges of another user, typically known as the superuser (root).</p><p>This gives you temporary administrative access to perform tasks that regular users cannot do.</p><p>The name 'sudo' stands for 'superuser do' or 'substitute user do'. When you run a command with sudo, the system will typically ask for your password to verify your identity.</p><p>Basic syntax:</p><code>sudo command_to_run</code><p>Common examples:</p><p>Modifying File Permissions: <code>sudo chmod [options] file_name></code></p><p>- Installing software: <code>sudo apt install package_name</code></p><p>- Editing system files: <code>sudo nano /etc/hosts</code></p><p>- Restarting the system: <code>sudo reboot</code></p><p>Always use sudo with caution, as it gives you the power to modify critical system files and settings that could potentially damage your system if used incorrectly.</p>",
+            "content": "<p>The <b>sudo<\/b> command is one of the more important commands in Linux as it allows you to execute commands with the security privileges of another user, typically known as the superuser (root).<\/p><p>This gives you temporary administrative access to perform tasks that regular users cannot do.<\/p><p>The name 'sudo' stands for 'superuser do' or 'substitute user do'. When you run a command with sudo, the system will typically ask for your password to verify your identity.<\/p><p>Basic syntax:<\/p><code>sudo command_to_run<\/code><p>Common examples:<\/p><p>Modifying File Permissions: <code>sudo chmod [options] file_name><\/code><\/p><p>- Installing software: <code>sudo apt install package_name<\/code><\/p><p>- Editing system files: <code>sudo nano \/etc\/hosts<\/code><\/p><p>- Restarting the system: <code>sudo reboot<\/code><\/p><p>Always use sudo with caution, as it gives you the power to modify critical system files and settings that could potentially damage your system if used incorrectly.<\/p>",
             "completed": false
         },
         {
@@ -615,7 +615,7 @@
             "section": "File Permissions",
             "title": "chmod: change user permissions",
             "content_type": "interative",
-            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work/ directory.</p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.</p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cant cat the content to view it since we don't have the permissions for it!</p>Also, notice how we dont have authorization to modifiy the file since we are not the user.</p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt</code></p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!</p><p>Try it out!</p>", 
+            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work\/ directory.<\/p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.<\/p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cant cat the content to view it since we don't have the permissions for it!<\/p>Also, notice how we dont have authorization to modifiy the file since we are not the user.<\/p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt<\/code><\/p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!<\/p><p>Try it out!<\/p>",
             "answer": "sudo chmod u+r",
             "completed": false
         },
@@ -625,7 +625,7 @@
             "section": "File Permissions",
             "title": "chmod: change group permissions",
             "content_type": "interactive",
-            "content": "Let's explore how to change group permissions for files.</p><p>In the same Work/ directory that we were just in, run ls -l to see the current files again</p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!</p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.</p><p>The syntax is: <code>sudo chmod g+w sales_report.txt</code><pTry it and then use ls -l again to see how the permissions have changed.</p>",
+            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<\/p><p>The syntax is: <code>sudo chmod g+w sales_report.txt<\/code><pTry it and then use ls -l again to see how the permissions have changed.<\/p>",
             "answer": "sudo chmod g+w sales_report.txt",
             "completed": false
         },
@@ -635,16 +635,16 @@
             "section": "File Permissions",
             "title": "chown",
             "content_type": "article",
-            "content": "<p>The <b>chown</b> command changes the owner and group of files and directories in Linux systems. It is another solution to change your file permissions wihout using sudo, since the owner will now be you. However if you don't own the file at first, you will need to use sudo to allow the chown command to take use. After this, you would no longer need sudo</p><p>Basic syntax: <code>chown [newowner] filename </code></p><p>Common examples:</p><ul><li><code>chown alice file.txt</code> - Changes owner to alice</li><li><code>chown bob:devlopers project.py</code> - Changes owner to bob and group to developers</li><li><code>chown -R www-data:www-data /var/www/</code> - Recursively changes ownership for all files in a directory</li></ul><p>Overall, while <b>sudo</b> provides temporary elevated privileges, <b>chown</b> makes permanent ownership changes that remain after your session ends. This is especially useful for:</p><ul><li>Setting proper ownership for service accounts (like web servers)</li><li>Delegating file management without giving sudo access</li><li>Enabling collaboration in multi-user environments</li><li>Following security best practices</li></ul><p>Since changing ownership often requires elevated privileges, you'll typically use it with sudo: <code>sudo chown [newuser] /path/to/source</code>",
+            "content": "<p>The <b>chown<\/b> command changes the owner and group of files and directories in Linux systems. It is another solution to change your file permissions wihout using sudo, since the owner will now be you. However if you don't own the file at first, you will need to use sudo to allow the chown command to take use. After this, you would no longer need sudo<\/p><p>Basic syntax: <code>chown [newowner] filename <\/code><\/p><p>Common examples:<\/p><ul><li><code>chown alice file.txt<\/code> - Changes owner to alice<\/li><li><code>chown bob:devlopers project.py<\/code> - Changes owner to bob and group to developers<\/li><li><code>chown -R www-data:www-data \/var\/www\/<\/code> - Recursively changes ownership for all files in a directory<\/li><\/ul><p>Overall, while <b>sudo<\/b> provides temporary elevated privileges, <b>chown<\/b> makes permanent ownership changes that remain after your session ends. This is especially useful for:<\/p><ul><li>Setting proper ownership for service accounts (like web servers)<\/li><li>Delegating file management without giving sudo access<\/li><li>Enabling collaboration in multi-user environments<\/li><li>Following security best practices<\/li><\/ul><p>Since changing ownership often requires elevated privileges, you'll typically use it with sudo: <code>sudo chown [newuser] \/path\/to\/source<\/code>",
             "completed": false
-        }, 
+        },
         {
             "id": 58,
             "parent": "basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
             "content_type": "interactive",
-            "content": "<p>In the Work/ directory, lets take a look how chown can be used and how it affects your system.</p><p>Run ls -l and you will notice that the owner for daily_logs.txt isn't you. Which means you wouldn't be allowed to alter the state of the system without constanly using sudo.</p>The permanment solution to this is to use chown with sudo to change ownership back to you. Lets see how it works by running this command</p><code>sudo chown user daily_logs.txt</code>",
+            "content": "<p>In the Work\/ directory, lets take a look how chown can be used and how it affects your system.<\/p><p>Run ls -l and you will notice that the owner for daily_logs.txt isn't you. Which means you wouldn't be allowed to alter the state of the system without constanly using sudo.<\/p>The permanment solution to this is to use chown with sudo to change ownership back to you. Lets see how it works by running this command<\/p><code>sudo chown user daily_logs.txt<\/code>",
             "completed": false
         },
         {
@@ -654,12 +654,12 @@
             "title": "Knowledge Check #15",
             "content_type": "multichoice",
             "questions": {
-              "A": "chmod +rwx file.txt",
-              "B": "chmod 777 file.txt",
-              "C": "chmod a+rwx file.txt",
-              "D": "Both B and C are correct"
+                "A": "chmod +rwx file.txt",
+                "B": "chmod 777 file.txt",
+                "C": "chmod a+rwx file.txt",
+                "D": "Both B and C are correct"
             },
-            "content": "<p>Which command(s) would give read, write, and execute permissions to all users (owner, group, and others) for file.txt?</p><div class=\"question__container\"></div>",
+            "content": "<p>Which command(s) would give read, write, and execute permissions to all users (owner, group, and others) for file.txt?<\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
             "completed": false
         },
@@ -670,73 +670,72 @@
             "title": "Knowledge Check #16",
             "content_type": "multichoice",
             "questions": {
-              "A": "chmod 644 report.txt",
-              "B": "chmod u=rw,go=r report.txt",
-              "C": "chmod a-wx,u+w report.txt",
-              "D": "All of the above"
+                "A": "chmod 644 report.txt",
+                "B": "chmod u=rw,go=r report.txt",
+                "C": "chmod a-wx,u+w report.txt",
+                "D": "All of the above"
             },
-            "content": "<p>Which command(s) would set permissions so that the owner can read and write a file, while the group and others can only read it?</p><div class=\"question__container\"></div>",
+            "content": "<p>Which command(s) would set permissions so that the owner can read and write a file, while the group and others can only read it?<\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
             "completed": false
-           },
-           {
+        },
+        {
             "id": 61,
             "parent": "basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #17",
             "content_type": "multichoice",
             "questions": {
-              "A": "chown user:group file.txt",
-              "B": "chown user.group file.txt",
-              "C": "chmod user:group file.txt",
-              "D": "chmod user.group file.txt"
+                "A": "chown user:group file.txt",
+                "B": "chown user.group file.txt",
+                "C": "chmod user:group file.txt",
+                "D": "chmod user.group file.txt"
             },
-            "content": "<p>Which command correctly changes both the owner and group of a file?</p><div class=\"question__container\"></div>",
+            "content": "<p>Which command correctly changes both the owner and group of a file?<\/p><div class=\"question__container\"><\/div>",
             "answer": "A",
             "completed": false
-           },
-           {
+        },
+        {
             "id": 62,
             "parent": "basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #18",
             "content_type": "multichoice",
             "questions": {
-              "A": "drwxr-xr-x",
-              "B": "-rwxr-xr-x",
-              "C": "-rw-r--r--",
-              "D": "drw-r--r--"
+                "A": "drwxr-xr-x",
+                "B": "-rwxr-xr-x",
+                "C": "-rw-r--r--",
+                "D": "drw-r--r--"
             },
-            "content": "<p>In the output of 'ls -l', which permission string represents a regular file (not a directory) with read and write permissions for the owner, and only read permissions for group and others?</p><div class=\"question__container\"></div>",
+            "content": "<p>In the output of 'ls -l', which permission string represents a regular file (not a directory) with read and write permissions for the owner, and only read permissions for group and others?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-           },
-           {
+        },
+        {
             "id": 63,
             "parent": "basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #19",
             "content_type": "multichoice",
             "questions": {
-              "A": "chmod",
-              "B": "chown",
-              "C": "sudo",
-              "D": "ls -l"
+                "A": "chmod",
+                "B": "chown",
+                "C": "sudo",
+                "D": "ls -l"
             },
-            "content": "<p>Which command should be used when you need to execute a command with elevated privileges, such as changing the ownership of a system file?</p><div class=\"question__container\"></div>",
+            "content": "<p>Which command should be used when you need to execute a command with elevated privileges, such as changing the ownership of a system file?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-           },
-           {
+        },
+        {
             "id": 64,
             "parent": "basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #8",
             "content_type": "interative",
-            "content": "<p>In the Work/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.</p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py</code>",
+            "content": "<p>In the Work\/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.<\/p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py<\/code>",
             "completed": false
-         }
-
+        }
     ],
     "networking": [
         {
@@ -779,6 +778,5 @@
             "answer": "A",
             "completed": false
         }
-        
     ]
 }

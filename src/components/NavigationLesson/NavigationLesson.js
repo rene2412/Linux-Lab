@@ -28,7 +28,6 @@ export default class NavigationLesson{
     setListeners(){
         this.sidebarBtnOpen.addEventListener('click',this.openSidebar);
         this.sidebarBtnClose.addEventListener('click',this.closeSidebar);
-        console.log(this.sidebarBtnOpen)
     }
 
     closeSidebar = ()=>{

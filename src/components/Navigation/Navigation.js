@@ -39,7 +39,7 @@ export default class Navigation {
 
   // need to set this up
   isLoggedIn = false;
-  constructor(container, isLoggedIn = false, data, showNavbar=true, sidebarBtnOpenContainer=".sidebar__button--open"){
+  constructor(container, isLoggedIn = false, data, showNavbar=true, sidebarBtnOpenClass=".sidebar__button--open"){
     this.showNavbar = showNavbar;
     this.data = data;
     this.isLoggedIn = isLoggedIn;
@@ -47,6 +47,7 @@ export default class Navigation {
     this.fullPath = window.location.pathname;
     this.path = this.fullPath.substring(this.fullPath.lastIndexOf("/") + 1);
     this.date = new Date();
+    this.sidebarBtnOpenClass = sidebarBtnOpenClass;
     this.render();
     this.setElements();
     this.setListeners();
@@ -67,7 +68,10 @@ export default class Navigation {
   };
 
   setElements() {
-    this.sidebarBtnOpen = document.querySelector(".sidebar__button--open");
+    this.sidebarBtnOpen = document.querySelector(this.sidebarBtnOpenClass);
+    console.log(this.sidebarBtnOpen);
+    this.sidebarBtnOpen.addEventListener('mouseover',()=>{console.log('clicked')});
+    console.log(this.sidebarBtnOpen);
     this.sidebarBtnClose = document.querySelector(".sidebar__button");
     this.sidebar = document.querySelector(".sidebar");
     this.navbarDate = document.querySelector(".navbar__date");
@@ -114,6 +118,7 @@ export default class Navigation {
   };
 
   openSidebar = () => {
+    console.log("HELLo");
     this.sidebar.classList.remove("sidebar--close");
     this.sidebar.classList.add("sidebar--open");
   };
@@ -146,9 +151,10 @@ export default class Navigation {
     //User Dropdown elements
     let userDropdownElem = (`
         <button class="user-dropdown--profile">Profile</button>
-        <a href="../../user/logout.php" class="user-dropdown--logout">Logout</a>
+        <button class="user-dropdown--logout"><a href="../../user/logout.php" >Logout</a></button>
     `);
 
+    // create sidebar markup
     const sidebar = document.createElement("div");
     sidebar.classList.add("sidebar");
     sidebar.classList.add("sidebar--close");
@@ -193,9 +199,14 @@ export default class Navigation {
     });
     const nav = document.createElement("nav");
     if(!this.showNavbar) nav.classList.add('hidden');
+    // handle sidebar button
+    let sidebarButton = `<button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>`;
+    if(this.sidebarBtnOpenClass && !this.showNavbar){
+      sidebarButton = "";
+    }
     nav.classList.add("navbar");
     nav.innerHTML = `
-            <button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
+    ${sidebarButton}
             <div class="navbar__left">
                 <img src="../assets/SVGs/Tux.svg.png" class="logo" alt="Linux-Lab logo">
             </div> 

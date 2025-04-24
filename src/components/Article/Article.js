@@ -14,7 +14,6 @@ export default class Article {
         // Wait for articleInnerHTML to be populated
         this.createArticleTemplate().then(() => {
             this.container.innerHTML = this.articleInnerHTML;
-            console.log(this.articleInnerHTML);
             
             // After the DOM is updated, initialize the observer
             this.initIntersectionObserver();
