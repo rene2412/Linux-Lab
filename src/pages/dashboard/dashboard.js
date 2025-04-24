@@ -7,7 +7,6 @@ async function AuthCheck(){
             throw new Error('Fail fetching auth info');
         }
         const data = await response.json()
-        console.log(data);
         if(!data.isLoggedIn){
             window.location.href = `../login/login.php`;
         }
@@ -121,7 +120,6 @@ class CardContinueLearning{
 class CardModules{
     constructor(data){
         this.data = data;
-        console.log(data);
     }
 
     getElements(data){
@@ -164,7 +162,6 @@ class CardProgress{
                 <p class="card__text">${section.completed}/${section.total}</p>
             `);
         })
-        console.log(elements);
         return elements;
     }
 

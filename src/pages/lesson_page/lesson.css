@@ -49,6 +49,7 @@ code{
     flex-direction: column;
     background-color: var(--color-background-dark);
     min-height: 65%;
+    max-height: 65%;
     position: relative;
 }
 

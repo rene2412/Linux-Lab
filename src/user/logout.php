@@ -15,6 +15,9 @@ if (isset($_SESSION["user_username"])) {
         session_unset();   // Unset all session variables
         session_destroy(); // Destroy the session
 
+        // delete user_info cookie
+        setcookie("user_info", "", time() - 3600, "/");  // Set expiration to past time
+
         // Once user logs out redirect to the landing page
         header("Location: ../pages/landing_page/landing_page.html");
         exit();

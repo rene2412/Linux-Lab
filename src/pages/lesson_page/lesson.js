@@ -1,5 +1,7 @@
 import VanillaTerminal from "./termC/term.js";
 import { NavigationLesson } from "../../components/NavigationLesson/index.js";
+import getUserCookie from "../../utils/getUserCookie.js";
+import Navigation from "../../components/Navigation/Navigation.js";
 
 const sectionLesson = document.querySelector(".section--lesson");
 
@@ -53,7 +55,6 @@ class LessonManager {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-      console.log()
       this.lesson = data[this.user]["lesson"];
       this.currentSection = data[this.user]["section"];
       this.fetchLessonsInit();
@@ -273,7 +274,6 @@ class lessonDisplay {
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
-    console.log('data updated');
     this.sectionSize = this.modules[this.curSection][0]["section__size"];
     this.update();
   };
@@ -292,7 +292,6 @@ class lessonDisplay {
   }
 
   render() {
-    console.log('rendering')
     this.container.replaceChildren();
     this.container.innerHTML = `<h1 class="lesson__title">${
       this.modules[this.curSection][this.curLesson]["title"]
@@ -357,11 +356,9 @@ class lessonDisplay {
       } else {
         button.classList.add("question--wrong");
         button.classList.add("animate-shake");
-        console.log("wrong");
         setTimeout(() => {
           button.classList.remove("question--wrong");
           button.classList.remove("animate-shake");
-          console.log("wrong done");
         }, 1000 * 2);
       }
     }
@@ -437,7 +434,6 @@ class lessonDisplay {
     }
   }
   updateStatus() {
-    console.log(this.modules);
     if (this.modules[this.curSection][this.curLesson][`completed`] === true) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
@@ -479,17 +475,37 @@ class lessonDisplay {
   }
 }
 const lessonManager = new LessonManager();
-
 const lessonDisplayController = new lessonDisplay(".lesson");
-const terminal = new VanillaTerminal({
-  apiEndpoint: "../../../api_commands.php",
-});
 
-const lessonNav = new LessonNav();
+// conditional render cookie
+const userObj = getUserCookie();
+if(userObj){
+  console.log(userObj);
+
+  const terminal = new VanillaTerminal({
+    apiEndpoint: "../../../api_commands.php",
+    username:userObj.username,
+  });
+  terminal.mount("#terminal__container");
+
+  const nav = new Navigation(".sidebar__container",userObj.isLoggedIn,userObj,false,)
+}
+else{
+
+  const terminal = new VanillaTerminal({
+    apiEndpoint: "../../../api_commands.php",
+  });
+  terminal.mount("#terminal__container");
 
 const sidebarLesson = new NavigationLesson(
   ".sidebar__container",
   ".sidebar__button--open"
 );
 
-terminal.mount("#terminal__container");
+
+}
+
+const lessonNav = new LessonNav();
+
+
+
