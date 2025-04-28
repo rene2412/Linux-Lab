@@ -7,13 +7,13 @@ const sectionLesson = document.querySelector(".section--lesson");
 
 class LessonManager {
   lesson = 1;
-  currentSection = "basics";
+  currentSection = "The Basics";
   sectionSize = 0;
   user = 0;
   lessons = [];
   constructor() {
     this.lesson = 1;
-    this.currentSection = "basics";
+    this.currentSection = "The Basics";
     // may change this later to identify user
     this.setupListeners();
     this.user = 0;
@@ -50,13 +50,13 @@ class LessonManager {
 
   async fetchUserInfoInit() {
     try {
-      const request = await fetch("../../testAPI/userInfo.json");
+      const request = await fetch("../../user/user.php");
       if (!request.ok) {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-      this.lesson = data[this.user]["lesson"];
-      this.currentSection = data[this.user]["section"];
+      this.lesson = data.currentModule.lessonId;
+      this.currentSection = data.currentModule.name;
       this.fetchLessonsInit();
     } catch (error) {
       console.error(error);
@@ -65,14 +65,15 @@ class LessonManager {
 
   async fetchUserInfo() {
     try {
-      const request = await fetch("../../testAPI/userInfo.json");
+      const request = await fetch("../../user/user.php");
       if (!request.ok) {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-      this.lesson = data[this.user]["lesson"];
-      this.currentSection = data[this.user]["section"];
+      this.lesson = data.currentModule.lessonId;
+      this.currentSection = data.currentModule.name;
       this.broadcastUpdate();
+      test();
     } catch (error) {
       console.error(error);
     }
@@ -194,7 +195,7 @@ class LessonNav {
           lessonId: id,
           // this is temporary as i will have to add more info to list elements
           // shoudl be the section belonging to that list element
-          section: "basics",
+          section: "The Basics",
           action: "change",
         },
       })
@@ -250,7 +251,7 @@ class LessonNav {
 }
 
 class lessonDisplay {
-  curSection = "basics";
+  curSection = "The Basics";
   curLesson = 1;
   sectionSize = 0;
   modules = {};
@@ -367,29 +368,31 @@ class lessonDisplay {
   nextLesson = () => {
     // if (this.curLesson >= this.sectionSize) return;
     ++this.curLesson;
-    document.dispatchEvent(
-      new CustomEvent("section:update", {
-        detail: {
-          action: "next",
-          section: this.curSection,
-          lessonId: this.curLesson,
-        },
-      })
-    );
+    this.update();
+    // document.dispatchEvent(
+    //   new CustomEvent("section:update", {
+    //     detail: {
+    //       action: "next",
+    //       section: this.curSection,
+    //       lessonId: this.curLesson,
+    //     },
+    //   })
+    // );
   };
 
   prevLesson = () => {
     if (this.curLesson <= 1) return;
     --this.curLesson;
-    document.dispatchEvent(
-      new CustomEvent("section:update", {
-        detail: {
-          action: "prev",
-          section: this.curSection,
-          lessonId: this.curLesson,
-        },
-      })
-    );
+    this.update();
+    // document.dispatchEvent(
+    //   new CustomEvent("section:update", {
+    //     detail: {
+    //       action: "prev",
+    //       section: this.curSection,
+    //       lessonId: this.curLesson,
+    //     },
+    //   })
+    // );
   };
 
   changeSection() {
@@ -434,6 +437,9 @@ class lessonDisplay {
     }
   }
   updateStatus() {
+    // console.log(this.modules)
+    // console.log(this.curSection)
+    console.log(this.curLesson)
     if (this.modules[this.curSection][this.curLesson][`completed`] === true) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
@@ -509,3 +515,15 @@ const lessonNav = new LessonNav();
 
 
 
+async function test(){
+  try{
+    const res = await fetch("../../user/user.php");
+    const data = await res.json();
+    console.log('test')
+    console.log(data);
+  }
+  catch(e){
+    console.error(e);
+  }
+}
+test();

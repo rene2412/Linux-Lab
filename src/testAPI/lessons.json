@@ -1,12 +1,12 @@
 {
-    "basics": [
+    "The Basics": [
         {
             "section__size": 65,
             "section__completed": false
         },
         {
             "id": 1,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Prelude",
             "title": "The Command Line",
             "content_type": "article",
@@ -15,7 +15,7 @@
         },
         {
             "id": 2,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Prelude",
             "title": "The Filesystem",
             "content_type": "article",
@@ -24,17 +24,17 @@
         },
         {
             "id": 3,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Hello World",
             "title": "echo",
             "content_type": "interactive",
             "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command, followed by a string of text we want to print. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"Hello World\"<\/code>",
             "answer": "echo Hello World",
-            "completed": false
+            "completed": true
         },
         {
             "id": 4,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "date",
             "content_type": "interactive",
@@ -44,7 +44,7 @@
         },
         {
             "id": 5,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "pwd",
             "content_type": "interactive",
@@ -54,7 +54,7 @@
         },
         {
             "id": 6,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "ls",
             "content_type": "interactive",
@@ -64,7 +64,7 @@
         },
         {
             "id": 7,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd",
             "content_type": "interactive",
@@ -74,7 +74,7 @@
         },
         {
             "id": 8,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "cat",
             "content_type": "interactive",
@@ -84,7 +84,7 @@
         },
         {
             "id": 9,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd ..",
             "content_type": "interactive",
@@ -94,7 +94,7 @@
         },
         {
             "id": 10,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd path\/to\/source",
             "content_type": "interactive",
@@ -104,7 +104,7 @@
         },
         {
             "id": 11,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowlegde Check #1",
             "content_type": "multichoice",
@@ -120,7 +120,7 @@
         },
         {
             "id": 12,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowlegde Check #2",
             "content_type": "multichoice",
@@ -136,7 +136,7 @@
         },
         {
             "id": 13,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowlegde Check #3",
             "content_type": "multichoice",
@@ -152,7 +152,7 @@
         },
         {
             "id": 14,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "touch",
             "content_type": "interactive",
@@ -162,7 +162,7 @@
         },
         {
             "id": 15,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "mkdir",
             "content_type": "interactive",
@@ -172,7 +172,7 @@
         },
         {
             "id": 16,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm",
             "content_type": "interactive",
@@ -182,7 +182,7 @@
         },
         {
             "id": 17,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "rmdir",
             "content_type": "interactive",
@@ -192,7 +192,7 @@
         },
         {
             "id": 18,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm -rf",
             "content_type": "interactive",
@@ -202,7 +202,7 @@
         },
         {
             "id": 19,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename files",
             "content_type": "interactive",
@@ -212,7 +212,7 @@
         },
         {
             "id": 20,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename directories",
             "content_type": "interactive",
@@ -222,7 +222,7 @@
         },
         {
             "id": 21,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - move files\/directories",
             "content_type": "interactive",
@@ -232,7 +232,7 @@
         },
         {
             "id": 22,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #1",
             "content_type": "interactive",
@@ -242,7 +242,7 @@
         },
         {
             "id": 23,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #4",
             "content_type": "multichoice",
@@ -258,7 +258,7 @@
         },
         {
             "id": 24,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #5",
             "content_type": "multichoice",
@@ -274,7 +274,7 @@
         },
         {
             "id": 25,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #6",
             "content_type": "multichoice",
@@ -290,7 +290,7 @@
         },
         {
             "id": 26,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #7",
             "content_type": "multichoice",
@@ -306,7 +306,7 @@
         },
         {
             "id": 27,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #8",
             "content_type": "multichoice",
@@ -322,7 +322,7 @@
         },
         {
             "id": 28,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #2",
             "content_type": "interactive",
@@ -332,7 +332,7 @@
         },
         {
             "id": 29,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "Searching & Filtering",
             "content_type": "article",
@@ -341,7 +341,7 @@
         },
         {
             "id": 30,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep",
             "content_type": "article",
@@ -350,7 +350,7 @@
         },
         {
             "id": 31,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep \"pattern\" file",
             "content_type": "interactive",
@@ -360,7 +360,7 @@
         },
         {
             "id": 32,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -n \"pattern\" file",
             "content_type": "interactive",
@@ -370,7 +370,7 @@
         },
         {
             "id": 33,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -c \"pattern\" file",
             "content_type": "interactive",
@@ -380,7 +380,7 @@
         },
         {
             "id": 34,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "wildcard*",
             "content_type": "interactive",
@@ -390,7 +390,7 @@
         },
         {
             "id": 35,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find",
             "content_type": "article",
@@ -399,7 +399,7 @@
         },
         {
             "id": 36,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source -name filename.txt",
             "content_type": "article",
@@ -409,7 +409,7 @@
         },
         {
             "id": 37,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source directory",
             "content_type": "article",
@@ -419,7 +419,7 @@
         },
         {
             "id": 38,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Output Redirection Operators: '>', '>>' ",
             "content_type": "article",
@@ -428,7 +428,7 @@
         },
         {
             "id": 39,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Overwrite Operator: '>'",
             "content_type": "interative",
@@ -438,7 +438,7 @@
         },
         {
             "id": 40,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Appending Operator: '>>'",
             "content_type": "interative",
@@ -448,7 +448,7 @@
         },
         {
             "id": 41,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #10",
             "content_type": "multichoice",
@@ -464,7 +464,7 @@
         },
         {
             "id": 42,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #11",
             "content_type": "multichoice",
@@ -480,7 +480,7 @@
         },
         {
             "id": 43,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #12",
             "content_type": "multichoice",
@@ -496,7 +496,7 @@
         },
         {
             "id": 44,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #13",
             "content_type": "multichoice",
@@ -512,7 +512,7 @@
         },
         {
             "id": 45,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #14",
             "content_type": "multichoice",
@@ -528,7 +528,7 @@
         },
         {
             "id": 46,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #3",
             "content_type": "lab",
@@ -538,7 +538,7 @@
         },
         {
             "id": 47,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #4",
             "content_type": "lab",
@@ -548,7 +548,7 @@
         },
         {
             "id": 48,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #5",
             "content_type": "lab",
@@ -557,7 +557,7 @@
         },
         {
             "id": 49,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #6",
             "content_type": "lab",
@@ -566,7 +566,7 @@
         },
         {
             "id": 50,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #7",
             "content_type": "lab",
@@ -575,7 +575,7 @@
         },
         {
             "id": 51,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "Permissions In Linux",
             "content_type": "article",
@@ -584,7 +584,7 @@
         },
         {
             "id": 52,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "ls -l",
             "content_type": "interative",
@@ -593,7 +593,7 @@
         },
         {
             "id": 53,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod",
             "content_type": "article",
@@ -602,7 +602,7 @@
         },
         {
             "id": 54,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "sudo",
             "content_type": "interative",
@@ -611,7 +611,7 @@
         },
         {
             "id": 55,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change user permissions",
             "content_type": "interative",
@@ -621,7 +621,7 @@
         },
         {
             "id": 56,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change group permissions",
             "content_type": "interactive",
@@ -631,7 +631,7 @@
         },
         {
             "id": 57,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown",
             "content_type": "article",
@@ -640,7 +640,7 @@
         },
         {
             "id": 58,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
             "content_type": "interactive",
@@ -649,7 +649,7 @@
         },
         {
             "id": 59,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #15",
             "content_type": "multichoice",
@@ -665,7 +665,7 @@
         },
         {
             "id": 60,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #16",
             "content_type": "multichoice",
@@ -681,7 +681,7 @@
         },
         {
             "id": 61,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #17",
             "content_type": "multichoice",
@@ -697,7 +697,7 @@
         },
         {
             "id": 62,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #18",
             "content_type": "multichoice",
@@ -713,7 +713,7 @@
         },
         {
             "id": 63,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #19",
             "content_type": "multichoice",
@@ -729,7 +729,7 @@
         },
         {
             "id": 64,
-            "parent": "basics",
+            "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #8",
             "content_type": "interative",
@@ -778,5 +778,15 @@
             "answer": "A",
             "completed": false
         }
-    ]
+    ],
+    "File Navigation": {
+        "7": {
+            "completed": true
+        }
+    },
+    "basics": {
+        "4": {
+            "completed": true
+        }
+    }
 }
