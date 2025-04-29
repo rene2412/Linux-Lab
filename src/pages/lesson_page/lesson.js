@@ -282,7 +282,6 @@ class lessonDisplay {
   initListeners() {
     this.nextButton.addEventListener("click", this.nextLesson);
     this.prevButton.addEventListener("click", this.prevLesson);
-    // this.misc.addEventListener("click", this.toggleLessonComplete);
     document.addEventListener("command-success", this.handleCorrectEvent);
   }
 
@@ -366,9 +365,10 @@ class lessonDisplay {
   };
 
   nextLesson = () => {
-    // if (this.curLesson >= this.sectionSize) return;
+    if (this.curLesson >= this.sectionSize) return;
     ++this.curLesson;
     this.update();
+    terminal.setLesson(this.curLesson);
     // document.dispatchEvent(
     //   new CustomEvent("section:update", {
     //     detail: {
@@ -384,6 +384,7 @@ class lessonDisplay {
     if (this.curLesson <= 1) return;
     --this.curLesson;
     this.update();
+    terminal.setLesson(this.curLesson);
     // document.dispatchEvent(
     //   new CustomEvent("section:update", {
     //     detail: {
@@ -483,12 +484,14 @@ class lessonDisplay {
 const lessonManager = new LessonManager();
 const lessonDisplayController = new lessonDisplay(".lesson");
 
+let terminal;
+
 // conditional render cookie
 const userObj = getUserCookie();
 if(userObj){
   console.log(userObj);
 
-  const terminal = new VanillaTerminal({
+  terminal = new VanillaTerminal({
     apiEndpoint: "../../../api_commands.php",
     username:userObj.username,
   });
@@ -498,7 +501,7 @@ if(userObj){
 }
 else{
 
-  const terminal = new VanillaTerminal({
+  terminal = new VanillaTerminal({
     apiEndpoint: "../../../api_commands.php",
   });
   terminal.mount("#terminal__container");
@@ -507,8 +510,6 @@ const sidebarLesson = new NavigationLesson(
   ".sidebar__container",
   ".sidebar__button--open"
 );
-
-
 }
 
 const lessonNav = new LessonNav();
