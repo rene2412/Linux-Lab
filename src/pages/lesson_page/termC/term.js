@@ -25,6 +25,7 @@ export default class VanillaTerminal {
     this.commandLine = null;
     this.command = null;
     this.history = null;
+    this.lessonId=1;
 
     // Key handlers
     this.keyHandler = {
@@ -40,6 +41,12 @@ export default class VanillaTerminal {
     // Bound methods to maintain 'this' context
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleTerminalClick = this.handleTerminalClick.bind(this);
+  }
+
+  setLesson(lesson){
+    this.lessonId = lesson;
+    console.log(`TERMINAL LESSON =====`)
+    console.log(this.lessonId);
   }
 
   // Mount the terminal to a container element
@@ -135,7 +142,7 @@ export default class VanillaTerminal {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `command=${encodeURIComponent(commandToSend)}`,
+      body: `command=${encodeURIComponent(commandToSend)}&lessonId=${encodeURIComponent(this.lessonId)}`,
     })
     .then(response => response.json())
     
