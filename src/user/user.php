@@ -25,6 +25,21 @@ if ($user_id) {
     $lessons_completed = $progress["lessons_completed"] ?? 0;
     $current_lesson = $progress["current_lesson"] ?? "Not Started";
 
+    //update the lesson ID from the most previous user lesson entry
+    $updateSql = $pdo->prepare("UPDATE user_progress up
+    JOIN (
+        SELECT user_id, lesson_id
+        FROM user_lessons
+        WHERE (user_id, completed_at) IN (
+            SELECT user_id, MAX(completed_at)
+            FROM user_lessons
+            GROUP BY user_id
+        )
+    ) ul ON up.user_id = ul.user_id
+    SET up.lesson_id = ul.lesson_id;
+    ");   
+    $updateSql->execute();
+
     // Get lesson ID
     $sql0 = $pdo->prepare("SELECT lesson_id FROM user_progress WHERE user_id = ?");
     $sql0->execute([$user_id]);
@@ -34,6 +49,7 @@ if ($user_id) {
     $sql = $pdo->prepare("SELECT is_logged_in FROM users WHERE id = ?");
     $sql->execute([$user_id]);
     $logged = (bool) $sql->fetchColumn();
+
 }
 
 // Section Mapping
@@ -70,7 +86,7 @@ if ($lessonId) {
     $sql2 = $pdo->prepare("SELECT lesson_name FROM lessons WHERE id = ?");
     try {
         $sql2->execute([$lessonId]);
-        $lessonName = $sql2->fetchColumn() ?? "No lesson found with ID: $lessonId";
+        $lessonName = $sql2->fetchColumn() ?? "The Command Line";
     } catch (PDOException $e) {
         $lessonName = "Error fetching lesson: " . $e->getMessage();
     }
@@ -96,7 +112,7 @@ $response = [
         "name" => $current_module,
         "currentSection" => $current_section,
         "lessonId" => $lessonId,
-        "lessonName" => $lessonName  
+        "lessonName" => $lessonName, 
     ],
     "modules" => [
         [
