@@ -104,6 +104,32 @@ if ($lessonId !== null) {
     }
 }
 
+//load the user progress to load in the progress bar
+$userProgress = "SELECT lesson_id FROM user_lessons WHERE user_id = ?";
+        $stmt = $pdo->prepare($userProgress);
+        $stmt->execute([$user_id]);
+        $completedLessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+//the lessons va will contain an array that has all the completed lesson ids
+$everyLesson = "SELECT id, lesson_name FROM lessons";
+$stmt4 = $pdo->query($everyLesson);
+$everyLesson = $stmt4->fetchAll(PDO::FETCH_ASSOC);
+
+$lessonStatus = [];
+foreach ($everyLesson as $lesson) {
+    $lesson_name = $lesson["lesson_name"];
+    $lesson_id = $lesson["id"];
+    $found = false;
+
+    foreach ($completedLessons as $completed_id) {
+        if ($lesson_id === $completed_id) {
+            $found = true;
+            break;
+        }
+    }
+    $lessonStatus[$lesson_name] = $found;
+}
+
 // The file will return the user info in JSON
 $response = [
     "username" => $username,
@@ -113,6 +139,7 @@ $response = [
         "currentSection" => $current_section,
         "lessonId" => $lessonId,
         "lessonName" => $lessonName, 
+        "lessonStatus" => $lessonStatus
     ],
     "modules" => [
         [
