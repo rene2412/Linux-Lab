@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL & ~E_WARNING);
 session_start();
 //require 'includes/config_session.inc.php';
 require_once "includes/database.inc.php";

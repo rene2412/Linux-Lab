@@ -254,7 +254,7 @@
             },
             "content": "<p>How does the <b>mv<\/b> command know whether to rename a file\/directory or change its location?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
-            "completed": false
+            "completed": true
         },
         {
             "id": 24,
@@ -789,6 +789,9 @@
             "completed": true
         },
         "6": {
+            "completed": true
+        },
+        "1": {
             "completed": true
         }
     }
