@@ -109,47 +109,51 @@ class LessonManager {
 
   // handle lesson and section changes bundled
   handleLessonSectionChange = async (e) => {
-    let { section, lessonId, action } = e.detail;
+    let { lessonId, action } = e.detail;
     if (action === "next") {
+      this.lesson++
       // if we are at last lesson or beyond lesson scope
       if (lessonId >= this.sectionSize) {
-        lessonId = this.sectionSize;
+        this.lesson = this.sectionSize;
         console.log(`cant go over section size`);
       }
     }
 
     if (action === "prev") {
       // if we are at last lesson or beyond lesson scope
+      this.lesson--
       if (lessonId <= 1) {
-        lessonId = 1;
+        this.lesson = 1;
         console.log(`cant go under section size`);
       }
     }
     if (action === "change") {
-      // make sure for new section change lessonid is within the new bounds
-      if (this.lessons[section][0].section__size <= lessonId)
-        lessonId = this.lessons[section][0].section__size;
+      if(this.lesson > 0 && this.lesson <= this.sectionSize)
+      this.lesson = lessonId;
     }
 
+    this.broadcastUpdate()
+
+
     // update our user info json
-    try {
-      const response = await fetch("../../testAPI/updateUserInfo.php", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          section: section,
-          lesson: lessonId,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`response error`, response.status);
-      }
-      this.fetchUserInfo();
-    } catch (error) {
-      console.log(`error saving ${error}`);
-    }
+    // try {
+    //   const response = await fetch("../../testAPI/updateUserInfo.php", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       section: section,
+    //       lesson: lessonId,
+    //     }),
+    //   });
+    //   if (!response.ok) {
+    //     throw new Error(`response error`, response.status);
+    //   }
+    //   this.fetchUserInfo();
+    // } catch (error) {
+    //   console.log(`error saving ${error}`);
+    // }
   };
 
   eventNewInfo(data) {
@@ -195,7 +199,6 @@ class LessonNav {
           lessonId: id,
           // this is temporary as i will have to add more info to list elements
           // shoudl be the section belonging to that list element
-          section: "The Basics",
           action: "change",
         },
       })
@@ -366,40 +369,31 @@ class lessonDisplay {
 
   nextLesson = () => {
     if (this.curLesson >= this.sectionSize) return;
-    ++this.curLesson;
-    this.update();
     terminal.setLesson(this.curLesson);
-    // document.dispatchEvent(
-    //   new CustomEvent("section:update", {
-    //     detail: {
-    //       action: "next",
-    //       section: this.curSection,
-    //       lessonId: this.curLesson,
-    //     },
-    //   })
-    // );
+    document.dispatchEvent(
+      new CustomEvent("section:update", {
+        detail: {
+          action: "next",
+          section: this.curSection,
+          lessonId: this.curLesson,
+        },
+      })
+    );
   };
 
   prevLesson = () => {
     if (this.curLesson <= 1) return;
-    --this.curLesson;
-    this.update();
-    terminal.setLesson(this.curLesson);
-    // document.dispatchEvent(
-    //   new CustomEvent("section:update", {
-    //     detail: {
-    //       action: "prev",
-    //       section: this.curSection,
-    //       lessonId: this.curLesson,
-    //     },
-    //   })
-    // );
+    // terminal.setLesson(this.curLesson);
+    document.dispatchEvent(
+      new CustomEvent("section:update", {
+        detail: {
+          action: "prev",
+          section: this.curSection,
+          lessonId: this.curLesson,
+        },
+      })
+    );
   };
-
-  changeSection() {
-    this.sectionSize = this.modules[this.curSection][0]["section__size"];
-    this.sectionSizeInteractive;
-  }
 
   updateMeter() {
     let interactiveCount = this.modules[this.curSection].reduce(
@@ -437,18 +431,17 @@ class lessonDisplay {
       );
     }
   }
+
   updateStatus() {
-    // console.log(this.modules)
-    // console.log(this.curSection)
-    console.log(this.curLesson)
     if (this.modules[this.curSection][this.curLesson][`completed`] === true) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
     } else {
       this.statusCheck.classList.add(`hidden`);
       this.statusCross.classList.remove(`hidden`);
-     }
     }
+  }
+
   toggleLessonComplete = () => {
     this.modules[this.curSection][this.curLesson][`completed`] =
       !this.modules[this.curSection][this.curLesson][`completed`];
@@ -489,8 +482,6 @@ let terminal;
 // conditional render cookie
 const userObj = getUserCookie();
 if(userObj){
-  console.log(userObj);
-
   terminal = new VanillaTerminal({
     apiEndpoint: "../../../api_commands.php",
     username:userObj.username,

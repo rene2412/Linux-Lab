@@ -45,8 +45,6 @@ export default class VanillaTerminal {
 
   setLesson(lesson){
     this.lessonId = lesson;
-    console.log(`TERMINAL LESSON =====`)
-    console.log(this.lessonId);
   }
 
   // Mount the terminal to a container element
@@ -114,7 +112,6 @@ export default class VanillaTerminal {
   }
 
   specialKeys() {
-    console.log(`special key used`);
     return;
   }
 
@@ -147,7 +144,6 @@ export default class VanillaTerminal {
     .then(response => response.json())
     
     .then(data => {
-      console.log(data);
       this.output(actualPrevCommand, data.output);
       this.updatePrompt(data.currentDirectory);
 

@@ -1,7 +1,7 @@
 {
     "The Basics": [
         {
-            "section__size": 65,
+            "section__size": 64,
             "section__completed": false
         },
         {
@@ -786,6 +786,9 @@
     },
     "basics": {
         "4": {
+            "completed": true
+        },
+        "6": {
             "completed": true
         }
     }
