@@ -9,7 +9,7 @@ $username = $_SESSION["user_username"] ?? null; // Get stored username
 $user_id = $_SESSION["user_id"] ?? null;
 $logged = false; // Default to false for guests
 
-$lessonId = null;
+$lessonId = 1;
 $lessons_completed = 0;
 $current_lesson = "Not Started";
 $lessonName = "No lesson found";
