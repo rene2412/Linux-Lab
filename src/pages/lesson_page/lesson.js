@@ -56,6 +56,7 @@ class LessonManager {
       }
       const data = await request.json();
       this.lesson = data.currentModule.lessonId;
+      if(!this.lesson)this.lesson=1;
       this.currentSection = data.currentModule.name;
       this.fetchLessonsInit();
     } catch (error) {
@@ -132,6 +133,7 @@ class LessonManager {
       this.lesson = lessonId;
     }
 
+    terminal.setLesson(this.lesson);
     this.broadcastUpdate()
 
 
@@ -279,6 +281,7 @@ class lessonDisplay {
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
     this.sectionSize = this.modules[this.curSection][0]["section__size"];
+    console.log(this.curLesson);
     this.update();
   };
 
@@ -369,7 +372,6 @@ class lessonDisplay {
 
   nextLesson = () => {
     if (this.curLesson >= this.sectionSize) return;
-    terminal.setLesson(this.curLesson);
     document.dispatchEvent(
       new CustomEvent("section:update", {
         detail: {
