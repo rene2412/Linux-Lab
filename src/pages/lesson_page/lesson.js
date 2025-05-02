@@ -107,6 +107,7 @@ class LessonManager {
         },
         lessons: this.lessons,
         lessonsCompleted: this.completedLessons,
+        sectionSize: this.sectionSize
       },
     });
     document.dispatchEvent(event);
@@ -290,7 +291,7 @@ class lessonDisplay {
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
-    this.sectionSize = this.modules[this.curSection][0]["section__size"];
+    this.sectionSize = data.sectionSize;
     this.completedLessons = data.lessonsCompleted;
     this.update();
   };
@@ -408,14 +409,18 @@ class lessonDisplay {
   };
 
   updateMeter() {
-    this.progBar.style.transform = `scalex(0.8)`
+    console.log(this.completedLessons)
+    let value = 0;
+    for(let key in this.completedLessons){
+      if(this.completedLessons[key])value++;
+    }
+    let progress = value/this.sectionSize;
+    this.progBar.style.transform = `scalex(${progress})`
+
   }
 
   updateStatus() {
     let title = this.modules[this.curSection][this.curLesson].title;
-    console.log(this.completedLessons);
-    console.log(title)
-    console.log(this.completedLessons[title])
     if (this.completedLessons[title]) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);

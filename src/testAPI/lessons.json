@@ -50,7 +50,7 @@
             "content_type": "interactive",
             "content": "<p>As we discussed earlier, a directory is just a folder and the command line has access to your current directory, as well as more.<\/p><p>Lets see what current directory we are in by using the command pwd (print working directory)<\/p><code>pwd<\/code>",
             "answer": "pwd",
-            "completed": false
+            "completed": true
         },
         {
             "id": 6,
@@ -60,7 +60,7 @@
             "content_type": "interactive",
             "content": "<p>By using pwd we can see that our current directory is the root directory represented by the '\/' symbol.<\/p><p>The root directory is the head of the filesystem, it all begins here.<\/p><p>To see what lives in our current directory at any given time, we can use the ls command, which stands for \"list\"<\/p><code>ls<\/code>",
             "answer": "ls",
-            "completed": false
+            "completed": true
         },
         {
             "id": 7,
@@ -70,7 +70,7 @@
             "content_type": "interactive",
             "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
             "answer": "cd Documents\/",
-            "completed": false
+            "completed": true
         },
         {
             "id": 8,
