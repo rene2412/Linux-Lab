@@ -69,7 +69,6 @@ export default class Navigation {
 
   setElements() {
     this.sidebarBtnOpen = document.querySelector(this.sidebarBtnOpenClass);
-    this.sidebarBtnOpen.addEventListener('mouseover',()=>{console.log('clicked')});
     this.sidebarBtnClose = document.querySelector(".sidebar__button");
     this.sidebar = document.querySelector(".sidebar");
     this.navbarDate = document.querySelector(".navbar__date");
@@ -116,7 +115,6 @@ export default class Navigation {
   };
 
   openSidebar = () => {
-    console.log("HELLo");
     this.sidebar.classList.remove("sidebar--close");
     this.sidebar.classList.add("sidebar--open");
   };

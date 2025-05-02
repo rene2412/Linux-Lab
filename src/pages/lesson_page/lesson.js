@@ -11,6 +11,7 @@ class LessonManager {
   sectionSize = 0;
   user = 0;
   lessons = [];
+  completedLessons = {};
   constructor() {
     this.lesson = 1;
     this.currentSection = "The Basics";
@@ -23,6 +24,7 @@ class LessonManager {
   setupListeners() {
     document.addEventListener("section:update", this.handleLessonSectionChange);
     document.addEventListener("completed:update", this.handleLessonCompleted);
+    document.addEventListener("command-success", this.handleLessonCompleted);
   }
   handleLessonCompleted = async () => {
     // update our user completed json
@@ -58,6 +60,7 @@ class LessonManager {
       this.lesson = data.currentModule.lessonId;
       if(!this.lesson)this.lesson=1;
       this.currentSection = data.currentModule.name;
+      this.completedLessons= data.currentModule.lessonStatus;
       this.fetchLessonsInit();
     } catch (error) {
       console.error(error);
@@ -73,8 +76,8 @@ class LessonManager {
       const data = await request.json();
       this.lesson = data.currentModule.lessonId;
       this.currentSection = data.currentModule.name;
+      this.completedLessons= data.currentModule.lessonStatus;
       this.broadcastUpdate();
-      test();
     } catch (error) {
       console.error(error);
     }
@@ -103,6 +106,7 @@ class LessonManager {
           currentSection: this.currentSection,
         },
         lessons: this.lessons,
+        lessonsCompleted: this.completedLessons,
       },
     });
     document.dispatchEvent(event);
@@ -195,6 +199,8 @@ class LessonNav {
     const idStr = e.target.id;
     const id = parseInt(idStr.slice(idStr.indexOf(":") + 1, idStr.length));
     const subSection = idStr.slice(0, idStr.indexOf(":"));
+    // clicking headers should not break code
+    if(id > 0){
     document.dispatchEvent(
       new CustomEvent("section:update", {
         detail: {
@@ -205,9 +211,10 @@ class LessonNav {
         },
       })
     );
+      this.dropdownContainer.classList.add("hidden");
+      this.isOpen = false;
+    }
 
-    this.dropdownContainer.classList.add("hidden");
-    this.isOpen = false;
   };
 
   handleToggle = (e) => {
@@ -232,7 +239,7 @@ class LessonNav {
         let returnString = "";
         if (lastSection != lessonData.section) {
           lastSection = lessonData.section;
-          returnString = `<li class="lesson__nav__subtitle"><h4>${lessonData.section}</h4></li>`;
+          returnString = `<li class="lesson__nav__subtitle"><span>${lessonData.section}</span></li>`;
         }
         if (lesson === lessonData.id) {
           return (
@@ -258,6 +265,7 @@ class LessonNav {
 class lessonDisplay {
   curSection = "The Basics";
   curLesson = 1;
+  lessonsCompleted = {};
   sectionSize = 0;
   modules = {};
 
@@ -265,7 +273,7 @@ class lessonDisplay {
     this.container = document.querySelector(container);
     this.nextButton = document.querySelector(".lesson__button--next");
     this.prevButton = document.querySelector(".lesson__button--prev");
-    this.progBar = document.querySelector(".progress-bar__meter");
+    this.progBar = document.querySelector(".progress-bar__bar");
     this.misc = document.querySelector(".lesson");
     this.statusCross = document.querySelector(".lesson__status--cross");
     this.statusCheck = document.querySelector(".lesson__status--check");
@@ -277,11 +285,13 @@ class lessonDisplay {
 
   handleChange = (e) => {
     const data = e.detail;
+    // console.log('handlechange')
+    // console.log(data)
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
     this.sectionSize = this.modules[this.curSection][0]["section__size"];
-    console.log(this.curLesson);
+    this.completedLessons = data.lessonsCompleted;
     this.update();
   };
 
@@ -398,44 +408,15 @@ class lessonDisplay {
   };
 
   updateMeter() {
-    let interactiveCount = this.modules[this.curSection].reduce(
-      (sum, lesson) => {
-        let value = 0;
-        if (
-          lesson.content_type === "interactive" ||
-          lesson.content_type === "multichoice"
-        )
-          value = 1;
-        return sum + value;
-      },
-      0
-    );
-    let completedCount = this.modules[this.curSection].reduce((sum, lesson) => {
-      if (
-        lesson.content_type != "interactive" &&
-        lesson.content_type != "multichoice"
-      )
-        return sum;
-      return sum + (lesson.completed ? 1 : 0);
-    }, 0);
-    let progValue = (completedCount / interactiveCount) * 100;
-    this.progBar.value = progValue;
-    if (progValue === 100) {
-      document.dispatchEvent(
-        new CustomEvent("section:isComplete", {
-          detail: {
-            userInfo: {
-              section: this.curSection,
-              lesson: this.curLesson,
-            },
-          },
-        })
-      );
-    }
+    this.progBar.style.transform = `scalex(0.8)`
   }
 
   updateStatus() {
-    if (this.modules[this.curSection][this.curLesson][`completed`] === true) {
+    let title = this.modules[this.curSection][this.curLesson].title;
+    console.log(this.completedLessons);
+    console.log(title)
+    console.log(this.completedLessons[title])
+    if (this.completedLessons[title]) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
     } else {
@@ -443,13 +424,6 @@ class lessonDisplay {
       this.statusCross.classList.remove(`hidden`);
     }
   }
-
-  toggleLessonComplete = () => {
-    this.modules[this.curSection][this.curLesson][`completed`] =
-      !this.modules[this.curSection][this.curLesson][`completed`];
-    this.updateMeter();
-    this.updateStatus();
-  };
 
   handleCorrectEvent = (e) => {
     this.showSuccessMessage();

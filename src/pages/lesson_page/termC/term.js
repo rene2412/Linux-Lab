@@ -45,7 +45,6 @@ export default class VanillaTerminal {
 
   setLesson(lesson){
     this.lessonId = lesson;
-    console.log(`lesson terminal ${this.lessonId}`)
   }
 
   // Mount the terminal to a container element
@@ -145,7 +144,7 @@ export default class VanillaTerminal {
     .then(response => response.json())
     
     .then(data => {
-      console.log(data)
+      // console.log(data)
       this.output(actualPrevCommand, data.output);
       this.updatePrompt(data.currentDirectory);
 

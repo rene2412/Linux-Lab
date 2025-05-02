@@ -193,11 +193,22 @@ code{
 }
 
 .lesson__nav__subtitle{
+    display: inline-block;
     background-color: var(--color-background-highlight);
     padding: var(--spce-xsm);
     padding-left: var(--spce-sm);
+    width: 100%;
+    max-width: 100%;
     position: sticky;
     top: 0;
+}
+.lesson__nav__subtitle > span{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    font-weight: bolder;
 }
 
 
@@ -208,6 +219,8 @@ code{
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
     height: fit-content;
     max-height: calc(40vh);
     box-shadow: 1px 1px 10px black;
@@ -361,22 +374,26 @@ code{
 /* Progress Bar */
 /* ================================= */
 .progress-bar{
-    margin: 0;
-    padding: 0;
-    height: 20px;
-}
-
-.progress-bar meter::-webkit-meter-bar{
-    background: var(--color-secondary);
-    border: none;
     height: 3px;
-    width: 100vw;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: var(--color-secondary) ;
+    position: relative;
 }
 
-.progress-bar meter::-webkit-meter-optimum-value{
+.progress-bar__bar{
     background-color: var(--color-highlight);
-    border-radius: var(--radius-med);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transition: transform 1s ease;
 }
+
+
+
 
 
 /* LESSON UTIL */

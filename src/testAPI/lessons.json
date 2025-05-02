@@ -100,13 +100,13 @@
             "content_type": "interactive",
             "content": "Navigating around your filesystem in the command line can be done more efficiently with cd.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
             "answer": "cd ..\/Projects\/project1",
-            "completed": false
+            "completed": true
         },
         {
             "id": 11,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
-            "title": "Knowlegde Check #1",
+            "title": "Knowledge Check #1",
             "content_type": "multichoice",
             "questions": {
                 "A": "cd",
@@ -122,7 +122,7 @@
             "id": 12,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
-            "title": "Knowlegde Check #2",
+            "title": "Knowledge Check #2",
             "content_type": "multichoice",
             "questions": {
                 "A": "echo",
@@ -138,7 +138,7 @@
             "id": 13,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
-            "title": "Knowlegde Check #3",
+            "title": "Knowledge Check #3",
             "content_type": "multichoice",
             "questions": {
                 "A": "pwd",
