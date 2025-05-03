@@ -4,6 +4,7 @@ import getUserCookie from "../../utils/getUserCookie.js";
 
 // cookie for auth init
 const userObj = getUserCookie();
+console.log(userObj)
 if(userObj){
     document.querySelector('.navigation__container').replaceChildren();
     const navigation = new Navigation(
@@ -13,6 +14,7 @@ if(userObj){
     );
 }
 else{
+document.querySelector('.navigation__container').replaceChildren();
 const navigation = new Navigation('.navigation__container');
 }
 
