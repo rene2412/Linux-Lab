@@ -208,9 +208,11 @@ class LessonNav {
   };
 
   render = (e) => {
+    console.log(e.detail);
     const lessons = e.detail.lessons;
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
+    const status = "";
     const openButtonText = `${lessons[section][lesson].section} - ${lessons[section][lesson].title}`;
     let lastSection = "";
     const listElements = lessons[section]
@@ -289,6 +291,11 @@ class lessonDisplay {
 
   render() {
     this.container.replaceChildren();
+    if(this.curLesson=== 1) {this.prevButton.style.pointerEvents= `none`; this.prevButton.style.opacity='0'}
+    else{this.prevButton.style.pointerEvents= `auto`; this.prevButton.style.opacity='1'}
+    if(this.curLesson === this.modules[this.curSection][0].section__size) {this.nextButton.style.pointerEvents= `none`; this.nextButton.style.opacity='0'}
+    else{this.nextButton.style.pointerEvents= `auto`; this.nextButton.style.opacity='1'}
+
     this.container.innerHTML = `<h1 class="lesson__title">${
       this.modules[this.curSection][this.curLesson]["title"]
     }</h1>
