@@ -31,7 +31,7 @@
             "content_type": "interactive",
             "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command, followed by a string of text we want to print. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"Hello World\"<\/code>",
             "answer": "echo Hello World",
-            "completed": true
+            "completed": false 
         },
         {
             "id": 4,
@@ -41,7 +41,7 @@
             "content_type": "interactive",
             "content": "<p>Lets find out through the command line what time it is and get todays date by using the <b>date<\/b> command<code>date<\/code>",
             "answer": "date",
-            "completed": true
+            "completed": false 
         },
         {
             "id": 5,
@@ -51,7 +51,7 @@
             "content_type": "interactive",
             "content": "<p>As we discussed earlier, a directory is just a folder and the command line has access to your current directory, as well as more.<\/p><p>Lets see what current directory we are in by using the command pwd (print working directory)<\/p><code>pwd<\/code>",
             "answer": "pwd",
-            "completed": true
+            "completed":  false
         },
         {
             "id": 6,
@@ -61,7 +61,7 @@
             "content_type": "interactive",
             "content": "<p>By using pwd we can see that our current directory is the root directory represented by the '\/' symbol.<\/p><p>The root directory is the head of the filesystem, it all begins here.<\/p><p>To see what lives in our current directory at any given time, we can use the ls command, which stands for \"list\"<\/p><code>ls<\/code>",
             "answer": "ls",
-            "completed": true
+            "completed": false 
         },
         {
             "id": 7,
@@ -71,7 +71,7 @@
             "content_type": "interactive",
             "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
             "answer": "cd Documents\/",
-            "completed": true
+            "completed": false 
         },
         {
             "id": 8,
@@ -101,7 +101,7 @@
             "content_type": "interactive",
             "content": "Navigating around your filesystem in the command line can be done more efficiently with cd.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
             "answer": "cd ..\/Projects\/project1",
-            "completed": true
+            "completed": false 
         },
         {
             "id": 11,
@@ -255,7 +255,7 @@
             },
             "content": "<p>How does the <b>mv<\/b> command know whether to rename a file\/directory or change its location?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
-            "completed": true
+            "completed": false 
         },
         {
             "id": 24,
@@ -782,18 +782,18 @@
     ],
     "File Navigation": {
         "7": {
-            "completed": true
+            "completed": false 
         }
     },
     "basics": {
         "4": {
-            "completed": true
+            "completed": false 
         },
         "6": {
-            "completed": true
+            "completed": false 
         },
         "1": {
-            "completed": true
+            "completed": false 
         }
     }
 }
