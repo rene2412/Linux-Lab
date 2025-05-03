@@ -140,27 +140,6 @@ class LessonManager {
 
     terminal.setLesson(this.lesson);
     this.broadcastUpdate()
-
-
-    // update our user info json
-    // try {
-    //   const response = await fetch("../../testAPI/updateUserInfo.php", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       section: section,
-    //       lesson: lessonId,
-    //     }),
-    //   });
-    //   if (!response.ok) {
-    //     throw new Error(`response error`, response.status);
-    //   }
-    //   this.fetchUserInfo();
-    // } catch (error) {
-    //   console.log(`error saving ${error}`);
-    // }
   };
 
   eventNewInfo(data) {
@@ -409,19 +388,23 @@ class lessonDisplay {
   };
 
   updateMeter() {
-    console.log(this.completedLessons)
     let value = 0;
     for(let key in this.completedLessons){
       if(this.completedLessons[key])value++;
     }
-    let progress = value/this.sectionSize;
+    let progress = value/this.modules[this.curSection][0].interactive__size;
+    console.log(this.modules[this.curSection][0].interactive__size)
     this.progBar.style.transform = `scalex(${progress})`
 
   }
 
   updateStatus() {
     let title = this.modules[this.curSection][this.curLesson].title;
-    if (this.completedLessons[title]) {
+    if(this.modules[this.curSection][this.curLesson].content_type==="article"){
+      this.statusCheck.classList.add(`hidden`);
+      this.statusCross.classList.add(`hidden`);
+    }
+    else if (this.completedLessons[title]) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
     } else {

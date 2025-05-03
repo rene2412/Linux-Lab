@@ -2,6 +2,7 @@
     "The Basics": [
         {
             "section__size": 64,
+            "interactive__size": 34,
             "section__completed": false
         },
         {
