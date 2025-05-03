@@ -284,3 +284,10 @@
         display: none;
     }
 }
+
+@media (max-width: 426px){
+    .navbar{
+        padding: var(--spce-med);
+    }
+
+}
