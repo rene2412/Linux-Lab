@@ -11,6 +11,8 @@ export default class Footer{
                 <h2 class="footer__title">Linux-Lab</h2>
                 <ul class="footer__links footer__list">
                     <li><p>Fresno, CA</p></li>
+                    <li><a href="../../pages/about_us/about_us.html">About</a></li>
+                    <li><a href="../../pages/contact_page/contact.html">Contact</a></li>
                 </ul>
             </section>
             <section class="footer__socials">
@@ -26,7 +28,7 @@ export default class Footer{
         </div>
         <div class="footer__end">
             <img src="../assets/SVGs/Tux.svg.png"class="footer__logo" alt="TUX the penguin">
-            <p>made by code</p>
+            <p>Linux-Lab</p>
         </div> 
         `;
         return html;
