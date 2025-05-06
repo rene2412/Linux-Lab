@@ -26,25 +26,33 @@ class LessonManager {
     document.addEventListener("completed:update", this.handleLessonCompleted);
     document.addEventListener("command-success", this.handleLessonCompleted);
   }
-  handleLessonCompleted = async () => {
-    // update our user completed json
-        this.lessons[this.currentSection][this.lesson].completed = true;
+  handleLessonCompleted = async (e) => {
+    console.log('handle lesson completed')
+    console.log(e.detail);
     try {
-      const response = await fetch("../../testAPI/updateLessonCompleted.php", {
-        method: "POST",
+      const response = await fetch("../../../api_commands.php", {
+        method: 'POST',
         headers: {
-          "Content-type": "application/json",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({
-          section: this.currentSection,
-          lesson: this.lesson,
-          completed: true,
-        }),
-      });
+        body: `command=${encodeURIComponent(e.detail.answer)}&lessonId=${encodeURIComponent(e.detail.lessonId)}`,
+      })
       if (!response.ok) {
         throw new Error(`response error`, response.status);
       }
+      const data = await response.json();
+      console.log('data')
+      console.log(data)
       this.fetchUserInfo();
+      if(data.commandSuccess) {
+        const successEvent = new CustomEvent('command-success', {
+          detail:{
+            command: commandToSend,
+            output: data.output
+          }
+        });
+        document.dispatchEvent(successEvent);
+      }
     } catch (error) {
       console.log(`error completing ${error}`);
     }
@@ -339,20 +347,22 @@ class lessonDisplay {
     }
   }
 
+  // HANDLE THE QUESTION
   handleQuestion = (e) => {
     let button = e.target;
     if (e.target.parentNode.tagName === "BUTTON") button = e.target.parentNode;
     if (button.tagName === "BUTTON") {
-      if (this.modules[this.curSection][this.curLesson].answer === button.id) {
+      let answer = this.modules[this.curSection][this.curLesson].answer;
+      if (answer === button.id) {
         button.classList.add("question--correct");
         button.parentNode.classList.add("question__container--correct");
-        this.showSuccessMessage();
         document.dispatchEvent(
           new CustomEvent("completed:update", {
             detail: {
               section: this.curSection,
               lessonId: this.curLesson,
               completed: true,
+              answer:answer,
             },
           })
         );
@@ -400,7 +410,6 @@ class lessonDisplay {
       if(this.completedLessons[key])value++;
     }
     let progress = value/this.modules[this.curSection][0].interactive__size;
-    console.log(this.modules[this.curSection][0].interactive__size)
     this.progBar.style.transform = `scalex(${progress})`
 
   }
