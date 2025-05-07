@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		}
 
 	session_start();
-    
 	if ($errors) {
 		$_SESSION["errors_signup"] = $errors; 
 		 header("Location: ../src/pages/login/login.php");	

@@ -1,6 +1,6 @@
 <?php 
+session_start();
 echo "Debug: Starting send_email.inc.php<br>";
-require_once "config_session.inc.php";
 echo "Debug: Session file included<br>";
 require __DIR__ . '/../vendor/autoload.php';
 echo "Debug: PHPMailer loaded<br>";

@@ -451,7 +451,7 @@
             "id": 41,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Knowledge Check #10",
+            "title": "Knowledge Check #9",
             "content_type": "multichoice",
             "questions": {
                 "A": "Redirects output to a file",
@@ -467,7 +467,7 @@
             "id": 42,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Knowledge Check #11",
+            "title": "Knowledge Check #10",
             "content_type": "multichoice",
             "questions": {
                 "A": "-i",
@@ -483,7 +483,7 @@
             "id": 43,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Knowledge Check #12",
+            "title": "Knowledge Check #11",
             "content_type": "multichoice",
             "questions": {
                 "A": "find filename \/path\/to\/source",
@@ -499,7 +499,7 @@
             "id": 44,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Knowledge Check #13",
+            "title": "Knowledge Check #12",
             "content_type": "multichoice",
             "questions": {
                 "A": "> reads from a file while >> writes to a file",
@@ -515,7 +515,7 @@
             "id": 45,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Knowledge Check #14",
+            "title": "Knowledge Check #13",
             "content_type": "multichoice",
             "questions": {
                 "A": "find notes.txt 'Linux'",
@@ -652,7 +652,7 @@
             "id": 59,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Knowledge Check #15",
+            "title": "Knowledge Check #14",
             "content_type": "multichoice",
             "questions": {
                 "A": "chmod +rwx file.txt",
@@ -668,7 +668,7 @@
             "id": 60,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Knowledge Check #16",
+            "title": "Knowledge Check #15",
             "content_type": "multichoice",
             "questions": {
                 "A": "chmod 644 report.txt",
@@ -684,7 +684,7 @@
             "id": 61,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Knowledge Check #17",
+            "title": "Knowledge Check #16",
             "content_type": "multichoice",
             "questions": {
                 "A": "chown user:group file.txt",
@@ -700,7 +700,7 @@
             "id": 62,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Knowledge Check #18",
+            "title": "Knowledge Check #17",
             "content_type": "multichoice",
             "questions": {
                 "A": "drwxr-xr-x",
@@ -716,7 +716,7 @@
             "id": 63,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Knowledge Check #19",
+            "title": "Knowledge Check #18",
             "content_type": "multichoice",
             "questions": {
                 "A": "chmod",

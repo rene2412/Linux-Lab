@@ -33,7 +33,7 @@ export default class ContactForm{
         e.preventDefault();
         this.formData = new FormData(this.form);
         try{
-            const response = await fetch('PLACEHOLDER',{
+            const response = await fetch('../../pages/contact_page/contact.php',{
                method:'POST',
                headers: {
                 'Content-type': 'application/json',
@@ -47,7 +47,11 @@ export default class ContactForm{
             if(!response.ok){
                 throw new Error(`Error sending message ${response.status}`)
             }
+            if (response.ok) {
+                console.log("php success");
+            }
             const data = await response.json();
+            console.log("PHP Response: ", data);
             this.mountSuccess();
 
         }

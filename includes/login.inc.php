@@ -29,8 +29,17 @@
 		 if (!password_verify($pwd, $result["pwd"])) {
 				$errors["password_invalid"] = "Invalid Password!";
 		}
-		//require_once 'config_session.inc.php';
+		ini_set('session.gc_maxlifetime', 7200); // 2 hours
+		session_set_cookie_params([
+			'lifetime' => 0, // session cookie (dies on browser close)
+			'path' => '/',
+			'domain' => '', 
+			'secure' => false,
+			'httponly' => true,
+			'samesite' => 'Lax'
+		]);
 		session_start();
+
 		if ($errors) {
 			$_SESSION["errors_login"] = $errors;
 			header("Location: ../src/pages/login/login.php");	
