@@ -216,7 +216,7 @@ class LessonNav {
   };
 
   render = (e) => {
-    console.log(e.detail);
+    // console.log(e.detail);
     const lessons = e.detail.lessons;
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
@@ -326,8 +326,8 @@ class lessonDisplay {
       // render correct questions
       for (const [key, value] of questionEntries) {
         if (
-          this.modules[this.curSection][this.curLesson].completed &&
-          this.modules[this.curSection][this.curLesson].answer === key
+          this.modules[this.curSection][this.curLesson].answer === key &&
+          this.completedLessons[this.modules[this.curSection][this.curLesson].title]
         ) {
           completed = true;
           questions.push(`
@@ -366,6 +366,7 @@ class lessonDisplay {
             },
           })
         );
+        this.showSuccessMessage();
       } else {
         button.classList.add("question--wrong");
         button.classList.add("animate-shake");
