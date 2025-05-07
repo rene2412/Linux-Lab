@@ -29,4 +29,3 @@ if (isset($_SESSION["user_username"])) {
     header("Location: ../pages/landing_page/landing_page.html");
     exit();
 }
-?>

@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL & ~E_WARNING);
 session_start();
+error_reporting(E_ALL & ~E_WARNING);
 //require 'includes/config_session.inc.php';
 require_once "includes/database.inc.php";
 //session_unset();
@@ -551,7 +551,7 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
                 "group" => "group",
                 "created" => date("Y-m-d H:i:s"),
                 "modified" => date("Y-m-d H:i:s"),
-                "size" => 0,
+                "size" => 21,
                 "content" => []
             ]
         ];
@@ -588,7 +588,7 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
             "group" => "group",
             "created" => date("Y-m-d H:i:s"),
             "modified" => date("Y-m-d H:i:s"),
-            "size" => 0,
+            "size" => 28,
             "content" => []
         ]
     ];
@@ -1498,7 +1498,23 @@ function send_current_lesson(PDO $pdo, int $userId) : string {
     $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
     return $current_lesson . "\n";
     }
-
+    function GetMultChoiceAnswer($lesson_id) : string {
+        $answer = "";
+        $data = json_decode(file_get_contents("src/testAPI/lessons.json"), true);
+    
+        foreach ($data as $section) {
+            foreach ($section as $lesson) {
+                if (isset($lesson['id']) && $lesson['id'] === $lesson_id) {
+                    if (isset($lesson['answer'])) {
+                        $answer = $lesson['answer'];
+                    }
+                    break 2; 
+                }
+            }
+        }
+        return $answer;
+    }
+    
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1515,6 +1531,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+
+    // Get the raw POST data
+    $json_answer = file_get_contents('php://input');
+    // Decode the JSON into a PHP associative array
+    $data_answer = json_decode($json_answer, true);
+
+    // Now you can access it like a regular array
+    $multi_answer = $data_answer['answer'];
+
     $fileSystem = &$_SESSION['fileSystem'];
     $currentDir = &$_SESSION['currentDirectory'];
     $sudo = false;
@@ -1524,6 +1549,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $arg3 = $args[3] ?? '';
     $output = "";
     $json = '';
+
     $isCorrect = false;
     $jsonString = file_get_contents('src/testAPI/lessons.json');
     $jsonData = json_decode($jsonString, true);
@@ -1539,7 +1565,84 @@ if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
 
 if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
- } 
+ }
+ //multi-choice and mysql handshake (madness)
+ if ($lessonID === 11 && GetMultChoiceAnswer($lessonID)  === "B") {
+    update_mysql($pdo, $userId, 11, 12);
+    updateUserProgress($pdo, $userId, 11);
+} 
+if ($lessonID === 12 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 12, 13);
+    updateUserProgress($pdo, $userId, 12);
+} 
+if ($lessonID === 13 && GetMultChoiceAnswer($lessonID)  === "D") {
+    update_mysql($pdo, $userId, 13, 14);
+    updateUserProgress($pdo, $userId, 13);
+}
+if ($lessonID === 23 && GetMultChoiceAnswer($lessonID)  === "B") {
+    update_mysql($pdo, $userId, 23, 14);
+    updateUserProgress($pdo, $userId, 23);
+}
+if ($lessonID === 24 && GetMultChoiceAnswer($lessonID)  === "B") {
+    update_mysql($pdo, $userId, 24, 25);
+    updateUserProgress($pdo, $userId, 24);
+}
+if ($lessonID === 25 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 25, 26);
+    updateUserProgress($pdo, $userId, 25);
+}
+if ($lessonID === 26 && GetMultChoiceAnswer($lessonID)  === "B") {
+    update_mysql($pdo, $userId, 26, 27);
+    updateUserProgress($pdo, $userId, 26);
+}
+if ($lessonID === 27 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 27, 28);
+    updateUserProgress($pdo, $userId, 27);
+}
+if ($lessonID === 41 && GetMultChoiceAnswer($lessonID)  === "B") {
+    update_mysql($pdo, $userId, 41, 42);
+    updateUserProgress($pdo, $userId, 41);
+}
+if ($lessonID === 42 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 42, 43);
+    updateUserProgress($pdo, $userId, 42);
+}
+if ($lessonID === 43 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 43, 44);
+    updateUserProgress($pdo, $userId, 43);
+}
+if ($lessonID === 44 && GetMultChoiceAnswer($lessonID)  === "B") {
+    update_mysql($pdo, $userId, 44, 45);
+    updateUserProgress($pdo, $userId, 44);
+}
+if ($lessonID === 45 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 45, 46);
+    updateUserProgress($pdo, $userId, 45);
+}
+if ($lessonID === 45 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 45, 46);
+    updateUserProgress($pdo, $userId, 45);
+}
+if ($lessonID === 59 && GetMultChoiceAnswer($lessonID)  === "D") {
+    update_mysql($pdo, $userId, 59, 60);
+    updateUserProgress($pdo, $userId, 59);
+}
+if ($lessonID === 60 && GetMultChoiceAnswer($lessonID)  === "D") {
+    update_mysql($pdo, $userId, 60, 61);
+    updateUserProgress($pdo, $userId, 60);
+}
+if ($lessonID === 61 && GetMultChoiceAnswer($lessonID)  === "A") {
+    update_mysql($pdo, $userId, 61, 62);
+    updateUserProgress($pdo, $userId, 61);
+}
+if ($lessonID === 62 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 62, 63);
+    updateUserProgress($pdo, $userId, 62);
+}
+if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
+    update_mysql($pdo, $userId, 63, 64);
+    updateUserProgress($pdo, $userId, 63);
+}
  switch ($cmd) {
     case 'echo':
         $GetLine = "";
@@ -1729,13 +1832,6 @@ if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
             }
         }
             $output  = process_date();
-            $output .= "\nPayload" . $lessonID;
-            if (is_numeric($lessonID)) {
-                $output .= "Number\n";
-            }
-            if (!is_numeric($lessonID)) {
-                $output .= "NOT NUmber\n";
-            }
             break;
     case 'cat':
             if (count($args) > 4) {
@@ -2069,6 +2165,9 @@ case 'python3':
             break;
     }
     
+    
+
+
 
     if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
         $progress = send_user_progress($pdo, $userId);
@@ -2081,6 +2180,9 @@ case 'python3':
         $currentLesson = null;
         $status = null;
     }
+
+ 
+$multi_answer = GetMultChoiceAnswer($lessonID);
    // Return the output as JSON
     echo json_encode([
         'output' => $output,
@@ -2088,6 +2190,7 @@ case 'python3':
         'currentDirectory' => $currentDir,
         'userProgress' => $progress,
         'userCurrentLesson' => $currentLesson,
-        'userStatus' => $status
+        'userStatus' => $status,
+        "answer" => $multi_answer,
     ]);
 } 
