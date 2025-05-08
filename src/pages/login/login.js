@@ -28,7 +28,6 @@ function showSignup(){
 
 }
 
-
 async function AuthCheck(){
     try{
         const response = await fetch('../../user/user.php');

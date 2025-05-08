@@ -12,7 +12,7 @@ $logged = false; // Default to false for guests
 $lessonId = 1;
 $lessons_completed = 0;
 $current_lesson = "Not Started";
-$lessonName = "No lesson found";
+$lessonName = "The Command Line";
 $current_section = "Prelude"; // Default to first section
 $current_module = "The Basics"; // Default module
 

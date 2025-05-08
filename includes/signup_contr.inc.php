@@ -57,7 +57,7 @@ function is_passsword_valid (string $pwd) : bool {
 else return true;
 }
 
-function create_user(object $pdo, string $pwd, string $username, string $email) : void {
-	set_user($pdo, $pwd, $username, $email);
+function create_user(object $pdo, string $pwd, string $username, string $email)  {
+	return set_user($pdo, $pwd, $username, $email);
 }
 
