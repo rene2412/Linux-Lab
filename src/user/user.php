@@ -145,7 +145,7 @@ $response = [
         [
             "name" => "The Basics",
             "completed" => $lessons_completed,
-            "total" => 60
+            "total" => 64
         ],
         [
             "name" => "Networking",
