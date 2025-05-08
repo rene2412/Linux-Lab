@@ -22,3 +22,28 @@
     display: flex; */
 }
 
+
+.caret-block::after {
+    content: '█';
+    animation: blink 2s steps(1,end) infinite;
+    font-family: monospace;
+    transform: scale(0.6);
+    transform: scaleX(0.8);
+    color: white;
+    animation-delay: 0.5s;
+    /* safari solutions */
+    /* min-width: 1px; */
+    display: inline-block;
+    white-space: pre;
+}
+
+
+@keyframes blink {
+    0%, 50%{
+        opacity: 1;
+        
+    }
+    25%, 75%{
+        opacity: 0;
+    }
+}

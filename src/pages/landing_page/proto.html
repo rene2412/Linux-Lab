@@ -6,6 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="./proto.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <div class="navigation__container">
@@ -13,9 +16,9 @@
 
     <main class=" text-white border-b-3  ">
         <!-- HERO -->
-        <div class=" border-b-3 border-[var(--color-secondary)] relative  z-0 isolate content gap-2 !px-5 -top-[var(--nav-height)]  h-svh text-white flex flex-col items-center justify-center">
+        <div class=" border-b-3 border-[var(--color-secondary)] relative z-0 isolate content gap-2 !px-5 -top-[var(--nav-height)]  h-svh text-white flex flex-col items-center justify-center">
             <div class="w-full  backdrop-blur-xs  h-full absolute -z-10  bg-white/10 " ></div>
-            <h1 class=" !text-5xl md:!text-6xl lg:!text-7xl font-extrabold text-center w-full p-0 m-0 ">Master the command line<span class="green">.</span></h1>
+            <h1 class=" text-wrap animate-typewriter !text-5xl md:!text-6xl lg:!text-7xl font-extrabold text-center w-full p-0 m-0 "> </h1>
             <p class=" text-center">Learn the command line in a simulated environment with interactive lessons.</p>
             <button type="button" class=" styled-button  bg-[var(--color-highlight)] !p-2 rounded-[var(--radius-med)]  "><a href="../login/login.php"><b>Get Started</b></a></button>
         </div>
@@ -39,14 +42,20 @@
         </div>
         <!-- Decoration -->
         <div class="text-2xl select-none border-b-3 !py-2">
-            <div class="  overflow-clip relative text-nowrap">
-                <span class=" green relative -left-1/3 ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            <div class=" overflow-none text-nowrap relative right-10 ">
+                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
             </div>
-            <div class="  overflow-clip relative text-nowrap">
-                <span class=" green relative ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            <div class=" overflow-none text-nowrap relative right-20 ">
+                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
             </div>
-            <div class="  overflow-clip relative text-nowrap">
-                <span class=" green relative -left-1/5 ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            <div class=" overflow-none text-nowrap relative right-50 ">
+                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
             </div>
         </div>
         <!-- Gallery and CTA -->
@@ -66,5 +75,36 @@
     <footer class="footer__container">
     </footer> 
     <script src="./landing_page.js"  type="module"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+         gsap.registerPlugin(ScrambleTextPlugin,ScrollTrigger)
+         gsap.to(".animate-typewriter",{
+            duration:3,
+            ease:'power1',
+            scrambleText:{
+                text:"Master the Command Line.",
+                chars:" ",
+                tweenLength:true,
+                newClass:"caret-block"
+            }
+         })
+
+        //  gsap.set('.span-marquee',{x:-50})
+        //  gsap.to('.span-marquee',{
+        //     x:50,
+        //     duration:10,
+        //     ease:'none',
+        //     scrollTrigger:{
+        //         trigger:'.span-marquee',
+        //         end: "bottom 70px",
+        //         markers:true,
+        //         scrub:0.6,
+        //     }
+        //  })
+        
+        });
+       
+       </script>
+
 </body>
 </html>
