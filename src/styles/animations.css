@@ -42,7 +42,7 @@
 
 
 .animate-blink-alt{
-    animation: blink-alt 2s steps(1,end) infinite;
+    animation: blink-alt 3s steps(1,end) infinite;
 }
 
 @keyframes blink-alt {
