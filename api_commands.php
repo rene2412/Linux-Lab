@@ -1472,7 +1472,6 @@ function updateUserProgress($pdo, $userId, $lesson_id) : void {
 //api to send the user progress to the front, in json, 
 //we will do that by getting all the lessons ids the current user has and sending those keys to json
 function send_user_progress(PDO $pdo, int $userId) : array {
-    if ($userId === null) return null;
         $sql = "
         SELECT lesson_id FROM user_lessons WHERE user_id = ?";
         $stmt = $pdo->prepare($sql);
@@ -1566,6 +1565,7 @@ if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
 if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
  }
+ 
  //multi-choice and mysql handshake (madness)
  if ($lessonID === 11 && GetMultChoiceAnswer($lessonID)  === "B") {
     update_mysql($pdo, $userId, 11, 12);
