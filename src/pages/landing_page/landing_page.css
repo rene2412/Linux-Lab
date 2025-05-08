@@ -3,9 +3,9 @@
 @import '../../components/Footer/Footer.css';
 
 
-*{
+/* *{
     box-sizing: border-box;
-}
+} */
 
 .content{
     background-color: black ;
@@ -13,40 +13,37 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    color: var(--text-color-main);
+    /* color: var(--text-color-main);
     display: flex;
     max-width: 100vw;
     width: 100%;
     min-height: calc(100vh - var(--nav-height));
     height: 100%;
-    display: flex;
+    display: flex; */
 }
 
 
-/* HERO SECTION */
-.hero{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: var(--spce-med);
-    background-color: var(--color-overlay);
-    /* background-color: red; */
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    padding: var(--spce-lg);
-    /* border-radius: var(--radius-med); */
-    max-width: 100vw;
-    width: 100vw;
+.caret-block::after {
+    content: '█';
+    animation: blink 2s steps(1,end) infinite;
+    font-family: monospace;
+    transform: scale(0.6);
+    transform: scaleX(0.8);
+    color: white;
+    animation-delay: 0.5s;
+    /* safari solutions */
+    /* min-width: 1px; */
+    display: inline-block;
+    white-space: pre;
 }
 
-.hero__title{
-    font-size: clamp(4rem, 5vw, 7rem);
-    text-align: center;
-}
 
-.green{
-    color: limegreen;
+@keyframes blink {
+    0%, 50%{
+        opacity: 1;
+        
+    }
+    25%, 75%{
+        opacity: 0;
+    }
 }
-

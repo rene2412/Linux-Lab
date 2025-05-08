@@ -1,0 +1,52 @@
+@import '../../styles/index.css';
+@import '../../components/Navigation/Navigation.css';
+@import '../../components/Footer/Footer.css';
+
+
+*{
+    box-sizing: border-box;
+}
+
+.content{
+    background-color: black ;
+    background-image: url(./matrix.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: var(--text-color-main);
+    display: flex;
+    max-width: 100vw;
+    width: 100%;
+    min-height: calc(100vh - var(--nav-height));
+    height: 100%;
+    display: flex;
+}
+
+
+/* HERO SECTION */
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--spce-med);
+    background-color: var(--color-overlay);
+    /* background-color: red; */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: var(--spce-lg);
+    /* border-radius: var(--radius-med); */
+    max-width: 100vw;
+    width: 100vw;
+}
+
+.hero__title{
+    font-size: clamp(4rem, 5vw, 7rem);
+    text-align: center;
+}
+
+.green{
+    color: limegreen;
+}
+
