@@ -6,21 +6,105 @@
     <title>Document</title>
     <link rel="stylesheet" href="./landing_page.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <div class="navigation__container">
     </div>
 
-    <div class="content">
-        <div class="hero">
-            <h1 class="hero__title animation--popup text-red-50 ">Master the command line<span class="green">.</span></h1>
-            <p class="animation--popup">Learn the command line in a simulated environment with interactive lessons.</p>
-            <button type="button" class="hero__button animation--popup styled-button"><a href="../login/login.php"><b>Get Started</b></a></button>
+    <main class=" text-white border-b-3  ">
+        <!-- HERO -->
+        <div class=" border-b-3 border-[var(--color-secondary)] relative z-0 isolate content gap-2 !px-5 -top-[var(--nav-height)]  h-svh text-white flex flex-col items-center justify-center">
+            <div class="w-full  backdrop-blur-xs  h-full absolute -z-10  bg-white/10 " ></div>
+            <h1 class=" text-wrap animate-typewriter !text-5xl md:!text-6xl lg:!text-7xl font-extrabold text-center w-full p-0 m-0 "> </h1>
+            <p class=" text-center">Learn the command line in a simulated environment with interactive lessons.</p>
+            <button type="button" class=" styled-button  bg-[var(--color-highlight)] !p-2 rounded-[var(--radius-med)]  "><a href="../login/login.php"><b>Get Started</b></a></button>
         </div>
-    </div>
+        <!-- 3 POINTS -->
+        <div class="flex flex-col justify-center gap-16 border-b-3 !pb-16 lg:!px-6 md:flex-row items-center flex-wrap  ">
+            <div class=" flex flex-col items-center gap-2 ">
+                <img class=" inline-block !select-none" src="../assets/SVGs/landingBook.png" alt="icon">
+                <h3 class=" text-center text-4xl lg:text-5xl font-extrabold"><span class="green">></span>Learn by doing</h3>
+                <p class=" max-w-72 text-center">The best way to learn a new tool is to use that tool.</p>
+            </div>
+            <div class=" flex flex-col items-center gap-2 ">
+                <img class=" inline-block !select-none" src="../assets/SVGs/landingBook2.png" alt="icon">
+                <h3 class=" text-center text-4xl lg:text-5xl  font-extrabold"><span class="green">></span>From the basics.</h3>
+                <p class=" max-w-72 text-center">We begin from zero to hero.</p>
+            </div>
+            <div class=" flex flex-col items-center gap-2 ">
+                <img class=" inline-block !select-none" src="../assets/SVGs/landingSnap.png" alt="icon">
+                <h3 class=" text-center text-4xl lg:text-5xl  font-extrabold"><span class="green">></span>Zero setup.</h3>
+                <p class=" max-w-72 text-center">Jump straight in, inside the browser. No setup, to the point.</p>
+            </div>
+        </div>
+        <!-- Decoration -->
+        <div class="text-2xl select-none border-b-3 !py-2">
+            <div class=" overflow-none text-nowrap relative right-10 ">
+                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            </div>
+            <div class=" overflow-none text-nowrap relative right-20 ">
+                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            </div>
+            <div class=" overflow-none text-nowrap relative right-50 ">
+                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            </div>
+        </div>
+        <!-- Gallery and CTA -->
+        <div class="flex flex-col justify-center gap-16 border-b-0 !py-16  ">
+            <div class=" flex flex-col items-center gap-2  ">
+                <h3 class=" text-center text-4xl lg:text-5xl   font-extrabold"><span class="green">></span>See it, believe it. <h3>
+                <img class="block !select-none md:hidden  " src="../assets/SVGs/landingLayout.png" alt="icon">
+                <img class="!select-none hidden md:!block md:max-w-190 lg:max-w-220  " src="../assets/SVGs/landingLayoutLarge.png" alt="icon">
+            </div>
+            <div class=" flex flex-col items-center gap-2 !p-20  ">
+                <h3 class=" text-center text-4xl lg:text-5xl   font-extrabold"><span class="green">></span>What are you waiting for?</h3>
+                <button type="button" class=" !my-2 !p-0 flex styled-button relative group "><span class="absolute text-[var(--color-secondary)] font-extrabold right-full !pr-1 text-xl text-center animate-blink-alt group-hover:scale-120 group-hover:!animate-none group-hover:text-[rgb(0,255,0)] top-2  ">></span><a class=" inline !p-3 font-extrabold " href="../login/login.php">Lets do it!</a></button>
+            </div>
+        </div>
+    </main>
 
     <footer class="footer__container">
     </footer> 
     <script src="./landing_page.js"  type="module"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+         gsap.registerPlugin(ScrambleTextPlugin,ScrollTrigger)
+         gsap.to(".animate-typewriter",{
+            duration:3,
+            ease:'power1',
+            scrambleText:{
+                text:"Master the Command Line.",
+                chars:" ",
+                tweenLength:true,
+                newClass:"caret-block"
+            }
+         })
+
+        //  gsap.set('.span-marquee',{x:-50})
+        //  gsap.to('.span-marquee',{
+        //     x:50,
+        //     duration:10,
+        //     ease:'none',
+        //     scrollTrigger:{
+        //         trigger:'.span-marquee',
+        //         end: "bottom 70px",
+        //         markers:true,
+        //         scrub:0.6,
+        //     }
+        //  })
+        
+        });
+       
+       </script>
+
 </body>
 </html>
