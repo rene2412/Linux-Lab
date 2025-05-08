@@ -1580,7 +1580,7 @@ if ($lessonID === 13 && GetMultChoiceAnswer($lessonID)  === "D") {
     updateUserProgress($pdo, $userId, 13);
 }
 if ($lessonID === 23 && GetMultChoiceAnswer($lessonID)  === "B") {
-    update_mysql($pdo, $userId, 23, 14);
+    update_mysql($pdo, $userId, 23, 24);
     updateUserProgress($pdo, $userId, 23);
 }
 if ($lessonID === 24 && GetMultChoiceAnswer($lessonID)  === "B") {
