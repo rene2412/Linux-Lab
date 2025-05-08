@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         require_once 'database.inc.php';
-//		require_once 'config_session.inc.php';
         require_once 'signup_model.inc.php';
         require_once 'signup_contr.inc.php';	
 	 
@@ -33,14 +32,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 			$errors["password_ invalid"] = "Invalid Password!";
 		}
 
-	session_start();
+		session_start();
 	if ($errors) {
 		$_SESSION["errors_signup"] = $errors; 
-		 header("Location: ../src/pages/login/login.php");	
+		 header("Location: ../src/pages/login/signup.php");	
 		 die();
 		}
+	    $result = create_user($pdo, $pwd, $username, $email);
+		$newSessionId = session_create_id();		
+	    $sessionId = $newSessionId . "_" . $result["id"];
+		session_id($sessionId);
+	
+		$_SESSION["user_id"] = $result["id"];
+		$_SESSION["user_username"] = htmlspecialchars($result["username"]);
+		$_SESSION["last_regeneration"] = time();
 
-	 create_user($pdo, $pwd, $username, $email);
+        $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
+        $stmt->execute([$_SESSION["user_id"]]);
+		if ($_SESSION["user_id"] !== null) {
+			require_once 'cookies.inc.php';
+			$json_response = json_encode($response);
+			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
+		}
 	 header("Location: ../src/pages/landing_page/landing_page.html");
 	 $pdo = null;
 	 $stmt = null;	 

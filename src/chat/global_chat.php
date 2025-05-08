@@ -37,12 +37,15 @@ elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 // Fetch and display all comments
 $commentLogs = display_user_comments($pdo);
+$allComments = [];
 // Print every comment for every user
 foreach ($commentLogs as $chat) {
     if (isset($chat['username']) && isset($chat['comment']) && isset($chat['modified'])) {
-        echo "Username: " . $chat['username'] . "\n";
-        echo "Comment: " . $chat['comment'] . "\n";
-        echo "Modified: " . $chat['modified'] . "\n";
-        echo "-------------------------\n";
+            $allComments[] =  [
+            "Username: " => $chat['username'],
+             "Comment: " => $chat['comment'],
+             "Modified: " => $chat['modified']
+            ];
+        }
     }
-}
+    echo json_encode($allComments);

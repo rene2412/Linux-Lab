@@ -23,7 +23,7 @@ function GetEmail(object $pdo, string $email) : array|false {
 	return $result;
 }
 
-function set_user(object $pdo, string $pwd, string $username, string $email) : void {
+function set_user(object $pdo, string $pwd, string $username, string $email)  {
 	$query = "INSERT INTO users (username, email, pwd) VALUES (:username, :email, :pwd);";
 	$statement = $pdo->prepare($query);
 	$options = [
@@ -36,7 +36,17 @@ function set_user(object $pdo, string $pwd, string $username, string $email) : v
 	$statement->bindParam(":email", $email);
 	$statement->bindParam(":pwd", $hashedPassword);
 	$statement->execute();
-	
+
+    // Get the newly created user's ID
+    $userId = $pdo->lastInsertId();
+    
+    // Return the user data needed for session
+    return [
+        "id" => $userId,
+        "username" => $username
+    ];
+
+
 }
 
 
