@@ -25,7 +25,7 @@
             <div class="w-full  backdrop-blur-md  h-full absolute -z-10  bg-white/10 " ></div>
             <h1 class=" hero-text text-wrap animate-typewriter !text-5xl md:!text-6xl lg:!text-7xl font-extrabold text-center w-full p-0 m-0 "> </h1>
             <p class=" hero-sub text-center">Learn the command line in a simulated environment with interactive lessons.</p>
-            <button type="button" class=" hero-button styled-button  bg-[var(--color-highlight)] !p-2 rounded-[var(--radius-med)]  "><a href="../login/login.php"><b>Get Started</b></a></button>
+            <button type="button" class=" hero-button styled-button  bg-[var(--color-highlight)] !p-2 rounded-[var(--radius-med)] text-xl   "><a href="../login/login.php"><b>Get Started</b></a></button>
         </div>
         <!-- 3 REASONS-->
         <div class=" reasons__container gap-16 border-b-3 !pb-16 lg:!px-6 grid-cols-2 grid-rows-2 flex flex-col md:grid items-center justify-center  ">
@@ -64,7 +64,7 @@
             </div>
         </div>
         <!-- Gallery and CTA -->
-        <div class="flex end__container flex-col justify-center gap-16 border-b-0 !py-16  ">
+        <div class=" overflow-hidden flex end__container flex-col justify-center gap-16 border-b-0 !py-16  ">
             <div class=" gallery__container flex flex-col items-center gap-2  ">
                 <h3 class=" text-center text-4xl lg:text-5xl font-extrabold"><span class="green">></span><span class="gallery__container__text"></span><h3>
                 <img class="block !select-none md:hidden  " src="../assets/SVGs/landingLayout.png" alt="icon">
@@ -84,53 +84,104 @@
         document.addEventListener("DOMContentLoaded", (event) => {
          gsap.registerPlugin(ScrambleTextPlugin,ScrollTrigger, SplitText)
         let heroTl = gsap.timeline();
+        // load timeline
         let loadTl = gsap.timeline();
         let split = SplitText.create('.loading-bar',{
             type:"lines",
             mask:"lines"
         })
 
-         gsap.from('.navbar',{
-            y:"-100%",
-            duration:2,
-            delay:3,
-            ease:"expo",
-         })
+        // full animation only on first session visit
+        const isNewSession = !sessionStorage.getItem('visited');
 
-         gsap.set('.loading-bar',{opacity:1});
-        loadTl.from(split.lines,{
-            delay:0.1,
-            duration: 1,
-            ease:"expo",
-            y:100,
-            skewX:-50,
-        }).to('.loading-text',{
-            delay:0.5,
-            duration:1,
-            scrambleText:{
-                text: "######",
-                chars: ".",
-            }
-        }).to('.loading-screen',{
-            scaleY:0,
-            duration:0.2,
-            transformOrigin:"bottom",
-        }).from(".hero-text",{opacity:0, y:"100%"}).to(".animate-typewriter",{
-            duration:3,
-            ease:'power1',
-            scrambleText:{
-                text:"Master the Command Line.",
-                chars:" ",
-                tweenLength:true,
-                newClass:"caret-block"
-            }
-         }).from(['.hero-sub','.hero-button'],{
-            opacity:0,
-            stagger:0.2,
-            y:"100%",
-            clearProps: "y",
-         })
+        if(isNewSession){
+            sessionStorage.setItem('visited','true');
+            loadTl.set('.loading-bar',{opacity:1}).from(split.lines,{
+                delay:0.1,
+                duration: 1,
+                ease:"expo",
+                y:100,
+                skewX:-50,
+            }).to('.loading-text',{
+                delay:0.5,
+                duration:1,
+                scrambleText:{
+                    text: "######",
+                    chars: ".",
+                }
+            }).to('.loading-screen',{
+                scaleY:0,
+                duration:0.2,
+                transformOrigin:"bottom",
+            }).from('.navbar',{
+                y:"-100%",
+                duration:2,
+                // delay:3,
+                ease:"expo",
+            },"loadEnd").to(".animate-typewriter",{
+                duration:3,
+                ease:'power1',
+                scrambleText:{
+                    text:"Master the Command Line.",
+                    chars:" ",
+                    tweenLength:true,
+                    newClass:"caret-block"
+                }
+            },"loadEnd+=0.5").from(['.hero-sub','.hero-button'],{
+                opacity:0,
+                stagger:0.2,
+                y:"100%",
+                clearProps: "y",
+            })
+        }
+        else{
+            loadTl.set('.loading-bar',{opacity:1})
+            .from(split.lines,{
+                delay:0,
+                duration: 0.2,
+                ease:"expo",
+                y:100,
+                skewX:-50,
+            })
+            .to('.loading-text',{
+                delay:0,
+                duration:0.1,
+                scrambleText:{
+                    text: "######",
+                    chars: ".",
+                }
+            }).to('.loading-screen',{
+                delay:0.1,
+                scaleY:0,
+                duration:0.2,
+                transformOrigin:"bottom",
+            }).from('.navbar',{
+                y:"-100%",
+                duration:2,
+                // delay:3,
+                ease:"expo",
+            },"loadEnd").to(".animate-typewriter",{
+                duration:3,
+                ease:'power1',
+                scrambleText:{
+                    text:"Master the Command Line.",
+                    chars:" ",
+                    tweenLength:true,
+                    newClass:"caret-block"
+                }
+            },"loadEnd+=0.5").from(['.hero-sub','.hero-button'],{
+                opacity:0,
+                stagger:0.2,
+                y:"100%",
+                clearProps: "y",
+            })
 
+        }
+
+
+        //  ====================================================
+        //  random code wave
+        //  ====================================================
          let code = document.querySelectorAll('.deco__code')
          code.forEach((elem)=>{
             gsap.set(elem,{x:gsap.utils.random(-700,-200)});
@@ -168,8 +219,9 @@
                 y: "100%",
                 opacity: 0,
                 delay: 0.5,
-                skewX: -50,
-                duration: 1,
+                // skewX: -50,
+                stagger:0.2,
+
             }, "start");
             
             return pointTl;
