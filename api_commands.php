@@ -1025,9 +1025,8 @@ function delete_recursive(&$directory) {
 
 
 function octal_chmod(&$fileSystem, $currentDirectory, $argument) : string {
-
     $perms = strval($argument);
-    if (count($perms)!= 3)  {
+    if (strlen($perms)!= 3)  {
         return "Error: Invalid Chmod Command";
     }
     
@@ -1050,6 +1049,7 @@ function octal_chmod(&$fileSystem, $currentDirectory, $argument) : string {
 }
 
 function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
+    
     // Navigate to the target directory
     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
     $current = &$fileSystem['/'];
@@ -1074,10 +1074,11 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
     $owner = $file['owner'];
 
     // Check permission to modify
-    if ($owner !== "owner" && $sudo !== "sudo") {
+    if ($owner !== "user" && $sudo !== "sudo") {
         return "Error: User does not own this file.\n";
     }
-    if (!s_numeric($argument)) {
+
+    if (is_numeric($argument)) {
             $permissions = octal_chmod($fileSystem, $currentDirectory, $argument);
             if (str_starts_with($permissions, "Error:")) {
                 return $permissions; //return the error message
@@ -1088,6 +1089,36 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
     }
     // At this point, either user owns it or used sudo — safe to proceed
     switch ($argument) {
+        case '+x':
+            $permissions[3] = 'x';
+            $permissions[6] = 'x'; 
+            $permissions[9] = 'x';
+            break; 
+        case '-x':
+            $permissions[3] = '-'; 
+            $permissions[6] = '-'; 
+            $permissions[9] = '-'; 
+            break;
+        case '+r':
+            $permissions[1] = 'r'; 
+            $permissions[4] = 'r'; 
+            $permissions[7] = 'r'; 
+            break;
+        case '-r':
+            $permissions[1] = '-'; 
+            $permissions[4] = '-'; 
+            $permissions[7] = '-'; 
+            break;  
+        case '+w':
+            $permissions[2] = 'w'; 
+            $permissions[5] = 'w'; 
+            $permissions[8] = 'w'; 
+            break;
+        case '-w':
+            $permissions[2] = '-'; 
+            $permissions[5] = '-'; 
+            $permissions[8] = '-'; 
+            break; 
         case 'u+x':
             $permissions[3] = 'x'; // User execute
             break;
@@ -1105,12 +1136,82 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
             $permissions[8] = '-'; // Others write
             $permissions[9] = '-'; // Others execute
             break;
+        case 'g+x':
+                $permissions[6] = 'x'; // Group execute
+                break;
+            
+         case 'g+r':
+                $permissions[4] = 'r'; // Group read
+                break;
+            
+        case 'g+w':
+                $permissions[5] = 'w'; // Group write
+                break;
+            
+        case 'g-r':
+                $permissions[4] = '-'; // Remove group read
+                break;
+        case 'g-x':
+                $permissions[6] = '-'; // Remove group execute
+                break;
+            
+        case 'o+x':
+                $permissions[9] = 'x'; // Others execute
+                break;
+            
+        case 'o+w':
+                $permissions[8] = 'w'; // Others write
+                break;
+            
+        case 'o-r':
+                $permissions[7] = '-'; // Remove others read
+                break;
+            
+        case 'o-w':
+                $permissions[8] = '-'; // Remove others write
+                break;
+            
+        case 'o-x':
+                $permissions[9] = '-'; // Remove others execute
+                break;
+            
+        case 'u-w':
+                $permissions[2] = '-'; // Remove user write
+                break;
+            
+            case 'u-x':
+                $permissions[3] = '-'; // Remove user execute
+                break;
+            
+            case 'a+r':
+                $permissions[1] = 'r';
+                $permissions[4] = 'r';
+                $permissions[7] = 'r';
+                break;
+            
+            case 'a-w':
+                $permissions[2] = '-';
+                $permissions[5] = '-';
+                $permissions[8] = '-';
+                break;
+            
+            case 'a+x':
+                $permissions[3] = 'x';
+                $permissions[6] = 'x';
+                $permissions[9] = 'x';
+                break;
+            
+            case 'a-r':
+                $permissions[1] = '-';
+                $permissions[4] = '-';
+                $permissions[7] = '-';
+                break;
         default:
-            return "Invalid chmod argument.\n";
+            return "Invalid Chmod Argument.\n";
     }
     $file['permissions'] = implode('', $permissions);
     $file['modified'] = date("Y-m-d H:i:s");
-    return "Permissions updated for $targetFile.\n";
+    return "";
 }
 
 function process_chown(&$fileSystem, $currentDirectory, $sudo, $newuser, $targetFile) : string {
@@ -1547,6 +1648,10 @@ function send_current_lesson(PDO $pdo, int $userId) : string {
         return $answer;
     }
     
+    function contains_number($string) {
+        return preg_match('/\d/', $string) === 1;
+    }
+    
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
@@ -1601,81 +1706,139 @@ if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
  
  //multi-choice and mysql handshake (madness)
  if ($lessonID === 11 && GetMultChoiceAnswer($lessonID)  === "B") {
-    update_mysql($pdo, $userId, 11, 12);
-    updateUserProgress($pdo, $userId, 11);
-} 
+    if ($userId !== null) {
+         update_mysql($pdo, $userId, 11, 12);
+         updateUserProgress($pdo, $userId, 11);
+    }
+}
+
 if ($lessonID === 12 && GetMultChoiceAnswer($lessonID)  === "C") {
-    update_mysql($pdo, $userId, 12, 13);
-    updateUserProgress($pdo, $userId, 12);
-} 
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 12, 13);
+        updateUserProgress($pdo, $userId, 12);
+    }
+}
+
 if ($lessonID === 13 && GetMultChoiceAnswer($lessonID)  === "D") {
-    update_mysql($pdo, $userId, 13, 14);
-    updateUserProgress($pdo, $userId, 13);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 13, 14);
+        updateUserProgress($pdo, $userId, 13);
+    }
 }
+
 if ($lessonID === 23 && GetMultChoiceAnswer($lessonID)  === "B") {
-    update_mysql($pdo, $userId, 23, 24);
-    updateUserProgress($pdo, $userId, 23);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 23, 24);
+        updateUserProgress($pdo, $userId, 23);
+    }
 }
+
 if ($lessonID === 24 && GetMultChoiceAnswer($lessonID)  === "B") {
-    update_mysql($pdo, $userId, 24, 25);
-    updateUserProgress($pdo, $userId, 24);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 24, 25);
+        updateUserProgress($pdo, $userId, 24);
+    }
 }
+
 if ($lessonID === 25 && GetMultChoiceAnswer($lessonID)  === "C") {
+    if ($userId !== null) {
     update_mysql($pdo, $userId, 25, 26);
     updateUserProgress($pdo, $userId, 25);
+    }
 }
+
 if ($lessonID === 26 && GetMultChoiceAnswer($lessonID)  === "B") {
+    if ($userId !== null) {
     update_mysql($pdo, $userId, 26, 27);
     updateUserProgress($pdo, $userId, 26);
+    }
 }
+
 if ($lessonID === 27 && GetMultChoiceAnswer($lessonID)  === "C") {
+    if ($userId !== null) {
     update_mysql($pdo, $userId, 27, 28);
     updateUserProgress($pdo, $userId, 27);
+    }
 }
+
 if ($lessonID === 41 && GetMultChoiceAnswer($lessonID)  === "B") {
+    if ($userId !== null) {
     update_mysql($pdo, $userId, 41, 42);
     updateUserProgress($pdo, $userId, 41);
+    }
 }
+
 if ($lessonID === 42 && GetMultChoiceAnswer($lessonID)  === "C") {
+    if ($userId !== null) {
     update_mysql($pdo, $userId, 42, 43);
     updateUserProgress($pdo, $userId, 42);
+    }
 }
+
 if ($lessonID === 43 && GetMultChoiceAnswer($lessonID)  === "C") {
-    update_mysql($pdo, $userId, 43, 44);
-    updateUserProgress($pdo, $userId, 43);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 43, 44);
+        updateUserProgress($pdo, $userId, 43);
+    }
 }
+
 if ($lessonID === 44 && GetMultChoiceAnswer($lessonID)  === "B") {
-    update_mysql($pdo, $userId, 44, 45);
-    updateUserProgress($pdo, $userId, 44);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 44, 45);
+        updateUserProgress($pdo, $userId, 44);
+    }
 }
+
 if ($lessonID === 45 && GetMultChoiceAnswer($lessonID)  === "C") {
-    update_mysql($pdo, $userId, 45, 46);
-    updateUserProgress($pdo, $userId, 45);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 45, 46);
+        updateUserProgress($pdo, $userId, 45);
+    }
 }
+
 if ($lessonID === 45 && GetMultChoiceAnswer($lessonID)  === "C") {
-    update_mysql($pdo, $userId, 45, 46);
-    updateUserProgress($pdo, $userId, 45);
+    if ($userId !== null) { 
+        update_mysql($pdo, $userId, 45, 46);
+        updateUserProgress($pdo, $userId, 45);
+    }
 }
+
 if ($lessonID === 59 && GetMultChoiceAnswer($lessonID)  === "D") {
-    update_mysql($pdo, $userId, 59, 60);
-    updateUserProgress($pdo, $userId, 59);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 59, 60);
+        updateUserProgress($pdo, $userId, 59);
+    }
 }
+
 if ($lessonID === 60 && GetMultChoiceAnswer($lessonID)  === "D") {
-    update_mysql($pdo, $userId, 60, 61);
-    updateUserProgress($pdo, $userId, 60);
+   if ($userId !== null) {
+        update_mysql($pdo, $userId, 60, 61);
+        updateUserProgress($pdo, $userId, 60);
+    }
 }
+
 if ($lessonID === 61 && GetMultChoiceAnswer($lessonID)  === "A") {
-    update_mysql($pdo, $userId, 61, 62);
-    updateUserProgress($pdo, $userId, 61);
+    if ($userId !== null) {
+        update_mysql($pdo, $userId, 61, 62);
+        updateUserProgress($pdo, $userId, 61);
+    }
 }
+
 if ($lessonID === 62 && GetMultChoiceAnswer($lessonID)  === "C") {
-    update_mysql($pdo, $userId, 62, 63);
-    updateUserProgress($pdo, $userId, 62);
+    if ($userId != null) {
+        update_mysql($pdo, $userId, 62, 63);
+        updateUserProgress($pdo, $userId, 62);
+    }
 }
+
 if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
+    if ($userId !== null) {
     update_mysql($pdo, $userId, 63, 64);
     updateUserProgress($pdo, $userId, 63);
+    }
 }
+
+
  switch ($cmd) {
     case 'echo':
         $GetLine = "";
@@ -2100,6 +2263,24 @@ if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
             break;
     case 'chmod':
         $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);
+        if (count($args) < 3 || count($args) > 4) {
+            $output = "Error: Invalid Chmod Command";
+            break;
+        }
+        if (str_starts_with($output, "Error:")) {
+            break;
+        }
+       if (!contains_number($arg)) {
+            $output = "For this lab please use octal mode\n";
+            break;
+        }
+        if ($lessonID === 65 && $arg === "633" && $arg2 === "sales_report.txt") {
+            $isCorrect = true;
+            if ($userId !== null) {
+                update_mysql($pdo, $userId, 65, 65);
+                updateUserProgress($pdo, $userId, 65);
+            }
+        }
         break;
     case 'chown':
         $output = process_chown($fileSystem, $currentDir, "no_sudo", $arg,  $arg2);
@@ -2111,7 +2292,7 @@ if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
             }
         
             if (count($args) !== 4) {
-                $output = "Usage: sudo $arg <mode> <file>";
+                $output = "Error: Invalid Sudo Command";
                 break;
             }
         
@@ -2129,6 +2310,17 @@ if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
                     if ($userId !== null) {
                         update_mysql($pdo, $userId, 56, 57);
                         updateUserProgress($pdo, $userId, 57);
+                    }
+                }
+                if ($lessonID == 65 && contains_number($arg2) === false) {
+                    $output = "For this lab please octal mode";
+                    break;
+                }
+                if ($lessonID === 65 && $arg2 === "633" && $arg3 === "sales_report.txt") {
+                    $isCorrect = true;
+                    if ($userId !== null) {
+                        update_mysql($pdo, $userId, 65, 65);
+                        updateUserProgress($pdo, $userId, 65);
                     }
                 }
             }
