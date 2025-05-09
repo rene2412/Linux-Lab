@@ -1024,6 +1024,31 @@ function delete_recursive(&$directory) {
 }
 
 
+function octal_chmod(&$fileSystem, $currentDirectory, $argument) : string {
+
+    $perms = strval($argument);
+    if (count($perms)!= 3)  {
+        return "Error: Invalid Chmod Command";
+    }
+    
+    $userPerms = $perms[0]; 
+    $groupPerms = $perms[1];
+    $otherPerms = $perms[2];
+    
+    $map = [
+        "0" => "---",
+        "1" => "--x",
+        "2" => "-w-",
+        "3" => "-wx",
+        "4" => "r--",
+        "5" => "r-x",
+        "6" => "rw-",
+        "7" => "rwx"
+    ];
+    $permissions = $map[$userPerms] . $map[$groupPerms] . $map[$otherPerms];
+    return $permissions;
+}
+
 function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
     // Navigate to the target directory
     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
@@ -1052,7 +1077,15 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
     if ($owner !== "owner" && $sudo !== "sudo") {
         return "Error: User does not own this file.\n";
     }
-
+    if (!s_numeric($argument)) {
+            $permissions = octal_chmod($fileSystem, $currentDirectory, $argument);
+            if (str_starts_with($permissions, "Error:")) {
+                return $permissions; //return the error message
+        }
+        $file['permissions'] = $permissions;
+        $file['modified'] = date("Y-m-d H:i:s");
+        return "Permissions updated for $targetFile.\n";
+    }
     // At this point, either user owns it or used sudo — safe to proceed
     switch ($argument) {
         case 'u+x':
