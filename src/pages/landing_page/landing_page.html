@@ -9,65 +9,70 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 </head>
 <body>
+    <!-- LOADING SCREEN -->
+    <div class=" loading-screen w-dvw h-svh fixed top-0 bg-black z-10 text-white flex justify-center items-center">
+        <h1 class=" opacity-0 font-mono font-italic loading-bar">[<span class="loading-text">......</span>]</h1>
+    </div>
     <div class="navigation__container">
     </div>
 
     <main class=" text-white border-b-3  ">
         <!-- HERO -->
         <div class=" border-b-3 border-[var(--color-secondary)] relative z-0 isolate content gap-2 !px-5 -top-[var(--nav-height)]  h-svh text-white flex flex-col items-center justify-center">
-            <div class="w-full  backdrop-blur-xs  h-full absolute -z-10  bg-white/10 " ></div>
-            <h1 class=" text-wrap animate-typewriter !text-5xl md:!text-6xl lg:!text-7xl font-extrabold text-center w-full p-0 m-0 "> </h1>
-            <p class=" text-center">Learn the command line in a simulated environment with interactive lessons.</p>
-            <button type="button" class=" styled-button  bg-[var(--color-highlight)] !p-2 rounded-[var(--radius-med)]  "><a href="../login/login.php"><b>Get Started</b></a></button>
+            <div class="w-full  backdrop-blur-md  h-full absolute -z-10  bg-white/10 " ></div>
+            <h1 class=" hero-text text-wrap animate-typewriter !text-5xl md:!text-6xl lg:!text-7xl font-extrabold text-center w-full p-0 m-0 "> </h1>
+            <p class=" hero-sub text-center">Learn the command line in a simulated environment with interactive lessons.</p>
+            <button type="button" class=" hero-button styled-button  bg-[var(--color-highlight)] !p-2 rounded-[var(--radius-med)]  "><a href="../login/login.php"><b>Get Started</b></a></button>
         </div>
-        <!-- 3 POINTS -->
-        <div class="flex flex-col justify-center gap-16 border-b-3 !pb-16 lg:!px-6 md:flex-row items-center flex-wrap  ">
-            <div class=" flex flex-col items-center gap-2 ">
+        <!-- 3 REASONS-->
+        <div class=" reasons__container gap-16 border-b-3 !pb-16 lg:!px-6 grid-cols-2 grid-rows-2 flex flex-col md:grid items-center justify-center  ">
+            <div class=" flex flex-col items-center gap-2 reason-1 col-start-1  ">
                 <img class=" inline-block !select-none" src="../assets/SVGs/landingBook.png" alt="icon">
-                <h3 class=" text-center text-4xl lg:text-5xl font-extrabold"><span class="green">></span>Learn by doing</h3>
-                <p class=" max-w-72 text-center">The best way to learn a new tool is to use that tool.</p>
+                <h3 class=" text-center text-4xl lg:text-5xl font-extrabold"><span class="green">></span><span class="reason-points1"></span></h3>
+                <p  class=" reason-1p max-w-72 text-center">The best way to learn a new tool is to use that tool.</p>
             </div>
-            <div class=" flex flex-col items-center gap-2 ">
-                <img class=" inline-block !select-none" src="../assets/SVGs/landingBook2.png" alt="icon">
-                <h3 class=" text-center text-4xl lg:text-5xl  font-extrabold"><span class="green">></span>From the basics.</h3>
+            <div class=" flex flex-col items-center gap-2 reason-2 col-start-2 ">
+                <img class="  inline-block !select-none" src="../assets/SVGs/landingBook2.png" alt="icon">
+                <h3 class=" text-center text-4xl lg:text-5xl  font-extrabold"><span class="green">></span><span class="reason-points2"></span></h3>
                 <p class=" max-w-72 text-center">We begin from zero to hero.</p>
             </div>
-            <div class=" flex flex-col items-center gap-2 ">
-                <img class=" inline-block !select-none" src="../assets/SVGs/landingSnap.png" alt="icon">
-                <h3 class=" text-center text-4xl lg:text-5xl  font-extrabold"><span class="green">></span>Zero setup.</h3>
+            <div class=" flex flex-col items-center gap-2 reason-3 row-start-2 col-span-full  ">
+                <img class="  inline-block !select-none" src="../assets/SVGs/landingSnap.png" alt="icon">
+                <h3 class=" text-center text-4xl lg:text-5xl  font-extrabold"><span class="green">></span><span class="reason-points3"></span></h3>
                 <p class=" max-w-72 text-center">Jump straight in, inside the browser. No setup, to the point.</p>
             </div>
         </div>
         <!-- Decoration -->
-        <div class="text-2xl select-none border-b-3 !py-2 overflow-hidden">
-            <div class=" overflow-none text-nowrap relative right-10 ">
-                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
-                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
-                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+        <div class=" deco__code__container text-2xl select-none border-b-3 !py-2 overflow-hidden">
+            <div class=" deco__code  overflow-none text-nowrap relative">
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
             </div>
-            <div class=" overflow-none text-nowrap relative right-20 ">
-                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
-                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
-                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            <div class=" deco__code  overflow-none text-nowrap relative">
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
             </div>
-            <div class=" overflow-none text-nowrap relative right-50 ">
-                <span class="   green ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
-                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
-                <span class="   green  ">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+            <div class=" deco__code  overflow-none text-nowrap relative">
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
+                <span class=" green">cat hello.txt bye.txt | echo "Hello World!" | date | ls -l | code .</span>
             </div>
         </div>
         <!-- Gallery and CTA -->
-        <div class="flex flex-col justify-center gap-16 border-b-0 !py-16  ">
-            <div class=" flex flex-col items-center gap-2  ">
-                <h3 class=" text-center text-4xl lg:text-5xl   font-extrabold"><span class="green">></span>See it, believe it. <h3>
+        <div class="flex end__container flex-col justify-center gap-16 border-b-0 !py-16  ">
+            <div class=" gallery__container flex flex-col items-center gap-2  ">
+                <h3 class=" text-center text-4xl lg:text-5xl font-extrabold"><span class="green">></span><span class="gallery__container__text"></span><h3>
                 <img class="block !select-none md:hidden  " src="../assets/SVGs/landingLayout.png" alt="icon">
                 <img class="!select-none hidden md:!block md:max-w-190 lg:max-w-220  " src="../assets/SVGs/landingLayoutLarge.png" alt="icon">
             </div>
-            <div class=" flex flex-col items-center gap-2 !p-20  ">
+            <div class=" cta__container flex flex-col items-center gap-10 ">
                 <h3 class=" text-center text-4xl lg:text-5xl   font-extrabold"><span class="green">></span>What are you waiting for?</h3>
-                <button type="button" class=" !my-2 !p-0 flex styled-button relative group "><span class="absolute text-[var(--color-secondary)] font-extrabold right-full !pr-1 text-xl text-center animate-blink-alt group-hover:scale-120 group-hover:!animate-none group-hover:text-[rgb(0,255,0)] top-2  ">></span><a class=" inline !p-3 font-extrabold " href="../login/login.php">Lets do it!</a></button>
+                <button type="button" class=" !my-2 !p-0 flex outline-2 hover:bg-[var(--color-highlight)] rounded-md relative group "><span class="absolute text-[var(--color-secondary)] font-extrabold right-full !pr-1 text-xl text-center animate-blink-alt group-hover:scale-120 group-hover:!animate-none group-hover:text-[rgb(0,255,0)] top-2  ">></span><a class=" inline !p-3 font-extrabold " href="../login/login.php">Lets do it!</a></button>
             </div>
         </div>
     </main>
@@ -77,8 +82,40 @@
     <script src="./landing_page.js"  type="module"></script>
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
-         gsap.registerPlugin(ScrambleTextPlugin,ScrollTrigger)
-         gsap.to(".animate-typewriter",{
+         gsap.registerPlugin(ScrambleTextPlugin,ScrollTrigger, SplitText)
+        let heroTl = gsap.timeline();
+        let loadTl = gsap.timeline();
+        let split = SplitText.create('.loading-bar',{
+            type:"lines",
+            mask:"lines"
+        })
+
+         gsap.from('.navbar',{
+            y:"-100%",
+            duration:2,
+            delay:3,
+            ease:"expo",
+         })
+
+         gsap.set('.loading-bar',{opacity:1});
+        loadTl.from(split.lines,{
+            delay:0.1,
+            duration: 1,
+            ease:"expo",
+            y:100,
+            skewX:-50,
+        }).to('.loading-text',{
+            delay:0.5,
+            duration:1,
+            scrambleText:{
+                text: "######",
+                chars: ".",
+            }
+        }).to('.loading-screen',{
+            scaleY:0,
+            duration:0.2,
+            transformOrigin:"bottom",
+        }).from(".hero-text",{opacity:0, y:"100%"}).to(".animate-typewriter",{
             duration:3,
             ease:'power1',
             scrambleText:{
@@ -87,22 +124,110 @@
                 tweenLength:true,
                 newClass:"caret-block"
             }
+         }).from(['.hero-sub','.hero-button'],{
+            opacity:0,
+            stagger:0.2,
+            y:"100%",
+            clearProps: "y",
          })
 
-        //  gsap.set('.span-marquee',{x:-50})
-        //  gsap.to('.span-marquee',{
-        //     x:50,
-        //     duration:10,
-        //     ease:'none',
-        //     scrollTrigger:{
-        //         trigger:'.span-marquee',
-        //         end: "bottom 70px",
-        //         markers:true,
-        //         scrub:0.6,
-        //     }
-        //  })
-        
+         let code = document.querySelectorAll('.deco__code')
+         code.forEach((elem)=>{
+            gsap.set(elem,{x:gsap.utils.random(-700,-200)});
+         })
+
+        gsap.to('.deco__code',{
+                x:-50,
+                duration:10,
+                ease:'sine',
+            scrollTrigger:{
+                // markers:true,
+                end: "bottom 70px",
+                trigger:'.deco__code__container',
+                scrub:5,
+            }
         });
+
+        function animatePoint(pointNum,phrase) {
+            let pointTl = gsap.timeline();
+            let reasonSplit = SplitText.create(`.reason-${pointNum} p`, {type:"lines", mask:"lines"});
+            pointTl.to(`.reason-points${pointNum}`, {
+                duration: 2,
+                ease: "power1",
+                scrambleText: {
+                text: phrase,
+                chars: "azcvnSDFOINfisEIF*$&23"
+                }
+            }, "start")
+            .from(`.reason-${pointNum} > img`, {
+                opacity: 0, 
+                y: "100%", 
+                duration: 0.5,
+            }, "start")
+            .from(reasonSplit.lines, {
+                y: "100%",
+                opacity: 0,
+                delay: 0.5,
+                skewX: -50,
+                duration: 1,
+            }, "start");
+            
+            return pointTl;
+        }
+        let ptl1 = animatePoint(1,"Learn by doing.")
+        let ptl2 = animatePoint(2,"From the start.")
+        let ptl3 = animatePoint(3,"Zero setup.")
+        let ptlMaster = gsap.timeline({
+            scrollTrigger:{
+                trigger: ".reasons__container",
+                markers:false,
+                start:"top 80%",
+                toggleActions:"play none none none"
+            }
+        });
+        ptlMaster.add(ptl1,"same").add(ptl2,"same+=0.3").add(ptl3,"same+=0.6")
+
+        let endtl = gsap.timeline({
+            scrollTrigger:{
+                trigger:".end__container",
+                markers:false,
+                start: " 75% ",
+                end: " top center",
+            }
+        })
+        endtl.to(`.gallery__container__text`, {
+                duration: 2,
+                ease: "power1",
+                scrambleText: {
+                text: "See it, believe it.",
+                chars: "azcvnSDFOINfisEIF*$&23"
+                }
+            },'start').from('.gallery__container img',{
+                opacity:0,
+                x:100,
+                duration:1,
+            },'start+=0.5')
+        });
+
+        let ctaSplit = SplitText.create('.cta__container h3',{ type: "lines"})
+        let ctatl = gsap.timeline({
+            scrollTrigger:{
+                trigger:".cta__container",
+                markers:false,
+                start: "20% 90%"
+            }
+        })
+        ctatl.from(ctaSplit.lines,{
+            y:'100%',
+            stagger:0.5,
+            rotateX:100,
+            opacity:0,
+            duration:1,
+        },'start').from('.cta__container button',{
+            x:'-100%',
+            opacity:0,
+            duration:1,
+        },'start+=0.3')
        
        </script>
 
