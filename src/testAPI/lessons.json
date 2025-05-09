@@ -1,7 +1,7 @@
 {
     "The Basics": [
         {
-            "section__size": 64,
+            "section__size": 65,
             "interactive__size": 34,
             "section__completed": false
         },
@@ -736,7 +736,16 @@
             "content_type": "interative",
             "content": "<p>In the Work\/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.<\/p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py<\/code>",
             "completed": false
-        }
+        },
+        {
+            "id": 65,
+            "parent": "The Basics",
+            "section": "Checkpoint - File Permissions",
+            "title": "Lab #9",
+            "content_type": "interative",
+            "content": "<p>Sticking in the same Work/ directory, in <b>octal</b> mode, write a command that removes read permissions for the group and others for 'sales_report.txt'</p><table border='1' style='border-collapse: collapse; margin-top: 15px;'><tr><th style='background-color: transparent;'>Octal </th><th style='background-color: transparent;'>Binary </th><th style='background-color: transparent;'>Permission </th></tr><tr><td style='background-color: transparent;'>0</td><td style='background-color: transparent;'>000</td><td style='background-color: transparent;'>---</td></tr><tr><td style='background-color: transparent;'>1</td><td style='background-color: transparent;'>001</td><td style='background-color: transparent;'>--x</td></tr><tr><td style='background-color: transparent;'>2</td><td style='background-color: transparent;'>010</td><td style='background-color: transparent;'>-w-</td></tr><tr><td style='background-color: transparent;'>3</td><td style='background-color: transparent;'>011</td><td style='background-color: transparent;'>-wx</td></tr><tr><td style='background-color: transparent;'>4</td><td style='background-color: transparent;'>100</td><td style='background-color: transparent;'>r--</td></tr><tr><td style='background-color: transparent;'>5</td><td style='background-color: transparent;'>101</td><td style='background-color: transparent;'>r-x</td></tr><tr><td style='background-color: transparent;'>6</td><td style='background-color: transparent;'>110</td><td style='background-color: transparent;'>rw-</td></tr><tr><td style='background-color: transparent;'>7</td><td style='background-color: transparent;'>111</td><td style='background-color: transparent;'>rwx</td></tr></table>",
+            "completed": false
+        } 
     ],
     "networking": [
         {
