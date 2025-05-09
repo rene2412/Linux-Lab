@@ -2164,10 +2164,6 @@ case 'python3':
             $output = "Command not recognized: $cmd\n";
             break;
     }
-    
-    
-
-
 
     if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
         $progress = send_user_progress($pdo, $userId);
