@@ -8,12 +8,13 @@ require_once "../../../includes/login_view.inc.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./login.css">
 </head>
 <body>
     <div class="auth__container">
         <div class="auth__card animation--popup">
             <div class="auth__top">
-                <h2>Linux-Lab</h2>
+                <h2 class="auth__top__logo"><a href="../landing_page/landing_page.html">Linux-Lab</a></h2>
             </div>
             <div class="auth__switch">
             </div>
@@ -24,7 +25,8 @@ require_once "../../../includes/login_view.inc.php";
                     <label for="pwd" class="input__label">Password:</label>
                     <input required type="password" class="input--single" name="pwd" id="pwd" placeholder="Password">
                     <button class="styled-button">Login</button>
-                    <a href="../lesson_page/lesson.html" class="login--guest">continue as guest</a>
+                    <a href="../lesson_page/lesson.html" class="login--guest">Continue as guest</a>
+                    <a href="./signup.php" class="login--guest">Signup instead</a>
                 </form>
                 <?php 
                 check_login_errors();
