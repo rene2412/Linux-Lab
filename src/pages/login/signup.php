@@ -7,14 +7,15 @@ require_once "../../../includes/signup_view.inc.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./login.css">
 </head>
-<div class="auth__container">
+<body>
+    <div class="auth__container">
         <div class="auth__card animation--popup">
             <div class="auth__top">
-                <h2>Linux-Lab</h2>
+                <h2 class="auth__top__logo"><a href="../landing_page/landing_page.html">Linux-Lab</a></h2>
             </div>
-            <div class="auth__switch">
-            </div>
+            <div class="auth__card__content">
                 <form id="signup__form" action="../../../includes/signup.inc.php" method="post" >
                     <label for="username-signup">Username:</label>
                     <input required type="text" id="username-signup" class="input--single" name="username" placeholder="Username">
@@ -24,6 +25,14 @@ require_once "../../../includes/signup_view.inc.php";
                     <input required type="password" id="pwd-signup" class="input--single" name="pwd" placeholder="Password">
                     <button class="styled-button">Signup</button>
                 </form>
-                <?php 
-                    check_signup_errors();
-                ?>
+                <a href="./login.php" class="login--guest">Login instead</a>
+            </div>
+            <?php 
+                check_signup_errors();
+            ?>
+            </div>
+        </div>
+    </div>
+    <script src="./login.js" defer></script>
+
+</body>
