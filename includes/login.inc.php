@@ -29,9 +29,8 @@
 		 if (!password_verify($pwd, $result["pwd"])) {
 				$errors["password_invalid"] = "Invalid Password!";
 		}
-		ini_set('session.gc_maxlifetime', 7200); // 2 hours
 		session_set_cookie_params([
-			'lifetime' => 0, // session cookie (dies on browser close)
+			'lifetime' => 10, // session cookie (dies on browser close)
 			'path' => '/',
 			'domain' => '', 
 			'secure' => false,
@@ -59,7 +58,7 @@
 		if ($_SESSION["user_id"] !== null) {
 			require_once 'cookies.inc.php';
 			$json_response = json_encode($response);
-			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
+			setcookie('user_info', $json_response, time() + 10, "/"); // Expires when browser closes
 		}
 		header('Location: ../src/pages/dashboard/dashboard.html');
 		$pdo = null;
