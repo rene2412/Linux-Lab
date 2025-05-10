@@ -24,8 +24,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 500px;
-  width: 400px;
+  height: 450px;
+  width: 350px;
   color: var(--text-color-inactive);  
   gap: var(--spce-sm);
   box-shadow: 0px 0px 100px -30px var(--color-highlight);
@@ -84,4 +84,28 @@
 }
 .login--guest:active{
   transform: scale(0.9);
+}
+
+#signup__form{
+  display: flex;
+  flex-direction: column;
+  gap: var(--spce-xsm) ;
+}
+#signup__form button{
+  margin-top: var(--spce-xsm);
+  align-self: stretch;
+}
+
+.auth__card__content{
+  flex-grow: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth__top__logo a{
+  text-decoration: none;
+  color: inherit;
 }
