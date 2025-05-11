@@ -41,8 +41,6 @@ class LessonManager {
         throw new Error(`response error`, response.status);
       }
       const data = await response.json();
-      console.log('data')
-      console.log(data)
       this.fetchUserInfo();
       if(data.commandSuccess) {
         const successEvent = new CustomEvent('command-success', {
@@ -226,7 +224,6 @@ class LessonNav {
   };
 
   render = (e) => {
-    console.log('render nav');
     const lessons = e.detail.lessons;
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
@@ -520,7 +517,7 @@ async function test(){
   try{
     const res = await fetch("../../user/user.php");
     const data = await res.json();
-    console.log('test')
+    console.log('user api information')
     console.log(data);
   }
   catch(e){
