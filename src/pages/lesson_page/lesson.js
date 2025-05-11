@@ -216,34 +216,58 @@ class LessonNav {
   };
 
   render = (e) => {
+    console.log('render nav');
     // console.log(e.detail);
     const lessons = e.detail.lessons;
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
+    const lessonStatus = e.detail.lessonsCompleted;
     const status = "";
+    console.log(lessons);
+    console.log(lesson);
+    console.log(section);
+    console.log(lessonStatus);
+    // get subtitle and lesson name
     const openButtonText = `${lessons[section][lesson].section} - ${lessons[section][lesson].title}`;
     let lastSection = "";
     const listElements = lessons[section]
       .filter((item) => item.id > 0)
       .map((lessonData) => {
+        // console.log(lessonData);
+        let statusImgSrc= "#";
+        let statusImgClass = " no-status ";
+        if(lessonData.content_type != "article"){
+          if(lessonStatus[lessonData.title] === true){
+            statusImgSrc="../assets/SVGs/check.svg"
+            statusImgClass = " has-status ";
+          }
+          else{
+            statusImgSrc="../assets/SVGs/cross.svg"
+            statusImgClass = " has-status ";
+          }
+        }
         let returnString = "";
+        // Subtitle
         if (lastSection != lessonData.section) {
           lastSection = lessonData.section;
           returnString = `<li class="lesson__nav__subtitle"><span>${lessonData.section}</span></li>`;
         }
+        // Lessons
         if (lesson === lessonData.id) {
+          // lesson active
           return (
             returnString +
             `<li class="lesson__nav__lesson "><button class="lesson__nav__button active" id="${`${lessonData.section}:${lessonData.id}`}"" >${
               lessonData.title
-            }</button></li>`
+            }</button><div class="lesson__nav__lesson__status"><img class="${statusImgClass}" src="${statusImgSrc}"></div> </li>`
           );
         } else
+          // lesson not active 
           return (
             returnString +
             `<li class="lesson__nav__lesson "><button class="lesson__nav__button" id="${`${lessonData.section}:${lessonData.id}`}"" >${
               lessonData.title
-            }</button></li>`
+            }</button><div class="lesson__nav__lesson__status"><img class="${statusImgClass}"  src="${statusImgSrc}"></div></li>`
           );
       });
     let listElementsString = listElements.join("");
