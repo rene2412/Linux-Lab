@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Global Chat</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="chat.css" />
+  </head>
+  <body>
+    <div class="navigation__container"></div>
+    <div class="layout">
+      <article class="min-h-svh h-svh text-white !p-10">
+        <div
+          class="flex flex-col justify-between outline-2 outline-[var(--color-secondary)] rounded-sm w-full h-full"
+        >
+          <div class="bg-red-500 flex justify-center items-center !py-2 ">
+            <h2 class="text-2xl font-extrabold">Global Chat</h2>
+          </div>
+          <article class=" overflow-y-scroll">
+            <div class="h-[1000px]">
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+              <p>this is a message</p>
+            </div>
+          </article>
+          <div class="bg-blue-700">
+            <form id="chatForm" action="global_chat.php" method="POST">
+              <textarea
+                name="comment"
+                placeholder="Post A Comment ..."
+              ></textarea>
+              <button type="submit">Post</button>
+            </form>
+          </div>
+        </div>
+      </article>
+    </div>
+    <footer class="footer__container"></footer>
+    <script type="module" src="chat.js"></script>
+  </body>
+</html>

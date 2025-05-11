@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json');
 error_reporting(E_ALL & ~E_WARNING);
 
-require_once "../../includes/database.inc.php";
+require_once "../../../includes/database.inc.php";
 $userID = $_SESSION["user_id"]; 
 $username = $_SESSION["user_username"] ?? "User Not Logged In";
 $sendJson = json_encode(["username" => $username]) ;
