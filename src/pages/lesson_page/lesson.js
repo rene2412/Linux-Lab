@@ -206,9 +206,19 @@ class LessonNav {
   };
 
   handleToggle = (e) => {
+    // stop document from initial click so it doesnt close instantly
+    e.stopPropagation()
     if (!this.isOpen) {
       this.dropdownContainer.classList.remove("hidden");
       this.isOpen = true;
+      // handle not on container click
+      document.addEventListener('click',(e)=>{
+        const within = this.dropdownContainer.contains(e.target);
+        if(!within && this.isOpen){
+          this.dropdownContainer.classList.add("hidden");
+          this.isOpen = false;
+        }
+      })
     } else if (this.isOpen) {
       this.dropdownContainer.classList.add("hidden");
       this.isOpen = false;
@@ -217,23 +227,17 @@ class LessonNav {
 
   render = (e) => {
     console.log('render nav');
-    // console.log(e.detail);
     const lessons = e.detail.lessons;
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
     const lessonStatus = e.detail.lessonsCompleted;
     const status = "";
-    console.log(lessons);
-    console.log(lesson);
-    console.log(section);
-    console.log(lessonStatus);
     // get subtitle and lesson name
     const openButtonText = `${lessons[section][lesson].section} - ${lessons[section][lesson].title}`;
     let lastSection = "";
     const listElements = lessons[section]
       .filter((item) => item.id > 0)
       .map((lessonData) => {
-        // console.log(lessonData);
         let statusImgSrc= "#";
         let statusImgClass = " no-status ";
         if(lessonData.content_type != "article"){
