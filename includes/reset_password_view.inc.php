@@ -5,6 +5,7 @@ function check_reset_password_errors() : void {
         $errors = $_SESSION["errors_reset_password"];
         foreach($errors as $error) {
             echo '<p style="color:red;">' . $error . '</p>';
+            break;
         }
         unset($_SESSION["errors_reset_password"]); 
     }
