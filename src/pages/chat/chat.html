@@ -11,34 +11,46 @@
     <div class="layout">
       <article class="min-h-svh h-svh text-white !p-10">
         <div
-          class="flex flex-col justify-between outline-2 outline-[var(--color-secondary)] rounded-sm w-full h-full"
+          class="flex flex-col bg-black justify-between outline-2 outline-[var(--color-secondary)] rounded-sm w-full h-[80%]"
         >
-          <div class="bg-red-500 flex justify-center items-center !py-2 ">
+          <!-- TOP -->
+          <div
+            class="bg-black border-b-2 flex justify-center items-center !py-2"
+          >
             <h2 class="text-2xl font-extrabold">Global Chat</h2>
           </div>
-          <article class=" overflow-y-scroll">
+          <!-- CHAT BOX HERE -->
+          <article class="overflow-y-scroll">
             <div class="h-[1000px]">
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
-              <p>this is a message</p>
+              <p>This is a message</p>
+              <p>This is another message</p>
+              <p>This is a this</p>
+              <p>hello world</p>
             </div>
           </article>
-          <div class="bg-blue-700">
-            <form id="chatForm" action="global_chat.php" method="POST">
+          <!-- INPUT UI -->
+          <form
+            id="chatForm"
+            action="global_chat.php"
+            method="POST"
+            class="h-fit w-full !p-4"
+          >
+            <div
+              class="h-fit w-full gap-4 bg-[var(--color-overlay)] flex items-center outline-0 rounded-xl !p-2"
+            >
               <textarea
                 name="comment"
                 placeholder="Post A Comment ..."
+                class="!animate-none resize-none input--single !max-h-40 !w-full !max-w-none field-sizing-content overflow-auto"
               ></textarea>
-              <button type="submit">Post</button>
-            </form>
-          </div>
+              <button
+                class="text-center self-stretchfont-bold text-green-400"
+                type="submit"
+              >
+                Send
+              </button>
+            </div>
+          </form>
         </div>
       </article>
     </div>
