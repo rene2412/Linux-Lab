@@ -21,11 +21,6 @@
 			$errors["username_invalid"] = "Invalid Username Or Password!";
 
 		}
-		// Check if GetUser returned false (user not found)
-        if (!is_username_wrong($result) === false) {
-            $errors["username_invalid"] = "Invalid Username2 Or Password!";
-		}
-
 		 if (!password_verify($pwd, $result["pwd"])) {
 				$errors["password_invalid"] = "Invalid Password!";
 		}

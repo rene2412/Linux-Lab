@@ -32,7 +32,7 @@ require_once "../../../includes/login_view.inc.php";
                 check_login_errors();
                 ?>
             </div>
-            <form action="includes/reset_info.inc.php" method="post">
+            <form action="../../../includes/reset_info.inc.php" method="post">
                 <button class="styled-button auth__forgot">Reset Password</button>
             </form>
         </div>

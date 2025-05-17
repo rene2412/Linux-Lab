@@ -23,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (username_is_taken($pdo, $username)) {
             $errors["username_taken"] = "Username is taken. Please choose another!";		
         }
-    
+		if (is_username_too_long($username )) {
+            $errors["invalid_username"] = "Username can't exceed past 20 characters";		
+		}
         if (email_is_registered($pdo, $email)) {
             $errors["email_taken"] = "Email already registered. Please choose another!";		
         }
