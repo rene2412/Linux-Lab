@@ -21,11 +21,34 @@
           </div>
           <!-- CHAT BOX HERE -->
           <article class="overflow-y-scroll">
-            <div class="h-[1000px]">
-              <p>This is a message</p>
-              <p>This is another message</p>
-              <p>This is a this</p>
-              <p>hello world</p>
+            <div class="h-[1000px] !px-5">
+              <div class=" flex flex-col">
+                <div class="message__row max-w-[80%] flex flex-col gap-2">
+                  <div
+                    class="message__header flex justify-between items-center !-mb-2"
+                  >
+                    <p class="green">@herb</p>
+                    <p class="text-sm text-[var(--text-color-secondary)] ">5-16-2025 16:09</p>
+                  </div>
+                  <div
+                    class="message !p-2 bg-[var(--color-overlay)] w-fit rounded-[var(--radius-med)]"
+                  >
+                    Hello World!
+                  </div>
+                </div>
+                <div class="message__row max-w-[80%] flex flex-col items-end self-end  gap-2">
+                  <div
+                    class="message__header flex justify-between items-center !-mb-2"
+                  >
+                    <p class="text-xs text-[var(--text-color-secondary)]">5-16-2025 16:09</p>
+                  </div>
+                  <div
+                    class="message !p-2 bg-[var(--color-highlight)] w-fit rounded-[var(--radius-med)]"
+                  >
+                    Hello World!
+                  </div>
+                </div>
+              </div>
             </div>
           </article>
           <!-- INPUT UI -->
@@ -43,12 +66,7 @@
                 placeholder="Post A Comment ..."
                 class="!animate-none resize-none input--single !max-h-40 !w-full !max-w-none field-sizing-content overflow-auto"
               ></textarea>
-              <button
-                class="text-center self-stretchfont-bold text-green-400"
-                type="submit"
-              >
-                Send
-              </button>
+              <button class="styled-button" type="submit">Send</button>
             </div>
           </form>
         </div>
