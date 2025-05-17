@@ -755,11 +755,10 @@
         {
             "id": 1,
             "parent": "networking",
-            "section": "networking",
-            "title": "wget",
-            "content_type": "interactive",
-            "content": "<p da wifi in>what should we do today or i dont even know im just tping<\/p><p>this is suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "wget",
+            "section": "Intro To Networking",
+            "title": "Networking On Linux",
+            "content_type": "article",
+            "content": "Networking On Linux can feel overwhelming and overly complicated, since there is so much content in networking it has become its own field. But here at Linux Lab we will go over the basic Linux networking commands and theory that will help you throughout your programming or IT career. ",
             "completed": false
         },
         {

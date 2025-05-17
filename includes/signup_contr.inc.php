@@ -16,7 +16,12 @@ function is_email_valid(string $email) : bool {
 	}
 	else return false;
 }
-
+function is_username_too_long(string $username) : bool {
+    if (strlen($username) > 15) {
+        return true;
+    }
+    else return false;
+}
 function username_is_taken(object $pdo, string $username) : bool {
 	if(GetUsername($pdo, $username)) {
 		return true;
