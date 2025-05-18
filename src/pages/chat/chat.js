@@ -24,12 +24,13 @@ class messageManager {
     this.chatForm = document.querySelector("#chatForm");
     this.chatForm.addEventListener("submit", this.handleFormSubmit);
     this.chatBox = document.querySelector("#message__rows");
-    this.lastUser = "";
-    this.currentRowMessages = [],
-    this.currentRow = "",
-    this.currentRowTimestamp = "",
-    this.currentMessages = 
-      this.getMessages();
+    this.container = document.querySelector(".message__rows__container");
+
+    this.lastUser = 1;
+    this.lastTimestamp = "";
+    (this.messages = []), (this.messageRow = []);
+    this.messageRowMessages = [];
+    this.getMessages();
   }
 
   getMessages = async () => {
@@ -39,6 +40,7 @@ class messageManager {
         throw new Error(response.status);
       }
       const data = await response.json();
+      console.log(data);
       this.renderMessages(data);
     } catch (e) {
       console.error(e);
@@ -46,35 +48,48 @@ class messageManager {
   };
 
   renderMessages(messages) {
-    messages.reverse().map((message) => {
-      console.log(message);
-      if (message.username != this.lastUser) {
-        this.lastUser = message.username;
-        this.currentRowTimestamp = message.Modified;
-        this.currentRowMessages.push(`
-                  <div class="message !p-2 bg-[var(--color-overlay)] w-fit rounded-[var(--radius-med)]">
-                   ${message.Comment} 
-                  </div>
-                `);
-      } else if (message.username === this.lastUser) {
-        this.currentRowMessages.push(`
-                  <div class="message !p-2 bg-[var(--color-overlay)] w-fit rounded-[var(--radius-med)]">
-                   ${message.Comment} 
-                  </div>
-                `);
+    for (let message of [...messages.reverse(), { Username: null }]) {
+      message = {
+        Username: message["Username: "],
+        Modified: message["Modified: "],
+        Comment: message["Comment: "],
+      };
+      if (this.lastUser != message.Username) {
+        // push previous message row
+        if (this.lastUser != 1) {
+          this.messageRow.push(
+            this.createRow(
+              this.lastUser,
+              this.lastTimestamp,
+              this.messageRowMessages.join('')
+            )
+          );
+        }
+        // reset messages and update last users
+        this.messageRowMessages = [];
+        this.lastUser = message.Username;
+        this.lastTimestamp = message.Modified;
+        this.messageRowMessages.push(
+          `<div class="message !p-2 bg-[var(--color-overlay)] w-fit rounded-[var(--radius-med)]">
+           ${message.Comment} 
+            </div>`
+        );
+      } else if (this.lastUser === message.Username) {
+        this.messageRowMessages.push(
+          `<div class="message !p-2 bg-[var(--color-overlay)] w-fit rounded-[var(--radius-med)]">
+           ${message.Comment} 
+            </div>
+            `
+        );
       }
-
-      // if(userObj.username === message.Username){
-      //     return(`
-
-      //     `)
-      // }
-    });
+    }
+    this.chatBox.replaceChildren();
+    this.chatBox.innerHTML = this.messageRow.join('');
   }
 
   createRow(username, timestamp, messages) {
     return `
-        <div class="message__row--other max-w-[80%] flex flex-col gap-2">
+        <div class="message__row--other max-w-[80%] flex flex-col !mt-2 gap-2">
             <div
             class="message__header gap-2 flex items-center !-mb-2"
             >
