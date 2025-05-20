@@ -41,8 +41,6 @@ class LessonManager {
         throw new Error(`response error`, response.status);
       }
       const data = await response.json();
-      console.log('data')
-      console.log(data)
       this.fetchUserInfo();
       if(data.commandSuccess) {
         const successEvent = new CustomEvent('command-success', {
@@ -206,9 +204,19 @@ class LessonNav {
   };
 
   handleToggle = (e) => {
+    // stop document from initial click so it doesnt close instantly
+    e.stopPropagation()
     if (!this.isOpen) {
       this.dropdownContainer.classList.remove("hidden");
       this.isOpen = true;
+      // handle not on container click
+      document.addEventListener('click',(e)=>{
+        const within = this.dropdownContainer.contains(e.target);
+        if(!within && this.isOpen){
+          this.dropdownContainer.classList.add("hidden");
+          this.isOpen = false;
+        }
+      })
     } else if (this.isOpen) {
       this.dropdownContainer.classList.add("hidden");
       this.isOpen = false;
@@ -216,34 +224,51 @@ class LessonNav {
   };
 
   render = (e) => {
-    // console.log(e.detail);
     const lessons = e.detail.lessons;
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
+    const lessonStatus = e.detail.lessonsCompleted;
     const status = "";
+    // get subtitle and lesson name
     const openButtonText = `${lessons[section][lesson].section} - ${lessons[section][lesson].title}`;
     let lastSection = "";
     const listElements = lessons[section]
       .filter((item) => item.id > 0)
       .map((lessonData) => {
+        let statusImgSrc= "#";
+        let statusImgClass = " no-status ";
+        if(lessonData.content_type != "article"){
+          if(lessonStatus[lessonData.title] === true){
+            statusImgSrc="../assets/SVGs/check.svg"
+            statusImgClass = " has-status ";
+          }
+          else{
+            statusImgSrc="../assets/SVGs/cross.svg"
+            statusImgClass = " has-status ";
+          }
+        }
         let returnString = "";
+        // Subtitle
         if (lastSection != lessonData.section) {
           lastSection = lessonData.section;
           returnString = `<li class="lesson__nav__subtitle"><span>${lessonData.section}</span></li>`;
         }
+        // Lessons
         if (lesson === lessonData.id) {
+          // lesson active
           return (
             returnString +
             `<li class="lesson__nav__lesson "><button class="lesson__nav__button active" id="${`${lessonData.section}:${lessonData.id}`}"" >${
               lessonData.title
-            }</button></li>`
+            }</button><div class="lesson__nav__lesson__status"><img class="${statusImgClass}" src="${statusImgSrc}"></div> </li>`
           );
         } else
+          // lesson not active 
           return (
             returnString +
             `<li class="lesson__nav__lesson "><button class="lesson__nav__button" id="${`${lessonData.section}:${lessonData.id}`}"" >${
               lessonData.title
-            }</button></li>`
+            }</button><div class="lesson__nav__lesson__status"><img class="${statusImgClass}"  src="${statusImgSrc}"></div></li>`
           );
       });
     let listElementsString = listElements.join("");
@@ -492,7 +517,7 @@ async function test(){
   try{
     const res = await fetch("../../user/user.php");
     const data = await res.json();
-    console.log('test')
+    console.log('user api information')
     console.log(data);
   }
   catch(e){
