@@ -21,3 +21,10 @@ function is_password_wrong(string $pwd, string $hashedPwd) : bool|array {
     }
     else return false;
 }
+
+function is_username_too_long(string $username) : bool {
+    if (strlen($username) > 15) {
+        return true;
+    }
+    else return false;
+}

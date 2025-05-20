@@ -1024,15 +1024,11 @@ function delete_recursive(&$directory) {
 }
 
 
-function octal_chmod(&$fileSystem, $currentDirectory, $argument) : string {
+function octal_chmod(&$fileSystem, $currentDirectory, $permissions, $argument, ) : string {
     $perms = strval($argument);
-    if (strlen($perms)!= 3)  {
+    if (strlen($perms) > 3)  {
         return "Error: Invalid Chmod Command";
     }
-    
-    $userPerms = $perms[0]; 
-    $groupPerms = $perms[1];
-    $otherPerms = $perms[2];
     
     $map = [
         "0" => "---",
@@ -1044,8 +1040,40 @@ function octal_chmod(&$fileSystem, $currentDirectory, $argument) : string {
         "6" => "rw-",
         "7" => "rwx"
     ];
-    $permissions = $map[$userPerms] . $map[$groupPerms] . $map[$otherPerms];
+
+  if (strlen($perms) === 1) {
+             if (!is_numeric($perms) || $perms > 7 || $perms < 0) {
+                     return "Error: Invalid Chmod Command\n";
+             }
+             $newOtherPerms =  $map[$perms];
+             $userPerms = $permissions[1] . $permissions[2] . $permissions[3];
+             $groupPerms = $permissions[4] . $permissions[5] . $permissions[6];
+             return $permissions[0] . $userPerms . $groupPerms . $newOtherPerms;
+    }
+if (strlen($perms) === 2) {
+        for ($i = 0; $i < 2; $i++) {
+            if (!is_numeric($perms[$i]) || $perms[$i] > 7 || $perms[$i] < 0) {
+                    return "Error: Invalid Chmod Command";
+            }
+     }
+             $newGroupPerms = $map[$perms[0]];
+             $newOtherPerms = $map[$perms[1]];
+             $userPerms = $permissions[1] . $permissions[2] . $permissions[3];
+           return $permissions[0] . $userPerms . $newGroupPerms . $newOtherPerms;
+    }
+else {
+    for ($i = 0; $i < 3; $i++) {
+            if ($perms[$i] > 7 || $perms[$i] < 0) {
+                return "Error: Invalid Chmod Command";
+            }
+    }
+    $userPerms = $perms[0]; 
+    $groupPerms = $perms[1];
+    $otherPerms = $perms[2];
+
+    $permissions = $permissions[0] . $map[$userPerms] . $map[$groupPerms] . $map[$otherPerms];
     return $permissions;
+    }  
 }
 
 function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
@@ -1079,15 +1107,14 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
     }
 
     if (is_numeric($argument)) {
-            $permissions = octal_chmod($fileSystem, $currentDirectory, $argument);
-            if (str_starts_with($permissions, "Error:")) {
-                return $permissions; //return the error message
+            $octalPermissions = octal_chmod($fileSystem, $currentDirectory, $permissions, $argument);
+            if (str_starts_with($octalPermissions, "Error:")) {
+                return $octalPermissions; 
         }
-        $file['permissions'] = $permissions;
+        $file['permissions'] = $octalPermissions;
         $file['modified'] = date("Y-m-d H:i:s");
         return "Permissions updated for $targetFile.\n";
     }
-    // At this point, either user owns it or used sudo — safe to proceed
     switch ($argument) {
         case '+x':
             $permissions[3] = 'x';
@@ -1207,7 +1234,7 @@ function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targe
                 $permissions[7] = '-';
                 break;
         default:
-            return "Invalid Chmod Argument.\n";
+            return "Error: Invalid Chmod Argument.\n";
     }
     $file['permissions'] = implode('', $permissions);
     $file['modified'] = date("Y-m-d H:i:s");
@@ -2270,7 +2297,7 @@ if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
         if (str_starts_with($output, "Error:")) {
             break;
         }
-       if (!contains_number($arg)) {
+       if ($lessonID === 65 && !contains_number($arg)) {
             $output = "For this lab please use octal mode\n";
             break;
         }
