@@ -747,33 +747,45 @@
             "completed": false
         } 
     ],
-    "networking": [
+    "Networking": [
         {
-            "section__size": 3,
+            "section__size": 15,
             "section__completed": false
         },
         {
             "id": 1,
-            "parent": "networking",
+            "parent": "Networking",
             "section": "Intro To Networking",
-            "title": "Networking On Linux",
+            "title": "Networking",
             "content_type": "article",
-            "content": "Networking On Linux can feel overwhelming and overly complicated, since there is so much content in networking it has become its own field. But here at Linux Lab we will go over the basic Linux networking commands and theory that will help you throughout your programming or IT career. ",
+            "content": "<p>In Computer Science, <b>Networking</b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet</b> services we all enjoy today!</p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.</p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.",
             "completed": false
         },
         {
             "id": 2,
-            "parent": "networking",
-            "section": "networking",
-            "title": "curl",
+            "parent": "Networking",
+            "section": "IP Addresses",
+            "title": "Ip Addresses, Local Address Network (LAN)",
             "content_type": "interactive",
-            "content": "<p>should we do today or i dont even know im just tping<\/p><p>suppposed to be some blahballhlsldajflalf salfjsaflasf<\/p><code>ls directory<\/code>",
-            "answer": "curl",
+            "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.</p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address</b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like (192.168.1.1)<p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!</p><img src='../../../images/Home_LAN_local_area_network_example_diagram.png' width='500'><p>On Linux, we can see our LAN IP address through the command line via this command: <code>ip addr</code>",
+            "answer": "",
             "completed": false
         },
         {
             "id": 3,
-            "parent": "networking",
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "Ping",
+            "content_type": "interative",
+            "content": "When we are online gaming, serfing the web, streaming movies or live tv, we will occassionaly come across  To test the speed or how \"strong\" a connection is to server or computer, we can run the <b",
+            "answer": "",
+            "completed": false
+        },
+
+
+        {
+            "id": 7,
+            "parent": "Networking",
             "section": "Checkpoint",
             "title": "ldsajfals",
             "content_type": "multichoice",
