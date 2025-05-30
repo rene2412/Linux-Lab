@@ -15,26 +15,48 @@ $ping = "PING google.com (2607:f8b0:4005:812::200e) 56 data bytes
 10 packets transmitted, 10 received, 0% packet loss, time 9013ms
 rtt min/avg/max/mdev = 44.763/98.985/249.913/62.369 ms";
 
-$ip = "1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host noprefixroute 
-       valid_lft forever preferred_lft forever
-2: enp1s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
-    link/ether aa:bb:cc:11:22:33 brd ff:ff:ff:ff:ff:ff
-3: enp2s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
-    link/ether aa:bb:cc:44:55:66 brd ff:ff:ff:ff:ff:ff
-4: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
-    link/ether 11:22:33:44:55:66 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.50.100/24 brd 192.168.50.255 scope global dynamic noprefixroute wlp3s0
-       valid_lft 60738sec preferred_lft 60738sec
-    inet6 2001:db8::1234:5678:abcd:ef01/64 scope global temporary dynamic 
-       valid_lft 86299sec preferred_lft 14299sec
-    inet6 2001:db8::abcd:ef12:3456:7890/64 scope global dynamic mngtmpaddr noprefixroute 
-       valid_lft 86299sec preferred_lft 14299sec
-    inet6 fe80::abcd:1234:5678:9abc/64 scope link noprefixroute 
-       valid_lft forever preferred_lft forever";
+$ip = 
+    "enp1s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 84:47:09:35:83:0e  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device memory 0xfcc00000-fccfffff  
+
+enp2s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 84:47:09:35:83:11  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device memory 0xfc900000-fc9fffff  
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 15043  bytes 10527961 (10.5 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 15043  bytes 10527961 (10.5 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp3s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0<global>
+        inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0<global>
+        inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20<link>
+        ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)
+        RX packets 3442836  bytes 4163221030my fault  (4.1 GB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1451503  bytes 303383335 (303.3 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+";
+
+
+
+
+
 
 $route = "default via 192.168.X.1 dev eth0 proto dhcp src 192.168.X.100 metric 600  
 192.168.X.0/24 dev eth0 proto kernel scope link src 192.168.X.100 metric 600";

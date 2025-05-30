@@ -13,7 +13,7 @@ if (isset($_SESSION["send_email"])) {
 
     require_once "database.inc.php";
 
-    $url = "http://localhost/Linux-Lab/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "http://linux-lab.live/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
     $expires = date("U") + 1800;
     $userEmail = $_SESSION["send_email"];
     
@@ -54,7 +54,7 @@ if (isset($_SESSION["send_email"])) {
 
         // Recipients
         $mail->setFrom($userEmail);
-        $mail->addAddress('linuxlab012@gmail.com');
+        $mail->addAddress($userEmail);
 
         // Content
         $mail->Subject = "Reset Your Password";
@@ -63,11 +63,10 @@ if (isset($_SESSION["send_email"])) {
 
         $mail->send();
         header("Location: email_sent.html");
-//        echo "Email sent successfully to $email.<br>";
     } catch (Exception $e) {
         error_log("Mailer Error: {$mail->ErrorInfo}");
     }
 } else {
-    header("Location: ../index.php");
+    //header("Location: ../index.php");
     exit();
 }
