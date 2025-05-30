@@ -765,14 +765,34 @@
             "id": 2,
             "parent": "Networking",
             "section": "IP Addresses",
-            "title": "Ip Addresses, Local Address Network (LAN)",
+            "title": "Local Ip Address, Local Address Network (LAN)",
             "content_type": "interactive",
-            "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.</p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address</b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1</code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!</p><img src='../../../images/Home_LAN_local_area_network_example_diagram.png' width='500'><p>On Linux, we can see our LAN IP address through the command line via this command: <code>ip addr</code>",
+            "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.</p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address</b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1</code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!</p><img src='../../../images/Home_LAN_local_area_network_example_diagram.png' width='500'>",
             "answer": "",
             "completed": false
         },
         {
             "id": 3,
+            "parent": "Networking",
+            "section": "IP Addresses",
+            "title": "ifconfig",
+            "content_type": "interactive",
+            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig</code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.</p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)</pre></code><p><strong>Breakdown:</strong></p><ul><li><code>wlp3s0</code>: Network interface name (your Wi-Fi device).</li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;</code>: Interface is active and supports broadcasting and multicasting.</li><li><code>mtu 1500</code>: Maximum packet size the interface can handle (We will look at how packets work later on).</li><li><code>inet 192.168.1.203</code>: The holy grail of the command! This is your local IPv4 address (LAN IP).</li><li><code>netmask 255.255.255.0</code>: Subnet mask that divides network and host portions of the IP.</li><li><code>broadcast 192.168.1.255</code>: Address to send packets to all devices on the LAN.</li><li><code>inet6</code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.</li><li><code>ether 50:e4:78:73:48:fd</code>: MAC (hardware) address of your network device.</li></ul><p>This command helps you see your device's IP configuration and network status.</p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "Servers, Clients, and Hosts",
+            "content_type": "article",
+            "content": "When accessing the internet or a network, devices typically fall into two main roles: <b>Servers</b> and <b>Clients</b>.<li><b>Server</b> – A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info—and respond with the correct data, such as your profile page, payment info, and more.</li><li><b>Client</b> – A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.</li><li><b>Host</b> – A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.</li> <img src='../../../images/server.gif' width='550' alt='server gif>'",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 5,
             "parent": "Networking",
             "section": "Connections",
             "title": "Networking Connections",
@@ -782,27 +802,37 @@
             "completed": false
         },     
         {
-            "id": 4,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "ping",
-            "content_type": "interative",
-            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:</p><code>ping 142.250.72.206</code>Or more cleanly: <code>ping google.com</code><p>The output at first glance can be cryptic and intimidating, but we'll break it down and see the important information it gives us.</p></p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net</b> – This shows the domain name of the responding server. It confirms that we successfully reached a Google server.</li><li><b>icmp_seq=1</b> – This is the sequence number of the ping packet, starting at 1 and increasing with each request.</li><li><b>ttl=114</b> – TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.</li><li><b>time=23.4 ms</b> – This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.</li></ul>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 5,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "ping",
-            "content_type": "interative",
-            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:</p><code>ping 142.250.72.206</code>Or more cleanly: <code>ping google.com</code><p>The output at first glance can be cryptic and intimidating, but we'll break it down and see the important information it gives us.</p></p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net</b> – This shows the domain name of the responding server. It confirms that we successfully reached a Google server.</li><li><b>icmp_seq=1</b> – This is the sequence number of the ping packet, starting at 1 and increasing with each request.</li><li><b>ttl=114</b> – TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.</li><li><b>time=23.4 ms</b> – This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.</li></ul>",
-            "answer": "",
-            "completed": false
-        },
-        {
             "id": 6,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "ping",
+            "content_type": "interative",
+            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:</p><code>ping 142.250.72.206</code>Or more cleanly: <code>ping google.com</code><p>The output at first glance like many Linux network commands that you have probably come across alrady, can be cryptic and intimidating, but we'll break it down and see the important information it gives us.</p></p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net</b> – This shows the domain name of the responding server. It confirms that we successfully reached a Google server.</li><li><b>icmp_seq=1</b> – This is the sequence number of the ping packet, starting at 1 and increasing with each request.</li><li><b>ttl=114</b> – TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.</li><li><b>time=23.4 ms</b> – This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.</li></ul>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 7,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "DNS - Domain Name System",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 8,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "nsloopkup",
+            "content_type": "interactive",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 9,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
             "title": "Knowledge Check #1",
@@ -818,7 +848,7 @@
             "completed": false
         },
         {
-            "id": 7,
+            "id": 10,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
             "title": "Knowledge Check #2",
@@ -834,7 +864,7 @@
             "completed": false
         },
         {
-            "id": 8,
+            "id": 11,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
             "title": "Knowledge Check #3",
@@ -850,17 +880,17 @@
             "completed": false
         },
         {
-            "id": 9,
+            "id": 12,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "TCP/IP",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of rules that defines how data is sent, received, and routed between devices.</p>",
+            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of <b>protocals</b> or rules that defines how data is sent, received, and routed between devices.</p><TCP -" ,
             "answer": "",
             "completed": false
         },
         {
-            "id": 10,
+            "id": 13,
             "parent": "Networking",
             "section": "Checkpoint",
             "title": "ldsajfals",
