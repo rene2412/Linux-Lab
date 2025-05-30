@@ -135,12 +135,16 @@ $response = [
     "username" => $username,
     "isLoggedIn" => $logged,
     "currentModule" => [
-        "name" => $current_module,
-        "currentSection" => $current_section,
-        "lessonId" => $lessonId,
-        "lessonName" => $lessonName, 
-        "lessonStatus" => $lessonStatus
-    ],
+        "name" => "Networking",
+        //"currentSection" => $current_section,
+        //"lessonId" => $lessonId,
+        //"lessonName" => $lessonName,
+        //"lessonStatus" => $lessonStatus
+          "currentSection" => "Networking",
+          "lessonId" => 1,
+          "lessonName" => "Intro To Networking",
+          "lessonStatus" => false
+        ],
     "modules" => [
         [
             "name" => "The Basics",
@@ -153,9 +157,9 @@ $response = [
             "total" => 21
         ],
         [
-            "name" => "IDK",
-            "completed" => 1,
-            "total" => 17 
+            "name" => "Bash Scripting",
+            "completed" => 0,
+            "total" => 0 
         ]
     ]
 ];
