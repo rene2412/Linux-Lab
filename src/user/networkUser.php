@@ -134,15 +134,11 @@ $response = [
     "username" => $username,
     "isLoggedIn" => $logged,
     "currentModule" => [
-       "name" => "The Basics",
-        "currentSection" => $current_section,
-        "lessonId" => $lessonId,
-        "lessonName" => $lessonName,
-        "lessonStatus" => $lessonStatus
-        //"currentSection" => "Networking",
-          //"lessonId" => 1,
-          //"lessonName" => "Intro To Networking",
-          //"lessonStatus" => false
+        "name" => "Networking",
+        "currentSection" => "Networking",
+        "lessonId" => 1,
+        "lessonName" => "Intro To Networking",
+        "lessonStatus" => false
         ],
     "modules" => [
         [

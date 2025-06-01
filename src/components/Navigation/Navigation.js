@@ -20,6 +20,13 @@ export default class Navigation {
       tag: "lesson.html",
       svg: "../../pages/assets/SVGs/Console.svg",
     },
+//Networking button goes here
+  {
+  title: "Networking",
+  link: "../../pages/lesson_page/lesson.html?module=networking",
+  tag: "lesson.html",
+  svg: "../../pages/assets/SVGs/Console.svg",
+    },
     {
       title: "About",
       link: "../../pages/about_us/about_us.html",
