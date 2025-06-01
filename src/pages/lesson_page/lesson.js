@@ -18,7 +18,7 @@ class LessonManager {
     // may change this later to identify user
     this.setupListeners();
     this.user = 0;
-    this.fetchUserInfoInit();
+   // this.fetchUserInfoInit();
   }
 
   setupListeners() {
@@ -63,11 +63,13 @@ class LessonManager {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-      this.lesson = data.currentModule.lessonId;
-      if(!this.lesson)this.lesson=1;
+    
+      this.lesson = data.currentModule.lessonId || 1;
       this.currentSection = data.currentModule.name;
-      this.completedLessons= data.currentModule.lessonStatus;
-      this.fetchLessonsInit();
+      this.completedLessons = data.currentModule.lessonStatus;
+  
+      await this.fetchLessonsInit(this.currentSection);
+    
     } catch (error) {
       console.error(error);
     }
@@ -83,21 +85,42 @@ class LessonManager {
       this.lesson = data.currentModule.lessonId;
       this.currentSection = data.currentModule.name;
       this.completedLessons= data.currentModule.lessonStatus;
-      this.broadcastUpdate();
+     // this.broadcastUpdate();
     } catch (error) {
       console.error(error);
     }
   }
 
-  async fetchLessonsInit() {
+  async fetchLessonsInit(moduleName = "The Basics") {
     try {
       const request = await fetch("../../testAPI/lessons.json");
       if (!request.ok) {
         throw new Error(`could not get lessons ${request.status}`);
       }
       const data = await request.json();
+      console.log("LESSONS FILE LOADED:", data); // 👈 add this
       this.lessons = data;
-      this.sectionSize = this.lessons[this.currentSection][0][`section__size`];
+
+       // Normalize module name casing
+    const matchedModule = Object.keys(this.lessons).find(
+      key => key.toLowerCase() === moduleName.toLowerCase()
+    );
+
+    if (!matchedModule) {
+      throw new Error(`Module "${moduleName}" not found in lessons.`);
+    }
+    
+    this.currentSection = matchedModule;
+    const sectionArray = this.lessons[this.currentSection];
+
+    if (!Array.isArray(sectionArray) || sectionArray.length === 0) {
+      throw new Error(`Lesson section is empty or not an array.`);
+    }
+
+    this.sectionSize = sectionArray[0].section__size || 0;
+    this.interactiveSize = sectionArray[0].interactive__size || 0;
+
+
       this.broadcastUpdate();
     } catch (error) {
       console.error(error);
@@ -158,10 +181,15 @@ class LessonNav {
   isOpen = false;
   constructor(container = ".lesson__nav") {
     this.container = document.querySelector(container);
+    if (!this.container) return;
     this.mount();
     this.openCloseButton = document.querySelector(".lesson__nav__button--open");
     this.dropdownContainer = document.querySelector(".lesson__nav__dropdown");
     this.listContainer = document.querySelector(".lesson__nav__links");
+    if (!this.openCloseButton || !this.dropdownContainer || !this.listContainer) {
+      console.warn("LessonNav elements not found.");
+      return;
+    }
     this.initListeners();
   }
 
@@ -188,11 +216,10 @@ class LessonNav {
     // clicking headers should not break code
     if(id > 0){
     document.dispatchEvent(
-      new CustomEvent("section:update", {
+      new CustomEvent("status:update", {
         detail: {
           lessonId: id,
-          // this is temporary as i will have to add more info to list elements
-          // shoudl be the section belonging to that list element
+          section: subSection,
           action: "change",
         },
       })
@@ -320,6 +347,9 @@ class lessonDisplay {
     this.updateMeter();
     this.updateStatus();
     this.render();
+    console.log("Loaded lesson modules:", Object.keys(this.modules));
+    console.log("Current section requested:", this.curSection);
+    
   }
 
   render() {
@@ -424,7 +454,7 @@ class lessonDisplay {
         detail: {
           action: "prev",
           section: this.curSection,
-          lessonId: this.curLesson,
+          lessonId: this.curLesson
         },
       })
     );
@@ -433,11 +463,15 @@ class lessonDisplay {
   updateMeter() {
     let value = 0;
     for(let key in this.completedLessons){
-      if(this.completedLessons[key])value++;
+      if(this.completedLessons[key]) value++;
     }
-    let progress = value/this.modules[this.curSection][0].interactive__size;
-    this.progBar.style.transform = `scalex(${progress})`
-
+   // let progress = value/this.modules[this.curSection][0].interactive__size;
+    //this.progBar.style.transform = `scalex(${progress})`
+    const section = this.modules[this.curSection];
+    const total = section[0].interactive__size || 1; // avoid divide-by-zero
+    const progress = value / total;
+  
+    this.progBar.style.transform = `scaleX(${progress})`;
   }
 
   updateStatus() {
@@ -509,13 +543,26 @@ const sidebarLesson = new NavigationLesson(
 );
 }
 
-const lessonNav = new LessonNav();
+const lessonNav = new LessonManager();
 
 
-
+//Rene's work
 async function test(){
+//intialize a URL that will be the difference between 'The Basics' and 'Networking'
+const urlParams = new URLSearchParams(window.location.search);
+const module = urlParams.get("module") || "The Basics";
+// Fetch lessons JSON and initialize the selected module
+  await lessonNav.fetchLessonsInit(module);
+//defauwlt souurce route is the basics
+let apiRoute = "../../user/user.php";
+
+//however if the user clicked on networking then process the new network api
+if (module.toLowerCase() === "networking") {
+  apiRoute = "../../user/networkUser.php";
+}
+//no bash yet
   try{
-    const res = await fetch("../../user/user.php");
+    const res = await fetch(apiRoute);
     const data = await res.json();
     console.log('user api information')
     console.log(data);

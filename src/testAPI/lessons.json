@@ -905,21 +905,5 @@
             "answer": "A",
             "completed": false
         }
-    ],
-    "File Navigation": {
-        "7": {
-            "completed": false
-        }
-    },
-    "basics": {
-        "4": {
-            "completed": true
-        },
-        "6": {
-            "completed": false
-        },
-        "1": {
-            "completed": false
-        }
-    }
+    ]
 }
