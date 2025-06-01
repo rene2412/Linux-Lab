@@ -817,7 +817,7 @@
             "section": "Connections",
             "title": "DNS - Domain Name System",
             "content_type": "article",
-            "content": "",
+            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com</b> or <b>amazon.com</b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)</b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).</p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.</p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!</p><img src='../../../images/dns.gif' width = '550'>",
             "answer": "",
             "completed": false
         },
@@ -827,7 +827,7 @@
             "section": "Connections",
             "title": "nsloopkup",
             "content_type": "interactive",
-            "content": "",
+            "content": "Through the Linux command line we can interact with a DNS server with <b> ",
             "answer": "",
             "completed": false
         },
