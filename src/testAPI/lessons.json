@@ -827,7 +827,7 @@
             "section": "Connections",
             "title": "nsloopkup",
             "content_type": "interactive",
-            "content": "Through the Linux command line we can interact with a DNS server with <b> ",
+            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup</b> which stands for <b>'name server lookup'</b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:</p><code>nslookup google.com</code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238</code></pre><ul><li><b>Server:</b> The DNS server your system is using to resolve the domain.ndx </li><li><b>Address:</b> The IP address of that DNS server with port 53 (used for DNS communication).</li><li><b>Non-authoritative answer:</b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.</li><li><b>Name:</b> The domain name you queried (google.com).</li><li><b>Address:</b> The resolved IP address of the domain.</li></ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.</p>",
             "answer": "",
             "completed": false
         },
@@ -880,17 +880,33 @@
             "completed": false
         },
         {
-            "id": 12,
+            "id": 13,
+            "parent": "Networking",
+            "section": "Checkpoint - The Internet, IP addresses, and Connections",
+            "title": "Knowledge Check #4",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
+                "B": "It scans the local network for all connected devices and lists their MAC addresses.",
+                "C": "It changes the DNS server settings on your computer.",
+                "D": "It encrypts DNS traffic to protect against spoofing attacks."
+            },
+            "content": "<p>What does the nslookup command do?</p><div class=\"question__container\"></div>",
+            "answer": "A",
+            "completed": false
+        },
+        {
+            "id": 14,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "TCP/IP",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of <b>protocals</b> or rules that defines how data is sent, received, and routed between devices.</p><TCP -" ,
+            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of <b>protocals</b> and rules that defines how data is sent, received, and routed between devices.</p><li></b>TCP</b> - works by transmitting data like a text message, emails, web pages, and more into tiny packets that get purposley gget broken down," ,
             "answer": "",
             "completed": false
         },
         {
-            "id": 13,
+            "id": 15,
             "parent": "Networking",
             "section": "Checkpoint",
             "title": "ldsajfals",
