@@ -20,13 +20,6 @@ export default class Navigation {
       tag: "lesson.html",
       svg: "../../pages/assets/SVGs/Console.svg",
     },
-//Networking button goes here
-  {
-  title: "Networking",
-  link: "../../pages/lesson_page/lesson.html?module=networking",
-  tag: "lesson.html",
-  svg: "../../pages/assets/SVGs/Console.svg",
-    },
     {
       title: "About",
       link: "../../pages/about_us/about_us.html",
@@ -40,9 +33,25 @@ export default class Navigation {
       svg: "../../pages/assets/SVGs/Address Book.svg",
     },
   ];
+
+  MODULES = [
+    {
+      title: "The Basics",
+      link: "../../pages/lesson_page/lesson.html",
+      // the tag is the name in sql of module
+      tag: "The Basics",
+    },
+    {
+      title: "Networking",
+      link: "../../pages/lesson_page/lesson.html?module=networking",
+      // the tag is the name in sql of module
+      tag: "Networking",
+    },
+  ];
   path = "";
 
   userDropdownIsOpen=false;
+  modulesDropdownIsOpen=false;
 
   // need to set this up
   isLoggedIn = false;
@@ -53,6 +62,7 @@ export default class Navigation {
     this.container = document.querySelector(container);
     this.fullPath = window.location.pathname;
     this.path = this.fullPath.substring(this.fullPath.lastIndexOf("/") + 1);
+    this.moduleParam = new URLSearchParams(window.location.search).get('module');
     this.date = new Date();
     this.sidebarBtnOpenClass = sidebarBtnOpenClass;
     this.render();
@@ -83,20 +93,29 @@ export default class Navigation {
       this.userButton = document.querySelector(".sidebar__button--user--auth");
       this.userDropdown = document.querySelector('.sidebar__bottom__dropdown')
     }
+    this.modulesButton = document.querySelector(".modules__button");
+    this.modulesDropdown = document.querySelector('.modules__dropdown');
   }
   setListeners() {
     this.sidebarBtnOpen.addEventListener("click", this.openSidebar);
     this.sidebarBtnClose.addEventListener("click", this.closeSidebar);
     if (this.isLoggedIn) {
       this.userButton.addEventListener("click", this.handleUserButtonClick);
-      document.addEventListener('click',this.handleDocumentClick);
     }
+    document.addEventListener('click',this.handleDocumentClick);
+    this.modulesButton.addEventListener("click", this.handleModulesButtonClick);
   }
 
   handleDocumentClick = (e)=>{
     if(this.userDropdownIsOpen){
       this.closeUserDropdown();
-    };
+    }
+    if(this.modulesDropdownIsOpen){
+      this.closeModulesDropdown();
+    }
+    if(!this.sidebar.contains(e.target) && this.sidebar.classList.contains('sidebar--open')){
+      this.closeSidebar();
+    }
   }
 
   openUserDropdown(){
@@ -116,12 +135,31 @@ export default class Navigation {
     else this.openUserDropdown();
   };
 
+  openModulesDropdown(){
+    this.modulesDropdown.classList.remove('hidden');
+    this.modulesButton.classList.add('open');
+    this.modulesDropdownIsOpen = true;
+  }
+
+  closeModulesDropdown(){
+    this.modulesDropdown.classList.add('hidden');
+    this.modulesButton.classList.remove('open');
+    this.modulesDropdownIsOpen = false;
+  }
+
+  handleModulesButtonClick = (e) => {
+    e.stopPropagation()
+    if(this.modulesDropdownIsOpen){this.closeModulesDropdown()}
+    else this.openModulesDropdown();
+  };
+
   closeSidebar = () => {
     this.sidebar.classList.remove("sidebar--open");
     this.sidebar.classList.add("sidebar--close");
   };
 
-  openSidebar = () => {
+  openSidebar = (e) => {
+    e.stopPropagation();
     this.sidebar.classList.remove("sidebar--close");
     this.sidebar.classList.add("sidebar--open");
   };
@@ -136,6 +174,20 @@ export default class Navigation {
 
       return `
                 <li class="navbar__link ${cssClass} "><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
+                `;
+    });
+
+    const modulesListElem = this.MODULES.map((module) => {
+      let cssClass = "";
+      // Check URL param for module matching
+      if (this.moduleParam && module.tag.toLowerCase() === this.moduleParam.toLowerCase()) {
+        cssClass = "link--active";
+      } else if (!this.moduleParam && module.tag === "The Basics") {
+        // Default to The Basics when no module param
+        cssClass = "link--active";
+      }
+      return `
+                <li class="navbar__link ${cssClass}"><a href="${module.link}">${module.title}</a></li>
                 `;
     });
 
@@ -170,6 +222,14 @@ export default class Navigation {
                 <nav class="sidebar__links">
                     <ul>
                     ${listElem.join("")}
+                    <li class="navbar__link navbar__link--modules">
+                        <button class="modules__button">Modules <img src="../../pages/assets/SVGs/chevron-down.svg"></img></button>
+                        <div class="modules__dropdown hidden">
+                            <ul>
+                            ${modulesListElem.join("")}
+                            </ul>
+                        </div>
+                    </li>
                     </ul>
                 </nav>
             </div>

@@ -516,6 +516,7 @@ class lessonDisplay {
 }
 const lessonManager = new LessonManager();
 const lessonDisplayController = new lessonDisplay(".lesson");
+const lessonNav = new LessonNav();
 
 let terminal;
 
@@ -543,8 +544,6 @@ const sidebarLesson = new NavigationLesson(
 );
 }
 
-const lessonNav = new LessonManager();
-
 
 //Rene's work
 async function test(){
@@ -552,7 +551,7 @@ async function test(){
 const urlParams = new URLSearchParams(window.location.search);
 const module = urlParams.get("module") || "The Basics";
 // Fetch lessons JSON and initialize the selected module
-  await lessonNav.fetchLessonsInit(module);
+  await lessonManager.fetchLessonsInit(module);
 //defauwlt souurce route is the basics
 let apiRoute = "../../user/user.php";
 
