@@ -171,9 +171,11 @@ export default class Navigation {
         cssClass = "link--active";
       }
       if(elem.title ==='Dashboard' && !this.isLoggedIn)return '';
+      
+      const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, '-')}`;
 
       return `
-                <li class="navbar__link ${cssClass} "><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
+                <li class="navbar__link ${cssClass} ${itemClass}"><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
                 `;
     });
 
@@ -255,9 +257,11 @@ export default class Navigation {
       if (this.path === elem.tag) {
         cssClass = "link--active--desktop";
       }
+      
+      const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, '-')}`;
 
       return `
-                <li class="navbar__link navbar--link--desktop  ${cssClass} "><a href="${elem.link}">${elem.title}</a></li>
+                <li class="navbar__link navbar--link--desktop ${cssClass} ${itemClass}"><a href="${elem.link}">${elem.title}</a></li>
                 `;
     });
     const nav = document.createElement("nav");
