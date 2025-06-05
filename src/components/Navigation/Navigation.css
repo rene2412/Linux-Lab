@@ -123,6 +123,26 @@
     color: var(--text-color-main);
 }
 
+/* nav order */
+.nav__link--dashboard{
+    order: 0;
+}
+.nav__link--terminal{
+    order: 1;
+}
+.navbar__link--modules{
+    order: 2;
+}
+.nav__link--home{
+    order: 3;
+}
+.nav__link--about{
+    order: 4;
+}
+.nav__link--contact{
+    order: 5;
+}
+
 /* sidebar modulse */
 
 
