@@ -135,3 +135,8 @@
   flex-direction: column;
 
 }
+
+.auth__card__subtext{
+  text-align: center;
+  color: var(--text-color-main);
+}

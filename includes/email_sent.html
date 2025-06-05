@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resetting Password!</title>
-    <h1>Email is sent, check your E-Mail!</h1>
+    <link rel="stylesheet" href="../src/pages/login/login.css">
+    <title>Email Sent</title>
 </head>
 <body>
-    
+    <div class="auth__container">
+        <div class="auth__card animation--popup">
+            <div class="auth__top">
+                <h2 class="auth__top__logo"><a href="../src/pages/landing_page/landing_page.html">Linux-Lab</a></h2>
+            </div>
+            <div class="auth__card__content auth__card__content--reset">
+                <h3>Email Sent!</h3>
+                <p class="auth__card__subtext">Check your email for password reset instructions.</p>
+                <div class="auth__card__content--reset__links">
+                    <a href="../src/pages/login/login.php" class="login--guest">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
