@@ -23,6 +23,7 @@ class LessonManager {
 
   setupListeners() {
     document.addEventListener("section:update", this.handleLessonSectionChange);
+    document.addEventListener("status:update", this.handleLessonSectionChange);
     document.addEventListener("completed:update", this.handleLessonCompleted);
     document.addEventListener("command-success", this.handleLessonCompleted);
   }
@@ -41,6 +42,8 @@ class LessonManager {
         throw new Error(`response error`, response.status);
       }
       const data = await response.json();
+      console.log('handle completed');
+      console.log(data);
       this.fetchUserInfo();
       if(data.commandSuccess) {
         const successEvent = new CustomEvent('command-success', {
@@ -98,7 +101,7 @@ class LessonManager {
         throw new Error(`could not get lessons ${request.status}`);
       }
       const data = await request.json();
-      console.log("LESSONS FILE LOADED:", data); // 👈 add this
+      // console.log("LESSONS FILE LOADED:", data); // 👈 add this
       this.lessons = data;
 
        // Normalize module name casing
@@ -140,6 +143,8 @@ class LessonManager {
       },
     });
     document.dispatchEvent(event);
+    console.log('broadcasting from manager')
+    console.log(event.detail)
   }
 
   // handle lesson and section changes bundled
@@ -213,6 +218,8 @@ class LessonNav {
     const idStr = e.target.id;
     const id = parseInt(idStr.slice(idStr.indexOf(":") + 1, idStr.length));
     const subSection = idStr.slice(0, idStr.indexOf(":"));
+    console.log(id)
+    console.log(subSection)
     // clicking headers should not break code
     if(id > 0){
     document.dispatchEvent(
@@ -328,7 +335,6 @@ class lessonDisplay {
   handleChange = (e) => {
     const data = e.detail;
     // console.log('handlechange')
-    // console.log(data)
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
@@ -537,11 +543,8 @@ else{
     apiEndpoint: "../../../api_commands.php",
   });
   terminal.mount("#terminal__container");
+  const nav = new Navigation(".sidebar__container",false,userObj,false,)
 
-const sidebarLesson = new NavigationLesson(
-  ".sidebar__container",
-  ".sidebar__button--open"
-);
 }
 
 
@@ -564,7 +567,7 @@ if (module.toLowerCase() === "networking") {
     const res = await fetch(apiRoute);
     const data = await res.json();
     console.log('user api information')
-    console.log(data);
+    // console.log(data);
   }
   catch(e){
     console.error(e);

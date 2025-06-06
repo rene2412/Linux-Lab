@@ -448,11 +448,11 @@ code{
 @media (min-width: 769px){
     .layout{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 50% 50%;
     }
 
     .section--lesson{
-        display: grid;
+        /* display: grid; */
         gap: 0;
         max-height: 100vh;
         height: 100%;
