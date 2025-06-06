@@ -645,7 +645,7 @@
             "section": "File Permissions",
             "title": "chown: change owner of a file",
             "content_type": "interactive",
-            "content": "<p>In the Work\/ directory, lets take a look how chown can be used and how it affects your system.<\/p><p>Run ls -l and you will notice that the owner for daily_logs.txt isn't you (user). Which means you wouldn't be allowed to alter the state of the system without constanly using sudo.<\/p>The permanment solution to this is to use chown with sudo to change ownership back to you. Lets see how it works by running this command<\/p><code>sudo chown user daily_logs.txt<\/code><p>Note: In this enviroment the owner for a file that you own is under <b>user</b> </p>",
+            "content": "<p>In the Work\/ directory, lets take a look how chown can be used and how it affects your system.<\/p><p>Run ls -l and you will notice that the owner for daily_logs.txt isn't you (user). Which means you wouldn't be allowed to alter the state of the system without constanly using sudo.<\/p>The permanment solution to this is to use chown with sudo to change ownership back to you. Lets see how it works by running this command<\/p><code>sudo chown user daily_logs.txt<\/code><p>Note: In this enviroment the owner for a file that you own is under <b>user<\/b> <\/p>",
             "completed": false
         },
         {
@@ -743,9 +743,9 @@
             "section": "Checkpoint - File Permissions",
             "title": "Lab #9",
             "content_type": "interative",
-            "content": "<p>Sticking in the same Work/ directory, in <b>octal</b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'</p><table border='1' style='border-collapse: collapse; margin-top: 15px;'><tr><th style='background-color: transparent;'>Octal </th><th style='background-color: transparent;'>Binary </th><th style='background-color: transparent;'>Permission </th></tr><tr><td style='background-color: transparent;'>0</td><td style='background-color: transparent;'>000</td><td style='background-color: transparent;'>---</td></tr><tr><td style='background-color: transparent;'>1</td><td style='background-color: transparent;'>001</td><td style='background-color: transparent;'>--x</td></tr><tr><td style='background-color: transparent;'>2</td><td style='background-color: transparent;'>010</td><td style='background-color: transparent;'>-w-</td></tr><tr><td style='background-color: transparent;'>3</td><td style='background-color: transparent;'>011</td><td style='background-color: transparent;'>-wx</td></tr><tr><td style='background-color: transparent;'>4</td><td style='background-color: transparent;'>100</td><td style='background-color: transparent;'>r--</td></tr><tr><td style='background-color: transparent;'>5</td><td style='background-color: transparent;'>101</td><td style='background-color: transparent;'>r-x</td></tr><tr><td style='background-color: transparent;'>6</td><td style='background-color: transparent;'>110</td><td style='background-color: transparent;'>rw-</td></tr><tr><td style='background-color: transparent;'>7</td><td style='background-color: transparent;'>111</td><td style='background-color: transparent;'>rwx</td></tr></table>",
+            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'<\/p><table border='1' style='border-collapse: collapse; margin-top: 15px;'><tr><th style='background-color: transparent;'>Octal <\/th><th style='background-color: transparent;'>Binary <\/th><th style='background-color: transparent;'>Permission <\/th><\/tr><tr><td style='background-color: transparent;'>0<\/td><td style='background-color: transparent;'>000<\/td><td style='background-color: transparent;'>---<\/td><\/tr><tr><td style='background-color: transparent;'>1<\/td><td style='background-color: transparent;'>001<\/td><td style='background-color: transparent;'>--x<\/td><\/tr><tr><td style='background-color: transparent;'>2<\/td><td style='background-color: transparent;'>010<\/td><td style='background-color: transparent;'>-w-<\/td><\/tr><tr><td style='background-color: transparent;'>3<\/td><td style='background-color: transparent;'>011<\/td><td style='background-color: transparent;'>-wx<\/td><\/tr><tr><td style='background-color: transparent;'>4<\/td><td style='background-color: transparent;'>100<\/td><td style='background-color: transparent;'>r--<\/td><\/tr><tr><td style='background-color: transparent;'>5<\/td><td style='background-color: transparent;'>101<\/td><td style='background-color: transparent;'>r-x<\/td><\/tr><tr><td style='background-color: transparent;'>6<\/td><td style='background-color: transparent;'>110<\/td><td style='background-color: transparent;'>rw-<\/td><\/tr><tr><td style='background-color: transparent;'>7<\/td><td style='background-color: transparent;'>111<\/td><td style='background-color: transparent;'>rwx<\/td><\/tr><\/table>",
             "completed": false
-        } 
+        }
     ],
     "Networking": [
         {
@@ -758,7 +758,7 @@
             "section": "Intro To Networking",
             "title": "Networking",
             "content_type": "article",
-            "content": "<p>In Computer Science, <b>Networking</b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet</b> services we all enjoy today!</p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.</p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.",
+            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.",
             "completed": false
         },
         {
@@ -767,7 +767,7 @@
             "section": "IP Addresses",
             "title": "Local Ip Address, Local Address Network (LAN)",
             "content_type": "interactive",
-            "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.</p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address</b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1</code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!</p><img src='../../../images/Home_LAN_local_area_network_example_diagram.png' width='500'>",
+            "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.<\/p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address<\/b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1<\/code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!<\/p><img src='..\/..\/..\/images\/Home_LAN_local_area_network_example_diagram.png' width='500'>",
             "answer": "",
             "completed": false
         },
@@ -777,7 +777,7 @@
             "section": "IP Addresses",
             "title": "ifconfig",
             "content_type": "interactive",
-            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig</code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.</p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)</pre></code><p><strong>Breakdown:</strong></p><ul><li><code>wlp3s0</code>: Network interface name (your Wi-Fi device).</li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;</code>: Interface is active and supports broadcasting and multicasting.</li><li><code>mtu 1500</code>: Maximum packet size the interface can handle (We will look at how packets work later on).</li><li><code>inet 192.168.1.203</code>: The holy grail of the command! This is your local IPv4 address (LAN IP).</li><li><code>netmask 255.255.255.0</code>: Subnet mask that divides network and host portions of the IP.</li><li><code>broadcast 192.168.1.255</code>: Address to send packets to all devices on the LAN.</li><li><code>inet6</code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.</li><li><code>ether 50:e4:78:73:48:fd</code>: MAC (hardware) address of your network device.</li></ul><p>This command helps you see your device's IP configuration and network status.</p>",
+            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
             "answer": "",
             "completed": false
         },
@@ -787,7 +787,7 @@
             "section": "Connections",
             "title": "Servers, Clients, and Hosts",
             "content_type": "article",
-            "content": "When accessing the internet or a network, devices typically fall into two main roles: <b>Servers</b> and <b>Clients</b>.<li><b>Server</b> – A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info—and respond with the correct data, such as your profile page, payment info, and more.</li><li><b>Client</b> – A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.</li><li><b>Host</b> – A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.</li> <img src='../../../images/server.gif' width='550' alt='server gif>'",
+            "content": "When accessing the internet or a network, devices typically fall into two main roles: <b>Servers<\/b> and <b>Clients<\/b>.<li><b>Server<\/b> \u2013 A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info\u2014and respond with the correct data, such as your profile page, payment info, and more.<\/li><li><b>Client<\/b> \u2013 A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.<\/li><li><b>Host<\/b> \u2013 A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.<\/li> <img src='..\/..\/..\/images\/server.gif' width='550' alt='server gif>'",
             "answer": "",
             "completed": false
         },
@@ -797,17 +797,17 @@
             "section": "Connections",
             "title": "Networking Connections",
             "content_type": "article",
-            "content": "<p>When we are online gaming, surfing the web, streaming movies, or watching live TV, we will occasionally come across network performance issues, often referred to as \"lag\" or, in technical terms, <b>network latency</b>.</p><p>Network latency issues can be caused by hardware performance, physical distance, packet loss, or network congestion (too much traffic on a network).</p><p>To test the speed or how \"strong\" a connection is to a server or computer, we can use the <b>ping</b> command followed by a destination argument. The argument can either be the ip address or the full website domain you're trying to connect to, as seen below:</p><code>ping 192.168.1.1</code><code>ping some_website.com</code>",
+            "content": "<p>When we are online gaming, surfing the web, streaming movies, or watching live TV, we will occasionally come across network performance issues, often referred to as \"lag\" or, in technical terms, <b>network latency<\/b>.<\/p><p>Network latency issues can be caused by hardware performance, physical distance, packet loss, or network congestion (too much traffic on a network).<\/p><p>To test the speed or how \"strong\" a connection is to a server or computer, we can use the <b>ping<\/b> command followed by a destination argument. The argument can either be the ip address or the full website domain you're trying to connect to, as seen below:<\/p><code>ping 192.168.1.1<\/code><code>ping some_website.com<\/code>",
             "answer": "",
             "completed": false
-        },     
+        },
         {
             "id": 6,
             "parent": "Networking",
             "section": "Connections",
             "title": "ping",
             "content_type": "interative",
-            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:</p><code>ping 142.250.72.206</code>Or more cleanly: <code>ping google.com</code><p>The output at first glance like many Linux network commands that you have probably come across alrady, can be cryptic and intimidating, but we'll break it down and see the important information it gives us.</p></p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net</b> – This shows the domain name of the responding server. It confirms that we successfully reached a Google server.</li><li><b>icmp_seq=1</b> – This is the sequence number of the ping packet, starting at 1 and increasing with each request.</li><li><b>ttl=114</b> – TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.</li><li><b>time=23.4 ms</b> – This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.</li></ul>",
+            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:<\/p><code>ping 142.250.72.206<\/code>Or more cleanly: <code>ping google.com<\/code><p>The output at first glance like many Linux network commands that you have probably come across alrady, can be cryptic and intimidating, but we'll break it down and see the important information it gives us.<\/p><\/p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net<\/b> \u2013 This shows the domain name of the responding server. It confirms that we successfully reached a Google server.<\/li><li><b>icmp_seq=1<\/b> \u2013 This is the sequence number of the ping packet, starting at 1 and increasing with each request.<\/li><li><b>ttl=114<\/b> \u2013 TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.<\/li><li><b>time=23.4 ms<\/b> \u2013 This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.<\/li><\/ul>",
             "answer": "",
             "completed": false
         },
@@ -817,7 +817,7 @@
             "section": "Connections",
             "title": "DNS - Domain Name System",
             "content_type": "article",
-            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com</b> or <b>amazon.com</b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)</b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).</p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.</p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!</p><img src='../../../images/dns.gif' width = '550'>",
+            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com<\/b> or <b>amazon.com<\/b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)<\/b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).<\/p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.<\/p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!<\/p><img src='..\/..\/..\/images\/dns.gif' width = '550'>",
             "answer": "",
             "completed": false
         },
@@ -827,7 +827,7 @@
             "section": "Connections",
             "title": "nsloopkup",
             "content_type": "interactive",
-            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup</b> which stands for <b>'name server lookup'</b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:</p><code>nslookup google.com</code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238</code></pre><ul><li><b>Server:</b> The DNS server your system is using to resolve the domain.ndx </li><li><b>Address:</b> The IP address of that DNS server with port 53 (used for DNS communication).</li><li><b>Non-authoritative answer:</b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.</li><li><b>Name:</b> The domain name you queried (google.com).</li><li><b>Address:</b> The resolved IP address of the domain.</li></ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.</p>",
+            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup<\/b> which stands for <b>'name server lookup'<\/b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:<\/p><code>nslookup google.com<\/code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238<\/code><\/pre><ul><li><b>Server:<\/b> The DNS server your system is using to resolve the domain.ndx <\/li><li><b>Address:<\/b> The IP address of that DNS server with port 53 (used for DNS communication).<\/li><li><b>Non-authoritative answer:<\/b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.<\/li><li><b>Name:<\/b> The domain name you queried (google.com).<\/li><li><b>Address:<\/b> The resolved IP address of the domain.<\/li><\/ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.<\/p>",
             "answer": "",
             "completed": false
         },
@@ -891,7 +891,7 @@
                 "C": "It changes the DNS server settings on your computer.",
                 "D": "It encrypts DNS traffic to protect against spoofing attacks."
             },
-            "content": "<p>What does the nslookup command do?</p><div class=\"question__container\"></div>",
+            "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
             "answer": "A",
             "completed": false
         },
@@ -899,9 +899,9 @@
             "id": 14,
             "parent": "Networking",
             "section": "Transfering Data",
-            "title": "TCP/IP",
+            "title": "TCP\/IP",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of <b>protocals</b> and rules that defines how data is sent, received, and routed between devices.</p><li></b>TCP</b> - works by transmitting data like a text message, emails, web pages, and more into tiny packets that get purposley gget broken down," ,
+            "content": "Today, the internet is powered by a model called <b>tcp\/ip<\/b> -- a set of <b>protocals<\/b> and rules that defines how data is sent, received, and routed between devices.<\/p><li><\/b>TCP<\/b> - works by transmitting data like a text message, emails, web pages, and more into tiny packets that get purposley gget broken down,",
             "answer": "",
             "completed": false
         },
@@ -921,5 +921,13 @@
             "answer": "A",
             "completed": false
         }
-    ]
+    ],
+    "basics": {
+        "1": {
+            "completed": true
+        },
+        "4": {
+            "completed": true
+        }
+    }
 }
