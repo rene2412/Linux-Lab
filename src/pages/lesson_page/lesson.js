@@ -18,14 +18,14 @@ class LessonManager {
     // may change this later to identify user
     this.setupListeners();
     this.user = 0;
-   // this.fetchUserInfoInit();
+   this.fetchUserInfoInit();
   }
 
   setupListeners() {
     document.addEventListener("section:update", this.handleLessonSectionChange);
     document.addEventListener("status:update", this.handleLessonSectionChange);
     document.addEventListener("completed:update", this.handleLessonCompleted);
-    document.addEventListener("command-success", this.handleLessonCompleted);
+    document.addEventListener("command-success", this.fetchUserInfo);
   }
   handleLessonCompleted = async (e) => {
     console.log('handle lesson completed')
@@ -70,6 +70,8 @@ class LessonManager {
       this.lesson = data.currentModule.lessonId || 1;
       this.currentSection = data.currentModule.name;
       this.completedLessons = data.currentModule.lessonStatus;
+      console.log(this.currentSection)
+      console.log('^^^^^^^^^^^')
   
       await this.fetchLessonsInit(this.currentSection);
     
@@ -85,10 +87,14 @@ class LessonManager {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
+      console.log('fetched new data')
+      console.log(data)
       this.lesson = data.currentModule.lessonId;
       this.currentSection = data.currentModule.name;
+      console.log(this.currentSection)
+      console.log('^^^^^^^^^^^')
       this.completedLessons= data.currentModule.lessonStatus;
-     // this.broadcastUpdate();
+     this.broadcastUpdate();
     } catch (error) {
       console.error(error);
     }
