@@ -15,7 +15,7 @@ $ping = "PING google.com (2607:f8b0:4005:812::200e) 56 data bytes
 10 packets transmitted, 10 received, 0% packet loss, time 9013ms
 rtt min/avg/max/mdev = 44.763/98.985/249.913/62.369 ms";
 
-$ip = 
+$ifconfig = 
     "enp1s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         ether 84:47:09:35:83:0e  txqueuelen 1000  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
@@ -52,11 +52,6 @@ wlp3s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX packets 1451503  bytes 303383335 (303.3 MB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ";
-
-
-
-
-
 
 $route = "default via 192.168.X.1 dev eth0 proto dhcp src 192.168.X.100 metric 600  
 192.168.X.0/24 dev eth0 proto kernel scope link src 192.168.X.100 metric 600";
