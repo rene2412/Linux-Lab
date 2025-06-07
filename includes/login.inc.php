@@ -53,7 +53,7 @@
 		if ($_SESSION["user_id"] !== null) {
 			require_once 'cookies.inc.php';
 			$json_response = json_encode($response);
-			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
+			setcookie('user_info', $json_response, time() + 3600 , "/"); // Expires when browser closes
 		}
 		header('Location: ../src/pages/dashboard/dashboard.html');
 		$pdo = null;

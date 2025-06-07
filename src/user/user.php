@@ -21,9 +21,17 @@ if ($user_id) {
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$user_id]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     $lessons_completed = $progress["lessons_completed"] ?? 0;
     $current_lesson = $progress["current_lesson"] ?? "Not Started";
+
+    // Fetch 'Networking' progress if user is logged in
+    $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $network_progress = $stmt->fetch(PDO::FETCH_ASSOC);
+    $networking_lessons_completed = $network_progress["lessons_completed"] ?? 0;
+    $current_lesson = $network_progress["current_lesson"] ?? "Not Started";
+   
 
     //update the lesson ID from the most previous user lesson entry
     $updateSql = $pdo->prepare("UPDATE user_progress up
@@ -139,10 +147,6 @@ $response = [
         "lessonId" => $lessonId,
         "lessonName" => $lessonName,
         "lessonStatus" => $lessonStatus
-        //"currentSection" => "Networking",
-          //"lessonId" => 1,
-          //"lessonName" => "Intro To Networking",
-          //"lessonStatus" => false
         ],
     "modules" => [
         [
@@ -152,7 +156,7 @@ $response = [
         ],
         [
             "name" => "Networking",
-            "completed" => 18,
+            "completed" => $networking_lessons_completed,
             "total" => 21
         ],
         [
