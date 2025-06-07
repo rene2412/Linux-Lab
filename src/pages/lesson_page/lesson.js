@@ -18,7 +18,7 @@ class LessonManager {
     // may change this later to identify user
     this.setupListeners();
     this.user = 0;
-   this.fetchUserInfoInit();
+    this.fetchUserInfoInit();
   }
 
   setupListeners() {
@@ -28,29 +28,31 @@ class LessonManager {
     document.addEventListener("command-success", this.fetchUserInfo);
   }
   handleLessonCompleted = async (e) => {
-    console.log('handle lesson completed')
+    console.log("handle lesson completed");
     console.log(e.detail);
     try {
       const response = await fetch("../../../api_commands.php", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `command=${encodeURIComponent(e.detail.answer)}&lessonId=${encodeURIComponent(e.detail.lessonId)}`,
-      })
+        body: `command=${encodeURIComponent(
+          e.detail.answer
+        )}&lessonId=${encodeURIComponent(e.detail.lessonId)}`,
+      });
       if (!response.ok) {
         throw new Error(`response error`, response.status);
       }
       const data = await response.json();
-      console.log('handle completed');
+      console.log("handle completed");
       console.log(data);
       this.fetchUserInfo();
-      if(data.commandSuccess) {
-        const successEvent = new CustomEvent('command-success', {
-          detail:{
+      if (data.commandSuccess) {
+        const successEvent = new CustomEvent("command-success", {
+          detail: {
             command: commandToSend,
-            output: data.output
-          }
+            output: data.output,
+          },
         });
         document.dispatchEvent(successEvent);
       }
@@ -66,39 +68,38 @@ class LessonManager {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-    
+
       this.lesson = data.currentModule.lessonId || 1;
       this.currentSection = data.currentModule.name;
       this.completedLessons = data.currentModule.lessonStatus;
-      console.log(this.currentSection)
-      console.log('^^^^^^^^^^^')
-  
+      console.log(this.currentSection);
+      console.log("^^^^^^^^^^^");
+
       await this.fetchLessonsInit(this.currentSection);
-    
     } catch (error) {
       console.error(error);
     }
   }
 
-  async fetchUserInfo() {
+  fetchUserInfo = async () => {
     try {
       const request = await fetch("../../user/user.php");
       if (!request.ok) {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-      console.log('fetched new data')
-      console.log(data)
+      // console.log('fetched new data')
+      // console.log(data)
       this.lesson = data.currentModule.lessonId;
       this.currentSection = data.currentModule.name;
-      console.log(this.currentSection)
-      console.log('^^^^^^^^^^^')
-      this.completedLessons= data.currentModule.lessonStatus;
-     this.broadcastUpdate();
+      console.log(this.currentSection);
+      console.log("^^^^^^^^^^^");
+      this.completedLessons = data.currentModule.lessonStatus;
+      this.broadcastUpdate();
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   async fetchLessonsInit(moduleName = "The Basics") {
     try {
@@ -110,25 +111,24 @@ class LessonManager {
       // console.log("LESSONS FILE LOADED:", data); // 👈 add this
       this.lessons = data;
 
-       // Normalize module name casing
-    const matchedModule = Object.keys(this.lessons).find(
-      key => key.toLowerCase() === moduleName.toLowerCase()
-    );
+      // Normalize module name casing
+      const matchedModule = Object.keys(this.lessons).find(
+        (key) => key.toLowerCase() === moduleName.toLowerCase()
+      );
 
-    if (!matchedModule) {
-      throw new Error(`Module "${moduleName}" not found in lessons.`);
-    }
-    
-    this.currentSection = matchedModule;
-    const sectionArray = this.lessons[this.currentSection];
+      if (!matchedModule) {
+        throw new Error(`Module "${moduleName}" not found in lessons.`);
+      }
 
-    if (!Array.isArray(sectionArray) || sectionArray.length === 0) {
-      throw new Error(`Lesson section is empty or not an array.`);
-    }
+      this.currentSection = matchedModule;
+      const sectionArray = this.lessons[this.currentSection];
 
-    this.sectionSize = sectionArray[0].section__size || 0;
-    this.interactiveSize = sectionArray[0].interactive__size || 0;
+      if (!Array.isArray(sectionArray) || sectionArray.length === 0) {
+        throw new Error(`Lesson section is empty or not an array.`);
+      }
 
+      this.sectionSize = sectionArray[0].section__size || 0;
+      this.interactiveSize = sectionArray[0].interactive__size || 0;
 
       this.broadcastUpdate();
     } catch (error) {
@@ -145,19 +145,18 @@ class LessonManager {
         },
         lessons: this.lessons,
         lessonsCompleted: this.completedLessons,
-        sectionSize: this.sectionSize
+        sectionSize: this.sectionSize,
       },
     });
     document.dispatchEvent(event);
-    console.log('broadcasting from manager')
-    console.log(event.detail)
+    console.log("broadcasting from manager");
   }
 
   // handle lesson and section changes bundled
   handleLessonSectionChange = async (e) => {
     let { lessonId, action } = e.detail;
     if (action === "next") {
-      this.lesson++
+      this.lesson++;
       // if we are at last lesson or beyond lesson scope
       if (lessonId >= this.sectionSize) {
         this.lesson = this.sectionSize;
@@ -167,19 +166,19 @@ class LessonManager {
 
     if (action === "prev") {
       // if we are at last lesson or beyond lesson scope
-      this.lesson--
+      this.lesson--;
       if (lessonId <= 1) {
         this.lesson = 1;
         console.log(`cant go under section size`);
       }
     }
     if (action === "change") {
-      if(this.lesson > 0 && this.lesson <= this.sectionSize)
-      this.lesson = lessonId;
+      if (this.lesson > 0 && this.lesson <= this.sectionSize)
+        this.lesson = lessonId;
     }
 
     terminal.setLesson(this.lesson);
-    this.broadcastUpdate()
+    this.broadcastUpdate();
   };
 
   eventNewInfo(data) {
@@ -197,7 +196,11 @@ class LessonNav {
     this.openCloseButton = document.querySelector(".lesson__nav__button--open");
     this.dropdownContainer = document.querySelector(".lesson__nav__dropdown");
     this.listContainer = document.querySelector(".lesson__nav__links");
-    if (!this.openCloseButton || !this.dropdownContainer || !this.listContainer) {
+    if (
+      !this.openCloseButton ||
+      !this.dropdownContainer ||
+      !this.listContainer
+    ) {
       console.warn("LessonNav elements not found.");
       return;
     }
@@ -224,39 +227,38 @@ class LessonNav {
     const idStr = e.target.id;
     const id = parseInt(idStr.slice(idStr.indexOf(":") + 1, idStr.length));
     const subSection = idStr.slice(0, idStr.indexOf(":"));
-    console.log(id)
-    console.log(subSection)
+    console.log(id);
+    console.log(subSection);
     // clicking headers should not break code
-    if(id > 0){
-    document.dispatchEvent(
-      new CustomEvent("status:update", {
-        detail: {
-          lessonId: id,
-          section: subSection,
-          action: "change",
-        },
-      })
-    );
+    if (id > 0) {
+      document.dispatchEvent(
+        new CustomEvent("status:update", {
+          detail: {
+            lessonId: id,
+            section: subSection,
+            action: "change",
+          },
+        })
+      );
       this.dropdownContainer.classList.add("hidden");
       this.isOpen = false;
     }
-
   };
 
   handleToggle = (e) => {
     // stop document from initial click so it doesnt close instantly
-    e.stopPropagation()
+    e.stopPropagation();
     if (!this.isOpen) {
       this.dropdownContainer.classList.remove("hidden");
       this.isOpen = true;
       // handle not on container click
-      document.addEventListener('click',(e)=>{
+      document.addEventListener("click", (e) => {
         const within = this.dropdownContainer.contains(e.target);
-        if(!within && this.isOpen){
+        if (!within && this.isOpen) {
           this.dropdownContainer.classList.add("hidden");
           this.isOpen = false;
         }
-      })
+      });
     } else if (this.isOpen) {
       this.dropdownContainer.classList.add("hidden");
       this.isOpen = false;
@@ -275,15 +277,14 @@ class LessonNav {
     const listElements = lessons[section]
       .filter((item) => item.id > 0)
       .map((lessonData) => {
-        let statusImgSrc= "#";
+        let statusImgSrc = "#";
         let statusImgClass = " no-status ";
-        if(lessonData.content_type != "article"){
-          if(lessonStatus[lessonData.title] === true){
-            statusImgSrc="../assets/SVGs/check.svg"
+        if (lessonData.content_type != "article") {
+          if (lessonStatus[lessonData.title] === true) {
+            statusImgSrc = "../assets/SVGs/check.svg";
             statusImgClass = " has-status ";
-          }
-          else{
-            statusImgSrc="../assets/SVGs/cross.svg"
+          } else {
+            statusImgSrc = "../assets/SVGs/cross.svg";
             statusImgClass = " has-status ";
           }
         }
@@ -302,8 +303,9 @@ class LessonNav {
               lessonData.title
             }</button><div class="lesson__nav__lesson__status"><img class="${statusImgClass}" src="${statusImgSrc}"></div> </li>`
           );
-        } else
-          // lesson not active 
+        }
+        // lesson not active
+        else
           return (
             returnString +
             `<li class="lesson__nav__lesson "><button class="lesson__nav__button" id="${`${lessonData.section}:${lessonData.id}`}"" >${
@@ -340,7 +342,7 @@ class lessonDisplay {
 
   handleChange = (e) => {
     const data = e.detail;
-    // console.log('handlechange')
+    console.log("handlechange");
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
@@ -359,17 +361,26 @@ class lessonDisplay {
     this.updateMeter();
     this.updateStatus();
     this.render();
-    console.log("Loaded lesson modules:", Object.keys(this.modules));
-    console.log("Current section requested:", this.curSection);
-    
+    // console.log("Loaded lesson modules:", Object.keys(this.modules));
+    // console.log("Current section requested:", this.curSection);
   }
 
   render() {
     this.container.replaceChildren();
-    if(this.curLesson=== 1) {this.prevButton.style.pointerEvents= `none`; this.prevButton.style.opacity='0'}
-    else{this.prevButton.style.pointerEvents= `auto`; this.prevButton.style.opacity='1'}
-    if(this.curLesson === this.modules[this.curSection][0].section__size) {this.nextButton.style.pointerEvents= `none`; this.nextButton.style.opacity='0'}
-    else{this.nextButton.style.pointerEvents= `auto`; this.nextButton.style.opacity='1'}
+    if (this.curLesson === 1) {
+      this.prevButton.style.pointerEvents = `none`;
+      this.prevButton.style.opacity = "0";
+    } else {
+      this.prevButton.style.pointerEvents = `auto`;
+      this.prevButton.style.opacity = "1";
+    }
+    if (this.curLesson === this.modules[this.curSection][0].section__size) {
+      this.nextButton.style.pointerEvents = `none`;
+      this.nextButton.style.opacity = "0";
+    } else {
+      this.nextButton.style.pointerEvents = `auto`;
+      this.nextButton.style.opacity = "1";
+    }
 
     this.container.innerHTML = `<h1 class="lesson__title">${
       this.modules[this.curSection][this.curLesson]["title"]
@@ -394,7 +405,9 @@ class lessonDisplay {
       for (const [key, value] of questionEntries) {
         if (
           this.modules[this.curSection][this.curLesson].answer === key &&
-          this.completedLessons[this.modules[this.curSection][this.curLesson].title]
+          this.completedLessons[
+            this.modules[this.curSection][this.curLesson].title
+          ]
         ) {
           completed = true;
           questions.push(`
@@ -429,7 +442,7 @@ class lessonDisplay {
               section: this.curSection,
               lessonId: this.curLesson,
               completed: true,
-              answer:answer,
+              answer: answer,
             },
           })
         );
@@ -466,7 +479,7 @@ class lessonDisplay {
         detail: {
           action: "prev",
           section: this.curSection,
-          lessonId: this.curLesson
+          lessonId: this.curLesson,
         },
       })
     );
@@ -474,25 +487,26 @@ class lessonDisplay {
 
   updateMeter() {
     let value = 0;
-    for(let key in this.completedLessons){
-      if(this.completedLessons[key]) value++;
+    for (let key in this.completedLessons) {
+      if (this.completedLessons[key]) value++;
     }
-   // let progress = value/this.modules[this.curSection][0].interactive__size;
+    // let progress = value/this.modules[this.curSection][0].interactive__size;
     //this.progBar.style.transform = `scalex(${progress})`
     const section = this.modules[this.curSection];
     const total = section[0].interactive__size || 1; // avoid divide-by-zero
     const progress = value / total;
-  
+
     this.progBar.style.transform = `scaleX(${progress})`;
   }
 
   updateStatus() {
     let title = this.modules[this.curSection][this.curLesson].title;
-    if(this.modules[this.curSection][this.curLesson].content_type==="article"){
+    if (
+      this.modules[this.curSection][this.curLesson].content_type === "article"
+    ) {
       this.statusCheck.classList.add(`hidden`);
       this.statusCross.classList.add(`hidden`);
-    }
-    else if (this.completedLessons[title]) {
+    } else if (this.completedLessons[title]) {
       this.statusCheck.classList.remove(`hidden`);
       this.statusCross.classList.add(`hidden`);
     } else {
@@ -534,48 +548,48 @@ let terminal;
 
 // conditional render cookie
 const userObj = getUserCookie();
-if(userObj){
+if (userObj) {
   terminal = new VanillaTerminal({
     apiEndpoint: "../../../api_commands.php",
-    username:userObj.username,
+    username: userObj.username,
   });
   terminal.mount("#terminal__container");
 
-  const nav = new Navigation(".sidebar__container",userObj.isLoggedIn,userObj,false,)
-}
-else{
-
+  const nav = new Navigation(
+    ".sidebar__container",
+    userObj.isLoggedIn,
+    userObj,
+    false
+  );
+} else {
   terminal = new VanillaTerminal({
     apiEndpoint: "../../../api_commands.php",
   });
   terminal.mount("#terminal__container");
-  const nav = new Navigation(".sidebar__container",false,userObj,false,)
-
+  const nav = new Navigation(".sidebar__container", false, userObj, false);
 }
-
 
 //Rene's work
-async function test(){
-//intialize a URL that will be the difference between 'The Basics' and 'Networking'
-const urlParams = new URLSearchParams(window.location.search);
-const module = urlParams.get("module") || "The Basics";
-// Fetch lessons JSON and initialize the selected module
+async function test() {
+  //intialize a URL that will be the difference between 'The Basics' and 'Networking'
+  const urlParams = new URLSearchParams(window.location.search);
+  const module = urlParams.get("module") || "The Basics";
+  // Fetch lessons JSON and initialize the selected module
   await lessonManager.fetchLessonsInit(module);
-//defauwlt souurce route is the basics
-let apiRoute = "../../user/user.php";
+  //defauwlt souurce route is the basics
+  let apiRoute = "../../user/user.php";
 
-//however if the user clicked on networking then process the new network api
-if (module.toLowerCase() === "networking") {
-  apiRoute = "../../user/networkUser.php";
-}
-//no bash yet
-  try{
+  //however if the user clicked on networking then process the new network api
+  if (module.toLowerCase() === "networking") {
+    apiRoute = "../../user/networkUser.php";
+  }
+  //no bash yet
+  try {
     const res = await fetch(apiRoute);
     const data = await res.json();
-    console.log('user api information')
+    console.log("user api information");
     // console.log(data);
-  }
-  catch(e){
+  } catch (e) {
     console.error(e);
   }
 }
