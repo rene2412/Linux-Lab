@@ -1452,14 +1452,8 @@ function process_ping($host) : string {
 	return $result;
 }
 
-function process_ip($flag) : string {
-    if ($flag === "a" || $flag === "addr") {
-    return $GLOBALS['ip'] . "\n";
-    }
-    elseif ($flag === "route") {
-    return $GLOBALS['route'] . "\n";
-    }
-    else return "";
+function process_ifconfig() : string {
+    return $GLOBALS['ifconfig'] . "\n";
 }
 
 function process_traceroute($host) : string {
@@ -1674,6 +1668,75 @@ function send_current_lesson(PDO $pdo, int $userId) : string {
         }
         return $answer;
     }
+  //
+function network_update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
+    if ($userId === null) return;
+    $stmt = $pdo->prepare("
+        INSERT INTO network_user_progress (user_id, lesson_id, lessons_completed, current_lesson)
+        VALUES (?, ?, 1, ?) 
+        ON DUPLICATE KEY UPDATE 
+        lessons_completed = CASE 
+        WHEN lessons_completed = 0 THEN 1  -- Ensure it starts at 1
+        WHEN current_lesson <> VALUES(current_lesson) THEN lessons_completed + 1  
+        ELSE lessons_completed 
+    END, 
+    current_lesson = VALUES(current_lesson)  
+");
+try {
+    $stmt->execute([$userId, $lessonId, $nextLesson]);
+} catch (PDOException $e) {
+   echo "SQL Error: " . $e->getMessage();
+}
+}
+
+function network_updateUserProgress($pdo, $userId, $lesson_id) : void {
+if ($userId === null) return;
+if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
+// Check if the user already completed the lesson
+$checkSql = "
+SELECT COUNT(*) FROM network_user_lessons 
+WHERE user_id = :userId AND lesson_id = :lesson_id;
+";
+$stmt = $pdo->prepare($checkSql);
+$stmt->execute([
+    ':userId' => $userId,
+    ':lesson_id' => $lesson_id
+]);
+$exists = $stmt->fetchColumn();
+
+// If no record exists, insert it
+if ($exists == 0) {
+    $insertSql = "
+    INSERT INTO network_user_lessons (user_id, lesson_id) 
+    VALUES (:userId, :lesson_id);
+    ";
+    $stmt = $pdo->prepare($insertSql);
+    $stmt->execute([
+        ':userId' => $userId,
+        ':lesson_id' => $lesson_id
+        ]);
+    }
+}
+else return;
+}
+
+function network_send_user_progress(PDO $pdo, int $userId) : array {
+    $sql = "
+    SELECT lesson_id FROM network_user_lessons WHERE user_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userId]);
+    $lessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return ["completed_lessons" => $lessons];
+}
+
+function network_send_current_lesson(PDO $pdo, int $userId) : string {
+if ($userId === null) return null;
+$stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
+$stmt->execute([$userId]);
+$progress = $stmt->fetch(PDO::FETCH_ASSOC);
+$current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
+return $current_lesson . "\n";
+}
     
     function contains_number($string) {
         return preg_match('/\d/', $string) === 1;
@@ -2046,7 +2109,6 @@ if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
             $output = "Error: Invalid date command";
             break;
         }
-             $jsonData['basics'][2]['completed'] = true;
             if ($lessonID === 4){
                 $isCorrect = true;
                 if ($userId !== null) {
@@ -2372,7 +2434,7 @@ case 'python3':
            $output = shell_exec('python3 sales.py');
            $isCorrect = true;
            if ($userId !== null) {
-               update_mysql($pdo, $userId, 64, 64);
+               update_mysql($pdo, $userId, 64, 65);
                updateUserProgress($pdo, $userId, 64);
         }
     }
@@ -2385,14 +2447,24 @@ case 'python3':
         break;
 	case 'ping':
         $output = process_ping($arg);
+        if ($lessonID === 6) {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 6, 7);
+                network_updateUserProgress($pdo, $userId, 6);
+            }
+        } 
         break;
-    case 'ip': 
-            $flag = $arg;
-            if ($flag === "a" || $flag === "addr" || $flag === "route") {
-                $output = process_ip($flag);
-          	} else {
-        	    $output = "Invalid command. Only 'ip a' and 'ip addr' are allowed.\n";
-		    }
+    case 'ifconfig': 
+        $output = process_ifconfig();
+        if ($lessonID === 3) {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 3, 4);
+                network_updateUserProgress($pdo, $userId, 3);
+            }
+        } 
+        break;
     case 'traceroute':
         $output = process_traceroute($arg);
 	    break;

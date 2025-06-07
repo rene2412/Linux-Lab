@@ -880,7 +880,7 @@
             "completed": false
         },
         {
-            "id": 13,
+            "id": 12,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, IP addresses, and Connections",
             "title": "Knowledge Check #4",
@@ -896,7 +896,7 @@
             "completed": false
         },
         {
-            "id": 14,
+            "id": 13,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "TCP\/IP",
@@ -906,7 +906,7 @@
             "completed": false
         },
         {
-            "id": 15,
+            "id": 14,
             "parent": "Networking",
             "section": "Checkpoint",
             "title": "ldsajfals",
