@@ -12,27 +12,34 @@ $logged = false; // Default to false for guests
 $lessonId = 1;
 $lessons_completed = 0;
 $current_lesson = "Not Started";
-$lessonName = "The Command Line";
-$current_section = "Prelude"; // Default to first section
-$current_module = "The Basics"; // Default module
+$lessonName = "Networking";
+$current_section = "Intro To Networking"; // Default to first section
+$current_module = "Networking"; // Default module
 
 if ($user_id) {
-    // Fetch progress if user is logged in
+    // Fetch 'Networking' progress if user is logged in
+    $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $network_progress = $stmt->fetch(PDO::FETCH_ASSOC);
+    $networking_lessons_completed = $network_progress["lessons_completed"] ?? 0;
+    $current_lesson = $network_progress["current_lesson"] ?? "Not Started";
+    
+    // Fetch 'The Basics' progress if user is logged in
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$user_id]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
-    
     $lessons_completed = $progress["lessons_completed"] ?? 0;
-    $current_lesson = $progress["current_lesson"] ?? "Not Started";
+    $basics_current_lesson = $progress["current_lesson"] ?? "Not Started";
+
 
     //update the lesson ID from the most previous user lesson entry
-    $updateSql = $pdo->prepare("UPDATE user_progress up
+    $updateSql = $pdo->prepare("UPDATE network_user_progress up
     JOIN (
         SELECT user_id, lesson_id
-        FROM user_lessons
+        FROM network_user_lessons
         WHERE (user_id, completed_at) IN (
             SELECT user_id, MAX(completed_at)
-            FROM user_lessons
+            FROM network_user_lessons
             GROUP BY user_id
         )
     ) ul ON up.user_id = ul.user_id
@@ -41,7 +48,7 @@ if ($user_id) {
     $updateSql->execute();
 
     // Get lesson ID
-    $sql0 = $pdo->prepare("SELECT lesson_id FROM user_progress WHERE user_id = ?");
+    $sql0 = $pdo->prepare("SELECT lesson_id FROM network_user_progress WHERE user_id = ?");
     $sql0->execute([$user_id]);
     $lessonId = $sql0->fetch(PDO::FETCH_ASSOC)['lesson_id'] ?? null;
 
@@ -53,37 +60,22 @@ if ($user_id) {
 }
 
 // Section Mapping
-$sections = ["Prelude", "Hello World", "File Navigation", "Checkpoint - File Navigation", "File Modifications", "Checkpoint - File Modifations", "Searching & Filtering", "File Redirection", "Checkpoint- Searching, Filtering, ", "File Permissions", "Checkpoint - File Permissions"];
+$sections = ["Intro To Networking", "IP Addresses", "Connections", "Checkpoint - The Internet, Ip addresses, and Connections", "Transferring Data"];
 
-if ($current_lesson >= 2 && $current_lesson < 3) {
-    $current_section = $sections[0]; // Prelude
-} elseif ($current_lesson === 3) {
-    $current_section = $sections[1]; // Hello World
-} elseif ($current_lesson >= 4 && $current_lesson <=10) {
-    $current_section = $sections[2]; // File Navigation
-} elseif ($current_lesson >= 11 && $current_lesson <= 13) {
-    $current_section = $sections[3]; // Checkpoint
-} elseif ($current_lesson >= 14 && $current_lesson <= 21) {
-    $current_section = $sections[4]; // File Modifications
-} elseif ($current_lesson >= 22 && $current_lesson <= 28) {
-    $current_section = $sections[5]; // Checkpoint - File Modifations
-} elseif ($current_lesson >= 29 && $current_lesson <= 37) {
-    $current_section = $sections[6]; // Searching & Filtering
-} elseif ($current_lesson >= 38 && $current_lesson <= 40 ) {
-    $current_section = $sections[7]; // File Redirection
-}
-elseif ($current_lesson >= 41 && $current_lesson >= 50) {
-    $current_section = $sections[8]; // Checkpoint - Searching, Filtering, Redirection
-}
-elseif ($current_lesson >= 51 && $current_lesson >= 58) {
-    $current_section = $sections[9]; // File Permissions
-}
-elseif ($current_lesson >= 59 && $current_lesson >= 64) {
-    $current_section = $sections[10]; // Checkpoint - File Permissions
+if ($current_lesson == 1) {
+    $current_section = $sections[0];
+} elseif ($current_lesson >= 2 && $current_lesson <= 3) {
+    $current_section = $sections[1]; 
+} elseif ($current_lesson >= 4 && $current_lesson <= 8) {
+    $current_section = $sections[2];
+} elseif ($current_lesson >= 9 && $current_lesson <= 12) {
+    $current_section = $sections[3];
+} elseif ($current_lesson >= 13) {
+    $current_section = $sections[4];
 }
 // Get Lesson Name if a valid lessonId exists
 if ($lessonId) {
-    $sql2 = $pdo->prepare("SELECT lesson_name FROM lessons WHERE id = ?");
+    $sql2 = $pdo->prepare("SELECT title FROM networking_lessons WHERE id = ?");
     try {
         $sql2->execute([$lessonId]);
         $lessonName = $sql2->fetchColumn() ?? "The Command Line";
@@ -92,32 +84,20 @@ if ($lessonId) {
     }
 }
 
-// Determine module
-$modules = ["The Basics", "Networking", "Bash Scripting (Coming Soon)"];
-if ($lessonId !== null) {
-    if ($lessonId <= 65) {
-        $current_module = $modules[0];
-    } elseif ($lessonId <= 100) {
-        $current_module = $modules[1];
-    } elseif ($lessonId <= 150) {
-        $current_module = $modules[2];
-    }
-}
-
 //load the user progress to load in the progress bar
-$userProgress = "SELECT lesson_id FROM user_lessons WHERE user_id = ?";
+$userProgress = "SELECT lesson_id FROM network_user_lessons WHERE user_id = ?";
         $stmt = $pdo->prepare($userProgress);
         $stmt->execute([$user_id]);
         $completedLessons = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 //the lessons va will contain an array that has all the completed lesson ids
-$everyLesson = "SELECT id, lesson_name FROM lessons";
+$everyLesson = "SELECT id, title FROM networking_lessons";
 $stmt4 = $pdo->query($everyLesson);
 $everyLesson = $stmt4->fetchAll(PDO::FETCH_ASSOC);
 
 $lessonStatus = [];
 foreach ($everyLesson as $lesson) {
-    $lesson_name = $lesson["lesson_name"];
+    $lesson_name = $lesson["title"];
     $lesson_id = $lesson["id"];
     $found = false;
 
@@ -135,20 +115,20 @@ $response = [
     "isLoggedIn" => $logged,
     "currentModule" => [
         "name" => "Networking",
-        "currentSection" => "Networking",
+        "currentSection" => $current_section,
         "lessonId" => 1,
-        "lessonName" => "Intro To Networking",
-        "lessonStatus" => false
+        "lessonName" => $lessonName,
+        "lessonStatus" => $lessonStatus
         ],
     "modules" => [
         [
             "name" => "The Basics",
             "completed" => $lessons_completed,
-            "total" => 64
+            "total" => 65
         ],
         [
             "name" => "Networking",
-            "completed" => 18,
+            "completed" => $networking_lessons_completed,
             "total" => 21
         ],
         [
