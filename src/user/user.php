@@ -179,8 +179,28 @@ function sendAPI($api) : array {
     }
 }
 
-//The main API
-//Change the paramater to 'The Basics' or 'Networking'
-$gigaAPI = sendAPI($api);
-error_log(json_encode($gigaAPI)); 
-echo json_encode($gigaAPI);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $input = trim(file_get_contents('php://input'));
+    if (!$input) {
+        error_log(json_encode($input)); 
+        echo json_encode(["Error: => Invalid Input"]);   
+    exit;
+    } 
+    elseif ($input === "The Basics") {
+        //The main API
+        $gigaAPI = sendAPI("The Basics");
+        error_log(json_encode($gigaAPI)); 
+        echo json_encode($gigaAPI);
+        return;
+    }
+    elseif ($input === "Networking" ) {
+        $gigaAPI = sendAPI("Networking");
+        error_log(json_encode($gigaAPI)); 
+        echo json_encode($gigaAPI);
+        return;
+    }
+    else {
+        error_log(json_encode($gigaAPI)); 
+        echo json_encode(["Error:  => Invalid Post Input"]);
+    }
+} 
