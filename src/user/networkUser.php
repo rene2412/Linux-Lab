@@ -4,6 +4,7 @@ session_start();
 header('Content-Type: application/json');
 require_once "../../includes/database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
+global $pdo;
 
 $username = $_SESSION["user_username"] ?? null; // Get stored username
 $user_id = $_SESSION["user_id"] ?? null;
@@ -142,6 +143,5 @@ $response = [
 error_log("Lesson ID: " . $lessonId);
 error_log("Current Lesson: " . $current_lesson);
 error_log(json_encode($response));  // This will output the API response for debugging purposes.
-
-// Output JSON
-echo json_encode($response);
+$_SESSION['networkAPI'] = $response;
+return $_SESSION['networkAPI'];
