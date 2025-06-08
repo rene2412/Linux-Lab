@@ -4,7 +4,7 @@ session_start();
 header('Content-Type: application/json');
 require_once "../../includes/database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
-
+global $pdo;
 $username = $_SESSION["user_username"] ?? null; // Get stored username
 $user_id = $_SESSION["user_id"] ?? null;
 $logged = false; // Default to false for guests
@@ -21,17 +21,16 @@ if ($user_id) {
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$user_id]);
     $progress = $stmt->fetch(PDO::FETCH_ASSOC);
-
     $lessons_completed = $progress["lessons_completed"] ?? 0;
+    
     $current_lesson = $progress["current_lesson"] ?? "Not Started";
 
-    // Fetch 'Networking' progress if user is logged in
+    // Fetch the network progress
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
     $stmt->execute([$user_id]);
     $network_progress = $stmt->fetch(PDO::FETCH_ASSOC);
     $networking_lessons_completed = $network_progress["lessons_completed"] ?? 0;
-    $current_lesson = $network_progress["current_lesson"] ?? "Not Started";
-   
+    
 
     //update the lesson ID from the most previous user lesson entry
     $updateSql = $pdo->prepare("UPDATE user_progress up
@@ -80,13 +79,13 @@ if ($current_lesson >= 2 && $current_lesson < 3) {
 } elseif ($current_lesson >= 38 && $current_lesson <= 40 ) {
     $current_section = $sections[7]; // File Redirection
 }
-elseif ($current_lesson >= 41 && $current_lesson >= 50) {
+elseif ($current_lesson >= 41 && $current_lesson <= 50) {
     $current_section = $sections[8]; // Checkpoint - Searching, Filtering, Redirection
 }
-elseif ($current_lesson >= 51 && $current_lesson >= 58) {
+elseif ($current_lesson >= 51 && $current_lesson <= 58) {
     $current_section = $sections[9]; // File Permissions
 }
-elseif ($current_lesson >= 59 && $current_lesson >= 64) {
+elseif ($current_lesson >= 59 && $current_lesson <= 64) {
     $current_section = $sections[10]; // Checkpoint - File Permissions
 }
 // Get Lesson Name if a valid lessonId exists
@@ -137,18 +136,24 @@ foreach ($everyLesson as $lesson) {
     }
     $lessonStatus[$lesson_name] = $found;
 }
-// The file will return the user info in JSON
-$response = [
-    "username" => $username,
-    "isLoggedIn" => $logged,
-    "currentModule" => [
-       "name" => "The Basics",
-        "currentSection" => $current_section,
-        "lessonId" => $lessonId,
-        "lessonName" => $lessonName,
-        "lessonStatus" => $lessonStatus
+
+function sendAPI($api) : array {
+    global $username, $logged, $current_section, $lessonId, $lessonName, $lessonStatus;
+    global $lessons_completed, $networking_lessons_completed;
+
+    if ($api === "The Basics") {
+    //The file will return the user info in JSON
+    return [
+        "username" => $username,
+        "isLoggedIn" => $logged,
+        "currentModule" => [
+            "name" => "The Basics",
+            "currentSection" => $current_section,
+            "lessonId" => $lessonId,
+            "lessonName" => $lessonName,
+            "lessonStatus" => $lessonStatus
         ],
-    "modules" => [
+         "modules" => [
         [
             "name" => "The Basics",
             "completed" => $lessons_completed,
@@ -166,10 +171,16 @@ $response = [
             ]
         ]
     ];
+}
+    if ($api === "Networking") {
+        require_once "networkUser.php";
+        $network = $_SESSION['networkAPI'];
+        return $network;
+    }
+}
 
-error_log("Lesson ID: " . $lessonId);
-error_log("Current Lesson: " . $current_lesson);
-error_log(json_encode($response));  // This will output the API response for debugging purposes.
-
-// Output JSON
-echo json_encode($response);
+//The main API
+//Change the paramater to 'The Basics' or 'Networking'
+$gigaAPI = sendAPI($api);
+error_log(json_encode($gigaAPI)); 
+echo json_encode($gigaAPI);
