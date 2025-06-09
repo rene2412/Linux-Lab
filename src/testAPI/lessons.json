@@ -750,7 +750,8 @@
     "Networking": [
         {
             "section__size": 15,
-            "section__completed": false
+            "section__completed": false,
+            "interactive__size": 15
         },
         {
             "id": 1,
