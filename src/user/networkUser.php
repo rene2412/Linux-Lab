@@ -119,7 +119,7 @@ $response = [
     "currentModule" => [
         "name" => "Networking",
         "currentSection" => $current_section,
-        "lessonId" => 1,
+        "lessonId" => $lessonId,
         "lessonName" => $lessonName,
         "lessonStatus" => $lessonStatus
         ],
