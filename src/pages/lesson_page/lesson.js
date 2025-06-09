@@ -72,10 +72,6 @@ class LessonManager {
       this.lesson = data.currentModule.lessonId || 1;
       this.currentSection = data.currentModule.name;
       this.completedLessons = data.currentModule.lessonStatus;
-      console.log(this.currentSection);
-      console.log("^^^^^^^^^^^");
-      console.log("DAYTA FROM INOF INIT");
-      console.log(data);
 
       await this.fetchLessonsInit(this.currentSection);
     } catch (error) {
@@ -90,12 +86,9 @@ class LessonManager {
         throw new Error("Could not load user info");
       }
       const data = await request.json();
-      // console.log('fetched new data')
-      // console.log(data)
+      
       this.lesson = data.currentModule.lessonId;
       this.currentSection = data.currentModule.name;
-      console.log(this.currentSection);
-      console.log("^^^^^^^^^^^");
       this.completedLessons = data.currentModule.lessonStatus;
       this.broadcastUpdate();
     } catch (error) {
@@ -110,7 +103,6 @@ class LessonManager {
         throw new Error(`could not get lessons ${request.status}`);
       }
       const data = await request.json();
-      // console.log("LESSONS FILE LOADED:", data); // 👈 add this
       this.lessons = data;
 
       // Normalize module name casing
@@ -151,7 +143,6 @@ class LessonManager {
       },
     });
     document.dispatchEvent(event);
-    console.log("broadcasting from manager");
   }
 
   // handle lesson and section changes bundled
@@ -229,8 +220,6 @@ class LessonNav {
     const idStr = e.target.id;
     const id = parseInt(idStr.slice(idStr.indexOf(":") + 1, idStr.length));
     const subSection = idStr.slice(0, idStr.indexOf(":"));
-    console.log(id);
-    console.log(subSection);
     // clicking headers should not break code
     if (id > 0) {
       document.dispatchEvent(
@@ -344,7 +333,6 @@ class lessonDisplay {
 
   handleChange = (e) => {
     const data = e.detail;
-    console.log("handlechange");
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
@@ -363,8 +351,6 @@ class lessonDisplay {
     this.updateMeter();
     this.updateStatus();
     this.render();
-    // console.log("Loaded lesson modules:", Object.keys(this.modules));
-    // console.log("Current section requested:", this.curSection);
   }
 
   render() {
@@ -489,17 +475,12 @@ class lessonDisplay {
 
   updateMeter() {
     let value = 0;
-    console.log('compled lessons',this.completedLessons);
     for (let key in this.completedLessons) {
       if (this.completedLessons[key]) value++;
     }
-    // let progress = value/this.modules[this.curSection][0].interactive__size;
-    //this.progBar.style.transform = `scalex(${progress})`
     const section = this.modules[this.curSection];
-    const total = section[0].interactive__size || 1; // avoid divide-by-zero
+    const total = section[0].interactive__size || 1;
     const progress = value / total;
-    console.log('updateMeter()')
-    console.log(section,total,progress)
 
     this.progBar.style.transform = `scaleX(${progress})`;
   }
@@ -574,28 +555,3 @@ if (userObj) {
   const nav = new Navigation(".sidebar__container", false, userObj, false);
 }
 
-//Rene's work
-async function test() {
-  //intialize a URL that will be the difference between 'The Basics' and 'Networking'
-  const urlParams = new URLSearchParams(window.location.search);
-  const module = urlParams.get("module") || "The Basics";
-  // Fetch lessons JSON and initialize the selected module
-  await lessonManager.fetchLessonsInit(module);
-  //defauwlt souurce route is the basics
-  let apiRoute = "../../user/user.php";
-
-  //however if the user clicked on networking then process the new network api
-  if (module.toLowerCase() === "networking") {
-    apiRoute = "../../user/networkUser.php";
-  }
-  //no bash yet
-  try {
-    const res = await fetch(apiRoute);
-    const data = await res.json();
-    console.log("user api information");
-    // console.log(data);
-  } catch (e) {
-    console.error(e);
-  }
-}
-test();
