@@ -74,6 +74,8 @@ class LessonManager {
       this.completedLessons = data.currentModule.lessonStatus;
       console.log(this.currentSection);
       console.log("^^^^^^^^^^^");
+      console.log("DAYTA FROM INOF INIT");
+      console.log(data);
 
       await this.fetchLessonsInit(this.currentSection);
     } catch (error) {
@@ -487,6 +489,7 @@ class lessonDisplay {
 
   updateMeter() {
     let value = 0;
+    console.log('compled lessons',this.completedLessons);
     for (let key in this.completedLessons) {
       if (this.completedLessons[key]) value++;
     }
@@ -495,6 +498,8 @@ class lessonDisplay {
     const section = this.modules[this.curSection];
     const total = section[0].interactive__size || 1; // avoid divide-by-zero
     const progress = value / total;
+    console.log('updateMeter()')
+    console.log(section,total,progress)
 
     this.progBar.style.transform = `scaleX(${progress})`;
   }

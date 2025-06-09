@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Set the content type to JSON
 header('Content-Type: application/json');
 require_once "../../includes/database.inc.php";

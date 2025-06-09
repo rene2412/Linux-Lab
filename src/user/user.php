@@ -179,6 +179,17 @@ function sendAPI($api) : array {
     }
 }
 
+  if ($_SERVER["REQUEST_METHOD"] === "GET") {
+      // Get current module from database instead of hardcoding
+      $stmt = $pdo->prepare("SELECT current_module FROM user_progress WHERE user_id = ?");
+      $stmt->execute([$user_id]);
+      $dbCurrentModule = $stmt->fetchColumn() ?? "The Basics";
+      
+      $gigaAPI = sendAPI($dbCurrentModule);
+      echo json_encode($gigaAPI);
+      exit;
+  }
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $input = trim(file_get_contents('php://input'));
     if (!$input) {
@@ -187,6 +198,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
     } 
     elseif ($input === "The Basics") {
+        // UPDATE database with new module
+        $stmt = $pdo->prepare("UPDATE user_progress SET current_module = ? WHERE user_id = ?");
+        $stmt->execute(["The Basics", $user_id]);
+        
         //The main API
         $gigaAPI = sendAPI("The Basics");
         error_log(json_encode($gigaAPI)); 
@@ -194,6 +209,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         return;
     }
     elseif ($input === "Networking" ) {
+        // UPDATE database with new module
+        $stmt = $pdo->prepare("UPDATE user_progress SET current_module = ? WHERE user_id = ?");
+        $stmt->execute(["Networking", $user_id]);
+        
         $gigaAPI = sendAPI("Networking");
         error_log(json_encode($gigaAPI)); 
         echo json_encode($gigaAPI);

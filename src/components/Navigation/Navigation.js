@@ -43,7 +43,7 @@ export default class Navigation {
     },
     {
       title: "Networking",
-      link: "../../pages/lesson_page/lesson.html?module=networking",
+      link: "../../pages/lesson_page/lesson.html",
       // the tag is the name in sql of module
       tag: "Networking",
     },
@@ -104,6 +104,9 @@ export default class Navigation {
     }
     document.addEventListener('click',this.handleDocumentClick);
     this.modulesButton.addEventListener("click", this.handleModulesButtonClick);
+    
+    // Add event listeners for module switching
+    document.addEventListener('click', this.handleModuleLinkClick);
   }
 
   handleDocumentClick = (e)=>{
@@ -153,6 +156,35 @@ export default class Navigation {
     else this.openModulesDropdown();
   };
 
+  handleModuleLinkClick = async (e) => {
+    // Check if clicked element is a module link
+    if (e.target.closest('.module-link')) {
+      e.preventDefault();
+      const moduleLink = e.target.closest('.module-link');
+      const moduleName = moduleLink.dataset.module;
+      
+      try {
+        // Send POST request to switch module
+        const response = await fetch('../../user/user.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: moduleName
+        });
+        
+        if (response.ok) {
+          // Close the modules dropdown
+          this.closeModulesDropdown();
+          // Redirect to lesson page after successful module switch
+          window.location.href = '../../pages/lesson_page/lesson.html';
+        } else {
+          console.error('Failed to switch module');
+        }
+      } catch (error) {
+        console.error('Error switching module:', error);
+      }
+    }
+  };
+
   closeSidebar = () => {
     this.sidebar.classList.remove("sidebar--open");
     this.sidebar.classList.add("sidebar--close");
@@ -189,7 +221,7 @@ export default class Navigation {
         cssClass = "link--active";
       }
       return `
-                <li class="navbar__link ${cssClass}"><a href="${module.link}">${module.title}</a></li>
+                <li class="navbar__link ${cssClass}"><a href="#" class="module-link" data-module="${module.tag}">${module.title}</a></li>
                 `;
     });
 
