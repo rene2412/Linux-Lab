@@ -104,8 +104,13 @@
 .card__button{
     width: 100%;
     margin-top: var(--spce-med);
+    padding: 0;
 }
 
+.card__button a{
+    display: inline-block;
+    padding: 10px 0 10px 0;
+}
 
 .dashboard__card--progress{
     min-height: 316px;
