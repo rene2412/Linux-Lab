@@ -152,7 +152,7 @@ export default class Navigation {
           // Close sidebar
           this.closeSidebar();
           // Redirect to lesson page after successful module switch
-          window.location.href = '../../pages/lesson_page/lesson.html';
+          window.location.href = `../../pages/lesson_page/lesson.html?module=${encodeURIComponent(moduleName)}`;
         } else {
           console.error('Failed to switch module');
         }
@@ -182,7 +182,7 @@ export default class Navigation {
           cssClass = "link--active";
         } else if (!this.moduleParam && elem.moduleTag === "The Basics") {
           // Default to The Basics when no module param
-          cssClass = "link--active";
+          // cssClass = "link--active";
         }
       } else if (this.path === elem.tag) {
         cssClass = "link--active";
@@ -218,7 +218,7 @@ export default class Navigation {
 
     //User Dropdown elements
     let userDropdownElem = (`
-        <button class="user-dropdown--profile">Profile</button>
+        <!-- <button class="user-dropdown--profile">Profile</button> Profile functionality not implemented -->
         <button class="user-dropdown--logout"><a href="../../user/logout.php" >Logout</a></button>
     `);
 
@@ -245,9 +245,9 @@ export default class Navigation {
                 <div class="sidebar__bottom--user__container">
                 ${sidebarUser}
                 </div>
-                <button type="button sidebar__button--settings">
+                <!-- <button type="button sidebar__button--settings">
                     <img class="sidebar__img--settings" src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
-                </button>
+                </button> Settings functionality not implemented -->
             </div>
         `;
     return sidebar;
