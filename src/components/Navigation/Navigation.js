@@ -14,11 +14,27 @@ export default class Navigation {
       tag: "landing_page.html",
       svg: "../../pages/assets/SVGs/Home.svg",
     },
+    // {
+    //   title: "Terminal",
+    //   link: "../../pages/lesson_page/lesson.html",
+    //   tag: "lesson.html",
+    //   svg: "../../pages/assets/SVGs/Console.svg",
+    // },
     {
-      title: "Terminal",
+      title: "The Basics",
       link: "../../pages/lesson_page/lesson.html",
       tag: "lesson.html",
       svg: "../../pages/assets/SVGs/Console.svg",
+      isModule: true,
+      moduleTag: "The Basics",
+    },
+    {
+      title: "Networking",
+      link: "../../pages/lesson_page/lesson.html",
+      tag: "lesson.html",
+      svg: "../../pages/assets/SVGs/network.svg",
+      isModule: true,
+      moduleTag: "Networking",
     },
     {
       title: "About",
@@ -34,24 +50,9 @@ export default class Navigation {
     },
   ];
 
-  MODULES = [
-    {
-      title: "The Basics",
-      link: "../../pages/lesson_page/lesson.html",
-      // the tag is the name in sql of module
-      tag: "The Basics",
-    },
-    {
-      title: "Networking",
-      link: "../../pages/lesson_page/lesson.html",
-      // the tag is the name in sql of module
-      tag: "Networking",
-    },
-  ];
   path = "";
 
   userDropdownIsOpen=false;
-  modulesDropdownIsOpen=false;
 
   // need to set this up
   isLoggedIn = false;
@@ -93,8 +94,6 @@ export default class Navigation {
       this.userButton = document.querySelector(".sidebar__button--user--auth");
       this.userDropdown = document.querySelector('.sidebar__bottom__dropdown')
     }
-    this.modulesButton = document.querySelector(".modules__button");
-    this.modulesDropdown = document.querySelector('.modules__dropdown');
   }
   setListeners() {
     this.sidebarBtnOpen.addEventListener("click", this.openSidebar);
@@ -103,7 +102,6 @@ export default class Navigation {
       this.userButton.addEventListener("click", this.handleUserButtonClick);
     }
     document.addEventListener('click',this.handleDocumentClick);
-    this.modulesButton.addEventListener("click", this.handleModulesButtonClick);
     
     // Add event listeners for module switching
     document.addEventListener('click', this.handleModuleLinkClick);
@@ -112,9 +110,6 @@ export default class Navigation {
   handleDocumentClick = (e)=>{
     if(this.userDropdownIsOpen){
       this.closeUserDropdown();
-    }
-    if(this.modulesDropdownIsOpen){
-      this.closeModulesDropdown();
     }
     if(!this.sidebar.contains(e.target) && this.sidebar.classList.contains('sidebar--open')){
       this.closeSidebar();
@@ -138,24 +133,6 @@ export default class Navigation {
     else this.openUserDropdown();
   };
 
-  openModulesDropdown(){
-    this.modulesDropdown.classList.remove('hidden');
-    this.modulesButton.classList.add('open');
-    this.modulesDropdownIsOpen = true;
-  }
-
-  closeModulesDropdown(){
-    this.modulesDropdown.classList.add('hidden');
-    this.modulesButton.classList.remove('open');
-    this.modulesDropdownIsOpen = false;
-  }
-
-  handleModulesButtonClick = (e) => {
-    e.stopPropagation()
-    if(this.modulesDropdownIsOpen){this.closeModulesDropdown()}
-    else this.openModulesDropdown();
-  };
-
   handleModuleLinkClick = async (e) => {
     // Check if clicked element is a module link
     if (e.target.closest('.module-link')) {
@@ -172,8 +149,8 @@ export default class Navigation {
         });
         
         if (response.ok) {
-          // Close the modules dropdown
-          this.closeModulesDropdown();
+          // Close sidebar
+          this.closeSidebar();
           // Redirect to lesson page after successful module switch
           window.location.href = '../../pages/lesson_page/lesson.html';
         } else {
@@ -199,30 +176,32 @@ export default class Navigation {
   createSidebarTemplate() {
     const listElem = this.LINKS.map((elem) => {
       let cssClass = "";
-      if (this.path === elem.tag) {
+      if (elem.isModule) {
+        // Check URL param for module matching
+        if (this.moduleParam && elem.moduleTag.toLowerCase() === this.moduleParam.toLowerCase()) {
+          cssClass = "link--active";
+        } else if (!this.moduleParam && elem.moduleTag === "The Basics") {
+          // Default to The Basics when no module param
+          cssClass = "link--active";
+        }
+      } else if (this.path === elem.tag) {
         cssClass = "link--active";
       }
+      
       if(elem.title ==='Dashboard' && !this.isLoggedIn)return '';
       
       const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, '-')}`;
 
-      return `
+      // Handle module links differently
+      if (elem.isModule) {
+        return `
+                <li class="navbar__link ${cssClass} ${itemClass}"><a href="#" class="module-link" data-module="${elem.moduleTag}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
+                `;
+      } else {
+        return `
                 <li class="navbar__link ${cssClass} ${itemClass}"><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
                 `;
-    });
-
-    const modulesListElem = this.MODULES.map((module) => {
-      let cssClass = "";
-      // Check URL param for module matching
-      if (this.moduleParam && module.tag.toLowerCase() === this.moduleParam.toLowerCase()) {
-        cssClass = "link--active";
-      } else if (!this.moduleParam && module.tag === "The Basics") {
-        // Default to The Basics when no module param
-        cssClass = "link--active";
       }
-      return `
-                <li class="navbar__link ${cssClass}"><a href="#" class="module-link" data-module="${module.tag}">${module.title}</a></li>
-                `;
     });
 
     let cssClass = "";
@@ -256,14 +235,6 @@ export default class Navigation {
                 <nav class="sidebar__links">
                     <ul>
                     ${listElem.join("")}
-                    <li class="navbar__link navbar__link--modules">
-                        <button class="modules__button">Modules <img src="../../pages/assets/SVGs/chevron-down.svg"></img></button>
-                        <div class="modules__dropdown hidden">
-                            <ul>
-                            ${modulesListElem.join("")}
-                            </ul>
-                        </div>
-                    </li>
                     </ul>
                 </nav>
             </div>
