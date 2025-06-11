@@ -130,56 +130,25 @@
 .nav__link--terminal{
     order: 1;
 }
-.navbar__link--modules{
+.nav__link--the-basics{
     order: 2;
 }
-.nav__link--home{
+.nav__link--networking{
     order: 3;
 }
-.nav__link--about{
+.nav__link--networking img{
+    width: 36px;
+}
+.nav__link--home{
     order: 4;
 }
-.nav__link--contact{
+.nav__link--about{
     order: 5;
 }
-
-/* sidebar modulse */
-
-
-.navbar__link--modules{
-    display:flex;
-    flex-direction: column;
-    align-items: start;
-    color: var(--text-color-main);
+.nav__link--contact{
+    order: 6;
 }
 
-
-.modules__button{
-    background-color: transparent;
-    border:none;
-    padding: var(--spce-xsm);
-    color: var(--text-color-main);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modules__button img {
-    transition: transform 0.2s ease-out
-}
-
-.modules__button.open img {
-    transform: rotate(-180deg);
-
-}
-
-.modules__dropdown{
-    background-color: var(--color-overlay);
-    width: 100%;
-    border-radius: var(--radius-med);
-
-}
 /* LOGIN BUTTON SIDEBAR */
 
 
@@ -223,6 +192,9 @@
 .user-dropdown--profile.user-dropdown--profile{
     background-color: var(--color-overlay);
 }
+.user-dropdown--logout.user-dropdown--logout{
+    background-color: var(--color-overlay);
+}
 
 .sidebar__bottom__dropdown >*:hover{
     background-color: rgba(255, 255, 255, 0.19);
@@ -236,8 +208,14 @@
 .sidebar__button--user:hover{
     transform: scale(1.1);
 }
+.sidebar__bottom--user__container{
+    width: 100%;
+}
+
 
 .sidebar__button--user--auth{
+    width: 100%;
+    text-align: left;
     color: var(--text-color-main);
     font-size: var(--text-size-xl);
     transition: transform 0.1s ease;
@@ -303,10 +281,6 @@
     transform: scale(0.9);
 }
 
-.navbar__link.navbar__link--modules:hover {
-    transform: scale(1.05);
-}
-
 .navbar--link--desktop:hover::before {
    position: absolute;
    left: calc(var(--spce-sm)*-1);
@@ -321,15 +295,6 @@
    content:">"; 
    text-align: center;
    color: limegreen;
-}
-
-
-.navbar__link.navbar__link--modules:hover::before {
-   position: absolute;
-   left: calc(var(--spce-sm)*-1);
-   content:""; 
-   text-align: center;
-   color: var(--color-inactive);
 }
 
 .svg{

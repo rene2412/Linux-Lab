@@ -107,7 +107,7 @@ class CardContinueLearning{
                 <div class="card__content">
                     <a href="../lesson_page/lesson.html" class="card__link">
                         <p class="card__text">${this.data.name}</p>
-                        <p class="card__text">Lesson:${this.data.lessonName}</p>
+                        <p class="card__text">Lesson: ${this.data.lessonName}</p>
                     </a>
                     <button class="styled-button card__button"><a href="../lesson_page/lesson.html">continue</a></button>
                 </div>
