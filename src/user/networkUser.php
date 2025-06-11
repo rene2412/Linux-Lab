@@ -19,6 +19,43 @@ $lessonName = "Networking";
 $current_section = "Intro To Networking"; // Default to first section
 $current_module = "Networking"; // Default module
 
+if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
+    //The file will return the user info in JSON
+    $guestlessonID = $_SESSION["guestLessonId"];
+    error_log(json_encode("Guest Lesson ID: $guestlessonID"));
+        //The main API
+        $response = [
+            "username" => "Guest",
+            "isLoggedIn" => false,
+            "currentModule" => [
+                "name" => $current_module,
+                "currentSection" => $current_section,
+                "lessonId" => $guestlessonID,
+                "lessonName" => $lessonName,
+                "lessonStatus" => false
+                ],
+            "modules" => [
+                [
+                    "name" => "The Basics",
+                    "completed" => 0,
+                    "total" => 65
+                ],
+                [
+                    "name" => "Networking",
+                    "completed" => 0,
+                    "total" => 21
+                ],
+                [
+                    "name" => "Bash Scripting",
+                    "completed" => 0,
+                    "total" => 0 
+                    ]
+                ]
+            ];
+        echo json_encode($response);
+        error_log(json_encode($response)); 
+        return;
+}
 if ($user_id) {
     // Fetch 'Networking' progress if user is logged in
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
