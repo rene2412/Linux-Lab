@@ -16,6 +16,88 @@ $lessonName = "The Command Line";
 $current_section = "Prelude"; // Default to first section
 $current_module = "The Basics"; // Default module
 
+if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
+    //The file will return the user info in JSON
+    $guestlessonID = $_SESSION["guestLessonId"];
+    error_log("REQUEST METHOD: " . $_SERVER["REQUEST_METHOD"]);
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $input = trim(file_get_contents('php://input'));
+        $_SESSION["input"] = $input;
+        error_log("Input: $input");
+        if ($input === "The Basics") {
+            $response = [
+                "username" => "Guest",
+                "isLoggedIn" => false,
+                "currentModule" => [
+                    "name" => $current_module,
+                    "currentSection" => $current_section,
+                    "lessonId" => $guestlessonID,
+                    "lessonName" => $lessonName,
+                    "lessonStatus" => false
+                    ],
+                "modules" => [
+                    [
+                        "name" => "The Basics",
+                        "completed" => 0,
+                        "total" => 65
+                    ],
+                    [
+                        "name" => "Networking",
+                        "completed" => 0,
+                        "total" => 21
+                    ],
+                    [
+                        "name" => "Bash Scripting",
+                        "completed" => 0,
+                        "total" => 0 
+                        ]
+                    ]
+                ];
+            echo json_encode($response);
+            error_log(json_encode($response)); 
+            exit;
+    }
+    elseif ($input === "Networking") {
+        $current_module = "Networking";
+        $lessonName = "Networking";
+        $current_section = "Intro To Networking"; // Default to first section
+    //The main API
+        $response = [
+            "username" => "Guest",
+            "isLoggedIn" => false,
+            "currentModule" => [
+                "name" => $current_module,
+                "currentSection" => $current_section,
+                "lessonId" => $guestlessonID,
+                "lessonName" => $lessonName,
+                "lessonStatus" => false
+                ],
+            "modules" => [
+                [
+                    "name" => "The Basics",
+                    "completed" => 0,
+                    "total" => 65
+                ],
+                [
+                    "name" => "Networking",
+                    "completed" => 0,
+                    "total" => 21
+                ],
+                [
+                    "name" => "Bash Scripting",
+                    "completed" => 0,
+                    "total" => 0 
+                    ]
+                ]
+            ];
+        echo json_encode($response);
+        error_log(json_encode($response)); 
+        exit;
+        }
+        else exit;
+    }
+}
+
 if ($user_id) {
     // Fetch progress if user is logged in
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
@@ -56,7 +138,6 @@ if ($user_id) {
     $sql = $pdo->prepare("SELECT is_logged_in FROM users WHERE id = ?");
     $sql->execute([$user_id]);
     $logged = (bool) $sql->fetchColumn();
-
 }
 
 // Section Mapping
@@ -140,9 +221,8 @@ foreach ($everyLesson as $lesson) {
 function sendAPI($api) : array {
     global $username, $logged, $current_section, $lessonId, $lessonName, $lessonStatus;
     global $lessons_completed, $networking_lessons_completed;
-
-    if ($api === "The Basics") {
     //The file will return the user info in JSON
+    if ($api === "The Basics") {
     return [
         "username" => $username,
         "isLoggedIn" => $logged,
@@ -168,18 +248,32 @@ function sendAPI($api) : array {
             "name" => "Bash Scripting",
             "completed" => 0,
             "total" => 0 
+                ]
             ]
-        ]
-    ];
-}
+        ];
+    }
     if ($api === "Networking") {
         require_once "networkUser.php";
         $network = $_SESSION['networkAPI'];
         return $network;
     }
-}
-
+}   
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
+        $guestInput = $_SESSION['input'];
+        error_log("Guest Input: $guestInput");
+    if ($user_id === null) {
+        if ($guestInput === "The Basics") {
+            require_once "guest.php";
+            $basics = $_SESSION['guestBasics'];
+            exit;
+      }
+    elseif ($guestInput === "Networking") {
+            require_once "networkGuest.php";
+            $guestNetwork = $_SESSION['guestNetwork'];
+            exit;
+      }
+    }
+    else {
       // Get current module from database instead of hardcoding
       $stmt = $pdo->prepare("SELECT current_module FROM user_progress WHERE user_id = ?");
       $stmt->execute([$user_id]);
@@ -189,7 +283,7 @@ function sendAPI($api) : array {
       echo json_encode($gigaAPI);
       exit;
   }
-
+}
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $input = trim(file_get_contents('php://input'));
     if (!$input) {
@@ -221,5 +315,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     else {
         error_log(json_encode($gigaAPI)); 
         echo json_encode(["Error:  => Invalid Post Input"]);
-    }
-} 
+        }
+    } 

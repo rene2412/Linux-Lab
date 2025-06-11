@@ -1,14 +1,14 @@
 <?php
-session_start();
 require_once "user.php";
 
-$guestlessonID = $_SESSION["guestLessonId"];
-$lessonName = "The Command Line";
-$current_section = "Prelude"; // Default to first section
-$current_module = "The Basics"; // Default module
+$guestlessonID = $_SESSION["guestLessonId"] ?? 1;
+$lessonName = "Networking";
+$current_section = "Intro To Networking"; // Default to first section
+$current_module = "Networking"; // Default module
 
+// The file will return the user info in JSON
 $response = [
-    "username" => "Guest",
+    "username" => $username,
     "isLoggedIn" => false,
     "currentModule" => [
         "name" => $current_module,
@@ -37,5 +37,5 @@ $response = [
     ];
 echo json_encode($response);
 error_log(json_encode($response));
-$_SESSION['guestBasics'] = $response; 
-return $_SESSION['guestBasics']; 
+$_SESSION['guestNetwork'] = $response;
+exit;

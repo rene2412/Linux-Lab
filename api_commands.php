@@ -1746,7 +1746,7 @@ return $current_lesson . "\n";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
    $lessonID = (int) trim($_POST['lessonId'] ?? '');
-    
+   $_SESSION['guestLessonId'] = $lessonID;
     
     // Improved argument parsing with quote handling
     preg_match_all('/"([^"]*)"|\'([^\']*)\'|(\S+)/', $command, $matches);
