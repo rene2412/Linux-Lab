@@ -23,7 +23,7 @@ if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $input = trim(file_get_contents('php://input'));
         $_SESSION["input"] = $input;
-        error_log("Input: $input");
+        error_log("INPUT: $input");
         if ($input === "The Basics") {
             $response = [
                 "username" => "Guest",
