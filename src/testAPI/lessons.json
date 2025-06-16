@@ -909,18 +909,13 @@
         {
             "id": 14,
             "parent": "Networking",
-            "section": "Checkpoint",
-            "title": "ldsajfals",
+            "section": "Transfering Data",
+            "title": "TCP/IP",
             "content_type": "article",
-            "questions": {
-                "A": "Option A",
-                "B": "Option B",
-                "C": "Option C",
-                "D": "Option D"
-            },
-            "content": "<p> this dfa<\/p><div class=\"question__container\"><\/div>",
-            "answer": "A",
+            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of <b>protocals</b> and rules that defines how data is sent, received, and routed between devices.</p><li></b>TCP</b> - works by transmitting data like a text message, emails, web pages, and more into tiny packets that get purposley gget broken down," ,
+            "answer": "",
             "completed": false
+    
         }
     ],
     "basics": {
