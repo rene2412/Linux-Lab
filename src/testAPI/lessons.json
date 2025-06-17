@@ -912,9 +912,30 @@
             "section": "Transfering Data",
             "title": "The 3 Way Handshake <img src='../../../images/handshake.svg' style='width: 45px; height: 55px; position: relative; top: 15px;'>",
             "content_type": "article",
-            "content": "",
+            "content": "<p>We know through TCP/IP, data is sent via packets. These packets hold data in bytes—a collection of binary numbers (1s and 0s). Before any data is transferred, TCP uses a process called the 3-Way Handshake to establish a reliable connection between two devices.</p><p>The 3 steps of this handshake are:</p><ul><li><strong>SYN:</strong> The client sends a synchronize (SYN) packet to the server to start a connection.</li><li><strong>SYN-ACK:</strong> The server responds with a synchronize-acknowledgment (SYN-ACK) to confirm it received the request and is ready to connect.</li><li><strong>ACK:</strong> The client replies with an acknowledgment (ACK), finalizing the connection setup.</li></ul><p>Once these steps are complete, both devices are ready to exchange data securely and reliably.</p>",
             "answer": "",
             "completed": false
+        },
+        {
+            "id": 15,
+            "parent": "Networking",
+            "section": "Transfering Data",
+            "title": "ip route",
+            "content_type": "interactive",
+            "content": "<p>The <b>ip route</b> command shows your computer’s routing table. It decides where to send network traffic, describes how the default gateway works (the next stop for outgoing data), and which network interfaces are used to reach different IP ranges.</p><p>In other words, think of ip route as your Google Maps directions (the planned route).</p> Let's take a look at the commands output: <code>ip route</code>",
+            "answer": "",
+            "completed": false
+        }, 
+        {
+                "id": 16,
+                "parent": "Networking",
+                "section": "Transfering Data",
+                "title": "traceroute",
+                "content_type": "article",
+                "content": "The <b>traceroute</b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for the <b>traceroute</b> is: <code>traceroute example_website.com</code> Lets try out an example on the terminal: <code>traceroute google.com</code> Breakdown of the output: <pre><ul><li><b>Hop Number:</b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.</li><li><b>IP Address:</b> The IP of the router or device at that hop (e.g. 192.168.1.1).</li><li><b>Time:</b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.</li><li><b>*:</b> A star means no response was received from that hop (could be blocked or timed out).</li></ul><p>This helps you spot slow or failing routes in a network.</p>",
+                "answer": "",
+                "answer": "",
+                "completed": false
         }
     ],
     "basics": {
