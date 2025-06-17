@@ -9,15 +9,14 @@ class LessonManager {
   lesson = 1;
   currentSection = "The Basics";
   sectionSize = 0;
-  user = 0;
   lessons = [];
   completedLessons = {};
+  isLoggedIn = false;
   constructor() {
     this.lesson = 1;
     this.currentSection = "The Basics";
     // may change this later to identify user
     this.setupListeners();
-    this.user = 0;
     this.fetchUserInfoInit();
   }
 
@@ -28,8 +27,6 @@ class LessonManager {
     document.addEventListener("command-success", this.fetchUserInfo);
   }
   handleLessonCompleted = async (e) => {
-    console.log("handle lesson completed");
-    console.log(e.detail);
     try {
       const response = await fetch("../../../api_commands.php", {
         method: "POST",
@@ -44,8 +41,6 @@ class LessonManager {
         throw new Error(`response error`, response.status);
       }
       const data = await response.json();
-      console.log("handle completed");
-      console.log(data);
       this.fetchUserInfo();
       if (data.commandSuccess) {
         const successEvent = new CustomEvent("command-success", {
@@ -57,7 +52,7 @@ class LessonManager {
         document.dispatchEvent(successEvent);
       }
     } catch (error) {
-      console.log(`error completing ${error}`);
+      console.error(`error completing ${error}`);
     }
   };
 
@@ -72,6 +67,7 @@ class LessonManager {
       this.lesson = data.currentModule.lessonId || 1;
       this.currentSection = data.currentModule.name;
       this.completedLessons = data.currentModule.lessonStatus;
+      this.isLoggedIn = data.isLoggedIn;
 
       await this.fetchLessonsInit(this.currentSection);
     } catch (error) {
@@ -90,6 +86,7 @@ class LessonManager {
       this.lesson = data.currentModule.lessonId;
       this.currentSection = data.currentModule.name;
       this.completedLessons = data.currentModule.lessonStatus;
+      this.isLoggedIn = data.isLoggedIn;
       this.broadcastUpdate();
     } catch (error) {
       console.error(error);
@@ -136,6 +133,7 @@ class LessonManager {
         user: {
           currentLessonId: this.lesson,
           currentSection: this.currentSection,
+          isLoggedIn:this.isLoggedIn,
         },
         lessons: this.lessons,
         lessonsCompleted: this.completedLessons,
@@ -153,7 +151,6 @@ class LessonManager {
       // if we are at last lesson or beyond lesson scope
       if (lessonId >= this.sectionSize) {
         this.lesson = this.sectionSize;
-        console.log(`cant go over section size`);
       }
     }
 
@@ -162,7 +159,6 @@ class LessonManager {
       this.lesson--;
       if (lessonId <= 1) {
         this.lesson = 1;
-        console.log(`cant go under section size`);
       }
     }
     if (action === "change") {
@@ -202,7 +198,7 @@ class LessonNav {
 
   mount() {
     this.container.innerHTML = `
-      <button class="lesson__nav__button--open"><span>loading...</span></button>
+      <button class="lesson__nav__button--open"><span>Loading...</span></button>
       <div class="lesson__nav__dropdown hidden">
           <ul class="lesson__nav__links">
           </ul>
@@ -261,6 +257,7 @@ class LessonNav {
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
     const lessonStatus = e.detail.lessonsCompleted;
+    const isLoggedIn = e.detail.user.isLoggedIn;
     const status = "";
     // get subtitle and lesson name
     const openButtonText = `${lessons[section][lesson].section} - ${lessons[section][lesson].title}`;
@@ -270,8 +267,8 @@ class LessonNav {
       .map((lessonData) => {
         let statusImgSrc = "#";
         let statusImgClass = " no-status ";
-        if (lessonData.content_type != "article") {
-          if (lessonStatus[lessonData.title] === true) {
+        if (lessonData.content_type != "article" && isLoggedIn === true) {
+          if (lessonStatus[lessonData.title] === true ) {
             statusImgSrc = "../assets/SVGs/check.svg";
             statusImgClass = " has-status ";
           } else {
@@ -316,6 +313,7 @@ class lessonDisplay {
   lessonsCompleted = {};
   sectionSize = 0;
   modules = {};
+  isLoggedIn = false;
 
   constructor(container, lessons = null) {
     this.container = document.querySelector(container);
@@ -333,6 +331,7 @@ class lessonDisplay {
 
   handleChange = (e) => {
     const data = e.detail;
+    this.isLoggedIn = data.user.isLoggedIn;
     this.curSection = data[`user`][`currentSection`];
     this.curLesson = data["user"]["currentLessonId"];
     this.modules = data["lessons"];
@@ -488,7 +487,7 @@ class lessonDisplay {
   updateStatus() {
     let title = this.modules[this.curSection][this.curLesson].title;
     if (
-      this.modules[this.curSection][this.curLesson].content_type === "article"
+      this.modules[this.curSection][this.curLesson].content_type === "article" || !this.isLoggedIn
     ) {
       this.statusCheck.classList.add(`hidden`);
       this.statusCross.classList.add(`hidden`);
