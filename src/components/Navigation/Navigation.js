@@ -262,6 +262,12 @@ export default class Navigation {
       }
       
       const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, '-')}`;
+      if(elem.moduleTag){
+        return`
+                <li class="navbar__link navbar--link--desktop ${cssClass} ${itemClass}"><a href="#" class="module-link" data-module="${elem.moduleTag}">${elem.title}</a></li>
+
+        `;
+      }
 
       return `
                 <li class="navbar__link navbar--link--desktop ${cssClass} ${itemClass}"><a href="${elem.link}">${elem.title}</a></li>
