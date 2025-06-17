@@ -900,19 +900,19 @@
             "id": 13,
             "parent": "Networking",
             "section": "Transfering Data",
-            "title": "TCP\/IP",
+            "title": "TCP/IP",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>tcp\/ip<\/b> -- a set of <b>protocals<\/b> and rules that defines how data is sent, received, and routed between devices.<\/p><li><\/b>TCP<\/b> - works by transmitting data like a text message, emails, web pages, and more into tiny packets that get purposley gget broken down,",
+            "content": "Today, the internet is powered by a model called <b>TCP/IP</b> — a set of <b>protocols</b> and rules that defines how data is sent, received, and routed between devices.<br><br><ul><li><b>TCP</b> (Transmission Control Protocol) works by transmitting data like text messages, emails, and web pages into tiny packets that are purposefully broken down. These packets are then sent across the network and reassembled in the correct order on the receiving end. TCP ensures reliability, checking for errors and guaranteeing that packets arrive intact and in sequence.</li><br><li><b>IP</b> (Internet Protocol) is responsible for addressing and routing these packets. Every device on a network is assigned a unique IP address, and IP ensures that packets are sent to the correct destination. However, IP does not guarantee that the packets arrive or are in order — that's TCP's job.</li></ul><br>The combination of TCP and IP allows for robust and efficient communication across the vast infrastructure of the internet. This layered approach makes it possible for different networks and devices to talk to each other regardless of hardware or software differences.<img src='../../../images/tcp_ip.webp' width='500'>",
             "answer": "",
             "completed": false
-        },
+        },        
         {
             "id": 14,
             "parent": "Networking",
             "section": "Transfering Data",
-            "title": "TCP/IP",
+            "title": "The 3 Way Handshake <img src='../../../images/handshake.svg' style='width: 45px; height: 55px; position: relative; top: 15px;'>",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>tcp/ip</b> -- a set of <b>protocals</b> and rules that defines how data is sent, received, and routed between devices.</p><li></b>TCP</b> - works by transmitting data like a text message, emails, web pages, and more into tiny packets that get purposley gget broken down," ,
+            "content": "",
             "answer": "",
             "completed": false
     
