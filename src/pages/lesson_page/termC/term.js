@@ -3,7 +3,7 @@ export default class VanillaTerminal {
     // Default options
     this.options = {
       apiEndpoint: '../api_commands.php',
-      username: 'example_user',
+      username: 'guest_user',
       hostname: 'LinuxLab',
       ...options
     };
