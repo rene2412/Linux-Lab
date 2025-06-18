@@ -749,7 +749,7 @@
     ],
     "Networking": [
         {
-            "section__size": 20,
+            "section__size": 25,
             "section__completed": false,
             "interactive__size": 15
         },
@@ -998,6 +998,26 @@
                 },
                 "content": "<p>In the output of 'ip route', what does the 'metric' value represent?</p><div class=\"question__container\"></div>",
                 "answer": "C",
+                "completed": false
+            },
+            {
+                "id": 21,
+                "parent": "Networking",
+                "section": "The Web",
+                "title": "Ports",
+                "content_type": "article",
+                "content": "<p>When we use a radio and want to find a rock music station, we tune to a specific frequency — like 104.7 MHz. That frequency tells the radio which station to <b>listen</b> to. Once the connection is made, we receive the output resulting in rock music output.</p><p>The internet works in a similar way. Because the internet handles many types of traffic (web browsing, email, file sharing, streaming, etc.), it uses <b>ports</b> to organize that traffic. Each port represents a specific type of service.</p><p>For example:</p><ul><li><b>Port 80</b> – HTTP (websites using plain text)</li><li><b>Port 443</b> – HTTPS (secure websites)</li><li><b>Port 25</b> – SMTP (sending email)</li><li><b>Port 53</b> – DNS (resolving domain names)</li></ul><p>When your computer connects to a website, it doesn’t just connect to an IP address — it also connects to a <b>port</b> on that address. This way, the server knows what kind of service you’re asking for.</p><p>Port numbers range from 0 to 65535, but most common services use ports below 1024, known as <b>well-known ports</b>.</p>",
+                "answer": "",
+                "completed": false
+            },
+            {
+                "id": 22,
+                "parent": "Networking",
+                "section": "The Web",
+                "title": "ss",
+                "content_type": "interactive",
+                "content": "The <b>traceroute</b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute</b> is: <code>traceroute example_website.com</code> Lets try out an example on the terminal: <code>traceroute google.com</code> Breakdown of the output: <pre><ul><li><b>Hop Number:</b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.</li><li><b>IP Address:</b> The IP of the router or device at that hop (e.g. 192.168.1.1).</li><li><b>Time:</b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.</li><li><b>*:</b> A star means no response was received from that hop (could be blocked or timed out).</li></ul><p>This helps you spot slow or failing routes in a network.</p>",
+                "answer": "",
                 "completed": false
             }
     ],
