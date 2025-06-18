@@ -22,7 +22,7 @@ $current_module = "The Basics"; // Default module
 
 if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
     //The file will return the user info in JSON
-    $guestlessonID = $_SESSION["guestLessonId"];
+    $guestlessonID = $_SESSION["guestLessonId"] ?? 1;
     error_log("REQUEST METHOD: " . $_SERVER["REQUEST_METHOD"]);
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $input = trim(file_get_contents('php://input'));
@@ -263,7 +263,7 @@ function sendAPI($api) : array {
     }
 }   
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
-        $guestInput = $_SESSION['input'];
+        $guestInput = $_SESSION['input'] ?? "The Basics";
         error_log("Guest Input: $guestInput");
     if ($user_id === null) {
         if ($guestInput === "The Basics") {
