@@ -1,5 +1,5 @@
 <?php 
-global $ping, $ip, $route, $traceroute, $nslookup, $dig, $host, $curl, $curl_api, $wget, $index;
+global $ping, $ip, $route, $traceroute, $nslookup, $dig, $host, $curl, $curl_api, $wget, $index, $ip_route;
 $ping = "PING google.com (2607:f8b0:4005:812::200e) 56 data bytes  
 64 bytes from nuq04s45-in-x0e.1e100.net (2607:f8b0:4005:812::200e): icmp_seq=1 ttl=250 time=139 ms
 64 bytes from nuq04s45-in-x0e.1e100.net (2607:f8b0:4005:812::200e): icmp_seq=2 ttl=250 time=161 ms
@@ -15,6 +15,9 @@ $ping = "PING google.com (2607:f8b0:4005:812::200e) 56 data bytes
 10 packets transmitted, 10 received, 0% packet loss, time 9013ms
 rtt min/avg/max/mdev = 44.763/98.985/249.913/62.369 ms";
 
+$ip_route = 
+"default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.217 metric 600
+192.168.1.0/24 dev wlp3s0 proto kernel scope link src 192.168.1.217 metric 600";
 $ifconfig = 
     "enp1s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         ether 84:47:09:35:83:0e  txqueuelen 1000  (Ethernet)
