@@ -749,7 +749,7 @@
     ],
     "Networking": [
         {
-            "section__size": 15,
+            "section__size": 20,
             "section__completed": false,
             "interactive__size": 15
         },
@@ -883,7 +883,7 @@
         {
             "id": 12,
             "parent": "Networking",
-            "section": "Checkpoint - The Internet, IP addresses, and Connections",
+            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
             "title": "Knowledge Check #4",
             "content_type": "multichoice",
             "questions": {
@@ -912,7 +912,7 @@
             "section": "Transfering Data",
             "title": "The 3 Way Handshake <img src='../../../images/handshake.svg' style='width: 45px; height: 55px; position: relative; top: 15px;'>",
             "content_type": "article",
-            "content": "<p>We know through TCP/IP, data is sent via packets. These packets hold data in bytes—a collection of binary numbers (1s and 0s). Before any data is transferred, TCP uses a process called the 3-Way Handshake to establish a reliable connection between two devices.</p><p>The 3 steps of this handshake are:</p><ul><li><strong>SYN:</strong> The client sends a synchronize (SYN) packet to the server to start a connection.</li><li><strong>SYN-ACK:</strong> The server responds with a synchronize-acknowledgment (SYN-ACK) to confirm it received the request and is ready to connect.</li><li><strong>ACK:</strong> The client replies with an acknowledgment (ACK), finalizing the connection setup.</li></ul><p>Once these steps are complete, both devices are ready to exchange data securely and reliably.</p>",
+            "content": "<p>We know through TCP/IP, data is sent via packets. These packets hold data in bytes—a collection of binary numbers (1s and 0s). Before any data is transferred, TCP uses a process called the 3-Way Handshake to establish a reliable connection between two devices.</p><p>The 3 steps of this handshake are:</p><ul><li><strong>SYN:</strong> The client sends a synchronize (SYN) packet to the server to start a connection.</li><li><strong>SYN-ACK:</strong> The server responds with a synchronize-acknowledgment (SYN-ACK) to confirm it received the request and is ready to connect.</li><li><strong>ACK:</strong> The client replies with an acknowledgment (ACK), finalizing the connection setup.</li></ul><p>Once these steps are complete, both devices are ready to exchange data securely and reliably.</p> <img src='../../../images/tcp_handshake.jpeg' width='550' height='450'>",
             "answer": "",
             "completed": false
         },
@@ -922,21 +922,84 @@
             "section": "Transfering Data",
             "title": "ip route",
             "content_type": "interactive",
-            "content": "<p>The <b>ip route</b> command shows your computer’s routing table. It decides where to send network traffic, describes how the default gateway works (the next stop for outgoing data), and which network interfaces are used to reach different IP ranges.</p><p>In other words, think of ip route as your Google Maps directions (the planned route).</p> Let's take a look at the commands output: <code>ip route</code>",
+            "content": "<p>The <b>ip route</b> command shows your computer’s routing table. It decides where to send network traffic, describes how the default gateway works (the next stop for outgoing data), and which network interfaces are used to reach different IP ranges.</p><p>In other words, think of <b>ip route</b> as your Google Maps directions (the planned route).</p><p>Lets try it on the terminal by running this command: <code>ip route</code> Breakdown: </p><pre><code>default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.217 metric 600\n192.168.1.0/24 dev wlp3s0 proto kernel scope link src 192.168.1.217 metric 600</code></pre><ul><li><b>default via 192.168.1.1</b>: This is the default route — if no other route matches, traffic goes to your router (192.168.1.1).</li><li><b>dev wlp3s0</b>: Indicates the wireless network interface being used.</li><li><b>proto dhcp</b>: This route was configured by DHCP.</li><li><b>src 192.168.1.217</b>: The system’s IP address on that interface.</li><li><b>metric 600</b>: A priority value — lower values are preferred.</li><li><b>192.168.1.0/24</b>: A route for all devices on your local network (192.168.1.x), which are reachable directly without needing a gateway.</li></ul>",
             "answer": "",
             "completed": false
         }, 
         {
-                "id": 16,
+            "id": 16,
+            "parent": "Networking",
+            "section": "Transfering Data",
+            "title": "traceroute",
+            "content_type": "article",
+            "content": "The <b>traceroute</b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute</b> is: <code>traceroute example_website.com</code> Lets try out an example on the terminal: <code>traceroute google.com</code> Breakdown of the output: <pre><ul><li><b>Hop Number:</b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.</li><li><b>IP Address:</b> The IP of the router or device at that hop (e.g. 192.168.1.1).</li><li><b>Time:</b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.</li><li><b>*:</b> A star means no response was received from that hop (could be blocked or timed out).</li></ul><p>This helps you spot slow or failing routes in a network.</p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 17,
+            "parent": "Networking",
+            "section": "Checkpoint - Transfering Data",
+            "title": "Knowledge Check #5",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "TCP handles addressing and routing, while IP ensures reliable delivery of packets",
+                "B": "TCP breaks data into packets and ensures reliable delivery, while IP handles addressing and routing",
+                "C": "TCP and IP both handle the same functions but are used for different types of data",
+                "D": "TCP encrypts data packets, while IP compresses them for faster transmission"
+            },
+            "content": "<p>What is the main difference between TCP and IP in the TCP/IP model?</p><div class=\"question__container\"></div>",
+            "answer": "B",
+            "completed": false
+            },
+            {
+                "id": 18,
                 "parent": "Networking",
-                "section": "Transfering Data",
-                "title": "traceroute",
-                "content_type": "article",
-                "content": "The <b>traceroute</b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for the <b>traceroute</b> is: <code>traceroute example_website.com</code> Lets try out an example on the terminal: <code>traceroute google.com</code> Breakdown of the output: <pre><ul><li><b>Hop Number:</b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.</li><li><b>IP Address:</b> The IP of the router or device at that hop (e.g. 192.168.1.1).</li><li><b>Time:</b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.</li><li><b>*:</b> A star means no response was received from that hop (could be blocked or timed out).</li></ul><p>This helps you spot slow or failing routes in a network.</p>",
-                "answer": "",
-                "answer": "",
+                "section": "Checkpoint - Transfering Data",
+                "title": "Knowledge Check #6",
+                "content_type": "multichoice",
+                "questions": {
+                    "A": "SYN → ACK → SYN-ACK",
+                    "B": "ACK → SYN → SYN-ACK",
+                    "C": "SYN → SYN-ACK → ACK",
+                    "D": "SYN-ACK → SYN → ACK"
+                },
+                "content": "<p>What is the correct order of the 3-Way Handshake in TCP?</p><div class=\"question__container\"></div>",
+                "answer": "C",
                 "completed": false
-        }
+            },
+            {
+                "id": 19,
+                "parent": "Networking",
+                "section": "Checkpoint - Transfering Data",
+                "title": "Knowledge Check #7",
+                "content_type": "multichoice",
+                "questions": {
+                    "A": "It shows the actual path packets take to reach a destination, including each router hop",
+                    "B": "It displays your computer's routing table and default gateway configuration",
+                    "C": "It lists all active network connections on your system",
+                    "D": "It monitors real-time network traffic and bandwidth usage"
+                },
+                "content": "<p>What does the traceroute command do?</p><div class=\"question__container\"></div>",
+                "answer": "A",
+                "completed": false
+            },
+            {
+                "id": 20,
+                "parent": "Networking",
+                "section": "Checkpoint - Transfering Data",
+                "title": "Knowledge Check #8",
+                "content_type": "multichoice",
+                "questions": {
+                    "A": "It indicates the network interface speed in Mbps",
+                    "B": "It shows the number of active connections on that route",
+                    "C": "It represents the priority value - lower numbers are preferred for routing",
+                    "D": "It displays the total number of packets sent through that route"
+                },
+                "content": "<p>In the output of 'ip route', what does the 'metric' value represent?</p><div class=\"question__container\"></div>",
+                "answer": "C",
+                "completed": false
+            }
     ],
     "basics": {
         "1": {

@@ -1469,6 +1469,11 @@ function process_traceroute($host) : string {
 return $result;
 }
 
+function process_ip_route() : string {
+    $output = $GLOBALS['ip_route'];
+    return $output;
+}
+
 function process_nslookup($host) : string {
     if ($host != "google.com") return "Invalid nslookup Command: Try Host Name 'google.com'";
     return $GLOBALS['nslookup'];
@@ -2455,6 +2460,13 @@ case 'python3':
             }
         } 
         break;
+    case 'ip':
+            if ($arg === "route") {
+                $output = process_ip_route();
+                break;
+            }
+            else $output = "Invalid ip command";
+            break;
     case 'ifconfig': 
         $output = process_ifconfig();
         if ($lessonID === 3) {
