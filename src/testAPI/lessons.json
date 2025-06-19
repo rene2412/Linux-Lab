@@ -11,7 +11,7 @@
             "section": "Prelude",
             "title": "The Command Line",
             "content_type": "article",
-            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.<\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge of Linux grows, you will see terms like the <b>shell<\/b>, <b>scripting<\/b>, <b>kernel<\/b>, etc....<\/p><p>But to understand these terms we must start at the begining, the <b>filesystem<\/b>.<\/p>",
+            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.<\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge of Linux grows, you will see terms like the <b>shell<\/b>, <b>scripting<\/b>, <b>kernel<\/b>, etc....<\/p><p>But to understand these terms we must start at the begining, the <b>filesystem<\/b>.<\/p><img src='../../../images/linuxCl.gif' width=500>",
             "completed": false
         },
         {
@@ -20,7 +20,7 @@
             "section": "Prelude",
             "title": "The Filesystem",
             "content_type": "article",
-            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.<\/p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.<\/p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.<\/p><p>Let's take a look how it visually works with this example below:<\/p> I WANT A ANIMATION GIF RIGHT HERE OF THE FILESYSTEM. I WAS TRYNNA DO IT BUT GOT COOKED<\/p>",
+            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.<\/p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.<\/p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.<\/p><p>Let's take a look how it visually works with this example below:<\/p> <img src='../../../images/fileSystem.gif' width = '500'",
             "completed": false
         },
         {
@@ -902,7 +902,7 @@
             "section": "Transfering Data",
             "title": "TCP\/IP",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>TCP\/IP<\/b> \u2014 a set of <b>protocols<\/b> and rules that defines how data is sent, received, and routed between devices.<br><br><ul><li><b>TCP<\/b> (Transmission Control Protocol) works by transmitting data like text messages, emails, and web pages into tiny packets that are purposefully broken down. These packets are then sent across the network and reassembled in the correct order on the receiving end. TCP ensures reliability, checking for errors and guaranteeing that packets arrive intact and in sequence.<\/li><br><li><b>IP<\/b> (Internet Protocol) is responsible for addressing and routing these packets. Every device on a network is assigned a unique IP address, and IP ensures that packets are sent to the correct destination. However, IP does not guarantee that the packets arrive or are in order \u2014 that's TCP's job.<\/li><\/ul><br>The combination of TCP and IP allows for robust and efficient communication across the vast infrastructure of the internet. This layered approach makes it possible for different networks and devices to talk to each other regardless of hardware or software differences.<img src='..\/..\/..\/images\/tcp_ip.webp' width='500'>",
+            "content": "Today, the internet is powered by a model called <b>TCP/IP</b> — a set of <b>protocols</b> and rules that defines how data is sent, received, and routed between devices.<br><br><ul><li><b>TCP</b> (Transmission Control Protocol) works by transmitting data like text messages, emails, and web pages into tiny packets that are purposefully broken down. These packets are then sent across the network and reassembled in the correct order on the receiving end. TCP ensures reliability, checking for errors and guaranteeing that packets arrive intact and in sequence.</li><br><li><b>IP</b> (Internet Protocol) is responsible for addressing and routing these packets. Every device on a network is assigned a unique IP address, and IP ensures that packets are sent to the correct destination. However, IP does not guarantee that the packets arrive or are in order — that's TCP's job.</li></ul><br>The combination of TCP and IP allows for robust and efficient communication across the vast infrastructure of the internet. This layered approach makes it possible for different networks and devices to talk to each other regardless of hardware or software differences.<img src='../../../images/tcp_ip.png' width='500'>",
             "answer": "",
             "completed": false
         },
@@ -985,41 +985,51 @@
             "completed": false
         },
         {
-            "id": 20,
-            "parent": "Networking",
-            "section": "Checkpoint - Transfering Data",
-            "title": "Knowledge Check #8",
-            "content_type": "multichoice",
-            "questions": {
-                "A": "It indicates the network interface speed in Mbps",
-                "B": "It shows the number of active connections on that route",
-                "C": "It represents the priority value - lower numbers are preferred for routing",
-                "D": "It displays the total number of packets sent through that route"
+                "id": 20,
+                "parent": "Networking",
+                "section": "Checkpoint - Transfering Data",
+                "title": "Knowledge Check #8",
+                "content_type": "multichoice",
+                "questions": {
+                    "A": "It indicates the network interface speed in Mbps",
+                    "B": "It shows the number of active connections on that route",
+                    "C": "It represents the priority value - lower numbers are preferred for routing",
+                    "D": "It displays the total number of packets sent through that route"
+                },
+                "content": "<p>In the output of 'ip route', what does the 'metric' value represent?</p><div class=\"question__container\"></div>",
+                "answer": "C",
+                "completed": false
             },
-            "content": "<p>In the output of 'ip route', what does the 'metric' value represent?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "C",
-            "completed": false
-        },
-        {
-            "id": 21,
-            "parent": "Networking",
-            "section": "The Web",
-            "title": "Ports",
-            "content_type": "article",
-            "content": "<p>When we use a radio and want to find a rock music station, we tune to a specific frequency \u2014 like 104.7 MHz. That frequency tells the radio which station to <b>listen<\/b> to. Once the connection is made, we receive the output resulting in rock music output.<\/p><p>The internet works in a similar way. Because the internet handles many types of traffic (web browsing, email, file sharing, streaming, etc.), it uses <b>ports<\/b> to organize that traffic. Each port represents a specific type of service.<\/p><p>For example:<\/p><ul><li><b>Port 80<\/b> \u2013 HTTP (websites using plain text)<\/li><li><b>Port 443<\/b> \u2013 HTTPS (secure websites)<\/li><li><b>Port 25<\/b> \u2013 SMTP (sending email)<\/li><li><b>Port 53<\/b> \u2013 DNS (resolving domain names)<\/li><\/ul><p>When your computer connects to a website, it doesn\u2019t just connect to an IP address \u2014 it also connects to a <b>port<\/b> on that address. This way, the server knows what kind of service you\u2019re asking for.<\/p><p>Port numbers range from 0 to 65535, but most common services use ports below 1024, known as <b>well-known ports<\/b>.<\/p>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 22,
-            "parent": "Networking",
-            "section": "The Web",
-            "title": "ss",
-            "content_type": "interactive",
-            "content": "The <b>traceroute<\/b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute<\/b> is: <code>traceroute example_website.com<\/code> Lets try out an example on the terminal: <code>traceroute google.com<\/code> Breakdown of the output: <pre><ul><li><b>Hop Number:<\/b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.<\/li><li><b>IP Address:<\/b> The IP of the router or device at that hop (e.g. 192.168.1.1).<\/li><li><b>Time:<\/b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.<\/li><li><b>*:<\/b> A star means no response was received from that hop (could be blocked or timed out).<\/li><\/ul><p>This helps you spot slow or failing routes in a network.<\/p>",
-            "answer": "",
-            "completed": false
-        }
+            {
+                "id": 21,
+                "parent": "Networking",
+                "section": "Ports & Sockets",
+                "title": "Ports",
+                "content_type": "article",
+                "content": "<p>When we use a radio and want to find a rock music station, we tune to a specific frequency — like 104.7 MHz. That frequency tells the radio which station to <b>listen</b> to. Once the connection is made, we receive the output resulting in rock music.</p><p>The internet works in a similar way. Because the internet handles many types of traffic (web browsing, email, file sharing, streaming, etc.), it uses <b>ports</b> to organize that traffic. Each port represents a specific type of service.</p><p>For example:</p><ul><li><b>Port 80</b> – HTTP (websites using plain text)</li><li><b>Port 443</b> – HTTPS (secure websites)</li><li><b>Port 25</b> – SMTP (sending email)</li><li><b>Port 53</b> – DNS (resolving domain names)</li></ul><p>When your computer connects to a website, it doesn’t just connect to an IP address — it also connects to a <b>port</b> on that address. This way, the server knows what kind of service you’re asking for.</p><p>Port numbers range from 0 to 65535, but most common services use ports below 1024, known as <b>well-known ports</b>.</p>",
+                "answer": "",
+                "completed": false
+            },
+            {
+                "id": 22,
+                "parent": "Networking",
+                "section": "Ports & Sockets",
+                "title": "telnet",
+                "content_type": "interactive",
+                "content": " The <b>telnet</b> command is a tcp client based command that allows us to manually connect to a remote host on a specific port. In other words, the command allows us to check if a service (like a web server, SSH server, or mail server) is running and reachcable on that port.</p> Syntax: <code>telnet [example.com] [port]</code> Let's try a basic example by testing if we can reach google and <b>listen</b> on port 80. <code>telnet google.com 80</code><p>Breakdown:</p><ul><li><b>Trying 2607:f8b0:4005:810::200e... </b> - This shows the IP address telnet is trying to reach (IPv6 or IPv4).</li><li><b>Connected to google.com.</b> — Success! A TCP connection to port 80 is established. </li></ul><br>If the connection is successful, you're now manually connected to Google’s web server over TCP. At this point, you could type an HTTP request (we will discuss later), or simply close the connection. Overall, this is useful for quickly testing if a port is open and listening.",
+                "answer": "",
+                "completed": false
+            }, 
+            {
+                "id": 23,
+                "parent": "Networking",
+                "section": "Ports & Sockets",
+                "title": "Sockets",
+                "content_type": "interactive",
+                "content": "<p>We’ve discussed TCP/IP, the protocol suite that defines how devices communicate over the internet. Now, let's go over an important piece of that model that powers gaming, APIs, ping commands, chat apps, and more: <b>sockets</b>.</p><p>A <b>socket</b> is an endpoint of a two-way communication link between two programs over a network. Sockets allow programs to send and receive data through a connection.</p><p>Every socket connection is defined by 4 components:</p><pre><code>&lt;Protocol, Source IP, Source Port, Destination IP, Destination Port&gt;</code></pre><p>Here's a real-world example:</p><pre><code>TCP, 192.168.1.10, Port 12345 → 93.184.216.34, Port 80</code></pre><ul><li><b>Protocol</b> — Usually TCP or UDP</li><li><b>Source IP & Port</b> — The device and port initiating the connection</li><li><b>Destination IP & Port</b> — The remote device and service being contacted</li></ul><p>When you play Fortnite or Call of Duty with your friends, your console and home network establishes a <b>socket connection</b> to the game's online servers. This connection allows real-time data to flow between your device and the server — tracking your movements, syncing player actions, and keeping the game state consistent across all players.</p><img src='../../../images/sockets.png' width='500'",
+                "answer": "",
+                "completed": false
+            }
     ],
     "basics": {
         "1": {

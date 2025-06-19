@@ -18,6 +18,7 @@ rtt min/avg/max/mdev = 44.763/98.985/249.913/62.369 ms";
 $ip_route = 
 "default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.217 metric 600
 192.168.1.0/24 dev wlp3s0 proto kernel scope link src 192.168.1.217 metric 600";
+$telnet = "";
 $ifconfig = 
     "enp1s0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         ether 84:47:09:35:83:0e  txqueuelen 1000  (Ethernet)
