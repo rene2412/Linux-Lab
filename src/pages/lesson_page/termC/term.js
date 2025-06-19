@@ -59,7 +59,7 @@ export default class VanillaTerminal {
     container.innerHTML = `
       <div class="terminal">
         <div class="history"></div>
-        <div class="command-line" contenteditable="plaintext-only" autofocus="true"><span class="prompt">${this.options.username}@${this.options.hostname}:${this.currentDirectory}$</span><span class="input"><span class="caret-block"> </span></span>
+        <div autocorrect="off" spellcheck="off" class="command-line" autofocus="true"><span autocorrect="off" class="prompt">${this.options.username}@${this.options.hostname}:${this.currentDirectory}$</span><span autocorrect="off" spellcheck="off" class="input" contenteditable="plaintext-only"><span class="caret-block"> </span></span>
         </div>
       </div>
     `;
@@ -72,7 +72,7 @@ export default class VanillaTerminal {
 
     // Add event listeners
     this.terminal.addEventListener('click', this.handleTerminalClick);
-    this.commandLine.addEventListener('keydown', this.handleKeyDown);
+    this.command.addEventListener('keydown', this.handleKeyDown);
 
     return true;
   }
@@ -81,7 +81,7 @@ export default class VanillaTerminal {
   unmount() {
     if (this.terminal) {
       this.terminal.removeEventListener('click', this.handleTerminalClick);
-      this.commandLine.removeEventListener('keydown', this.handleKeyDown);
+      this.command.removeEventListener('keydown', this.handleKeyDown);
       this.terminal.parentNode.removeChild(this.terminal);
       
       // Reset DOM references
@@ -93,7 +93,7 @@ export default class VanillaTerminal {
   }
 
   handleTerminalClick() {
-    this.commandLine.focus();
+    this.command.focus();
   }
 
   handleKeyDown(e) {

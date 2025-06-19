@@ -356,6 +356,12 @@ code{
     margin: var(--spce-lg) 0;
 }
 
+.lesson__content > img{
+    width: 100%;
+    border-radius: var(--radius-med);
+
+}
+
 
 
 .svg{
