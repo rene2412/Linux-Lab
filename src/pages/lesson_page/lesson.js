@@ -4,6 +4,11 @@ import getUserCookie from "../../utils/getUserCookie.js";
 import Navigation from "../../components/Navigation/Navigation.js";
 
 const sectionLesson = document.querySelector(".section--lesson");
+const noti = document.querySelector('.notification');
+const notiClose = document.querySelector(".notification__close");
+notiClose.addEventListener('click',()=>{
+  noti.style.display = 'none'
+})
 
 class LessonManager {
   lesson = 1;
@@ -546,6 +551,7 @@ if (userObj) {
     userObj,
     false
   );
+  noti.style.display = 'none';
 } else {
   terminal = new VanillaTerminal({
     apiEndpoint: "../../../api_commands.php",
