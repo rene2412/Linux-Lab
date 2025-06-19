@@ -910,7 +910,7 @@
             "id": 14,
             "parent": "Networking",
             "section": "Transfering Data",
-            "title": "The 3 Way Handshake <img src='..\/..\/..\/images\/handshake.svg' style='width: 45px; height: 55px; position: relative; top: 15px;'>",
+            "title": "The 3 Way Handshake",
             "content_type": "article",
             "content": "<p>We know through TCP\/IP, data is sent via packets. These packets hold data in bytes\u2014a collection of binary numbers (1s and 0s). Before any data is transferred, TCP uses a process called the 3-Way Handshake to establish a reliable connection between two devices.<\/p><p>The 3 steps of this handshake are:<\/p><ul><li><strong>SYN:<\/strong> The client sends a synchronize (SYN) packet to the server to start a connection.<\/li><li><strong>SYN-ACK:<\/strong> The server responds with a synchronize-acknowledgment (SYN-ACK) to confirm it received the request and is ready to connect.<\/li><li><strong>ACK:<\/strong> The client replies with an acknowledgment (ACK), finalizing the connection setup.<\/li><\/ul><p>Once these steps are complete, both devices are ready to exchange data securely and reliably.<\/p> <img src='..\/..\/..\/images\/tcp_handshake.jpeg' width='550' height='450'>",
             "answer": "",
