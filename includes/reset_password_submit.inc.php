@@ -1,11 +1,13 @@
 <?php
+session_start();
 
 if (isset($_POST["reset-password-submit"])) {
     $selector = $_POST["selector"];
     $validator = $_POST["validator"];
     $password = $_POST["pwd"];
     $passwordRepeat = $_POST["rpwd"];
-    
+    error_log("Selector: " . $selector);
+    error_log("Validator: " . $validator);
 
     if (empty($password) || empty($passwordRepeat)) {
         $_SESSION['rpwdErrors'] = "Error: Password Cannot Be Empty"; 
@@ -16,7 +18,6 @@ if (isset($_POST["reset-password-submit"])) {
         $_SESSION['rpwdErrors'] = "Error: Passwords Do Not Match!";
         header("Location: create_new_password.inc.php?selector=$selector&validator=$validator"); 
     }
-
 
     $currentDate = date("U");
     require_once "database.inc.php";
