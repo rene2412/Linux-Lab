@@ -29,6 +29,22 @@
     caret-color: transparent;
 }
 
+.input{
+    caret-color: transparent;
+    outline: none;
+    text-decoration: none;
+}
+
+  .input {
+    text-decoration: none !important;
+    -webkit-text-decoration-line: none !important;
+    text-decoration-line: none !important;
+    -webkit-text-decoration-color: transparent !important;
+    text-decoration-color: transparent !important;
+    -moz-appearance: textfield !important;
+    -webkit-appearance: none !important;
+  }
+
 .prompt {
     color: lime; 
 }
