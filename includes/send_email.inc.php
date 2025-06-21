@@ -2,9 +2,6 @@
 session_start();
 require __DIR__ . '/../vendor/autoload.php';
 
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-
 use \SendGrid\Mail\Mail;
 
 
