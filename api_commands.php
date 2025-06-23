@@ -827,7 +827,51 @@ function process_cat(&$fileSystem, $currentDirectory, $file, $args, $targetFile)
     return "";
 }
 
-function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string {
+function traverse_to_current_directory($fileSystem, $currentDirectory, $dir) {
+// Handle root directory access: 
+if ($dir === "/") {
+    $currentDirectory = "/";
+    return "";
+}  
+// Convert relative path into an array
+$newPath = explode("/", trim($dir, "/"));
+$pathParts = explode("/", trim($currentDirectory, "/"));
+
+foreach ($newPath as $part) {
+    if ($part === "..") {
+        if (!empty($pathParts)) {
+            array_pop($pathParts); // Move up one directory
+        }
+    } else {
+        $pathParts[] = $part; // Move into the next directory
+    }
+}
+
+// Resolve final path
+$resolvedPath = implode("/", $pathParts);
+if ($resolvedPath === "/") {
+    $resolvedPath = "/";
+}
+
+// Traverse filesystem to validate the path
+$currentLevel = &$fileSystem["/"];
+$traversePath = array_filter(explode("/", trim($resolvedPath, "/")), 'strlen');
+
+foreach ($traversePath as $part) {
+    if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+        return "Error: '$part' is not a directory.\n";
+        }
+    $currentLevel = &$currentLevel[$part];
+    }
+}
+
+
+function process_copy (&$filesystem, $currentDirectory, $isFile, $currentContent, $contentDestination) {
+
+
+}
+
+function process_mv(&$fileSystem, $currentDirectory, $oldname, $newname): string {
     // Helper to resolve absolute paths
     $resolvePath = function ($baseDir, $path) {
         $isAbsolute = (substr($path, 0, 1) === '/');
@@ -850,7 +894,7 @@ function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string
     $sourceDir = dirname($sourcePath);
     $sourceName = basename($sourcePath);
     $sourceParts = array_filter(explode('/', trim($sourceDir, '/')), 'strlen');
-    $sourceLevel = &$filesystem['/'];
+    $sourceLevel = &$fileSystem['/'];
     foreach ($sourceParts as $part) {
         if (!array_key_exists($part, $sourceLevel) || !is_array($sourceLevel[$part])) {
             return "Error: Source path invalid.";
@@ -867,7 +911,7 @@ function process_mv(&$filesystem, $currentDirectory, $oldname, $newname): string
     $targetDir = dirname($targetPath);
     $targetName = basename($targetPath);
     $targetParts = array_filter(explode('/', trim($targetDir, '/')), 'strlen');
-    $targetLevel = &$filesystem['/'];
+    $targetLevel = &$fileSystem['/'];
     foreach ($targetParts as $part) {
         if (!array_key_exists($part, $targetLevel) || !is_array($targetLevel[$part])) {
             return "Error: Target directory does not exist.";

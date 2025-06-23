@@ -749,7 +749,7 @@
     ],
     "Networking": [
         {
-            "section__size": 25,
+            "section__size": 30,
             "section__completed": false,
             "interactive__size": 15
         },
@@ -1029,7 +1029,91 @@
             "content": "<p>We\u2019ve discussed TCP\/IP, the protocol suite that defines how devices communicate over the internet. Now, let's go over an important piece of that model that powers gaming, APIs, ping commands, chat apps, and more: <b>sockets<\/b>.<\/p><p>A <b>socket<\/b> is an endpoint of a two-way communication link between two programs over a network. Sockets allow programs to send and receive data through a connection.<\/p><p>Every socket connection is defined by 4 components:<\/p><pre><code>&lt;Protocol, Source IP, Source Port, Destination IP, Destination Port&gt;<\/code><\/pre><p>Here's a real-world example:<\/p><pre><code>TCP, 192.168.1.10, Port 12345 \u2192 93.184.216.34, Port 80<\/code><\/pre><ul><li><b>Protocol<\/b> \u2014 Usually TCP or UDP<\/li><li><b>Source IP & Port<\/b> \u2014 The device and port initiating the connection<\/li><li><b>Destination IP & Port<\/b> \u2014 The remote device and service being contacted<\/li><\/ul><p>When you play Fortnite or Call of Duty with your friends, your console and home network establishes a <b>socket connection<\/b> to the game's online servers. This connection allows real-time data to flow between your device and the server \u2014 tracking your movements, syncing player actions, and keeping the game state consistent across all players.<\/p><img src='..\/..\/..\/images\/sockets.png' width='500'",
             "answer": "",
             "completed": false
-        }
+        },
+        {
+            "id": 24,
+            "parent": "Networking",
+            "section": "Ports & Sockets",
+            "title": "netstat/ss",
+            "content_type": "interactive",
+            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat</b> command, but the modern and faster alternative is <b>ss</b>.<p><p><b>Try out the command in the command line and we will breakdoen the output</b><br><code>ss -tuln</code><br>This command shows all TCP and UDP (another transfer protocol like tcp, but just faster and less safe), and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:</b><ul><li><b>Netid</b>: The protocol being used (e.g. tcp, udp)</li><li><b>State</b>: Connection state (e.g. LISTEN, ESTABLISHED)</li><li><b>Recv-Q</b>: Bytes received and queued</li><li><b>Send-Q</b>: Bytes waiting to be sent</li><li><b>Local Address:Port</b>: Your IP address and port</li><li><b>Peer Address:Port</b>: The remote IP address and port (if connected)</li></ul><p><p> Using <b>ss</b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It’s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss</b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 25,
+            "parent": "Networking",
+            "section": "Checkpoint - Ports & Sockets",
+            "title": "Knowledge Check #9",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "They are used to identify physical cables between computers",
+              "B": "They assign unique IDs to different websites",
+              "C": "They allow a computer to distinguish between different types of network traffic",
+              "D": "They are the same as IP addresses"
+            },
+            "content": "<p>What is the main purpose of ports in networking?</p>",
+            "answer": "C",
+            "completed": false
+          },
+          {
+            "id": 26,
+            "parent": "Networking",
+            "section": "Checkpoint - Ports & Sockets",
+            "title": "Knowledge Check #10",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "Port numbers used for encryption only",
+              "B": "Port numbers used for internal debugging",
+              "C": "Ports in the range 0–1023 that are reserved for common services",
+              "D": "Port numbers used only in gaming servers"
+            },
+            "content": "<p>What are 'well-known ports'?</p>",
+            "answer": "C",
+            "completed": false
+          },
+          {
+            "id": 27,
+            "parent": "Networking",
+            "section": "Checkpoint - Ports & Sockets",
+            "title": "Knowledge Check #11",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "To install software from a remote repository",
+              "B": "To test if a specific port is open and reachable on a remote host",
+              "C": "To scan for viruses on a network",
+              "D": "To monitor the CPU usage of a server"
+            },
+            "content": "<p>What is the purpose of the <code>telnet</code> command in networking?</p>",
+            "answer": "B",
+            "completed": false
+          },
+          {
+            "id": 28,
+            "parent": "Networking",
+            "section": "Checkpoint - Ports & Sockets",
+            "title": "Knowledge Check #12",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "An IP address assigned to a domain",
+              "B": "A temporary file created during file transfer",
+              "C": "A two-way communication endpoint defined by protocol, IPs, and ports",
+              "D": "A DNS entry for connecting to a server"
+            },
+            "content": "<p>Which of the following best describes a network socket?</p>",
+            "answer": "C",
+            "completed": false
+          },
+          {
+            "id": 29,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "HTTP vs HTTPS",
+            "content_type": "article",
+            "content": "",
+            "completed": false
+          } 
+
     ],
     "basics": {
         "1": {
