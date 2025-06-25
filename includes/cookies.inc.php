@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+			session_start();
+	}
+
 require_once "database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
 

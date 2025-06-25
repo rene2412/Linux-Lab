@@ -19,8 +19,15 @@ $current_lesson = "Not Started";
 $lessonName = "The Command Line";
 $current_section = "Prelude"; // Default to first section
 $current_module = "The Basics"; // Default module
+error_log("username: $username\n");
+error_log("userID: $user_id\n");
 
-if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
+if ($user_id === null) { 
+    error_log($user_id === null 
+    ? "→ Entering GUEST branch" 
+    : "→ Entering LOGGED-IN branch, dbModule = $dbCurrentModule");
+
+
     //The file will return the user info in JSON
     $guestlessonID = $_SESSION["guestLessonId"] ?? 1;
     error_log("REQUEST METHOD: " . $_SERVER["REQUEST_METHOD"]);
@@ -261,7 +268,10 @@ function sendAPI($api) : array {
         $network = $_SESSION['networkAPI'];
         return $network;
     }
+    else return ["Error" => "INVALID API"];
 }   
+error_log("→ GET handler, user_id = " . var_export($user_id, true));
+
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $guestInput = $_SESSION['input'] ?? "The Basics";
         error_log("Guest Input: $guestInput");
@@ -269,55 +279,70 @@ function sendAPI($api) : array {
         if ($guestInput === "The Basics") {
             require_once "guest.php";
             $basics = $_SESSION['guestBasics'];
-            exit;
+            echo json_encode($basics); 
+            return;
       }
     elseif ($guestInput === "Networking") {
             require_once "networkGuest.php";
             $guestNetwork = $_SESSION['guestNetwork'];
-            exit;
+            echo json_encode($guestNetwork);
+            return;
       }
     }
     else {
-      // Get current module from database instead of hardcoding
+     global $dbCurrentModule;
+     //Get current module from database instead of hardcoding
       $stmt = $pdo->prepare("SELECT current_module FROM user_progress WHERE user_id = ?");
       $stmt->execute([$user_id]);
       $dbCurrentModule = $stmt->fetchColumn() ?? "The Basics";
-      
+      error_log("About to call sendAPI($dbCurrentModule)");
       $gigaAPI = sendAPI($dbCurrentModule);
+      error_log("sendAPI returned: " . json_encode($gigaAPI));
       echo json_encode($gigaAPI);
-      exit;
+      return;
   }
 }
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $input = trim(file_get_contents('php://input'));
     if (!$input) {
         error_log(json_encode($input)); 
         echo json_encode(["Error: => Invalid Input"]);   
-    exit;
-    } 
+        return;
+}
+
     elseif ($input === "The Basics") {
         // UPDATE database with new module
         $stmt = $pdo->prepare("UPDATE user_progress SET current_module = ? WHERE user_id = ?");
         $stmt->execute(["The Basics", $user_id]);
         
         //The main API
-        $gigaAPI = sendAPI("The Basics");
-        error_log(json_encode($gigaAPI)); 
+        $stmt = $pdo->prepare("SELECT current_module FROM user_progress WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        $dbCurrentModule = $stmt->fetchColumn() ?? "The Basics";
+
+        //Return the API
+        $gigaAPI = sendAPI($dbCurrentModule);
         echo json_encode($gigaAPI);
         return;
     }
+
     elseif ($input === "Networking" ) {
         // UPDATE database with new module
         $stmt = $pdo->prepare("UPDATE user_progress SET current_module = ? WHERE user_id = ?");
         $stmt->execute(["Networking", $user_id]);
         
-        $gigaAPI = sendAPI("Networking");
-        error_log(json_encode($gigaAPI)); 
+        $stmt = $pdo->prepare("SELECT current_module FROM user_progress WHERE user_id = ?");
+        $stmt->execute([$user_id]);
+        $dbCurrentModule = $stmt->fetchColumn() ?? "Networking";
+    
+        $gigaAPI = sendAPI($dbCurrentModule);
         echo json_encode($gigaAPI);
         return;
     }
+
     else {
-        error_log(json_encode($gigaAPI)); 
-        echo json_encode(["Error:  => Invalid Post Input"]);
+        error_log(json_encode("Error: Invalid Post Input ")); 
+        echo json_encode(["Error:  Invalid Post Input"]);
         }
     } 
