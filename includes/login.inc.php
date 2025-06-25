@@ -24,26 +24,25 @@
 		 if (!password_verify($pwd, $result["pwd"])) {
 				$errors["password_invalid"] = "Invalid Password!";
 		}
-		session_set_cookie_params([
-			'lifetime' => 10, // session cookie (dies on browser close)
+
+		if (session_status() === PHP_SESSION_NONE) {
+			session_set_cookie_params([
+			'lifetime' => 0, // session cookie (dies on browser close)
 			'path' => '/',
 			'domain' => '', 
 			'secure' => false,
 			'httponly' => true,
 			'samesite' => 'Lax'
 		]);
-		session_start();
-
+			session_start();
+	}
 		if ($errors) {
 			$_SESSION["errors_login"] = $errors;
 			header("Location: ../src/pages/login/login.php");	
 			die();
 		}
-
-		$newSessionId = session_create_id();		
-	    $sessionId = $newSessionId . "_" . $result["id"];
-		session_id($sessionId);
-	
+		
+		session_regenerate_id(true);
 		$_SESSION["user_id"] = $result["id"];
 		$_SESSION["user_username"] = htmlspecialchars($result["username"]);
 		$_SESSION["last_regeneration"] = time();
@@ -53,7 +52,7 @@
 		if ($_SESSION["user_id"] !== null) {
 			require_once 'cookies.inc.php';
 			$json_response = json_encode($response);
-			setcookie('user_info', $json_response, time() + 3600 , "/"); // Expires when browser closes
+			setcookie('user_info', $json_response,  0 , "/"); // Expires when browser closes
 		}
 		header('Location: ../src/pages/dashboard/dashboard.html');
 		$pdo = null;

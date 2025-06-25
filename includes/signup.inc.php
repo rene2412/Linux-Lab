@@ -50,14 +50,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		$_SESSION["user_id"] = $result["id"];
 		$_SESSION["user_username"] = htmlspecialchars($result["username"]);
 		$_SESSION["last_regeneration"] = time();
-
-        $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
+		$user_id = $_SESSION["user_id"];
+		//for current module
+		$sql = $pdo->prepare("INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson, current_module) VALUES (?, ?, ?, ?, ?)");
+		$sql->execute([$user_id, 0, 0, 0, 'The Basics']);
+		//set user is logged
+		$stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
         $stmt->execute([$_SESSION["user_id"]]);
+
 		if ($_SESSION["user_id"] !== null) {
 			require_once 'cookies.inc.php';
 			$json_response = json_encode($response);
 			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
 		}
+	 
 	 header("Location: ../src/pages/landing_page/landing_page.html");
 	 $pdo = null;
 	 $stmt = null;	 
