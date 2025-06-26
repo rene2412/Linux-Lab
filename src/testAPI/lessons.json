@@ -1110,9 +1110,18 @@
             "section": "The World Wide Web",
             "title": "HTTP vs HTTPS",
             "content_type": "article",
-            "content": "",
+            "content": "<p>When we enter a link into our browser, we often see <b>http://</b> or <b>https://</b>. But what do they mean, and how are they different?</p><ul><li><b>HTTP</b> stands for <i>Hypertext Transfer Protocol</i>. It's a protocol that establishes how web browsers (like Safari, Chrome, and Firefox) communicate with web servers. HTTP works over the TCP/IP model to send requests and receive web data in packets.</li>However, HTTP is not secure — it sends sensitive user data like emails, passwords, and credit card information in plain text. Meaning that hackers could intercept and read the data through a technique like packet sniffing. To counter this issue, engineers created <b>https.</b><li><b>HTTPS</b> is the secure version of HTTP. The 'S' stands for <i>Secure</i>. It works by encrypting the data sent between the browser and the server using protocols like SSL/TLS, preventing hackers from reading sensitive information. </li></ul><p>Overall, http and https mark one of the major components that makes the <b>world wide web</b> run.</p><b>Note:</b> Whenever you’re logging in or making a purchase online, make sure the URL starts with <b>https://</b> — the extra 'S' means your connection is encrypted and secure.</p>",
             "completed": false
-          } 
+          },
+          {
+            "id": 30,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "GET vs POST",
+            "content_type": "article",
+            "content": "", 
+            "completed": false
+          }  
 
     ],
     "basics": {
