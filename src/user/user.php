@@ -105,8 +105,58 @@ if ($user_id === null) {
         error_log(json_encode($response)); 
         exit;
         }
-        else exit;
     }
+    elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
+        error_log("→ GET handler, user_id = NULL");
+        
+        // Get the module from URL parameter or session
+        $requested_module = $_GET['module'] ?? $_SESSION["input"] ?? "The Basics";
+        error_log("Guest Input: $requested_module");
+        
+        // Set module-specific defaults
+        if ($requested_module === "Networking") {
+            $current_module = "Networking";
+            $lessonName = "Networking";
+            $current_section = "Intro To Networking";
+        } else {
+            $current_module = "The Basics";
+            $lessonName = "The Command Line";
+            $current_section = "Prelude";
+        }
+        
+        $response = [
+            "username" => "Guest",
+            "isLoggedIn" => false,
+            "currentModule" => [
+                "name" => $current_module,
+                "currentSection" => $current_section,
+                "lessonId" => $guestlessonID,
+                "lessonName" => $lessonName,
+                "lessonStatus" => false
+            ],
+            "modules" => [
+                [
+                    "name" => "The Basics",
+                    "completed" => 0,
+                    "total" => 65
+                ],
+                [
+                    "name" => "Networking",
+                    "completed" => 0,
+                    "total" => 21
+                ],
+                [
+                    "name" => "Bash Scripting",
+                    "completed" => 0,
+                    "total" => 0
+                ]
+            ]
+        ];
+        echo json_encode($response);
+        error_log(json_encode($response));
+        exit;
+    }
+        else exit;
 }
 
 if ($user_id) {
