@@ -759,7 +759,7 @@
             "section": "Intro To Networking",
             "title": "Networking",
             "content_type": "article",
-            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.",
+            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands. <img src='../../../images/netWork.gif' width='500'>",
             "completed": false
         },
         {
@@ -1052,7 +1052,7 @@
               "C": "They allow a computer to distinguish between different types of network traffic",
               "D": "They are the same as IP addresses"
             },
-            "content": "<p>What is the main purpose of ports in networking?</p>",
+            "content": "<p>What is the main purpose of ports in networking?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
           },
@@ -1068,7 +1068,7 @@
               "C": "Ports in the range 0–1023 that are reserved for common services",
               "D": "Port numbers used only in gaming servers"
             },
-            "content": "<p>What are 'well-known ports'?</p>",
+            "content": "<p>What are 'well-known ports'?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
           },
@@ -1084,7 +1084,7 @@
               "C": "To scan for viruses on a network",
               "D": "To monitor the CPU usage of a server"
             },
-            "content": "<p>What is the purpose of the <code>telnet</code> command in networking?</p>",
+            "content": "<p>What is the purpose of the telnet command in networking?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
           },
@@ -1100,7 +1100,7 @@
               "C": "A two-way communication endpoint defined by protocol, IPs, and ports",
               "D": "A DNS entry for connecting to a server"
             },
-            "content": "<p>Which of the following best describes a network socket?</p>",
+            "content": "<p>Which of the following best describes a network socket?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
           },
