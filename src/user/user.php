@@ -107,13 +107,10 @@ if ($user_id === null) {
         }
     }
     elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
-        error_log("→ GET handler, user_id = NULL");
         
         // Get the module from URL parameter or session
         $requested_module = $_GET['module'] ?? $_SESSION["input"] ?? "The Basics";
-        error_log("Guest Input: $requested_module");
         
-        // Set module-specific defaults
         if ($requested_module === "Networking") {
             $current_module = "Networking";
             $lessonName = "Networking";
