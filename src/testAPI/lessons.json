@@ -1127,10 +1127,19 @@
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl",
-            "content_type": "article",
-            "content": "The most powerful network Linux command that is used to extract web content, modify web content, and even hack, is the <b>curl</b> command",
+            "content_type": "interactive",
+            "content": "The most powerful network Linux command that is used to extract web content, modify web content, and even hack, is the <b>curl</b> command.</p>The <b>curl</b> command works by transferring data to or from a server and operates on top of HTTP methods like GET, POST, and even interact with API's.</p> Using the <b>curl</b> command can get complicated since it can do many things and takes in a lot of parameters, but here is the basic syntax: <code>curl [options] [URL..]</code> Like with other Linux commands we have come across, [options] is an optional argument that does filtering and modifications, we will use it later on.</p> For now, let's take a look at a basic example, we will use the <b>curl</b> command to extract the HTML code (the code websites use to structure their websites) from Oracle and output it in the terminal. Try iy out! <code>curl https://www.oracle.com/</code>",
             "completed": false
-          }  
+          },
+          {
+            "id": 32,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "curl - headers",
+            "content_type": "interactive",
+            "content": "Before we enter a webpage and view all the content, your broweser sends chuncks of information that will needed for the user. This information will inclide the following: <li><b>User-Agent</b> - </li>",
+            "completed": false
+          } 
 
     ],
     "basics": {
