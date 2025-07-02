@@ -1137,10 +1137,27 @@
             "section": "The World Wide Web",
             "title": "curl - headers",
             "content_type": "interactive",
-            "content": "Before we enter a webpage and view all the content, your broweser sends chuncks of information that will needed for the user. This information will inclide the following: <li><b>User-Agent</b> - </li>",
+             "content": "Before we enter a webpage and view all the content, your browser sends chunks of information that will be needed for the user. This information will include the following: <li><b>User-Agent</b> – Identifies the browser, version, and operating system being used.</li> <li><b>Accept</b> – Tells the server what content types (like HTML, JSON, XML) the client can understand.</li> <li><b>Host</b> – Specifies the domain name of the server the client wants to connect to.</li> <li><b>Connection</b> – Indicates whether the client wants to keep the connection open or close it after the response.</li><li><b>expires</b> - The expiration date and time when the browser will consider this version of the web page 'old' and will fetch a new copy</li><li><b>cache-control</b> - The permission details that decides if the content can only be cached to your browser (private), or can be cached to 3rd parties to enhance the performance time for everyone using the website (public).</li> Let's run through a headers example using the curl command with an option command.</p> <code>curl -I https://www.google.com</code> We added the '-I' flag here which stands for 'HEAD Request' which tells curl to not extract the full HTML content, but rather just the headers. Try it out!",
             "completed": false
-          } 
-
+          }, 
+          {
+            "id": 33,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "API's - Application Programming Interface",
+            "content_type": "article",
+            "content": "An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications use to request and exchange information, enabling developers to build complex features by integrating with other systems or services. They act as a bridge between different software components, simplifying development and promoting modularity.<br><br>One of the most popular types of APIs is the REST API, which follows the REST (Representational State Transfer) architectural style designed specifically for web services. REST APIs use standard HTTP methods and are known for being simple, scalable, and stateless.<br><br>Key characteristics of REST APIs include:<ul><li><b>Use of standard HTTP methods:</b> Such as GET to retrieve data, POST to create new data, PUT to update existing data, and DELETE to remove data.</li><li><b>Statelessness:</b> Each request from client to server must contain all the information needed to understand and process it, with no client context stored on the server between requests.</li><li><b>Resource-Based:</b> Resources (like users, products, or orders) are identified using URLs (Uniform Resource Locators).</li><li><b>Multiple Data Formats:</b> While JSON is the most commonly used format, REST APIs can also send and receive XML, HTML, or plain text.</li><li><b>Scalability and Simplicity:</b> The design of REST APIs supports easy scaling of applications and straightforward implementation.</li></ul><br>Overall, APIs, and especially REST APIs, play a crucial role in modern software development by enabling seamless integration between different applications and services over the web.",
+            "completed": false
+          },
+          {
+            "id": 34,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "curl - API's",
+            "content_type": "interactive",
+            "content": "Let's use the curl command to fetch the current stock for google using an API! <code>curl https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&\napikey=VVPWAF4272QM01N9</code> You can switch out the 'GOOG' to match any stock symbol, like 'MSFT' for Micrsoft, 'TSLA' for Tesla, and so on. Try it out!",
+            "completed": false
+          }                
     ],
     "basics": {
         "1": {

@@ -1801,9 +1801,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     preg_match_all('/"([^"]*)"|\'([^\']*)\'|(\S+)/', $command, $matches);
     $args = [];
     foreach ($matches[0] as $match) {
-        $trimmed = trim($match, "'\"");
-        if (!empty($trimmed)) {
-            $args[] = $trimmed;
+        // If the match contains URL special characters, preserve quotes
+        if (strpos($match, '&') !== false || strpos($match, '?') !== false) {
+            $args[] = $match; // Keep original quotes
+        }
+        else {
+            $trimmed = trim($match, "'\"");
+            if (!empty($trimmed)) {
+                $args[] = $trimmed;
+            }   
         }
     }
 
@@ -1822,7 +1828,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cmd = $args[0] ?? '';
     $arg = $args[1] ?? '';
     $arg2 = $args[2] ?? '';
-    $arg3 = $arvurlgs[3] ?? '';
+    $arg3 = $args[3] ?? '';
     $output = "";
     $json = '';
 
@@ -2531,11 +2537,14 @@ case 'python3':
         $output = process_dig($arg);
         break;
     case 'host';
-        $output = process_host($arg);
-        break;
+    $output =  shell_exec("nslookup www.alphavantage.co");
+ 
+    break;
     case 'curl':
+        $command = implode(' ', $args);
+        error_log("Command: " .  $command);
         $shell = shell_exec(implode(' ', $args));
-        error_log("Shell Command: $shell");
+        error_log("Output: $shell");
         $output = $shell;
         break;
     case 'wget':
