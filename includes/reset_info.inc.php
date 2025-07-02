@@ -9,7 +9,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
+    <title>Reset Password | Linux-Lab</title>
+    <link rel="icon" type="image/x-icon" href="/src/pages/assets/SVGs/favicon.ico">
     <link rel="stylesheet" href="../src/pages/login/login.css"/>
 </head>
 <body>
