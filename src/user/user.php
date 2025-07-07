@@ -295,12 +295,12 @@ function sendAPI($api) : array {
         [
             "name" => "The Basics",
             "completed" => $lessons_completed,
-            "total" => 64
+            "total" => 50
         ],
         [
             "name" => "Networking",
             "completed" => $networking_lessons_completed,
-            "total" => 21
+           "total" => 30
         ],
         [
             "name" => "Bash Scripting",
@@ -317,7 +317,6 @@ function sendAPI($api) : array {
     }
     else return ["Error" => "INVALID API"];
 }   
-error_log("→ GET handler, user_id = " . var_export($user_id, true));
 
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $guestInput = $_SESSION['input'] ?? "The Basics";
@@ -325,12 +324,16 @@ error_log("→ GET handler, user_id = " . var_export($user_id, true));
     if ($user_id === null) {
         if ($guestInput === "The Basics") {
             require_once "guest.php";
+            $_SESSION["module"] = "basics";
+            $module = $_SESSION["module"];
             $basics = $_SESSION['guestBasics'];
             echo json_encode($basics); 
             return;
       }
     elseif ($guestInput === "Networking") {
             require_once "networkGuest.php";
+            $_SESSION["module"] = "networking";
+            $module = $_SESSION["module"];
             $guestNetwork = $_SESSION['guestNetwork'];
             echo json_encode($guestNetwork);
             return;
@@ -359,6 +362,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
     elseif ($input === "The Basics") {
+        $_SESSION["module"] = "basics";
+        $module = $_SESSION["module"];
+        error_log("MODULE: $module");
         // UPDATE database with new module
         $stmt = $pdo->prepare("UPDATE user_progress SET current_module = ? WHERE user_id = ?");
         $stmt->execute(["The Basics", $user_id]);
@@ -375,6 +381,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     elseif ($input === "Networking" ) {
+        $_SESSION["module"] = "networking";
+        $module = $_SESSION["module"];
+        error_log("MODULE: $module");
         // UPDATE database with new module
         $stmt = $pdo->prepare("UPDATE user_progress SET current_module = ? WHERE user_id = ?");
         $stmt->execute(["Networking", $user_id]);

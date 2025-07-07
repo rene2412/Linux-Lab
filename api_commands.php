@@ -1484,7 +1484,7 @@ function process_find($fileSystem, $currentDirectory, $path, $expression): strin
     return empty($files) ? "Error: No files found.\n" : implode("\n", $files) . "\n";
 }
 function process_ping($host) : string {
-    if ($host != "google.com") return "Invalid Ping Command: Try Host Name 'google.com'";
+    if ($host != "google.com" && $host != "142.250.72.206") return "Invalid Ping Command: Try Host Name 'google.com'";
         $output = $GLOBALS['ping'];
         $lines = explode("\n", $output);
         $result = "";
@@ -1622,7 +1622,6 @@ function GetCurrentLesson() : int {
     return $value;
 }
 
-
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
         if ($userId === null) return;
         $stmt = $pdo->prepare("
@@ -1635,11 +1634,12 @@ function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : v
             ELSE lessons_completed 
         END, 
         current_lesson = VALUES(current_lesson)  
-  ");
+        lesson_id = VALUES(lesson_id)
+        ");
     try {
         $stmt->execute([$userId, $lessonId, $nextLesson]);
     } catch (PDOException $e) {
-       echo "SQL Error: " . $e->getMessage();
+       error_log("SQL Error: " . $e->getMessage());
    }
 }
 
@@ -1693,7 +1693,7 @@ function send_user_progress(PDO $pdo, int $userId) : array {
           return 1;
   } 
 
-function send_current_lesson(PDO $pdo, int $userId) : string {
+ function send_current_lesson(PDO $pdo, int $userId) : string {
     if ($userId === null) return null;
     $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM user_progress WHERE user_id = ?");
     $stmt->execute([$userId]);
@@ -1701,24 +1701,45 @@ function send_current_lesson(PDO $pdo, int $userId) : string {
     $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
     return $current_lesson . "\n";
     }
-    function GetMultChoiceAnswer($lesson_id) : string {
+ function GetMultChoiceAnswer($lesson_id) : string {
         $answer = "";
         $data = json_decode(file_get_contents("src/testAPI/lessons.json"), true);
     
-        foreach ($data as $section) {
-            foreach ($section as $lesson) {
-                if (isset($lesson['id']) && $lesson['id'] === $lesson_id) {
-                    if (isset($lesson['answer'])) {
-                        $answer = $lesson['answer'];
+        foreach ($data as $section => $lessons) {
+             if ($section === "The Basics") {
+                foreach ($lessons as $lesson) {
+                    if (isset($lesson['id']) && $lesson['id'] === $lesson_id) {
+                        if (isset($lesson['answer'])) {
+                            $answer = $lesson['answer'];
+                            }
+                        break; 
                     }
-                    break 2; 
                 }
+                break;
             }
         }
         return $answer;
     }
-  //
-function network_update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
+
+ function GetNetworkMultChoiceAnswer($lesson_id) : string {
+        $answer = "";
+        $data = json_decode(file_get_contents("src/testAPI/lessons.json"), true);
+    
+        foreach ($data as $section => $lessons) {
+            if ($section === "Networking") {
+                foreach ($lessons as $lesson) {
+                    if (isset($lesson['id']) && $lesson['id'] === $lesson_id) {
+                        if (isset($lesson['answer'])) {
+                            return $lesson['answer'];
+                        }
+                   }
+              }
+          }
+       }
+        return $answer;
+    }
+
+    function network_update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
     if ($userId === null) return;
     $stmt = $pdo->prepare("
         INSERT INTO network_user_progress (user_id, lesson_id, lessons_completed, current_lesson)
@@ -1726,16 +1747,17 @@ function network_update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLes
         ON DUPLICATE KEY UPDATE 
         lessons_completed = CASE 
         WHEN lessons_completed = 0 THEN 1  -- Ensure it starts at 1
-        WHEN current_lesson <> VALUES(current_lesson) THEN lessons_completed + 1  
+        WHEN lesson_id <> VALUES(lesson_id) THEN lessons_completed + 1 
         ELSE lessons_completed 
     END, 
-    current_lesson = VALUES(current_lesson)  
+    current_lesson = VALUES(current_lesson),
+     lesson_id = VALUES(lesson_id) 
 ");
 try {
     $stmt->execute([$userId, $lessonId, $nextLesson]);
 } catch (PDOException $e) {
-   echo "SQL Error: " . $e->getMessage();
-}
+   error_log("SQL Error: " . $e->getMessage());
+    }
 }
 
 function network_updateUserProgress($pdo, $userId, $lesson_id) : void {
@@ -1779,12 +1801,12 @@ function network_send_user_progress(PDO $pdo, int $userId) : array {
 }
 
 function network_send_current_lesson(PDO $pdo, int $userId) : string {
-if ($userId === null) return null;
-$stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
-$stmt->execute([$userId]);
-$progress = $stmt->fetch(PDO::FETCH_ASSOC);
-$current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
-return $current_lesson . "\n";
+    if ($userId === null) return null;
+    $stmt = $pdo->prepare("SELECT lessons_completed, current_lesson FROM network_user_progress WHERE user_id = ?");
+    $stmt->execute([$userId]);
+    $progress = $stmt->fetch(PDO::FETCH_ASSOC);
+    $current_lesson = $progress ? $progress["current_lesson"] : "Not Started";
+    return $current_lesson . "\n";
 }
     
     function contains_number($string) {
@@ -1794,9 +1816,12 @@ return $current_lesson . "\n";
 // Handle the command
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $command = trim($_POST['command'] ?? '');
-   $lessonID = (int) trim($_POST['lessonId'] ?? '');
-   $_SESSION['guestLessonId'] = $lessonID;
-    
+    $lessonID = (int) trim($_POST['lessonId'] ?? '');
+    $_SESSION['guestLessonId'] = $lessonID;
+    //fetch the current module from the global session
+    $module = $_SESSION["module"];
+    error_log("Current Module: $module");
+
     // Improved argument parsing with quote handling
     preg_match_all('/"([^"]*)"|\'([^\']*)\'|(\S+)/', $command, $matches);
     $args = [];
@@ -1812,7 +1837,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }   
         }
     }
-
 
     // Get the raw POST data
     $json_answer = file_get_contents('php://input');
@@ -1848,17 +1872,22 @@ if (isset($_SESSION["user_username"]) && !empty($_SESSION["user_username"])) {
 if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
  }
- 
+
+//fetch the current module
+error_log("Lesson ID: $lessonID");
+error_log("Answer: " . GetMultChoiceAnswer($lessonID));
  //multi-choice and mysql handshake (madness)
+ 
+if ($module === "basics") {
+error_log("entering basics");
  if ($lessonID === 11 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
          update_mysql($pdo, $userId, 11, 12);
          updateUserProgress($pdo, $userId, 11);
     }
 }
-
 if ($lessonID === 12 && GetMultChoiceAnswer($lessonID)  === "C") {
-    if ($userId !== null) {
+    if ($userId) {
         update_mysql($pdo, $userId, 12, 13);
         updateUserProgress($pdo, $userId, 12);
     }
@@ -1975,14 +2004,114 @@ if ($lessonID === 62 && GetMultChoiceAnswer($lessonID)  === "C") {
         updateUserProgress($pdo, $userId, 62);
     }
 }
-
 if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
     if ($userId !== null) {
     update_mysql($pdo, $userId, 63, 64);
     updateUserProgress($pdo, $userId, 63);
+        }
     }
 }
 
+if ($module === "networking") {
+    if ($lessonID === 9 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+    if ($userId) {
+        network_update_mysql($pdo, $userId, 9, 10);
+        network_updateUserProgress($pdo, $userId, 9);
+    }
+}
+
+if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+    if ($userId) {
+        network_update_mysql($pdo, $userId, 10, 11);
+        network_updateUserProgress($pdo, $userId, 10);
+        }
+    }
+    if ($lessonID === 11 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 11, 12);
+            network_updateUserProgress($pdo, $userId, 11);
+        }
+    }
+
+    if ($lessonID === 12 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 12, 13);
+            network_updateUserProgress($pdo, $userId, 12);
+        }
+    }
+    if ($lessonID === 17 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 17, 18);
+            network_updateUserProgress($pdo, $userId, 17);
+        }
+    }
+    if ($lessonID === 18 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 18, 19);
+            network_updateUserProgress($pdo, $userId, 18);
+        }
+    }
+    if ($lessonID === 19 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 19, 20);
+            network_updateUserProgress($pdo, $userId, 19);
+        }
+    }
+    if ($lessonID === 20 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 20, 21);
+            network_updateUserProgress($pdo, $userId, 20);
+        }
+    }
+    if ($lessonID === 25 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 25, 26);
+            network_updateUserProgress($pdo, $userId, 25);
+        }
+    }
+    if ($lessonID === 26 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 26, 27);
+            network_updateUserProgress($pdo, $userId, 26);
+        }
+    }
+    if ($lessonID === 27 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 27, 28);
+            network_updateUserProgress($pdo, $userId, 27);
+        }
+    }
+    if ($lessonID === 28 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 28, 29);
+            network_updateUserProgress($pdo, $userId, 28);
+        }
+    }
+   if ($lessonID === 37 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+    if ($userId) {
+        network_update_mysql($pdo, $userId, 37, 38);
+        network_updateUserProgress($pdo, $userId, 37);
+        }
+    }
+    if ($lessonID === 38 && GetNetworkMultChoiceAnswer($lessonID) === 'D') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 38, 39);
+            network_updateUserProgress($pdo, $userId, 38);
+        }
+    }
+    if ($lessonID === 39 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 39, 40);
+            network_updateUserProgress($pdo, $userId, 39);
+        }
+    }
+    if ($lessonID === 40 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 40, 40);
+            network_updateUserProgress($pdo, $userId, 40);
+        }
+    }
+}
 
  switch ($cmd) {
     case 'echo':
@@ -2172,6 +2301,7 @@ if ($lessonID === 63 && GetMultChoiceAnswer($lessonID)  === "C") {
             }
         }
             $output  = process_date();
+            $output .= "\nLesson: " . $lessonID;
             break;
     case 'cat':
             if (count($args) > 4) {
@@ -2502,7 +2632,7 @@ case 'python3':
         break;
 	case 'ping':
         $output = process_ping($arg);
-        if ($lessonID === 6) {
+        if ($lessonID === 6 && ($arg === "google.com" || $arg === "142.250.72.206")) {
             $isCorrect = true;
             if ($userId) {
                 network_update_mysql($pdo, $userId, 6, 7);
@@ -2513,6 +2643,13 @@ case 'python3':
     case 'ip':
             if ($arg === "route") {
                 $output = process_ip_route();
+                if ($lessonID === 15) {
+                    $isCorrect = true;
+                if ($userId) {
+                    network_update_mysql($pdo, $userId, 15, 16);
+                    network_updateUserProgress($pdo, $userId, 15);
+                }
+            }
                 break;
             }
             else $output = "Invalid ip command";
@@ -2529,23 +2666,89 @@ case 'python3':
         break;
     case 'traceroute':
         $output = process_traceroute($arg);
+        if ($arg === "google.com") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 16, 17);
+                network_updateUserProgress($pdo, $userId, 16);
+            }
+        }
 	    break;
 	case 'nslookup':
-        $output = process_nslookup($arg);
+        $command = implode(' ', array_map('strtolower', $args));
+        $shell = shell_exec($command);
+        $output = $shell;
+        if ($lessonID === 8 && $command === "nslookup google.com") {
+            $isCorrect = true;
+            if ($userId) {
+                error_log("NSLOOKUP");
+                network_update_mysql($pdo, $userId, 8, 9);
+                network_updateUserProgress($pdo, $userId, 8);
+            }
+        }
         break;
-    case 'dig':
-        $output = process_dig($arg);
+     case 'netstat':
+        $command = implode(' ', array_map('strtolower', $args));
+        $output = shell_exec($command);
         break;
-    case 'host';
-    $output =  shell_exec("nslookup www.alphavantage.co");
- 
+    case 'ss':
+        $command = implode(' ', array_map('strtolower', $args));
+        $output = shell_exec($command);
+        if ($lessonID === 24 && $command === "ss -tuln") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 24, 25);
+                network_updateUserProgress($pdo, $userId, 24);
+            }
+        }
+
+    case 'host':
+    $output =  shell_exec("nslookup www.alphavantage.com");
     break;
+    case 'telnet':
+        $command = implode(' ', array_map('strtolower', $args));
+        $shell = shell_exec($command);
+        $output = $shell;
+        if ($lessonID === 22 && $command === "telnet google.com 80") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 22, 23);
+                network_updateUserProgress($pdo, $userId, 22);
+            }
+        }
+        break;
     case 'curl':
         $command = implode(' ', $args);
-        error_log("Command: " .  $command);
         $shell = shell_exec(implode(' ', $args));
-        error_log("Output: $shell");
         $output = $shell;
+        if ($lessonID === 31 && $command === "curl https://www.oracle.com") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 31, 32);
+                network_updateUserProgress($pdo, $userId, 31); 
+            }
+        }
+        if ($lessonID === 32 && $command === "curl -I https://www.google.com") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 32, 33);
+                network_updateUserProgress($pdo, $userId, 32); 
+            }
+        }
+        if ($lessonID === 34 && $command === "curl https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=VVPWAF4272QM01N9") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 34, 35);
+                network_updateUserProgress($pdo, $userId, 34); 
+            }
+        }
+        if ($lessonID === 36 && $command === "curl ifconfig.me") {
+            $isCorrect = true;
+            if ($userId) {
+                network_update_mysql($pdo, $userId, 36, 37);
+                network_updateUserProgress($pdo, $userId, 36); 
+            }
+        }
         break;
     case 'wget':
         $output = process_wget($fileSystem, $currentDir, $arg);
