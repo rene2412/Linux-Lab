@@ -38,12 +38,12 @@ if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
                 [
                     "name" => "The Basics",
                     "completed" => 0,
-                    "total" => 65
+                    "total" => 50
                 ],
                 [
                     "name" => "Networking",
                     "completed" => 0,
-                    "total" => 21
+                    "total" => 40
                 ],
                 [
                     "name" => "Bash Scripting",
@@ -164,12 +164,12 @@ $response = [
         [
             "name" => "The Basics",
             "completed" => $lessons_completed,
-            "total" => 65
+            "total" => 50
         ],
         [
             "name" => "Networking",
             "completed" => $networking_lessons_completed,
-            "total" => 21
+            "total" => 30
         ],
         [
             "name" => "Bash Scripting",

@@ -2,7 +2,7 @@
     "The Basics": [
         {
             "section__size": 65,
-            "interactive__size": 34,
+            "interactive__size": 50,
             "section__completed": false
         },
         {
@@ -749,9 +749,9 @@
     ],
     "Networking": [
         {
-            "section__size": 35,
+            "section__size": 40,
             "section__completed": false,
-            "interactive__size": 15
+            "interactive__size": 30
         },
         {
             "id": 1,
@@ -767,7 +767,7 @@
             "parent": "Networking",
             "section": "IP Addresses",
             "title": "Local Ip Address, Local Address Network (LAN)",
-            "content_type": "interactive",
+            "content_type": "article",
             "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.<\/p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address<\/b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1<\/code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!<\/p><img src='..\/..\/..\/images\/Home_LAN_local_area_network_example_diagram.png' width='500'>",
             "answer": "",
             "completed": false
@@ -931,7 +931,7 @@
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "traceroute",
-            "content_type": "article",
+            "content_type": "interactive",
             "content": "The <b>traceroute<\/b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute<\/b> is: <code>traceroute example_website.com<\/code> Lets try out an example on the terminal: <code>traceroute google.com<\/code> Breakdown of the output: <pre><ul><li><b>Hop Number:<\/b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.<\/li><li><b>IP Address:<\/b> The IP of the router or device at that hop (e.g. 192.168.1.1).<\/li><li><b>Time:<\/b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.<\/li><li><b>*:<\/b> A star means no response was received from that hop (could be blocked or timed out).<\/li><\/ul><p>This helps you spot slow or failing routes in a network.<\/p>",
             "answer": "",
             "completed": false
@@ -1025,7 +1025,7 @@
             "parent": "Networking",
             "section": "Ports & Sockets",
             "title": "Sockets",
-            "content_type": "interactive",
+            "content_type": "article",
             "content": "<p>We\u2019ve discussed TCP\/IP, the protocol suite that defines how devices communicate over the internet. Now, let's go over an important piece of that model that powers gaming, APIs, ping commands, chat apps, and more: <b>sockets<\/b>.<\/p><p>A <b>socket<\/b> is an endpoint of a two-way communication link between two programs over a network. Sockets allow programs to send and receive data through a connection.<\/p><p>Every socket connection is defined by 4 components:<\/p><pre><code>&lt;Protocol, Source IP, Source Port, Destination IP, Destination Port&gt;<\/code><\/pre><p>Here's a real-world example:<\/p><pre><code>TCP, 192.168.1.10, Port 12345 \u2192 93.184.216.34, Port 80<\/code><\/pre><ul><li><b>Protocol<\/b> \u2014 Usually TCP or UDP<\/li><li><b>Source IP & Port<\/b> \u2014 The device and port initiating the connection<\/li><li><b>Destination IP & Port<\/b> \u2014 The remote device and service being contacted<\/li><\/ul><p>When you play Fortnite or Call of Duty with your friends, your console and home network establishes a <b>socket connection<\/b> to the game's online servers. This connection allows real-time data to flow between your device and the server \u2014 tracking your movements, syncing player actions, and keeping the game state consistent across all players.<\/p><img src='..\/..\/..\/images\/sockets.png' width='500'>",
             "answer": "",
             "completed": false
@@ -1036,7 +1036,7 @@
             "section": "Ports & Sockets",
             "title": "netstat/ss",
             "content_type": "interactive",
-            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat</b> command, but the modern and faster alternative is <b>ss</b>.<p><p><b>Try out the command in the command line and we will breakdoen the output</b><br><code>ss -tuln</code><br>This command shows all TCP and UDP (another transfer protocol like tcp, but just faster and less safe), and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:</b><ul><li><b>Netid</b>: The protocol being used (e.g. tcp, udp)</li><li><b>State</b>: Connection state (e.g. LISTEN, ESTABLISHED)</li><li><b>Recv-Q</b>: Bytes received and queued</li><li><b>Send-Q</b>: Bytes waiting to be sent</li><li><b>Local Address:Port</b>: Your IP address and port</li><li><b>Peer Address:Port</b>: The remote IP address and port (if connected)</li></ul><p><p> Using <b>ss</b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It’s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss</b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
+            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat</b> command, but the modern and faster alternative is <b>ss</b>.<p><p><b>Try out the command in the command line and we will breakdown the output</b><br><code>ss -tuln</code><br>This command shows all TCP and UDP (another transfer protocol like tcp, but just faster and less safe), and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:</b><ul><li><b>Netid</b>: The protocol being used (e.g. tcp, udp)</li><li><b>State</b>: Connection state (e.g. LISTEN, ESTABLISHED)</li><li><b>Recv-Q</b>: Bytes received and queued</li><li><b>Send-Q</b>: Bytes waiting to be sent</li><li><b>Local Address:Port</b>: Your IP address and port</li><li><b>Peer Address:Port</b>: The remote IP address and port (if connected)</li></ul><p><p> Using <b>ss</b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It’s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss</b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
             "answer": "",
             "completed": false
         },
@@ -1128,14 +1128,14 @@
             "section": "The World Wide Web",
             "title": "curl",
             "content_type": "interactive",
-            "content": "The most powerful network Linux command that is used to extract web content, modify web content, and even hack, is the <b>curl</b> command.</p>The <b>curl</b> command works by transferring data to or from a server and operates on top of HTTP methods like GET, POST, and even interact with API's.</p> Using the <b>curl</b> command can get complicated since it can do many things and takes in a lot of parameters, but here is the basic syntax: <code>curl [options] [URL..]</code> Like with other Linux commands we have come across, [options] is an optional argument that does filtering and modifications, we will use it later on.</p> For now, let's take a look at a basic example, we will use the <b>curl</b> command to extract the HTML code (the code websites use to structure their websites) from Oracle and output it in the terminal. Try iy out! <code>curl https://www.oracle.com/</code>",
+            "content": "The most powerful network Linux command that is used to extract web content, modify web content, and even hack, is the <b>curl</b> command.</p>The <b>curl</b> command works by transferring data to or from a server and operates on top of HTTP methods like GET, POST, and even interact with API's.</p> Using the <b>curl</b> command can get complicated since it can do many things and takes in a lot of parameters, but here is the basic syntax: <code>curl [options] [URL..]</code> Like with other Linux commands we have come across, [options] is an optional argument that does filtering and modifications, we will use it later on.</p> For now, let's take a look at a basic example, we will use the <b>curl</b> command to extract the HTML code (the code websites use to structure their websites) from Oracle and output it in the terminal. Try iy out! <code>curl https://www.oracle.com</code>",
             "completed": false
           },
           {
             "id": 32,
             "parent": "Networking",
             "section": "The World Wide Web",
-            "title": "curl - headers",
+            "title": "curl - Headers",
             "content_type": "interactive",
              "content": "Before we enter a webpage and view all the content, your browser sends chunks of information that will be needed for the user. This information will include the following: <li><b>User-Agent</b> – Identifies the browser, version, and operating system being used.</li> <li><b>Accept</b> – Tells the server what content types (like HTML, JSON, XML) the client can understand.</li> <li><b>Host</b> – Specifies the domain name of the server the client wants to connect to.</li> <li><b>Connection</b> – Indicates whether the client wants to keep the connection open or close it after the response.</li><li><b>expires</b> - The expiration date and time when the browser will consider this version of the web page 'old' and will fetch a new copy</li><li><b>cache-control</b> - The permission details that decides if the content can only be cached to your browser (private), or can be cached to 3rd parties to enhance the performance time for everyone using the website (public).</li> Let's run through a headers example using the curl command with an option command.</p> <code>curl -I https://www.google.com</code> We added the '-I' flag here which stands for 'HEAD Request' which tells curl to not extract the full HTML content, but rather just the headers. Try it out!",
             "completed": false
@@ -1157,7 +1157,89 @@
             "content_type": "interactive",
             "content": "Let's use the curl command to fetch the current stock for google using an API! <code>curl https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&\napikey=VVPWAF4272QM01N9</code> You can switch out the 'GOOG' to match any stock symbol, like 'MSFT' for Micrsoft, 'TSLA' for Tesla, and so on. Try it out!",
             "completed": false
-          }                
+          },  
+          {
+            "id": 35,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "WAN (Wide Area Network)",
+            "content_type": "article",
+            "content": "Earlier, we discussed that a LAN (Local Area Network) is the local network where devices like your phone, laptop, or printer communicate. For example, in a home, café, or office, we learned how to find your local IP using the `ifconfig'. But what about your public IP address?</p>This is the IP that the outside world sees when you connect to the internet.</p><p>When your device sends a request to the internet, it goes through your router. Your router has a WAN (Wide Area Network) IP address, which is typically the same as your public IP. This IP is assigned by your ISP (Internet Service Provider) and allows your router — and by extension, your entire local network — to communicate with servers on the internet across a large geographical area.</p><img src='../../../images/wan.jpg' width='500'",
+            "completed": false
+          },
+          {
+            "id": 36,
+            "parent": "Networking",
+            "section": "The World Wide Web",
+            "title": "curl - Public IP",
+            "content_type": "interactive",
+            "content": "Outside of work related devices, public Ip's are dynamic, meaning they are changing to provide efficiency. To currently see our public IP, we can use the curl command to fetch our current public IP we can use the command line</p><code>curl ifconfig.me</code> This command is pretty clever, it sends a HTTP GET request to your own device. It tells the server \"Hey server, what IP do you see from me?\". The server responds back with your public IP, try it out!",
+            "completed": false
+          },
+          {
+            "id": 37,
+            "parent": "Networking",
+            "section": "Checkpoint - The World Wide Web",
+            "title": "Knowledge Check #13",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "GET requests store data in the server, while POST requests read data from the server",
+              "B": "POST requests send data to the server, while GET requests retrieve data from the server and show it in the browser",
+              "C": "GET is used for login forms and payments, while POST is used for loading webpages",
+              "D": "There is no difference, both methods are used to view HTML content"
+            },
+            "content": "<p>Which statement best describes the difference between HTTP GET and POST requests?</p><\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
+            "completed": false
+          },
+          {
+            "id": 38,
+            "parent": "Networking",
+            "section": "Checkpoint - The World Wide Web",
+            "title": "Knowledge Check #14",
+            "content_type": "multichoice",
+            "questions": {
+            "A": "The local IP address assigned to your device via DHCP",
+            "B": "The internal network address used in a LAN",
+            "C": "The IP address your browser uses to identify itself to your router",
+            "D": "The public IP address visible to servers you connect to over the internet"
+            },
+            "content": "<p>What does the following command retrieve?<br><code>curl ifconfig.me</code></p><\/p><div class=\"question__container\"><\/div>",
+            "answer": "D",
+            "completed": false
+          },
+          {
+             "id": 39,
+             "parent": "Networking",
+             "section": "Checkpoint - The World Wide Web",
+             "title": "Knowledge Check #15",
+             "content_type": "multichoice",
+             "questions": {
+             "A": "curl is a Linux-only command that only downloads software packages",
+             "B": "curl allows data transfer between servers using HTTP methods like GET and POST, and is commonly used to interact with APIs",
+             "C": "curl is used exclusively to monitor IP address changes by your ISP",
+              "D": "curl uploads your IP address to web browsers for tracking"
+        },
+            "content": "<p>What is the purpose of the <b>curl</b> command in networking?</p><\/p><div class=\"question__container\"><\/div>",
+            "answer": "B",
+            "completed": false
+          },
+          {
+            "id": 40,
+            "parent": "Networking",
+            "section": "Checkpoint - The World Wide Web",
+            "title": "Knowledge Check #16",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "Your router assigns a private IP to websites so your devices can connect",
+              "B": "Your local IP address is broadcast to public networks for internet access",
+              "C": "Your router uses a WAN IP assigned by your ISP to communicate with the internet, and this is often your public IP",
+              "D": "Your browser directly connects to every device on the internet using your device’s internal IP"
+            },
+            "content": "<p>How does your router connect your local network to the internet using a WAN IP?</p><\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
+            "completed": false
+          }                                                          
     ],
     "basics": {
         "1": {

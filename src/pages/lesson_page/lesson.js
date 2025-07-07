@@ -559,4 +559,3 @@ if (userObj) {
   terminal.mount("#terminal__container");
   const nav = new Navigation(".sidebar__container", false, userObj, false);
 }
-
