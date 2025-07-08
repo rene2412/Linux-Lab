@@ -1,8 +1,8 @@
 {
     "The Basics": [
         {
-            "section__size": 65,
-            "interactive__size": 50,
+            "section__size": 68,
+            "interactive__size": 52,
             "section__completed": false
         },
         {
@@ -97,6 +97,16 @@
             "id": 10,
             "parent": "The Basics",
             "section": "File Navigation",
+            "title": "Absolute Path vs Relative Path",
+            "content_type": "article",
+            "content": "It would be pretty inefficient if we wanted to navigate around the filesystem if our target source file lived in a far directory. We would probably have to use cd and cd .. a lot to reach our destination. However, this is where <b>absolute</b> and <b>relative</b> paths come into play.<ul><li>An <b>absolute path</b> is the full path to a file or directory from the root directory. It always starts with a forward slash (/) and shows the entire path tree. Example: <code>/home/user/documents/file.txt</code></li><li>A <b>relative path</b> refers to a location relative to your current working directory. It does not start with a slash and is shorter to write. Example: <code>../documents/file.txt</code></li></ul><p>Knowing when to use absolute vs relative paths is key for scripting, navigating efficiently, and writing reliable software.</p> <img src='../../../images/abs_relative.jpg' width='500'>",
+            "answer": "",
+            "completed": false 
+        },
+        {
+            "id": 11,
+            "parent": "The Basics",
+            "section": "File Navigation",
             "title": "cd path\/to\/source",
             "content_type": "interactive",
             "content": "Navigating around your filesystem in the command line can be done more efficiently with cd.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
@@ -104,7 +114,7 @@
             "completed": false
         },
         {
-            "id": 11,
+            "id": 12,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #1",
@@ -120,7 +130,7 @@
             "completed": false
         },
         {
-            "id": 12,
+            "id": 13,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #2",
@@ -136,7 +146,7 @@
             "completed": false
         },
         {
-            "id": 13,
+            "id": 14,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #3",
@@ -152,7 +162,17 @@
             "completed": false
         },
         {
-            "id": 14,
+            "id": 15,
+            "parent": "The Basics",
+            "section": "File Navigation",
+            "title": "Lab #1",
+            "content_type": "interactive",
+            "content": "cat path/to/source",
+            "answer": "cd Documents\/",
+            "completed": false 
+        },
+        {
+            "id": 16,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "touch",
@@ -162,7 +182,7 @@
             "completed": false
         },
         {
-            "id": 15,
+            "id": 17,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mkdir",
@@ -172,7 +192,7 @@
             "completed": false
         },
         {
-            "id": 16,
+            "id": 18,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm",
@@ -182,7 +202,7 @@
             "completed": false
         },
         {
-            "id": 17,
+            "id": 19,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rmdir",
@@ -192,7 +212,7 @@
             "completed": false
         },
         {
-            "id": 18,
+            "id": 20,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm -rf",
@@ -202,7 +222,7 @@
             "completed": false
         },
         {
-            "id": 19,
+            "id": 21,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename files",
@@ -212,7 +232,7 @@
             "completed": false
         },
         {
-            "id": 20,
+            "id": 22,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename directories",
@@ -222,7 +242,7 @@
             "completed": false
         },
         {
-            "id": 21,
+            "id": 23,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - move files\/directories",
@@ -232,17 +252,27 @@
             "completed": false
         },
         {
-            "id": 22,
+            "id": 24,
+            "parent": "The Basics",
+            "section": "File Modifications",
+            "title": "cp",
+            "content_type": "interactive",
+            "content": "copy",
+            "answer": "mv hello.txt ..\/Projects",
+            "completed": false
+        }, 
+        {
+            "id": 25,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
-            "title": "Lab #1",
+            "title": "Lab #2",
             "content_type": "interactive",
             "content": "<p>Since we can moves around files with <b>mv<\/b>, we can also move around directories the same way!<\/p><p>Enter the command line argument to move the Projects\/ directory into Subfolder\/ which lives in Documents<\/p><code>mv Directory\/ path\/to\/source<\/code>",
             "answer": "mv Projects\/ Documents\/Subfolder",
             "completed": false
         },
         {
-            "id": 23,
+            "id": 26,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #4",
@@ -258,7 +288,7 @@
             "completed": false
         },
         {
-            "id": 24,
+            "id": 27,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #5",
@@ -274,7 +304,7 @@
             "completed": false
         },
         {
-            "id": 25,
+            "id": 28,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #6",
@@ -290,7 +320,7 @@
             "completed": false
         },
         {
-            "id": 26,
+            "id": 29,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #7",
@@ -306,7 +336,7 @@
             "completed": false
         },
         {
-            "id": 27,
+            "id": 30,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #8",
@@ -322,17 +352,17 @@
             "completed": false
         },
         {
-            "id": 28,
+            "id": 31,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
-            "title": "Lab #2",
+            "title": "Lab #3",
             "content_type": "interactive",
             "content": "Create a new directory called \"School\/\" and in that new directory create a file called \"log.txt\"<\/p><p>Now enter a command that deletes your new School\/ directory that you made.<\/p>",
             "answer": "rm -rf School\/",
             "completed": false
         },
         {
-            "id": 29,
+            "id": 32,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "Searching & Filtering",
@@ -341,7 +371,7 @@
             "completed": false
         },
         {
-            "id": 30,
+            "id": 33,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep",
@@ -350,7 +380,7 @@
             "completed": false
         },
         {
-            "id": 31,
+            "id": 34,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep \"pattern\" file",
@@ -360,7 +390,7 @@
             "completed": false
         },
         {
-            "id": 32,
+            "id": 35,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -n \"pattern\" file",
@@ -370,7 +400,7 @@
             "completed": false
         },
         {
-            "id": 33,
+            "id": 36,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -c \"pattern\" file",
@@ -380,7 +410,7 @@
             "completed": false
         },
         {
-            "id": 34,
+            "id": 37,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "wildcard*",
@@ -390,7 +420,7 @@
             "completed": true
         },
         {
-            "id": 35,
+            "id": 38,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find",
@@ -399,7 +429,7 @@
             "completed": false
         },
         {
-            "id": 36,
+            "id": 39,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source -name filename.txt",
@@ -409,7 +439,7 @@
             "completed": false
         },
         {
-            "id": 37,
+            "id": 40,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source directory",
@@ -419,7 +449,7 @@
             "completed": false
         },
         {
-            "id": 38,
+            "id": 41,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Output Redirection Operators: '>', '>>' ",
@@ -428,7 +458,7 @@
             "completed": false
         },
         {
-            "id": 39,
+            "id": 42,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Overwrite Operator: '>'",
@@ -438,7 +468,7 @@
             "completed": false
         },
         {
-            "id": 40,
+            "id": 43,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Appending Operator: '>>'",
@@ -448,7 +478,7 @@
             "completed": false
         },
         {
-            "id": 41,
+            "id": 44,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #9",
@@ -464,7 +494,7 @@
             "completed": true
         },
         {
-            "id": 42,
+            "id": 45,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #10",
@@ -480,7 +510,7 @@
             "completed": true
         },
         {
-            "id": 43,
+            "id": 46,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #11",
@@ -496,7 +526,7 @@
             "completed": false
         },
         {
-            "id": 44,
+            "id": 47,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #12",
@@ -512,7 +542,7 @@
             "completed": false
         },
         {
-            "id": 45,
+            "id": 48,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #13",
@@ -528,54 +558,54 @@
             "completed": false
         },
         {
-            "id": 46,
+            "id": 49,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #3",
+            "title": "Lab #4",
             "content_type": "lab",
             "content": "<p>In our Documents\/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.<\/p><p>We will need a flag to output the number line where the pattern appears.<\/p>",
             "answer": "grep -n \"we\" Declaration.txt",
             "completed": false
         },
         {
-            "id": 47,
+            "id": 50,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #4",
+            "title": "Lab #5",
             "content_type": "lab",
             "content": "<p>Lets traverse to the Lyrics\/ directory that lives in the Documents\/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt<\/p>",
             "answer": "grep -c \"happen\" LetItHappen.txt",
             "completed": false
         },
         {
-            "id": 48,
+            "id": 51,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #5",
+            "title": "Lab #6",
             "content_type": "lab",
             "content": "<p>In the same Lyrics\/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt<\/p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>",
             "completed": false
         },
         {
-            "id": 49,
+            "id": 52,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #6",
+            "title": "Lab #7",
             "content_type": "lab",
             "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt<\/p>",
             "completed": false
         },
         {
-            "id": 50,
+            "id": 53,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #7",
+            "title": "Lab #8",
             "content_type": "lab",
             "content": "<p>Write a command that returns all the .txt files in the Documents\/ directory?<\/p>",
             "completed": false
         },
         {
-            "id": 51,
+            "id": 54,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "Permissions In Linux",
@@ -584,7 +614,7 @@
             "completed": false
         },
         {
-            "id": 52,
+            "id": 55,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "ls -l",
@@ -593,7 +623,7 @@
             "completed": false
         },
         {
-            "id": 53,
+            "id": 56,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod",
@@ -602,7 +632,7 @@
             "completed": false
         },
         {
-            "id": 54,
+            "id": 57,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "sudo",
@@ -611,7 +641,7 @@
             "completed": false
         },
         {
-            "id": 55,
+            "id": 58,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change user permissions",
@@ -621,7 +651,7 @@
             "completed": false
         },
         {
-            "id": 56,
+            "id": 59,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change group permissions",
@@ -631,7 +661,7 @@
             "completed": false
         },
         {
-            "id": 57,
+            "id": 60,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown",
@@ -640,7 +670,7 @@
             "completed": false
         },
         {
-            "id": 58,
+            "id": 61,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
@@ -649,7 +679,7 @@
             "completed": false
         },
         {
-            "id": 59,
+            "id": 62,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #14",
@@ -665,7 +695,7 @@
             "completed": false
         },
         {
-            "id": 60,
+            "id": 63,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #15",
@@ -681,7 +711,7 @@
             "completed": false
         },
         {
-            "id": 61,
+            "id": 64,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #16",
@@ -697,7 +727,7 @@
             "completed": false
         },
         {
-            "id": 62,
+            "id": 65,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #17",
@@ -713,7 +743,7 @@
             "completed": false
         },
         {
-            "id": 63,
+            "id": 66,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #18",
@@ -729,19 +759,19 @@
             "completed": false
         },
         {
-            "id": 64,
+            "id": 67,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Lab #8",
+            "title": "Lab #9",
             "content_type": "interative",
             "content": "<p>In the Work\/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.<\/p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py<\/code>",
             "completed": false
         },
         {
-            "id": 65,
+            "id": 68,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
-            "title": "Lab #9",
+            "title": "Lab #10",
             "content_type": "interative",
             "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'<\/p><table border='1' style='border-collapse: collapse; margin-top: 15px;'><tr><th style='background-color: transparent;'>Octal <\/th><th style='background-color: transparent;'>Binary <\/th><th style='background-color: transparent;'>Permission <\/th><\/tr><tr><td style='background-color: transparent;'>0<\/td><td style='background-color: transparent;'>000<\/td><td style='background-color: transparent;'>---<\/td><\/tr><tr><td style='background-color: transparent;'>1<\/td><td style='background-color: transparent;'>001<\/td><td style='background-color: transparent;'>--x<\/td><\/tr><tr><td style='background-color: transparent;'>2<\/td><td style='background-color: transparent;'>010<\/td><td style='background-color: transparent;'>-w-<\/td><\/tr><tr><td style='background-color: transparent;'>3<\/td><td style='background-color: transparent;'>011<\/td><td style='background-color: transparent;'>-wx<\/td><\/tr><tr><td style='background-color: transparent;'>4<\/td><td style='background-color: transparent;'>100<\/td><td style='background-color: transparent;'>r--<\/td><\/tr><tr><td style='background-color: transparent;'>5<\/td><td style='background-color: transparent;'>101<\/td><td style='background-color: transparent;'>r-x<\/td><\/tr><tr><td style='background-color: transparent;'>6<\/td><td style='background-color: transparent;'>110<\/td><td style='background-color: transparent;'>rw-<\/td><\/tr><tr><td style='background-color: transparent;'>7<\/td><td style='background-color: transparent;'>111<\/td><td style='background-color: transparent;'>rwx<\/td><\/tr><\/table>",
             "completed": false
