@@ -8,7 +8,6 @@ function GetUsername(object $pdo, string $username) : array|false {
 	$statement = $pdo->prepare($query);
 	$statement->bindParam(":username", $username);
 	$statement->execute();
-
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
 	return $result;
 }
