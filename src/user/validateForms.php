@@ -7,6 +7,7 @@ function GetEmail(PDO $pdo, int $userID) : string|false {
     $email = $statement->fetchColumn();
     return $email;
 }
+
 function GetUsername(PDO $pdo, int $userID) : string|false {
     $sql = "SELECT username FROM users WHERE id=?";
     $statement = $pdo->prepare($sql);
@@ -32,5 +33,19 @@ function Is_Username_Taken(PDO $pdo, string $username) : bool {
     $statement = $pdo->prepare($sql);
 	$statement->execute([$username]);
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
-    return $result !== false;
+    return $result;
+}
+
+function Delete_Account(PDO $pdo, int $userID) : bool {
+    $sql = "DELETE FROM user_progress WHERE user_id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$userID]);
+    
+    $sql = "DELETE FROM user_lessons WHERE user_id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$userID]);
+
+    $sql = "DELETE FROM users WHERE id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$userID]);
 }

@@ -6,18 +6,31 @@
     <title>User Settings</title>
 </head>
 <body>
-    <form action="userSettings.php" method="POST">
-         Change Username <br>
-        <input name="old_username" placeholder="Old Username">
-        <input name="new_username" placeholder="New Username">
-        <button>Change Username</button> <br> <br>
-        Change Email <br>
-        <input name="old_email" placeholder="Old Email">
-        <input name="new_email" placeholder="New Email">
-        <button>Change Email</button> <br>
-        </input>
-        <br>
-    </form>
+  <!-- Change Username Form -->
+  <form action="userSettings.php" method="POST">
+    <input type="hidden" name="form_type" value="change_username">
+    Change Username <br>
+    <input name="old_username" placeholder="Old Username">
+    <input name="new_username" placeholder="New Username">
+    <button type="submit">Change Username</button>
+</form>
+<br><br>
+<!-- Change Email Form -->
+<form action="userSettings.php" method="POST">
+    <input type="hidden" name="form_type" value="change_email">
+    Change Email <br>
+    <input name="old_email" placeholder="Old Email">
+    <input name="new_email" placeholder="New Email">
+    <button type="submit">Change Email</button>
+</form>
+<br><br>
+<!-- Delete Account -->
+<form action="userSettings.php" method="POST">
+    <input type="hidden" name="form_type" value="delete_account">
+    Delete Account <br>
+    <button type="submit">Delete Account</button>
+</form>
+<br><br>
     <!--I already did reset password so just call it again -->
     <form action="../../includes/reset_info.inc.php" method="POST">
         Reset Password <br>
