@@ -451,7 +451,7 @@
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source -name filename.txt",
-            "content_type": "article",
+            "content_type": "interactive",
             "content": "<p>In our root directory lets run through a basic find command to see how it works! We are going to look for a file named \"LetItHappen.txt\" that lives in Documents\/Lyrics.<\/p><code>find Documents\/Lyrics -name \"LetItHappen.txt\"<\/code>",
             "answer": "find Documents\/Lyrics \"LetItHappen.txt\"",
             "completed": false
@@ -461,7 +461,7 @@
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source directory",
-            "content_type": "article",
+            "content_type": "interactive",
             "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ -name \"project1\"<\/code>",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
@@ -654,7 +654,7 @@
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "sudo",
-            "content_type": "interative",
+            "content_type": "article",
             "content": "<p>The <b>sudo<\/b> command is one of the more important commands in Linux as it allows you to execute commands with the security privileges of another user, typically known as the superuser (root).<\/p><p>This gives you temporary administrative access to perform tasks that regular users cannot do.<\/p><p>The name 'sudo' stands for 'superuser do' or 'substitute user do'. When you run a command with sudo, the system will typically ask for your password to verify your identity.<\/p><p>Basic syntax:<\/p><code>sudo command_to_run<\/code><p>Common examples:<\/p><p>Modifying File Permissions: <code>sudo chmod [options] file_name><\/code><\/p><p>- Installing software: <code>sudo apt install package_name<\/code><\/p><p>- Editing system files: <code>sudo nano \/etc\/hosts<\/code><\/p><p>- Restarting the system: <code>sudo reboot<\/code><\/p><p>Always use sudo with caution, as it gives you the power to modify critical system files and settings that could potentially damage your system if used incorrectly.<\/p>",
             "completed": false
         },
