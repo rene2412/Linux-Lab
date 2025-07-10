@@ -738,17 +738,42 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     return "\n";
 }
 
-function process_cat(&$fileSystem, $currentDirectory, $file, $args, $targetFile) : string {
-    $GLOBALS['commandSuccess'] = false;
-    $currentDirectory = rtrim($currentDirectory, "/");
-    $pathParts = array_filter(explode("/", $currentDirectory), 'strlen');
+function process_cat(&$fileSystem, $dir, $file, $args, $targetFile) : string {
+     // Handle root directory access: cd /
+    if ($dir === "/") {
+        $currentDirectory = "/";
+        $GLOBALS['commandSuccess'] = true;
+        return "";
+    }
+
+    // Convert relative path into an array
+    $newPath = explode("/", trim($dir, "/"));
+    $pathParts = explode("/", trim($currentDirectory, "/"));
+
+    foreach ($newPath as $part) {
+        if ($part === "..") {
+            if (!empty($pathParts)) {
+                array_pop($pathParts); // Move up one directory
+            }
+        } else {
+            $pathParts[] = $part; // Move into the next directory
+    }
+}
+
+    // Resolve final path
+    $resolvedPath = implode("/", $pathParts);
+    if ($resolvedPath === "/") {
+        $resolvedPath = "/";
+    }
+
+// Traverse filesystem to validate the path
     $currentLevel = &$fileSystem["/"];
-    
-    // Navigate to target directory
-    foreach ($pathParts as $part) {
-        if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
-            return "Error: Invalid directory path.\n";
-        }
+    $traversePath = array_filter(explode("/", trim($resolvedPath, "/")), 'strlen');
+
+    foreach ($traversePath as $part) {
+        if (str_ends_with($part, ".txt") || !isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+            return "Error: '$part' is not a directory.\n";
+    }
         $currentLevel = &$currentLevel[$part];
     }
 
@@ -1880,58 +1905,58 @@ error_log("Answer: " . GetMultChoiceAnswer($lessonID));
  
 if ($module === "basics") {
 error_log("entering basics");
- if ($lessonID === 11 && GetMultChoiceAnswer($lessonID)  === "B") {
+ if ($lessonID === 14 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
-         update_mysql($pdo, $userId, 11, 12);
-         updateUserProgress($pdo, $userId, 11);
+         update_mysql($pdo, $userId, 14, 15);
+         updateUserProgress($pdo, $userId, 14);
     }
 }
-if ($lessonID === 12 && GetMultChoiceAnswer($lessonID)  === "C") {
+if ($lessonID === 15 && GetMultChoiceAnswer($lessonID)  === "C") {
     if ($userId) {
-        update_mysql($pdo, $userId, 12, 13);
-        updateUserProgress($pdo, $userId, 12);
+        update_mysql($pdo, $userId, 15, 16);
+        updateUserProgress($pdo, $userId, 16);
     }
 }
 
-if ($lessonID === 13 && GetMultChoiceAnswer($lessonID)  === "D") {
+if ($lessonID === 16 && GetMultChoiceAnswer($lessonID)  === "D") {
     if ($userId !== null) {
-        update_mysql($pdo, $userId, 13, 14);
-        updateUserProgress($pdo, $userId, 13);
+        update_mysql($pdo, $userId, 16, 17);
+        updateUserProgress($pdo, $userId, 16);
     }
 }
 
-if ($lessonID === 23 && GetMultChoiceAnswer($lessonID)  === "B") {
+if ($lessonID === 28 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
-        update_mysql($pdo, $userId, 23, 24);
-        updateUserProgress($pdo, $userId, 23);
+        update_mysql($pdo, $userId, 28, 29);
+        updateUserProgress($pdo, $userId, 28);
     }
 }
 
-if ($lessonID === 24 && GetMultChoiceAnswer($lessonID)  === "B") {
+if ($lessonID === 29 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
-        update_mysql($pdo, $userId, 24, 25);
-        updateUserProgress($pdo, $userId, 24);
+        update_mysql($pdo, $userId, 29, 30);
+        updateUserProgress($pdo, $userId, 29);
     }
 }
 
-if ($lessonID === 25 && GetMultChoiceAnswer($lessonID)  === "C") {
+if ($lessonID === 30 && GetMultChoiceAnswer($lessonID)  === "C") {
     if ($userId !== null) {
-    update_mysql($pdo, $userId, 25, 26);
-    updateUserProgress($pdo, $userId, 25);
+    update_mysql($pdo, $userId, 30, 31);
+    updateUserProgress($pdo, $userId, 30);
     }
 }
 
-if ($lessonID === 26 && GetMultChoiceAnswer($lessonID)  === "B") {
+if ($lessonID === 31 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
-    update_mysql($pdo, $userId, 26, 27);
-    updateUserProgress($pdo, $userId, 26);
+    update_mysql($pdo, $userId, 31, 32);
+    updateUserProgress($pdo, $userId, 31);
     }
 }
 
-if ($lessonID === 27 && GetMultChoiceAnswer($lessonID)  === "C") {
+if ($lessonID === 32 && GetMultChoiceAnswer($lessonID)  === "C") {
     if ($userId !== null) {
-    update_mysql($pdo, $userId, 27, 28);
-    updateUserProgress($pdo, $userId, 27);
+    update_mysql($pdo, $userId, 32, 33);
+    updateUserProgress($pdo, $userId, 32);
     }
 }
 
@@ -2186,7 +2211,17 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             updateUserProgress($pdo, $userId, 50);
             }
         }
-         break;   
+         break;
+    case 'whoami':
+        $output = $username;
+        if ($lessonID === 5) {
+            $isCorrect = true;
+            if ($userId) {
+                update_mysql($pdo, $userId, 5, 6);  
+                updateUserProgress($pdo, $userId, 5);
+            }
+        }
+        break;   
     case 'touch':
             if (count($args) > 2) {
                 $output = "Error: Invalid touch command\n";
@@ -2199,11 +2234,11 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             // Write the updated JSON back to the file
             file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
             chmod('src/testAPI/lessons.json', 0666);
-            if ($lessonID === 14 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
+            if ($lessonID === 18 && $GLOBALS['commandSuccess'] && $arg === "linux.txt") {
                 $isCorrect = true;
                 if ($userId !== null) {
-                update_mysql($pdo, $userId, 14, 15);  
-                updateUserProgress($pdo, $userId, 14);
+                update_mysql($pdo, $userId, 18, 19);  
+                updateUserProgress($pdo, $userId, 18);
             }
         }
         break;
@@ -2233,11 +2268,11 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
         // Write the updated JSON back to the file
         file_put_contents('src/testAPI/lessons.json', $updatedJsonString);          
         chmod('src/testAPI/lessons.json', 0666);
-        if ($lessonID === 6) {
+        if ($lessonID === 7) {
             $isCorrect = true;
             if ($userId !== null) {
-            update_mysql($pdo, $userId, 6, 7); 
-            updateUserProgress($pdo, $userId, 6);
+            update_mysql($pdo, $userId, 7, 8); 
+            updateUserProgress($pdo, $userId, 7);
            }
        }
         $output = process_ls($fileSystem, $currentDir);
@@ -2255,11 +2290,11 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
              //Write the updated JSON back to the file
              file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
              chmod('src/testAPI/lessons.json', 0666); 
-             if ($lessonID === 9) {
+             if ($lessonID === 11) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                 updateUserProgress($pdo, $userId, 9);
-                 update_mysql($pdo, $userId, 9, 10);
+                 updateUserProgress($pdo, $userId, 11);
+                 update_mysql($pdo, $userId, 11, 12);
             }
         }
              break;
@@ -2274,17 +2309,26 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             if ($lessonID === 10  && ($arg === "../Projects/project1" ||  $arg === "../Projects/project1/")) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                update_mysql($pdo, $userId, 10, 11);
-                updateUserProgress($pdo, $userId, 10);
+                update_mysql($pdo, $userId, 13, 14);
+                updateUserProgress($pdo, $userId, 13);
                 }
             }
-            if ($lessonID === 7 && ($arg === "Documents" || $arg === "Documents/")) {
+            if ($lessonID === 8 && ($arg === "Documents" || $arg === "Documents/")) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                update_mysql($pdo, $userId, 7, 8);
-                updateUserProgress($pdo, $userId, 7);
+                update_mysql($pdo, $userId, 8, 9);
+                updateUserProgress($pdo, $userId, 8);
                }
             }
+            }
+        }
+        break;
+    case 'clear':
+        if ($lessonID === 10) {
+            $isCorrect = true;
+            if ($userId) {
+                update_mysql($pdo, $userId, 10, 11);
+                updateUserProgress($pdo, $userId, 10);
             }
         }
         break;
@@ -2318,21 +2362,34 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
                //Write the updated JSON back to the file
                file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
                chmod('src/testAPI/lessons.json', 0666);
-            if ($lessonID === 8 && $GLOBALS['commandSuccess'] && $arg === "hello.txt" ) {
+
+               if ($lessonID === 17 && $arg !== "/Documents/Lyrics/LetItHappen.txt") {
+                $output = "For this lab, please use the absolute path!";
+                break;
+              } 
+               if ($lessonID === 17 && $arg === "/Documents/Lyrics/LetItHappen.txt") {
+                $isCorrect = true;
+                if ($userId) {
+                    update_mysql($pdo, $userId, 17, 18 ); 
+                    updateUserProgress($pdo, $userId, 17);
+                }
+                break;
+            } 
+            if ($lessonID === 9 && $GLOBALS['commandSuccess'] && $arg === "hello.txt" ) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                update_mysql($pdo, $userId, 8, 9); 
-                updateUserProgress($pdo, $userId, 8);
+                update_mysql($pdo, $userId, 9, 10); 
+                updateUserProgress($pdo, $userId, 9);
+                }
+                break;
             }
-        }
             if ($lessonID === 48 && $arg === "LetItHappen.txt" && $arg2 === ">" && $arg3 === "copy.txt" && $GLOBALS['commandSuccess']) {
                 $isCorrect = true;
                 if ($userId !== null) {
                 update_mysql($pdo, $userId, 48, 49);
-                updateUserProgress($pdo, $userId, 49); 
-            }
-        }
-
+                updateUserProgress($pdo, $userId, 48); 
+                    }
+                }
         break;
     case 'pwd':
              $jsonData['basics'][3]['completed'] = true;
@@ -2340,26 +2397,31 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
                 $output = "Error: Invalid pwd command";
                 break;
             }
-            if ($lessonID === 5) {
+            if ($lessonID === 6) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                     update_mysql($pdo, $userId, 5, 6); 
-                    updateUserProgress($pdo, $userId, 5);
+                     update_mysql($pdo, $userId, 6, 7); 
+                    updateUserProgress($pdo, $userId, 7);
             }
         }
             $output = process_pwd($currentDir);
             break;
+    case 'cp':
+        if ($userId !== null) {
+            update_mysql($pdo, $userId, 26, 27);
+            updateUserProgress($pdo, $userId, 26);
+            }
     case 'mkdir':
         if (count($args) > 2) {
             $output = "Error: Invalid mkdir command";
             break;
         }
         $output = process_mkdir($fileSystem, $currentDir, $arg);
-        if ($lessonID == 15 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
+        if ($lessonID == 19 && $GLOBALS['commandSuccess'] && ($arg === "ubuntu/" || $arg === "ubuntu")) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                update_mysql($pdo, $userId, 14, 15);
-                updateUserProgress($pdo, $userId, 14);
+                update_mysql($pdo, $userId, 19, 20);
+                updateUserProgress($pdo, $userId, 19);
                 }
             }
         break;
@@ -2371,35 +2433,34 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             $output = process_mv($fileSystem, $currentDir, $arg, $arg2);
             $GetLine = $arg . $arg2;
           
-            if ($lessonID === 19 && $arg === "file2.txt" && $arg2 === "kali.txt" && $GLOBALS['commandSuccess']) {
+            if ($lessonID === 23 && $arg === "file2.txt" && $arg2 === "kali.txt" && $GLOBALS['commandSuccess']) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                    update_mysql($pdo, $userId, 19, 20);            
-                    updateUserProgress($pdo, $userId, 19);
+                    update_mysql($pdo, $userId, 23, 24);            
+                    updateUserProgress($pdo, $userId, 23);
                 }
             } 
-            if ($lessonID === 20 && $arg === "Documents/" && $arg2 === "Debian/" && $GLOBALS['commandSuccess']) {
+            if ($lessonID === 24 && $arg === "Documents/" && $arg2 === "Debian/" && $GLOBALS['commandSuccess']) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                    update_mysql($pdo, $userId, 20, 21);            
-                    updateUserProgress($pdo, $userId, 20);
+                    update_mysql($pdo, $userId, 24, 25);            
+                    updateUserProgress($pdo, $userId, 24);
                 }
             }  
-            if ($lessonID === 21 && $arg === "hello.txt" && ($arg2 === "../Projects/" || $arg2 === "../Projects") && $GLOBALS['commandSuccess']) {
+            if ($lessonID === 25 && $arg === "hello.txt" && ($arg2 === "../Projects/" || $arg2 === "../Projects") && $GLOBALS['commandSuccess']) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                    update_mysql($pdo, $userId, 21, 22);            
-                    updateUserProgress($pdo, $userId, 21);
+                    update_mysql($pdo, $userId, 25, 26);            
+                    updateUserProgress($pdo, $userId, 25);
                 }
             } 
-            if ($lessonID === 22 && ($arg === "Projects" || $args === "Projects/") && ($arg2 === "Documents/Subfolder/" || $arg2 === "Documents/Subfolder")) {
+            if ($lessonID === 27 && ($arg === "Projects" || $args === "Projects/") && ($arg2 === "Documents/Subfolder/" || $arg2 === "Documents/Subfolder")) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                    update_mysql($pdo, $userId, 22, 23);            
-                    updateUserProgress($pdo, $userId, 22);
+                    update_mysql($pdo, $userId, 27, 28);            
+                    updateUserProgress($pdo, $userId, 27);
                 }
-            }
-            
+            }        
             break;
     
     case 'rm':
@@ -2412,18 +2473,18 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
                 if (str_starts_with($output, "Error:")) {
                     break;
                 }
-                if ($lessonID === 18 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
+                if ($lessonID === 22 && ($arg2 === "Subfolder/" || $arg2 === "Subfolder")) {
                      $isCorrect = true;
                      if ($userId !== null) {
-                         update_mysql($pdo, $userId, 18, 19);
-                         updateUserProgress($pdo, $userId, 18);
+                         update_mysql($pdo, $userId, 22, 23);
+                         updateUserProgress($pdo, $userId, 22);
                      }
                 }
-                if ($lessonID === 28 && ($arg2 === "School/" || $arg2 === "School")) {
+                if ($lessonID === 33 && ($arg2 === "School/" || $arg2 === "School")) {
                     $isCorrect = true;
                     if ($userId !== null) {
-                        update_mysql($pdo, $userId, 28, 29);
-                        updateUserProgress($pdo, $userId, 28);
+                        update_mysql($pdo, $userId, 33, 34);
+                        updateUserProgress($pdo, $userId, 33);
                     }
                }
                 break;
@@ -2436,8 +2497,8 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
                 if ($lessonID === 16 && $GLOBALS['commandSuccess'] && $arg === "penguin.txt") {
                     $isCorrect = true;
                     if ($userId !== null) {
-                        update_mysql($pdo, $userId, 16, 17);
-                        updateUserProgress($pdo, $userId, 16);
+                        update_mysql($pdo, $userId, 20, 21);
+                        updateUserProgress($pdo, $userId, 20);
                     }
                 }
             }
@@ -2449,11 +2510,11 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
                 break;
             }
             $output = process_rmdir($fileSystem, $currentDir, $arg);
-            if ($lessonID === 17 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
+            if ($lessonID === 21 && $GLOBALS['commandSuccess'] && ($arg === "project1/" || $arg === "project1")) {
                 $isCorrect = true; 
                 if ($userId !== null) {
-                    update_mysql($pdo, $userId, 17, 18); 
-                    updateUserProgress($pdo, $userId, 17);
+                    update_mysql($pdo, $userId, 21, 22); 
+                    updateUserProgress($pdo, $userId, 21);
                 }
             }
             break;
