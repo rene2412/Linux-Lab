@@ -891,9 +891,21 @@ foreach ($traversePath as $part) {
 }
 
 
-function process_copy (&$filesystem, $currentDirectory, $isFile, $currentContent, $contentDestination) {
-
-
+function process_copy (&$fileSystem, $currentDirectory, $file, $sourcePath) {
+    // Helper to resolve absolute paths
+    $resolvePath = function ($baseDir, $path) {
+        $isAbsolute = (substr($path, 0, 1) === '/');
+        $parts = $isAbsolute ? [] : explode('/', trim($baseDir, '/'));
+        foreach (explode('/', $path) as $part) {
+            if ($part === '..') {
+                if (!empty($parts)) array_pop($parts);
+            } elseif ($part !== '.' && $part !== '') {
+                $parts[] = $part;
+            }
+        }
+        return '/' . implode('/', $parts);
+    };
+    
 }
 
 function process_mv(&$fileSystem, $currentDirectory, $oldname, $newname): string {
@@ -2338,7 +2350,6 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             }
         }
             $output  = process_date();
-            $output .= "\nLesson: " . $lessonID;
             break;
     case 'cat':
             if (count($args) > 4) {
