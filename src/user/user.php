@@ -9,7 +9,7 @@ header('Content-Type: application/json');
 require_once "../../includes/database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
 global $pdo;
-$username = $_SESSION["user_username"] ?? null; // Get stored username
+$username = $_SESSION["user_username"] ?? "guest"; // Get stored username
 $user_id = $_SESSION["user_id"] ?? null;
 $logged = false; // Default to false for guests
 
