@@ -4,10 +4,10 @@ require_once "../../includes/database.inc.php";
 require_once "../../includes/signup_contr.inc.php";
 session_start();
 
-echo json_encode("User Settings");
 $username = $_SESSION["user_username"];
 $userId = $_SESSION["user_id"];
-echo json_encode ("User: $username<br>ID: $userId");
+$Errors = [];
+$Success = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $formType = $_POST["form_type"] ?? "";
@@ -17,31 +17,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $newUsername = $_POST["new_username"];
    $username = GetUsername($pdo, $userId);
    if (empty($oldUsername) || empty($newUsername)) {
-    echo json_encode ("Error: Username Input Can't Be Empty");
-    return;
+    $Errors .= "Error: Username Input Can't Be Empty";
     }
    if ($username !== $oldUsername) {
-    echo json_encode ("Error: Username '$oldUsername' Not Found!");
-    return;
+    $Errors .= "Error: Username '$oldUsername' Not Found!";
     }
    if ($oldUsername === $newUsername) {
-    echo json_encode ("Error: New Username Can't Be The Same!");
-    return;
+    $Errors .= "Error: New Username Can't Be The Same!";
     }
     if (Is_Username_Taken($pdo, $newUsername)) {
-    echo json_encode ("Error: $newUsername Is Taken! Please Choose Another");
-    return;
+    $Errors .= "Error: $newUsername Is Taken! Please Choose Another";
     }
     if (is_username_too_long($newUsername)) {
-    echo json_encode ("Error: Username Is Too Long! Stay Within 15 Characters");
-    return;
+    $Errors .= "Error: Username Is Too Long! Stay Within 15 Characters";
     }
     if ($oldUsername !== $newUsername) {
         UpdateUsername($pdo, $userId, $newUsername);
-        echo json_encode ("Success: Username Updated!");
+        $Success .= "Success: Username Updated!";
         //log user out
         require_once "logout.php";
-        return;
     }
 }
     if ($formType === "change_email") {        
@@ -49,40 +43,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $newEmail = $_POST["new_email"];
         //email validation
         $email = GetEmail($pdo, $userId);
-        echo json_encode ("Email: $email");
 
       if (empty($oldEmail) || empty($newEmail)) {
-        echo json_encode("Error: Email Input Can't Be Empty");
-        return;
+        $Errors .= "Error: Email Input Can't Be Empty";
      }
       if ($email !== $oldEmail) {
-         echo json_encode("Error: Email '$oldEmail' Not Found!");
-         return;
+         $Errors .= "Error: Email '$oldEmail' Not Found!";
     }
       if ($oldEmail === $newEmail) {
-        echo json_encode("Error: New Email Can't Be The Same!");
-        return;
+        $Errors .= "Error: New Email Can't Be The Same!";   
     }
       if (email_is_registered($pdo, $newEmail)) {
-        echo json_encode("Error: $newEmail Is Taken! Please Choose Another");
-        return;
+        $Errors .= "Error: $newEmail Is Taken! Please Choose Another";
     }
     //insert the new email
       if ($oldEmail !== $newEmail) {
          UpdateEmail($pdo, $userId, $newEmail);
-         echo json_encode("Success: E-Mail is updated!");
-         return;
+         $Success .= "Success: E-Mail is updated!";
         } 
     }
     //delete the account (rip)
     if ($formType === "delete_account") {
         Delete_Account($pdo, $userId);
-        echo json_encode("Account Succesfully Deleted, Goodbye!");
+        $Success .= "Account Succesfully Deleted, Goodbye!";
         require_once "logout.php";
-        return;
     }
     else {
-        echo json_decode("Error Invalid Form!");
-        return;
+        $Errors .= "Error Invalid Form!";
     }
+    //sending api
+    echo json_encode([
+        "Username: " => $username,
+        "User Id: " => $userId,
+        "Error Logs: " => $Errors,
+        "Success Logs: " => $Success,
+    ]);
 }

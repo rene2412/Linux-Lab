@@ -890,8 +890,7 @@ foreach ($traversePath as $part) {
     }
 }
 
-
-function process_copy (&$fileSystem, $currentDirectory, $file, $sourcePath) {
+function process_copy(&$fileSystem, $currentDirectory, $file, $sourcePath): string {
     // Helper to resolve absolute paths
     $resolvePath = function ($baseDir, $path) {
         $isAbsolute = (substr($path, 0, 1) === '/');
@@ -905,7 +904,55 @@ function process_copy (&$fileSystem, $currentDirectory, $file, $sourcePath) {
         }
         return '/' . implode('/', $parts);
     };
-    
+
+    // Resolve full source and target paths
+    $sourceFullPath = $resolvePath($currentDirectory, $file);
+    $targetFullPath = $resolvePath($currentDirectory, $sourcePath);
+
+    // Navigate to source directory
+    $sourceDir = dirname($sourceFullPath);
+    $sourceName = basename($sourceFullPath);
+    $sourceParts = array_filter(explode('/', trim($sourceDir, '/')), 'strlen');
+    $sourceLevel = &$fileSystem['/'];
+    foreach ($sourceParts as $part) {
+        if (!array_key_exists($part, $sourceLevel) || !is_array($sourceLevel[$part])) {
+            return "Error: Source path invalid.";
+        }
+        $sourceLevel = &$sourceLevel[$part];
+    }
+
+    // Check if source exists
+    if (!array_key_exists($sourceName, $sourceLevel)) {
+        return "Error: '$file' not found.";
+    }
+
+    // Navigate to target directory
+    $targetDir = dirname($targetFullPath);
+    $targetName = basename($targetFullPath);
+    $targetParts = array_filter(explode('/', trim($targetDir, '/')), 'strlen');
+    $targetLevel = &$fileSystem['/'];
+    foreach ($targetParts as $part) {
+        if (!array_key_exists($part, $targetLevel) || !is_array($targetLevel[$part])) {
+            return "Error: Target directory does not exist.";
+        }
+        $targetLevel = &$targetLevel[$part];
+    }
+
+    // If target is a directory, append source name (e.g., cp file.txt dir/)
+    if (array_key_exists($targetName, $targetLevel) && is_array($targetLevel[$targetName])) {
+        $targetLevel = &$targetLevel[$targetName];
+        $targetName = $sourceName;
+    }
+
+    // Check for conflicts
+    if (array_key_exists($targetName, $targetLevel)) {
+        return "Error: '$targetName' already exists.";
+    }
+
+    // Perform the copy (deep copy to avoid reference issues)
+    $targetLevel[$targetName] = $sourceLevel[$sourceName];
+  return "";
+   // return "Successfully copied '$file' to '$sourcePath'.";
 }
 
 function process_mv(&$fileSystem, $currentDirectory, $oldname, $newname): string {
@@ -1098,7 +1145,7 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
 function delete_recursive(&$directory) {
     foreach ($directory as $key => &$content) {
         if (is_array($content)) {
-            delete_recursive($content); // 🔁 Recursive call for subdirectories
+            delete_recursive($content); // Recursive call for subdirectories
         }
         unset($directory[$key]); // Delete files or now-empty directories
     }
@@ -2218,6 +2265,9 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
         }
          break;
     case 'whoami':
+        if ($userId === null) {
+            $username = "guest";
+        } 
         $output = $username;
         if ($lessonID === 5) {
             $isCorrect = true;
@@ -2411,10 +2461,15 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             $output = process_pwd($currentDir);
             break;
     case 'cp':
-        if ($userId !== null) {
-            update_mysql($pdo, $userId, 26, 27);
-            updateUserProgress($pdo, $userId, 26);
+        $output = process_copy($fileSystem, $currentDir, $arg, $arg2);
+        if ($lessonID == 26 && $arg === "hello.txt" && ($arg2 === "../Projects" || $arg2 === "/Projects") && !str_starts_with($output, "Error:")) {
+            $isCorrect = true;
+            if ($userId !== null) {
+                update_mysql($pdo, $userId, 26, 27);
+                updateUserProgress($pdo, $userId, 26);
             }
+        }
+        break;
     case 'mkdir':
         if (count($args) > 2) {
             $output = "Error: Invalid mkdir command";

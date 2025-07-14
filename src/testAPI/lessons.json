@@ -275,8 +275,8 @@
             "section": "File Modifications",
             "title": "cp",
             "content_type": "interactive",
-            "content": "copy",
-            "answer": "mv hello.txt ..\/Projects",
+            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp</b> (copy) command to achieve this and the syntax looks a lot like the mv command</p><code>cp [file] path/to/source</code><p> Traverse to the /Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ../Projects</code> Note: The source path can either be absolute or relative, your choice!",
+            "answer": "cp hello.txt ../Projects",
             "completed": false
         }, 
         {
