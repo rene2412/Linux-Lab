@@ -1,60 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="../assets/SVGs/favicon.ico">
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Linux-Lab</title>
+    <link rel="icon" type="image/x-icon" href="../assets/SVGs/favicon.ico" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="settingModal.css" />
+  </head>
+  <body>
     <div class="navigation__container"></div>
+
+    <!-- SETTINGS -->
+    <dialog class="setting__container">
+      <div class="setting__header">
+        <h2>Settings</h2>
+        <button class="setting__button--close setting__button">
+          <img src="../assets/SVGs/Close.svg" alt="close" />
+        </button>
+      </div>
+      <div class="setting__content">
+        <form
+          class="setting__form setting__form--email setting__item"
+          action="#"
+          method="POST"
+        >
+          <h4 class="setting__form__title">Change Email</h4>
+          <label for="oldEmail">Enter current Email:</label>
+          <input
+            class="input--single"
+            placeholder="currentEmail@domain.com"
+            id="oldEmail"
+            name="oldEmail"
+            type="email"
+            required
+          />
+          <label for="newEmail">Enter new Email:</label>
+          <input
+            placeholder="email@domain.com"
+            id="newEmail"
+            name="newEmail"
+            type="email"
+            class="input--single"
+            required
+          />
+          <button class="form__button--cpwd styled-button" type="submit">
+            Change Email
+          </button>
+          <p class="status status--error hidden"></p>
+          <p class="status status--success hidden"></p>
+        </form>
+        <form
+          class="setting__form setting__form--name setting__item"
+          action="#"
+          method="POST"
+        >
+          <h4 class="setting__form__title">Change Username</h4>
+          <label for="oldName">Enter current username</label>
+          <input
+            class="input--single"
+            placeholder="current Username"
+            id="oldName"
+            name="oldName"
+            type="text"
+            required
+          />
+          <label for="newName">Enter new Email:</label>
+          <input
+            placeholder="New Username"
+            id="newName"
+            name="newName"
+            type="text"
+            class="input--single"
+            required
+          />
+          <button class="form__button--name styled-button" type="submit">
+            Change Name
+          </button>
+          <p class="status status--error hidden"></p>
+          <p class="status status--success hidden"></p>
+        </form>
+        <div class="setting__item">
+          <h4 class="setting__form__title">Delete Account:</h4>
+          <button
+            type="button"
+            class="setting__button setting__button--delete styled-button"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- LAYOUT -->
     <div class="layout">
-        <div class="sidebar__placeholder"></div>
-        <main class="dashboard__container">
-            <p class="greeting__text">Loading...</p>
-            <!-- <div class="dashboard__cards">
-                <div class="dashboard__column--1 dashboard__column">
-
-                    <div class="dashboard__card dashboard__card--continue">
-                        <h3 class="card__title">Continue Learning:</h3>
-                        <div class="card__content">
-                            <a href="#" class="card__link">
-                                <p class="card__text">The Basics</p>
-                                <p class="card__text">Lesson: cat</p>
-                            </a>
-                            <button class="styled-button card__button">continue</button>
-                        </div>
-                    </div>
-
-                    <div class="dashboard__card dashboard__card--modules">
-                        <h3 class="no-select">Modules:</h3>
-                        <div class="card__content">
-                            <ul class="card__ul">
-                                <li class="card__subtitle"><a href="#" class="card__link">The Basics</a></li>
-                            </ul>
-                            <p class="card__message no-select animate-pulse">Coming Soon...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="dashboard__column--2 dashboard__column">
-                    <div class="dashboard__card dashboard__card--progress">
-                        <h3>Your Progress:</h3>
-                        <div class="card__content">
-                            <div class="card__content--progress">
-                                <p class="card__text">The Basics</p>
-                                <span class="card__progress-bar">[<span class="green">██████████████</span>░░░░░░]</span>
-                                <p class="card__text">13/21</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div> -->
-    </main>
-
+      <div class="sidebar__placeholder"></div>
+      <main class="dashboard__container">
+        <p class="greeting__text">Loading...</p>
+      </main>
     </div>
-    
+
     <script src="dashboard.js" type="module"></script>
-</body>
+    <script>
+      const modal = document.querySelector(".setting__container");
+      const closeBtn = modal.querySelector(".setting__button--close");
+
+      const emailForm = document.querySelector(".setting__form--email");
+      const usernameForm = document.querySelector(".setting__form--name");
+
+      console.log(emailForm);
+      console.log(usernameForm);
+
+      emailForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        console.log(data);
+
+        try {
+          const response = await fetch("../../user/change_email.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              new_email: data.newEmail,
+              old_email: data.oldEmail,
+            }),
+          });
+          if (!response.ok) {
+            throw new Error ("Bad response form send");
+          }
+          const resData = await response.json();
+          console.log(resData);
+        } catch (e) {
+          console.error(e);
+        }
+      });
+
+      closeBtn.addEventListener("click", () => {
+        modal.close();
+      });
+      modal.showModal();
+    </script>
+  </body>
 </html>

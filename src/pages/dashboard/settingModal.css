@@ -1,0 +1,60 @@
+@import '../../styles/inputForm.css';
+
+.setting__container{
+    background-color: var(--color-background-dark);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 430px;
+    padding: var(--spce-med);
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 1s ease-out;
+    border-radius: var(--radius-med);
+}
+
+.setting__content{
+    margin: var(--spce-lg) var(--spce-lg) var(--spce-lg) var(--spce-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spce-xlg);
+}
+
+.setting__item{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: var(--spce-xsm);
+}
+
+.setting__item button{
+    width: 100%;
+}
+
+.setting__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting__button--close{
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0px;
+}
+
+.setting__button--delete{
+    /* background-color: #dc0909; */
+    background-color: transparent;
+    border: solid 2px #dc0909;
+    color: #dc0909;
+    font-weight: 800;
+}
+
+
+
+dialog::backdrop{
+    background: rgba(0, 0, 0, 0.398);
+    backdrop-filter: blur(3px);
+}
