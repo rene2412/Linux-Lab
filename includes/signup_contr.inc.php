@@ -1,6 +1,8 @@
 <?php 
+
 //type declaration, if an int is declared an int, it cannot be converted 
 declare(strict_types=1);
+require_once 'signup_model.inc.php';
 
 function is_input_empty(string $username, string $pwd, string $email) : bool {
 	if (empty($username) || empty($pwd) || empty($email)) {
