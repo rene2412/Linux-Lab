@@ -1,6 +1,6 @@
 <?php
 
-function GetEmail(PDO $pdo, int $userID) : string|false {
+function GetUserEmail(PDO $pdo, int $userID) : string|false {
     $sql = "SELECT email FROM users WHERE id=?";
     $statement = $pdo->prepare($sql);
     $statement->execute([$userID]);
@@ -8,7 +8,7 @@ function GetEmail(PDO $pdo, int $userID) : string|false {
     return $email;
 }
 
-function GetUsername(PDO $pdo, int $userID) : string|false {
+function Get_Username(PDO $pdo, int $userID) : string|false {
     $sql = "SELECT username FROM users WHERE id=?";
     $statement = $pdo->prepare($sql);
     $statement->execute([$userID]);
