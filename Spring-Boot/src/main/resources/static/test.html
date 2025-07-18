@@ -61,9 +61,12 @@
             border-bottom: 2px solid #00ff00;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 20px;
             box-shadow: 0 2px 20px rgba(0, 255, 0, 0.2);
+            position: relative;
         }
+
         .bash-logo {
             position: absolute;
             top: 50%;
@@ -79,6 +82,7 @@
             0%, 100% { filter: drop-shadow(0 0 10px #00ff00); }
             50% { filter: drop-shadow(0 0 20px #00ff00) drop-shadow(0 0 30px #00ff00); }
         }
+
         .bash-symbol {
             font-size: 2.5em;
             color: #00ff00;
@@ -111,7 +115,8 @@
         }
 
         .terminal-info {
-            margin-left: auto;
+            position: absolute;
+            right: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -123,7 +128,7 @@
             display: flex;
             width: 100%;
             height: 100vh;
-            padding-top: 80px;
+            padding-top: 100px;
         }
 
         .lesson-panel {
@@ -465,6 +470,7 @@
         @media (max-width: 1024px) {
             .split-container {
                 flex-direction: column;
+                padding-top: 120px;
             }
             
             .lesson-panel,
@@ -480,6 +486,11 @@
             
             .header h1 {
                 font-size: 1.8em;
+            }
+            
+            .bash-logo {
+                width: 50px;
+                height: 50px;
             }
         }
 
@@ -501,7 +512,7 @@
     
     <div class="header">
         <div class="bash-symbol">$</div>
-        <img src=".././../../../../images/bash.png" alt="Bash Logo" class="bash-logo">
+        <img src="images/bash.png" alt="Bash Logo" class="bash-logo">
         <h1>Bash Scripting</h1>
         <div class="terminal-info">
             <span> Ubuntu 22.04 LTS</span>
@@ -606,12 +617,33 @@ echo "🐧 Welcome to Linux Bash Scripting!"
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
-    
     <script>
-        // Initialize Matrix Rain Effect
-        function createMatrixRain() {
-            const matrixBg = document.getElementById('matrixBg');
-            const chars = '01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?';
+        // Initialize ACE editor
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/terminal");
+        editor.session.setMode("ace/mode/sh");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true,
+            fontSize: "14px",
+            showPrintMargin: false,
+            highlightActiveLine: true,
+            highlightSelectedWord: true
+        });
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // Matrix rain effect
+        function createMatrixRain() {rene2412@rene2412-L1:/var/www/html/Linux-Lab$ ls
+            api_commands.php  composer.json  correct_output.php  images    index.html   perms.sh   sales.py     src       test_autoload.php  test.php
+            Command_Line      composer.lock  documentation       includes  network.php  README.md  Spring-Boot  terminal  test_email.php     vendor
+            rene2412@rene2412-L1:/var/www/html/Linux-Lab$ 
             
             for (let i = 0; i < 50; i++) {
                 const char = document.createElement('div');
@@ -624,240 +656,39 @@ echo "🐧 Welcome to Linux Bash Scripting!"
             }
         }
 
-        // Update current time
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('currentTime').textContent = `${timeString}`;
+        // Initialize everything
+        updateTime();
+        setInterval(updateTime, 1000);
+        createMatrixRain();
+
+        // Placeholder functions for buttons
+        function runCode() {
+            console.log("Running code...");
         }
 
-        // Initialize Ace Editor
-        const editor = ace.edit("editor");
-        editor.setTheme("ace/theme/terminal");
-        editor.session.setMode("ace/mode/sh");
-        editor.setOptions({
-            enableBasicAutocompletion: true,
-            enableSnippets: true,
-            enableLiveAutocompletion: true,
-            fontSize: 14,
-            showPrintMargin: false,
-            wrap: true,
-            tabSize: 2,
-            useSoftTabs: true,
-            cursorStyle: "wide"
-        });
-
-        // Update status bar
-        function updateStatus() {
-            const cursor = editor.getCursorPosition();
-            document.getElementById('lineNumber').textContent = cursor.row + 1;
-            document.getElementById('columnNumber').textContent = cursor.column + 1;
-        }
-
-        editor.on('changeSelection', updateStatus);
-        editor.on('changeCursor', updateStatus);
-
-        // Run code with Spring Boot backend integration
-        async function runCode() {
-            const code = editor.getValue().trim();
-            const runButton = document.querySelector('.btn-run');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            
-            if (!code) {
-                alert('Please write a bash script first!');
-                return;
-            }
-
-            // Show loading state
-            runButton.classList.add('running');
-            runButton.innerHTML = '<span>⏳</span><span>Executing...</span>';
-            loadingSpinner.style.display = 'inline-block';
-
-            const output = document.getElementById('output');
-            const outputContent = document.getElementById('outputContent');
-            
-            try {
-                // Send code to Spring Boot backend
-                const response = await fetch('/api/execute-bash', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        code: code,
-                        timeout: 30000 // 30 seconds timeout
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const result = await response.json();
-                
-                // Display result
-                outputContent.textContent += result.output || 'No output generated';
-                
-                if (result.error) {
-                    outputContent.textContent += '\n\n❌ Error:\n' + result.error;
-                } else {
-                    outputContent.textContent += '\n\n✅ Script executed successfully!';
-                }
-                
-                if (result.executionTime) {
-                    outputContent.textContent += `\n⏱️ Execution time: ${result.executionTime}ms`;
-                }
-                
-            } catch (error) {
-                console.error('Error executing script:', error);
-                // Fallback to simulation if backend is not available
-                outputContent.textContent += simulateAdvancedBash(code);
-                outputContent.textContent += '\n\n🔄 Running in simulation mode (backend not available)';
-            } finally {
-                // Reset button and spinner
-                runButton.classList.remove('running');
-                runButton.innerHTML = '<span>▶</span><span>Execute</span>';
-                loadingSpinner.style.display = 'none';
-                
-                // Scroll to bottom
-                outputContent.scrollTop = outputContent.scrollHeight;
-            }
-        }
-
-        // Enhanced bash simulation (fallback)
-        function simulateAdvancedBash(code) {
-            let output = '';
-            const lines = code.split('\n');
-            
-            lines.forEach(line => {
-                line = line.trim();
-                
-                if (line.startsWith('echo ')) {
-                    let text = line.substring(5).replace(/['"]/g, '');
-                    text = text.replace(/\$\{?(\w+)\}?/g, (match, varName) => {
-                        const vars = {
-                            'script_name': 'Linux Bash Tutorial',
-                            'version': '2.0',
-                            'timestamp': new Date().toLocaleString()
-                        };
-                        return vars[varName] || match;
-                    });
-                    text = text.replace(/\$\(whoami\)/g, 'developer');
-                    text = text.replace(/\$\(hostname\)/g, 'linux-terminal');
-                    text = text.replace(/\$\(pwd\)/g, '/home/developer/scripts');
-                    text = text.replace(/\$SHELL/g, '/bin/bash');
-                    text = text.replace(/\$\(date[^)]*\)/g, new Date().toLocaleString());
-                    
-                    output += text + '\n';
-                } else if (line.startsWith('mkdir ')) {
-                    const dirs = line.substring(6).replace('-p ', '');
-                    output += `📁 Created directories: ${dirs}\n`;
-                } else if (line.includes('for ') && line.includes('services')) {
-                    output += '🔧 Checking nginx...\n🔧 Checking mysql...\n🔧 Checking redis...\n🔧 Checking docker...\n';
-                } else if (line.includes('check_system')) {
-                    const service = line.match(/"([^"]+)"/);
-                    if (service) {
-                        output += `✅ ${service[1]} is operational\n`;
-                    }
-                }
-            });
-            
-            return output || '✅ Script executed successfully\n';
-        }
-
-        // Save file
         function saveFile() {
-            const content = editor.getValue();
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'script.sh';
-            a.click();
-            URL.revokeObjectURL(url);
+            console.log("Saving file...");
         }
 
-        // Load file
         function loadFile() {
-            document.getElementById('fileInput').click();
+            console.log("Loading file...");
         }
 
-        function handleFileLoad() {
-            const file = document.getElementById('fileInput').files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    editor.setValue(e.target.result);
-                    editor.clearSelection();
-                    updateStatus();
-                };
-                reader.readAsText(file);
-            }
-        }
-
-        // Clear editor
         function clearEditor() {
-            if (confirm('Are you sure you want to clear the editor?')) {
-                editor.setValue('#!/bin/bash\n# Write your bash script here\n\n');
-                editor.clearSelection();
-                document.getElementById('output').style.display = 'none';
-                updateStatus();
-            }
-        }
-
-        // Keyboard shortcuts
-        editor.commands.addCommand({
-            name: 'save',
-            bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
-            exec: saveFile
-        });
-
-        editor.commands.addCommand({
-            name: 'run',
-            bindKey: {win: 'Ctrl-Enter', mac: 'Command-Enter'},
-            exec: runCode
-        });
-
-        // Lesson navigation
-        let currentLessonIndex = 0;
-        let totalLessons = 10; // You can adjust this based on your needs
-
-        function nextLesson() {
-            if (currentLessonIndex < totalLessons - 1) {
-                currentLessonIndex++;
-                updateLessonCounter();
-                // Here you would load the next lesson content
-                // loadLesson(currentLessonIndex);
-            }
+            editor.setValue("");
         }
 
         function previousLesson() {
-            if (currentLessonIndex > 0) {
-                currentLessonIndex--;
-                updateLessonCounter();
-                // Here you would load the previous lesson content
-                // loadLesson(currentLessonIndex);
-            }
+            console.log("Previous lesson");
         }
 
-        function updateLessonCounter() {
-            document.getElementById('currentLesson').textContent = currentLessonIndex + 1;
-            document.getElementById('totalLessons').textContent = totalLessons;
-            
-            // Update button states
-            const prevBtn = document.querySelector('.nav-prev');
-            const nextBtn = document.querySelector('.nav-next');
-            
-            prevBtn.disabled = currentLessonIndex === 0;
-            nextBtn.disabled = currentLessonIndex === totalLessons - 1;
+        function nextLesson() {
+            console.log("Next lesson");
         }
 
-        // Initialize everything
-        createMatrixRain();
-        updateTime();
-        setInterval(updateTime, 1000);
-        updateStatus();
-        updateLessonCounter();
+        function handleFileLoad() {
+            console.log("File loaded");
+        }
     </script>
 </body>
 </html>
