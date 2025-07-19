@@ -561,7 +561,6 @@ echo "🐧 Welcome to Linux Bash Scripting!"
                 
                 <div class="output" id="output">
                     <div class="output-header">
-                        <span>💻</span>
                         <span>Terminal Output</span>
                         <div class="loading-animation" id="loadingSpinner" style="display: none;"></div>
                     </div>
@@ -581,7 +580,7 @@ echo "🐧 Welcome to Linux Bash Scripting!"
                         </div>
                     </div>
                     <div class="status-right">
-                        <span class="terminal-prompt">$ ready_to_execute</span>
+                        <span class="terminal-prompt">$bash_shell_scripting</script></span>
                     </div>
                 </div>
             </div>
@@ -643,112 +642,101 @@ echo "🐧 Welcome to Linux Bash Scripting!"
         editor.on('changeSelection', updateStatus);
         editor.on('changeCursor', updateStatus);
 
-        // Run code with Spring Boot backend integration
-        async function runCode() {
-            const code = editor.getValue().trim();
-            const runButton = document.querySelector('.btn-run');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            
-            if (!code) {
-                alert('Please write a bash script first!');
-                return;
-            }
+// DO NOT TOUCH THIS FUNCTION
+//Function will run code and send it the backend to Spring Boot for docker containment
+async function runCode() {
+    const code = editor.getValue().trim();
+    const runButton = document.querySelector('.btn-run');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const output = document.getElementById('output');
+    const outputContent = document.getElementById('outputContent');
+    
+    if (!code) {
+        alert('Please write a bash script first!');
+        return;
+    }
 
-            // Show loading state
-            runButton.classList.add('running');
-            runButton.innerHTML = '<span>⏳</span><span>Executing...</span>';
-            loadingSpinner.style.display = 'inline-block';
+    // Show loading state
+    runButton.classList.add('running');
+    runButton.innerHTML = '<span>Executing...</span>';
+    loadingSpinner.style.display = 'inline-block';
+    
+    // Show output container
+    output.style.display = 'block';
+    outputContent.textContent = 'Executing script...\n';
 
-            const output = document.getElementById('output');
-            const outputContent = document.getElementById('outputContent');
-            
-            try {
-                // Send code to Spring Boot backend
-                const response = await fetch('/api/script', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ script: code })
-                });
+    try {
+        console.log('Sending script to backend:', code); // Debug log
+        
+        // Send code to Spring Boot backend
+        const response = await fetch('/api/script', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ script: code })
+        });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+        console.log('Response status:', response.status); // Debug log
 
-                const result = await response.json();
-                
-                outputContent.textContent = ''; 
-                // Display result
-                outputContent.textContent += result.output || 'No output generated';
-                
-                if (result.error) {
-                    outputContent.textContent += '\n\n❌ Error:\n' + result.error;
-                } else {
-                    outputContent.textContent += '\n\n✅ Script executed successfully!';
-                }
-                
-                if (result.executionTime) {
-                    outputContent.textContent += `\n⏱️ Execution time: ${result.executionTime}ms`;
-                }
-                
-            } catch (error) {
-                console.error('Error executing script:', error);
-                // Fallback to simulation if backend is not available
-                outputContent.textContent += simulateAdvancedBash(code);
-                outputContent.textContent += '\n\n🔄 Running in simulation mode';
-            } finally {
-                // Reset button and spinner
-                runButton.classList.remove('running');
-                runButton.innerHTML = '<span>▶</span><span>Execute</span>';
-                loadingSpinner.style.display = 'none';
-                
-                // Scroll to bottom
-                outputContent.scrollTop = outputContent.scrollHeight;
-            }
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
         }
 
-        // Enhanced bash simulation (fallback)
-        function simulateAdvancedBash(code) {
-            let output = '';
-            const lines = code.split('\n');
-            
-            lines.forEach(line => {
-                line = line.trim();
-                
-                if (line.startsWith('echo ')) {
-                    let text = line.substring(5).replace(/['"]/g, '');
-                    text = text.replace(/\$\{?(\w+)\}?/g, (match, varName) => {
-                        const vars = {
-                            'script_name': 'Linux Bash Tutorial',
-                            'version': '2.0',
-                            'timestamp': new Date().toLocaleString()
-                        };
-                        return vars[varName] || match;
-                    });
-                    text = text.replace(/\$\(whoami\)/g, 'developer');
-                    text = text.replace(/\$\(hostname\)/g, 'linux-terminal');
-                    text = text.replace(/\$\(pwd\)/g, '/home/developer/scripts');
-                    text = text.replace(/\$SHELL/g, '/bin/bash');
-                    text = text.replace(/\$\(date[^)]*\)/g, new Date().toLocaleString());
-                    
-                    output += text + '\n';
-                } else if (line.startsWith('mkdir ')) {
-                    const dirs = line.substring(6).replace('-p ', '');
-                    output += `📁 Created directories: ${dirs}\n`;
-                } else if (line.includes('for ') && line.includes('services')) {
-                    output += '🔧 Checking nginx...\n🔧 Checking mysql...\n🔧 Checking redis...\n🔧 Checking docker...\n';
-                } else if (line.includes('check_system')) {
-                    const service = line.match(/"([^"]+)"/);
-                    if (service) {
-                        output += `✅ ${service[1]} is operational\n`;
-                    }
-                }
-            });
-            
-            return output || '✅ Script executed successfully\n';
+        const result = await response.json();
+        console.log('Backend response:', result); // Debug log
+        
+        // Clear previous output
+        outputContent.textContent = '';
+        
+        // Display result
+        if (result.output && result.output.length > 0) {
+            outputContent.textContent += result.output;
+        } else {
+           // outputContent.textContent += ' Output:\n(No output produced)';
         }
+        
+        if (result.error && result.error.length > 0) {
+            outputContent.textContent += '\n\n' + result.error;
+        }
+        
+        // Show execution status
+        if (result.success !== undefined) {
+            if (result.success) {
+                outputContent.textContent += '\n\n\n\nScript executed successfully!';
+            } else {
+                outputContent.textContent += `\n\n\n\nScript failed with exit code: ${result.exitCode || 'unknown'}`;
+            }
+        }
+        
+        if (result.executionTime) {
+            outputContent.textContent += `\nExecution time: ${result.executionTime}ms`;
+        }
+        
+    } catch (error) {
+        console.error('Error executing script:', error);
+        outputContent.textContent = '';
+        outputContent.textContent += 'Connection Error:\n' + error.message;
+        outputContent.textContent += '\n\n Falling back to simulation mode...\n\n';
+        
+        // Fallback to simulation if backend is not available
+        const simulatedOutput = simulateAdvancedBash(code);
+        outputContent.textContent += simulatedOutput;
+        
+    } finally {
+        // Reset button and spinner
+        runButton.classList.remove('running');
+        runButton.innerHTML = '<span>▶</span><span>Execute</span>';
+        loadingSpinner.style.display = 'none';
+        
+        // Scroll to bottom
+        outputContent.scrollTop = outputContent.scrollHeight;
+    }
+}
 
+       
         // Save file
         function saveFile() {
             const content = editor.getValue();
