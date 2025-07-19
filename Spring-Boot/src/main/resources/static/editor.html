@@ -64,21 +64,7 @@
             gap: 20px;
             box-shadow: 0 2px 20px rgba(0, 255, 0, 0.2);
         }
-        .bash-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            filter: drop-shadow(0 0 10px #00ff00);
-            animation: logo-glow 2s ease-in-out infinite;
-        }
 
-        @keyframes logo-glow {
-            0%, 100% { filter: drop-shadow(0 0 10px #00ff00); }
-            50% { filter: drop-shadow(0 0 20px #00ff00) drop-shadow(0 0 30px #00ff00); }
-        }
         .bash-symbol {
             font-size: 2.5em;
             color: #00ff00;
@@ -501,7 +487,7 @@
     
     <div class="header">
         <div class="bash-symbol">$</div>
-        <img src=".././../../../../images/bash.png" alt="Bash Logo" class="bash-logo">
+        <!--<img src=".././../../../images/bash.png" alt="Bash Logo" class="bash-logo"> -->
         <h1>Bash Scripting</h1>
         <div class="terminal-info">
             <span> Ubuntu 22.04 LTS</span>
@@ -678,15 +664,12 @@ echo "🐧 Welcome to Linux Bash Scripting!"
             
             try {
                 // Send code to Spring Boot backend
-                const response = await fetch('/api/execute-bash', {
+                const response = await fetch('/api/script', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        code: code,
-                        timeout: 30000 // 30 seconds timeout
-                    })
+                    body: JSON.stringify({ script: code })
                 });
 
                 if (!response.ok) {
@@ -695,6 +678,7 @@ echo "🐧 Welcome to Linux Bash Scripting!"
 
                 const result = await response.json();
                 
+                outputContent.textContent = ''; 
                 // Display result
                 outputContent.textContent += result.output || 'No output generated';
                 
@@ -712,7 +696,7 @@ echo "🐧 Welcome to Linux Bash Scripting!"
                 console.error('Error executing script:', error);
                 // Fallback to simulation if backend is not available
                 outputContent.textContent += simulateAdvancedBash(code);
-                outputContent.textContent += '\n\n🔄 Running in simulation mode (backend not available)';
+                outputContent.textContent += '\n\n🔄 Running in simulation mode';
             } finally {
                 // Reset button and spinner
                 runButton.classList.remove('running');
