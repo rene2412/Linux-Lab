@@ -18,7 +18,7 @@ $input = json_decode(file_get_contents("php://input"), true);
    $oldUsername = $input["old_username"] ?? "";
    $newUsername = $input["new_username"] ?? "";
    $username = Get_Username($pdo, $userId);
-   
+   $email = GetUserEmail($pdo, $userId);
    if (empty($oldUsername) || empty($newUsername)) {
     $Errors[] = "Error: Username Input Can't Be Empty";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
