@@ -1,4 +1,5 @@
 import { Navigation } from "../../components/Navigation/index.js";
+import {SettingModal} from "../../components/SettingModal/index.js"
 
 async function AuthCheck(){
     try{
@@ -208,5 +209,4 @@ const DATA = [
     },
 ]
 
-// const nav = new Navigation('.navigation__container');
-// const dashboard = new DashboardManager();
+const modal = new SettingModal();

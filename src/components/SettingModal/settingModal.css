@@ -12,6 +12,7 @@
     border-radius: var(--radius-med);
 }
 
+
 .setting__content{
     margin: var(--spce-lg) var(--spce-lg) var(--spce-lg) var(--spce-lg);
     display: flex;
@@ -42,13 +43,22 @@
     align-items: center;
     justify-content: center;
     border: 0px;
+    transition: all 0.4s cubic-bezier(0.62,-0.26,0.27,1.55) ;
+}
+
+.setting__button--close:hover{
+    transform: rotate(90deg);
+}
+.setting__button--close:active{
+    transform: scale(0.9) ;
+    opacity: 0.8;
 }
 
 .setting__button--delete{
     /* background-color: #dc0909; */
     background-color: transparent;
-    border: solid 2px #dc0909;
-    color: #dc0909;
+    border: solid 2px var(--color-error);
+    color: var(--color-error);
     font-weight: 800;
 }
 
@@ -57,4 +67,17 @@
 dialog::backdrop{
     background: rgba(0, 0, 0, 0.398);
     backdrop-filter: blur(3px);
+}
+
+/* status */
+
+.status--error{
+    color: var(--color-error);
+}
+.status--success{
+    color: var(--color-highlight);
+}
+
+label{
+    color: var(--text-color-secondary);
 }

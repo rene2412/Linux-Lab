@@ -49,8 +49,6 @@ $input = json_decode(file_get_contents("php://input"), true);
         $Success = "Success: Username Updated!";
         $username = $newUsername;
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
-        //log user out
-        require_once "logout.php";
         return;
     }
 
