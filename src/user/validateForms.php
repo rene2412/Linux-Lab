@@ -44,6 +44,14 @@ function Delete_Account(PDO $pdo, int $userID) : bool {
     $sql = "DELETE FROM user_lessons WHERE user_id = ?";
     $statement = $pdo->prepare($sql);
     $statement->execute([$userID]);
+    
+    $sql = "DELETE FROM network_user_lessons WHERE user_id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$userID]);
+    
+    $sql = "DELETE FROM network_user_progress WHERE user_id = ?";
+    $statement = $pdo->prepare($sql);
+    $statement->execute([$userID]);
 
     $sql = "DELETE FROM users WHERE id = ?";
     $statement = $pdo->prepare($sql);

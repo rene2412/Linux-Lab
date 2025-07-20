@@ -48,7 +48,7 @@ $input = json_decode(file_get_contents("php://input"), true);
         UpdateUsername($pdo, $userId, $newUsername);
         $Success = "Success: Username Updated!";
         $username = $newUsername;
-    Send_Rest_API($username, $userId, $email, $Errors, $Success);
+        Send_Rest_API($username, $userId, $email, $Errors, $Success);
         return;
     }
 
