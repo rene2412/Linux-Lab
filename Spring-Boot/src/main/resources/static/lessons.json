@@ -2,6 +2,7 @@
     "lessons": [
       {
         "id": 1,
+        "title": "Introduction to Bash",
         "content": "Bash (Bourne Again Shell) is a command language interpreter that executes commands read from the standard input or from a file. It's the default shell on most Linux distributions and macOS.",
         "objectives": [
           "Understand what Bash is and its purpose",

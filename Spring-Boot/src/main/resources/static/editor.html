@@ -857,7 +857,6 @@ async function loadLessons() {
 // Add this function to display a specific lesson
 function displayLesson(index) {
     const lessonContent = document.getElementById('lessonContent');
-    const lessonTitle = document.getElementById('lessonTitle');
     
     if (index < 0 || index >= lessons.length) {
         console.error('Invalid lesson index:', index);
@@ -866,62 +865,29 @@ function displayLesson(index) {
     
     const lesson = lessons[index];
     
-    // Update lesson title in header
-    lessonTitle.textContent = lesson.title || `Lesson ${index + 1}`;
     
     // Build lesson content HTML
     let lessonHTML = `
         <div class="lesson-section">
-            <h3>📖 ${lesson.title || `Lesson ${index + 1}`}</h3>
-            ${lesson.difficulty ? `<p><strong>Difficulty:</strong> <span style="color: #00ff00;">${lesson.difficulty}</span></p>` : ''}
+            <h3>${lesson.title || `Lesson ${index + 1}`}</h3>
+           ${lesson.difficulty ? `<p><strong>Difficulty:</strong> <span style="color: #00ff00;">${lesson.difficulty}</span></p>` : '' }
         </div>
     `;
     
     if (lesson.content) {
         lessonHTML += `
             <div class="lesson-section">
-                <h3>📝 Content</h3>
+                <h3> Content</h3>
                 <div>${lesson.content}</div>
             </div>
         `;
     }
     
-    if (lesson.objectives && lesson.objectives.length > 0) {
-        lessonHTML += `
-            <div class="lesson-section">
-                <h3>🎯 Objectives</h3>
-                <ul>
-                    ${lesson.objectives.map(obj => `<li>${obj}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-    }
-    
-    if (lesson.code_example) {
-        lessonHTML += `
-            <div class="lesson-section">
-                <h3>💻 Code Example</h3>
-                <div class="code-example">${lesson.code_example.replace(/\\n/g, '\n')}</div>
-                ${lesson.example_explanation ? `<p><strong>Explanation:</strong> ${lesson.example_explanation}</p>` : ''}
-            </div>
-        `;
-    }
-    
-    if (lesson.exercises && lesson.exercises.length > 0) {
-        lessonHTML += `
-            <div class="lesson-section">
-                <h3>🏋️ Exercises</h3>
-                <ol>
-                    ${lesson.exercises.map(exercise => `<li>${exercise}</li>`).join('')}
-                </ol>
-            </div>
-        `;
-    }
-    
+  
     if (lesson.tips && lesson.tips.length > 0) {
         lessonHTML += `
             <div class="lesson-section">
-                <h3>💡 Tips</h3>
+                <h3>Tips</h3>
                 <ul>
                     ${lesson.tips.map(tip => `<li>${tip}</li>`).join('')}
                 </ul>
