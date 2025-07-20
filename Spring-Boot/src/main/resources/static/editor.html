@@ -500,30 +500,33 @@
             <div class="lesson-panel">
                 <div class="lesson-header">
                     <div class="lesson-title">Interactive Bash Lessons</div>
+                    <!-- This is where the title of the current lesson will be shown -->
+                    <h2 id="lessonTitle"></h2>
                 </div>
+            
+                <!-- Main lesson content area -->
                 <div class="lesson-content" id="lessonContent">
                     <!-- Lesson content will be dynamically loaded here -->
-                    <div class="lesson-placeholder">
-                        <h3> echo</h3>
-                        <p>Lessons will be displayed here!.</p>
-                    </div>
                 </div>
-                
+            
+                <!-- Buttons to navigate -->
                 <div class="lesson-navigation">
                     <button class="nav-btn nav-prev" onclick="previousLesson()">
                         <span>◀</span>
                         <span>Previous</span>
                     </button>
+            
                     <div class="lesson-counter">
-                        <span id="currentLesson">1</span> / <span id="totalLessons">10</span>
+                        <span id="currentLesson">--</span> / <span id="totalLessons">--</span>
                     </div>
+            
                     <button class="nav-btn nav-next" onclick="nextLesson()">
                         <span>Next</span>
                         <span>▶</span>
                     </button>
                 </div>
             </div>
-
+            
             <div class="editor-panel">
                 <div class="editor-header">
                     <div class="editor-title">
@@ -593,6 +596,7 @@ echo "🐧 Welcome to Linux Bash Scripting!"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
     
     <script>
+
         // Initialize Matrix Rain Effect
         function createMatrixRain() {
             const matrixBg = document.getElementById('matrixBg');
@@ -641,6 +645,9 @@ echo "🐧 Welcome to Linux Bash Scripting!"
 
         editor.on('changeSelection', updateStatus);
         editor.on('changeCursor', updateStatus);
+
+
+
 
 // DO NOT TOUCH THIS FUNCTION
 //Function will run code and send it the backend to Spring Boot for docker containment
@@ -790,29 +797,171 @@ async function runCode() {
             exec: runCode
         });
 
-        // Lesson navigation
-        let currentLessonIndex = 0;
-        let totalLessons = 10; // You can adjust this based on your needs
+// Lesson navigation
+let lessons = [];
+let currentLessonIndex = 0;
+let totalLessons = 0;
 
-        function nextLesson() {
-            if (currentLessonIndex < totalLessons - 1) {
-                currentLessonIndex++;
-                updateLessonCounter();
-                // Here you would load the next lesson content
-                // loadLesson(currentLessonIndex);
-            }
+async function loadLessons() {
+    const lessonContent = document.getElementById('lessonContent');
+    
+    try {
+        // Show loading indicator
+        lessonContent.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #00ff00;">
+                <div class="loading-animation" style="display: inline-block; margin-bottom: 10px;"></div>
+                <p>Loading lessons...</p>
+            </div>
+        `;
+        
+        // Fetch lessons from JSON file
+        const response = await fetch('lessons.json');
+        
+        if (!response.ok) {
+            throw new Error(`Failed to load lessons: ${response.status} ${response.statusText}`);
         }
-
-        function previousLesson() {
-            if (currentLessonIndex > 0) {
-                currentLessonIndex--;
-                updateLessonCounter();
-                // Here you would load the previous lesson content
-                // loadLesson(currentLessonIndex);
-            }
+        
+        const data = await response.json();
+        lessons = data.lessons;
+        totalLessons = lessons.length;
+        
+        // Update total lessons counter
+        document.getElementById('totalLessons').textContent = totalLessons;
+        
+        // Load the first lesson
+        if (lessons.length > 0) {
+            currentLessonIndex = 0;
+            displayLesson(currentLessonIndex);
+        } else {
+            throw new Error('No lessons found in the JSON file');
         }
+        
+    } catch (error) {
+        console.error('Error loading lessons:', error);
+        
+        // Show error message
+        lessonContent.innerHTML = `
+            <div style="background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; color: #ff4444; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <h3>❌ Error Loading Lessons</h3>
+                <p><strong>Error:</strong> ${error.message}</p>
+                <p><strong>Make sure you have a 'lessons.json' file in the same directory.</strong></p>
+            </div>
+        `;
+        
+        // Reset counters
+        document.getElementById('totalLessons').textContent = '--';
+        document.getElementById('currentLesson').textContent = '--';
+    }
+}
 
-        function updateLessonCounter() {
+// Add this function to display a specific lesson
+function displayLesson(index) {
+    const lessonContent = document.getElementById('lessonContent');
+    const lessonTitle = document.getElementById('lessonTitle');
+    
+    if (index < 0 || index >= lessons.length) {
+        console.error('Invalid lesson index:', index);
+        return;
+    }
+    
+    const lesson = lessons[index];
+    
+    // Update lesson title in header
+    lessonTitle.textContent = lesson.title || `Lesson ${index + 1}`;
+    
+    // Build lesson content HTML
+    let lessonHTML = `
+        <div class="lesson-section">
+            <h3>📖 ${lesson.title || `Lesson ${index + 1}`}</h3>
+            ${lesson.difficulty ? `<p><strong>Difficulty:</strong> <span style="color: #00ff00;">${lesson.difficulty}</span></p>` : ''}
+        </div>
+    `;
+    
+    if (lesson.content) {
+        lessonHTML += `
+            <div class="lesson-section">
+                <h3>📝 Content</h3>
+                <div>${lesson.content}</div>
+            </div>
+        `;
+    }
+    
+    if (lesson.objectives && lesson.objectives.length > 0) {
+        lessonHTML += `
+            <div class="lesson-section">
+                <h3>🎯 Objectives</h3>
+                <ul>
+                    ${lesson.objectives.map(obj => `<li>${obj}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+    
+    if (lesson.code_example) {
+        lessonHTML += `
+            <div class="lesson-section">
+                <h3>💻 Code Example</h3>
+                <div class="code-example">${lesson.code_example.replace(/\\n/g, '\n')}</div>
+                ${lesson.example_explanation ? `<p><strong>Explanation:</strong> ${lesson.example_explanation}</p>` : ''}
+            </div>
+        `;
+    }
+    
+    if (lesson.exercises && lesson.exercises.length > 0) {
+        lessonHTML += `
+            <div class="lesson-section">
+                <h3>🏋️ Exercises</h3>
+                <ol>
+                    ${lesson.exercises.map(exercise => `<li>${exercise}</li>`).join('')}
+                </ol>
+            </div>
+        `;
+    }
+    
+    if (lesson.tips && lesson.tips.length > 0) {
+        lessonHTML += `
+            <div class="lesson-section">
+                <h3>💡 Tips</h3>
+                <ul>
+                    ${lesson.tips.map(tip => `<li>${tip}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+    
+    // Set the lesson content
+    lessonContent.innerHTML = lessonHTML;
+    
+    // Update lesson counter and navigation buttons
+    updateLessonCounter();
+    
+    // Load code example into editor if available
+    if (lesson.code_example && lesson.load_in_editor !== false) {
+        editor.setValue(lesson.code_example.replace(/\\n/g, '\n'));
+        editor.clearSelection();
+        updateStatus();
+    }
+    
+    // Scroll to top of lesson content
+    lessonContent.scrollTop = 0;
+}
+
+function nextLesson() {
+    if (currentLessonIndex < totalLessons - 1) {
+        currentLessonIndex++;
+        displayLesson(currentLessonIndex);
+    }
+}
+
+function previousLesson() {
+    if (currentLessonIndex > 0) {
+        currentLessonIndex--;
+        displayLesson(currentLessonIndex);
+    }
+}
+
+
+         function updateLessonCounter() {
             document.getElementById('currentLesson').textContent = currentLessonIndex + 1;
             document.getElementById('totalLessons').textContent = totalLessons;
             
@@ -829,7 +978,7 @@ async function runCode() {
         updateTime();
         setInterval(updateTime, 1000);
         updateStatus();
-        updateLessonCounter();
+        loadLessons();
     </script>
 </body>
 </html>

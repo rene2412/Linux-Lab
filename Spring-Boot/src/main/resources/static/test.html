@@ -61,26 +61,8 @@
             border-bottom: 2px solid #00ff00;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 20px;
             box-shadow: 0 2px 20px rgba(0, 255, 0, 0.2);
-            position: relative;
-        }
-
-        .bash-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            filter: drop-shadow(0 0 10px #00ff00);
-            animation: logo-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes logo-glow {
-            0%, 100% { filter: drop-shadow(0 0 10px #00ff00); }
-            50% { filter: drop-shadow(0 0 20px #00ff00) drop-shadow(0 0 30px #00ff00); }
         }
 
         .bash-symbol {
@@ -115,8 +97,7 @@
         }
 
         .terminal-info {
-            position: absolute;
-            right: 30px;
+            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -128,7 +109,7 @@
             display: flex;
             width: 100%;
             height: 100vh;
-            padding-top: 100px;
+            padding-top: 80px;
         }
 
         .lesson-panel {
@@ -463,14 +444,13 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to { transform: rotate(360px); }
         }
 
         /* Responsive design */
         @media (max-width: 1024px) {
             .split-container {
                 flex-direction: column;
-                padding-top: 120px;
             }
             
             .lesson-panel,
@@ -486,11 +466,6 @@
             
             .header h1 {
                 font-size: 1.8em;
-            }
-            
-            .bash-logo {
-                width: 50px;
-                height: 50px;
             }
         }
 
@@ -512,7 +487,6 @@
     
     <div class="header">
         <div class="bash-symbol">$</div>
-        <img src="images/bash.png" alt="Bash Logo" class="bash-logo">
         <h1>Bash Scripting</h1>
         <div class="terminal-info">
             <span> Ubuntu 22.04 LTS</span>
@@ -524,7 +498,7 @@
         <div class="split-container">
             <div class="lesson-panel">
                 <div class="lesson-header">
-                    <div class="lesson-title">Interactive Bash Lessons</div>
+                    <div class="lesson-title" id="lessonTitle">Interactive Bash Lessons</div>
                 </div>
                 <div class="lesson-content" id="lessonContent">
                     <!-- Lesson content will be dynamically loaded here -->
@@ -586,7 +560,6 @@ echo "🐧 Welcome to Linux Bash Scripting!"
                 
                 <div class="output" id="output">
                     <div class="output-header">
-                        <span>💻</span>
                         <span>Terminal Output</span>
                         <div class="loading-animation" id="loadingSpinner" style="display: none;"></div>
                     </div>
@@ -606,7 +579,7 @@ echo "🐧 Welcome to Linux Bash Scripting!"
                         </div>
                     </div>
                     <div class="status-right">
-                        <span class="terminal-prompt">$ ready_to_execute</span>
+                        <span class="terminal-prompt">$bash_shell_scripting</span>
                     </div>
                 </div>
             </div>
@@ -617,30 +590,13 @@ echo "🐧 Welcome to Linux Bash Scripting!"
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
+    
     <script>
-        // Initialize ACE editor
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/terminal");
-        editor.session.setMode("ace/mode/sh");
-        editor.setOptions({
-            enableBasicAutocompletion: true,
-            enableLiveAutocompletion: true,
-            enableSnippets: true,
-            fontSize: "14px",
-            showPrintMargin: false,
-            highlightActiveLine: true,
-            highlightSelectedWord: true
-        });
-
-        // Update current time
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('currentTime').textContent = timeString;
-        }
-
-        // Matrix rain effect
-        function createMatrixRain() { 
+        // Initialize Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixBg = document.getElementById('matrixBg');
+            const chars = '01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=[]{}|;:,.<>?';
+            
             for (let i = 0; i < 50; i++) {
                 const char = document.createElement('div');
                 char.className = 'matrix-char';
@@ -652,39 +608,307 @@ echo "🐧 Welcome to Linux Bash Scripting!"
             }
         }
 
-        // Initialize everything
-        updateTime();
-        setInterval(updateTime, 1000);
-        createMatrixRain();
-
-        // Placeholder functions for buttons
-        function runCode() {
-            console.log("Running code...");
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('currentTime').textContent = `${timeString}`;
         }
 
+        // Initialize Ace Editor
+        const editor = ace.edit("editor");
+        editor.setTheme("ace/theme/terminal");
+        editor.session.setMode("ace/mode/sh");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true,
+            fontSize: 14,
+            showPrintMargin: false,
+            wrap: true,
+            tabSize: 2,
+            useSoftTabs: true,
+            cursorStyle: "wide"
+        });
+
+        // Update status bar
+        function updateStatus() {
+            const cursor = editor.getCursorPosition();
+            document.getElementById('lineNumber').textContent = cursor.row + 1;
+            document.getElementById('columnNumber').textContent = cursor.column + 1;
+        }
+
+        editor.on('changeSelection', updateStatus);
+        editor.on('changeCursor', updateStatus);
+
+        // Function will run code and send it the backend to Spring Boot for docker containment
+        async function runCode() {
+            const code = editor.getValue().trim();
+            const runButton = document.querySelector('.btn-run');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const output = document.getElementById('output');
+            const outputContent = document.getElementById('outputContent');
+            
+            if (!code) {
+                alert('Please write a bash script first!');
+                return;
+            }
+
+            // Show loading state
+            runButton.classList.add('running');
+            runButton.innerHTML = '<span>Executing...</span>';
+            loadingSpinner.style.display = 'inline-block';
+            
+            // Show output container
+            output.style.display = 'block';
+            outputContent.textContent = 'Executing script...\n';
+
+            try {
+                console.log('Sending script to backend:', code);
+                
+                // Send code to Spring Boot backend
+                const response = await fetch('/api/script', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ script: code })
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+
+                const result = await response.json();
+                console.log('Backend response:', result);
+                
+                // Clear previous output
+                outputContent.textContent = '';
+                
+                // Display result
+                if (result.output && result.output.length > 0) {
+                    outputContent.textContent += result.output;
+                }
+                
+                if (result.error && result.error.length > 0) {
+                    outputContent.textContent += '\n\n' + result.error;
+                }
+                
+                // Show execution status
+                if (result.success !== undefined) {
+                    if (result.success) {
+                        outputContent.textContent += '\n\n\n\nScript executed successfully!';
+                    } else {
+                        outputContent.textContent += `\n\n\n\nScript failed with exit code: ${result.exitCode || 'unknown'}`;
+                    }
+                }
+                
+                if (result.executionTime) {
+                    outputContent.textContent += `\nExecution time: ${result.executionTime}ms`;
+                }
+                
+            } catch (error) {
+                console.error('Error executing script:', error);
+                outputContent.textContent = '';
+                outputContent.textContent += 'Connection Error:\n' + error.message;
+                outputContent.textContent += '\n\n Falling back to simulation mode...\n\n';
+                
+                // Fallback to simulation if backend is not available
+                const simulatedOutput = simulateBashOutput(code);
+                outputContent.textContent += simulatedOutput;
+                
+            } finally {
+                // Reset button and spinner
+                runButton.classList.remove('running');
+                runButton.innerHTML = '<span>▶</span><span>Execute</span>';
+                loadingSpinner.style.display = 'none';
+                
+                // Scroll to bottom
+                outputContent.scrollTop = outputContent.scrollHeight;
+            }
+        }
+
+        // Simple bash simulation for fallback
+        function simulateBashOutput(code) {
+            let output = '';
+            const lines = code.split('\n');
+            
+            for (let line of lines) {
+                line = line.trim();
+                if (line.startsWith('echo ')) {
+                    let text = line.substring(5).replace(/["']/g, '');
+                    output += text + '\n';
+                } else if (line === 'pwd') {
+                    output += '/home/user\n';
+                } else if (line === 'whoami') {
+                    output += 'user\n';
+                } else if (line === 'date') {
+                    output += new Date().toString() + '\n';
+                } else if (line.startsWith('ls')) {
+                    output += 'file1.txt  file2.txt  directory1\n';
+                }
+            }
+            
+            return output || '(No output produced)\n';
+        }
+       
+        // Save file
         function saveFile() {
-            console.log("Saving file...");
+            const content = editor.getValue();
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'script.sh';
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
+        // Load file
         function loadFile() {
-            console.log("Loading file...");
-        }
-
-        function clearEditor() {
-            editor.setValue("");
-        }
-
-        function previousLesson() {
-            console.log("Previous lesson");
-        }
-
-        function nextLesson() {
-            console.log("Next lesson");
+            document.getElementById('fileInput').click();
         }
 
         function handleFileLoad() {
-            console.log("File loaded");
+            const file = document.getElementById('fileInput').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    editor.setValue(e.target.result);
+                    editor.clearSelection();
+                    updateStatus();
+                };
+                reader.readAsText(file);
+            }
         }
-    </script>
-</body>
-</html>
+
+        // Clear editor
+        function clearEditor() {
+            if (confirm('Are you sure you want to clear the editor?')) {
+                editor.setValue('#!/bin/bash\n# Write your bash script here\n\n');
+                editor.clearSelection();
+                document.getElementById('output').style.display = 'none';
+                updateStatus();
+            }
+        }
+
+        // Keyboard shortcuts
+        editor.commands.addCommand({
+            name: 'save',
+            bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
+            exec: saveFile
+        });
+
+        editor.commands.addCommand({
+            name: 'run',
+            bindKey: {win: 'Ctrl-Enter', mac: 'Command-Enter'},
+            exec: runCode
+        });
+
+        // Lesson navigation
+        let lessons = [];
+        let currentLessonIndex = 0;
+        let totalLessons = 0;
+
+        // Create a sample lessons object for fallback
+        const fallbackLessons = [
+            {
+                id: 1,
+                title: "Introduction to Bash",
+                difficulty: "Beginner",
+                content: "Bash (Bourne Again SHell) is a command-line interpreter and scripting language for Unix-like operating systems.",
+                objectives: [
+                    "Understand what Bash is",
+                    "Learn basic Bash syntax",
+                    "Write your first Bash script"
+                ],
+                code_example: "#!/bin/bash\n# This is a comment\necho \"Hello, World!\"",
+                exercises: [
+                    "Create a script that prints your name",
+                    "Add comments to explain your code"
+                ],
+                tips: [
+                    "Always start with #!/bin/bash shebang",
+                    "Use comments to explain complex logic"
+                ]
+            },
+            {
+                id: 2,
+                title: "Variables and Data Types",
+                difficulty: "Beginner",
+                content: "Variables in Bash are used to store data that can be referenced and manipulated in scripts.",
+                objectives: [
+                    "Learn how to declare variables",
+                    "Understand variable types",
+                    "Practice variable manipulation"
+                ],
+                code_example: "#!/bin/bash\nname=\"Alice\"\nage=25\necho \"Name: $name, Age: $age\"",
+                exercises: [
+                    "Create variables for your personal information",
+                    "Practice string concatenation"
+                ],
+                tips: [
+                    "No spaces around the = sign",
+                    "Use quotes for strings with spaces"
+                ]
+            }
+        ];
+
+        async function loadLessons() {
+            const lessonContent = document.getElementById('lessonContent');
+            
+            try {
+                // Show loading indicator
+                lessonContent.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #00ff00;">
+                        <div class="loading-animation" style="display: inline-block; margin-bottom: 10px;"></div>
+                        <p>Loading lessons...</p>
+                    </div>
+                `;
+                
+                // Try to fetch lessons from JSON file
+                const response = await fetch('lessons.json');
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load lessons: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                lessons = data.lessons || fallbackLessons;
+                
+            } catch (error) {
+                console.warn('Could not load lessons.json, using fallback lessons:', error);
+                // Use fallback lessons if JSON file is not available
+                lessons = fallbackLessons;
+            }
+            
+            totalLessons = lessons.length;
+            
+            // Update total lessons counter
+            document.getElementById('totalLessons').textContent = totalLessons;
+            
+            // Load the first lesson
+            if (lessons.length > 0) {
+                currentLessonIndex = 0;
+                displayLesson(currentLessonIndex);
+            } else {
+                lessonContent.innerHTML = `
+                    <div style="background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; color: #ff4444; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                        <h3>❌ No Lessons Available</h3>
+                        <p>No lessons could be loaded.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Display a specific lesson
+        function displayLesson(index) {
+            const lessonContent = document.getElementById('lessonContent');
+            const lessonTitle = document.getElementById('lessonTitle');
+            
+            if (index < 0 || index >= lessons.length) {
+                console.error('Invalid lesson
