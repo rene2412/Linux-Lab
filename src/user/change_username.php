@@ -6,8 +6,8 @@ session_start();
 
 $username = $_SESSION["user_username"];
 $userId = $_SESSION["user_id"];
-$Errors = [];
-$Success = [];
+$Errors = "N/A";
+$Success = "N/A";
 if (!$userId) {
     echo json_encode(["Error" => "Invalid User"]);
     return;
@@ -20,33 +20,33 @@ $input = json_decode(file_get_contents("php://input"), true);
    $username = Get_Username($pdo, $userId);
    $email = GetUserEmail($pdo, $userId);
    if (empty($oldUsername) || empty($newUsername)) {
-    $Errors[] = "Error: Username Input Can't Be Empty";
+    $Errors = "Error: Username Input Can't Be Empty";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
     return;
     }
    if ($username !== $oldUsername) {
-    $Errors[] = "Error: Username '$oldUsername' Not Found!";
+    $Errors = "Error: Username '$oldUsername' Not Found!";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
     return;
     }
    if ($oldUsername === $newUsername) {
-    $Errors[] = "Error: New Username Can't Be The Same!";
+    $Errors = "Error: New Username Can't Be The Same!";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
     return;
     }
     if (Is_Username_Taken($pdo, $newUsername)) {
-    $Errors[] = "Error: $newUsername Is Taken! Please Choose Another";
+    $Errors = "Error: $newUsername Is Taken! Please Choose Another";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
     return;
     }
     if (is_username_too_long($newUsername)) {
-    $Errors [] = "Error: Username Is Too Long! Stay Within 15 Characters";
+    $Errors  = "Error: Username Is Too Long! Stay Within 15 Characters";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
     return;
     }
     if ($oldUsername !== $newUsername) {
         UpdateUsername($pdo, $userId, $newUsername);
-        $Success[] = "Success: Username Updated!";
+        $Success = "Success: Username Updated!";
         $username = $newUsername;
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
         //log user out
