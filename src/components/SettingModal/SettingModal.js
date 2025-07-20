@@ -27,6 +27,7 @@ export default class SettingModal {
     this.emailStatus = document.querySelector(".status__email");
     this.usernameForm = document.querySelector(".setting__form--name");
     this.usernameStatus = document.querySelector(".status__name");
+    this.deleteBtn = document.querySelector(".setting__button--delete")
   };
 
   setListeners = () => {
@@ -37,6 +38,20 @@ export default class SettingModal {
 
     document.addEventListener('modalopen',()=>{
       this.container.showModal()
+    })
+
+    this.deleteBtn.addEventListener('click', async ()=>{
+      try {
+        const response = await fetch("../../user/delete_account.php");
+        if (!response.ok) {
+          throw new Error("Bad response from delete change");
+        }
+        const resData = await response.json();
+        console.log(resData);
+      } catch (e) {
+        console.error(e);
+      }
+
     })
 
 
@@ -62,15 +77,16 @@ export default class SettingModal {
           throw new Error("Bad response form email change");
         }
         const resData = await response.json();
+        console.log(resData);
         this.emailStatus.innerText = "";
         this.emailStatus.classList.remove("status--error");
         this.emailStatus.classList.remove("status--success");
         if (resData["Error Logs: "].length > 0) {
-          this.emailStatus.innerText = resData["Error Logs: "][0];
+          this.emailStatus.innerText = resData["Error Logs: "];
           this.emailStatus.classList.remove("status--success");
           this.emailStatus.classList.add("status--error");
         } else if (resData["Success Logs: "].length > 0) {
-          this.emailStatus.innerText = resData["Success Logs: "][0];
+          this.emailStatus.innerText = resData["Success Logs: "];
           this.emailStatus.classList.remove("status--error");
           this.emailStatus.classList.add("status--success");
         } else {
@@ -106,11 +122,11 @@ export default class SettingModal {
         this.usernameStatus.innerText = "";
         this.usernameStatus.classList.remove("status--error");
         this.usernameStatus.classList.remove("status--success");
-        if (resData["Error Logs: "].length > 0 && resData["Error Logs: "][0] == "N/A") {
-          this.usernameStatus.innerText = resData["Error Logs: "][0];
+        if (resData["Error Logs: "] && resData["Error Logs: "] != "N/A") {
+          this.usernameStatus.innerText = resData["Error Logs: "];
           this.usernameStatus.classList.remove("status--success");
           this.usernameStatus.classList.add("status--error");
-        } else if (resData["Success Logs: "].length > 0) {
+        } else if (resData["Success Logs: "]) {
           this.usernameStatus.innerText = "Refreshing in 2 seconds, log back in";
           this.usernameStatus.classList.remove("status--error");
           this.usernameStatus.classList.add("status--success");
@@ -147,7 +163,7 @@ export default class SettingModal {
           <label for="oldEmail">Enter current Email:</label>
           <input
             class="input--single"
-            placeholder="currentEmail@domain.com"
+            placeholder="email@domain.com"
             id="oldEmail"
             name="oldEmail"
             type="email"
@@ -173,10 +189,10 @@ export default class SettingModal {
           method="POST"
         >
           <h4 class="setting__form__title">Change Username:</h4>
-          <label for="oldName">Enter current username</label>
+          <label for="oldName">Enter current Username:</label>
           <input
             class="input--single"
-            placeholder="current Username"
+            placeholder="Current Username"
             id="oldName"
             name="oldName"
             type="text"
@@ -204,6 +220,7 @@ export default class SettingModal {
           >
             Delete
           </button>
+          <p class="status status--error">Goodbye...this is irreversable</p>
         </div>
       </div>
         `;
