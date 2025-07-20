@@ -1,0 +1,49 @@
+{
+    "lessons": [
+      {
+        "id": 1,
+        "content": "Bash (Bourne Again Shell) is a command language interpreter that executes commands read from the standard input or from a file. It's the default shell on most Linux distributions and macOS.",
+        "objectives": [
+          "Understand what Bash is and its purpose",
+          "Learn basic shell concepts",
+          "Write your first bash script"
+        ],
+        "code_example": "#!/bin/bash\\necho \"Hello, World!\"\\necho \"Welcome to Bash scripting!\"",
+        "example_explanation": "The shebang (#!/bin/bash) tells the system which interpreter to use. The echo command prints text to the terminal.",
+        "exercises": [
+          "Create a script that prints your name",
+          "Add comments to explain what your script does"
+        ],
+        "tips": [
+          "Always start your bash scripts with #!/bin/bash",
+          "Use echo to display output",
+          "Comments start with # symbol"
+        ],
+        "load_in_editor": true
+      },
+      {
+        "id": 2,
+        "title": "Variables and Data Types",
+        "difficulty": "beginner",
+        "content": "Variables in bash are used to store data. Unlike other programming languages, bash variables don't have explicit data types - everything is treated as a string by default.",
+        "objectives": [
+          "Learn how to declare and use variables",
+          "Understand variable naming conventions",
+          "Practice variable manipulation"
+        ],
+        "code_example": "#!/bin/bash\\n\\n# Variable declaration\\nname=\"John\"\\nage=25\\n\\n# Using variables\\necho \"Name: $name\"\\necho \"Age: $age\"\\n\\n# Variable concatenation\\nfull_info=\"$name is $age years old\"\\necho $full_info",
+        "example_explanation": "Variables are assigned without spaces around the = sign. Use $ to access variable values. Variables can be concatenated within double quotes.",
+        "exercises": [
+          "Create variables for your favorite color, number, and food",
+          "Display them in a formatted message"
+        ],
+        "tips": [
+          "No spaces around = when assigning variables",
+          "Use double quotes to preserve spaces in variable values",
+          "Variable names should be descriptive"
+        ],
+        "load_in_editor": true
+      }
+    ]
+}
+      
