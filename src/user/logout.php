@@ -21,13 +21,13 @@ if (isset($_SESSION["user_username"])) {
         setcookie("user_info", "", time() - 3600, "/");  // Set expiration to past time
 
         // Once user logs out redirect to the landing page
-        header("Location: ../pages/landing_page/landing_page.html");
+        header("Location: ../pages/login/login.php");
         exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 } else {
     // Handle case if user is not logged in or session is not set
-    header("Location: ../pages/landing_page/landing_page.html");
+    header("Location: ../pages/login/login.php");
     exit();
 }
