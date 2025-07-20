@@ -92,7 +92,8 @@ export default class Navigation {
     this.navbarDate = document.querySelector(".navbar__date");
     if (this.isLoggedIn) {
       this.userButton = document.querySelector(".sidebar__button--user--auth");
-      this.userDropdown = document.querySelector('.sidebar__bottom__dropdown')
+      this.userDropdown = document.querySelector('.sidebar__bottom__dropdown');
+      this.userSetting= document.querySelector('.sidebar__button--settings');
     }
   }
   setListeners() {
@@ -100,6 +101,13 @@ export default class Navigation {
     this.sidebarBtnClose.addEventListener("click", this.closeSidebar);
     if (this.isLoggedIn) {
       this.userButton.addEventListener("click", this.handleUserButtonClick);
+      this.userSetting.addEventListener('click',()=>{
+        const event = new CustomEvent('modalopen',{
+          detail:{data:'modal open fired from navigation setting button'},
+          bubbles:true,
+        })
+        document.dispatchEvent(event);
+      })
     }
     document.addEventListener('click',this.handleDocumentClick);
     
@@ -245,9 +253,9 @@ export default class Navigation {
                 <div class="sidebar__bottom--user__container">
                 ${sidebarUser}
                 </div>
-                <!-- <button type="button sidebar__button--settings">
+                <button type="button" class="sidebar__button--settings">
                     <img class="sidebar__img--settings" src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
-                </button> Settings functionality not implemented -->
+                </button>  
             </div>
         `;
     return sidebar;

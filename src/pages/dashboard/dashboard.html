@@ -6,14 +6,17 @@
     <title>Dashboard | Linux-Lab</title>
     <link rel="icon" type="image/x-icon" href="../assets/SVGs/favicon.ico" />
     <link rel="stylesheet" href="dashboard.css" />
-    <link rel="stylesheet" href="settingModal.css" />
+    <link
+      rel="stylesheet"
+      href="../../components/SettingModal/settingModal.css"
+    />
   </head>
   <body>
     <div class="navigation__container"></div>
 
     <!-- SETTINGS -->
     <dialog class="setting__container">
-      <div class="setting__header">
+      <!-- <div class="setting__header">
         <h2>Settings</h2>
         <button class="setting__button--close setting__button">
           <img src="../assets/SVGs/Close.svg" alt="close" />
@@ -47,7 +50,7 @@
           <button class="form__button--cpwd styled-button" type="submit">
             Change Email
           </button>
-          <p class="status"></p>
+          <p class="status status__email"></p>
         </form>
         <form
           class="setting__form setting__form--name setting__item"
@@ -76,7 +79,7 @@
           <button class="form__button--name styled-button" type="submit">
             Change Name
           </button>
-          <p class="status "></p>
+          <p class="status status__name"></p>
         </form>
         <div class="setting__item">
           <h4 class="setting__form__title">Delete Account:</h4>
@@ -87,7 +90,7 @@
             Delete
           </button>
         </div>
-      </div>
+      </div> -->
     </dialog>
 
     <!-- LAYOUT -->
@@ -99,47 +102,9 @@
     </div>
 
     <script src="dashboard.js" type="module"></script>
-    <script>
-      const modal = document.querySelector(".setting__container");
-      const closeBtn = modal.querySelector(".setting__button--close");
-
-      const emailForm = document.querySelector(".setting__form--email");
-      const usernameForm = document.querySelector(".setting__form--name");
-
-      console.log(emailForm);
-      console.log(usernameForm);
-
-      emailForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-        console.log(data);
-
-        try {
-          const response = await fetch("../../user/change_email.php", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              new_email: data.newEmail,
-              old_email: data.oldEmail,
-            }),
-          });
-          if (!response.ok) {
-            throw new Error ("Bad response form send");
-          }
-          const resData = await response.json();
-          console.log(resData);
-        } catch (e) {
-          console.error(e);
-        }
-      });
-
-      closeBtn.addEventListener("click", () => {
-        modal.close();
-      });
-      // modal.showModal();
-    </script>
+    <script
+      src="../../components/SettingModal/SettingModal.js"
+      type="module"
+    ></script>
   </body>
 </html>

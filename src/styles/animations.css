@@ -6,7 +6,7 @@
 @keyframes popup{
     from{
         opacity: 0;
-        transform: translateY(30px) rotateX(30deg);
+        transform: translateY(10px) ;
     }
     to{
         opacity: 1;
@@ -18,11 +18,11 @@
 @keyframes rotate-in{
     from{
         opacity: 0;
-        transform: rotate(-30deg) scale(0);
+        transform: translateY(10px) ;
     }
     to{
         opacity: 1;
-        transform: rotate(0deg) scale(1);
+        transform: translateY(0px) ;
     }
 
 }
