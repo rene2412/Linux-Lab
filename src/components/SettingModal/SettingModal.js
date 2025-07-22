@@ -27,7 +27,7 @@ export default class SettingModal {
     this.emailStatus = document.querySelector(".status__email");
     this.usernameForm = document.querySelector(".setting__form--name");
     this.usernameStatus = document.querySelector(".status__name");
-    this.deleteBtn = document.querySelector(".setting__button--delete")
+    this.deleteForm = document.querySelector(".form--delete")
   };
 
   setListeners = () => {
@@ -40,9 +40,11 @@ export default class SettingModal {
       this.container.showModal()
     })
 
-    this.deleteBtn.addEventListener('click', async ()=>{
+    this.deleteForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
       try {
         const response = await fetch("../../user/delete_account.php");
+        window.location.replace("../../pages/login/login.php");
         if (!response.ok) {
           throw new Error("Bad response from delete change");
         }
@@ -212,16 +214,26 @@ export default class SettingModal {
           </button>
           <p class="status status__name"></p>
         </form>
-        <div class="setting__item">
+        <form action="#" class="setting__item form--delete">
           <h4 class="setting__form__title">Delete Account:</h4>
+          <label for="confirm">Type DELETE to delete account:</label>
+          <input
+            id="confirm"
+            class="input--single"
+            type="text" 
+            placeholder="Type DELETE to confirm"
+            pattern="DELETE"
+            title="Please type DELETE to confirm account deletion"
+            required
+          />
           <button
-            type="button"
+            type="submit"
             class="setting__button setting__button--delete styled-button"
           >
             Delete
           </button>
           <p class="status status--error">Goodbye...this is irreversable</p>
-        </div>
+        </form>
       </div>
         `;
   };
