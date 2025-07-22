@@ -2,46 +2,36 @@
     "lessons": [
       {
         "id": 1,
+        "section": "Prelude",
         "title": "Introduction to Bash",
-        "content": "Bash (Bourne Again Shell) is a command language interpreter that executes commands read from the standard input or from a file. It's the default shell on most Linux distributions and macOS.",
-        "objectives": [
-          "Understand what Bash is and its purpose",
-          "Learn basic shell concepts",
-          "Write your first bash script"
-        ],
-        "code_example": "#!/bin/bash\\necho \"Hello, World!\"\\necho \"Welcome to Bash scripting!\"",
-        "example_explanation": "The shebang (#!/bin/bash) tells the system which interpreter to use. The echo command prints text to the terminal.",
-        "exercises": [
-          "Create a script that prints your name",
-          "Add comments to explain what your script does"
-        ],
+        "content": "Bash (Bourne Again Shell) is a command programming language interpreter, that executes commands read from the standard input or from a file. It's the default shell on most Linux distributions and macOS. The shell is the program that reads and executes commands via the command line that affects your entire machine.</p> Bash Scripting is a scripting language, which means that it was specically designed to automate tasks for system admins, software engineers, IT, and Cyber Security on Linux machines. In addition, since Bash scripts have the ability to modify system files, hackers use Bash scripts to perform attacks which could allow them to compromise your system. Overall, learning Bash Scripting could open the door for better career oppurtunites, enhance your programming skills, and give you a better understaning of Linux.",
         "tips": [
-          "Always start your bash scripts with #!/bin/bash",
-          "Use echo to display output",
-          "Comments start with # symbol"
+        "WARNING: This section of Linux-Lab assumes you already know a programming language (Preferably in Python, C, or C++). If not then prepare for a fast paced enviroment as this section will use concepts that will make more sense for an experienced programmer."
         ],
         "load_in_editor": true
       },
       {
         "id": 2,
-        "title": "Variables and Data Types",
-        "difficulty": "beginner",
-        "content": "Variables in bash are used to store data. Unlike other programming languages, bash variables don't have explicit data types - everything is treated as a string by default.",
-        "objectives": [
-          "Learn how to declare and use variables",
-          "Understand variable naming conventions",
-          "Practice variable manipulation"
-        ],
-        "code_example": "#!/bin/bash\\n\\n# Variable declaration\\nname=\"John\"\\nage=25\\n\\n# Using variables\\necho \"Name: $name\"\\necho \"Age: $age\"\\n\\n# Variable concatenation\\nfull_info=\"$name is $age years old\"\\necho $full_info",
-        "example_explanation": "Variables are assigned without spaces around the = sign. Use $ to access variable values. Variables can be concatenated within double quotes.",
-        "exercises": [
-          "Create variables for your favorite color, number, and food",
-          "Display them in a formatted message"
-        ],
+        "section": "Shebang, Printing, & $Variables",
+        "title": "Hello World",
+        "difficulty": "Beginner",
+        "content": "Every Bash script begins with the <b>shebang</b> character sequence: #!. Followed by the absolute path that the interpreter uses to execute the script: <code>#!/bin/bash.</code><br><br>To print to the screen, we follow the same command used in the Linux command line: <b>echo</b>. The difference is that echo can now take different parameters like strings, chars, ints, arrays, and more.<br><br>For the first lesson here, lets print to the screen: \"Hello World\".",
         "tips": [
-          "No spaces around = when assigning variables",
-          "Use double quotes to preserve spaces in variable values",
-          "Variable names should be descriptive"
+        "Make sure your script file has executable permissions: use `chmod +x script.sh`. In this enviorement you wont need to, but if you are programming on your own machine, you will need to allow user execution permissions.",
+        "Use double quotes (`\"`) around strings to preserve spaces and interpret variables correctly."
+        ],
+        "load_in_editor": true
+      },
+      {
+        "id": 3,
+        "section": "Shebang, Printing, & $Variables",
+        "title": "$Variables",
+        "difficulty": "Beginner",
+        "content": "Since Bash is a scripting language, variables are not type-strict. You don't declare them with a data type — you simply assign them using the equals sign (`=`), and reference them using the dollar sign (`$`). Bash is not type-strict, everything is stored as a string by default. It's only interpreted as a number when used in an arithmetic context.<br><br>Let's write a program that demonstrates how you can create and reference variables in Bash:<br><br><code>food=\"Pizza\"<br>echo \"I like, $food\"</code><br><br>Note: The Bash interperter knows that food is a string variable because it is not used in an arthmethic context (we wil discuss about this in the next lesson). The variable (whether it is a string, int, char, etc) is extracted or referenced in the echo paramater, in this case the variable food represents a string. Also, there should be no spaces around the equals sign when assigning a value. In addition, double quotes are recommended to preserve spacing and interpret variable values properly.",
+        "tips": [
+          "Variable assignment must not have spaces around the `=`. For example: `x=5`, not `x = 5`.",
+          "All variables are treated as strings by default unless used in arithmetic expressions.",
+          "Variable names should start with a letter or underscore, not a number."
         ],
         "load_in_editor": true
       }
