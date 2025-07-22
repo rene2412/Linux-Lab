@@ -36,7 +36,7 @@ function Is_Username_Taken(PDO $pdo, string $username) : bool {
     return $result;
 }
 
-function Delete_Account(PDO $pdo, int $userID) : bool {
+function Delete_Account(PDO $pdo, int $userID) {
     $sql = "DELETE FROM user_progress WHERE user_id = ?";
     $statement = $pdo->prepare($sql);
     $statement->execute([$userID]);
