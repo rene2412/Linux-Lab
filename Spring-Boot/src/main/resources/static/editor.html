@@ -854,7 +854,6 @@ async function loadLessons() {
     }
 }
 
-// Add this function to display a specific lesson
 function displayLesson(index) {
     const lessonContent = document.getElementById('lessonContent');
     
@@ -862,7 +861,6 @@ function displayLesson(index) {
         console.error('Invalid lesson index:', index);
         return;
     }
-    
     const lesson = lessons[index];
     
     
@@ -877,7 +875,6 @@ function displayLesson(index) {
     if (lesson.content) {
         lessonHTML += `
             <div class="lesson-section">
-                <h3> Content</h3>
                 <div>${lesson.content}</div>
             </div>
         `;
