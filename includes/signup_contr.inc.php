@@ -25,7 +25,7 @@ function is_username_too_long(string $username) : bool {
     else return false;
 }
 function username_is_taken(object $pdo, string $username) : bool {
-	if(GetUsername($pdo, $username)) {
+	if (GetUsername($pdo, strtolower($username))) {
 		return true;
 	}
 	else return false;
@@ -67,4 +67,5 @@ else return true;
 function create_user(object $pdo, string $pwd, string $username, string $email)  {
 	return set_user($pdo, $pwd, $username, $email);
 }
+
 
