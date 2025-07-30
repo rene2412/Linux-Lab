@@ -37,6 +37,9 @@ require_once __DIR__. "/../../../vendor/autoload.php";
                 ?>
             </div>
             <?php 
+               session_start();
+               $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+               $dotenv->load();
                
                $client = new Google\Client;
                $client->setClientId($_ENV["CLIENT_ID"]);
