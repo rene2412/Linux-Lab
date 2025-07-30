@@ -19,6 +19,12 @@ $input = json_decode(file_get_contents("php://input"), true);
    $newUsername = $input["new_username"] ?? "";
    $username = Get_Username($pdo, $userId);
    $email = GetUserEmail($pdo, $userId);
+   
+   if ($_SESSION["auth_type"] === "google") {
+    $Errors = "Error: Your account is managed by Google and can't be modified here.\nTo change your information please change through Google.";
+    Send_Rest_API($username, $userId, $email, $Errors, $Success);
+    return;
+    }
    if (empty($oldUsername) || empty($newUsername)) {
     $Errors = "Error: Username Input Can't Be Empty";
     Send_Rest_API($username, $userId, $email, $Errors, $Success);
