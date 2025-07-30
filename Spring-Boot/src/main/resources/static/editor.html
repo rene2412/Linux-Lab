@@ -355,7 +355,7 @@
         .output {
             height: 200px;
             background: #000000;
-            border-top: 2px solid #00ff00;
+            border-top: 2px solid #ffffff;
             display: none;
             flex-direction: column;
         }
@@ -374,9 +374,9 @@
         .output-content {
             flex: 1;
             padding: 15px;
-            color: #00ff00;
+            color: #ffffff;
             font-family: 'Ubuntu Mono', monospace;
-            font-size: 13px;
+            font-size: 16px;
             line-height: 1.4;
             white-space: pre-wrap;
             overflow-y: auto;
@@ -622,7 +622,7 @@ echo "🐧 Welcome to Linux Bash Scripting!"
 
         // Initialize Ace Editor
         const editor = ace.edit("editor");
-        editor.setTheme("ace/theme/terminal");
+        editor.setTheme("ace/theme/twilight");
         editor.session.setMode("ace/mode/sh");
         editor.setOptions({
             enableBasicAutocompletion: true,
@@ -802,6 +802,10 @@ let lessons = [];
 let currentLessonIndex = 0;
 let totalLessons = 0;
 
+function GetCurrentLesson()  {
+    return currentLessonIndex;
+}
+
 async function loadLessons() {
     const lessonContent = document.getElementById('lessonContent');
     
@@ -854,7 +858,6 @@ async function loadLessons() {
     }
 }
 
-// Add this function to display a specific lesson
 function displayLesson(index) {
     const lessonContent = document.getElementById('lessonContent');
     
@@ -862,7 +865,6 @@ function displayLesson(index) {
         console.error('Invalid lesson index:', index);
         return;
     }
-    
     const lesson = lessons[index];
     
     
@@ -877,7 +879,6 @@ function displayLesson(index) {
     if (lesson.content) {
         lessonHTML += `
             <div class="lesson-section">
-                <h3> Content</h3>
                 <div>${lesson.content}</div>
             </div>
         `;

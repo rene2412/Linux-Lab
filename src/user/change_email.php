@@ -22,6 +22,13 @@ $oldEmail = $input["old_email"] ?? "";
 $newEmail = $input["new_email"] ?? "";
 $currentEmail = GetUserEmail($pdo, $userId);
 $email = "";
+
+if ($_SESSION["auth_type"] === "google") {
+  $Errors = "Error: Your account is managed by Google and can't be modified here.\nTo change your information please change through Google.";
+  $email = $oldEmail;
+  Send_Rest_API($username, $userId, $email, $Errors, $Success);
+  return;
+}
 if (empty($oldEmail) || empty($newEmail)) {
     $Errors = "Error: Email Input Can't Be Empty";
     $email = $oldEmail;

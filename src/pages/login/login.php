@@ -2,7 +2,9 @@
 require_once "../../../includes/config_session.inc.php";
 require_once "../../../includes/signup_view.inc.php";
 require_once "../../../includes/login_view.inc.php";
+require_once __DIR__. "/../../../vendor/autoload.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +36,24 @@ require_once "../../../includes/login_view.inc.php";
                 check_login_errors();
                 ?>
             </div>
+            <?php 
+               session_start();
+               $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+               $dotenv->load();
+               
+               $client = new Google\Client;
+               $client->setClientId($_ENV["CLIENT_ID"]);
+               $client->setClientSecret($_ENV["CLIENT_SECRET"]);
+               $client->setRedirectUri("http://localhost/Linux-Lab/src/pages/login/google.php");
+
+                $client->addScope("email");
+                $client->addScope("profile");
+
+                $auth_url = $client->createAuthUrl();
+            
+                ?>
+            <a href="<?= htmlspecialchars($auth_url) ?>">
+            <button>Sign In With Google</button></a>
             <form action="../../../includes/reset_info.inc.php" method="post">
                 <button class="styled-button auth__forgot">Reset Password</button>
             </form>

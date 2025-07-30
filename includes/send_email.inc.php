@@ -1,6 +1,8 @@
 <?php 
 session_start();
 require __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 use \SendGrid\Mail\Mail;
 
@@ -13,7 +15,7 @@ if (isset($_SESSION["send_email"])) {
 
     require_once "database.inc.php";
 
-    $url = "https://linux-lab.live/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "http://localhost/Linux-Lab/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
     $expires = date("U") + 1800;
     
     // SQL Queries
@@ -35,19 +37,16 @@ if (isset($_SESSION["send_email"])) {
     } else {
         $hashedToken = password_hash($token, PASSWORD_DEFAULT); 
         $stmt->execute([$userEmail, $selector, $hashedToken, $expires]);
-             error_log("✅ INSERT executed");
+             error_log("INSERT executed");
     }
-
-    // Sending the email
-   // $mail = new PHPMailer(true);
-
-
+    
+    $apiKey = $_ENV["SENDGRID_API_KEY"];
+    $sendgrid = new \SendGrid($apiKey);
     $email = new Mail();
     $email->setFrom("no-reply@linux-lab.live", "Linux Lab");
     $email->setSubject("Reset Your Password");
     $email->addTo($userEmail);
     $email->addContent("text/html", "Here is your reset link: <a href='$url'>$url</a>");   
-    
     
     try {
     $response = $sendgrid->send($email);
@@ -60,4 +59,5 @@ if (isset($_SESSION["send_email"])) {
         error_log("SendGrid Error: " . $e->getMessage());
     }
 }
+
 
