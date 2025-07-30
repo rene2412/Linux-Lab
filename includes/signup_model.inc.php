@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 function GetUsername(object $pdo, string $username) : array|false {
-	$query = "SELECT username FROM users WHERE username = :username;";
+	$query = "SELECT username FROM users WHERE LOWER(username) = LOWER(:username);";
 	$statement = $pdo->prepare($query);
 	$statement->bindParam(":username", $username);
 	$statement->execute();
@@ -20,6 +20,16 @@ function GetEmail(object $pdo, string $email) : array|false {
 
 	$result = $statement->fetch(PDO::FETCH_ASSOC);
 	return $result;
+}
+
+function GetUsernameByEmail(object $pdo, string $email) {
+	$query = "SELECT username FROM users where email= :email";
+	$statement = $pdo->prepare($query);
+	$statement->bindParam(":email", $email);
+	$statement->execute();
+
+	$result = $statement->fetch(PDO::FETCH_ASSOC);
+	return $result ? $result['username'] : null;
 }
 
 function set_user(object $pdo, string $pwd, string $username, string $email)  {
@@ -47,6 +57,7 @@ function set_user(object $pdo, string $pwd, string $username, string $email)  {
 
 
 }
+
 
 
 
