@@ -9,9 +9,6 @@ $pwd = $_SESSION["pwd"];
 
 unset($_SESSION["pwd"]);
 
-echo error_log("$pwd");
-echo error_log("$email");
-echo error_log("$username");
 try {
         $result = create_user($pdo, $pwd, $username, $email);
 		$newSessionId = session_create_id();		
