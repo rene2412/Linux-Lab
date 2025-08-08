@@ -1,12 +1,17 @@
 // import { useState } from 'react';
 import './App.css';
+import { Navbar } from './components/layout';
+import Navmenu from './components/layout/Navmenu';
+import NavbarProvider from './context/navContext';
 
 function App() {
-
   return (
-    <>
-      <h1 className=" w-5 text-3xl">hello world</h1>
-    </>
+    <main className="bg-dark min-h-svh">
+      <NavbarProvider>
+        <Navbar />
+        <Navmenu/>
+      </NavbarProvider>
+    </main>
   );
 }
 
