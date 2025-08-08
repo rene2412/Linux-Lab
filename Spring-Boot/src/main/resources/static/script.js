@@ -56,7 +56,7 @@ async function runCode() {
 
     // Show loading state
     runButton.classList.add('running');
-    runButton.innerHTML = '<span>Executing...</span>';
+    runButton.innerHTML = '<span>Running...</span>';
     loadingSpinner.style.display = 'inline-block';
     
     // Show output container
@@ -101,6 +101,7 @@ async function runCode() {
         }
         
         // Show execution status
+        /*
         if (result.success !== undefined) {
             if (result.success) {
                 outputContent.textContent += '\n\n\n\nScript executed successfully!';
@@ -108,7 +109,7 @@ async function runCode() {
                 outputContent.textContent += `\n\n\n\nScript failed with exit code: ${result.exitCode || 'unknown'}`;
             }
         }
-        
+        */
         if (result.executionTime) {
             outputContent.textContent += `\nExecution time: ${result.executionTime}ms`;
         }
@@ -126,7 +127,7 @@ async function runCode() {
     } finally {
         // Reset button and spinner
         runButton.classList.remove('running');
-        runButton.innerHTML = '<span>▶</span><span>Execute</span>';
+        runButton.innerHTML = '<span>▶</span><span>Run</span>';
         loadingSpinner.style.display = 'none';
         
         // Scroll to bottom
@@ -283,7 +284,8 @@ function displayLesson(index) {
             </div>
         `;
     }
-    
+   
+
     // Set the lesson content
     lessonContent.innerHTML = lessonHTML;
     
@@ -305,6 +307,7 @@ function nextLesson() {
     if (currentLessonIndex < totalLessons - 1) {
         currentLessonIndex++;
         displayLesson(currentLessonIndex);
+        updateDropdownTitle(lessons[currentLessonIndex]);
     }
 }
 
@@ -312,6 +315,7 @@ function previousLesson() {
     if (currentLessonIndex > 0) {
         currentLessonIndex--;
         displayLesson(currentLessonIndex);
+        updateDropdownTitle(lessons[currentLessonIndex]); 
     }
 }
 
