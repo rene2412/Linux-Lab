@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bash Scripting - Linux Terminal Editor</title>
+    <title>Bash Scripting | Linux Lab</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="matrix-bg" id="matrixBg"></div>
-    
-    <div class="header">
-        <div class="terminal-info">
-        </div>
-    </div>
-
     <div class="container">
         <div class="split-container">
             <div class="lesson-panel">
-                <div class="lesson-header">
-                    <div class="lesson-title"></div>
+                <div class="dropdown">
+                    <div class="dropdown-bar">
+                        <span class="select">Loading...</span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="bash-lessons">
+                    </ul>
                 </div>
-            
+                <script src="bash_lessons.js"></script>
                 <div class="lesson-content" id="lessonContent">
                     <!-- Lesson content will be dynamically loaded here -->
                 </div>
