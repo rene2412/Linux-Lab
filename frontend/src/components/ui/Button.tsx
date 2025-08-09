@@ -1,4 +1,9 @@
 import type React from 'react'; // default props
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
+
+gsap.registerPlugin(ScrambleTextPlugin);
 
 type ButtonProps = React.ComponentPropsWithoutRef<'button'> & {
   className?: string;

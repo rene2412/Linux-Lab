@@ -31,7 +31,7 @@ export default function Navbar({ className, ...props }: NavbarProps) {
   return (
     <nav
       {...props}
-      className={`relative flex justify-between px-4 py-4 font-sans text-white ${className}`}
+      className={`flex justify-between px-4 py-4 sticky top-0 font-sans text-white ${className}`}
     >
       <div className="bg-dark/80 absolute top-0 left-0 -z-10 h-full w-full backdrop-blur-xl"></div>
       <div className="aspect-square w-9">

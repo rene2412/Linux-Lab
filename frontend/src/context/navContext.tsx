@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 type NavbarContextProps = {
   isOpen: boolean;
@@ -13,12 +13,6 @@ const NavbarContext = createContext<NavbarContextProps | null>(null);
 
 export default function NavbarProvider({ children }: NavbarProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-//   useEffect(()=>{
-//     console.log("Toggled Nav")
-//     console.log(isOpen)
-
-//   },[isOpen])
 
   return (
     <NavbarContext value={{ isOpen, setIsOpen }}>{children}</NavbarContext>

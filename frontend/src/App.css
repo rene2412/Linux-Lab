@@ -34,6 +34,7 @@
   --text-heading-h7: 2.938rem;
   --text-heading-xl: 2.25rem;
   --text-heading-lg: 1.688rem;
+  --text-heading-slg: 1.312rem;
 
   --text-h1: 6.562rem;
   --text-h2: 5rem;
@@ -41,8 +42,10 @@
   --text-h4: 2.938rem;
   --text-h5: 2.25rem;
   --text-xl: 1.688rem;
-  --text-lg: 1.688rem;
+  --text-lg: 1.312rem;
   --text-base: 1rem;
   --text-sm: 0.75rem;
   --text-xs: 0.562rem;
+
+  --leading-tighter:1.10em;
 }
