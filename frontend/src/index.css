@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.text-hero {
+  font-size: clamp(2rem, 2.89vw, 4rem);
+}
+
+.text-hero-lg {
+  font-size: clamp(1rem, 5.9vw, 99rem);
+}
+
+.text-hero-lg-serif {
+  font-size: clamp(3.75rem, 6.5vw, 99rem);
+}
