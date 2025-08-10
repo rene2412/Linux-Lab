@@ -2,6 +2,7 @@ import type React from 'react';
 import tuxImage from '../../assets/tux.png';
 import Button from '../ui/Button';
 import { useNavbar } from '../../context/navContext';
+import { ArrowRight } from 'lucide-react';
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -29,53 +30,58 @@ export default function Navbar({ className, ...props }: NavbarProps) {
   const { isOpen, setIsOpen } = useNavbar();
 
   return (
-    <nav
-      {...props}
-      className={`flex justify-between px-4 py-4 sticky top-0 font-sans text-white ${className}`}
-    >
-      <div className="bg-dark/80 absolute top-0 left-0 -z-10 h-full w-full backdrop-blur-xl"></div>
-      <div className="aspect-square w-9">
-        <Logo />
-      </div>
-      <ul
-        className={`absolute top-0 right-0 bottom-0 left-0 hidden items-center justify-center gap-6 lg:flex`}
+    <>
+      <p className="bg-highlight font-spencer flex items-center gap-1 tracking-wide justify-center text-lg">
+        Linux-Lab has officially launched! Enjoy <ArrowRight></ArrowRight>
+      </p>
+      <nav
+        {...props}
+        className={`sticky top-0 flex justify-between px-4 py-4 font-sans text-white ${className}`}
       >
-        {DATA.links.map(elem => {
-          return (
-            <li key={elem.title}>
-              <a className="tracking-sans-normal" href={elem.href}>
-                {elem.title}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-      <div className="flex gap-4">
-        <Button
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-          className="lg:hidden"
-          variant="outline"
-          type="submit"
+        <div className="bg-dark/80 absolute top-0 left-0 -z-10 h-full w-full backdrop-blur-xl"></div>
+        <div className="aspect-square w-9">
+          <Logo />
+        </div>
+        <ul
+          className={`absolute top-0 right-0 bottom-0 left-0 hidden items-center justify-center gap-6 lg:flex`}
         >
-          Menu
-        </Button>
-        <Button
-          className="hidden lg:inline-block"
-          variant="default"
-          type="submit"
-        >
-          Try It Now
-        </Button>
-        <Button
-          className="hidden lg:inline-block"
-          variant="outline"
-          type="submit"
-        >
-          Login
-        </Button>
-      </div>
-    </nav>
+          {DATA.links.map(elem => {
+            return (
+              <li key={elem.title}>
+                <a className="tracking-sans-normal" href={elem.href}>
+                  {elem.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="flex gap-4">
+          <Button
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+            className="lg:hidden"
+            variant="outline"
+            type="submit"
+          >
+            Menu
+          </Button>
+          <Button
+            className="hidden lg:inline-block"
+            variant="default"
+            type="submit"
+          >
+            Try It Now
+          </Button>
+          <Button
+            className="hidden lg:inline-block"
+            variant="outline"
+            type="submit"
+          >
+            Login
+          </Button>
+        </div>
+      </nav>
+    </>
   );
 }
