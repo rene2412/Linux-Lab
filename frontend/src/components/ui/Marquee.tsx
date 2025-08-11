@@ -27,7 +27,7 @@ export default function Marquee({
         const wrap = gsap.utils.wrap(-half, 0);
 
         const xSet = gsap.quickTo(container.current, 'x', {
-          duration: 0.1,
+          duration: 0.5,
           ease: 'power4.out',
           modifiers: {
             x: gsap.utils.unitize(wrap),
@@ -58,7 +58,7 @@ export default function Marquee({
   );
 
   return (
-    <div className={`h-full w-full overflow-hidden ${className}`}>
+    <div aria-hidden className={`h-full w-full overflow-hidden ${className}`}>
       <div
         ref={container}
         className="marquee__track aria-hidden: select-none pointer-events-none flex text-nowrap text-white"

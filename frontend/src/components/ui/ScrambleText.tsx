@@ -34,12 +34,14 @@ export default function ScrambleText({
           paused: false,
         });
         tl.current.from(container.current, {
-          filter: 'blur(1px)',
-          duration: 0.4,
-          ease: 'none',
+          filter: 'blur(4px)',
+          duration:0.25,
+          ease: 'power2.out',
           scrambleText: {
+            text: container.current?.textContent || '',
             chars: '!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz',
-            speed: 0.5,
+            speed: 0.1,
+            // rightToLeft:true
           },
         });
       }
@@ -52,6 +54,8 @@ export default function ScrambleText({
   });
 
   return (
-      <span onMouseEnter={active} className='text-center' ref={container}>{children}</span>
+    <span onMouseEnter={active} className="text-center" ref={container}>
+      {children}
+    </span>
   );
 }
