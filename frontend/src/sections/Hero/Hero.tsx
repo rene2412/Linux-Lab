@@ -20,7 +20,7 @@ export default function Hero() {
             alt="black hole monochrome"
           />
           {/* background darken imgae*/}
-          <div className="absolute lg:hidden z-0 h-full w-full bg-black/70"></div>
+          <div className="absolute z-0 h-full w-full bg-black/70 lg:hidden"></div>
           <div className="relative z-20 mx-0 flex h-full w-full flex-col justify-between px-4 py-14 sm:mx-auto sm:max-w-lg md:max-w-xl lg:max-w-full lg:items-end lg:justify-end lg:px-14">
             <span className="padding text-transparent select-none lg:hidden">
               .
@@ -33,9 +33,9 @@ export default function Hero() {
                 From command line basics, to networking we got you covered for
                 free and in browser.
               </span>
-              <div className="flex w-full items-center justify-center gap-4 rounded-sm lg:w-lg lg:bg-black/90 lg:p-4 lg:backdrop-blur-xl">
+              <div className="flex w-full items-center justify-stretch gap-4 rounded-sm lg:w-lg lg:bg-black/90 lg:p-4 lg:backdrop-blur-xl">
                 <Button className="xl:text-heading-slg w-full py-4">
-                  Try it now
+                  Try It Now
                 </Button>
                 <Button
                   className="xl:text-heading-slg w-full py-4"
@@ -48,7 +48,7 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <Marquee className='mt-2'>
+      <Marquee className="mt-2">
         <span className="font-spencer md:text-heading-h6 text-heading-h7 mx-4 flex gap-8">
           <span>The Basics</span> <span>Networking</span>
           <span>Bash Scripting</span>

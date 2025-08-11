@@ -3,6 +3,8 @@ import tuxImage from '../../assets/tux.png';
 import Button from '../ui/Button';
 import { useNavbar } from '../../context/navContext';
 import { ArrowRight } from 'lucide-react';
+import ScrambleText from '../ui/ScrambleText';
+
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -31,7 +33,7 @@ export default function Navbar({ className, ...props }: NavbarProps) {
 
   return (
     <>
-      <p className="bg-highlight font-spencer flex items-center gap-1 tracking-wide justify-center text-lg">
+      <p className="bg-highlight font-spencer flex items-center justify-center gap-1 text-lg tracking-wide">
         Linux-Lab has officially launched! Enjoy <ArrowRight></ArrowRight>
       </p>
       <nav
@@ -49,7 +51,7 @@ export default function Navbar({ className, ...props }: NavbarProps) {
             return (
               <li key={elem.title}>
                 <a className="tracking-sans-normal" href={elem.href}>
-                  {elem.title}
+                  <ScrambleText>{elem.title}</ScrambleText>
                 </a>
               </li>
             );
