@@ -20,7 +20,7 @@
   --color-dark: #000000;
   --color-highlight: rgb(41, 255, 34);
 
-  --tracking-sans-normal: -0.07em;
+  --tracking-sans-normal: -0.06em;
   --tracking-sans-wide: -0.04em;
   --tracking-spencer-normal: 0em;
   --tracking-spencer-tight: -0.03em;
@@ -48,4 +48,5 @@
   --text-xs: 0.562rem;
 
   --leading-tighter:1.10em;
+  --leading-tighten:1.20em;
 }

@@ -4,6 +4,7 @@ import { Navbar } from './components/layout';
 import Navmenu from './components/layout/Navmenu';
 import LenisProvider from './context/LenisContext';
 import NavbarProvider from './context/navContext';
+import About from './sections/About';
 import Hero from './sections/Hero';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Navmenu className="z-20" />
           <main className="isolate z-0">
             <Hero />
+            <About/>
             <div className="h-svh"></div>
           </main>
         </NavbarProvider>

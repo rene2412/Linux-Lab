@@ -2,7 +2,7 @@ import type React from 'react';
 import tuxImage from '../../assets/tux.png';
 import Button from '../ui/Button';
 import { useNavbar } from '../../context/navContext';
-import { ArrowRight } from 'lucide-react';
+// import { ArrowRight } from 'lucide-react';
 import ScrambleText from '../ui/ScrambleText';
 
 
@@ -33,9 +33,9 @@ export default function Navbar({ className, ...props }: NavbarProps) {
 
   return (
     <>
-      <p className="bg-highlight font-spencer flex items-center justify-center gap-1 text-lg tracking-wide">
+      {/* <p className="bg-highlight font-spencer flex items-center justify-center gap-1 text-lg tracking-wide">
         Linux-Lab has officially launched! Enjoy <ArrowRight></ArrowRight>
-      </p>
+      </p> */}
       <nav
         {...props}
         className={`sticky top-0 flex justify-between px-4 py-4 font-sans text-white ${className}`}

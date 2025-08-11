@@ -13,7 +13,7 @@ export default function Hero() {
             Linux-Lab
           </h1>
         </div>
-        <div className="card__container shadow-highlight/20 relative col-span-10 col-start-2 row-start-2 h-[75lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm shadow-[0_0_180px] lg:h-[65vh]">
+        <div className="card__container shadow-highlight/20 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm shadow-[0_0_180px] lg:h-[65vh]">
           <img
             className="absolute top-0 left-0 z-0 h-full w-full object-cover select-none"
             src="media/asciibh.png"
