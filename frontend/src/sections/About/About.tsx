@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import TextPlugin from 'gsap/TextPlugin';
@@ -9,42 +9,87 @@ gsap.registerPlugin(ScrollTrigger, SplitText, TextPlugin);
 
 export default function About() {
   const container = useRef<HTMLElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
   const images = [
-    {src:'media/'}
-  ]
-  console.log(images);
+    { src: 'media/bg.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg2.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg3.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg4.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg5.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg6.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg7.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg8.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg9.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg10.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg11.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg12.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg13.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg14.png', alt: 'abstract dither pattern' },
+  ];
 
   useGSAP(
     () => {
-      ScrollTrigger.create({
-        trigger: '.pin__wrapper',
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: '.pin__content',
-        // markers: true,
-      });
+      if (loading) {
+        document.fonts.ready.then(() => {
+          setLoading(false);
+        });
+      }
 
-      const split = SplitText.create('.split', {
-        type: 'words',
-        // mask: 'words',
-      });
-      gsap.from(split.words, {
-        opacity: 0.1,
-        filter: 'blur(3px)',
-        ease: 'none',
-        stagger: 0.5,
-        scrollTrigger: {
+      if (!loading) {
+        ScrollTrigger.create({
           trigger: '.pin__wrapper',
           start: 'top top',
           end: 'bottom bottom',
-          markers: true,
-          scrub: true,
-        },
-      });
-    },
-    { scope: container }
-  );
+          pin: '.pin__content',
+        });
 
+        const split = SplitText.create('.split', {
+          type: 'words',
+          // mask: 'words',
+        });
+        gsap.from(split.words, {
+          opacity: 0.1,
+          filter: 'blur(4px)',
+          ease: 'none',
+          stagger: 0.5,
+          scrollTrigger: {
+            trigger: '.pin__wrapper',
+            start: 'top top',
+            end: 'bottom bottom',
+            markers: false,
+            scrub: true,
+          },
+        });
+        ScrollTrigger.create({
+          trigger: '.pin__wrapper',
+          start: 'top top',
+          end: 'bottom bottom',
+          onUpdate: self => {
+            const newIndex = Math.min(
+              Math.floor(self.progress * images.length),
+              images.length - 1
+            );
+            setCurrentImageIndex(newIndex);
+          },
+        });
+
+        gsap.from('.pin__img', {
+          yPercent: -40,
+          opacity: 0,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.pin__wrapper',
+            start: 'top bottom',
+            end: ' top bottom',
+            //   markers: true,
+            scrub: true,
+          },
+        });
+      }
+    },
+    { scope: container, dependencies: [loading] }
+  );
 
   return (
     <section ref={container} className="mx-4 my-auto mt-20 h-fit sm:min-h-lvh">
@@ -54,14 +99,17 @@ export default function About() {
           Linux-Lab
         </span>
       </h1>
-      <div className="pin__wrapper h-[400lvh]">
+      <div className="pin__wrapper h-[200lvh]">
         <div className="pin__content mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
-          <img
-            src="media/bg2.png"
-            className="col-span-3 col-start-2 mt-auto aspect-square object-contain sm:mt-0 xl:col-span-4 xl:col-start-2"
-            alt="blackhole"
-          ></img>
-          <h2 className="text-heading-lg split md:text-heading-xl leading-tighten tracking-sans-wide lg:text-heading-h7 col-span-4 my-10 text-white sm:col-span-6 sm:col-start-7">
+          <div className="pin__img col-span-3 col-start-2 mt-auto sm:mt-0 xl:col-span-4 xl:col-start-2">
+            <img
+              src={images[currentImageIndex].src}
+              key={currentImageIndex}
+              className="aspect-square object-cover"
+              alt={images[currentImageIndex].alt}
+            />
+          </div>
+          <h2 className="text-heading-lg split pin__text md:text-heading-xl leading-tighten tracking-sans-wide lg:text-heading-h7 col-span-4 my-10 text-white sm:col-span-6 sm:col-start-7">
             <span className="text-highlight">Linux</span>-Lab is a web based
             learning platform meant to teach people from all knowledge levels
             about <span className="text-highlight">Linux</span>. We want to take

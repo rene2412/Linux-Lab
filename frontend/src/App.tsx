@@ -6,6 +6,7 @@ import LenisProvider from './context/LenisContext';
 import NavbarProvider from './context/navContext';
 import About from './sections/About';
 import Hero from './sections/Hero';
+import Overview from './sections/Overview';
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <main className="isolate z-0">
             <Hero />
             <About/>
-            <div className="h-svh"></div>
+            <Overview/>
+            <div className="h-svh bg-red-50"></div>
           </main>
         </NavbarProvider>
       </main>
