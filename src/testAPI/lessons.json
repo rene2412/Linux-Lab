@@ -1,7 +1,7 @@
 {
     "The Basics": [
         {
-            "section__size": 70,
+            "section__size": 75,
             "interactive__size": 54,
             "section__completed": false
         },
@@ -9,22 +9,49 @@
             "id": 1,
             "parent": "The Basics",
             "section": "Prelude",
-            "title": "The Command Line",
+            "title": "Overview ",
             "content_type": "article",
-            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.<\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge of Linux grows, you will see terms like the <b>shell<\/b>, <b>scripting<\/b>, <b>kernel<\/b>, etc....<\/p><p>But to understand these terms we must start at the begining, the <b>filesystem<\/b>.<\/p><img src='..\/..\/..\/images\/linuxCl.gif' width=500>",
+            "content": "Welcome to Linux Lab! In this section you will learn the basics and more of the Linux command line.<br><br>The Linux command line can seem intimidating at first, but we at Linux Lab have developed a fun, interative, and informative way to learn Linux. Reading docs or watching tutorials are also good, but we answer the question \"Oh okay thats cool, but when will I ever use this command?\".<br><br> Well in this section we will go over several commands, understand why its there, and how to use it. <br><br>Therefore, the best way to learn is by doing, lets get your journey into the world of Linux started!",
             "completed": false
         },
         {
             "id": 2,
             "parent": "The Basics",
             "section": "Prelude",
-            "title": "The Filesystem",
+            "title": "What Is Linux?",
             "content_type": "article",
-            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.<\/p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.<\/p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.<\/p><p>Let's take a look how it visually works with this example below:<\/p> <img src='..\/..\/..\/images\/fileSystem.gif' width = '500'",
+            "content": "Linux is a free and open-source operating system based on Unix (an older but groundbreaking operating system from the 1970s). From what started as a hobby project by a college student in 1991 named Linus Torvalds, is now powering most of the digital world.<br><br>Here's what is currently running Linux right now:<br>• The servers behind Netflix, Google, and Amazon<br>• Your Android phone<br>• Your car's infotainment system (Tesla, BMW, Toyota, etc.)<br>• The router connecting you to the internet<br>• Most smart TVs and IoT devices<br><br>In the workplace, Linux skills are essential for:<br>• Software developers and engineers<br>• System administrators and DevOps teams<br>• Cybersecurity professionals<br>• Hackers<br>• Data scientists and analysts<br><br>The reason Linux is everywhere? It's reliable, secure, customizable, and completely free. While Windows costs hundreds of dollars per license, Linux costs nothing and can be modified for any purpose.<br><br>That's why when companies need systems that absolutely cannot fail, like running a bank or launching rockets, they choose Linux.",
             "completed": false
         },
         {
             "id": 3,
+            "parent": "The Basics",
+            "section": "Prelude",
+            "title": "Linux Architecture",
+            "content_type": "article",
+            "content": "There are 5 main components that make Linux work: Applications, Kernel, Shell, Utilities, and Hardware. As you can see from the image below, these components work with each other to create the Linux operating system. Let's see how they work:<br><br><img src='../../../images/Linux-Architecture.png' width='500'><br><br><b>Kernel</b> - The Linux kernel is the core of the operating system and lays down the foundation for how software communicates with hardware. The kernel has 4 main jobs:<br><ul><li><b>Memory Management:</b> Keeps track of the device's memory and decides where and how to store content</li><li><b>Process Management:</b> Determines which process or program can use the CPU (Central Processing Unit) for a certain time</li><li><b>Device Drivers:</b> Acts as a translator between hardware devices (like keyboards, mice, printers) and the software</li><li><b>System Calls:</b> Provides a way for programs to request services from the operating system</li></ul><br><b>Shell</b> - This is your command line interface! The shell takes the commands you type and translates them into instructions the kernel can understand. Popular shells include Bash, Zsh, and Fish.<br><br><b>Applications</b> - These are the programs you actually use, like web browsers, text editors, and games. They run on top of the operating system.<br><br><b>Utilities</b> - Built-in command line tools that help you manage your system.<br><br><b>Hardware</b> - The physical components like CPU, RAM, hard drives, and network cards that everything else depends on.<br><br>Think of it like a restaurant: Hardware is the kitchen, Kernel is the head chef coordinating everything, Shell is the waiter taking your orders, Utilities are the cooking tools, and Applications are the meals you actually enjoy!<br><br> For this section of Linux Lab we will work with the Linux shell and utilities.",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "parent": "The Basics",
+            "section": "Prelude",
+            "title": "The Command Line",
+            "content_type": "article",
+            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task via the <b>shell</b>\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the interactive learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge and experience with Linux grows, you will begin using your computer in powerful ways. Tasks that take dozens of clicks in a graphical interface can be done with a single command.</p><p>For now, we must understand how the <b>filesystem</b> works, because that's where all your files and programs live.</p><img src='../../../images/linuxCl.gif' width='500'><br><br>",
+            "completed": false
+        },
+        {
+            "id": 5,
+            "parent": "The Basics",
+            "section": "Prelude",
+            "title": "The Filesystem",
+            "content_type": "article",
+            "content": "<p>The core philosophy in Linux is that <b>everything is a file</b>. This means that every file, folder (directory), and even hardware devices are treated as file-like objects to allow for fast and easy navigation throughout your system.</p><p>A <b>directory</b> is just the Linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories, and so on.</p><p>This looping technique is called <b>recursion</b>, which is exactly how the filesystem works - like Russian nesting dolls, but for your computer files!</p><p>Let's take a look at how it visually works with this example below:</p><img src='../../../images/fileSystem.gif' width='500'><br><br><p>Think of it like a family tree:</p><ul><li><b>Root (/):</b> The very top of everything - like the great-great-grandparent</li><li><b>Directories:</b> Like family branches - they can have children (more directories or files)</li><li><b>Files:</b> The end points - they contain your actual data</li></ul><p>Every file and directory has a unique <b>path</b> that tells you exactly where to find it. For example: <code>/home/user/Documents/my_file.txt</code></p><p>This path is like giving someone directions to your house - it starts from the root (/) and follows the directories until it reaches your file.</p><p>With that in mind, we can begin introducing commands we have all been waiting for.",
+            "completed": false
+        },
+        {
+            "id": 6,
             "parent": "The Basics",
             "section": "Hello World",
             "title": "echo",
@@ -34,7 +61,7 @@
             "completed": false
         },
         {
-            "id": 4,
+            "id": 7,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "date",
@@ -44,7 +71,7 @@
             "completed": false
         },
         {
-            "id": 5,
+            "id": 8,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "whoami", 
@@ -53,7 +80,7 @@
             "completed": false
         },
         {
-            "id": 6,
+            "id": 9,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "pwd",
@@ -63,7 +90,7 @@
             "completed": false
         },
         {
-            "id": 7,
+            "id": 10,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "ls",
@@ -73,7 +100,7 @@
             "completed": false
         },
         {
-            "id": 8,
+            "id": 11,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd",
@@ -83,7 +110,7 @@
             "completed": false
         },
         {
-            "id": 9,
+            "id": 12,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cat",
@@ -93,7 +120,7 @@
             "completed": true
         },
         {
-            "id": 10,
+            "id": 13,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "clear",
@@ -102,7 +129,7 @@
             "completed": true
         },
         {
-            "id": 11,
+            "id": 14,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd ..",
@@ -112,7 +139,7 @@
             "completed": false
         },
         {
-            "id": 12,
+            "id": 15,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "Absolute Path vs Relative Path",
@@ -122,7 +149,7 @@
             "completed": false 
         },
         {
-            "id": 13,
+            "id": 16,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd path\/to\/source",
@@ -132,7 +159,7 @@
             "completed": false
         },
         {
-            "id": 14,
+            "id": 17,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #1",
@@ -148,7 +175,7 @@
             "completed": false
         },
         {
-            "id": 15,
+            "id": 18,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #2",
@@ -164,7 +191,7 @@
             "completed": false
         },
         {
-            "id": 16,
+            "id": 19,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #3",
@@ -180,7 +207,7 @@
             "completed": false
         },
         {
-            "id": 17,
+            "id": 20,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #1",
@@ -190,7 +217,7 @@
             "completed": false 
         },
         {
-            "id": 18,
+            "id": 21,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "touch",
@@ -200,7 +227,7 @@
             "completed": false
         },
         {
-            "id": 19,
+            "id": 22,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mkdir",
@@ -210,7 +237,7 @@
             "completed": false
         },
         {
-            "id": 20,
+            "id": 23,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm",
@@ -220,7 +247,7 @@
             "completed": false
         },
         {
-            "id": 21,
+            "id": 24,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rmdir",
@@ -230,7 +257,7 @@
             "completed": false
         },
         {
-            "id": 22,
+            "id": 25,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm -rf",
@@ -240,7 +267,7 @@
             "completed": false
         },
         {
-            "id": 23,
+            "id": 26,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename files",
@@ -250,7 +277,7 @@
             "completed": false
         },
         {
-            "id": 24,
+            "id": 27,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename directories",
@@ -260,7 +287,7 @@
             "completed": false
         },
         {
-            "id": 25,
+            "id": 28,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - move files\/directories",
@@ -270,7 +297,7 @@
             "completed": false
         },
         {
-            "id": 26,
+            "id": 29,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "cp",
@@ -280,7 +307,7 @@
             "completed": false
         }, 
         {
-            "id": 27,
+            "id": 30,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #2",
@@ -290,7 +317,7 @@
             "completed": false
         },
         {
-            "id": 28,
+            "id": 31,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #4",
@@ -306,7 +333,7 @@
             "completed": false
         },
         {
-            "id": 29,
+            "id": 32,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #5",
@@ -322,7 +349,7 @@
             "completed": false
         },
         {
-            "id": 30,
+            "id": 33,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #6",
@@ -338,7 +365,7 @@
             "completed": false
         },
         {
-            "id": 31,
+            "id": 34,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #7",
@@ -354,7 +381,7 @@
             "completed": false
         },
         {
-            "id": 32,
+            "id": 35,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #8",
@@ -370,7 +397,7 @@
             "completed": false
         },
         {
-            "id": 33,
+            "id": 36,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #3",
@@ -380,7 +407,7 @@
             "completed": false
         },
         {
-            "id": 34,
+            "id": 37,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "Searching & Filtering",
@@ -389,7 +416,7 @@
             "completed": false
         },
         {
-            "id": 35,
+            "id": 38,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep",
@@ -398,7 +425,7 @@
             "completed": false
         },
         {
-            "id": 36,
+            "id": 39,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep \"pattern\" file",
@@ -408,7 +435,7 @@
             "completed": false
         },
         {
-            "id": 37,
+            "id": 40,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -n \"pattern\" file",
@@ -418,7 +445,7 @@
             "completed": false
         },
         {
-            "id": 38,
+            "id": 41,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -c \"pattern\" file",
@@ -428,7 +455,7 @@
             "completed": false
         },
         {
-            "id": 39,
+            "id": 42,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "wildcard*",
@@ -438,7 +465,7 @@
             "completed": true
         },
         {
-            "id": 40,
+            "id": 43,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find",
@@ -447,7 +474,7 @@
             "completed": false
         },
         {
-            "id": 41,
+            "id": 44,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source -name filename.txt",
@@ -457,7 +484,7 @@
             "completed": false
         },
         {
-            "id": 42,
+            "id": 45,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source directory",
@@ -465,9 +492,29 @@
             "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ -name \"project1\"<\/code>",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
+        }, 
+        {
+            "id": 46,
+            "parent": "The Basics",
+            "section": "Searching & Filtering",
+            "title": "sort",
+            "content_type": "interactive",
+            "content": "The <b>sort</b> command is one of the more powerful commands in Linux, it allows to us sort content of a file and see the output based on the parameters we give it. By default <b>sort</b> arranges lines alphabetically in ascending order. Which means that if numbers are in the file, <b>sort</b> will treat the numbers as strings and only sort by the first digit of a number. Lets look at some examples ", 
+            "answer": "",
+            "completed": false
         },
         {
-            "id": 43,
+            "id": 47,
+            "parent": "The Basics",
+            "section": "Searching & Filtering",
+            "title": "sort -flag",
+            "content_type": "interactive",
+            "content": "",
+            "answer": "find Projects\/ -name \"project1\"",
+            "completed": false
+        },
+        {
+            "id": 48,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Output Redirection Operators: '>', '>>' ",
@@ -476,7 +523,7 @@
             "completed": false
         },
         {
-            "id": 44,
+            "id": 49,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Overwrite Operator: '>'",
@@ -486,7 +533,7 @@
             "completed": false
         },
         {
-            "id": 45,
+            "id": 50,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Appending Operator: '>>'",
@@ -496,7 +543,17 @@
             "completed": false
         },
         {
-            "id": 46,
+            "id": 51,
+            "parent": "The Basics",
+            "section": "File Redirection",
+            "title": "The Appending Operator: '>>'",
+            "content_type": "interative",
+            "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
+            "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
+            "completed": false
+        },
+        {
+            "id": 52,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #9",
@@ -512,7 +569,7 @@
             "completed": true
         },
         {
-            "id": 47,
+            "id": 53,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #10",
@@ -528,7 +585,7 @@
             "completed": true
         },
         {
-            "id": 48,
+            "id": 54,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #11",
@@ -544,7 +601,7 @@
             "completed": false
         },
         {
-            "id": 49,
+            "id": 55,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #12",
