@@ -111,7 +111,7 @@ async function runCode() {
         }
         */
         if (result.executionTime) {
-            outputContent.textContent += `\nExecution time: ${result.executionTime}ms`;
+            //outputContent.textContent += `\nExecution time: ${result.executionTime}ms`;
         }
         
     } catch (error) {

@@ -84,7 +84,7 @@ body {
     align-self: center;
     min-width: 15em;
     position: relative;
-    margin: 2em;
+    margin: 0.9em;
 }
 
 .dropdown * {
@@ -99,7 +99,7 @@ body {
     align-items: center;
     border: 0.3px #666666 solid;
     border-radius: 0.5em;
-    padding: 1em;
+    padding: 0.6em;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -336,7 +336,7 @@ body {
 
 .editor-header {
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    padding: 20px;
+    padding: 15px;
     border-bottom: 1px solid #000000;
     display: flex;
     justify-content: space-between;
