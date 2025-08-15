@@ -499,7 +499,7 @@
             "section": "Searching & Filtering",
             "title": "sort",
             "content_type": "interactive",
-            "content": "The <b>sort</b> command is one of the more powerful commands in Linux, it allows to us sort content of a file and see the output based on the parameters we give it. By default <b>sort</b> arranges lines alphabetically in ascending order. Which means that if numbers are in the file, <b>sort</b> will treat the numbers as strings and only sort by the first digit of a number. Lets look at some examples ", 
+            "content": "The <b>sort</b> command is one of the more powerful commands in Linux, it allows us to sort content of a file and see the output based on the parameters we give it. By default <b>sort</b> arranges lines alphabetically in ascending order. Which means that if numbers are in the file, <b>sort</b> will treat the numbers as strings and only sort by the first digit of a number.<br><code>sort -flag filename</code>Like with other commands, the flag here is optional so lets just first look at a simple example.<br><br>In our Documents/ directory, lets take a look of our grocery list. Then, we will use this simple sort command and observe what happens, try it out! <code>sort grocery_list.txt </code>", 
             "answer": "",
             "completed": false
         },

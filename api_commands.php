@@ -204,6 +204,29 @@ $fileSystem = [
                     ]
                 ]
             ],
+            "grocery_list.txt" => [
+                "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 01:24:04",
+                    "modified" => "2025-02-27 01:24:04",
+                    "size" => 285,
+                    "content" => [
+                        "Steak",
+                        "Chicken",
+                        "Rice",
+                        "Spinach",
+                        "Eggs",
+                        "Potatoes",
+                        "Bananaa",
+                        "Apples",
+                        "Strawberries",
+                        "Carrorts",
+                        "Spinach"
+                    ]
+                ]
+            ],
             "hello.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
@@ -1203,6 +1226,25 @@ else {
     return $permissions;
     }  
 }
+
+function process_sort() {
+    $text = ["banana", "carrots", "apple"];
+    $sort = [];
+    $char = [];
+    $i = 0;
+    $sort = $text[0];
+    foreach ($text as $word) {
+        $char[] = mb_substr($word, 0, 1);        
+        $t = ord($char[0]);
+        $r = ord($sort[0]);
+        if ($t >= r) {               
+             
+        }
+        $sort .= $word;
+    }
+    return $sort;
+}
+
 
 function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
     
@@ -2666,6 +2708,9 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
                 }
             }
             break;
+    case 'sort':
+            $output = process_sort();
+        break;
     case 'chmod':
         $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);
         if (count($args) < 3 || count($args) > 4) {
