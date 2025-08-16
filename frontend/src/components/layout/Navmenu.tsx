@@ -171,7 +171,7 @@ export default function Navmenu({ className = ' ' }) {
             </p>
             <span
               style={{ clipPath: 'inset(15% 0% 25% 0%)' }}
-              className="animate-blink-alt font-spencer ml-0.5 h-fit w-fit bg-white"
+              className="animate-cursor-blink font-spencer ml-0.5 h-fit w-fit bg-white"
             >
               a
             </span>

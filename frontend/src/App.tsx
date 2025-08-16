@@ -19,7 +19,8 @@ function App() {
             <Hero />
             <About/>
             <Overview/>
-            <div className="h-svh bg-red-50"></div>
+            {/* <Benefits/> */}
+            <div className="h-svh bg-dark"></div>
           </main>
         </NavbarProvider>
       </main>

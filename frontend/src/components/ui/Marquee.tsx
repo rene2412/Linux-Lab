@@ -23,7 +23,7 @@ export default function Marquee({
 
       if (!loading && container.current) {
         const half = container.current.querySelector('.marquee__item')?.clientWidth || 0;
-        console.log(half);
+        // console.log(half);
         const wrap = gsap.utils.wrap(-half, 0);
 
         const xSet = gsap.quickTo(container.current, 'x', {
