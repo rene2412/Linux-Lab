@@ -2,9 +2,10 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 // import { useGSAP } from "@gsap/react";
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import SplitText from 'gsap/SplitText';
 import React, { useRef, useState } from 'react';
-gsap.registerPlugin(ScrambleTextPlugin, SplitText);
+gsap.registerPlugin(ScrambleTextPlugin, SplitText, ScrollTrigger);
 
 // make sure to make parent relative for full hover fill vs text
 /**
@@ -12,16 +13,17 @@ gsap.registerPlugin(ScrambleTextPlugin, SplitText);
  * PARENT MUST BE Relative to work with active
  * @param children - The text content to display and animate
  */
-export default function ScrambleText({
+export default function FadeIn({
   children,
+  className,
 }: {
   children: React.ReactNode;
+  className?: string; 
 }) {
   const container = useRef<HTMLSpanElement>(null);
   const [loading, setLoading] = useState(true);
-  const tl = useRef<GSAPTimeline>(null);
 
-  const { contextSafe } = useGSAP(
+  useGSAP(
     () => {
       if (loading) {
         document.fonts.ready.then(() => {
@@ -29,19 +31,20 @@ export default function ScrambleText({
         });
       }
 
+      const elements = container.current?.querySelectorAll('.fadeIn')
+      if(!elements)return;
       if (!loading) {
-        tl.current = gsap.timeline({
-          paused: false,
-        });
-        tl.current.to(container.current, {
-          // filter: 'blur(4px)',
-          duration:0.3,
-          ease: 'none',
-          scrambleText: {
-            text: container.current?.textContent || '',
-            chars: '!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz',
-            speed: 5,
-            // rightToLeft:true
+        gsap.from(elements, {
+          duration:0.6,
+          yPercent:100,
+          opacity:0,
+          scale:0.9,
+          stagger:0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: container.current,
+            markers: false,
+            start: 'top 95%',
           },
         });
       }
@@ -49,13 +52,5 @@ export default function ScrambleText({
     { scope: container, dependencies: [loading] }
   );
 
-  const active = contextSafe(() => {
-    if (!tl?.current?.isActive()) tl?.current?.progress(0);
-  });
-
-  return (
-    <span onMouseEnter={active} className="text-center" ref={container}>
-      {children}
-    </span>
-  );
+  return <span className={className}  ref={container}>{children}</span>;
 }

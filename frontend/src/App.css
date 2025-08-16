@@ -10,12 +10,18 @@
   src: url('/fonts/dmsansvariable.ttf') format('truetype');
   font-display: swap;
 }
+@font-face {
+  font-family: 'Jersey25';
+  src: url('/fonts/Jersey25.ttf') format('truetype');
+  font-display: swap;
+}
 
 @theme {
   --font-spencer: 'Spencer', system-ui;
   --font-sans:
     'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-jersey:'Jersey25', monospace;
 
   --color-dark: #000000;
   --color-highlight: rgb(41, 255, 34);
@@ -49,4 +55,16 @@
 
   --leading-tighter:1.10em;
   --leading-tighten:1.20em;
+
+  --animate-cursor-blink: cursor-blink step-start 0.9s 0.5s infinite ;
+
+  @keyframes cursor-blink{
+    0%{
+      opacity: 1;
+    }
+    50%{
+      opacity:0
+    }
+  }
+
 }

@@ -12,7 +12,9 @@ export default function LenisProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const lenis = new Lenis();
+  const lenis = new Lenis({
+    prevent:(node)=> node.classList.contains('subscroll'),
+  });
 
   // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
   lenis.on('scroll', ScrollTrigger.update);

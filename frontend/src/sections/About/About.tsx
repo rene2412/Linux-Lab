@@ -4,6 +4,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import TextPlugin from 'gsap/TextPlugin';
 import SplitText from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import ScrambleScroll from '../../components/ui/ScrambleScroll';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, TextPlugin);
 
@@ -77,13 +78,14 @@ export default function About() {
         gsap.from('.pin__img', {
           yPercent: -40,
           opacity: 0,
+          rotate: -20,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: '.pin__wrapper',
             start: 'top bottom',
             end: ' top bottom',
             //   markers: true,
-            scrub: true,
+            scrub: 1.2,
           },
         });
       }
@@ -92,13 +94,18 @@ export default function About() {
   );
 
   return (
-    <section ref={container} className="mx-4 my-auto mt-20 h-fit sm:min-h-lvh">
-      <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-white">
-        About the{' '}
-        <span className="tracking-spencer-normal text-highlight font-spencer">
-          Linux-Lab
-        </span>
-      </h1>
+    <section
+      id="about"
+      ref={container}
+      className="mx-4 overflow-x-hidden my-auto mt-40 h-fit sm:min-h-lvh"
+    >
+        <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-white">
+          <ScrambleScroll>About the </ScrambleScroll>
+          <span>{' '}</span>
+          <ScrambleScroll className="tracking-spencer-normal text-highlight font-spencer">
+            Linux-Lab
+          </ScrambleScroll>
+        </h1>
       <div className="pin__wrapper h-[200lvh]">
         <div className="pin__content mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
           <div className="pin__img col-span-3 col-start-2 mt-auto sm:mt-0 xl:col-span-4 xl:col-start-2">

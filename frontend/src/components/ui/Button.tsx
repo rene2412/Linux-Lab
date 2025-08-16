@@ -25,7 +25,7 @@ export default function Button({
     return (
       <button
         {...props}
-        className={`outline-highlight text-highlight font-spencer flex touch-manipulation items-center justify-center rounded-sm px-6 py-2 outline-2 ${className}`}
+        className={`outline-highlight text-highlight font-spencer flex touch-manipulation items-center justify-center rounded-sm px-6 py-2 outline-2 focus:shadow-[0_0_16px] shadow-highlight/40  ${className}`}
       >
         {children}
       </button>
