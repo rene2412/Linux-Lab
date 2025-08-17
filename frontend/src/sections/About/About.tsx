@@ -76,16 +76,18 @@ export default function About() {
         });
 
         gsap.from('.pin__img', {
-          yPercent: -40,
+          yPercent: -20,
+          xPercent: -40,
           opacity: 0,
-          rotate: -20,
-          ease: 'power2.out',
+          clipPath:'inset(10%)',
+          rotate: -2,
+          ease: 'none',
           scrollTrigger: {
             trigger: '.pin__wrapper',
             start: 'top bottom',
             end: ' top bottom',
             //   markers: true,
-            scrub: 1.2,
+            scrub: 1.1,
           },
         });
       }
@@ -108,11 +110,11 @@ export default function About() {
         </h1>
       <div className="pin__wrapper h-[200lvh]">
         <div className="pin__content mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
-          <div className="pin__img col-span-3 col-start-2 mt-auto sm:mt-0 xl:col-span-4 xl:col-start-2">
+          <div className="pin__img col-span-3 col-start-2 mix-blend-hard-light mt-auto sm:mt-0 xl:col-span-4 xl:col-start-2">
             <img
               src={images[currentImageIndex].src}
               key={currentImageIndex}
-              className="aspect-square object-cover"
+              className="aspect-square mix-blend-lighten object-cover"
               alt={images[currentImageIndex].alt}
             />
           </div>

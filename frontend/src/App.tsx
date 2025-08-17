@@ -7,6 +7,7 @@ import NavbarProvider from './context/navContext';
 import About from './sections/About';
 import Hero from './sections/Hero';
 import Overview from './sections/Overview';
+import Benefits from './sections/Benefits';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <Hero />
             <About/>
             <Overview/>
-            {/* <Benefits/> */}
+            <Benefits/>
             <div className="h-svh bg-dark"></div>
           </main>
         </NavbarProvider>

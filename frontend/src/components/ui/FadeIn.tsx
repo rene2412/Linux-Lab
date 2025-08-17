@@ -35,12 +35,12 @@ export default function FadeIn({
       if(!elements)return;
       if (!loading) {
         gsap.from(elements, {
-          duration:0.6,
-          yPercent:100,
+          duration:1,
+          yPercent:70,
           opacity:0,
-          scale:0.9,
+          scale:0.90,
           stagger:0.1,
-          ease: 'power3.out',
+          ease: 'power4.out',
           scrollTrigger: {
             trigger: container.current,
             markers: false,

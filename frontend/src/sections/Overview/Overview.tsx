@@ -138,9 +138,7 @@ export default function Overview() {
   });
 
   const handleClose = contextSafe((e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('click close')
     const target = e.target as HTMLElement;
-    console.log(target);
     const modal = target?.parentNode;
     if (!modal) return;
 
@@ -234,7 +232,7 @@ function CardReading({
 }) {
   return (
     <article
-      className={`draggable shadow-highlight/20 card__container absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 outline-2 outline-white backdrop-blur-xl hover:shadow-[0px_0px_64px] sm:gap-4 md:p-4 ${className}`}
+      className={`draggable shadow-highlight/20 card__container absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 outline-2 outline-white backdrop-blur-xl  hover:shadow-[0px_0px_64px] sm:gap-4 md:p-4 ${className}`}
     >
       <h2 className="text-heading-h6 lg:text-heading-h5 card__heading font-spencer leading-tighter text-white">
         {title}
