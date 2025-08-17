@@ -1227,26 +1227,109 @@ else {
     }  
 }
 
-function process_sort() {
-    $text = ["banana", "carrots", "apple"];
-    $sort = [];
-    $char = [];
-    $i = 0;
-    $sort = $text[0];
-    foreach ($text as $word) {
-        $char[] = mb_substr($word, 0, 1);        
-        $t = ord($char[0]);
-        $r = ord($sort[0]);
-        if ($t >= r) {               
-             
+function process_sort(&$fileSystem, $currentDirectory, $flags, $file) {
+    $resolvePath = function ($baseDir, $path) {
+        $isAbsolute = (substr($path, 0, 1) === '/');
+        $parts = $isAbsolute ? [] : explode('/', trim($baseDir, '/'));
+        foreach (explode('/', $path) as $part) {
+            if ($part === '..') {
+                if (!empty($parts)) array_pop($parts);
+            } elseif ($part !== '.' && $part !== '') {
+                $parts[] = $part;
+            }
         }
-        $sort .= $word;
+        return '/' . implode('/', $parts);
+    };
+
+    if (empty($file)) {
+        return "Error: No file specified.";
     }
-    return $sort;
+
+    $filePath = $resolvePath($currentDirectory, $file);
+    $fileDir = dirname($filePath);
+    $fileName = basename($filePath);
+    
+    $fileParts = array_filter(explode('/', trim($fileDir, '/')), 'strlen');
+    $fileLevel = &$fileSystem['/'];
+    foreach ($fileParts as $part) {
+        if (!array_key_exists($part, $fileLevel) || !is_array($fileLevel[$part])) {
+            return "Error: Directory does not exist.";
+        }
+        $fileLevel = &$fileLevel[$part];
+    }
+
+   if (!array_key_exists($fileName, $fileLevel)) {
+        return "Error: '$file' not found.";
+    }
+    
+    if (is_array($fileLevel[$fileName]) && !isset($fileLevel[$fileName]['file'])) {
+        return "Error: '$file' is a directory.";
+    }
+
+    if (isset($fileLevel[$fileName]['file']['permissions'])) {
+        $filePermissions = $fileLevel[$fileName]['file']['permissions'];
+        if ($filePermissions[1] !== 'r') {
+            return "Error: User does not have permission to read the file";
+        }
+    }
+
+    // Get file content - handle your file system structure
+    if (isset($fileLevel[$fileName]['file']['content'])) {
+        // Your file system stores content as array of lines
+        $lines = $fileLevel[$fileName]['file']['content'];
+    } elseif (is_string($fileLevel[$fileName])) {
+        // Legacy string format fallback
+        $content = $fileLevel[$fileName];
+        $lines = explode("\n", $content);
+    } else {
+        return "Error: Unable to read file content.";
+    }
+    
+    // Remove empty last line if it exists
+    if (end($lines) === '') {
+        array_pop($lines);
+    }
+
+    // Parse flags
+    $reverse = false;
+    $numeric = false;
+    $unique = false;
+    
+    if (!empty($flags)) {
+        $flagString = ltrim($flags, '-');
+        $reverse = strpos($flagString, 'r') !== false;
+        $numeric = strpos($flagString, 'n') !== false;
+        $unique = strpos($flagString, 'u') !== false;
+    }
+
+    // Sort the lines
+    if ($numeric) {
+        // Numeric sort
+        usort($lines, function($a, $b) use ($reverse) {
+            $numA = is_numeric($a) ? (float)$a : 0;
+            $numB = is_numeric($b) ? (float)$b : 0;
+            $result = $numA <=> $numB;
+            return $reverse ? -$result : $result;
+        });
+    } else {
+        // Lexicographic sort
+        if ($reverse) {
+            rsort($lines);
+        } else {
+            sort($lines);
+        }
+    }
+
+    // Remove duplicates if -u flag is used
+    if ($unique) {
+        $lines = array_unique($lines);
+        $lines = array_values($lines); // Re-index array
+    }
+
+    return implode("\n", $lines);
 }
 
-
-function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
+   function process_chmod(&$fileSystem, $currentDirectory, $sudo, $argument, $targetFile) : string {
     
     // Navigate to the target directory
     $path = $currentDirectory === '/' ? [] : explode('/', trim($currentDirectory, '/'));
@@ -2709,7 +2792,13 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             }
             break;
     case 'sort':
-            $output = process_sort();
+        if (substr($arg, 0, 1) === '-') {
+            // $arg is flags, $arg2 is filename
+            $output = process_sort($fileSystem, $currentDir, $arg, $arg2);
+        } else {
+            // $arg is filename, no flags
+            $output = process_sort($fileSystem, $currentDir, '', $arg);
+        }
         break;
     case 'chmod':
         $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);

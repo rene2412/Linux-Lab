@@ -509,7 +509,7 @@
             "section": "Searching & Filtering",
             "title": "sort -flag",
             "content_type": "interactive",
-            "content": "",
+            "content": "We can now mess around by adding flags to the <b>sort</b> command to add an aditional layer of filtering. Here are a few:",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
         },
@@ -617,7 +617,7 @@
             "completed": false
         },
         {
-            "id": 50,
+            "id": 56,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #13",
@@ -633,7 +633,7 @@
             "completed": false
         },
         {
-            "id": 51,
+            "id": 57,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #4",
@@ -643,7 +643,7 @@
             "completed": false
         },
         {
-            "id": 52,
+            "id": 58,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #5",
@@ -653,7 +653,7 @@
             "completed": false
         },
         {
-            "id": 53,
+            "id": 59,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #6",
@@ -662,7 +662,7 @@
             "completed": false
         },
         {
-            "id": 54,
+            "id": 60,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #7",
@@ -671,7 +671,7 @@
             "completed": false
         },
         {
-            "id": 55,
+            "id": 61,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #8",
@@ -680,7 +680,7 @@
             "completed": false
         },
         {
-            "id": 56,
+            "id": 62,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "Permissions In Linux",
@@ -689,7 +689,7 @@
             "completed": false
         },
         {
-            "id": 57,
+            "id": 63,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "ls -l",
@@ -698,7 +698,7 @@
             "completed": false
         },
         {
-            "id": 58,
+            "id": 64,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod",
@@ -707,7 +707,7 @@
             "completed": false
         },
         {
-            "id": 59,
+            "id": 65,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "sudo",
@@ -716,7 +716,7 @@
             "completed": false
         },
         {
-            "id": 60,
+            "id": 66,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change user permissions",
@@ -726,7 +726,7 @@
             "completed": false
         },
         {
-            "id": 61,
+            "id": 67,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change group permissions",
@@ -736,7 +736,7 @@
             "completed": false
         },
         {
-            "id": 62,
+            "id": 68,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown",
@@ -745,7 +745,7 @@
             "completed": false
         },
         {
-            "id": 63,
+            "id": 69,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
@@ -754,7 +754,7 @@
             "completed": false
         },
         {
-            "id": 64,
+            "id": 70,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #14",
@@ -770,7 +770,7 @@
             "completed": false
         },
         {
-            "id": 65,
+            "id": 71,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #15",
@@ -786,7 +786,7 @@
             "completed": false
         },
         {
-            "id": 66,
+            "id": 72,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #16",
@@ -802,7 +802,7 @@
             "completed": false
         },
         {
-            "id": 67,
+            "id": 73,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #17",
@@ -818,7 +818,7 @@
             "completed": false
         },
         {
-            "id": 68,
+            "id": 74,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #18",
@@ -834,7 +834,7 @@
             "completed": false
         },
         {
-            "id": 69,
+            "id": 75,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #9",
@@ -843,7 +843,7 @@
             "completed": false
         },
         {
-            "id": 70,
+            "id": 76,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #10",
