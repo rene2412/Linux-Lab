@@ -1,8 +1,8 @@
 {
     "The Basics": [
         {
-            "section__size": 75,
-            "interactive__size": 54,
+            "section__size": 78,
+            "interactive__size": 53,
             "section__completed": false
         },
         {
@@ -11,7 +11,7 @@
             "section": "Prelude",
             "title": "Overview ",
             "content_type": "article",
-            "content": "Welcome to Linux Lab! In this section you will learn the basics and more of the Linux command line.<br><br>The Linux command line can seem intimidating at first, but we at Linux Lab have developed a fun, interative, and informative way to learn Linux. Reading docs or watching tutorials are also good, but we answer the question \"Oh okay thats cool, but when will I ever use this command?\".<br><br> Well in this section we will go over several commands, understand why its there, and how to use it. <br><br>Therefore, the best way to learn is by doing, lets get your journey into the world of Linux started!",
+            "content": "Welcome to Linux Lab! In this section you will learn the basics and more of the Linux command line.<br><br>The Linux command line can seem intimidating at first, but we at Linux Lab have developed a fun, interactive, and informative way to learn Linux. Reading docs or watching tutorials are also good, but we answer the question \"Oh okay thats cool, but when will I ever use this command?\".<br><br> Well in this section we will go over several commands, understand why its there, and how to use it. <br><br>Therefore, the best way to learn is by doing, lets get your journey into the world of Linux started!",
             "completed": false
         },
         {
@@ -154,7 +154,7 @@
             "section": "File Navigation",
             "title": "cd path\/to\/source",
             "content_type": "interactive",
-            "content": "Navigating around your filesystem in the command line can be done more efficiently by taking the absolute and relative path into account.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path (which also our relative path) as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
+            "content": "As discussed, navigating around your filesystem in the command line can be done more efficiently by taking the absolute and relative path into account.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path (which also our relative path) as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
             "answer": "cd ..\/Projects\/project1",
             "completed": false
         },
@@ -209,7 +209,7 @@
         {
             "id": 20,
             "parent": "The Basics",
-            "section": "Checkpoint - File Modifications",
+            "section": "Checkpoint - File Navigation",
             "title": "Lab #1",
             "content_type": "interactive",
             "content": "There is a 'LetItHappen.txt' file that contains the lyrics to a Tame Impala song. The file lives inside file in our /Lyrics directory, that lives inside the /Documents directory.</p> Write the command using the <b>absolute</b> path that will display the content of 'LetItHappen.txt'</p>Remember: To see the contents of a file we can use the <b>cat</b>, and every absolute path begins by starting at the root directory via '<b>/</b>'. ",
@@ -242,7 +242,7 @@
             "section": "File Modifications",
             "title": "rm",
             "content_type": "interactive",
-            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>",
+            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed by the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>TIP: Since we are now deleting content through the command line, you can use a custom command (not a real Linux command) we implemented called: <code>refresh</code>This will restore the simulated filesytem back to its default state. However this is not a real feature, so if you delete content from the command line on your machine MAKE SURE you dont need it. There is no retrieving it, once its gone, its gone!:)",
             "answer": "rm penguin.txt",
             "completed": false
         },
@@ -292,7 +292,7 @@
             "section": "File Modifications",
             "title": "mv - move files\/directories",
             "content_type": "interactive",
-            "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
+            "content": "Now that we have gone over how to rename content with mv, we can discuss how to move files around your filesystem.<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that relative path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
             "answer": "mv hello.txt ..\/Projects",
             "completed": false
         },
@@ -302,7 +302,7 @@
             "section": "File Modifications",
             "title": "cp",
             "content_type": "interactive",
-            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp</b> (copy) command to achieve this and the syntax looks a lot like the mv command</p><code>cp [file] path/to/source</code><p> Traverse to the /Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ../Projects</code> Note: The source path can either be absolute or relative, your choice!",
+            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp</b> (copy) command to achieve this and the syntax looks a lot like the mv command.</p><code>cp [file] path/to/source</code><p> Traverse to the /Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ../Projects</code> Note: The source path can either be absolute or relative, your choice!",
             "answer": "cp hello.txt ../Projects",
             "completed": false
         }, 
@@ -509,10 +509,10 @@
             "section": "Searching & Filtering",
             "title": "sort -flag",
             "content_type": "interactive",
-            "content": "We can now mess around by adding flags to the <b>sort</b> command to add an aditional layer of filtering. Here are a few:",
+            "content": "We can now mess around by adding flags to the <b>sort</b> command to add an additional layer of filtering. Here are a few major ones:<ul><li><b>-r</b>: Reverses the order of the sort output.</li><li><b>-n</b>: Sorts numbers numerically instead of alphabetically (so 2 comes before 10).</li><li><b>-u</b>: Removes duplicate lines so only unique results are shown.</li></ul> Go ahead and try out the reverse flag in grocery_list.txt<code>sort -r grocery_list.txt</code>",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
-        },
+        }, 
         {
             "id": 48,
             "parent": "The Basics",
@@ -527,7 +527,7 @@
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Overwrite Operator: '>'",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>Lets enter our Documents directory and overwrite Shakespeare.txt with new content we will provide as an argument<\/p><code> echo \"I Love Linux!\" > Shakespeare.txt<\/code><p>This command will completely erase the existing content and replace it with the argument \"I  Love Linux!\". Try it out!<\/p>",
             "answer": "echo \"I love Linux!\" > Shakespeare.txt",
             "completed": false
@@ -537,23 +537,13 @@
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Appending Operator: '>>'",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
             "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
             "completed": false
         },
         {
             "id": 51,
-            "parent": "The Basics",
-            "section": "File Redirection",
-            "title": "The Appending Operator: '>>'",
-            "content_type": "interative",
-            "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
-            "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
-            "completed": false
-        },
-        {
-            "id": 52,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #9",
@@ -569,7 +559,7 @@
             "completed": true
         },
         {
-            "id": 53,
+            "id": 52,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #10",
@@ -585,7 +575,7 @@
             "completed": true
         },
         {
-            "id": 54,
+            "id": 53,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #11",
@@ -601,7 +591,7 @@
             "completed": false
         },
         {
-            "id": 55,
+            "id": 54,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #12",
@@ -617,7 +607,7 @@
             "completed": false
         },
         {
-            "id": 56,
+            "id": 55,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #13",
@@ -633,81 +623,99 @@
             "completed": false
         },
         {
-            "id": 57,
+            "id": 56,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #4",
-            "content_type": "lab",
+            "content_type": "interactive",
             "content": "<p>In our Documents\/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.<\/p><p>We will need a flag to output the number line where the pattern appears.<\/p>",
             "answer": "grep -n \"we\" Declaration.txt",
+            "completed": false
+        },
+        {
+            "id": 57,
+            "parent": "The Basics",
+            "section": "Checkpoint - File Searching, Filtering, and Redirection",
+            "title": "Lab #5",
+            "content_type": "interactive",
+            "content": "<p>Lets traverse to the Lyrics\/ directory that lives in the Documents\/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt<\/p>",
+            "answer": "grep -c \"happen\" LetItHappen.txt",
             "completed": false
         },
         {
             "id": 58,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #5",
-            "content_type": "lab",
-            "content": "<p>Lets traverse to the Lyrics\/ directory that lives in the Documents\/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt<\/p>",
-            "answer": "grep -c \"happen\" LetItHappen.txt",
+            "title": "Lab #6",
+            "content_type": "interactive",
+            "content": "<p>In the same Lyrics\/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt<\/p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>",
             "completed": false
         },
         {
             "id": 59,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #6",
-            "content_type": "lab",
-            "content": "<p>In the same Lyrics\/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt<\/p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>",
+            "title": "Lab #7",
+            "content_type": "interactive",
+            "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt<\/p>",
             "completed": false
         },
         {
             "id": 60,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #7",
-            "content_type": "lab",
-            "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt<\/p>",
+            "title": "Lab #8",
+            "content_type": "interactive",
+            "content": "<p>Write a command that returns all the .txt files in the Documents\/ directory?<\/p>",
             "completed": false
         },
         {
             "id": 61,
             "parent": "The Basics",
-            "section": "Checkpoint - File Searching, Filtering, and Redirection",
-            "title": "Lab #8",
-            "content_type": "lab",
-            "content": "<p>Write a command that returns all the .txt files in the Documents\/ directory?<\/p>",
+            "section": "File Permissions",
+            "title": "Permissions In Linux",
+            "content_type": "article",
+            "content": "<p>In Linux every file has permissions that allows or prevents users to read, write, and execute a file or program. We can desrcibe these terms on the terminal as:<br><br><b>r<\/b> \u2013 Read (can view the file or list the folder)<\/br><br><b>w<\/b> \u2013  Write (can modify the file or folder)<\/br><br><b>x<\/b> \u2013 Execute (can run the file if it\u2019s a program or enter the folder)<\/br><\/p>Also, there are permissions for 3 type of users:<br><br><b>Owner<\/b> \u2013 the person who owns the file<br><br><b>Group<\/b> \u2013 a group of users assigned to the file<\/br><br><b>Others<\/b> \u2013 everyone else<\/p>",
             "completed": false
         },
         {
             "id": 62,
             "parent": "The Basics",
             "section": "File Permissions",
-            "title": "Permissions In Linux",
-            "content_type": "article",
-            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br>    <b>r<\/b> \u2013 Read (can view the file or list the folder)<\/br><b>w<\/b> \u2013  Write (can modify the file or folder)<\/br> <b>x<\/b> \u2013 Execute (can run the file if it\u2019s a program or enter the folder)<\/br><\/p><br><p>Also, there are permissions for 3 type of users:<br><b>Owner<\/b> \u2013 the person who owns the file<br><b>Group<\/b> \u2013 a group of users assigned to the file<\/br><b>Others<\/b> \u2013 everyone else<\/p>",
+            "title": "ls -l",
+            "content_type": "interactive",
+            "content": "<p>Permissions can seem confusing at first, but we will clear it up. To see the output of your file permisions we can use the <b>ls -l<\/b> command, lets walk through the output!<\/p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt<\/code><\/p><p>To start off, there are 10 dashes, but the very first dash will determine if it's a file or directory. The next 9 are grouped into 3, which is important to understand to make modifications. The first group of 3 gives you the permissions for the owner (or the user if you own it) of the file, the next 3 give you permissions for the group (a collection of users like a devs team that are working on this), and the last 3 represent the others (a collection of users who are not the owner and not apart of the team). Lets look at the output one by one. <\/p><ul><li><b>-<\/b>As mentioned earlier, the first - indicates it's a regular file. If it were a directory, it would show <b>d<\/b>.<\/li><li><b>rw-<\/b> The owner can read and write the file.<\/li><li><b>r--<\/b> The group can only read the file.<\/li><li><b>r--<\/b> Others (everyone else) can also only read the file.<\/li><li><b>user<\/b> The name of the file's owner.<\/li><li><b>group<\/b> The group assigned to the file.<\/li><li><b>2025-02-27 01:24:04<\/b> The last modified date and time.<\/li><li><b>648<\/b> The file size in bytes.<\/li><li><b>Shakespeare.txt<\/b>: The name of the file.<\/li><\/ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.<\/p>",
             "completed": false
         },
         {
             "id": 63,
             "parent": "The Basics",
             "section": "File Permissions",
-            "title": "ls -l",
-            "content_type": "interative",
-            "content": "<p>To see the output of your file permisions we can use the <b>ls -l<\/b> command, lets walk through the output!<\/p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt<\/code><\/p><p>Here's what each part means:<\/p><ul><li><b>-<\/b> This indicates it's a regular file. If it were a directory, it would show <b>d<\/b>.<\/li><li><b>rw-<\/b> The owner can read and write the file.<\/li><li><b>r--<\/b> The group can only read the file.<\/li><li><b>r--<\/b> Others (everyone else) can also only read the file.<\/li><li><b>user<\/b> The name of the file's owner.<\/li><li><b>group<\/b> The group assigned to the file.<\/li><li><b>2025-02-27 01:24:04<\/b> The last modified date and time.<\/li><li><b>648<\/b> The file size in bytes.<\/li><li><b>Shakespeare.txt<\/b>: The name of the file.<\/li><\/ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.<\/p>",
+            "title": "Alphabetic Mode",
+            "content_type": "article",
+            "content": "The Linux permisions can be expressed in 2 ways, one being the <b>Alphabetic</b> mode which we have been working with already but lets take a closer look.</p>Up to now, we know that in order to see the permissions of a file, directory, or program we have to read the permissions for that owener's, group's, or other's dashes, but the placement of the dashes do matter. For example, lets look at this image for a quick quick example. <img src='../../../images/file_permissions_alpha.png' width='500px'> As mentioned earlier a few times, the vert first dash is not relevant to the permissions, it just simply tells us if its a file or directory.</p> Therefore, we split the next 9 dashes into the 3 groups as mentioned before. The first dash always represents the <b>read</b> permissions. If the permission has the <b>r</b>, we know permissions are valid. However, if was a dash that means it does not have read permissions.  In fact the dash for the owner's, group's, and other's mean the same thing, that this body does not have this permission.</p> The second dash represnts the <b>write</b> permission, which states if this body is able to write to this file. If there is a <b>w</b> then writing permisions are valid. Otherwise, it would be invalid and represented with the dash.</p>Liekwise, the last permission for a body represents the execution permission. Meaning if this body is allowed to run this program or file. If they are allowed then it will be represented with <b>x</b>, otherwise it's not allowed and will be represented with a dash",
             "completed": false
         },
         {
             "id": 64,
             "parent": "The Basics",
             "section": "File Permissions",
+            "title": "Octal Mode",
+            "content_type": "article",
+            "content": "The 2nd way we can represent Linux permissions is through a numeric or <b>octal</b> mode. The <b>octal</b> mode allows us to simplify permissions by using numbers instead of letters!<br><br>Each permission type has a numeric value:<br><ul><li><b>r (read)</b> = 4</li><li><b>w (write)</b> = 2</li><li><b>x (execute)</b> = 1</li></ul>We add these numbers together to form a single digit for each group: <b>owner</b>, <b>group</b>, and <b>others</b>.<br><br>For example:<br><ul><li><code>rwx</code> = 4 + 2 + 1 = 7</li><li><code>rw-</code> = 4 + 2 + 0 = 6</li><li><code>r--</code> = 4 + 0 + 0 = 4</li></ul><br>When written in octal mode, permissions are represented as three digits, one for each body. For instance:<br><ul><li><b>777</b> = rwx for owner, rwx for group, rwx for others</li><li><b>644</b> = rw- for owner, r-- for group, r-- for others</li><li><b>755</b> = rwx for owner, r-x for group, r-x for others</li></ul><img src='../../../images/octal.png' width=500px> Overall, this makes octal mode the more efficient and cleaner approach to set permissions in Linux, especially when setting permissions with the <b>chmod</b> command.",
+            "completed": true
+        },        
+        {
+            "id": 65,
+            "parent": "The Basics",
+            "section": "File Permissions",
             "title": "chmod",
             "content_type": "article",
-            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>There are two ways to specify permissions:<\/p><h4>Symbolic Method:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Numeric Method:<\/h4><p>Permissions can also be represented by numbers:<\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p> However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission, which we will discuss in detail later on.<\/p>",
+            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>As discussed earlier, there are two ways to specify permissions:<\/p><h4>Alphabetic Mode:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Octal Mode:<\/\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p></b>However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission",
             "completed": false
         },
         {
-            "id": 65,
+            "id": 66,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "sudo",
@@ -716,27 +724,27 @@
             "completed": false
         },
         {
-            "id": 66,
+            "id": 67,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change user permissions",
-            "content_type": "interative",
-            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work\/ directory.<\/p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.<\/p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cant cat the content to view it since we don't have the permissions for it!<\/p>Also, notice how we dont have authorization to modifiy the file since we are not the user.<\/p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt<\/code><\/p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!<\/p><p>Try it out!<\/p>",
+            "content_type": "interactive",
+            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work\/ directory.<\/p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.<\/p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cannot cat the content to view it since we don't have the permissions for it!<\/p>Also, notice how we dont have authorization to modifiy the file since we are not the user.<\/p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt<\/code><\/p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!<\/p><p>Try it out!<\/p>",
             "answer": "sudo chmod u+r",
             "completed": false
         },
         {
-            "id": 67,
+            "id": 68,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change group permissions",
             "content_type": "interactive",
-            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<\/p><p>The syntax is: <code>sudo chmod g+w sales_report.txt<\/code><pTry it and then use ls -l again to see how the permissions have changed.<\/p>",
+            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<code>sudo chmod g+w sales_report.txt</code>Try it and then use ls -l again to see how the permissions have changed!",
             "answer": "sudo chmod g+w sales_report.txt",
             "completed": false
         },
         {
-            "id": 68,
+            "id": 69,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown",
@@ -745,7 +753,7 @@
             "completed": false
         },
         {
-            "id": 69,
+            "id": 70,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
@@ -754,7 +762,7 @@
             "completed": false
         },
         {
-            "id": 70,
+            "id": 71,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #14",
@@ -770,7 +778,7 @@
             "completed": false
         },
         {
-            "id": 71,
+            "id": 72,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #15",
@@ -786,7 +794,7 @@
             "completed": false
         },
         {
-            "id": 72,
+            "id": 73,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #16",
@@ -802,7 +810,7 @@
             "completed": false
         },
         {
-            "id": 73,
+            "id": 74,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #17",
@@ -818,7 +826,7 @@
             "completed": false
         },
         {
-            "id": 74,
+            "id": 75,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #18",
@@ -834,21 +842,30 @@
             "completed": false
         },
         {
-            "id": 75,
+            "id": 76,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #9",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>In the Work\/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.<\/p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py<\/code>",
             "completed": false
         },
         {
-            "id": 76,
+            "id": 77,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #10",
-            "content_type": "interative",
-            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'<\/p><table border='1' style='border-collapse: collapse; margin-top: 15px;'><tr><th style='background-color: transparent;'>Octal <\/th><th style='background-color: transparent;'>Binary <\/th><th style='background-color: transparent;'>Permission <\/th><\/tr><tr><td style='background-color: transparent;'>0<\/td><td style='background-color: transparent;'>000<\/td><td style='background-color: transparent;'>---<\/td><\/tr><tr><td style='background-color: transparent;'>1<\/td><td style='background-color: transparent;'>001<\/td><td style='background-color: transparent;'>--x<\/td><\/tr><tr><td style='background-color: transparent;'>2<\/td><td style='background-color: transparent;'>010<\/td><td style='background-color: transparent;'>-w-<\/td><\/tr><tr><td style='background-color: transparent;'>3<\/td><td style='background-color: transparent;'>011<\/td><td style='background-color: transparent;'>-wx<\/td><\/tr><tr><td style='background-color: transparent;'>4<\/td><td style='background-color: transparent;'>100<\/td><td style='background-color: transparent;'>r--<\/td><\/tr><tr><td style='background-color: transparent;'>5<\/td><td style='background-color: transparent;'>101<\/td><td style='background-color: transparent;'>r-x<\/td><\/tr><tr><td style='background-color: transparent;'>6<\/td><td style='background-color: transparent;'>110<\/td><td style='background-color: transparent;'>rw-<\/td><\/tr><tr><td style='background-color: transparent;'>7<\/td><td style='background-color: transparent;'>111<\/td><td style='background-color: transparent;'>rwx<\/td><\/tr><\/table>",
+            "content_type": "interactive",
+            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'.<img src='../../../images/chart.jpg' height='300px' width='450px'",
+            "completed": false
+        }, 
+        {
+            "id": 78,
+            "parent": "The Basics",
+            "section": "Final",
+            "title": "Closing thoughts",
+            "content_type": "interactive",
+            "content": "Congratulations on completing the \"Command Line\" section of Linux-Lab! Although we didn't touch every single command, we hoped that this section gave you a good understanding of the Linux Command Line and how you will apply it to your profession or craft.</p> However, the learning of the command line is not done yet! Come and check out our \"Networking\" section where you will learn how the internet works and apply that theory towards the Linux Command Line.<a href='https://linux-lab.live/Linux-Lab/src/pages/lesson_page/lesson.html?module=Networking'> <b><u>Networking In Linux</b></u>, we hope to see you there!</a><h3>Additional Resource:</h3>If you are interested in learning more and in depth about the Linux Command Line here is a great resource!</p>Shotts, William E. Jr.. The Linux Command Line: A Complete Introduction. United States, No Starch Press, 2012. <img src='../../../images/LCML.jpg'", 
             "completed": false
         }
     ],
@@ -876,9 +893,27 @@
             "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.<\/p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address<\/b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1<\/code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!<\/p><img src='..\/..\/..\/images\/Home_LAN_local_area_network_example_diagram.png' width='500'>",
             "answer": "",
             "completed": false
-        },
+        }, 
         {
             "id": 3,
+            "parent": "Networking",
+            "section": "IP Addresses",
+            "title": "How does an IP address work?",
+            "content_type": "article",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "parent": "Networking",
+            "section": "IP4 vs IP6",
+            "title": "How does an IP address work?",
+            "content_type": "article",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 5,
             "parent": "Networking",
             "section": "IP Addresses",
             "title": "ifconfig",
@@ -912,7 +947,7 @@
             "parent": "Networking",
             "section": "Connections",
             "title": "ping",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>On the command line lets ping google to see how strong our connection is to their server:<\/p><code>ping 142.250.72.206<\/code>Or more cleanly: <code>ping google.com<\/code><p>The output at first glance like many Linux network commands that you have probably come across alrady, can be cryptic and intimidating, but we'll break it down and see the important information it gives us.<\/p><\/p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net<\/b> \u2013 This shows the domain name of the responding server. It confirms that we successfully reached a Google server.<\/li><li><b>icmp_seq=1<\/b> \u2013 This is the sequence number of the ping packet, starting at 1 and increasing with each request.<\/li><li><b>ttl=114<\/b> \u2013 TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.<\/li><li><b>time=23.4 ms<\/b> \u2013 This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.<\/li><\/ul>",
             "answer": "",
             "completed": false
