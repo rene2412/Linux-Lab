@@ -898,18 +898,19 @@
             "id": 3,
             "parent": "Networking",
             "section": "IP Addresses",
-            "title": "How does an IP address work?",
+            "title": "IPV4 vs IPV6",
             "content_type": "article",
+            "content": "Since 1983, the internet used the standard 32 bit integer (we will discuss this later) IP address to identify devices on the internet. <code>192.1.0.277</code>You probably have seen this already in your life since it's still used today, however as technology advanced and more people began using the internet, we faced a big problem. We ran out of IP addresses!</p>How did we combat this? Well simple, we just made the IP address bigger!</p>On June 12, 2012, IPV6 (Internet Protocal Version 6) was officialy launched worldwide.<code>2001:db8::ff00:42:832</code>Instead of the original 32 bit address IPV4 used, IPV6 uses an outstanding 128 bits! But how much bigger is that? Let's find out in the next lesson.",
             "answer": "",
             "completed": false
         },
         {
             "id": 4,
             "parent": "Networking",
-            "section": "IP4 vs IP6",
+            "section": "IP Addresses",
             "title": "How does an IP address work?",
             "content_type": "article",
-            "answer": "",
+            "answer": "We have talked about how IP address use 32 bits or 128 bits, but what exactly does that mean?</p>Bits are just 1's and 0's, and is the only way computers know how to communicate, also known as <b>binary</b>.</p>In binary, we read from right to left and every digit goes by a power of 2, the first the digit starting on the right is: 2¹ which is 2, then the next will be 2² which is 4, followed by 2³ which 9 and so on. Let's take a look at a IPV'4 address as an example. ",
             "completed": false
         },
         {
@@ -918,7 +919,7 @@
             "section": "IP Addresses",
             "title": "ifconfig",
             "content_type": "interactive",
-            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
+            "content": "On the Linux Command Line, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
             "answer": "",
             "completed": false
         },
