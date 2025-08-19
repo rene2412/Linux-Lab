@@ -878,10 +878,10 @@
         {
             "id": 1,
             "parent": "Networking",
-            "section": "Intro To Networking",
+            "section": "Prelude",
             "title": "Networking",
             "content_type": "article",
-            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands. <img src='../../../images/netWork.gif' width='500'>",
+            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.<img src='../../../images/netWork.gif' width='500'>",
             "completed": false
         },
         {
@@ -900,7 +900,7 @@
             "section": "IP Addresses",
             "title": "IPV4 vs IPV6",
             "content_type": "article",
-            "content": "Since 1983, the internet used the standard 32 bit integer (we will discuss this later) IP address to identify devices on the internet. <code>192.1.0.277</code>You probably have seen this already in your life since it's still used today, however as technology advanced and more people began using the internet, we faced a big problem. We ran out of IP addresses!</p>How did we combat this? Well simple, we just made the IP address bigger!</p>On June 12, 2012, IPV6 (Internet Protocal Version 6) was officialy launched worldwide.<code>2001:db8::ff00:42:832</code>Instead of the original 32 bit address IPV4 used, IPV6 uses an outstanding 128 bits! But how much bigger is that? Let's find out in the next lesson.",
+            "content": "Since 1983, the internet used the standard 32 bit integer (we will discuss this later) IP address to identify devices on the internet. <code>192.1.0.255</code>You probably have seen this already in your life since it's still used today, however as technology advanced and more people began using the internet, we faced a big problem. We ran out of IP addresses!</p>How did we combat this? Well simple, we just made the IP address bigger!</p>On June 12, 2012, IPV6 (Internet Protocal Version 6) was officialy launched worldwide.<code>2001:db8::ff00:42:832</code>Instead of the original 32 bit address IPV4 used, IPV6 uses an outstanding 128 bits! But how much bigger is that? Let's find out in the next lesson.",
             "answer": "",
             "completed": false
         },
@@ -910,7 +910,7 @@
             "section": "IP Addresses",
             "title": "How does an IP address work?",
             "content_type": "article",
-            "answer": "We have talked about how IP address use 32 bits or 128 bits, but what exactly does that mean?</p>Bits are just 1's and 0's, and is the only way computers know how to communicate, also known as <b>binary</b>.</p>In binary, we read from right to left and every digit goes by a power of 2, the first the digit starting on the right is: 2¹ which is 2, then the next will be 2² which is 4, followed by 2³ which 9 and so on. Let's take a look at a IPV'4 address as an example. ",
+            "content": "We have talked about how IP address use 32 bits or 128 bits, but what exactly does that mean?</p>Bits are just 1's and 0's, and is the way how computers communicate and process information, also known as <b>binary</b>.</p>In binary, we read from right to left and every digit goes by a power of 2. The first digit starting on the right is: 2¹ which is 2, then the next will be 2² which is 4, followed by 2³ which 8 and so on. <img src='../../../images/binary.png'>  </p>For ip addreses, they range between 0-255 and are seperated by the period('.') which is known as an <b>octet</b>. Each octet will hold 8 bits, and the bits (if you do the math) will return back the decimal value of that octet. Since there are 4 octets and each octet contains 8 bits, that means the entire address contains 32 bits! Hence why IPV4 is a 32 bit address! Let's take a look at a IPV4 address as an example. <img src='../../../images/ip.png'> From the example, we can see how it works, the octets are split into their binary value which will all add up back to the human readable decimal value.</p> As mentioned earlier, IPV4 ran its course since it only provided 4,294,967,296 (2<sup>32</sup>) possible unqie addresses. At the time this was seen as enough but the internet and technology exploded, which gave rise to IPV6.</p>For IPV6, its ip address uses a slightly more complex system but its roughly the same idea. Since its a 128 bits, that means it provides 2(<sup>132</sup>) is a number so big its enough to fill every star in the universe with 5.4 quadrillion grains of sand, so I think we are safe for now.",
             "completed": false
         },
         {
@@ -919,64 +919,14 @@
             "section": "IP Addresses",
             "title": "ifconfig",
             "content_type": "interactive",
-            "content": "On the Linux Command Line, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
+            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most. There will be some concepts we have yet to explore but we will go through it later on to make sense of this mess.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPV6 address assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
             "answer": "",
             "completed": false
-        },
-        {
-            "id": 4,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "Servers, Clients, and Hosts",
-            "content_type": "article",
-            "content": "When accessing the internet or a network, devices typically fall into two main roles: <b>Servers<\/b> and <b>Clients<\/b>.<li><b>Server<\/b> \u2013 A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info\u2014and respond with the correct data, such as your profile page, payment info, and more.<\/li><li><b>Client<\/b> \u2013 A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.<\/li><li><b>Host<\/b> \u2013 A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.<\/li> <img src='..\/..\/..\/images\/server.gif' width='550' alt='server gif>'",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 5,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "Networking Connections",
-            "content_type": "article",
-            "content": "<p>When we are online gaming, surfing the web, streaming movies, or watching live TV, we will occasionally come across network performance issues, often referred to as \"lag\" or, in technical terms, <b>network latency<\/b>.<\/p><p>Network latency issues can be caused by hardware performance, physical distance, packet loss, or network congestion (too much traffic on a network).<\/p><p>To test the speed or how \"strong\" a connection is to a server or computer, we can use the <b>ping<\/b> command followed by a destination argument. The argument can either be the ip address or the full website domain you're trying to connect to, as seen below:<\/p><code>ping 192.168.1.1<\/code><code>ping some_website.com<\/code>",
-            "answer": "",
-            "completed": false
-        },
+        },     
         {
             "id": 6,
             "parent": "Networking",
-            "section": "Connections",
-            "title": "ping",
-            "content_type": "interactive",
-            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:<\/p><code>ping 142.250.72.206<\/code>Or more cleanly: <code>ping google.com<\/code><p>The output at first glance like many Linux network commands that you have probably come across alrady, can be cryptic and intimidating, but we'll break it down and see the important information it gives us.<\/p><\/p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net<\/b> \u2013 This shows the domain name of the responding server. It confirms that we successfully reached a Google server.<\/li><li><b>icmp_seq=1<\/b> \u2013 This is the sequence number of the ping packet, starting at 1 and increasing with each request.<\/li><li><b>ttl=114<\/b> \u2013 TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.<\/li><li><b>time=23.4 ms<\/b> \u2013 This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.<\/li><\/ul>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 7,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "DNS - Domain Name System",
-            "content_type": "article",
-            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com<\/b> or <b>amazon.com<\/b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)<\/b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).<\/p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.<\/p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!<\/p><img src='..\/..\/..\/images\/dns.gif' width = '550'>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 8,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "nsloopkup",
-            "content_type": "interactive",
-            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup<\/b> which stands for <b>'name server lookup'<\/b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:<\/p><code>nslookup google.com<\/code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238<\/code><\/pre><ul><li><b>Server:<\/b> The DNS server your system is using to resolve the domain.ndx <\/li><li><b>Address:<\/b> The IP address of that DNS server with port 53 (used for DNS communication).<\/li><li><b>Non-authoritative answer:<\/b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.<\/li><li><b>Name:<\/b> The domain name you queried (google.com).<\/li><li><b>Address:<\/b> The resolved IP address of the domain.<\/li><\/ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.<\/p>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 9,
-            "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "section": "Checkpoint - Ip addresses",
             "title": "Knowledge Check #1",
             "content_type": "multichoice",
             "questions": {
@@ -990,26 +940,102 @@
             "completed": false
         },
         {
-            "id": 10,
+            "id": 7,
             "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "section": "Checkpoint - Ip addresses",
             "title": "Knowledge Check #2",
             "content_type": "multichoice",
             "questions": {
-                "A": "A devices hardware MAC address",
-                "B": "A unique identifier assigned to each device on a network to facilitate communication",
-                "C": "A secret password used by routers to unlock the Internet",
-                "D": "The location of a device stored on its hard drive"
+              "A": "IPv4 uses 32-bit addresses while IPv6 uses 128-bit addresses",
+              "B": "IPv4 is newer than IPv6",
+              "C": "IPv4 supports more devices than IPv6",
+              "D": "IPv4 and IPv6 are the same protocol"
             },
-            "content": "<p>What is an ip address?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "B",
+            "content": "<p>What's the difference between IPv4 and IPv6?</p><div class=\"question__container\"></div>",
+            "answer": "A",
             "completed": false
         },
         {
-            "id": 11,
+            "id": 8,
+            "parent": "Networking",
+            "section": "Checkpoint - Ip addresses",
+            "title": "Knowledge Check #3",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "Computers use binary to process IP addresses internally, even though we see them in decimal",
+              "B": "Binary is only used when IP addresses are transmitted over fiber optic cables",
+              "C": "Routers convert IP addresses to binary only when they malfunction",
+              "D": "Computers use binary to process IP addresses internally, even though we see them in decimal"
+            },
+            "content": "<p>How does binary work with IP addresses?</p><div class=\"question__container\"></div>",
+            "answer": "D",
+            "completed": false
+        },     
+        {
+            "id": 9,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "Subnets",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 17,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "Servers, Clients, and Hosts",
+            "content_type": "article",
+            "content": "When we interact with a network, devices typically fall into two main roles: <b>Servers<\/b> and <b>Clients<\/b>.<li><b>Server<\/b> \u2013 A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info\u2014and respond with the correct data, such as your profile page, payment info, and more.<\/li><li><b>Client<\/b> \u2013 A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.<\/li><li><b>Host<\/b> \u2013 A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.<\/li> <img src='..\/..\/..\/images\/server.gif' width='550' alt='server gif>'",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 18,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "Networking Connections",
+            "content_type": "article",
+            "content": "<p>When we are online gaming, surfing the web, streaming movies, or watching live TV, we will occasionally come across network performance issues, often referred to as \"lag\" or, in technical terms, <b>network latency<\/b>.<\/p><p>Network latency issues can be caused by hardware performance, physical distance, packet loss, or network congestion (too much traffic on a network).<\/p><p>To test the speed or how \"strong\" a connection is to a server or computer, we can use the <b>ping<\/b> command followed by a destination argument. The argument can either be the ip address or the full website domain you're trying to connect to, as seen below:<\/p><code>ping 192.168.1.1<\/code><code>ping some_website.com<\/code>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 19,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "ping",
+            "content_type": "interactive",
+            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:<\/p><code>ping 142.250.72.206<\/code>Or more cleanly: <code>ping google.com<\/code><p>The output at first glance (like many Linux network commands that you have probably come across alrady) can be cryptic and intimidating, but we'll break it down and see the important information it gives us.<\/p><\/p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net<\/b> \u2013 This shows the domain name of the responding server. It confirms that we successfully reached a Google server.<\/li><li><b>icmp_seq=1<\/b> \u2013 This is the sequence number of the ping packet, starting at 1 and increasing with each request (we will learn more about this later).<\/li><li><b>ttl=114<\/b> \u2013 TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.<\/li><li><b>time=23.4 ms<\/b> \u2013 This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.<\/li><\/ul>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 20,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "DNS - Domain Name System",
+            "content_type": "article",
+            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com<\/b> or <b>amazon.com<\/b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)<\/b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).<\/p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.<\/p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!<\/p><img src='..\/..\/..\/images\/dns.gif' width = '550'>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 21,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "nsloopkup",
+            "content_type": "interactive",
+            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup<\/b> which stands for <b>'name server lookup'<\/b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:<\/p><code>nslookup google.com<\/code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238<\/code><\/pre><ul><li><b>Server:<\/b> The DNS server your system is using to resolve the domain.ndx <\/li><li><b>Address:<\/b> The IP address of that DNS server with port 53 (used for DNS communication).<\/li><li><b>Non-authoritative answer:<\/b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.<\/li><li><b>Name:<\/b> The domain name you queried (google.com).<\/li><li><b>Address:<\/b> The resolved IP address of the domain.<\/li><\/ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.<\/p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 22,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
-            "title": "Knowledge Check #3",
+            "title": "Knowledge Check #4",
             "content_type": "multichoice",
             "questions": {
                 "A": "Sends test messages to a server or IP address to measure connectivity and response time",
@@ -1022,23 +1048,59 @@
             "completed": false
         },
         {
-            "id": 12,
+            "id": 23,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
-            "title": "Knowledge Check #4",
+            "title": "Knowledge Check #5",
             "content_type": "multichoice",
             "questions": {
                 "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
                 "B": "It scans the local network for all connected devices and lists their MAC addresses.",
-                "C": "It changes the DNS server settings on your computer.",
+                "C": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
                 "D": "It encrypts DNS traffic to protect against spoofing attacks."
             },
             "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "A",
+            "answer": "C",
+            "completed": false
+        }, 
+        {
+            "id": 24,
+            "parent": "Networking",
+            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "title": "Knowledge Check #5",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
+                "B": "It scans the local network for all connected devices and lists their MAC addresses.",
+                "C": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
+                "D": "It encrypts DNS traffic to protect against spoofing attacks."
+            },
+            "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
-            "id": 13,
+            "id": 25,
+            "parent": "Networking",
+            "section": "Transfering Data",
+            "title": "Sockets",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 26,
+            "parent": "Networking",
+            "section": "Transfering Data",
+            "title": "HTTP Protocals",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 27,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "TCP\/IP",
@@ -1048,7 +1110,7 @@
             "completed": false
         },
         {
-            "id": 14,
+            "id": 28,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "The 3 Way Handshake",
@@ -1058,7 +1120,7 @@
             "completed": false
         },
         {
-            "id": 15,
+            "id": 29,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "ip route",
@@ -1068,7 +1130,7 @@
             "completed": false
         },
         {
-            "id": 16,
+            "id": 30,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "traceroute",
