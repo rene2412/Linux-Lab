@@ -54,7 +54,7 @@ export default function Benefits() {
     <section
       id="benefits"
       ref={container}
-      className="mx-4 lg:mx-5 mt-20 flex max-h-fit min-h-lvh flex-col overflow-x-visible"
+      className="mx-4 lg:mx-5 mt-40 flex max-h-fit min-h-lvh flex-col overflow-x-visible"
     >
       <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
         <ScrambleScroll>Why Learn</ScrambleScroll>
