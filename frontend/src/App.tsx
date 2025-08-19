@@ -8,6 +8,8 @@ import About from './sections/About';
 import Hero from './sections/Hero';
 import Overview from './sections/Overview';
 import Benefits from './sections/Benefits';
+import Globe from './sections/Globe/Globe';
+import Modules from './sections/Modules/Modules';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <About/>
             <Overview/>
             <Benefits/>
+            <Globe/>
+            <Modules/>
             <div className="h-svh bg-dark"></div>
           </main>
         </NavbarProvider>
