@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Process_Bash_Script {
 
     @PostMapping("/script")
+    @SuppressWarnings("CallToPrintStackTrace")
     public ResponseEntity<Map<String, Object>> runScript(@RequestBody Map<String, String> body) {
         String scriptContent = body.get("script");
         Map<String, Object> result = new HashMap<>();

@@ -1,30 +1,57 @@
 {
     "The Basics": [
         {
-            "section__size": 70,
-            "interactive__size": 54,
+            "section__size": 78,
+            "interactive__size": 53,
             "section__completed": false
         },
         {
             "id": 1,
             "parent": "The Basics",
             "section": "Prelude",
-            "title": "The Command Line",
+            "title": "Overview ",
             "content_type": "article",
-            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task.<\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge of Linux grows, you will see terms like the <b>shell<\/b>, <b>scripting<\/b>, <b>kernel<\/b>, etc....<\/p><p>But to understand these terms we must start at the begining, the <b>filesystem<\/b>.<\/p><img src='..\/..\/..\/images\/linuxCl.gif' width=500>",
+            "content": "Welcome to Linux Lab! In this section you will learn the basics and more of the Linux command line.<br><br>The Linux command line can seem intimidating at first, but we at Linux Lab have developed a fun, interactive, and informative way to learn Linux. Reading docs or watching tutorials are also good, but we answer the question \"Oh okay thats cool, but when will I ever use this command?\".<br><br> Well in this section we will go over several commands, understand why its there, and how to use it. <br><br>Therefore, the best way to learn is by doing, lets get your journey into the world of Linux started!",
             "completed": false
         },
         {
             "id": 2,
             "parent": "The Basics",
             "section": "Prelude",
-            "title": "The Filesystem",
+            "title": "What Is Linux?",
             "content_type": "article",
-            "content": "<p>The core philisophy in Linux is that everything is a file, meaning that every file and folder (directory) are treated as file-like objects to allow for fast and easy navigation throughout your system.<\/p><p>A directory is just the linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories and so on.<\/p><p>This looping technqiue is called recurssion, which is exactly how the filestem works.<\/p><p>Let's take a look how it visually works with this example below:<\/p> <img src='..\/..\/..\/images\/fileSystem.gif' width = '500'",
+            "content": "Linux is a free and open-source operating system based on Unix (an older but groundbreaking operating system from the 1970s). From what started as a hobby project by a college student in 1991 named Linus Torvalds, is now powering most of the digital world.<br><br>Here's what is currently running Linux right now:<br>• The servers behind Netflix, Google, and Amazon<br>• Your Android phone<br>• Your car's infotainment system (Tesla, BMW, Toyota, etc.)<br>• The router connecting you to the internet<br>• Most smart TVs and IoT devices<br><br>In the workplace, Linux skills are essential for:<br>• Software developers and engineers<br>• System administrators and DevOps teams<br>• Cybersecurity professionals<br>• Hackers<br>• Data scientists and analysts<br><br>The reason Linux is everywhere? It's reliable, secure, customizable, and completely free. While Windows costs hundreds of dollars per license, Linux costs nothing and can be modified for any purpose.<br><br>That's why when companies need systems that absolutely cannot fail, like running a bank or launching rockets, they choose Linux.",
             "completed": false
         },
         {
             "id": 3,
+            "parent": "The Basics",
+            "section": "Prelude",
+            "title": "Linux Architecture",
+            "content_type": "article",
+            "content": "There are 5 main components that make Linux work: Applications, Kernel, Shell, Utilities, and Hardware. As you can see from the image below, these components work with each other to create the Linux operating system. Let's see how they work:<br><br><img src='../../../images/Linux-Architecture.png' width='500'><br><br><b>Kernel</b> - The Linux kernel is the core of the operating system and lays down the foundation for how software communicates with hardware. The kernel has 4 main jobs:<br><ul><li><b>Memory Management:</b> Keeps track of the device's memory and decides where and how to store content</li><li><b>Process Management:</b> Determines which process or program can use the CPU (Central Processing Unit) for a certain time</li><li><b>Device Drivers:</b> Acts as a translator between hardware devices (like keyboards, mice, printers) and the software</li><li><b>System Calls:</b> Provides a way for programs to request services from the operating system</li></ul><br><b>Shell</b> - This is your command line interface! The shell takes the commands you type and translates them into instructions the kernel can understand. Popular shells include Bash, Zsh, and Fish.<br><br><b>Applications</b> - These are the programs you actually use, like web browsers, text editors, and games. They run on top of the operating system.<br><br><b>Utilities</b> - Built-in command line tools that help you manage your system.<br><br><b>Hardware</b> - The physical components like CPU, RAM, hard drives, and network cards that everything else depends on.<br><br>Think of it like a restaurant: Hardware is the kitchen, Kernel is the head chef coordinating everything, Shell is the waiter taking your orders, Utilities are the cooking tools, and Applications are the meals you actually enjoy!<br><br> For this section of Linux Lab we will work with the Linux shell and utilities.",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "parent": "The Basics",
+            "section": "Prelude",
+            "title": "The Command Line",
+            "content_type": "article",
+            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task via the <b>shell</b>\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the interactive learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge and experience with Linux grows, you will begin using your computer in powerful ways. Tasks that take dozens of clicks in a graphical interface can be done with a single command.</p><p>For now, we must understand how the <b>filesystem</b> works, because that's where all your files and programs live.</p><img src='../../../images/linuxCl.gif' width='500'><br><br>",
+            "completed": false
+        },
+        {
+            "id": 5,
+            "parent": "The Basics",
+            "section": "Prelude",
+            "title": "The Filesystem",
+            "content_type": "article",
+            "content": "<p>The core philosophy in Linux is that <b>everything is a file</b>. This means that every file, folder (directory), and even hardware devices are treated as file-like objects to allow for fast and easy navigation throughout your system.</p><p>A <b>directory</b> is just the Linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories, and so on.</p><p>This looping technique is called <b>recursion</b>, which is exactly how the filesystem works - like Russian nesting dolls, but for your computer files!</p><p>Let's take a look at how it visually works with this example below:</p><img src='../../../images/fileSystem.gif' width='500'><br><br><p>Think of it like a family tree:</p><ul><li><b>Root (/):</b> The very top of everything - like the great-great-grandparent</li><li><b>Directories:</b> Like family branches - they can have children (more directories or files)</li><li><b>Files:</b> The end points - they contain your actual data</li></ul><p>Every file and directory has a unique <b>path</b> that tells you exactly where to find it. For example: <code>/home/user/Documents/my_file.txt</code></p><p>This path is like giving someone directions to your house - it starts from the root (/) and follows the directories until it reaches your file.</p><p>With that in mind, we can begin introducing commands we have all been waiting for.",
+            "completed": false
+        },
+        {
+            "id": 6,
             "parent": "The Basics",
             "section": "Hello World",
             "title": "echo",
@@ -34,7 +61,7 @@
             "completed": false
         },
         {
-            "id": 4,
+            "id": 7,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "date",
@@ -44,7 +71,7 @@
             "completed": false
         },
         {
-            "id": 5,
+            "id": 8,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "whoami", 
@@ -53,7 +80,7 @@
             "completed": false
         },
         {
-            "id": 6,
+            "id": 9,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "pwd",
@@ -63,7 +90,7 @@
             "completed": false
         },
         {
-            "id": 7,
+            "id": 10,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "ls",
@@ -73,7 +100,7 @@
             "completed": false
         },
         {
-            "id": 8,
+            "id": 11,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd",
@@ -83,7 +110,7 @@
             "completed": false
         },
         {
-            "id": 9,
+            "id": 12,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cat",
@@ -93,7 +120,7 @@
             "completed": true
         },
         {
-            "id": 10,
+            "id": 13,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "clear",
@@ -102,7 +129,7 @@
             "completed": true
         },
         {
-            "id": 11,
+            "id": 14,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd ..",
@@ -112,7 +139,7 @@
             "completed": false
         },
         {
-            "id": 12,
+            "id": 15,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "Absolute Path vs Relative Path",
@@ -122,17 +149,17 @@
             "completed": false 
         },
         {
-            "id": 13,
+            "id": 16,
             "parent": "The Basics",
             "section": "File Navigation",
             "title": "cd path\/to\/source",
             "content_type": "interactive",
-            "content": "Navigating around your filesystem in the command line can be done more efficiently by taking the absolute and relative path into account.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path (which also our relative path) as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
+            "content": "As discussed, navigating around your filesystem in the command line can be done more efficiently by taking the absolute and relative path into account.<\/p><p>For example, lets say we were in our Documents\/ dirctory. But we needed to go into our project1\/ directory that lives in Projects\/. The brute force approach would look something like:<\/p><code>cd ..<\/code\/><code>cd Projects\/<\/code><code>cd project1\/<\/code><p>This approach while isnt technically wrong, is just a slow way to navigate around your filesystem. To fix this, the cd command allows you to put the source path as its argument.<\/p> Lets look at the example again, we start in our Documents\/ dirctory and have to access Projects\/ which lives a level above us right now, so we can use \"cd ..\" to achieve that. We would then be in our root directory which has access to Projects\/ which has access to projects1\/ which was our target directory.<\/p>Adding it all up we get the source path (which also our relative path) as <b>..\/Projects\/projects1<\/b>. Lets try this out on the command line!<\/p><code> cd ..\/Projects\/project1<\/code>",
             "answer": "cd ..\/Projects\/project1",
             "completed": false
         },
         {
-            "id": 14,
+            "id": 17,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #1",
@@ -148,7 +175,7 @@
             "completed": false
         },
         {
-            "id": 15,
+            "id": 18,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #2",
@@ -164,7 +191,7 @@
             "completed": false
         },
         {
-            "id": 16,
+            "id": 19,
             "parent": "The Basics",
             "section": "Checkpoint - File Navigation",
             "title": "Knowledge Check #3",
@@ -180,9 +207,9 @@
             "completed": false
         },
         {
-            "id": 17,
+            "id": 20,
             "parent": "The Basics",
-            "section": "Checkpoint - File Modifications",
+            "section": "Checkpoint - File Navigation",
             "title": "Lab #1",
             "content_type": "interactive",
             "content": "There is a 'LetItHappen.txt' file that contains the lyrics to a Tame Impala song. The file lives inside file in our /Lyrics directory, that lives inside the /Documents directory.</p> Write the command using the <b>absolute</b> path that will display the content of 'LetItHappen.txt'</p>Remember: To see the contents of a file we can use the <b>cat</b>, and every absolute path begins by starting at the root directory via '<b>/</b>'. ",
@@ -190,7 +217,7 @@
             "completed": false 
         },
         {
-            "id": 18,
+            "id": 21,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "touch",
@@ -200,7 +227,7 @@
             "completed": false
         },
         {
-            "id": 19,
+            "id": 22,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mkdir",
@@ -210,17 +237,17 @@
             "completed": false
         },
         {
-            "id": 20,
+            "id": 23,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm",
             "content_type": "interactive",
-            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>",
+            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed by the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>TIP: Since we are now deleting content through the command line, you can use a custom command (not a real Linux command) we implemented called: <code>refresh</code>This will restore the simulated filesytem back to its default state. However this is not a real feature, so if you delete content from the command line on your machine MAKE SURE you dont need it. There is no retrieving it, once its gone, its gone!:)",
             "answer": "rm penguin.txt",
             "completed": false
         },
         {
-            "id": 21,
+            "id": 24,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rmdir",
@@ -230,7 +257,7 @@
             "completed": false
         },
         {
-            "id": 22,
+            "id": 25,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "rm -rf",
@@ -240,7 +267,7 @@
             "completed": false
         },
         {
-            "id": 23,
+            "id": 26,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename files",
@@ -250,7 +277,7 @@
             "completed": false
         },
         {
-            "id": 24,
+            "id": 27,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - rename directories",
@@ -260,27 +287,27 @@
             "completed": false
         },
         {
-            "id": 25,
+            "id": 28,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "mv - move files\/directories",
             "content_type": "interactive",
-            "content": "Now that we have gone over how to rename content with mv, we can discuss how move files around your filesystem<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that chained path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
+            "content": "Now that we have gone over how to rename content with mv, we can discuss how to move files around your filesystem.<\/p><p>For example, in our Documents\/ directory we have a hello.txt file, but what if we wanted hello.txt to live in our Projects\/ directory instead?<\/p> Well <b>mv<\/b> also allows us to move around content, just with different arguments. Lets try it out by doing exactly that, lets move hello.txt from our Documents directory into Projects\/ directory<\/p><p>Note: We will be using that relative path technqiue we used with cd, since we cant directly access Projects\/ from our Documents\/ directory, we need to ask who can directly access Projects\/? Well the root can since Projects\/ is a direct sub directory of it. Lets look at the command!<code> mv hello.txt ..\/Projects\/<\/code><p> Here we are grabbing the text file, followed by its argument which is just a source path to put the text file in.<\/p>",
             "answer": "mv hello.txt ..\/Projects",
             "completed": false
         },
         {
-            "id": 26,
+            "id": 29,
             "parent": "The Basics",
             "section": "File Modifications",
             "title": "cp",
             "content_type": "interactive",
-            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp</b> (copy) command to achieve this and the syntax looks a lot like the mv command</p><code>cp [file] path/to/source</code><p> Traverse to the /Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ../Projects</code> Note: The source path can either be absolute or relative, your choice!",
+            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp</b> (copy) command to achieve this and the syntax looks a lot like the mv command.</p><code>cp [file] path/to/source</code><p> Traverse to the /Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ../Projects</code> Note: The source path can either be absolute or relative, your choice!",
             "answer": "cp hello.txt ../Projects",
             "completed": false
         }, 
         {
-            "id": 27,
+            "id": 30,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #2",
@@ -290,7 +317,7 @@
             "completed": false
         },
         {
-            "id": 28,
+            "id": 31,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #4",
@@ -306,7 +333,7 @@
             "completed": false
         },
         {
-            "id": 29,
+            "id": 32,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #5",
@@ -322,7 +349,7 @@
             "completed": false
         },
         {
-            "id": 30,
+            "id": 33,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #6",
@@ -338,7 +365,7 @@
             "completed": false
         },
         {
-            "id": 31,
+            "id": 34,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #7",
@@ -354,7 +381,7 @@
             "completed": false
         },
         {
-            "id": 32,
+            "id": 35,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Knowledge Check #8",
@@ -370,7 +397,7 @@
             "completed": false
         },
         {
-            "id": 33,
+            "id": 36,
             "parent": "The Basics",
             "section": "Checkpoint - File Modifications",
             "title": "Lab #3",
@@ -380,7 +407,7 @@
             "completed": false
         },
         {
-            "id": 34,
+            "id": 37,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "Searching & Filtering",
@@ -389,7 +416,7 @@
             "completed": false
         },
         {
-            "id": 35,
+            "id": 38,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep",
@@ -398,7 +425,7 @@
             "completed": false
         },
         {
-            "id": 36,
+            "id": 39,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep \"pattern\" file",
@@ -408,7 +435,7 @@
             "completed": false
         },
         {
-            "id": 37,
+            "id": 40,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -n \"pattern\" file",
@@ -418,7 +445,7 @@
             "completed": false
         },
         {
-            "id": 38,
+            "id": 41,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "grep -c \"pattern\" file",
@@ -428,7 +455,7 @@
             "completed": false
         },
         {
-            "id": 39,
+            "id": 42,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "wildcard*",
@@ -438,7 +465,7 @@
             "completed": true
         },
         {
-            "id": 40,
+            "id": 43,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find",
@@ -447,7 +474,7 @@
             "completed": false
         },
         {
-            "id": 41,
+            "id": 44,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source -name filename.txt",
@@ -457,7 +484,7 @@
             "completed": false
         },
         {
-            "id": 42,
+            "id": 45,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "find path\/to\/source directory",
@@ -465,9 +492,29 @@
             "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ -name \"project1\"<\/code>",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
+        }, 
+        {
+            "id": 46,
+            "parent": "The Basics",
+            "section": "Searching & Filtering",
+            "title": "sort",
+            "content_type": "interactive",
+            "content": "The <b>sort</b> command is one of the more powerful commands in Linux, it allows us to sort content of a file and see the output based on the parameters we give it. By default <b>sort</b> arranges lines alphabetically in ascending order. Which means that if numbers are in the file, <b>sort</b> will treat the numbers as strings and only sort by the first digit of a number.<br><code>sort -flag filename</code>Like with other commands, the flag here is optional so lets just first look at a simple example.<br><br>In our Documents/ directory, lets take a look of our grocery list. Then, we will use this simple sort command and observe what happens, try it out! <code>sort grocery_list.txt </code>", 
+            "answer": "",
+            "completed": false
         },
         {
-            "id": 43,
+            "id": 47,
+            "parent": "The Basics",
+            "section": "Searching & Filtering",
+            "title": "sort -flag",
+            "content_type": "interactive",
+            "content": "We can now mess around by adding flags to the <b>sort</b> command to add an additional layer of filtering. Here are a few major ones:<ul><li><b>-r</b>: Reverses the order of the sort output.</li><li><b>-n</b>: Sorts numbers numerically instead of alphabetically (so 2 comes before 10).</li><li><b>-u</b>: Removes duplicate lines so only unique results are shown.</li></ul> Go ahead and try out the reverse flag in grocery_list.txt<code>sort -r grocery_list.txt</code>",
+            "answer": "find Projects\/ -name \"project1\"",
+            "completed": false
+        }, 
+        {
+            "id": 48,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Output Redirection Operators: '>', '>>' ",
@@ -476,27 +523,27 @@
             "completed": false
         },
         {
-            "id": 44,
+            "id": 49,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Overwrite Operator: '>'",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>Lets enter our Documents directory and overwrite Shakespeare.txt with new content we will provide as an argument<\/p><code> echo \"I Love Linux!\" > Shakespeare.txt<\/code><p>This command will completely erase the existing content and replace it with the argument \"I  Love Linux!\". Try it out!<\/p>",
             "answer": "echo \"I love Linux!\" > Shakespeare.txt",
             "completed": false
         },
         {
-            "id": 45,
+            "id": 50,
             "parent": "The Basics",
             "section": "File Redirection",
             "title": "The Appending Operator: '>>'",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>In the same Shakespeare.txt file lets now add to the file with the '>>' operator by writing \"Dinosaur!\" to the file. Try it out!<\/p><code>echo \"Dinosaur!\" >> Shakespeare.txt<\/code><p>Notice how instead of overwriting the contenet like how the '>' operator does, it just adds to it!<\/p><p>Coming up soon, we will look at examples of how to redirect the output of grep, ls, cat, etc.. but it is generally the same syntax and principle<\/p>",
             "answer": "echo \"Dinosaur!\" >> Shakespeare.txt",
             "completed": false
         },
         {
-            "id": 46,
+            "id": 51,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #9",
@@ -512,7 +559,7 @@
             "completed": true
         },
         {
-            "id": 47,
+            "id": 52,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #10",
@@ -528,7 +575,7 @@
             "completed": true
         },
         {
-            "id": 48,
+            "id": 53,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #11",
@@ -544,7 +591,7 @@
             "completed": false
         },
         {
-            "id": 49,
+            "id": 54,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #12",
@@ -560,7 +607,7 @@
             "completed": false
         },
         {
-            "id": 50,
+            "id": 55,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Knowledge Check #13",
@@ -576,81 +623,99 @@
             "completed": false
         },
         {
-            "id": 51,
+            "id": 56,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #4",
-            "content_type": "lab",
+            "content_type": "interactive",
             "content": "<p>In our Documents\/ directory, write a command that outputs all the times \"we\" appears in Declaration.txt BY LINE.<\/p><p>We will need a flag to output the number line where the pattern appears.<\/p>",
             "answer": "grep -n \"we\" Declaration.txt",
             "completed": false
         },
         {
-            "id": 52,
+            "id": 57,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #5",
-            "content_type": "lab",
+            "content_type": "interactive",
             "content": "<p>Lets traverse to the Lyrics\/ directory that lives in the Documents\/ directory, write a command the returns the count of how many times \"happen\" appears in LetItHappen.txt<\/p>",
             "answer": "grep -c \"happen\" LetItHappen.txt",
             "completed": false
         },
         {
-            "id": 53,
+            "id": 58,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #6",
-            "content_type": "lab",
+            "content_type": "interactive",
             "content": "<p>In the same Lyrics\/ directory, write a command that redirects the output of \"LetItHappen.txt\" to a new file called copy.txt<\/p>Hint: 'cat shows the output of a file and '>' or '>>' redirects that output<p>",
             "completed": false
         },
         {
-            "id": 54,
+            "id": 59,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #7",
-            "content_type": "lab",
+            "content_type": "interactive",
             "content": "<p>In your new copy.txt file write a command that takes the string \"Earth, Moon, Sun\" and APPENDS to copy.txt<\/p>",
             "completed": false
         },
         {
-            "id": 55,
+            "id": 60,
             "parent": "The Basics",
             "section": "Checkpoint - File Searching, Filtering, and Redirection",
             "title": "Lab #8",
-            "content_type": "lab",
+            "content_type": "interactive",
             "content": "<p>Write a command that returns all the .txt files in the Documents\/ directory?<\/p>",
             "completed": false
         },
         {
-            "id": 56,
+            "id": 61,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "Permissions In Linux",
             "content_type": "article",
-            "content": "<p>In Linux every file has permissions that allows or prevents users to read, writing, and executing that file. We can desrcibe these terms on the terminal as:<br>    <b>r<\/b> \u2013 Read (can view the file or list the folder)<\/br><b>w<\/b> \u2013  Write (can modify the file or folder)<\/br> <b>x<\/b> \u2013 Execute (can run the file if it\u2019s a program or enter the folder)<\/br><\/p><br><p>Also, there are permissions for 3 type of users:<br><b>Owner<\/b> \u2013 the person who owns the file<br><b>Group<\/b> \u2013 a group of users assigned to the file<\/br><b>Others<\/b> \u2013 everyone else<\/p>",
+            "content": "<p>In Linux every file has permissions that allows or prevents users to read, write, and execute a file or program. We can desrcibe these terms on the terminal as:<br><br><b>r<\/b> \u2013 Read (can view the file or list the folder)<\/br><br><b>w<\/b> \u2013  Write (can modify the file or folder)<\/br><br><b>x<\/b> \u2013 Execute (can run the file if it\u2019s a program or enter the folder)<\/br><\/p>Also, there are permissions for 3 type of users:<br><br><b>Owner<\/b> \u2013 the person who owns the file<br><br><b>Group<\/b> \u2013 a group of users assigned to the file<\/br><br><b>Others<\/b> \u2013 everyone else<\/p>",
             "completed": false
         },
         {
-            "id": 57,
+            "id": 62,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "ls -l",
-            "content_type": "interative",
-            "content": "<p>To see the output of your file permisions we can use the <b>ls -l<\/b> command, lets walk through the output!<\/p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt<\/code><\/p><p>Here's what each part means:<\/p><ul><li><b>-<\/b> This indicates it's a regular file. If it were a directory, it would show <b>d<\/b>.<\/li><li><b>rw-<\/b> The owner can read and write the file.<\/li><li><b>r--<\/b> The group can only read the file.<\/li><li><b>r--<\/b> Others (everyone else) can also only read the file.<\/li><li><b>user<\/b> The name of the file's owner.<\/li><li><b>group<\/b> The group assigned to the file.<\/li><li><b>2025-02-27 01:24:04<\/b> The last modified date and time.<\/li><li><b>648<\/b> The file size in bytes.<\/li><li><b>Shakespeare.txt<\/b>: The name of the file.<\/li><\/ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.<\/p>",
+            "content_type": "interactive",
+            "content": "<p>Permissions can seem confusing at first, but we will clear it up. To see the output of your file permisions we can use the <b>ls -l<\/b> command, lets walk through the output!<\/p><code>-rw-r--r-- user group 2025-02-27 01:24:04 648 Shakespeare.txt<\/code><\/p><p>To start off, there are 10 dashes, but the very first dash will determine if it's a file or directory. The next 9 are grouped into 3, which is important to understand to make modifications. The first group of 3 gives you the permissions for the owner (or the user if you own it) of the file, the next 3 give you permissions for the group (a collection of users like a devs team that are working on this), and the last 3 represent the others (a collection of users who are not the owner and not apart of the team). Lets look at the output one by one. <\/p><ul><li><b>-<\/b>As mentioned earlier, the first - indicates it's a regular file. If it were a directory, it would show <b>d<\/b>.<\/li><li><b>rw-<\/b> The owner can read and write the file.<\/li><li><b>r--<\/b> The group can only read the file.<\/li><li><b>r--<\/b> Others (everyone else) can also only read the file.<\/li><li><b>user<\/b> The name of the file's owner.<\/li><li><b>group<\/b> The group assigned to the file.<\/li><li><b>2025-02-27 01:24:04<\/b> The last modified date and time.<\/li><li><b>648<\/b> The file size in bytes.<\/li><li><b>Shakespeare.txt<\/b>: The name of the file.<\/li><\/ul><p>In summary, this file is readable by everyone, writable only by the owner, and not executable by anyone.<\/p>",
             "completed": false
         },
         {
-            "id": 58,
+            "id": 63,
+            "parent": "The Basics",
+            "section": "File Permissions",
+            "title": "Alphabetic Mode",
+            "content_type": "article",
+            "content": "The Linux permisions can be expressed in 2 ways, one being the <b>Alphabetic</b> mode which we have been working with already but lets take a closer look.</p>Up to now, we know that in order to see the permissions of a file, directory, or program we have to read the permissions for that owener's, group's, or other's dashes, but the placement of the dashes do matter. For example, lets look at this image for a quick quick example. <img src='../../../images/file_permissions_alpha.png' width='500px'> As mentioned earlier a few times, the vert first dash is not relevant to the permissions, it just simply tells us if its a file or directory.</p> Therefore, we split the next 9 dashes into the 3 groups as mentioned before. The first dash always represents the <b>read</b> permissions. If the permission has the <b>r</b>, we know permissions are valid. However, if was a dash that means it does not have read permissions.  In fact the dash for the owner's, group's, and other's mean the same thing, that this body does not have this permission.</p> The second dash represnts the <b>write</b> permission, which states if this body is able to write to this file. If there is a <b>w</b> then writing permisions are valid. Otherwise, it would be invalid and represented with the dash.</p>Liekwise, the last permission for a body represents the execution permission. Meaning if this body is allowed to run this program or file. If they are allowed then it will be represented with <b>x</b>, otherwise it's not allowed and will be represented with a dash",
+            "completed": false
+        },
+        {
+            "id": 64,
+            "parent": "The Basics",
+            "section": "File Permissions",
+            "title": "Octal Mode",
+            "content_type": "article",
+            "content": "The 2nd way we can represent Linux permissions is through a numeric or <b>octal</b> mode. The <b>octal</b> mode allows us to simplify permissions by using numbers instead of letters!<br><br>Each permission type has a numeric value:<br><ul><li><b>r (read)</b> = 4</li><li><b>w (write)</b> = 2</li><li><b>x (execute)</b> = 1</li></ul>We add these numbers together to form a single digit for each group: <b>owner</b>, <b>group</b>, and <b>others</b>.<br><br>For example:<br><ul><li><code>rwx</code> = 4 + 2 + 1 = 7</li><li><code>rw-</code> = 4 + 2 + 0 = 6</li><li><code>r--</code> = 4 + 0 + 0 = 4</li></ul><br>When written in octal mode, permissions are represented as three digits, one for each body. For instance:<br><ul><li><b>777</b> = rwx for owner, rwx for group, rwx for others</li><li><b>644</b> = rw- for owner, r-- for group, r-- for others</li><li><b>755</b> = rwx for owner, r-x for group, r-x for others</li></ul><img src='../../../images/octal.png' width=500px> Overall, this makes octal mode the more efficient and cleaner approach to set permissions in Linux, especially when setting permissions with the <b>chmod</b> command.",
+            "completed": true
+        },        
+        {
+            "id": 65,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod",
             "content_type": "article",
-            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>There are two ways to specify permissions:<\/p><h4>Symbolic Method:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Numeric Method:<\/h4><p>Permissions can also be represented by numbers:<\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p> However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission, which we will discuss in detail later on.<\/p>",
+            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>As discussed earlier, there are two ways to specify permissions:<\/p><h4>Alphabetic Mode:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Octal Mode:<\/\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p></b>However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission",
             "completed": false
         },
         {
-            "id": 59,
+            "id": 66,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "sudo",
@@ -659,27 +724,27 @@
             "completed": false
         },
         {
-            "id": 60,
+            "id": 67,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change user permissions",
-            "content_type": "interative",
-            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work\/ directory.<\/p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.<\/p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cant cat the content to view it since we don't have the permissions for it!<\/p>Also, notice how we dont have authorization to modifiy the file since we are not the user.<\/p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt<\/code><\/p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!<\/p><p>Try it out!<\/p>",
+            "content_type": "interactive",
+            "content": "<p>Let's take it slower and break down how to use sudo with chmod, traverse to the root directory and enter the Work\/ directory.<\/p><p>Use ls -l to see the permissions on these files, try using cat on 'daily_logs.txt' to see whats inside the content.<\/p><p>Notice how we dont have read permissions for 'daily_logs.txt' so we cannot cat the content to view it since we don't have the permissions for it!<\/p>Also, notice how we dont have authorization to modifiy the file since we are not the user.<\/p><p>There are a few ways to tackle this problem, but lets use sudo for now. Since we are adding reading permissions and we don't own the file ourselves we must syntatically use: <code>sudo chmod u+r daily_logs.txt<\/code><\/p><p> Which just means \"Hey Linux, treat me as the root user, so please add reading permissions to this user!<\/p><p>Try it out!<\/p>",
             "answer": "sudo chmod u+r",
             "completed": false
         },
         {
-            "id": 61,
+            "id": 68,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod: change group permissions",
             "content_type": "interactive",
-            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<\/p><p>The syntax is: <code>sudo chmod g+w sales_report.txt<\/code><pTry it and then use ls -l again to see how the permissions have changed.<\/p>",
+            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<code>sudo chmod g+w sales_report.txt</code>Try it and then use ls -l again to see how the permissions have changed!",
             "answer": "sudo chmod g+w sales_report.txt",
             "completed": false
         },
         {
-            "id": 62,
+            "id": 69,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown",
@@ -688,7 +753,7 @@
             "completed": false
         },
         {
-            "id": 63,
+            "id": 70,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chown: change owner of a file",
@@ -697,7 +762,7 @@
             "completed": false
         },
         {
-            "id": 64,
+            "id": 71,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #14",
@@ -713,7 +778,7 @@
             "completed": false
         },
         {
-            "id": 65,
+            "id": 72,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #15",
@@ -729,7 +794,7 @@
             "completed": false
         },
         {
-            "id": 66,
+            "id": 73,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #16",
@@ -745,7 +810,7 @@
             "completed": false
         },
         {
-            "id": 67,
+            "id": 74,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #17",
@@ -761,7 +826,7 @@
             "completed": false
         },
         {
-            "id": 68,
+            "id": 75,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Knowledge Check #18",
@@ -777,21 +842,30 @@
             "completed": false
         },
         {
-            "id": 69,
+            "id": 76,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #9",
-            "content_type": "interative",
+            "content_type": "interactive",
             "content": "<p>In the Work\/ directory there is 'revenue.py' file that contains a python script which calculates the total revnenue the store has accumulated. However, it can't be executed right now since it doesn't have the the permission for it.<\/p><p>Write a command that allows the python code to be executed and then run that python code with: <code> python3 revenue.py<\/code>",
             "completed": false
         },
         {
-            "id": 70,
+            "id": 77,
             "parent": "The Basics",
             "section": "Checkpoint - File Permissions",
             "title": "Lab #10",
-            "content_type": "interative",
-            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'<\/p><table border='1' style='border-collapse: collapse; margin-top: 15px;'><tr><th style='background-color: transparent;'>Octal <\/th><th style='background-color: transparent;'>Binary <\/th><th style='background-color: transparent;'>Permission <\/th><\/tr><tr><td style='background-color: transparent;'>0<\/td><td style='background-color: transparent;'>000<\/td><td style='background-color: transparent;'>---<\/td><\/tr><tr><td style='background-color: transparent;'>1<\/td><td style='background-color: transparent;'>001<\/td><td style='background-color: transparent;'>--x<\/td><\/tr><tr><td style='background-color: transparent;'>2<\/td><td style='background-color: transparent;'>010<\/td><td style='background-color: transparent;'>-w-<\/td><\/tr><tr><td style='background-color: transparent;'>3<\/td><td style='background-color: transparent;'>011<\/td><td style='background-color: transparent;'>-wx<\/td><\/tr><tr><td style='background-color: transparent;'>4<\/td><td style='background-color: transparent;'>100<\/td><td style='background-color: transparent;'>r--<\/td><\/tr><tr><td style='background-color: transparent;'>5<\/td><td style='background-color: transparent;'>101<\/td><td style='background-color: transparent;'>r-x<\/td><\/tr><tr><td style='background-color: transparent;'>6<\/td><td style='background-color: transparent;'>110<\/td><td style='background-color: transparent;'>rw-<\/td><\/tr><tr><td style='background-color: transparent;'>7<\/td><td style='background-color: transparent;'>111<\/td><td style='background-color: transparent;'>rwx<\/td><\/tr><\/table>",
+            "content_type": "interactive",
+            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'.<img src='../../../images/chart.jpg' height='300px' width='450px'",
+            "completed": false
+        }, 
+        {
+            "id": 78,
+            "parent": "The Basics",
+            "section": "Final",
+            "title": "Closing thoughts",
+            "content_type": "interactive",
+            "content": "Congratulations on completing the \"Command Line\" section of Linux-Lab! Although we didn't touch every single command, we hoped that this section gave you a good understanding of the Linux Command Line and how you will apply it to your profession or craft.</p> However, the learning of the command line is not done yet! Come and check out our \"Networking\" section where you will learn how the internet works and apply that theory towards the Linux Command Line.<a href='https://linux-lab.live/Linux-Lab/src/pages/lesson_page/lesson.html?module=Networking'> <b><u>Networking In Linux</b></u>, we hope to see you there!</a><h3>Additional Resource:</h3>If you are interested in learning more and in depth about the Linux Command Line here is a great resource!</p>Shotts, William E. Jr.. The Linux Command Line: A Complete Introduction. United States, No Starch Press, 2012. <img src='../../../images/LCML.jpg'", 
             "completed": false
         }
     ],
@@ -804,10 +878,10 @@
         {
             "id": 1,
             "parent": "Networking",
-            "section": "Intro To Networking",
+            "section": "Prelude",
             "title": "Networking",
             "content_type": "article",
-            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands. <img src='../../../images/netWork.gif' width='500'>",
+            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.<img src='../../../images/netWork.gif' width='500'>",
             "completed": false
         },
         {
@@ -819,71 +893,40 @@
             "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.<\/p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address<\/b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1<\/code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!<\/p><img src='..\/..\/..\/images\/Home_LAN_local_area_network_example_diagram.png' width='500'>",
             "answer": "",
             "completed": false
-        },
+        }, 
         {
             "id": 3,
             "parent": "Networking",
             "section": "IP Addresses",
-            "title": "ifconfig",
-            "content_type": "interactive",
-            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPv6 addresses (A modern ip version address that we will look at later) assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
+            "title": "IPV4 vs IPV6",
+            "content_type": "article",
+            "content": "Since 1983, the internet used the standard 32 bit integer (we will discuss this later) IP address to identify devices on the internet. <code>192.1.0.255</code>You probably have seen this already in your life since it's still used today, however as technology advanced and more people began using the internet, we faced a big problem. We ran out of IP addresses!</p>How did we combat this? Well simple, we just made the IP address bigger!</p>On June 12, 2012, IPV6 (Internet Protocal Version 6) was officialy launched worldwide.<code>2001:db8::ff00:42:832</code>Instead of the original 32 bit address IPV4 used, IPV6 uses an outstanding 128 bits! But how much bigger is that? Let's find out in the next lesson.",
             "answer": "",
             "completed": false
         },
         {
             "id": 4,
             "parent": "Networking",
-            "section": "Connections",
-            "title": "Servers, Clients, and Hosts",
+            "section": "IP Addresses",
+            "title": "How does an IP address work?",
             "content_type": "article",
-            "content": "When accessing the internet or a network, devices typically fall into two main roles: <b>Servers<\/b> and <b>Clients<\/b>.<li><b>Server<\/b> \u2013 A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info\u2014and respond with the correct data, such as your profile page, payment info, and more.<\/li><li><b>Client<\/b> \u2013 A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.<\/li><li><b>Host<\/b> \u2013 A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.<\/li> <img src='..\/..\/..\/images\/server.gif' width='550' alt='server gif>'",
-            "answer": "",
+            "content": "We have talked about how IP address use 32 bits or 128 bits, but what exactly does that mean?</p>Bits are just 1's and 0's, and is the way how computers communicate and process information, also known as <b>binary</b>.</p>In binary, we read from right to left and every digit goes by a power of 2. The first digit starting on the right is: 2¹ which is 2, then the next will be 2² which is 4, followed by 2³ which 8 and so on. <img src='../../../images/binary.png'>  </p>For ip addreses, they range between 0-255 and are seperated by the period('.') which is known as an <b>octet</b>. Each octet will hold 8 bits, and the bits (if you do the math) will return back the decimal value of that octet. Since there are 4 octets and each octet contains 8 bits, that means the entire address contains 32 bits! Hence why IPV4 is a 32 bit address! Let's take a look at a IPV4 address as an example. <img src='../../../images/ip.png'> From the example, we can see how it works, the octets are split into their binary value which will all add up back to the human readable decimal value.</p> As mentioned earlier, IPV4 ran its course since it only provided 4,294,967,296 (2<sup>32</sup>) possible unqie addresses. At the time this was seen as enough but the internet and technology exploded, which gave rise to IPV6.</p>For IPV6, its ip address uses a slightly more complex system but its roughly the same idea. Since its a 128 bits, that means it provides 2(<sup>132</sup>) is a number so big its enough to fill every star in the universe with 5.4 quadrillion grains of sand, so I think we are safe for now.",
             "completed": false
         },
         {
             "id": 5,
             "parent": "Networking",
-            "section": "Connections",
-            "title": "Networking Connections",
-            "content_type": "article",
-            "content": "<p>When we are online gaming, surfing the web, streaming movies, or watching live TV, we will occasionally come across network performance issues, often referred to as \"lag\" or, in technical terms, <b>network latency<\/b>.<\/p><p>Network latency issues can be caused by hardware performance, physical distance, packet loss, or network congestion (too much traffic on a network).<\/p><p>To test the speed or how \"strong\" a connection is to a server or computer, we can use the <b>ping<\/b> command followed by a destination argument. The argument can either be the ip address or the full website domain you're trying to connect to, as seen below:<\/p><code>ping 192.168.1.1<\/code><code>ping some_website.com<\/code>",
+            "section": "IP Addresses",
+            "title": "ifconfig",
+            "content_type": "interactive",
+            "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most. There will be some concepts we have yet to explore but we will go through it later on to make sense of this mess.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPV6 address assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
             "answer": "",
             "completed": false
-        },
+        },     
         {
             "id": 6,
             "parent": "Networking",
-            "section": "Connections",
-            "title": "ping",
-            "content_type": "interative",
-            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:<\/p><code>ping 142.250.72.206<\/code>Or more cleanly: <code>ping google.com<\/code><p>The output at first glance like many Linux network commands that you have probably come across alrady, can be cryptic and intimidating, but we'll break it down and see the important information it gives us.<\/p><\/p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net<\/b> \u2013 This shows the domain name of the responding server. It confirms that we successfully reached a Google server.<\/li><li><b>icmp_seq=1<\/b> \u2013 This is the sequence number of the ping packet, starting at 1 and increasing with each request.<\/li><li><b>ttl=114<\/b> \u2013 TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.<\/li><li><b>time=23.4 ms<\/b> \u2013 This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.<\/li><\/ul>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 7,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "DNS - Domain Name System",
-            "content_type": "article",
-            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com<\/b> or <b>amazon.com<\/b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)<\/b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).<\/p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.<\/p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!<\/p><img src='..\/..\/..\/images\/dns.gif' width = '550'>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 8,
-            "parent": "Networking",
-            "section": "Connections",
-            "title": "nsloopkup",
-            "content_type": "interactive",
-            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup<\/b> which stands for <b>'name server lookup'<\/b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:<\/p><code>nslookup google.com<\/code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238<\/code><\/pre><ul><li><b>Server:<\/b> The DNS server your system is using to resolve the domain.ndx <\/li><li><b>Address:<\/b> The IP address of that DNS server with port 53 (used for DNS communication).<\/li><li><b>Non-authoritative answer:<\/b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.<\/li><li><b>Name:<\/b> The domain name you queried (google.com).<\/li><li><b>Address:<\/b> The resolved IP address of the domain.<\/li><\/ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.<\/p>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 9,
-            "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "section": "Checkpoint - Ip addresses",
             "title": "Knowledge Check #1",
             "content_type": "multichoice",
             "questions": {
@@ -897,26 +940,132 @@
             "completed": false
         },
         {
-            "id": 10,
+            "id": 7,
             "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "section": "Checkpoint - Ip addresses",
             "title": "Knowledge Check #2",
             "content_type": "multichoice",
             "questions": {
-                "A": "A devices hardware MAC address",
-                "B": "A unique identifier assigned to each device on a network to facilitate communication",
-                "C": "A secret password used by routers to unlock the Internet",
-                "D": "The location of a device stored on its hard drive"
+              "A": "IPv4 uses 32-bit addresses while IPv6 uses 128-bit addresses",
+              "B": "IPv4 is newer than IPv6",
+              "C": "IPv4 supports more devices than IPv6",
+              "D": "IPv4 and IPv6 are the same protocol"
             },
-            "content": "<p>What is an ip address?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "B",
+            "content": "<p>What's the difference between IPv4 and IPv6?</p><div class=\"question__container\"></div>",
+            "answer": "A",
+            "completed": false
+        },
+        {
+            "id": 8,
+            "parent": "Networking",
+            "section": "Checkpoint - Ip addresses",
+            "title": "Knowledge Check #3",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "Computers use binary to process IP addresses internally, even though we see them in decimal",
+              "B": "Binary is only used when IP addresses are transmitted over fiber optic cables",
+              "C": "Routers convert IP addresses to binary only when they malfunction",
+              "D": "Computers use binary to process IP addresses internally, even though we see them in decimal"
+            },
+            "content": "<p>How does binary work with IP addresses?</p><div class=\"question__container\"></div>",
+            "answer": "D",
+            "completed": false
+        },     
+        {
+            "id": 9,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "Classes",
+            "content_type": "article",
+            "content": "<p>Right now would be a good time to mention that your ip address isn't just a random set of numbers between 0-255, they are a reflection of what kinda Network you are in!</p><p>Back in the early days of the internet, engineers created a system called <b>Network Classes</b> to organize IP addresses based on network size. Think of it like organizing neighborhoods - some are small residential streets, others are massive cities!</p><p>There are three main classes you'll encounter:</p><p><b>Class A Networks (1.0.0.0 - 126.255.255.255)</b><br>These are the <b>massive</b> networks! If your IP starts with a number between 1-126, you're on a huge network that can support around 16 million devices. These are typically used by large corporations or internet service providers.<br><code>Example: 10.5.100.50</code></p><p><b>Class B Networks (128.0.0.0 - 191.255.255.255)</b><br>The <b>medium-sized</b> networks! If your IP starts with 128-191, you're on a network that can handle about 65,000 devices. Perfect for universities or medium-sized companies.<br><code>Example: 172.16.10.25</code></p><p><b>Class C Networks (192.0.0.0 - 223.255.255.255)</b><br>The <b>small</b> networks! If your IP starts with 192-223, you're on a cozy network with about 254 devices max. This is what you'll see at home, small offices, or cafes.<br><code>Example: 192.168.1.100</code> (Looks familiar, right?)</p><p>Here's the cool part: just by looking at the first number of any IP address, you can instantly tell what size network you're dealing with!</p><p>But here's the problem that led to subnetting - what if you need something in between? What if 254 devices is too small, but 65,000 is way too big? That's where subnetting comes to the rescue, which we'll explore next!</p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 10,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "Subnets",
+            "content_type": "article",
+            "content": "<p>So we learned that network classes give us three fixed sizes: huge (Class A), medium (Class B), or small (Class C). But what happens when none of these sizes fit what you actually need?</p><p>Enter <b>subnetting</b> - the art of taking one big network and chopping it up into smaller, more manageable pieces!</p><p>Think of subnetting like this: imagine you own a large apartment building (your original network). Instead of having one massive space where everyone lives together, you divide it into separate floors or apartments. Each apartment becomes its own <b>subnet</b> - a smaller network within the bigger one.</p><p><b>Why would you want to do this?</b></p><p><b>Organization:</b> You can separate different groups. Put the accounting department on one subnet, engineering on another. Just like putting different departments on different floors of a building!</p><p><b>Security:</b> You can control who talks to whom. Maybe the guest WiFi subnet can't access the company servers subnet.</p><p><b>Performance:</b> Smaller networks mean less traffic congestion. Instead of 1000 devices all shouting at once, you have groups of 50 devices in organized subnets.</p><p><b>Efficiency:</b> No more wasting IP addresses! Instead of giving a small company an entire Class B network (65,000 addresses) when they only need 500, you can create custom-sized subnets.</p><p>Here's a simple example: Let's say you have the network <code>192.168.1.0</code> (normally 254 devices). With subnetting, you could split this into:</p><ul><li><code>192.168.1.0</code> - Subnet for employees (126 devices)</li><li><code>192.168.1.128</code> - Subnet for guests (126 devices)</li></ul><p>Same building, but now it's organized into two separate apartments!</p><p>The magic happens with something called a <b>subnet mask</b>, which tells your computer: \"Hey, these IP addresses are in your neighborhood, but those other ones are in a different subnet.\"",
+            "answer": "",
             "completed": false
         },
         {
             "id": 11,
             "parent": "Networking",
+            "section": "Subnetting",
+            "title": "Subnet Masks",
+            "content_type": "article",
+            "content": "<p>Alright, so we know subnetting lets us divide big networks into smaller ones. But how does your computer actually know where one subnet ends and another begins? That's where the <b>subnet mask</b> comes in!</p><p>Remember when we looked at the <code>ifconfig</code> command and saw that mysterious <code>netmask 255.255.255.0</code>? Well, that's your subnet mask in action!</p><p>Think of a subnet mask like a postal system. When you write an address, you have a street address (like \"123 Main Street\") and a city (like \"Springfield\"). The subnet mask tells your computer: \"Here's the city part (network), and here's the street address part (host).\"</p><p>Let's break down the most common subnet mask: <code>255.255.255.0</code></p><p>In binary (remember our friend binary?), this looks like:<br><code>11111111.11111111.11111111.00000000</code></p><p>Here's the rule: wherever you see <code>255</code> (or <code>11111111</code> in binary), that part represents the <b>network portion</b>. Wherever you see <code>0</code> (or <code>00000000</code> in binary), that's the <b>host portion</b>.</p><p>So for an IP address like <code>192.168.1.100</code> with subnet mask <code>255.255.255.0</code>:</p><ul><li><b>Network part:</b> <code>192.168.1</code> (this is like your \"city\")</li><li><b>Host part:</b> <code>100</code> (this is like your \"street address\")</li></ul><p>This means any device with an IP starting with <code>192.168.1.___</code> is in the same subnet - they're all in the same \"city\" and can talk to each other directly!</p><p>But a device with IP <code>192.168.2.50</code>? That's in a different \"city\" (different subnet), so they'd need a router to communicate.</p><p>You'll also see subnet masks written in <b>CIDR notation</b> like <code>/24</code>. This just means \"the first 24 bits are the network portion.\" Since <code>255.255.255.0</code> has 24 ones in binary, it's the same as <code>/24</code>!</p><p>Next time you run <code>ifconfig</code>, you'll know exactly what that netmask is telling you about your network neighborhood!</p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 12,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "ifoncfig",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 17,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "Servers, Clients, and Hosts",
+            "content_type": "article",
+            "content": "When we interact with a network, devices typically fall into two main roles: <b>Servers<\/b> and <b>Clients<\/b>.<li><b>Server<\/b> \u2013 A server is a computer or device that is specifically designed to receive requests and respond with the appropriate data (like web pages, streaming movies, sports, and so on). For example, when you log into a website, your device (the client) sends a request to the server. The server's job is to process the request by checking your login info\u2014and respond with the correct data, such as your profile page, payment info, and more.<\/li><li><b>Client<\/b> \u2013 A client is the device or program that initiates the request. Most commonly, it's your computer, phone, or browser accessing a service like a website or email.<\/li><li><b>Host<\/b> \u2013 A host refers to any device connected to a network that can send or receive data. Both clients and servers are considered hosts.<\/li> <img src='..\/..\/..\/images\/server.gif' width='550' alt='server gif>'",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 18,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "Networking Connections",
+            "content_type": "article",
+            "content": "<p>When we are online gaming, surfing the web, streaming movies, or watching live TV, we will occasionally come across network performance issues, often referred to as \"lag\" or, in technical terms, <b>network latency<\/b>.<\/p><p>Network latency issues can be caused by hardware performance, physical distance, packet loss, or network congestion (too much traffic on a network).<\/p><p>To test the speed or how \"strong\" a connection is to a server or computer, we can use the <b>ping<\/b> command followed by a destination argument. The argument can either be the ip address or the full website domain you're trying to connect to, as seen below:<\/p><code>ping 192.168.1.1<\/code><code>ping some_website.com<\/code>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 19,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "ping",
+            "content_type": "interactive",
+            "content": "<p>On the command line lets ping google to see how strong our connection is to their server:<\/p><code>ping 142.250.72.206<\/code>Or more cleanly: <code>ping google.com<\/code><p>The output at first glance (like many Linux network commands that you have probably come across alrady) can be cryptic and intimidating, but we'll break it down and see the important information it gives us.<\/p><\/p><ul><li><b>64 bytes from nuq04s45-in-x0e.1e100.net<\/b> \u2013 This shows the domain name of the responding server. It confirms that we successfully reached a Google server.<\/li><li><b>icmp_seq=1<\/b> \u2013 This is the sequence number of the ping packet, starting at 1 and increasing with each request (we will learn more about this later).<\/li><li><b>ttl=114<\/b> \u2013 TTL stands for 'Time To Live', which tells how many more hops (routers) the packet can go through before being discarded. It also gives a rough idea of how far away the server is.<\/li><li><b>time=23.4 ms<\/b> \u2013 This is the round-trip time in milliseconds. Lower values mean faster responses and better connection quality.<\/li><\/ul>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 20,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "DNS - Domain Name System",
+            "content_type": "article",
+            "content": "Whenever we search for a website in a browser, we type in something simple like <b>google.com<\/b> or <b>amazon.com<\/b>. But how does your device actually know where to go?<p>This is where the <b>Domain Name System (DNS)<\/b> comes in. It's a protocol that translates those easy-to-remember domain names into IP addresses (the real location of a website on the internet).<\/p><p>Think of DNS like a phonebook for the internet. When you type in a domain, your system reaches out to a DNS server, which looks up the name and responds with the matching IP address. Once your system has that, it can connect to the correct server and load the site.<\/p><p>Without DNS, we'd have to memorize strings of numbers like 142.250.190.78 instead of just typing 'google.com'. Take a look at a visual walkthrough below!<\/p><img src='..\/..\/..\/images\/dns.gif' width = '550'>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 21,
+            "parent": "Networking",
+            "section": "Connections",
+            "title": "nsloopkup",
+            "content_type": "interactive",
+            "content": "Through the Linux command line we can interact with a DNS server with <b>nslookup<\/b> which stands for <b>'name server lookup'<\/b>.<p>The command will return the IP address of some_website.com and the DNS server used for the query. Try it out on the command line with this example:<\/p><code>nslookup google.com<\/code>Breakdown:<pre><code>Server: 192.168.1.1\nAddress: 192.168.1.1#53\nNon-authoritative answer:\nName:   google.com\nAddress: 142.250.72.238<\/code><\/pre><ul><li><b>Server:<\/b> The DNS server your system is using to resolve the domain.ndx <\/li><li><b>Address:<\/b> The IP address of that DNS server with port 53 (used for DNS communication).<\/li><li><b>Non-authoritative answer:<\/b> Indicates the response is from a cached or forwarded DNS server, not directly from the authoritative source.<\/li><li><b>Name:<\/b> The domain name you queried (google.com).<\/li><li><b>Address:<\/b> The resolved IP address of the domain.<\/li><\/ul><p>Note: Sometimes, multiple IPs may be shown depending on the DNS setup of the domain.<\/p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 22,
+            "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
-            "title": "Knowledge Check #3",
+            "title": "Knowledge Check #4",
             "content_type": "multichoice",
             "questions": {
                 "A": "Sends test messages to a server or IP address to measure connectivity and response time",
@@ -929,23 +1078,59 @@
             "completed": false
         },
         {
-            "id": 12,
+            "id": 23,
             "parent": "Networking",
             "section": "Checkpoint - The Internet, Ip addresses, and Connections",
-            "title": "Knowledge Check #4",
+            "title": "Knowledge Check #5",
             "content_type": "multichoice",
             "questions": {
                 "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
                 "B": "It scans the local network for all connected devices and lists their MAC addresses.",
-                "C": "It changes the DNS server settings on your computer.",
+                "C": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
                 "D": "It encrypts DNS traffic to protect against spoofing attacks."
             },
             "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "A",
+            "answer": "C",
+            "completed": false
+        }, 
+        {
+            "id": 24,
+            "parent": "Networking",
+            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "title": "Knowledge Check #5",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
+                "B": "It scans the local network for all connected devices and lists their MAC addresses.",
+                "C": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
+                "D": "It encrypts DNS traffic to protect against spoofing attacks."
+            },
+            "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "C",
             "completed": false
         },
         {
-            "id": 13,
+            "id": 25,
+            "parent": "Networking",
+            "section": "Transfering Data",
+            "title": "Sockets",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 26,
+            "parent": "Networking",
+            "section": "Transfering Data",
+            "title": "HTTP Protocals",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 27,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "TCP\/IP",
@@ -955,7 +1140,7 @@
             "completed": false
         },
         {
-            "id": 14,
+            "id": 28,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "The 3 Way Handshake",
@@ -965,7 +1150,7 @@
             "completed": false
         },
         {
-            "id": 15,
+            "id": 29,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "ip route",
@@ -975,7 +1160,7 @@
             "completed": false
         },
         {
-            "id": 16,
+            "id": 30,
             "parent": "Networking",
             "section": "Transfering Data",
             "title": "traceroute",

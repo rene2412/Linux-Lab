@@ -277,11 +277,12 @@ foreach ($everyLesson as $lesson) {
 }
 
 function sendAPI($api) : array {
-    global $username, $logged, $current_section, $lessonId, $lessonName, $lessonStatus;
+    global $user_id, $username, $logged, $current_section, $lessonId, $lessonName, $lessonStatus;
     global $lessons_completed, $networking_lessons_completed;
     //The file will return the user info in JSON
     if ($api === "The Basics") {
     return [
+        "userId" => $user_id,
         "username" => $username,
         "isLoggedIn" => $logged,
         "currentModule" => [
@@ -348,7 +349,7 @@ function sendAPI($api) : array {
       error_log("About to call sendAPI($dbCurrentModule)");
       $gigaAPI = sendAPI($dbCurrentModule);
       error_log("sendAPI returned: " . json_encode($gigaAPI));
-      echo json_encode($gigaAPI);
+      echo json_encode($gigaAPI, JSON_PRETTY_PRINT);
       return;
   }
 }
@@ -376,7 +377,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         //Return the API
         $gigaAPI = sendAPI($dbCurrentModule);
-        echo json_encode($gigaAPI);
+        echo json_encode($gigaAPI, JSON_PRETTY_PRINT);
         return;
     }
 
@@ -393,7 +394,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $dbCurrentModule = $stmt->fetchColumn() ?? "Networking";
     
         $gigaAPI = sendAPI($dbCurrentModule);
-        echo json_encode($gigaAPI);
+        echo json_encode($gigaAPI, JSON_PRETTY_PRINT);
         return;
     }
 
