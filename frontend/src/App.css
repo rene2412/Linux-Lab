@@ -21,10 +21,12 @@
   --font-sans:
     'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-jersey:'Jersey25', monospace;
+  --font-jersey: 'Jersey25', monospace;
 
   --color-dark: #000000;
   --color-highlight: rgb(41, 255, 34);
+  --color-highlight-half: rgba(41, 255, 34, 0.5);
+  --color-highlight-quarter: rgb(41, 255, 34, 0.25);
 
   --tracking-sans-normal: -0.06em;
   --tracking-sans-wide: -0.04em;
@@ -53,18 +55,17 @@
   --text-sm: 0.75rem;
   --text-xs: 0.562rem;
 
-  --leading-tighter:1.10em;
-  --leading-tighten:1.20em;
+  --leading-tighter: 1.1em;
+  --leading-tighten: 1.2em;
 
-  --animate-cursor-blink: cursor-blink step-start 0.9s 0.5s infinite ;
+  --animate-cursor-blink: cursor-blink step-start 0.9s 0.5s infinite;
 
-  @keyframes cursor-blink{
-    0%{
+  @keyframes cursor-blink {
+    0% {
       opacity: 1;
     }
-    50%{
-      opacity:0
+    50% {
+      opacity: 0;
     }
   }
-
 }

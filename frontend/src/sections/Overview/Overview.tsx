@@ -103,6 +103,28 @@ export default function Overview() {
     { scope: container, dependencies: [] }
   );
 
+  // list scroll trigger
+  useGSAP(
+    () => {
+      const items = document.querySelectorAll('.module__item');
+
+      // items.forEach(element => {
+      //   gsap.from(element, {
+      //     yPercent:'100',
+      //     ease: 'none',
+      //     scrollTrigger: {
+      //       markers: true,
+      //       trigger: container.current,
+      //       start: 'top+=30% bottom',
+      //       end: 'top top',
+      //       scrub: 1,
+      //     },
+      //   });
+      // });
+    },
+    { scope: container, dependencies: [] }
+  );
+
   const openModal = contextSafe((e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLElement;
     const modal = target.parentNode?.querySelector('.card__container');
@@ -118,20 +140,23 @@ export default function Overview() {
         chars: '!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz',
       },
     });
-    gsap.fromTo(
+    const tl = gsap.timeline();
+    tl.fromTo(
       modal,
       {
         opacity: 0,
-        scale: 0.7,
-        filter: 'blur(8px)',
+        scaleX: 0.9,
+        scaleY: 0.9,
+        // filter: 'blur(4px)',
         display: 'flex',
       },
       {
         opacity: 1,
-        scale: 1,
-        filter: 'blur(0px)',
+        scaleX: 1,
+        scaleY: 1,
+        // filter: 'blur(0px)',
         ease: 'power4.out',
-        duration: 0.35,
+        duration: 0.25,
       }
     );
   });
@@ -155,20 +180,21 @@ export default function Overview() {
         rightToLeft: true,
       },
     });
-    gsap.to(modal, {
+    const tl = gsap.timeline();
+    tl.to(modal, {
       opacity: 0,
-      scale: 0.7,
-      filter: 'blur(8px)',
+      scale: 0.9,
+      // filter: 'blur(8px)',
       display: 'none',
       ease: 'power4.out',
-      duration: 0.35,
+      duration: 0.25,
     });
   });
 
   return (
     <section
       ref={container}
-      className="mx-4 mt-20  max-h-fit min-h-lvh  overflow-x-visible"
+      className="mx-4 mt-20 max-h-fit min-h-lvh overflow-x-visible"
     >
       <div className="flex h-full grow flex-col py-10">
         <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
@@ -182,15 +208,15 @@ export default function Overview() {
             </p>
           </div>
         </FadeIn>
-        <ul className="flex overflow-x-hidden my-30 lg:my-10 min-h-fit grow flex-col items-center justify-center gap-20 lg:gap-30">
+        <ul className="my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 lg:my-10 lg:gap-20">
           {OVERVIEW_LINKS.map(item => {
             return (
               <li
-                className="flex items-center justify-center text-white"
+                className="module__item flex items-center justify-center text-white"
                 key={item.name}
               >
                 <button
-                  className="font-spencer cursor-pointer group text-heading-h5 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full touch-manipulation leading-none"
+                  className="font-spencer group text-heading-h5 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full cursor-pointer touch-manipulation leading-none"
                   type="button"
                   onClick={e => {
                     openModal(e);
@@ -227,12 +253,15 @@ function CardReading({
   title?: string;
   className?: string;
   children?: React.ReactNode;
+  active?: boolean;
   handleClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (
     <article
-      className={`draggable shadow-highlight/20 card__container absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/100 p-2 outline-2 outline-white backdrop-blur-xl hover:shadow-[0px_0px_64px] sm:gap-4 md:p-4 ${className}`}
+      className={`draggable card__container group absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/100 p-2 outline-2 outline-white sm:gap-4 md:p-4 ${className}`}
     >
+      <div className="bg-highlight card__bg absolute top-0 left-0 -z-20 h-full w-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-50"></div>
+      <div className="card__bg pointer-events-none absolute top-0 left-0 -z-10 h-full w-full bg-black"></div>
       <h2 className="text-heading-h6 lg:text-heading-h5 card__heading font-spencer leading-tighter text-white">
         {title}
       </h2>

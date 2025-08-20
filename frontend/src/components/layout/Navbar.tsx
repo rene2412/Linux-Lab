@@ -5,7 +5,6 @@ import { useNavbar } from '../../context/navContext';
 // import { ArrowRight } from 'lucide-react';
 import ScrambleText from '../ui/ScrambleText';
 
-
 export function Logo({ className }: { className?: string }) {
   return (
     <img
@@ -33,8 +32,8 @@ export default function Navbar({ className, ...props }: NavbarProps) {
 
   return (
     <>
-      {/* <p className="bg-highlight font-spencer flex items-center justify-center gap-1 text-lg tracking-wide">
-        Linux-Lab has officially launched! Enjoy <ArrowRight></ArrowRight>
+      {/* <p className="bg-highlight font-spencer flex items-center justify-center gap-1 tracking-wide">
+        Linux-Lab has received funding from China! 🇨🇳 <ArrowRight></ArrowRight>
       </p> */}
       <nav
         {...props}
