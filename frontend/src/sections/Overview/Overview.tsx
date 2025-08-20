@@ -20,7 +20,7 @@ gsap.registerPlugin(
 
 const OVERVIEW_LINKS = [
   {
-    name: 'Command Line',
+    name: 'Foundations',
     content: [
       <p>
         Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
@@ -92,11 +92,11 @@ export default function Overview() {
         bounds: container.current,
         cursor: 'default',
         zIndexBoost: true,
-        allowEventDefault:true,
+        allowEventDefault: true,
       });
       gsap.set('.card__container', {
         display: 'none',
-        opacity: 0,
+        opacity: 1,
       });
     },
 
@@ -112,7 +112,6 @@ export default function Overview() {
     gsap.to(target.querySelector('.text__scramble'), {
       duration: 0.4,
       ease: 'none',
-      // color:'var(--color-highlight)',
       scrambleText: {
         text: target?.querySelector('.text__scramble')?.textContent || '',
         speed: 4,
@@ -169,9 +168,9 @@ export default function Overview() {
   return (
     <section
       ref={container}
-      className="mx-4 mt-20  flex flex-col max-h-fit min-h-lvh overflow-x-visible"
+      className="mx-4 mt-20  max-h-fit min-h-lvh  overflow-x-visible"
     >
-      <div className="relative grow flex flex-col h-full py-10">
+      <div className="flex h-full grow flex-col py-10">
         <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
           <ScrambleScroll>Our content.</ScrambleScroll>
         </h2>
@@ -183,7 +182,7 @@ export default function Overview() {
             </p>
           </div>
         </FadeIn>
-        <ul className="flex h-full grow min-h-fit flex-col items-center my-10 justify-center gap-20 lg:gap-30">
+        <ul className="flex overflow-x-hidden my-30 lg:my-10 min-h-fit grow flex-col items-center justify-center gap-20 lg:gap-30">
           {OVERVIEW_LINKS.map(item => {
             return (
               <li
@@ -191,7 +190,7 @@ export default function Overview() {
                 key={item.name}
               >
                 <button
-                  className="font-spencer group text-heading-h6 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full  touch-manipulation leading-none"
+                  className="font-spencer cursor-pointer group text-heading-h5 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full touch-manipulation leading-none"
                   type="button"
                   onClick={e => {
                     openModal(e);
@@ -232,7 +231,7 @@ function CardReading({
 }) {
   return (
     <article
-      className={`draggable shadow-highlight/20 card__container absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 outline-2 outline-white backdrop-blur-xl  hover:shadow-[0px_0px_64px] sm:gap-4 md:p-4 ${className}`}
+      className={`draggable shadow-highlight/20 card__container absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/100 p-2 outline-2 outline-white backdrop-blur-xl hover:shadow-[0px_0px_64px] sm:gap-4 md:p-4 ${className}`}
     >
       <h2 className="text-heading-h6 lg:text-heading-h5 card__heading font-spencer leading-tighter text-white">
         {title}
@@ -241,10 +240,10 @@ function CardReading({
         {children}
       </div>
       <Button
-        onClick={(e)=>{
+        onClick={e => {
           handleClose(e);
         }}
-        variant='outline'
+        variant="outline"
         className={`text-heading-slg mt-auto`}
         data-clickable="false"
       >

@@ -61,7 +61,7 @@ export default function Marquee({
     <div aria-hidden className={`h-full w-full overflow-hidden ${className}`}>
       <div
         ref={container}
-        className="marquee__track aria-hidden: select-none pointer-events-none flex text-nowrap text-white"
+        className="marquee__track aria-hidden: select-none pointer-events-none flex text-nowrap "
       >
         <div className="marquee__item">{children}</div>
         <div className="marquee__item">{children}</div>
