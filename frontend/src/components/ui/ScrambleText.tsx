@@ -14,8 +14,10 @@ gsap.registerPlugin(ScrambleTextPlugin, SplitText);
  */
 export default function ScrambleText({
   children,
+  className,
 }: {
   children: React.ReactNode;
+  className?: string;
 }) {
   const container = useRef<HTMLSpanElement>(null);
   const [loading, setLoading] = useState(true);
@@ -54,7 +56,7 @@ export default function ScrambleText({
   });
 
   return (
-    <span onMouseEnter={active} className="text-center" ref={container}>
+    <span onMouseEnter={active} className={`text-center hover:text-highlight ${className}`} ref={container}>
       {children}
     </span>
   );

@@ -51,7 +51,7 @@ export default function About() {
         });
         gsap.from(split.words, {
           opacity: 0.1,
-          filter: 'blur(4px)',
+          // filter: 'blur(4px)',
           ease: 'none',
           stagger: 0.5,
           scrollTrigger: {
@@ -79,7 +79,7 @@ export default function About() {
           yPercent: -20,
           xPercent: -40,
           opacity: 0,
-          clipPath:'inset(10%)',
+          clipPath: 'inset(10%)',
           rotate: -2,
           ease: 'none',
           scrollTrigger: {
@@ -99,22 +99,22 @@ export default function About() {
     <section
       id="about"
       ref={container}
-      className="mx-4 overflow-x-hidden my-auto mt-40 h-fit sm:min-h-lvh"
+      className="mx-4 my-auto mt-40 h-fit overflow-x-hidden sm:min-h-lvh"
     >
-        <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-white">
-          <ScrambleScroll>About the </ScrambleScroll>
-          <span>{' '}</span>
-          <ScrambleScroll className="tracking-spencer-normal text-highlight font-spencer">
-            Linux-Lab
-          </ScrambleScroll>
-        </h1>
+      <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-white">
+        <ScrambleScroll>About the </ScrambleScroll>
+        <span> </span>
+        <ScrambleScroll className="tracking-spencer-normal text-highlight font-spencer">
+          Linux-Lab
+        </ScrambleScroll>
+      </h1>
       <div className="pin__wrapper h-[200lvh]">
         <div className="pin__content mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
-          <div className="pin__img col-span-3 col-start-2 mix-blend-hard-light mt-auto sm:mt-0 xl:col-span-4 xl:col-start-2">
+          <div className="pin__img col-span-3 col-start-2 mt-auto mix-blend-hard-light sm:mt-0 xl:col-span-4 xl:col-start-2">
             <img
               src={images[currentImageIndex].src}
               key={currentImageIndex}
-              className="aspect-square mix-blend-lighten object-cover"
+              className="aspect-square object-cover mix-blend-lighten"
               alt={images[currentImageIndex].alt}
             />
           </div>

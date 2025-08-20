@@ -31,7 +31,7 @@ export default function Globe() {
         yPercent: 30,
         rotate: 3,
         scale: 0.9,
-        filter: 'blur(4px)',
+        // filter: 'blur(4px)',
         scrollTrigger: {
           trigger: container.current,
           start: 'top+=10% top',
@@ -52,7 +52,7 @@ export default function Globe() {
       className="relative mx-4 mt-40 h-lvh overflow-clip lg:mx-5"
     >
       <div className="absolute bottom-0 z-10 h-1/4 w-full bg-gradient-to-t from-black to-black/0"></div>
-      <div className="img__container globe absolute top-1/8 left-0 z-0 mt-100 h-full w-full">
+      <div className="img__container globe absolute top-[53lvh] left-0 z-0 h-full w-full">
         <img
           src="media/earth.png"
           alt="earth dither"

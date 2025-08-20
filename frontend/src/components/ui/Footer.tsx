@@ -5,19 +5,19 @@ import ScrambleText from './ScrambleText';
 export default function Footer() {
   return (
     <footer
-      className={`flex h-[600px] flex-col justify-between pt-6 text-white`}
+      className={`flex h-[550px] flex-col justify-between pt-6 text-white`}
     >
-        <ScrambleScroll className="font-spencer text-heading-xl mx-4">
-          Linux-Lab
-        </ScrambleScroll>
+      <ScrambleScroll className="font-spencer text-heading-xl mx-4 sm:hidden">
+        Linux-Lab
+      </ScrambleScroll>
       <div className="flex h-full grow grid-cols-12 flex-col justify-start sm:grid">
         <div className="col-span-6 row-start-0 my-auto hidden flex-col items-center justify-center gap-2 sm:flex">
-          <h5 className="font-spencer text-heading-h5 leading-none">
+          <ScrambleScroll className="font-spencer text-heading-h5 lg:text-heading-h4 leading-none">
             Linux-Lab
-          </h5>
-          <span className="text-center">Based in Space, California </span>
+          </ScrambleScroll>
+          <span className="text-center">Based in Beijing, China </span>
         </div>
-        <nav className="col-span-6 col-start-7 mx-4 mt-10 grid h-fit grid-cols-2 grid-rows-2 gap-x-4 gap-y-10 sm:mx-auto sm:my-auto sm:max-w-xl">
+        <nav className="col-span-6 col-start-7 mx-4 mt-10 grid h-fit grid-cols-2 grid-rows-2 gap-x-4 gap-y-10 sm:my-auto lg:col-start-8 lg:col-span-4">
           <NavLinkList title="Quick Links" data={FOOTER_DATA.quickLinks} />
           <NavLinkList title="Modules" data={FOOTER_DATA.modules} />
           <NavLinkList title="Socials" data={FOOTER_DATA.social} />
@@ -28,7 +28,7 @@ export default function Footer() {
         <span className="text-center">
           © <span className="font-spencer">Linux-Lab 2025</span>
         </span>
-        <Marquee className="bg-highlight shadow-highlight/30 font-spencer h-fit !text-black shadow-[0px_0px_100px]">
+        <Marquee className="bg-highlight shadow-highlight font-spencer h-fit !text-black shadow-[0px_0px_120px]">
           <span className="mx-2">
             Dove nested towers, the hour was Strike the street, quicksilver moon
             Carriage across the fog Two-step to lamp lights cellar tune The

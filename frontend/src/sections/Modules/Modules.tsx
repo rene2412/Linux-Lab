@@ -10,6 +10,7 @@ import Button from '../../components/ui/Button';
 import CommandLine from '../../components/ui/CommandLine';
 
 import { useGSAP } from '@gsap/react';
+import { useLenis } from '../../context/LenisContext';
 gsap.registerPlugin(Observer, InertiaPlugin);
 
 const MODULES = [
@@ -58,6 +59,7 @@ export default function Modules() {
   const container = useRef<HTMLElement>(null);
   const pointer = useRef({ deltaX: 0, deltaY: 0 });
   const [activeIndex, setActiveIndex] = useState<null | number>(null);
+  const lenis = useLenis();
 
   useGSAP(
     () => {
@@ -77,31 +79,33 @@ export default function Modules() {
               tl.kill();
             },
           });
-          tl.to(element, {
-            inertia: {
-              x: {
-                velocity: pointer.current.deltaX * 10,
-                end: 0,
+          if (!lenis.isScrolling) {
+            tl.to(element, {
+              inertia: {
+                x: {
+                  velocity: pointer.current.deltaX * 10,
+                  end: 0,
+                },
+                y: {
+                  velocity: pointer.current.deltaY * 10,
+                  end: 0,
+                },
               },
-              y: {
-                velocity: pointer.current.deltaY * 10,
-                end: 0,
+            }).fromTo(
+              element,
+              {
+                rotate: 0,
               },
-            },
-          }).fromTo(
-            element,
-            {
-              rotate: 0,
-            },
-            {
-              rotate: (Math.random() - 0.5) * 2,
-              duration: 0.4,
-              yoyo: true,
-              repeat: 1,
-              ease: 'power1.out',
-            },
-            '<'
-          );
+              {
+                rotate: (Math.random() - 0.5) * 2,
+                duration: 0.4,
+                yoyo: true,
+                repeat: 1,
+                ease: 'power1.out',
+              },
+              '<'
+            );
+          }
         });
       });
     },
