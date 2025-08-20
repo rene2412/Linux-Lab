@@ -16,7 +16,7 @@ frontend/.vite/
 frontend/.env
 frontend/.env.local
 frontend/.env.production
-frontend/public/fonts
+# frontend/public/fonts
 
 # TypeScript
 *.tsbuildinfo

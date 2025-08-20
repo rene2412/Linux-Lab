@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ScrambleScroll from '../../components/ui/ScrambleScroll';
 import { Observer } from 'gsap/Observer';
 import InertiaPlugin from 'gsap/InertiaPlugin';
@@ -55,8 +55,9 @@ const MODULES = [
 ];
 
 export default function Modules() {
-  const container = useRef(null);
+  const container = useRef<HTMLElement>(null);
   const pointer = useRef({ deltaX: 0, deltaY: 0 });
+  const [activeIndex, setActiveIndex] = useState<null | number>(null);
 
   useGSAP(
     () => {
@@ -67,9 +68,10 @@ export default function Modules() {
           pointer.current.deltaY = e.deltaY;
         },
       });
-      const cards = container.current.querySelectorAll('.module__card');
-      cards.forEach(element => {
-        element.addEventListener('mouseenter', e => {
+      const cards = container.current?.querySelectorAll('.module__card');
+      if (!cards) return;
+      cards.forEach((element: Element) => {
+        element.addEventListener('mouseenter', () => {
           const tl = gsap.timeline({
             onComplete: () => {
               tl.kill();
@@ -117,14 +119,26 @@ export default function Modules() {
       </h1>
       <ModuleCarousel />
       <div className="mx-auto mt-10 hidden max-w-[1440px] items-center justify-center gap-10 px-5 perspective-midrange transform-3d lg:flex">
-        {MODULES.map(module => {
+        {MODULES.map((module, index) => {
           return (
-            <Card className="module__card h-[70lvh] min-h-fit max-w-md space-y-6 transform-3d">
+            <Card
+              key={index}
+              onMouseEnter={() => {
+                setActiveIndex(index);
+              }}
+              onMouseLeave={() => {
+                setActiveIndex(null);
+              }}
+              className="module__card group h-[70lvh] min-h-fit max-w-md space-y-6 transform-3d"
+            >
               <CardHeader>{module.title}</CardHeader>
               <p className="desc tracking-sans-normal text-white">
                 {module.description}
               </p>
-              <CommandLine text={module.cliText}></CommandLine>
+              <CommandLine
+                active={index == activeIndex}
+                text={module.cliText}
+              ></CommandLine>
               <CardInfo
                 className="flex flex-col gap-5"
                 size={module.info.size}
@@ -141,14 +155,21 @@ export default function Modules() {
           );
         })}
       </div>
+      <p className="font-spencer text-heading-slg mt-10 text-center text-white">
+        Off We Go
+      </p>
     </section>
   );
 }
 
 function ModuleCarousel({ className = '' }: { className?: string }) {
+  const [activeIndex, setActiveIndex] = useState<null | number>(null);
   return (
     <Splide
       hasTrack={false}
+      onActive={e => {
+        setActiveIndex(e.index);
+      }}
       options={{
         arrows: false,
         padding: '16px',
@@ -172,15 +193,21 @@ function ModuleCarousel({ className = '' }: { className?: string }) {
       aria-label="Modules Information"
     >
       <SplideTrack className="mt-10 !overflow-visible lg:hidden">
-        {MODULES.map(module => {
+        {MODULES.map((module, index) => {
           return (
             <SplideSlide className="">
-              <Card className="mx-auto h-[70lvh] min-h-fit max-w-md space-y-6">
+              <Card
+                active={index === activeIndex}
+                className={`mx-auto h-[70lvh] min-h-fit max-w-md space-y-6`}
+              >
                 <CardHeader>{module.title}</CardHeader>
                 <p className="desc tracking-sans-normal text-white">
                   {module.description}
                 </p>
-                <CommandLine text={module.cliText}></CommandLine>
+                <CommandLine
+                  active={index === activeIndex}
+                  text={module.cliText}
+                ></CommandLine>
                 <CardInfo
                   className="flex flex-col gap-5"
                   size={module.info.size}

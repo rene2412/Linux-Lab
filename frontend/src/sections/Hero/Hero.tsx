@@ -48,7 +48,7 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <Marquee className="mt-2">
+      <Marquee className="mt-2 text-white">
         <span className="font-spencer md:text-heading-h6 text-heading-h7 mx-4 flex gap-8">
           <span>The Basics</span> <span>Networking</span>
           <span>Bash Scripting</span>

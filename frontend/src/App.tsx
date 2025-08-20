@@ -10,6 +10,8 @@ import Overview from './sections/Overview';
 import Benefits from './sections/Benefits';
 import Globe from './sections/Globe/Globe';
 import Modules from './sections/Modules/Modules';
+import MediaLarge from './sections/MediaLarge/MediaLarge';
+import Footer from './components/ui/Footer';
 
 function App() {
   return (
@@ -25,7 +27,9 @@ function App() {
             <Benefits/>
             <Globe/>
             <Modules/>
-            <div className="h-svh bg-dark"></div>
+            <MediaLarge/>
+            <Footer/>
+            {/* <div className="h-svh bg-dark"></div> */}
           </main>
         </NavbarProvider>
       </main>

@@ -3,13 +3,17 @@ import type React from 'react';
 export function Card({
   children,
   className,
-}: {
+  active,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & {
   children?: React.ReactNode;
   className?: string;
+  active?:boolean;
 }) {
   return (
     <article
-      className={`shadow-highlight/20 card__container z-10 flex h-3/4 max-h-[650px] min-h-fit max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 outline-2 outline-white backdrop-blur-xl hover:shadow-[0px_0px_64px] sm:gap-4 md:p-4 ${className}`}
+    {...props}
+      className={`shadow-highlight/20 card__container z-10 flex h-3/4 max-h-[650px] transition-[box-shadow] duration-300 min-h-fit max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 outline-2 outline-white backdrop-blur-xl hover:shadow-[0px_0px_64px] ${active &&'shadow-[0px_0px_64px]' } sm:gap-4 md:p-4 ${className}`}
     >
       {children}
     </article>
@@ -25,7 +29,7 @@ export function CardHeader({
 }) {
   return (
     <h2
-      className={`text-heading-h6 lg:text-heading-h5 card__heading font-spencer leading-tighter text-white ${className}`}
+      className={`text-heading-h6 lg:text-heading-h5 card__heading font-spencer  text-white ${className}`}
     >
       {children}
     </h2>
