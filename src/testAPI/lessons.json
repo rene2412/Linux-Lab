@@ -975,7 +975,37 @@
             "id": 9,
             "parent": "Networking",
             "section": "Subnetting",
+            "title": "Classes",
+            "content_type": "article",
+            "content": "<p>Right now would be a good time to mention that your ip address isn't just a random set of numbers between 0-255, they are a reflection of what kinda Network you are in!</p><p>Back in the early days of the internet, engineers created a system called <b>Network Classes</b> to organize IP addresses based on network size. Think of it like organizing neighborhoods - some are small residential streets, others are massive cities!</p><p>There are three main classes you'll encounter:</p><p><b>Class A Networks (1.0.0.0 - 126.255.255.255)</b><br>These are the <b>massive</b> networks! If your IP starts with a number between 1-126, you're on a huge network that can support around 16 million devices. These are typically used by large corporations or internet service providers.<br><code>Example: 10.5.100.50</code></p><p><b>Class B Networks (128.0.0.0 - 191.255.255.255)</b><br>The <b>medium-sized</b> networks! If your IP starts with 128-191, you're on a network that can handle about 65,000 devices. Perfect for universities or medium-sized companies.<br><code>Example: 172.16.10.25</code></p><p><b>Class C Networks (192.0.0.0 - 223.255.255.255)</b><br>The <b>small</b> networks! If your IP starts with 192-223, you're on a cozy network with about 254 devices max. This is what you'll see at home, small offices, or cafes.<br><code>Example: 192.168.1.100</code> (Looks familiar, right?)</p><p>Here's the cool part: just by looking at the first number of any IP address, you can instantly tell what size network you're dealing with!</p><p>But here's the problem that led to subnetting - what if you need something in between? What if 254 devices is too small, but 65,000 is way too big? That's where subnetting comes to the rescue, which we'll explore next!</p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 10,
+            "parent": "Networking",
+            "section": "Subnetting",
             "title": "Subnets",
+            "content_type": "article",
+            "content": "<p>So we learned that network classes give us three fixed sizes: huge (Class A), medium (Class B), or small (Class C). But what happens when none of these sizes fit what you actually need?</p><p>Enter <b>subnetting</b> - the art of taking one big network and chopping it up into smaller, more manageable pieces!</p><p>Think of subnetting like this: imagine you own a large apartment building (your original network). Instead of having one massive space where everyone lives together, you divide it into separate floors or apartments. Each apartment becomes its own <b>subnet</b> - a smaller network within the bigger one.</p><p><b>Why would you want to do this?</b></p><p><b>Organization:</b> You can separate different groups. Put the accounting department on one subnet, engineering on another. Just like putting different departments on different floors of a building!</p><p><b>Security:</b> You can control who talks to whom. Maybe the guest WiFi subnet can't access the company servers subnet.</p><p><b>Performance:</b> Smaller networks mean less traffic congestion. Instead of 1000 devices all shouting at once, you have groups of 50 devices in organized subnets.</p><p><b>Efficiency:</b> No more wasting IP addresses! Instead of giving a small company an entire Class B network (65,000 addresses) when they only need 500, you can create custom-sized subnets.</p><p>Here's a simple example: Let's say you have the network <code>192.168.1.0</code> (normally 254 devices). With subnetting, you could split this into:</p><ul><li><code>192.168.1.0</code> - Subnet for employees (126 devices)</li><li><code>192.168.1.128</code> - Subnet for guests (126 devices)</li></ul><p>Same building, but now it's organized into two separate apartments!</p><p>The magic happens with something called a <b>subnet mask</b>, which tells your computer: \"Hey, these IP addresses are in your neighborhood, but those other ones are in a different subnet.\"",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 11,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "Subnet Masks",
+            "content_type": "article",
+            "content": "<p>Alright, so we know subnetting lets us divide big networks into smaller ones. But how does your computer actually know where one subnet ends and another begins? That's where the <b>subnet mask</b> comes in!</p><p>Remember when we looked at the <code>ifconfig</code> command and saw that mysterious <code>netmask 255.255.255.0</code>? Well, that's your subnet mask in action!</p><p>Think of a subnet mask like a postal system. When you write an address, you have a street address (like \"123 Main Street\") and a city (like \"Springfield\"). The subnet mask tells your computer: \"Here's the city part (network), and here's the street address part (host).\"</p><p>Let's break down the most common subnet mask: <code>255.255.255.0</code></p><p>In binary (remember our friend binary?), this looks like:<br><code>11111111.11111111.11111111.00000000</code></p><p>Here's the rule: wherever you see <code>255</code> (or <code>11111111</code> in binary), that part represents the <b>network portion</b>. Wherever you see <code>0</code> (or <code>00000000</code> in binary), that's the <b>host portion</b>.</p><p>So for an IP address like <code>192.168.1.100</code> with subnet mask <code>255.255.255.0</code>:</p><ul><li><b>Network part:</b> <code>192.168.1</code> (this is like your \"city\")</li><li><b>Host part:</b> <code>100</code> (this is like your \"street address\")</li></ul><p>This means any device with an IP starting with <code>192.168.1.___</code> is in the same subnet - they're all in the same \"city\" and can talk to each other directly!</p><p>But a device with IP <code>192.168.2.50</code>? That's in a different \"city\" (different subnet), so they'd need a router to communicate.</p><p>You'll also see subnet masks written in <b>CIDR notation</b> like <code>/24</code>. This just means \"the first 24 bits are the network portion.\" Since <code>255.255.255.0</code> has 24 ones in binary, it's the same as <code>/24</code>!</p><p>Next time you run <code>ifconfig</code>, you'll know exactly what that netmask is telling you about your network neighborhood!</p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 12,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "ifoncfig",
             "content_type": "article",
             "content": "",
             "answer": "",
