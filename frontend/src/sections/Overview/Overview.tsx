@@ -108,20 +108,25 @@ export default function Overview() {
   // list scroll trigger
   useGSAP(
     () => {
-      // const items = document.querySelectorAll('.module__item');
-      // items.forEach(element => {
-      //   gsap.from(element, {
-      //     yPercent:'100',
-      //     ease: 'none',
-      //     scrollTrigger: {
-      //       markers: true,
-      //       trigger: container.current,
-      //       start: 'top+=30% bottom',
-      //       end: 'top top',
-      //       scrub: 1,
-      //     },
-      //   });
-      // });
+      const items = document.querySelectorAll('.float__text');
+      items.forEach((element, index) => {
+        const tl = gsap.timeline();
+        tl.from(element, {
+          delay: 0.1 * index,
+          scrambleText: {
+            text:''
+          },
+        }).to(element, {
+          scrambleText:{
+            text: '{original}',
+          }
+        }).to(element,{
+          delay:1,
+          scrambleText:{
+            text:' ',
+          }
+        })
+      });
     },
     { scope: container, dependencies: [] }
   );
@@ -196,7 +201,14 @@ export default function Overview() {
     <div className="relative">
       <BackgroundImage src="media/bg.png" alt="abstract dither" />
       <SectionFade variant="top" />
-      <SectionFade variant="bottom" className='' />
+      <SectionFade variant="bottom" className="" />
+      <div className="text-highlight flex flex-col justify-end gap-2 absolute top-1/2 left-32 h-32 w-32">
+        <span className="float__text inline-block">Hello World!</span>
+        <span className="float__text inline-block">Hello World!</span>
+        <span className="float__text inline-block">Hello World!</span>
+        <span className="float__text inline-block">Hello World!</span>
+        <span className="float__text inline-block">Hello World!</span>
+      </div>
       <section
         ref={container}
         className="mx-4 mt-20 max-h-fit min-h-lvh overflow-x-visible py-20"
@@ -213,7 +225,7 @@ export default function Overview() {
               </p>
             </div>
           </FadeIn>
-          <ul className="my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 lg:my-10 lg:gap-20">
+          <ul className="list__container my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 perspective-distant transform-3d lg:my-10 lg:gap-20">
             {OVERVIEW_LINKS.map(item => {
               return (
                 <li
@@ -234,7 +246,11 @@ export default function Overview() {
                       &gt;
                     </span>
                   </button>
-                  <CardReading className='z-30' handleClose={handleClose} title={item.name}>
+                  <CardReading
+                    className="z-30"
+                    handleClose={handleClose}
+                    title={item.name}
+                  >
                     {item.content}
                   </CardReading>
                 </li>

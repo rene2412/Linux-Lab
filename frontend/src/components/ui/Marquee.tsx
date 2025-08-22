@@ -22,7 +22,8 @@ export default function Marquee({
       }
 
       if (!loading && container.current) {
-        const half = container.current.querySelector('.marquee__item')?.clientWidth || 0;
+        const half =
+          container.current.querySelector('.marquee__item')?.clientWidth || 0;
         // console.log(half);
         const wrap = gsap.utils.wrap(-half, 0);
 
@@ -43,12 +44,16 @@ export default function Marquee({
           if (lenis.direction != 0) {
             direction = lenis.direction;
           }
-          xSet(
-            (value =
-              value +
-              gsap.utils.clamp(MIN_SCROLL_VEL, MAX_SCROLL_VEL, lenis.velocity) +
-              CONST_VEL * direction)
-          );
+            xSet(
+              (value =
+                value +
+                gsap.utils.clamp(
+                  MIN_SCROLL_VEL,
+                  MAX_SCROLL_VEL,
+                  lenis.velocity
+                ) +
+                CONST_VEL * direction)
+            );
           requestAnimationFrame(move);
         }
         move();
@@ -61,7 +66,7 @@ export default function Marquee({
     <div aria-hidden className={`h-full w-full overflow-hidden ${className}`}>
       <div
         ref={container}
-        className="marquee__track aria-hidden: select-none pointer-events-none flex text-nowrap "
+        className="marquee__track aria-hidden: pointer-events-none flex text-nowrap select-none"
       >
         <div className="marquee__item">{children}</div>
         <div className="marquee__item">{children}</div>

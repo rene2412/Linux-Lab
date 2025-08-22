@@ -1,15 +1,104 @@
 import Button from '../../components/ui/Button';
 import Marquee from '../../components/ui/Marquee';
+import GSDevTools from 'gsap/GSDevTools';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
+import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
+
+gsap.registerPlugin(GSDevTools, ScrambleTextPlugin);
 
 export default function Hero() {
+  const container = useRef(null);
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+      tl.from('.card__container', {
+        // delay: 0.5,
+        duration: 1,
+        yPercent: 20,
+        clipPath: 'inset(40%)',
+        // yPercent: 20,
+        ease: 'power4.inOut',
+      })
+        .from(
+          '.card__container',
+          {
+            scale: 0.3,
+            ease: 'power4.inOut',
+            duration: 1.3,
+          },
+          '-=0.2'
+        )
+        .from(
+          '.marquee__container',
+          {
+            yPercent: -50,
+            clipPath: 'inset(50% 0)',
+            opacity: 0,
+            scale: 1,
+            skewX: '20deg',
+            duration: 1,
+            ease: 'power3.out',
+          },
+          '-=0.65'
+        )
+        .from(
+          '.text__hero__mobile',
+          {
+            yPercent: 50,
+            opacity: 0,
+            duation: 1,
+            ease: 'power4.out',
+            stagger: 0.1,
+          },
+          '<'
+        )
+        .fromTo(
+          '.text__hero',
+          {
+            opacity: 0,
+            yPercent: 50,
+          },
+          {
+            ease: 'power4.out',
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.2,
+            scrambleText: {
+              text: '{original}',
+              speed: 4,
+              chars:
+                '!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz',
+            },
+          },
+          '<+=0'
+        )
+        .from(
+          '.buttons__hero',
+          {
+            // clipPath: 'inset(70% 0 0 0)',
+            opacity: 0,
+            scale: 0.9,
+            duration: 0.8,
+            yPercent: 60,
+            ease: 'power4.out',
+          },
+          '<+=0.15'
+        );
+
+      GSDevTools.create({ animation: tl, visibility:'hidden' });
+    },
+    { scope: container, dependencies: [] }
+  );
   return (
-    <>
+    <div ref={container}>
       <section className="mx-4 grid-cols-12 grid-rows-none text-white lg:mx-5 lg:grid lg:gap-x-5">
-        <div className="header col-span-10 col-start-2 flex items-center justify-center leading-tight lg:justify-between">
-          <h1 className="tracking-sans-wide text-hero-lg hidden lg:block">
+        <div className="header col-span-10 col-start-2 flex items-center justify-center overflow-x-hidden leading-tight text-nowrap lg:justify-between">
+          <h1 className="tracking-sans-wide text__hero text-hero-lg hidden lg:block">
             Begin your Linux journey.
           </h1>
-          <h1 className="text-highlight font-spencer text-hero-lg-serif text-heading-h3">
+          <h1 className="text-highlight text__hero font-spencer text-hero-lg-serif text-heading-h3">
             Linux-Lab
           </h1>
         </div>
@@ -21,19 +110,19 @@ export default function Hero() {
           />
           {/* background darken imgae*/}
           <div className="absolute z-0 h-full w-full bg-black/70 lg:hidden"></div>
-          <div className="relative z-20 mx-0 flex h-full w-full flex-col justify-between px-4 py-14 sm:mx-auto sm:max-w-lg md:max-w-xl lg:max-w-full lg:items-end lg:justify-end lg:px-14">
+          <div className="relative z-20 mx-0 flex h-full w-full flex-col justify-between px-4 py-14 sm:mx-auto sm:max-w-lg md:max-w-xl lg:max-w-full lg:items-end lg:justify-end lg:px-8 lg:py-8">
             <span className="padding text-transparent select-none lg:hidden">
               .
             </span>
-            <h2 className="text-heading-h6 sm:text-heading-h5 tracking-sans-wide text-center leading-tight lg:hidden">
+            <h2 className="text-heading-h6 sm:text-heading-h5 text__hero__mobile tracking-sans-wide text-center leading-tight lg:hidden">
               Begin your <span className="text-highlight">Linux</span> Journey.
             </h2>
             <div className="bottom__cta flex flex-col gap-4">
-              <span className="tracking-sans-normal text-center leading-tight lg:hidden">
+              <span className="tracking-sans-normal text__hero__mobile text-center leading-tight lg:hidden">
                 From command line basics, to networking we got you covered for
                 free and in browser.
               </span>
-              <div className="flex w-full items-center justify-stretch gap-4 rounded-sm lg:w-lg lg:bg-black/90 lg:p-4 lg:backdrop-blur-xl">
+              <div className="buttons__hero flex w-full origin-bottom-right items-center justify-stretch gap-4 rounded-sm lg:w-md lg:bg-black/90 lg:p-4 lg:backdrop-blur-xl">
                 <Button className="xl:text-heading-slg w-full py-4">
                   Try It Now
                 </Button>
@@ -48,16 +137,16 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <Marquee className="mt-2 text-white">
+      <Marquee className="marquee__container mt-2 text-white">
         <span className="font-spencer md:text-heading-h6 text-heading-h7 mx-4 flex gap-8">
-          <span>The Basics</span> <span>Networking</span>
+          <span>Foundations</span> <span>Networking</span>
           <span>Bash Scripting</span>
-          <span>The Basics</span> <span>Networking</span>
+          <span>Foundations</span> <span>Networking</span>
           <span>Bash Scripting</span>
-          <span>The Basics</span> <span>Networking</span>
+          <span>Foundations</span> <span>Networking</span>
           <span>Bash Scripting</span>
         </span>
       </Marquee>
-    </>
+    </div>
   );
 }

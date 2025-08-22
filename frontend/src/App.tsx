@@ -18,7 +18,7 @@ function App() {
     <LenisProvider>
       <main className="bg-dark relative min-h-svh">
         <NavbarProvider>
-          <Navbar className="z-10" />
+          <Navbar className="z-10 " />
           <Navmenu className="z-20" />
           <main className="isolate z-0">
             <Hero />

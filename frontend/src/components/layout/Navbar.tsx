@@ -4,6 +4,9 @@ import Button from '../ui/Button';
 import { useNavbar } from '../../context/navContext';
 // import { ArrowRight } from 'lucide-react';
 import ScrambleText from '../ui/ScrambleText';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -29,6 +32,19 @@ type NavbarProps = React.ComponentPropsWithoutRef<'nav'> & {
 
 export default function Navbar({ className, ...props }: NavbarProps) {
   const { isOpen, setIsOpen } = useNavbar();
+  const container = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.from(container.current, {
+        // yPercent:100,
+        opacity: 0,
+        delay: 1.8,
+        ease: 'power4.out',
+      });
+    },
+    { scope: container }
+  );
 
   return (
     <>
@@ -37,25 +53,28 @@ export default function Navbar({ className, ...props }: NavbarProps) {
       </p> */}
       <nav
         {...props}
+        ref={container}
         className={`sticky top-0 flex justify-between px-4 py-4 font-sans text-white ${className}`}
       >
         <div className="bg-dark/80 absolute top-0 left-0 -z-10 h-full w-full backdrop-blur-xl"></div>
         <div className="aspect-square w-9">
           <Logo />
         </div>
-        <ul
-          className={`absolute top-0 right-0 bottom-0 left-0 hidden items-center justify-center gap-6 lg:flex`}
-        >
-          {DATA.links.map(elem => {
-            return (
-              <li key={elem.title}>
-                <a className="tracking-sans-normal" href={elem.href}>
-                  <ScrambleText>{elem.title}</ScrambleText>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="absolute pointer-events-none flex justify-center w-full h-full top-0 right-0 bottom-0 left-0">
+          <ul
+            className={`hidden w-sm pointer-events-auto grid-cols-4 items-center place-content-center justify-center lg:grid`}
+          >
+            {DATA.links.map(elem => {
+              return (
+                <li key={elem.title} className='grid place-items-center'>
+                  <a className="tracking-sans-normal text-center" href={elem.href}>
+                    <ScrambleText>{elem.title}</ScrambleText>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
         <div className="flex gap-4">
           <Button
             onClick={() => {
