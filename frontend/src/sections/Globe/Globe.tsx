@@ -16,13 +16,13 @@ export default function Globe() {
       gsap.from('.img__container', {
         yPercent: 50,
         scale: 1.5,
-        rotate: -180,
+        rotate: -100,
         scrollTrigger: {
           trigger: container.current,
           start: 'top bottom',
           end: 'top top',
           markers: false,
-          scrub: 2,
+          scrub: 1.2,
         },
         ease: 'none',
       });
@@ -31,7 +31,7 @@ export default function Globe() {
         yPercent: 30,
         rotate: 3,
         scale: 0.9,
-        // filter: 'blur(4px)',
+        filter: 'blur(8px)',
         scrollTrigger: {
           trigger: container.current,
           start: 'top+=10% top',

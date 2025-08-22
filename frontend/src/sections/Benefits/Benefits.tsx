@@ -7,6 +7,8 @@ import ScrambleScroll from '../../components/ui/ScrambleScroll';
 import FadeIn from '../../components/ui/FadeIn';
 import TextPlugin from 'gsap/TextPlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import SectionFade from '../../components/ui/SectionFade';
+import BackgroundImage from '../../components/ui/BackgroundImage';
 
 gsap.registerPlugin(SplitText, ScrambleTextPlugin, TextPlugin, ScrollTrigger);
 
@@ -51,87 +53,95 @@ export default function Benefits() {
   );
 
   return (
-    <section
-      id="benefits"
-      ref={container}
-      className="mx-4 lg:mx-5 mt-40 flex max-h-fit min-h-lvh flex-col overflow-x-visible"
-    >
-      <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
-        <ScrambleScroll>Why Learn</ScrambleScroll>
-        <span> </span>
-        <ScrambleScroll className="font-spencer text-highlight">
-          Linux?
-        </ScrambleScroll>
-      </h2>
-      <FadeIn>
-        <p className="fadeIn tracking-sans-normal max-w-lg mt-6 text-white">
-          <span className="text-highlight">Linux</span> isn't just another skill
-          - it's the foundation of modern tech. From servers to smartphones,{' '}
-          <span className="text-highlight">Linux </span>
-          runs the world. Learning it gives you direct access to how computers
-          actually work, not just the pretty interfaces. If you want to truly
-          understand technology instead of just using it,
-          <span className="text-highlight"> Linux </span> is where you start.
-        </p>
-      </FadeIn>
-      <div className="flex flex-col items-center justify-center lg:hidden">
+    <div className="relative overflow-x-hidden">
+      <BackgroundImage
+        src="media/bg2.png"
+        alt="abstract dither"
+      ></BackgroundImage>
+      <SectionFade variant="top" className="" />
+      <SectionFade variant="bottom" className="" />
+      <section
+        id="benefits"
+        ref={container}
+        className="relative mx-4 mt-20 flex max-h-fit min-h-lvh flex-col overflow-x-visible py-20 lg:mx-5"
+      >
+        <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
+          <ScrambleScroll>Why Learn</ScrambleScroll>
+          <span> </span>
+          <ScrambleScroll className="font-spencer text-highlight">
+            Linux?
+          </ScrambleScroll>
+        </h2>
         <FadeIn>
-          <p className="tracking-sans-normal fadeIn text-heading-xl mt-64 text-center font-sans text-white">
-            Here are some reasons
+          <p className="fadeIn tracking-sans-normal mt-6 max-w-lg text-white">
+            <span className="text-highlight">Linux</span> isn't just another
+            skill - it's the foundation of modern tech. From servers to
+            smartphones, <span className="text-highlight">Linux </span>
+            runs the world. Learning it gives you direct access to how computers
+            actually work, not just the pretty interfaces. If you want to truly
+            understand technology instead of just using it,
+            <span className="text-highlight"> Linux </span> is where you start.
           </p>
         </FadeIn>
-        <img
-          src="media/tux8.png"
-          alt="a pixelated version of the Linux mascot tux, sitting down"
-          className="my-32 mix-blend-lighten"
-        ></img>
-      </div>
-      <dl className="flex grid-cols-12 grid-rows-3 overflow-clip flex-col gap-32 w-full lg:gap-y-16 lg:gap-x-5 text-white lg:grid justify-center items-center lg:content-center">
-        <Statistic
-          key={STATS[0].header}
-          header={STATS[0].header}
-          value={STATS[0].value}
-          variant={STATS[0].variant}
-          className="col-span-full mx-auto"
-        >
-          {STATS[0].children}
-        </Statistic>
-        <Statistic
-          key={STATS[1].header}
-          header={STATS[1].header}
-          value={STATS[1].value}
-          variant={STATS[1].variant} 
-          className="col-span-3 col-start-2 row-start-2"
-        >
-          {STATS[1].children}
-        </Statistic>
-        <div className="col-span-2 hidden lg:block col-start-6 row-start-2 mx-auto aspect-square h-full w-full">
+        <div className="flex flex-col items-center justify-center lg:hidden">
+          <FadeIn>
+            <p className="tracking-sans-normal fadeIn text-heading-xl mt-64 text-center font-sans text-white">
+              Here are some reasons
+            </p>
+          </FadeIn>
           <img
             src="media/tux8.png"
             alt="a pixelated version of the Linux mascot tux, sitting down"
-            className="h-full w-full object-contain mix-blend-lighten"
+            className="my-32 mix-blend-lighten"
           ></img>
         </div>
-        <Statistic
-          key={STATS[2].header}
-          header={STATS[2].header}
-          value={STATS[2].value}
-          variant={STATS[2].variant}
-          className="col-span-3 col-start-9 row-start-2"
-        >
-          {STATS[2].children}
-        </Statistic>
-        <Statistic
-          key={STATS[3].header}
-          header={STATS[3].header}
-          value={STATS[3].value}
-          variant={STATS[3].variant}
-          className="row-start-3 col-span-full mx-auto"
-        >
-          {STATS[3].children}
-        </Statistic>
-      </dl>
-    </section>
+        <dl className="flex w-full grid-cols-12 grid-rows-3 flex-col items-center justify-center gap-32 overflow-clip text-white lg:grid lg:content-center lg:gap-x-5 lg:gap-y-16">
+          <Statistic
+            key={STATS[0].header}
+            header={STATS[0].header}
+            value={STATS[0].value}
+            variant={STATS[0].variant}
+            className="col-span-full mx-auto"
+          >
+            {STATS[0].children}
+          </Statistic>
+          <Statistic
+            key={STATS[1].header}
+            header={STATS[1].header}
+            value={STATS[1].value}
+            variant={STATS[1].variant}
+            className="col-span-3 col-start-2 row-start-2"
+          >
+            {STATS[1].children}
+          </Statistic>
+          <div className="col-span-2 col-start-6 row-start-2 mx-auto hidden aspect-square h-full w-full lg:block">
+            <img
+              src="media/tux8.png"
+              alt="a pixelated version of the Linux mascot tux, sitting down"
+              className="h-full w-full object-contain mix-blend-lighten"
+            ></img>
+          </div>
+          <Statistic
+            key={STATS[2].header}
+            header={STATS[2].header}
+            value={STATS[2].value}
+            variant={STATS[2].variant}
+            className="col-span-3 col-start-9 row-start-2"
+          >
+            {STATS[2].children}
+          </Statistic>
+          <Statistic
+            key={STATS[3].header}
+            header={STATS[3].header}
+            value={STATS[3].value}
+            variant={STATS[3].variant}
+            className="col-span-full row-start-3 mx-auto"
+          >
+            {STATS[3].children}
+          </Statistic>
+        </dl>
+      </section>
+    </div>
   );
 }
 
@@ -173,7 +183,7 @@ function Statistic({
       ref={container}
       className={`flex max-w-md flex-col items-center justify-center ${className}`}
     >
-      <h3 className="font-spencer text-nowrap text-heading-lg md:text-heading-xl">
+      <h3 className="font-spencer text-heading-lg md:text-heading-xl text-nowrap">
         <ScrambleScroll>{header}</ScrambleScroll>
       </h3>
       <dt className="relative leading-none">
@@ -189,7 +199,7 @@ function Statistic({
         )}
         <span className="font-spencer text-heading-h3 md:text-heading-h2">
           {variant === 'default' ? (
-            <ScrambleScroll className='text-nowrap'>{value}</ScrambleScroll>
+            <ScrambleScroll className="text-nowrap">{value}</ScrambleScroll>
           ) : (
             <span className="animate-number text-nowrap">{value}</span>
           )}

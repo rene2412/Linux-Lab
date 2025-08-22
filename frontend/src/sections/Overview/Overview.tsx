@@ -9,6 +9,8 @@ import { SplitText } from 'gsap/SplitText';
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
 import ScrambleScroll from '../../components/ui/ScrambleScroll';
 import FadeIn from '../../components/ui/FadeIn';
+import BackgroundImage from '../../components/ui/BackgroundImage';
+import SectionFade from '../../components/ui/SectionFade';
 
 gsap.registerPlugin(
   Draggable,
@@ -106,8 +108,7 @@ export default function Overview() {
   // list scroll trigger
   useGSAP(
     () => {
-      const items = document.querySelectorAll('.module__item');
-
+      // const items = document.querySelectorAll('.module__item');
       // items.forEach(element => {
       //   gsap.from(element, {
       //     yPercent:'100',
@@ -192,55 +193,60 @@ export default function Overview() {
   });
 
   return (
-    <section
-      ref={container}
-      className="mx-4 mt-20 max-h-fit min-h-lvh overflow-x-visible"
-    >
-      <div className="flex h-full grow flex-col py-10">
-        <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
-          <ScrambleScroll>Our content.</ScrambleScroll>
-        </h2>
-        <FadeIn>
-          <div className="mt-4 grid max-w-lg grid-cols-4 gap-4 md:flex md:w-64">
-            <p className="tracking-sans-normal fadeIn col-span-2 col-start-3 font-sans text-white">
-              Click on any of these topics to get an overview at the topics we
-              cover.
-            </p>
-          </div>
-        </FadeIn>
-        <ul className="my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 lg:my-10 lg:gap-20">
-          {OVERVIEW_LINKS.map(item => {
-            return (
-              <li
-                className="module__item flex items-center justify-center text-white"
-                key={item.name}
-              >
-                <button
-                  className="font-spencer group text-heading-h5 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full cursor-pointer touch-manipulation leading-none"
-                  type="button"
-                  onClick={e => {
-                    openModal(e);
-                  }}
+    <div className="relative">
+      <BackgroundImage src="media/bg.png" alt="abstract dither" />
+      <SectionFade variant="top" />
+      <SectionFade variant="bottom" className='' />
+      <section
+        ref={container}
+        className="mx-4 mt-20 max-h-fit min-h-lvh overflow-x-visible py-20"
+      >
+        <div className="flex h-full grow flex-col py-10">
+          <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
+            <ScrambleScroll>Our content.</ScrambleScroll>
+          </h2>
+          <FadeIn>
+            <div className="mt-4 grid max-w-lg grid-cols-4 gap-4 md:flex md:w-64">
+              <p className="tracking-sans-normal fadeIn col-span-2 col-start-3 font-sans text-white">
+                Click on any of these topics to get an overview at the topics we
+                cover.
+              </p>
+            </div>
+          </FadeIn>
+          <ul className="my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 lg:my-10 lg:gap-20">
+            {OVERVIEW_LINKS.map(item => {
+              return (
+                <li
+                  className="module__item flex items-center justify-center text-white"
+                  key={item.name}
                 >
-                  <ScrambleScroll className="text__scramble scrambleScroll pointer-events-none -z-10 h-full w-full">
-                    {item.name}
-                  </ScrambleScroll>
-                  <span className="animate-cursor-blink arrow font-jersey text-highlight absolute right-full bottom-1/11 hidden -translate-x-1/11 group-focus-within:inline-block group-hover:inline-block">
-                    &gt;
-                  </span>
-                </button>
-                <CardReading handleClose={handleClose} title={item.name}>
-                  {item.content}
-                </CardReading>
-              </li>
-            );
-          })}
-        </ul>
-        <span className="tracking-sans-normal text-center text-white lg:text-xl">
-          What will you learn?
-        </span>
-      </div>
-    </section>
+                  <button
+                    className="font-spencer group text-heading-h5 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full cursor-pointer touch-manipulation leading-none"
+                    type="button"
+                    onClick={e => {
+                      openModal(e);
+                    }}
+                  >
+                    <ScrambleScroll className="text__scramble scrambleScroll pointer-events-none -z-10 h-full w-full">
+                      {item.name}
+                    </ScrambleScroll>
+                    <span className="animate-cursor-blink arrow font-jersey text-highlight absolute right-full bottom-1/11 hidden -translate-x-1/11 group-focus-within:inline-block group-hover:inline-block">
+                      &gt;
+                    </span>
+                  </button>
+                  <CardReading className='z-30' handleClose={handleClose} title={item.name}>
+                    {item.content}
+                  </CardReading>
+                </li>
+              );
+            })}
+          </ul>
+          <span className="tracking-sans-normal text-center text-white lg:text-xl">
+            What will you learn?
+          </span>
+        </div>
+      </section>
+    </div>
   );
 }
 

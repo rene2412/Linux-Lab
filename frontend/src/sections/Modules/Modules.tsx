@@ -11,6 +11,8 @@ import CommandLine from '../../components/ui/CommandLine';
 
 import { useGSAP } from '@gsap/react';
 import { useLenis } from '../../context/LenisContext';
+import BackgroundImage from '../../components/ui/BackgroundImage';
+import SectionFade from '../../components/ui/SectionFade';
 gsap.registerPlugin(Observer, InertiaPlugin);
 
 const MODULES = [
@@ -116,8 +118,11 @@ export default function Modules() {
     <section
       id="modules"
       ref={container}
-      className="mt-40 h-lvh min-h-fit overflow-x-hidden"
+      className="mt-20 py-20 relative h-lvh min-h-fit overflow-x-hidden"
     >
+      <BackgroundImage src='media/bg5.png' alt='abstract dither'/>
+      <SectionFade variant='top'/>
+      <SectionFade variant='bottom'/>
       <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-center text-white">
         <ScrambleScroll>Where will you begin?</ScrambleScroll>
       </h1>
@@ -199,7 +204,7 @@ function ModuleCarousel({ className = '' }: { className?: string }) {
       <SplideTrack className="mt-10 !overflow-visible lg:hidden">
         {MODULES.map((module, index) => {
           return (
-            <SplideSlide className="">
+            <SplideSlide key={module.title} className="">
               <Card
                 active={index === activeIndex}
                 className={`mx-auto h-[70lvh] min-h-fit max-w-md space-y-6`}
