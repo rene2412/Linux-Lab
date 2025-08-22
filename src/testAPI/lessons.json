@@ -977,7 +977,7 @@
             "section": "Subnetting",
             "title": "Classes",
             "content_type": "article",
-            "content": "<p>Right now would be a good time to mention that your ip address isn't just a random set of numbers between 0-255, they are a reflection of what kinda Network you are in!</p><p>Back in the early days of the internet, engineers created a system called <b>Network Classes</b> to organize IP addresses based on network size. Think of it like organizing neighborhoods - some are small residential streets, others are massive cities!</p><p>There are three main classes you'll encounter:</p><p><b>Class A Networks (1.0.0.0 - 126.255.255.255)</b><br>These are the <b>massive</b> networks! If your IP starts with a number between 1-126, you're on a huge network that can support around 16 million devices. These are typically used by large corporations or internet service providers.<br><code>Example: 10.5.100.50</code></p><p><b>Class B Networks (128.0.0.0 - 191.255.255.255)</b><br>The <b>medium-sized</b> networks! If your IP starts with 128-191, you're on a network that can handle about 65,000 devices. Perfect for universities or medium-sized companies.<br><code>Example: 172.16.10.25</code></p><p><b>Class C Networks (192.0.0.0 - 223.255.255.255)</b><br>The <b>small</b> networks! If your IP starts with 192-223, you're on a cozy network with about 254 devices max. This is what you'll see at home, small offices, or cafes.<br><code>Example: 192.168.1.100</code> (Looks familiar, right?)</p><p>Here's the cool part: just by looking at the first number of any IP address, you can instantly tell what size network you're dealing with!</p><p>But here's the problem that led to subnetting - what if you need something in between? What if 254 devices is too small, but 65,000 is way too big? That's where subnetting comes to the rescue, which we'll explore next!</p>",
+            "content": "<p>Right now would be a good time to mention that your ip address isn't just a random set of numbers between 0-255, they are a reflection of what kinda Network you are in!</p><p>Back in the early days of the internet, engineers created a system called <b>Network Classes</b> to organize IP addresses based on network size. Think of it like organizing neighborhoods - some are small residential streets, others are massive cities!</p><p>There are three main classes you'll encounter:</p><p><b>Class A Networks (1.0.0.0 - 126.255.255.255)</b><br>These are the <b>massive</b> networks. If your IP starts with a number between 1-126, you're on a huge network that can support around 16 million devices. These are typically used by large corporations or internet service providers.<br><code>Example: 10.5.100.50</code></p><p><b>Class B Networks (128.0.0.0 - 191.255.255.255)</b><br>The <b>medium-sized</b> networks. If your IP starts with 128-191, you're on a network that can handle about 65,000 devices. Perfect for universities or medium-sized companies.<br><code>Example: 172.16.10.25</code></p><p><b>Class C Networks (192.0.0.0 - 223.255.255.255)</b><br>The <b>small</b> networks! If your IP starts with 192-223, you're on a small network with about 254 devices max. This is what you'll see at home, small offices, or cafes.<br><code>Example: 192.168.1.100</code> (Looks familiar, right?)</p><p>Here's the cool part: just by looking at the first number of any IP address, you can instantly tell what size network you're dealing with!</p><p>But here's the problem that led to subnetting - what if you need something in between? What if 254 devices is too small, but 65,000 is way too big? That's where subnetting comes to the rescue, which we'll explore next!</p>",
             "answer": "",
             "completed": false
         },
@@ -987,7 +987,7 @@
             "section": "Subnetting",
             "title": "Subnets",
             "content_type": "article",
-            "content": "<p>So we learned that network classes give us three fixed sizes: huge (Class A), medium (Class B), or small (Class C). But what happens when none of these sizes fit what you actually need?</p><p>Enter <b>subnetting</b> - the art of taking one big network and chopping it up into smaller, more manageable pieces!</p><p>Think of subnetting like this: imagine you own a large apartment building (your original network). Instead of having one massive space where everyone lives together, you divide it into separate floors or apartments. Each apartment becomes its own <b>subnet</b> - a smaller network within the bigger one.</p><p><b>Why would you want to do this?</b></p><p><b>Organization:</b> You can separate different groups. Put the accounting department on one subnet, engineering on another. Just like putting different departments on different floors of a building!</p><p><b>Security:</b> You can control who talks to whom. Maybe the guest WiFi subnet can't access the company servers subnet.</p><p><b>Performance:</b> Smaller networks mean less traffic congestion. Instead of 1000 devices all shouting at once, you have groups of 50 devices in organized subnets.</p><p><b>Efficiency:</b> No more wasting IP addresses! Instead of giving a small company an entire Class B network (65,000 addresses) when they only need 500, you can create custom-sized subnets.</p><p>Here's a simple example: Let's say you have the network <code>192.168.1.0</code> (normally 254 devices). With subnetting, you could split this into:</p><ul><li><code>192.168.1.0</code> - Subnet for employees (126 devices)</li><li><code>192.168.1.128</code> - Subnet for guests (126 devices)</li></ul><p>Same building, but now it's organized into two separate apartments!</p><p>The magic happens with something called a <b>subnet mask</b>, which tells your computer: \"Hey, these IP addresses are in your neighborhood, but those other ones are in a different subnet.\"",
+            "content": "<p>We have discussed that network classes give us three fixed sizes: huge (Class A), medium (Class B), or small (Class C). But what happens when none of these sizes fit what you actually need? Well we kinda figured it through <b>subnetting</b>.</p><p><b>Subnetting</b> refers to the network process of taking one big network and chopping it up into smaller, more manageable pieces.</p><p>Think of subnetting like this: imagine you own a large apartment building (your original network). Instead of having one massive space where everyone lives together, you divide it into separate floors or apartments. Each apartment becomes its own <b>subnet</b>(a smaller network within the bigger one).</p><p>Why would you want to do this?</b></p><p><b>Organization:</b> You can separate different groups. Put the accounting department on one subnet, engineering on another. Just like putting different departments on different floors of a building!</p><p><b>Security:</b> You can control who talks to whom. Maybe the guest WiFi subnet can't access the company servers subnet.</p><p><b>Performance:</b> Smaller networks mean less traffic congestion. Instead of 1000 devices all shouting at once, you have groups of 50 devices in organized subnets.</p><p><b>Efficiency:</b> No more wasting IP addresses! Instead of giving a small company an entire Class B network (65,000 addresses) when they only need 500, you can create custom-sized subnets.</p><p>Here's a simple example: Let's say you have the network <code>192.168.1.0</code> (normally 254 devices). With subnetting, you could split this into:</p><ul><li><code>192.168.1.0</code> - Subnet for employees (126 devices)</li><li><code>192.168.1.128</code> - Subnet for guests (126 devices)</li></ul><p>Same building, but now it's organized into two separate apartments!</p><p>The magic happens with something called a <b>subnet mask</b>, which tells your computer: \"Hey, these IP addresses are in your neighborhood, but those other ones are in a different subnet.\"",
             "answer": "",
             "completed": false
         },
@@ -997,7 +997,7 @@
             "section": "Subnetting",
             "title": "Subnet Masks",
             "content_type": "article",
-            "content": "<p>Alright, so we know subnetting lets us divide big networks into smaller ones. But how does your computer actually know where one subnet ends and another begins? That's where the <b>subnet mask</b> comes in!</p><p>Remember when we looked at the <code>ifconfig</code> command and saw that mysterious <code>netmask 255.255.255.0</code>? Well, that's your subnet mask in action!</p><p>Think of a subnet mask like a postal system. When you write an address, you have a street address (like \"123 Main Street\") and a city (like \"Springfield\"). The subnet mask tells your computer: \"Here's the city part (network), and here's the street address part (host).\"</p><p>Let's break down the most common subnet mask: <code>255.255.255.0</code></p><p>In binary (remember our friend binary?), this looks like:<br><code>11111111.11111111.11111111.00000000</code></p><p>Here's the rule: wherever you see <code>255</code> (or <code>11111111</code> in binary), that part represents the <b>network portion</b>. Wherever you see <code>0</code> (or <code>00000000</code> in binary), that's the <b>host portion</b>.</p><p>So for an IP address like <code>192.168.1.100</code> with subnet mask <code>255.255.255.0</code>:</p><ul><li><b>Network part:</b> <code>192.168.1</code> (this is like your \"city\")</li><li><b>Host part:</b> <code>100</code> (this is like your \"street address\")</li></ul><p>This means any device with an IP starting with <code>192.168.1.___</code> is in the same subnet - they're all in the same \"city\" and can talk to each other directly!</p><p>But a device with IP <code>192.168.2.50</code>? That's in a different \"city\" (different subnet), so they'd need a router to communicate.</p><p>You'll also see subnet masks written in <b>CIDR notation</b> like <code>/24</code>. This just means \"the first 24 bits are the network portion.\" Since <code>255.255.255.0</code> has 24 ones in binary, it's the same as <code>/24</code>!</p><p>Next time you run <code>ifconfig</code>, you'll know exactly what that netmask is telling you about your network neighborhood!</p>",
+            "content": "<p>Alright, so we know subnetting lets us divide big networks into smaller ones. But how does your computer actually know where one subnet ends and another begins? That's where the <b>subnet mask</b> comes in</p><p>Remember when we looked at the <b>ifconfig</b> command and saw that cryptic? <code>netmask 255.255.255.0</code>Well, that's your subnet mask in action!</p><p>Think of a subnet mask like a postal system. When you write an address, you have a street address (like \"123 Main Street\") and a city (like \"Springfield\"). The subnet mask tells your computer: \"Here's the city part (network), and here's the street address part (host).\"</p><p>Let's break down the most common subnet mask: <code>255.255.255.0</code></p><p>In binary this looks like:<br><code>11111111.11111111.11111111.00000000</code></p><p>Here's the rule: wherever you see <b>255</b> (or <b>11111111</b> in binary), that part represents the <b>network portion</b>. Wherever you see <b>0</b> (or <b>00000000</b> in binary), that's the <b>host portion</b>.</p><p>So for an IP address like <b>192.168.1.100</b> with subnet mask <b>255.255.255.0</b>:</p><ul><li><b>Network part:</b> <code>192.168.1</code> (this is like your \"city\")</li><li><b>Host part:</b> <code>100</code> (this is like your \"street address\")</li></ul><p>This means any device with an IP starting with <code>192.168.1.___</code> is in the same subnet, meaning they're all in the same \"city\" and can talk to each other directly!</p><p>But a device with an IP like: <code>192.168.2.50</code> That's in a different \"city\" (different subnet), so it will need <b>defualt gateway</b> or router to communicate.</p><p>You'll also see subnet masks written in <b>CIDR notation</b> like <b>/24</b>. This just means \"the first 24 bits are the network portion.\" Since <b>255.255.255.0</b> has 24 ones in binary, it's the same as <b>/24</b>.<p>Next time you run <b>ifconfig</b>, you'll know exactly what that netmask is telling you about your network neighborhood!</p>",
             "answer": "",
             "completed": false
         },
@@ -1005,14 +1005,81 @@
             "id": 12,
             "parent": "Networking",
             "section": "Subnetting",
-            "title": "ifoncfig",
+            "title": "Default Gateway",
             "content_type": "article",
-            "content": "",
+            "content": "<p>We found out that when we try to access a service outside of our network, we need the default gateway to route us out of local network and find the outside network we want to speak to.</p><p>Think of your <b>default gateway</b> like the front door of your apartment building. When you want to visit someone who lives in your building (same subnet), you can walk directly to their door. But when you want to visit someone in a different building (different network), you have to go through the front door and out into the street!</p><p>Your default gateway is typically your router, and it does the job. That little box sitting in your home or office that connects your local network to the internet. It usually has an IP address like <code>192.168.1.1</code> or <code>192.168.0.1</code></p><p><b>Here's how it works:</b></p><p>Let's say your computer (<b>192.168.1.100</b>) wants to visit Google (<b>142.250.72.206</b>). Your computer first checks: \"Is Google in my subnet?\"</p><p>Using the subnet mask <b>255.255.255.0</b>, your computer realizes:</p><ul><li>My network: <code>192.168.1.x</code></li><li>Google's network: <code>142.250.72.x</code></li><li>These don't match - Google is NOT in my neighborhood!</li></ul><p>So your computer says: \"I need to go through the front door!\" and sends the request to the default gateway (<b>192.168.1.1</b>). The gateway then says: \"No problem, I'll find the path to Google for you!\" and routes your request out to the internet.</p><p>On the command line we can see this process taking place with the Linux command:<code>ip route</code>",
+            "answer": "",
+            "completed": false
+        }, 
+        {
+            "id": 13,
+            "parent": "Networking",
+            "section": "Subnetting",
+            "title": "ip route",
+            "content_type": "interactive",
+            "content": "<p>The <b>ip route<\/b> command shows your computer\u2019s routing table. It decides where to send network traffic, describes how the default gateway works, and which network interfaces are used to reach different IP ranges.<\/p><p>In other words, think of <b>ip route<\/b> as your Google Maps directions (the planned route).<\/p><p>Lets try it on the terminal by running this command: <code>ip route<\/code> Breakdown: <\/p><pre><code>default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.217 metric 600\n192.168.1.0\/24 dev wlp3s0 proto kernel scope link src 192.168.1.217 metric 600<\/code><\/pre><ul><li><b>default via 192.168.1.1<\/b>: This is the default route \u2014 if no other route matches, traffic goes to your router (192.168.1.1).<\/li><li><b>dev wlp3s0<\/b>: Indicates the wireless network interface being used.<\/li><li><b>proto dhcp<\/b>: This route was configured by DHCP (A network service whos job it is to automatically assign every device network settings on its network)1.<\/li><li><b>src 192.168.1.217<\/b>: The system\u2019s IP address on that interface.<\/li><li><b>metric 600<\/b>: A priority value \u2014 lower values are preferred.<\/li><li><b>192.168.1.0\/24<\/b>: A route for all devices on your local network (192.168.1.x), which are reachable directly without needing a gateway.<\/li><\/ul>",
             "answer": "",
             "completed": false
         },
         {
+            "id": 14,
+            "parent": "Networking",
+            "section": "Checkpoint - Subnetting",
+            "title": "Knowledge Check #5",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "The network portion is 192.168.1 and the host portion is 100",
+                "B": "The network portion is 192 and the host portion is 168.1.100",
+                "C": "The network portion is 192.168.1 and the host portion is 100",
+                "D": "The entire address 192.168.1.100 is the host portion"
+            },
+            "content": "<p>Given the IP address 192.168.1.100 with subnet mask 255.255.255.0, what are the network and host portions?</p><div class=\"question__container\"></div>",
+            "answer": "C",
+            "completed": false
+        },
+        {
+            "id": 15,
+            "parent": "Networking",
+            "section": "Checkpoint - Subnetting",
+            "title": "Knowledge Check #6",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "When your computer needs to communicate with a device outside your local subnet",
+                "B": "Every time you send any network traffic, regardless of destination",
+                "C": "Only when connecting to secure websites using HTTPS",
+                "D": "When your computer is running low on available IP addresses"
+            },
+            "content": "<p>When does your computer use the default gateway?</p><div class=\"question__container\"></div>",
+            "answer": "A",
+            "completed": false
+        },
+        {
+            "id": 16,
+            "parent": "Networking",
+            "section": "Checkpoint - Subnetting",
+            "title": "Knowledge Check #7",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "It shows your computer's routing table and how traffic is directed to different networks",
+                "B": "It changes your IP address to a new one automatically",
+                "C": "It tests the speed of your internet connection",
+                "D": "It shows your computer's routing table and how traffic is directed to different networks"
+            },
+            "content": "<p>What does the 'ip route' command show you?</p><div class=\"question__container\"></div>",
+            "answer": "D",
+            "completed": false
+        },
+        {
             "id": 17,
+            "parent": "Networking",
+            "section": "Checkpoint - Subnetting",
+            "title": "Lab #1",
+            "content_type": "interactive",
+            "content": "Your boss is asking you to store the <b>ifconfig</b> output in a address.txt file, and is asking you to store the <b>ip route</b> output in a routing.txt file. Traverse to the Networking/ directory as that is where the files will live in. Remember, how we <b>redirect</b> output",
+            "completed": false
+        },
+        {
+            "id": 18,
             "parent": "Networking",
             "section": "Connections",
             "title": "Servers, Clients, and Hosts",
@@ -1022,7 +1089,7 @@
             "completed": false
         },
         {
-            "id": 18,
+            "id": 19,
             "parent": "Networking",
             "section": "Connections",
             "title": "Networking Connections",
@@ -1032,7 +1099,7 @@
             "completed": false
         },
         {
-            "id": 19,
+            "id": 20,
             "parent": "Networking",
             "section": "Connections",
             "title": "ping",
@@ -1042,7 +1109,7 @@
             "completed": false
         },
         {
-            "id": 20,
+            "id": 21,
             "parent": "Networking",
             "section": "Connections",
             "title": "DNS - Domain Name System",
@@ -1052,7 +1119,7 @@
             "completed": false
         },
         {
-            "id": 21,
+            "id": 22,
             "parent": "Networking",
             "section": "Connections",
             "title": "nsloopkup",
@@ -1062,9 +1129,9 @@
             "completed": false
         },
         {
-            "id": 22,
+            "id": 23,
             "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "section": "Checkpoint - Connections",
             "title": "Knowledge Check #4",
             "content_type": "multichoice",
             "questions": {
@@ -1078,9 +1145,9 @@
             "completed": false
         },
         {
-            "id": 23,
+            "id": 24,
             "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
+            "section": "Checkpoint - Connections",
             "title": "Knowledge Check #5",
             "content_type": "multichoice",
             "questions": {
@@ -1094,10 +1161,10 @@
             "completed": false
         }, 
         {
-            "id": 24,
+            "id": 25,
             "parent": "Networking",
-            "section": "Checkpoint - The Internet, Ip addresses, and Connections",
-            "title": "Knowledge Check #5",
+            "section": "Checkpoint - Connections",
+            "title": "Knowledge Check #6",
             "content_type": "multichoice",
             "questions": {
                 "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
@@ -1110,20 +1177,10 @@
             "completed": false
         },
         {
-            "id": 25,
-            "parent": "Networking",
-            "section": "Transfering Data",
-            "title": "Sockets",
-            "content_type": "article",
-            "content": "",
-            "answer": "",
-            "completed": false
-        },
-        {
             "id": 26,
             "parent": "Networking",
-            "section": "Transfering Data",
-            "title": "HTTP Protocals",
+            "section": "Checkpoint - Connections",
+            "title": "Lab #2",
             "content_type": "article",
             "content": "",
             "answer": "",
@@ -1132,7 +1189,47 @@
         {
             "id": 27,
             "parent": "Networking",
-            "section": "Transfering Data",
+            "section": "Checkpoint - Connections",
+            "title": "Lab #3",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 28,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "Sockets",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 29,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "Ports",
+            "content_type": "article",
+            "content": "<p>When we use a radio and want to find a rock music station, we tune to a specific frequency \u2014 like 104.7 MHz. That frequency tells the radio which station to <b>listen<\/b> to. Once the connection is made, we receive the output resulting in rock music.<\/p><p>The internet works in a similar way. Because the internet handles many types of traffic (web browsing, email, file sharing, streaming, etc.), it uses <b>ports<\/b> to organize that traffic. Each port represents a specific type of service.<\/p><p>For example:<\/p><ul><li><b>Port 80<\/b> \u2013 HTTP (websites using plain text)<\/li><li><b>Port 443<\/b> \u2013 HTTPS (secure websites)<\/li><li><b>Port 25<\/b> \u2013 SMTP (sending email)<\/li><li><b>Port 53<\/b> \u2013 DNS (resolving domain names)<\/li><\/ul><p>When your computer connects to a website, it doesn\u2019t just connect to an IP address \u2014 it also connects to a <b>port<\/b> on that address. This way, the server knows what kind of service you\u2019re asking for.<\/p><p>Port numbers range from 0 to 65535, but most common services use ports below 1024, known as <b>well-known ports<\/b>.<\/p>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 30,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "HTTP",
+            "content_type": "article",
+            "content": "",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 31,
+            "parent": "Networking",
+            "section": "Transfering",
             "title": "TCP\/IP",
             "content_type": "article",
             "content": "Today, the internet is powered by a model called <b>TCP\/IP<\/b> \u2014 a set of <b>protocols<\/b> and rules that defines how data is sent, received, and routed between devices.<br><br><ul><li><b>TCP<\/b> (Transmission Control Protocol) works by transmitting data like text messages, emails, and web pages into tiny packets that are purposefully broken down. These packets are then sent across the network and reassembled in the correct order on the receiving end. TCP ensures reliability, checking for errors and guaranteeing that packets arrive intact and in sequence.<\/li><br><li><b>IP<\/b> (Internet Protocol) is responsible for addressing and routing these packets. Every device on a network is assigned a unique IP address, and IP ensures that packets are sent to the correct destination. However, IP does not guarantee that the packets arrive or are in order \u2014 that's TCP's job.<\/li><\/ul><br>The combination of TCP and IP allows for robust and efficient communication across the vast infrastructure of the internet. This layered approach makes it possible for different networks and devices to talk to each other regardless of hardware or software differences.<img src='..\/..\/..\/images\/tcp_ip.png' width='500'>",
@@ -1140,9 +1237,9 @@
             "completed": false
         },
         {
-            "id": 28,
+            "id": 32,
             "parent": "Networking",
-            "section": "Transfering Data",
+            "section": "Transfering",
             "title": "The 3 Way Handshake",
             "content_type": "article",
             "content": "<p>We know through TCP\/IP, data is sent via packets. These packets hold data in bytes\u2014a collection of binary numbers (1s and 0s). Before any data is transferred, TCP uses a process called the 3-Way Handshake to establish a reliable connection between two devices.<\/p><p>The 3 steps of this handshake are:<\/p><ul><li><strong>SYN:<\/strong> The client sends a synchronize (SYN) packet to the server to start a connection.<\/li><li><strong>SYN-ACK:<\/strong> The server responds with a synchronize-acknowledgment (SYN-ACK) to confirm it received the request and is ready to connect.<\/li><li><strong>ACK:<\/strong> The client replies with an acknowledgment (ACK), finalizing the connection setup.<\/li><\/ul><p>Once these steps are complete, both devices are ready to exchange data securely and reliably.<\/p> <img src='..\/..\/..\/images\/tcp_handshake.jpeg' width='550' height='450'>",
@@ -1150,19 +1247,9 @@
             "completed": false
         },
         {
-            "id": 29,
+            "id": 33,
             "parent": "Networking",
-            "section": "Transfering Data",
-            "title": "ip route",
-            "content_type": "interactive",
-            "content": "<p>The <b>ip route<\/b> command shows your computer\u2019s routing table. It decides where to send network traffic, describes how the default gateway works (the next stop for outgoing data), and which network interfaces are used to reach different IP ranges.<\/p><p>In other words, think of <b>ip route<\/b> as your Google Maps directions (the planned route).<\/p><p>Lets try it on the terminal by running this command: <code>ip route<\/code> Breakdown: <\/p><pre><code>default via 192.168.1.1 dev wlp3s0 proto dhcp src 192.168.1.217 metric 600\n192.168.1.0\/24 dev wlp3s0 proto kernel scope link src 192.168.1.217 metric 600<\/code><\/pre><ul><li><b>default via 192.168.1.1<\/b>: This is the default route \u2014 if no other route matches, traffic goes to your router (192.168.1.1).<\/li><li><b>dev wlp3s0<\/b>: Indicates the wireless network interface being used.<\/li><li><b>proto dhcp<\/b>: This route was configured by DHCP.<\/li><li><b>src 192.168.1.217<\/b>: The system\u2019s IP address on that interface.<\/li><li><b>metric 600<\/b>: A priority value \u2014 lower values are preferred.<\/li><li><b>192.168.1.0\/24<\/b>: A route for all devices on your local network (192.168.1.x), which are reachable directly without needing a gateway.<\/li><\/ul>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 30,
-            "parent": "Networking",
-            "section": "Transfering Data",
+            "section": "Transfering",
             "title": "traceroute",
             "content_type": "interactive",
             "content": "The <b>traceroute<\/b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute<\/b> is: <code>traceroute example_website.com<\/code> Lets try out an example on the terminal: <code>traceroute google.com<\/code> Breakdown of the output: <pre><ul><li><b>Hop Number:<\/b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.<\/li><li><b>IP Address:<\/b> The IP of the router or device at that hop (e.g. 192.168.1.1).<\/li><li><b>Time:<\/b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.<\/li><li><b>*:<\/b> A star means no response was received from that hop (could be blocked or timed out).<\/li><\/ul><p>This helps you spot slow or failing routes in a network.<\/p>",
@@ -1170,9 +1257,9 @@
             "completed": false
         },
         {
-            "id": 17,
+            "id": 34,
             "parent": "Networking",
-            "section": "Checkpoint - Transfering Data",
+            "section": "Checkpoint - Transfering",
             "title": "Knowledge Check #5",
             "content_type": "multichoice",
             "questions": {
@@ -1186,9 +1273,9 @@
             "completed": false
         },
         {
-            "id": 18,
+            "id": 35,
             "parent": "Networking",
-            "section": "Checkpoint - Transfering Data",
+            "section": "Checkpoint - Transfering",
             "title": "Knowledge Check #6",
             "content_type": "multichoice",
             "questions": {
@@ -1202,9 +1289,9 @@
             "completed": false
         },
         {
-            "id": 19,
+            "id": 36,
             "parent": "Networking",
-            "section": "Checkpoint - Transfering Data",
+            "section": "Checkpoint - Transfering",
             "title": "Knowledge Check #7",
             "content_type": "multichoice",
             "questions": {
@@ -1218,9 +1305,9 @@
             "completed": false
         },
         {
-            "id": 20,
+            "id": 37,
             "parent": "Networking",
-            "section": "Checkpoint - Transfering Data",
+            "section": "Checkpoint - Transfering",
             "title": "Knowledge Check #8",
             "content_type": "multichoice",
             "questions": {
@@ -1234,7 +1321,7 @@
             "completed": false
         },
         {
-            "id": 21,
+            "id": 38,
             "parent": "Networking",
             "section": "Ports & Sockets",
             "title": "Ports",
@@ -1244,7 +1331,7 @@
             "completed": false
         },
         {
-            "id": 22,
+            "id": 39,
             "parent": "Networking",
             "section": "Ports & Sockets",
             "title": "telnet",
@@ -1254,17 +1341,7 @@
             "completed": false
         },
         {
-            "id": 23,
-            "parent": "Networking",
-            "section": "Ports & Sockets",
-            "title": "Sockets",
-            "content_type": "article",
-            "content": "<p>We\u2019ve discussed TCP\/IP, the protocol suite that defines how devices communicate over the internet. Now, let's go over an important piece of that model that powers gaming, APIs, ping commands, chat apps, and more: <b>sockets<\/b>.<\/p><p>A <b>socket<\/b> is an endpoint of a two-way communication link between two programs over a network. Sockets allow programs to send and receive data through a connection.<\/p><p>Every socket connection is defined by 4 components:<\/p><pre><code>&lt;Protocol, Source IP, Source Port, Destination IP, Destination Port&gt;<\/code><\/pre><p>Here's a real-world example:<\/p><pre><code>TCP, 192.168.1.10, Port 12345 \u2192 93.184.216.34, Port 80<\/code><\/pre><ul><li><b>Protocol<\/b> \u2014 Usually TCP or UDP<\/li><li><b>Source IP & Port<\/b> \u2014 The device and port initiating the connection<\/li><li><b>Destination IP & Port<\/b> \u2014 The remote device and service being contacted<\/li><\/ul><p>When you play Fortnite or Call of Duty with your friends, your console and home network establishes a <b>socket connection<\/b> to the game's online servers. This connection allows real-time data to flow between your device and the server \u2014 tracking your movements, syncing player actions, and keeping the game state consistent across all players.<\/p><img src='..\/..\/..\/images\/sockets.png' width='500'>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 24,
+            "id": 40,
             "parent": "Networking",
             "section": "Ports & Sockets",
             "title": "netstat/ss",
