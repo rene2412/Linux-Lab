@@ -1167,13 +1167,13 @@
             "title": "Knowledge Check #6",
             "content_type": "multichoice",
             "questions": {
-                "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
-                "B": "It scans the local network for all connected devices and lists their MAC addresses.",
-                "C": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
-                "D": "It encrypts DNS traffic to protect against spoofing attacks."
+                "A": "A Server provides services, a Client requests services, and a Host is any device connected to a network",
+                "B": "A Server stores data, a Client processes data, and a Host manages network traffic",
+                "C": "A Server and Client are the same thing, while a Host is a physical computer only",
+                "D": "A Server is always hardware, a Client is always software, and a Host must have an IP address"
             },
-            "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "C",
+            "content": "<p>What's the differene between a Server, Client, and Host?<\/p><div class=\"question__container\"><\/div>",
+            "answer": "A",
             "completed": false
         },
         {
