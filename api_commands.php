@@ -1831,6 +1831,37 @@ function GetCurrentLesson() : int {
     return $value;
 }
 
+function process_wc(&$fileSystem, $currentDirectory, $flag, $file) {
+        // Trim and split the current directory path
+        $currentDirectory = rtrim($currentDirectory, "/");
+        $path = array_filter(explode("/", $currentDirectory), 'strlen');
+        $currentLevel = &$fileSystem["/"]; // Reference to root
+    
+        // Traverse to the current directory
+        foreach ($path as $part) {
+            if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
+                return "Error: '$part' not found.\n";
+            }
+            $currentLevel = &$currentLevel[$part]; // Maintain reference
+        }
+    
+        // Check if the file exists
+        if (!array_key_exists($file, $currentLevel)) {
+            return "Error: File '$file' not found.\n";
+        }
+    
+        // Check if the target is a directory
+        if ((!str_ends_with($file, ".txt"))) {
+            return "Error: '$file' is a directory";
+        } 
+        $lines = $currentLevel[$file]['file']['content'];
+        $count = 0;
+        foreach($lines as $line) {
+            $count++;
+        }
+        return $count;
+    }
+
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
         if ($userId === null) return;
         $stmt = $pdo->prepare("
@@ -2085,10 +2116,8 @@ if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
 //fetch the current module
 error_log("Lesson ID: $lessonID");
 error_log("Answer: " . GetMultChoiceAnswer($lessonID));
- //multi-choice and mysql handshake (madness)
- 
+ //multi-choice and mysql handshake (madness) 
 if ($module === "basics") {
-error_log("entering basics");
  if ($lessonID === 17 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
          update_mysql($pdo, $userId, 17, 18);
@@ -2395,7 +2424,8 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             $username = "guest";
         } 
         $output = $username;
-        $output .= $lessonID;
+        $output .= "\n" . $lessonID;
+        $output .= "\n" . $fullCmd;
         if ($lessonID === 8) {
             $isCorrect = true;
             if ($userId) {
@@ -2816,6 +2846,14 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             }
         }
         break;
+    case 'wc':
+            if (count($args) === 2) {
+                $output = process_wc($fileSystem, $currentDir, "", $arg);
+
+                break;
+            }
+                $output = process_wc($fileSystem, $currentDir, $arg, $arg2);
+            break;
     case 'chmod':
         $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);
         if (count($args) < 3 || count($args) > 4) {
@@ -2962,7 +3000,6 @@ case 'python3':
         if ($lessonID === 8 && $command === "nslookup google.com") {
             $isCorrect = true;
             if ($userId) {
-                error_log("NSLOOKUP");
                 network_update_mysql($pdo, $userId, 8, 9);
                 network_updateUserProgress($pdo, $userId, 8);
             }
