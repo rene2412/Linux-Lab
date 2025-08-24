@@ -1,4 +1,4 @@
-import Button from '../../components/ui/Button';
+// import Button from '../../components/ui/Button';
 import Marquee from '../../components/ui/Marquee';
 import GSDevTools from 'gsap/GSDevTools';
 import gsap from 'gsap';
@@ -7,14 +7,16 @@ import { useRef } from 'react';
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
 import BlockCaret from '../../components/ui/BlockCaret';
 import TextPlugin from 'gsap/TextPlugin';
+import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN } from '../../utils/data';
+import Anchor from '../../components/ui/Anchor';
 
 gsap.registerPlugin(GSDevTools, ScrambleTextPlugin, TextPlugin);
 
 export default function Hero() {
   const container = useRef(null);
+  // const lenis = useLenis();
   useGSAP(
     () => {
-      // const tl0 = gsap.timeline();
       const tl = gsap.timeline({ paused: false });
 
       // text sequence
@@ -22,41 +24,50 @@ export default function Hero() {
         scrambleText: {
           text: '{original}',
         },
-        duration:0.8,
-        ease:'none',
+        duration: 0.8,
+        ease: 'none',
       })
         .to('.textCycle', {
           text: './ linux-lab.sh',
           delay: 1,
           duration: 1,
         })
-        .to('.split__left',{
-          delay:0.8,
-          xPercent:-100,
-          scale:0.8,
-          duration:0.5,
-          clipPath:'inset(0 100% 0 0)',
-          ease:'power4.inOut',
+        .to('.split__left', {
+          delay: 0.8,
+          xPercent: -100,
+          scale: 0.8,
+          duration: 0.5,
+          clipPath: 'inset(0 100% 0 0)',
+          ease: 'power4.inOut',
           // ease:'power1.out',
           // ease:'none',
         })
-        .to('.split__right',{
-          ease:'power4.inOut',
-          // ease:'power1.out',
-          // ease:'none',
-          scale:0.8,
-          duration:0.5,
-          xPercent:100,
-          clipPath:'inset(0 0 0 100%)'
-        },'<')
+        .to(
+          '.split__right',
+          {
+            ease: 'power4.inOut',
+            // ease:'power1.out',
+            // ease:'none',
+            scale: 0.8,
+            duration: 0.5,
+            xPercent: 100,
+            clipPath: 'inset(0 0 0 100%)',
+          },
+          '<'
+        )
         // hero sequence
-        .fromTo('.card__container', {
-          clipPath: 'inset(100%)',
-        },{
-          duration: 1,
-          clipPath: 'inset(0%)',
-          ease: 'power4.out',
-        },'<+=0.05')
+        .fromTo(
+          '.card__container',
+          {
+            clipPath: 'inset(100%)',
+          },
+          {
+            duration: 1,
+            clipPath: 'inset(0%)',
+            ease: 'power4.out',
+          },
+          '<+=0.05'
+        )
         .from(
           '.card__container',
           {
@@ -84,7 +95,7 @@ export default function Hero() {
           {
             yPercent: 50,
             opacity: 0,
-            duation: 1,
+            duration: 1,
             ease: 'power4.out',
             stagger: 0.1,
           },
@@ -137,7 +148,7 @@ export default function Hero() {
           aria-hidden
           className={`text-heading-slg cli font-mono text-white`}
         >
-          <span className="text-highlight inline-block split__left cli__prompt font-spencer">
+          <span className="text-highlight split__left cli__prompt font-spencer inline-block">
             {'user@linux-lab'}
           </span>
           <span className="split__right inline-block">
@@ -161,7 +172,7 @@ export default function Hero() {
             Linux-Lab
           </h1>
         </div>
-        <div className="card__container  relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-white shadow-[0_0_180px] lg:h-[65vh]">
+        <div className="card__container shadow-highlight/50 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] lg:h-[65vh]">
           <img
             className="absolute top-0 left-0 z-0 h-full w-full object-cover select-none"
             src="media/asciibh.png"
@@ -182,15 +193,19 @@ export default function Hero() {
                 free and in browser.
               </span>
               <div className="buttons__hero flex w-full origin-bottom-right items-center justify-stretch gap-4 rounded-sm lg:w-md lg:bg-black/90 lg:p-4 lg:backdrop-blur-xl">
-                <Button className="xl:text-heading-slg w-full py-4">
+                <Anchor
+                  href={SITE_URL_FOUNDATIONS}
+                  className="xl:text-heading-slg w-full py-4"
+                >
                   Try It Now
-                </Button>
-                <Button
+                </Anchor>
+                <Anchor
                   className="xl:text-heading-slg w-full py-4"
                   variant="outline"
+                  href={SITE_URL_LOGIN}
                 >
                   Login
-                </Button>
+                </Anchor>
               </div>
             </div>
           </div>

@@ -7,6 +7,8 @@ import ScrambleText from '../ui/ScrambleText';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Anchor from '../ui/Anchor';
+import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN} from '../../utils/data.ts'
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -60,14 +62,17 @@ export default function Navbar({ className, ...props }: NavbarProps) {
         <div className="aspect-square w-9">
           <Logo />
         </div>
-        <div className="absolute pointer-events-none flex justify-center w-full h-full top-0 right-0 bottom-0 left-0">
+        <div className="pointer-events-none absolute top-0 right-0 bottom-0 left-0 flex h-full w-full justify-center">
           <ul
-            className={`hidden w-sm pointer-events-auto grid-cols-4 items-center place-content-center justify-center md:grid`}
+            className={`pointer-events-auto hidden w-sm grid-cols-4 place-content-center items-center justify-center md:grid`}
           >
             {DATA.links.map(elem => {
               return (
-                <li key={elem.title} className='grid place-items-center'>
-                  <a className="tracking-sans-normal text-center" href={elem.href}>
+                <li key={elem.title} className="grid place-items-center">
+                  <a
+                    className="tracking-sans-normal text-center"
+                    href={elem.href}
+                  >
                     <ScrambleText>{elem.title}</ScrambleText>
                   </a>
                 </li>
@@ -86,20 +91,20 @@ export default function Navbar({ className, ...props }: NavbarProps) {
           >
             Menu
           </Button>
-          <Button
-            className="hidden w-26  !p-0 md:inline-block"
+          <Anchor
+            className="hidden w-26 !p-0 md:grid"
             variant="default"
-            type="submit"
+            href={SITE_URL_FOUNDATIONS}
           >
             Try It Now
-          </Button>
-          <Button
-            className="hidden w-18 md:inline-block"
+          </Anchor>
+          <Anchor
+            className="hidden w-18 md:grid"
             variant="outline"
-            type="submit"
+            href={SITE_URL_LOGIN}
           >
             Login
-          </Button>
+          </Anchor>
         </div>
       </nav>
     </>

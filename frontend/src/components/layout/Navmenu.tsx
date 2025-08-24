@@ -8,6 +8,8 @@ import SplitText from 'gsap/SplitText';
 import TextPlugin from 'gsap/TextPlugin';
 import { typewriterCycle } from '../../utils/animations/textCycle';
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
+import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN } from '../../utils/data';
+import Anchor from '../ui/Anchor';
 
 gsap.registerPlugin(SplitText, TextPlugin, ScrambleTextPlugin);
 
@@ -59,17 +61,22 @@ export default function Navmenu({ className = ' ' }) {
             ease: 'power1.out',
             duration: 0.3,
           })
-          .from('.navbar__deco__container', {
-            clipPath: 'inset(0 0 100% 0)',
-            y: 5,
-            ease: 'power4.out',
-          },'<')
+          .from(
+            '.navbar__deco__container',
+            {
+              clipPath: 'inset(0 0 100% 0)',
+              y: 5,
+              ease: 'power4.out',
+            },
+            '<'
+          )
           .from(
             '.navbar__link',
             {
               scrambleText: {
-                text:'',
-                chars:'!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz'
+                text: '',
+                chars:
+                  '!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz',
               },
               yPercent: 30,
               opacity: 1,
@@ -180,7 +187,13 @@ export default function Navmenu({ className = ' ' }) {
           <ul>
             {DATA.links.map(link => {
               return (
-                <li onClick={()=>{setIsOpen(false)}} className="flex justify-stretch" key={link.title}>
+                <li
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  className="flex justify-stretch"
+                  key={link.title}
+                >
                   <a
                     className={`font-spencer navbar__link text-heading-h5 w-full leading-snug`}
                     href={link.href}
@@ -195,10 +208,16 @@ export default function Navmenu({ className = ' ' }) {
         <div className="bottom">
           <div className="nav__buttons flex flex-col items-center justify-center gap-2">
             <span className="tracking-sans-normal">Start learning now.</span>
-            <Button className="w-full py-4">Try it now</Button>
-            <Button variant="outline" className="w-full py-4">
+            <Anchor href={SITE_URL_FOUNDATIONS} className="w-full py-4">
+              Try it now
+            </Anchor>
+            <Anchor
+              href={SITE_URL_LOGIN}
+              variant="outline"
+              className="w-full py-4"
+            >
               Login
-            </Button>
+            </Anchor>
           </div>
         </div>
       </div>

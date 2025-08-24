@@ -8,13 +8,14 @@ import '@splidejs/react-splide/css';
 import { Card, CardHeader, CardInfo } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import CommandLine from '../../components/ui/CommandLine';
-
 import { useGSAP } from '@gsap/react';
 import { useLenis } from '../../context/LenisContext';
 import BackgroundImage from '../../components/ui/BackgroundImage';
 import SectionFade from '../../components/ui/SectionFade';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(Observer, InertiaPlugin,ScrollTrigger);
+import { SITE_URL_FOUNDATIONS, SITE_URL_NETWORKING } from '../../utils/data';
+import Anchor from '../../components/ui/Anchor';
+gsap.registerPlugin(Observer, InertiaPlugin, ScrollTrigger);
 
 const MODULES = [
   {
@@ -29,6 +30,7 @@ const MODULES = [
     },
     buttonText: 'Begin Journey',
     cliText: ['Hello World', 'This is Foundations'],
+    href: SITE_URL_FOUNDATIONS,
   },
   {
     title: 'Networking',
@@ -42,6 +44,7 @@ const MODULES = [
     },
     buttonText: 'Scour the Webs',
     cliText: ['Networking!', 'WE LOVE THE INTERNET'],
+    href: SITE_URL_NETWORKING,
   },
   {
     title: 'Scripting',
@@ -53,7 +56,7 @@ const MODULES = [
       difficulty: 'Intermediate → Advanced',
       price: 'Free',
     },
-    buttonText: 'Automate Away',
+    buttonText: 'Coming Soon',
     cliText: ['AUTOMATION', 'Very Cool!'],
   },
 ];
@@ -77,16 +80,16 @@ export default function Modules() {
       gsap.from('.module__card', {
         x: '-50%',
         y: '-20%',
-        rotate:'5deg',
-        opacity:0,
-        scale:0.95,
+        rotate: '5deg',
+        opacity: 0,
+        scale: 0.95,
         ease: 'power4.out',
         duration: 1.25,
-        stagger:0.1,
-        scrollTrigger:{
-          trigger:'.module__card',
-          start:'top 92%'
-        }
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: '.module__card',
+          start: 'top 92%',
+        },
       });
 
       const cards = container.current?.querySelectorAll('.module__card');
@@ -172,9 +175,25 @@ export default function Modules() {
                 difficulty={module.info.difficulty}
                 price={module.info.price}
               ></CardInfo>
-              <Button variant="outline" className={'text-heading-slg mt-auto'}>
-                <a className="">{module.buttonText}</a>
-              </Button>
+              {module.href ? (
+                <Anchor
+                  href={module.href}
+                  variant="outline"
+                  className={'text-heading-slg mt-auto'}
+                >
+                  {module.buttonText}
+                </Anchor>
+              ) : (
+                <Button
+                  disabled
+                  variant="outline"
+                  className={
+                    'text-heading-slg pointer-events-none mt-auto !cursor-not-allowed saturate-0'
+                  }
+                >
+                  {module.buttonText}
+                </Button>
+              )}
             </Card>
           );
         })}
@@ -239,11 +258,25 @@ function ModuleCarousel({ className = '' }: { className?: string }) {
                   difficulty={module.info.difficulty}
                   price={module.info.price}
                 ></CardInfo>
-                <Button variant="outline" className={'mt-auto'}>
-                  <a href="#" className="text-heading-slg h-full w-full">
+                {module.href ? (
+                  <Anchor
+                    href={module.href}
+                    variant="outline"
+                    className={'text-heading-slg mt-auto'}
+                  >
                     {module.buttonText}
-                  </a>
-                </Button>
+                  </Anchor>
+                ) : (
+                  <Button
+                    disabled
+                    variant="outline"
+                    className={
+                      'text-heading-slg pointer-events-none mt-auto !cursor-not-allowed saturate-0'
+                    }
+                  >
+                    {module.buttonText}
+                  </Button>
+                )}
               </Card>
             </SplideSlide>
           );

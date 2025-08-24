@@ -1,5 +1,6 @@
 // import { useState } from 'react';
 import './App.css';
+import 'lenis/dist/lenis.css'
 import { Navbar } from './components/layout';
 import Navmenu from './components/layout/Navmenu';
 import LenisProvider from './context/LenisContext';

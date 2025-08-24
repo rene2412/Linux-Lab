@@ -13,7 +13,7 @@ export function Card({
   return (
     <article
       {...props}
-      className={`shadow-highlight/0 card__container hover:shadow-highlight/20 z-10 flex h-3/4 max-h-[650px] min-h-fit max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 shadow-[0px_0px_64px] outline-2 outline-white backdrop-blur-xl transition-[box-shadow] duration-300 ${active && 'shadow-highlight'} sm:gap-4 md:p-4 ${className}`}
+      className={`shadow-highlight/0 card__container hover:shadow-highlight/20 z-10 flex h-3/4 max-h-[650px] min-h-fit max-w-md origin-center flex-col rounded-sm bg-black/90 p-2 shadow-[0px_0px_64px] outline-2 outline-white backdrop-blur-xl transition-[box-shadow] duration-300 ${active && 'shadow-highlight/40'} sm:gap-4 md:p-4 ${className}`}
     >
       {children}
     </article>
