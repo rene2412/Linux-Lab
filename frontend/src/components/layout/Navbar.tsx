@@ -39,7 +39,7 @@ export default function Navbar({ className, ...props }: NavbarProps) {
       gsap.from(container.current, {
         // yPercent:100,
         opacity: 0,
-        delay: 1.8,
+        delay: 5.1,
         ease: 'power4.out',
       });
     },
@@ -62,7 +62,7 @@ export default function Navbar({ className, ...props }: NavbarProps) {
         </div>
         <div className="absolute pointer-events-none flex justify-center w-full h-full top-0 right-0 bottom-0 left-0">
           <ul
-            className={`hidden w-sm pointer-events-auto grid-cols-4 items-center place-content-center justify-center lg:grid`}
+            className={`hidden w-sm pointer-events-auto grid-cols-4 items-center place-content-center justify-center md:grid`}
           >
             {DATA.links.map(elem => {
               return (
@@ -80,21 +80,21 @@ export default function Navbar({ className, ...props }: NavbarProps) {
             onClick={() => {
               setIsOpen(!isOpen);
             }}
-            className="lg:hidden"
+            className="md:hidden"
             variant="outline"
             type="submit"
           >
             Menu
           </Button>
           <Button
-            className="hidden lg:inline-block"
+            className="hidden w-26  !p-0 md:inline-block"
             variant="default"
             type="submit"
           >
             Try It Now
           </Button>
           <Button
-            className="hidden lg:inline-block"
+            className="hidden w-18 md:inline-block"
             variant="outline"
             type="submit"
           >

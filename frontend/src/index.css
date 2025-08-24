@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+body{
+  background-color: black;
+}
+
+
 .text-hero {
   font-size: clamp(2rem, 2.89vw, 4rem);
 }

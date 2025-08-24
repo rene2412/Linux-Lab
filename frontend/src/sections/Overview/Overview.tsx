@@ -11,13 +11,15 @@ import ScrambleScroll from '../../components/ui/ScrambleScroll';
 import FadeIn from '../../components/ui/FadeIn';
 import BackgroundImage from '../../components/ui/BackgroundImage';
 import SectionFade from '../../components/ui/SectionFade';
+import TextPlugin from 'gsap/TextPlugin';
 
 gsap.registerPlugin(
   Draggable,
   Observer,
   InertiaPlugin,
   SplitText,
-  ScrambleTextPlugin
+  ScrambleTextPlugin,
+  TextPlugin
 );
 
 const OVERVIEW_LINKS = [
@@ -100,8 +102,30 @@ export default function Overview() {
         display: 'none',
         opacity: 1,
       });
-    },
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'bottom bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
 
+      tl.to('.container__content', {
+        yPercent: 30,
+        scale: 0.65,
+        ease: 'power1.inOut',
+      }).fromTo(
+        container.current,
+        {},
+        {
+          clipPath: 'inset(0% 0% 100% 0%)',
+          opacity: 0,
+          ease: 'none',
+        },
+        '<'
+      );
+    },
     { scope: container, dependencies: [] }
   );
 
@@ -110,22 +134,25 @@ export default function Overview() {
     () => {
       const items = document.querySelectorAll('.float__text');
       items.forEach((element, index) => {
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({ repeat: -1 });
         tl.from(element, {
-          delay: 0.1 * index,
+          delay: 0.05 * index,
           scrambleText: {
-            text:''
+            text: '',
+            chars: 'upperCase',
           },
-        }).to(element, {
-          scrambleText:{
-            text: '{original}',
-          }
-        }).to(element,{
-          delay:1,
-          scrambleText:{
-            text:' ',
-          }
         })
+          .to(element, {
+            scrambleText: {
+              text: '{original}',
+            },
+          })
+          .to(element, {
+            delay: 0.5,
+            scrambleText: {
+              text: '',
+            },
+          });
       });
     },
     { scope: container, dependencies: [] }
@@ -198,21 +225,12 @@ export default function Overview() {
   });
 
   return (
-    <div className="relative">
+    <div ref={container} className="relative">
       <BackgroundImage src="media/bg.png" alt="abstract dither" />
       <SectionFade variant="top" />
       <SectionFade variant="bottom" className="" />
-      <div className="text-highlight flex flex-col justify-end gap-2 absolute top-1/2 left-32 h-32 w-32">
-        <span className="float__text inline-block">Hello World!</span>
-        <span className="float__text inline-block">Hello World!</span>
-        <span className="float__text inline-block">Hello World!</span>
-        <span className="float__text inline-block">Hello World!</span>
-        <span className="float__text inline-block">Hello World!</span>
-      </div>
-      <section
-        ref={container}
-        className="mx-4 mt-20 max-h-fit min-h-lvh overflow-x-visible py-20"
-      >
+
+      <section id='overview' className="container__content mx-4 mt-20 max-h-fit min-h-lvh overflow-x-visible py-20">
         <div className="flex h-full grow flex-col py-10">
           <h2 className="text-heading-xl lg:text-heading-h6 tracking-sans-normal font-sans text-white">
             <ScrambleScroll>Our content.</ScrambleScroll>
@@ -225,7 +243,7 @@ export default function Overview() {
               </p>
             </div>
           </FadeIn>
-          <ul className="list__container my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 perspective-distant transform-3d lg:my-10 lg:gap-20">
+          <ul className="list__container my-30 flex min-h-fit grow flex-col items-center justify-center gap-20 overflow-x-hidden lg:my-10 lg:gap-20">
             {OVERVIEW_LINKS.map(item => {
               return (
                 <li
@@ -239,7 +257,7 @@ export default function Overview() {
                       openModal(e);
                     }}
                   >
-                    <ScrambleScroll className="text__scramble scrambleScroll pointer-events-none -z-10 h-full w-full">
+                    <ScrambleScroll className="text__scramble scrambleScroll pointer-events-none -z-10 h-full w-full text-nowrap">
                       {item.name}
                     </ScrambleScroll>
                     <span className="animate-cursor-blink arrow font-jersey text-highlight absolute right-full bottom-1/11 hidden -translate-x-1/11 group-focus-within:inline-block group-hover:inline-block">
@@ -280,7 +298,7 @@ function CardReading({
 }) {
   return (
     <article
-      className={`draggable card__container group absolute z-10 flex h-3/4 max-h-[650px] min-h-fit w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/100 p-2 outline-2 outline-white sm:gap-4 md:p-4 ${className}`}
+      className={`draggable card__container group absolute z-10 flex h-3/4 max-h-[650px] min-h-[600px] w-9/10 max-w-md origin-center flex-col rounded-sm bg-black/100 p-2 outline-2 outline-white sm:gap-4 md:p-4 ${className}`}
     >
       <div className="bg-highlight card__bg absolute top-0 left-0 -z-20 h-full w-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-50"></div>
       <div className="card__bg pointer-events-none absolute top-0 left-0 -z-10 h-full w-full bg-black"></div>

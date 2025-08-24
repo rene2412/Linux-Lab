@@ -16,19 +16,19 @@ import Footer from './components/ui/Footer';
 function App() {
   return (
     <LenisProvider>
-      <main className="bg-dark relative min-h-svh">
+      <main className="bg-dark selection:bg-highlight relative min-h-svh selection:text-black">
         <NavbarProvider>
-          <Navbar className="z-10 " />
+          <Navbar className="z-10" />
           <Navmenu className="z-20" />
           <main className="isolate z-0">
             <Hero />
-            <About/>
-            <Overview/>
-            <Benefits/>
-            <Globe/>
-            <Modules/>
-            <MediaLarge/>
-            <Footer/>
+            <About />
+            <Overview />
+            <Benefits />
+            <Globe />
+            <Modules />
+            <MediaLarge />
+            <Footer />
             {/* <div className="h-svh bg-dark"></div> */}
           </main>
         </NavbarProvider>

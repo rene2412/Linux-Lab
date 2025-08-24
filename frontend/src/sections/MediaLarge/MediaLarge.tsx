@@ -2,7 +2,7 @@ import SectionFade from "../../components/ui/SectionFade";
 
 export default function MediaLarge() {
   return (
-    <section className="relative h-[750px] overflow-clip">
+    <section className="relative h-[650px] overflow-clip">
       <SectionFade variant="top" />
       <SectionFade variant="bottom" />
       <div className="-z-10 h-full w-full">

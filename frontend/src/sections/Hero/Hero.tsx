@@ -5,22 +5,58 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
+import BlockCaret from '../../components/ui/BlockCaret';
+import TextPlugin from 'gsap/TextPlugin';
 
-gsap.registerPlugin(GSDevTools, ScrambleTextPlugin);
+gsap.registerPlugin(GSDevTools, ScrambleTextPlugin, TextPlugin);
 
 export default function Hero() {
   const container = useRef(null);
   useGSAP(
     () => {
-      const tl = gsap.timeline();
-      tl.from('.card__container', {
-        // delay: 0.5,
-        duration: 1,
-        yPercent: 20,
-        clipPath: 'inset(40%)',
-        // yPercent: 20,
-        ease: 'power4.inOut',
+      // const tl0 = gsap.timeline();
+      const tl = gsap.timeline({ paused: false });
+
+      // text sequence
+      tl.to('.cli__prompt', {
+        scrambleText: {
+          text: '{original}',
+        },
+        duration:0.8,
+        ease:'none',
       })
+        .to('.textCycle', {
+          text: './ linux-lab.sh',
+          delay: 1,
+          duration: 1,
+        })
+        .to('.split__left',{
+          delay:0.8,
+          xPercent:-100,
+          scale:0.8,
+          duration:0.5,
+          clipPath:'inset(0 100% 0 0)',
+          ease:'power4.inOut',
+          // ease:'power1.out',
+          // ease:'none',
+        })
+        .to('.split__right',{
+          ease:'power4.inOut',
+          // ease:'power1.out',
+          // ease:'none',
+          scale:0.8,
+          duration:0.5,
+          xPercent:100,
+          clipPath:'inset(0 0 0 100%)'
+        },'<')
+        // hero sequence
+        .fromTo('.card__container', {
+          clipPath: 'inset(100%)',
+        },{
+          duration: 1,
+          clipPath: 'inset(0%)',
+          ease: 'power4.out',
+        },'<+=0.05')
         .from(
           '.card__container',
           {
@@ -87,14 +123,37 @@ export default function Hero() {
           '<+=0.15'
         );
 
-      GSDevTools.create({ animation: tl, visibility:'hidden' });
+      // GSDevTools.create({ animation: tl });
     },
     { scope: container, dependencies: [] }
   );
   return (
-    <div ref={container}>
+    <div ref={container} className="relative overflow-x-hidden pb-12">
+      <div
+        aria-hidden
+        className="absolute top-1/2 left-1/2 grid h-full w-full -translate-x-1/2 -translate-y-1/2 place-content-center"
+      >
+        <span
+          aria-hidden
+          className={`text-heading-slg cli font-mono text-white`}
+        >
+          <span className="text-highlight inline-block split__left cli__prompt font-spencer">
+            {'user@linux-lab'}
+          </span>
+          <span className="split__right inline-block">
+            <span className="font-spencer cli__prompt">
+              :<span className="font-jersey cli__prompt">~$ </span>
+            </span>
+            <span className="font-spencer">
+              <span className="textCycle"></span>
+              <BlockCaret />
+            </span>
+          </span>
+        </span>
+      </div>
+      {/* <BackgroundImage src="media/bg.png" alt="img" className='opacity-9' /> */}
       <section className="mx-4 grid-cols-12 grid-rows-none text-white lg:mx-5 lg:grid lg:gap-x-5">
-        <div className="header col-span-10 col-start-2 flex items-center justify-center overflow-x-hidden leading-tight text-nowrap lg:justify-between">
+        <div className="header col-span-10 col-start-2 flex items-center justify-center overflow-hidden leading-tight text-nowrap lg:justify-between">
           <h1 className="tracking-sans-wide text__hero text-hero-lg hidden lg:block">
             Begin your Linux journey.
           </h1>
@@ -102,7 +161,7 @@ export default function Hero() {
             Linux-Lab
           </h1>
         </div>
-        <div className="card__container shadow-highlight/20 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm shadow-[0_0_180px] lg:h-[65vh]">
+        <div className="card__container  relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-white shadow-[0_0_180px] lg:h-[65vh]">
           <img
             className="absolute top-0 left-0 z-0 h-full w-full object-cover select-none"
             src="media/asciibh.png"

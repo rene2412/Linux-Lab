@@ -5,7 +5,7 @@ import ScrambleText from './ScrambleText';
 export default function Footer() {
   return (
     <footer
-      className={`flex h-[550px] flex-col justify-between pt-6 text-white`}
+      className={`flex h-[650px] lg:h-[550px] flex-col justify-between pt-6 text-white`}
     >
       <ScrambleScroll className="font-spencer text-heading-xl mx-4 sm:hidden">
         Linux-Lab
@@ -15,7 +15,7 @@ export default function Footer() {
           <ScrambleScroll className="font-spencer text-heading-h5 lg:text-heading-h4 leading-none">
             Linux-Lab
           </ScrambleScroll>
-          <span className="text-center">Based in Beijing, China </span>
+          <span className="text-center">Surely right?</span>
         </div>
         <nav className="col-span-6 col-start-7 mx-4 mt-10 grid h-fit grid-cols-2 grid-rows-2 gap-x-4 gap-y-10 sm:my-auto lg:col-start-8 lg:col-span-4">
           <NavLinkList title="Quick Links" data={FOOTER_DATA.quickLinks} />

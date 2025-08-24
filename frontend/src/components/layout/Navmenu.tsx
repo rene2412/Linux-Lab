@@ -63,12 +63,13 @@ export default function Navmenu({ className = ' ' }) {
             clipPath: 'inset(0 0 100% 0)',
             y: 5,
             ease: 'power4.out',
-          })
+          },'<')
           .from(
             '.navbar__link',
             {
-              text: {
-                value: '',
+              scrambleText: {
+                text:'',
+                chars:'!#*_?,/ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz'
               },
               yPercent: 30,
               opacity: 1,
@@ -179,7 +180,7 @@ export default function Navmenu({ className = ' ' }) {
           <ul>
             {DATA.links.map(link => {
               return (
-                <li className="flex justify-stretch" key={link.title}>
+                <li onClick={()=>{setIsOpen(false)}} className="flex justify-stretch" key={link.title}>
                   <a
                     className={`font-spencer navbar__link text-heading-h5 w-full leading-snug`}
                     href={link.href}

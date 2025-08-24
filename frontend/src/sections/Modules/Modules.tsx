@@ -13,7 +13,8 @@ import { useGSAP } from '@gsap/react';
 import { useLenis } from '../../context/LenisContext';
 import BackgroundImage from '../../components/ui/BackgroundImage';
 import SectionFade from '../../components/ui/SectionFade';
-gsap.registerPlugin(Observer, InertiaPlugin);
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(Observer, InertiaPlugin,ScrollTrigger);
 
 const MODULES = [
   {
@@ -72,6 +73,22 @@ export default function Modules() {
           pointer.current.deltaY = e.deltaY;
         },
       });
+
+      gsap.from('.module__card', {
+        x: '-50%',
+        y: '-20%',
+        rotate:'5deg',
+        opacity:0,
+        scale:0.95,
+        ease: 'power4.out',
+        duration: 1.25,
+        stagger:0.1,
+        scrollTrigger:{
+          trigger:'.module__card',
+          start:'top 92%'
+        }
+      });
+
       const cards = container.current?.querySelectorAll('.module__card');
       if (!cards) return;
       cards.forEach((element: Element) => {
@@ -85,11 +102,11 @@ export default function Modules() {
             tl.to(element, {
               inertia: {
                 x: {
-                  velocity: pointer.current.deltaX * 10,
+                  velocity: pointer.current.deltaX * 2,
                   end: 0,
                 },
                 y: {
-                  velocity: pointer.current.deltaY * 10,
+                  velocity: pointer.current.deltaY * 2,
                   end: 0,
                 },
               },
@@ -118,16 +135,16 @@ export default function Modules() {
     <section
       id="modules"
       ref={container}
-      className="mt-20 py-20 relative h-lvh min-h-fit overflow-x-hidden"
+      className="relative mt-20 min-h-fit overflow-x-hidden py-20"
     >
-      <BackgroundImage src='media/bg5.png' alt='abstract dither'/>
-      <SectionFade variant='top'/>
-      <SectionFade variant='bottom'/>
+      <BackgroundImage src="media/bg5.png" alt="abstract dither" />
+      <SectionFade variant="top" />
+      <SectionFade variant="bottom" className="!h-0" />
       <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-center text-white">
         <ScrambleScroll>Where will you begin?</ScrambleScroll>
       </h1>
       <ModuleCarousel />
-      <div className="mx-auto mt-10 hidden max-w-[1440px] items-center justify-center gap-10 px-5 perspective-midrange transform-3d lg:flex">
+      <div className="mx-auto mt-10 hidden max-w-[1440px] items-center justify-center gap-10 px-5 lg:flex">
         {MODULES.map((module, index) => {
           return (
             <Card
@@ -138,7 +155,7 @@ export default function Modules() {
               onMouseLeave={() => {
                 setActiveIndex(null);
               }}
-              className="module__card group h-[70lvh] min-h-fit max-w-md space-y-6 transform-3d"
+              className="module__card group h-[70lvh] min-h-fit max-w-md grow-1 space-y-6"
             >
               <CardHeader>{module.title}</CardHeader>
               <p className="desc tracking-sans-normal text-white">
@@ -155,10 +172,8 @@ export default function Modules() {
                 difficulty={module.info.difficulty}
                 price={module.info.price}
               ></CardInfo>
-              <Button variant="outline" className={'mt-auto'}>
-                <a href="#" className="text-heading-slg h-full w-full">
-                  {module.buttonText}
-                </a>
+              <Button variant="outline" className={'text-heading-slg mt-auto'}>
+                <a className="">{module.buttonText}</a>
               </Button>
             </Card>
           );
