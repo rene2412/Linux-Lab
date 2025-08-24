@@ -1,7 +1,7 @@
 {
     "The Basics": [
         {
-            "section__size": 78,
+            "section__size": 85,
             "interactive__size": 53,
             "section__completed": false
         },
@@ -858,9 +858,36 @@
             "content_type": "interactive",
             "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'.<img src='../../../images/chart.jpg' height='300px' width='450px'",
             "completed": false
-        }, 
+        },
         {
             "id": 78,
+            "parent": "The Basics",
+            "section": "Extra",
+            "title": "Extra",
+            "content_type": "article",
+            "content": "By now we have covered most of the core Linux commands that you will need, but there are still some convient commands that would be beneficial so lets quicky go over them.",
+            "completed": false
+        },
+        {
+            "id": 79,
+            "parent": "The Basics",
+            "section": "Extra",
+            "title": "wc",
+            "content_type": "interactive",
+            "content": "Ever wondered how many lines a file has? Well of course Linux has a command that makes it super easy to do just that.</p>",
+            "completed": false
+        },
+        {
+            "id": 80,
+            "parent": "The Basics",
+            "section": "Extra",
+            "title": "Piping |",
+            "content_type": "article",
+            "content": "\"Do one thing and do it well, and work together through pipes.\" ",
+            "completed": false
+        },
+        {
+            "id": 81,
             "parent": "The Basics",
             "section": "Final",
             "title": "Closing thoughts",
@@ -871,9 +898,9 @@
     ],
     "Networking": [
         {
-            "section__size": 40,
+            "section__size": 53,
             "section__completed": false,
-            "interactive__size": 30
+            "interactive__size": 22
         },
         {
             "id": 1,
@@ -1073,7 +1100,7 @@
             "id": 17,
             "parent": "Networking",
             "section": "Checkpoint - Subnetting",
-            "title": "Lab #1",
+            "title": "Knowledge Check #8",
             "content_type": "interactive",
             "content": "Your boss is asking you to store the <b>ifconfig</b> output in a address.txt file, and is asking you to store the <b>ip route</b> output in a routing.txt file. Traverse to the Networking/ directory as that is where the files will live in. Remember, how we <b>redirect</b> output",
             "completed": false
@@ -1132,7 +1159,7 @@
             "id": 23,
             "parent": "Networking",
             "section": "Checkpoint - Connections",
-            "title": "Knowledge Check #4",
+            "title": "Knowledge Check #9",
             "content_type": "multichoice",
             "questions": {
                 "A": "Sends test messages to a server or IP address to measure connectivity and response time",
@@ -1148,7 +1175,7 @@
             "id": 24,
             "parent": "Networking",
             "section": "Checkpoint - Connections",
-            "title": "Knowledge Check #5",
+            "title": "Knowledge Check #10",
             "content_type": "multichoice",
             "questions": {
                 "A": "It queries a DNS server to retrieve information about a domain name, such as its IP address.",
@@ -1164,7 +1191,7 @@
             "id": 25,
             "parent": "Networking",
             "section": "Checkpoint - Connections",
-            "title": "Knowledge Check #6",
+            "title": "Knowledge Check #11",
             "content_type": "multichoice",
             "questions": {
                 "A": "A Server provides services, a Client requests services, and a Host is any device connected to a network",
@@ -1179,36 +1206,6 @@
         {
             "id": 26,
             "parent": "Networking",
-            "section": "Checkpoint - Connections",
-            "title": "Lab #2",
-            "content_type": "article",
-            "content": "",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 27,
-            "parent": "Networking",
-            "section": "Checkpoint - Connections",
-            "title": "Lab #3",
-            "content_type": "article",
-            "content": "",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 28,
-            "parent": "Networking",
-            "section": "Transfering",
-            "title": "Sockets",
-            "content_type": "article",
-            "content": "",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 29,
-            "parent": "Networking",
             "section": "Transfering",
             "title": "Ports",
             "content_type": "article",
@@ -1217,12 +1214,42 @@
             "completed": false
         },
         {
+            "id": 27,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "Protocols",
+            "content_type": "article",
+            "content": "<p>Suppose you are at a party and you meet someone new, the instinct for both parties is to shake each other's hands and greet. This process could be seen as a <b>protocol</b>, meaning that both parties engaged in societal rules and guidelines to greet each other. The internet works the same way.</p><p>In networking, a <b>protocol</b> is a set of rules and standards that govern how devices communicate with each other over a network. Just like social protocols help people interact smoothly, network protocols ensure that different computers, servers, and devices can understand each other and exchange information reliably.</p><h2>Why Do We Need Protocols?</h2><p>Imagine trying to have a conversation where one person speaks English, another speaks French, and a third speaks Japanese - without any common language or translation rules, communication would be impossible. Network protocols solve this problem by establishing:</p><ul><li><strong>Common Language</strong>: How data should be formatted and structured</li><li><strong>Timing Rules</strong>: When to send data and when to wait</li><li><strong>Error Handling</strong>: What to do when something goes wrong</li><li><strong>Connection Management</strong>: How to start and end communications</li></ul><h2>How Protocols Work</h2><p>Think of protocols as layers of rules, like a formal dinner party:</p><ol><li><strong>Physical Layer</strong>: Like having proper seating arrangements - how the actual connection is made</li><li><strong>Data Layer</strong>: Like using the right utensils - how information is packaged</li><li><strong>Application Layer</strong>: Like following conversation etiquette - how programs interact</li></ol>",
+            "answer": "",
+            "completed": false
+        },
+        {
+            "id": 28,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "HTTP (Hypertext Transfer Protocal",
+            "content_type": "article",
+            "content": "<p>We have all seen it before, HTTP (Hypertext Transfer Protocol) is the protocol across the web. It works by underlying rules and guidelines that operate over other fundamental protocols like TCP and UDP.</p><h2>What is HTTP?</h2><p>HTTP is the foundation of data communication on the World Wide Web. Every time you click a link, submit a form, or load a webpage, your browser is using HTTP to communicate with web servers. Think of it as the postal system of the internet, it defines how messages are formatted and transmitted between your browser (the client) and websites (the servers).</p><h2>HTTP's Protocol Stack</h2><p>HTTP doesn't work alone, it relies on lower-level protocols to actually transport data:</p><ul><li><strong>TCP (Transmission Control Protocol)</strong>: Provides reliable, ordered delivery of HTTP messages</li><li><strong>UDP (User Datagram Protocol)</strong>: Sometimes used for faster, but less reliable communication</li><li><strong>IP (Internet Protocol)</strong>: Handles routing messages across the internet</li></ul><p>HTTP sits on top of these protocols, focusing on the structure and meaning of web communication while letting TCP/UDP handle the actual data transmission.</p><h2>How HTTP Works</h2><p>HTTP follows a simple request-response model:</p><ol><li><strong>Request</strong>: Your browser sends a request to a web server asking for a specific resource (like a webpage, image, or video)</li><li><strong>Response</strong>: The server processes the request and sends back the requested resource along with a status code</li><li><strong>Display</strong>: Your browser receives the response and displays the content to you</li></ol><h2>HTTP Status Codes</h2><p>When a server responds, it includes a status code to indicate what happened:</p><ul><li><strong>200 OK</strong>: Everything worked perfectly</li><li><strong>404 Not Found</strong>: The requested page doesn't exist</li><li><strong>500 Internal Server Error</strong>: Something went wrong on the server</li><li><strong>301 Moved Permanently</strong>: The page has moved to a new location</li></ul><h2>So we can conclude that <b>sockets</b> are the foundation to create a connection, but how will data flow across the connection? Well this is where <b>TCP</b> & <b>UDP</b> come into play." ,
+            "answer": "",
+            "completed": false
+        },   
+        {
+            "id": 29,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "Sockets",
+            "content_type": "article",
+            "content": "<p>This is where Networking gets serious, especially if you are interested in network programming.</p><p>A socket is the 2-way endpoint between a client and server. Meaning that before any data is sent over the internet, a 2-way connection must be established. So, how does it work?<p>Think of a socket as a telephone connection between two parties. Just like you need to dial a number and wait for the other person to pick up before you can have a conversation, computers need to establish a socket connection before they can exchange data.</p><p>A socket combines:</p><ul><li><strong>IP Address</strong>: The \"phone number\" that identifies the specific computer</li><li><strong>Port Number</strong>: The specific \"extension\" or service on that computer.</li><li><strong>Protocol</strong>: The \"language\" they'll use to communicate.</li></ul><h2>Socket Connnection Steps</h3><ol><li><strong>Server Setup</strong>: The server creates a socket and \"listens\" on a specific port (like waiting by the phone)</li><li><strong>Client Request</strong>: The client creates a socket and attempts to connect to the server's IP address and port</li><li><strong>Connection Established</strong>: If successful, both sides now have a direct communication channel</li><li><strong>Data Exchange</strong>: Information flows back and forth through this established connection</li><li><strong>Connection Closed</strong>: Either side can terminate the connection when finished</li></ol>",
+            "answer": "",
+            "completed": false
+        },
+        {
             "id": 30,
             "parent": "Networking",
             "section": "Transfering",
-            "title": "HTTP",
+            "title": "TCP (Transmission Control Protocol)",
             "content_type": "article",
-            "content": "",
+            "content": "<p><b>TCP (Transmission Control Protocol)</b> is one of the more popular techniques used to transfer data across a socket (the internet). It works by establishing a reliable, connection-oriented communication channel between two devices.</p><h2>What Makes TCP Special?</h2><p>Think of TCP like a registered mail service - it guarantees that your package (data) will arrive at its destination in the correct order and in perfect condition. If something goes wrong during delivery, TCP will detect the problem and resend the data automatically.</p><h2>Key Features of TCP</h2><ul><li><strong>Reliable Delivery</strong>: TCP ensures that all data sent actually reaches its destination</li><li><strong>Ordered Data</strong>: Messages arrive in the exact same order they were sent</li><li><strong>Error Detection</strong>: TCP can detect corrupted or missing data</li><li><strong>Flow Control</strong>: It prevents overwhelming the receiving device with too much data at once</li><li><strong>Connection-Oriented</strong>: A connection must be established before any data transfer begins</li></ul><h2>The Three-Way Handshake</h2><p>Before any data can be sent, TCP establishes a connection through a process called the three-way handshake:</p><ol><li><strong>SYN</strong>: Client says \"I want to connect\"</li><li><strong>SYN-ACK</strong>: Server responds \"OK, I'm ready to connect\"</li><li><strong>ACK</strong>: Client confirms \"Great, let's start communicating\"</li></ol><p>This is like two people agreeing to have a phone conversation before they start talking.</p><h2>How TCP Ensures Reliability</h2><p>TCP uses several mechanisms to guarantee reliable data transfer:</p><ul><li><strong>Sequence Numbers</strong>: Each piece of data gets a number so the receiver knows the correct order</li><li><strong>Acknowledgments</strong>: The receiver confirms when data arrives successfully</li><li><strong>Retransmission</strong>: If data doesn't arrive or gets corrupted, TCP automatically resends it</li><li><strong>Checksums</strong>: Built-in error detection to catch corrupted data</li></ul><h2>When is TCP Used?</h2><p>TCP is perfect for applications where accuracy is more important than speed:</p><ul><li>Web browsing (HTTP/HTTPS)</li><li>Email transmission</li><li>File transfers</li><li>Online banking</li><li>Any application where losing data would be a problem</li></ul><img src='..\/..\/..\/images\/tcp_handshake.jpeg' width='550' height='450'>",
             "answer": "",
             "completed": false
         },
@@ -1230,24 +1257,13 @@
             "id": 31,
             "parent": "Networking",
             "section": "Transfering",
-            "title": "TCP\/IP",
+            "title": "UDP (User Datagram Protocol",
             "content_type": "article",
-            "content": "Today, the internet is powered by a model called <b>TCP\/IP<\/b> \u2014 a set of <b>protocols<\/b> and rules that defines how data is sent, received, and routed between devices.<br><br><ul><li><b>TCP<\/b> (Transmission Control Protocol) works by transmitting data like text messages, emails, and web pages into tiny packets that are purposefully broken down. These packets are then sent across the network and reassembled in the correct order on the receiving end. TCP ensures reliability, checking for errors and guaranteeing that packets arrive intact and in sequence.<\/li><br><li><b>IP<\/b> (Internet Protocol) is responsible for addressing and routing these packets. Every device on a network is assigned a unique IP address, and IP ensures that packets are sent to the correct destination. However, IP does not guarantee that the packets arrive or are in order \u2014 that's TCP's job.<\/li><\/ul><br>The combination of TCP and IP allows for robust and efficient communication across the vast infrastructure of the internet. This layered approach makes it possible for different networks and devices to talk to each other regardless of hardware or software differences.<img src='..\/..\/..\/images\/tcp_ip.png' width='500'>",
-            "answer": "",
+            "content": "<p><b>UDP (User Datagram Protocol)</b> is a fast and lightweight technique used to transfer data across a socket (the internet). It works by sending data quickly without establishing a formal connection or guaranteeing delivery.</p><h2>What Makes UDP Different?</h2><p>Think of UDP like dropping postcards in a mailbox - you send them quickly and hope they arrive, but you don't get confirmation of delivery. UDP prioritizes speed over reliability, making it perfect for situations where losing a little data isn't catastrophic.</p><h2>Key Features of UDP</h2><ul><li><strong>Fast Delivery</strong>: No connection setup means data can be sent immediately</li><li><strong>Connectionless</strong>: No need to establish a connection before sending data</li><li><strong>Lightweight</strong>: Minimal overhead means more bandwidth for actual data</li><li><strong>No Guarantees</strong>: Data might arrive out of order, duplicated, or not at all</li><li><strong>Simple</strong>: Fewer features mean less complexity and faster processing</li></ul><h2>How UDP Works</h2><p>UDP's approach is straightforward:</p><ol><li><strong>Package Data</strong>: Wrap the data in a UDP header with basic information</li><li><strong>Send Immediately</strong>: Fire the data packet toward its destination</li><li><strong>Move On</strong>: Don't wait for confirmation - just keep sending more data</li></ol><p>There's no handshake, no acknowledgments, and no retransmission if something goes wrong.</p><h2>UDP vs TCP: The Trade-off</h2><p>While TCP is like a careful conversation with confirmations, UDP is like shouting across a crowded room:</p><ul><li><strong>Speed</strong>: UDP is much faster because it skips reliability checks</li><li><strong>Efficiency</strong>: Less overhead means more actual data gets transmitted</li><li><strong>Risk</strong>: Some data packets might get lost or arrive in the wrong order</li></ul><h2>When is UDP Used?</h2><p>UDP is perfect for applications where speed matters more than perfect accuracy:</p><ul><li>Online gaming (a few missed frames won't ruin the experience)</li><li>Video streaming (better to skip a corrupted frame than pause the video)</li><li>Voice calls (brief audio dropouts are preferable to delays)</li><li>DNS lookups (quick queries that can be easily repeated if needed)</li><li>Live broadcasts (real-time data where delays would be worse than minor losses)</li></ul><img src='../../../images/udp.webp'>",
             "completed": false
         },
         {
             "id": 32,
-            "parent": "Networking",
-            "section": "Transfering",
-            "title": "The 3 Way Handshake",
-            "content_type": "article",
-            "content": "<p>We know through TCP\/IP, data is sent via packets. These packets hold data in bytes\u2014a collection of binary numbers (1s and 0s). Before any data is transferred, TCP uses a process called the 3-Way Handshake to establish a reliable connection between two devices.<\/p><p>The 3 steps of this handshake are:<\/p><ul><li><strong>SYN:<\/strong> The client sends a synchronize (SYN) packet to the server to start a connection.<\/li><li><strong>SYN-ACK:<\/strong> The server responds with a synchronize-acknowledgment (SYN-ACK) to confirm it received the request and is ready to connect.<\/li><li><strong>ACK:<\/strong> The client replies with an acknowledgment (ACK), finalizing the connection setup.<\/li><\/ul><p>Once these steps are complete, both devices are ready to exchange data securely and reliably.<\/p> <img src='..\/..\/..\/images\/tcp_handshake.jpeg' width='550' height='450'>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 33,
             "parent": "Networking",
             "section": "Transfering",
             "title": "traceroute",
@@ -1255,28 +1271,48 @@
             "content": "The <b>traceroute<\/b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute<\/b> is: <code>traceroute example_website.com<\/code> Lets try out an example on the terminal: <code>traceroute google.com<\/code> Breakdown of the output: <pre><ul><li><b>Hop Number:<\/b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.<\/li><li><b>IP Address:<\/b> The IP of the router or device at that hop (e.g. 192.168.1.1).<\/li><li><b>Time:<\/b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.<\/li><li><b>*:<\/b> A star means no response was received from that hop (could be blocked or timed out).<\/li><\/ul><p>This helps you spot slow or failing routes in a network.<\/p>",
             "answer": "",
             "completed": false
-        },
+        },   
+        {
+            "id": 33,
+            "parent": "Networking",
+            "section": "Transfering",
+            "title": "telnet",
+            "content_type": "interactive",
+            "content": " The <b>telnet<\/b> command is a tcp client based command that allows us to manually connect to a remote host on a specific port. In other words, the command allows us to check if a service (like a web server, SSH server, or mail server) is running and reachcable on that port.<\/p> Syntax: <code>telnet [example.com] [port]<\/code> Let's try a basic example by testing if we can reach google and <b>listen<\/b> on port 80. <code>telnet google.com 80<\/code><p>Breakdown:<\/p><ul><li><b>Trying 2607:f8b0:4005:810::200e... <\/b> - This shows the IP address telnet is trying to reach (IPv6 or IPv4).<\/li><li><b>Connected to google.com.<\/b> \u2014 Success! A TCP connection to port 80 is established. <\/li><\/ul><br>If the connection is successful, you're now manually connected to Google\u2019s web server over TCP. At this point, you could type an HTTP request (we will discuss later), or simply close the connection. Overall, this is useful for quickly testing if a port is open and listening.",
+            "answer": "",
+            "completed": false
+        },    
         {
             "id": 34,
             "parent": "Networking",
-            "section": "Checkpoint - Transfering",
-            "title": "Knowledge Check #5",
-            "content_type": "multichoice",
-            "questions": {
-                "A": "TCP handles addressing and routing, while IP ensures reliable delivery of packets",
-                "B": "TCP breaks data into packets and ensures reliable delivery, while IP handles addressing and routing",
-                "C": "TCP and IP both handle the same functions but are used for different types of data",
-                "D": "TCP encrypts data packets, while IP compresses them for faster transmission"
-            },
-            "content": "<p>What is the main difference between TCP and IP in the TCP\/IP model?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "B",
+            "section": "Transfering",
+            "title": "netstat/ss",
+            "content_type": "interactive",
+            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat</b> command, but the modern and faster alternative is <b>ss</b>.<p><p><b>Try out the command in the command line and we will breakdown the output</b><br><code>ss -tuln</code><br>This command shows all TCP, UDP, and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:</b><ul><li><b>Netid</b>: The protocol being used (e.g. tcp, udp)</li><li><b>State</b>: Connection state (e.g. LISTEN, ESTABLISHED)</li><li><b>Recv-Q</b>: Bytes received and queued</li><li><b>Send-Q</b>: Bytes waiting to be sent</li><li><b>Local Address:Port</b>: Your IP address and port</li><li><b>Peer Address:Port</b>: The remote IP address and port (if connected)</li></ul><p><p> Using <b>ss</b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It’s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss</b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
+            "answer": "",
             "completed": false
         },
         {
             "id": 35,
             "parent": "Networking",
             "section": "Checkpoint - Transfering",
-            "title": "Knowledge Check #6",
+            "title": "Knowledge Check #12",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "TCP is faster and connectionless, while UDP is slower but more reliable",
+              "B": "TCP ensures reliable, ordered delivery with connection setup, while UDP is fast but unreliable",
+              "C": "TCP and UDP both guarantee delivery but use different encryption methods",
+              "D": "TCP is used for web browsing only, while UDP is used for all other internet applications"
+            },
+            "content": "<p>What is the main difference between TCP and UDP protocols?</p><div class=\"question__container\"></div>",
+            "answer": "B",
+            "completed": false
+        },
+        {
+            "id": 36,
+            "parent": "Networking",
+            "section": "Checkpoint - Transfering",
+            "title": "Knowledge Check #13",
             "content_type": "multichoice",
             "questions": {
                 "A": "SYN \u2192 ACK \u2192 SYN-ACK",
@@ -1289,10 +1325,10 @@
             "completed": false
         },
         {
-            "id": 36,
+            "id": 37,
             "parent": "Networking",
             "section": "Checkpoint - Transfering",
-            "title": "Knowledge Check #7",
+            "title": "Knowledge Check #14",
             "content_type": "multichoice",
             "questions": {
                 "A": "It shows the actual path packets take to reach a destination, including each router hop",
@@ -1305,56 +1341,26 @@
             "completed": false
         },
         {
-            "id": 37,
-            "parent": "Networking",
-            "section": "Checkpoint - Transfering",
-            "title": "Knowledge Check #8",
-            "content_type": "multichoice",
-            "questions": {
-                "A": "It indicates the network interface speed in Mbps",
-                "B": "It shows the number of active connections on that route",
-                "C": "It represents the priority value - lower numbers are preferred for routing",
-                "D": "It displays the total number of packets sent through that route"
-            },
-            "content": "<p>In the output of 'ip route', what does the 'metric' value represent?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "C",
-            "completed": false
-        },
-        {
             "id": 38,
             "parent": "Networking",
-            "section": "Ports & Sockets",
-            "title": "Ports",
-            "content_type": "article",
-            "content": "<p>When we use a radio and want to find a rock music station, we tune to a specific frequency \u2014 like 104.7 MHz. That frequency tells the radio which station to <b>listen<\/b> to. Once the connection is made, we receive the output resulting in rock music.<\/p><p>The internet works in a similar way. Because the internet handles many types of traffic (web browsing, email, file sharing, streaming, etc.), it uses <b>ports<\/b> to organize that traffic. Each port represents a specific type of service.<\/p><p>For example:<\/p><ul><li><b>Port 80<\/b> \u2013 HTTP (websites using plain text)<\/li><li><b>Port 443<\/b> \u2013 HTTPS (secure websites)<\/li><li><b>Port 25<\/b> \u2013 SMTP (sending email)<\/li><li><b>Port 53<\/b> \u2013 DNS (resolving domain names)<\/li><\/ul><p>When your computer connects to a website, it doesn\u2019t just connect to an IP address \u2014 it also connects to a <b>port<\/b> on that address. This way, the server knows what kind of service you\u2019re asking for.<\/p><p>Port numbers range from 0 to 65535, but most common services use ports below 1024, known as <b>well-known ports<\/b>.<\/p>",
-            "answer": "",
+            "section": "Checkpoint - Transfering",
+            "title": "Knowledge Check #15",
+            "content_type": "multichoice",
+            "questions": {
+              "A": "Telnet displays local network connections, while Netstat connects to remote services",
+              "B": "Telnet connects to and tests remote services, while Netstat displays local network connections and statistics",
+              "C": "Both Telnet and Netstat perform the same function but work on different operating systems",
+              "D": "Telnet encrypts network data, while Netstat compresses it for faster transmission"
+            },
+            "content": "<p>What is the main difference between Telnet and Netstat?</p><div class=\"question__container\"></div>",
+            "answer": "B",
             "completed": false
         },
         {
             "id": 39,
             "parent": "Networking",
-            "section": "Ports & Sockets",
-            "title": "telnet",
-            "content_type": "interactive",
-            "content": " The <b>telnet<\/b> command is a tcp client based command that allows us to manually connect to a remote host on a specific port. In other words, the command allows us to check if a service (like a web server, SSH server, or mail server) is running and reachcable on that port.<\/p> Syntax: <code>telnet [example.com] [port]<\/code> Let's try a basic example by testing if we can reach google and <b>listen<\/b> on port 80. <code>telnet google.com 80<\/code><p>Breakdown:<\/p><ul><li><b>Trying 2607:f8b0:4005:810::200e... <\/b> - This shows the IP address telnet is trying to reach (IPv6 or IPv4).<\/li><li><b>Connected to google.com.<\/b> \u2014 Success! A TCP connection to port 80 is established. <\/li><\/ul><br>If the connection is successful, you're now manually connected to Google\u2019s web server over TCP. At this point, you could type an HTTP request (we will discuss later), or simply close the connection. Overall, this is useful for quickly testing if a port is open and listening.",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 40,
-            "parent": "Networking",
-            "section": "Ports & Sockets",
-            "title": "netstat/ss",
-            "content_type": "interactive",
-            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat</b> command, but the modern and faster alternative is <b>ss</b>.<p><p><b>Try out the command in the command line and we will breakdown the output</b><br><code>ss -tuln</code><br>This command shows all TCP and UDP (another transfer protocol like tcp, but just faster and less safe), and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:</b><ul><li><b>Netid</b>: The protocol being used (e.g. tcp, udp)</li><li><b>State</b>: Connection state (e.g. LISTEN, ESTABLISHED)</li><li><b>Recv-Q</b>: Bytes received and queued</li><li><b>Send-Q</b>: Bytes waiting to be sent</li><li><b>Local Address:Port</b>: Your IP address and port</li><li><b>Peer Address:Port</b>: The remote IP address and port (if connected)</li></ul><p><p> Using <b>ss</b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It’s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss</b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
-            "answer": "",
-            "completed": false
-        },
-        {
-            "id": 25,
-            "parent": "Networking",
-            "section": "Checkpoint - Ports & Sockets",
-            "title": "Knowledge Check #9",
+            "section": "Checkpoint - Transfering",
+            "title": "Knowledge Check #16",
             "content_type": "multichoice",
             "questions": {
               "A": "They are used to identify physical cables between computers",
@@ -1367,10 +1373,10 @@
             "completed": false
           },
           {
-            "id": 26,
+            "id": 40,
             "parent": "Networking",
-            "section": "Checkpoint - Ports & Sockets",
-            "title": "Knowledge Check #10",
+            "section": "Checkpoint - Transfering",
+            "title": "Knowledge Check #17",
             "content_type": "multichoice",
             "questions": {
               "A": "Port numbers used for encryption only",
@@ -1383,26 +1389,10 @@
             "completed": false
           },
           {
-            "id": 27,
+            "id": 41,
             "parent": "Networking",
-            "section": "Checkpoint - Ports & Sockets",
-            "title": "Knowledge Check #11",
-            "content_type": "multichoice",
-            "questions": {
-              "A": "To install software from a remote repository",
-              "B": "To test if a specific port is open and reachable on a remote host",
-              "C": "To scan for viruses on a network",
-              "D": "To monitor the CPU usage of a server"
-            },
-            "content": "<p>What is the purpose of the telnet command in networking?<\/p><div class=\"question__container\"><\/div>",
-            "answer": "B",
-            "completed": false
-          },
-          {
-            "id": 28,
-            "parent": "Networking",
-            "section": "Checkpoint - Ports & Sockets",
-            "title": "Knowledge Check #12",
+            "section": "Checkpoint - Transfering",
+            "title": "Knowledge Check #18",
             "content_type": "multichoice",
             "questions": {
               "A": "An IP address assigned to a domain",
@@ -1415,16 +1405,16 @@
             "completed": false
           },
           {
-            "id": 29,
+            "id": 42,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "HTTP vs HTTPS",
             "content_type": "article",
-            "content": "While we browse a website, we interact with the browser’s HTTP methods—requests made from a client (like your browser) to a server. These requests come in different forms, but the two most common are <b>GET</b> and <b>POST</b>.<li><b>GET</b> – A <b>GET</b> request is used to retrieve information from a server. It fetches data such as web pages, session information (like a username), or third-party data through APIs (we’ll discuss APIs in more detail later). For example, whenever you click on a link or load a webpage that displays data, you are sending a GET request to the server, which then responds with the requested content.</li><li><b>POST</b> – A <b>POST</b> request is used to send data to a server, usually in a secure manner. Common examples include entering your credit or debit card information to complete a purchase, or submitting your email, username, and password to sign up or log in to a web application.</li><img src='../../../images/https.png' width='500'>",
+            "content": "We have gone over HTTP already, but what is its counterpart HTTPS?</p><h2>What is HTTPS?</h2><p>HTTPS (HyperText Transfer Protocol Secure) is essentially HTTP with a security layer added on top. Think of HTTP as sending a postcard through the mail - anyone handling it can read your message. HTTPS is like sealing that same message in an encrypted envelope that only the intended recipient can open.</p><h2>Encryption</h2><p>The main difference between HTTP and HTTPS is that HTTPS encrypts all data traveling between your browser and the web server. This means:</p><ul><li><strong>HTTP</strong>: Data travels in plain text that anyone can intercept and read</li><li><strong>HTTPS</strong>: Data is scrambled using encryption, making it unreadable to eavesdroppers</li></ul><h2>How HTTPS Works</h2><p>HTTPS uses SSL/TLS (Secure Sockets Layer/Transport Layer Security) to create a secure connection:</p><ol><li><strong>Handshake</strong>: Your browser and the server agree on encryption methods</li><li><strong>Certificate Exchange</strong>: The server proves its identity with a digital certificate</li><li><strong>Key Exchange</strong>: Both sides create a shared secret key for encryption</li><li><strong>Secure Communication</strong>: All data is encrypted using the shared key</li></ol><h2>Visual Indicators</h2><p>You can easily identify HTTPS websites:</p><ul><li><strong>Lock Icon</strong>: Appears in your browser's address bar</li><li><strong>Green Address Bar</strong>: Some browsers show enhanced visual security indicators</li><li><strong>URL Prefix</strong>: Starts with \"https://\" instead of \"http://\"</li><li><strong>Port Number</strong>: Uses port 443 instead of port 80</li></ul><h2>Why HTTPS Matters</h2></p><ul><li><strong>Eavesdropping</strong>: Prevents others from reading your data</li><li><strong>Man-in-the-Middle Attacks</strong>: Ensures you're communicating with the real website</li><li><strong>Data Tampering</strong>: Detects if information has been modified during transmission</li></ul><p><strong>Essential for:</strong></p><ul><li>Online banking and financial transactions</li><li>Shopping and credit card information</li><li>Login credentials and passwords</li><li>Personal information and private communications</li></ul><h2>The Cost of Security</h2><p>HTTPS does have some trade-offs:</p><ul><li><strong>Slightly Slower</strong>: Encryption/decryption takes processing power</li><li><strong>More Complex</strong>: Requires SSL certificates and proper configuration</li><li><strong>Additional Overhead</strong>: Extra data in each request for security headers</li></ul><p>However, modern computers and networks make these costs minimal, which is why most websites now use HTTPS by default.</p><img src='../../../images/https.png'>",
             "completed": false
           },
           {
-            "id": 30,
+            "id": 43,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "GET vs POST",
@@ -1433,7 +1423,7 @@
             "completed": false
           }, 
           {
-            "id": 31,
+            "id": 44,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl",
@@ -1442,7 +1432,7 @@
             "completed": false
           },
           {
-            "id": 32,
+            "id": 45,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl - Headers",
@@ -1451,7 +1441,7 @@
             "completed": false
           }, 
           {
-            "id": 33,
+            "id": 46,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "API's - Application Programming Interface",
@@ -1460,7 +1450,7 @@
             "completed": false
           },
           {
-            "id": 34,
+            "id": 47,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl - API's",
@@ -1469,16 +1459,16 @@
             "completed": false
           },  
           {
-            "id": 35,
+            "id": 48,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "WAN (Wide Area Network)",
             "content_type": "article",
-            "content": "Earlier, we discussed that a LAN (Local Area Network) is the local network where devices like your phone, laptop, or printer communicate. For example, in a home, café, or office, we learned how to find your local IP using the `ifconfig'. But what about your public IP address?</p>This is the IP that the outside world sees when you connect to the internet.</p><p>When your device sends a request to the internet, it goes through your router. Your router has a WAN (Wide Area Network) IP address, which is typically the same as your public IP. This IP is assigned by your ISP (Internet Service Provider) and allows your router — and by extension, your entire local network — to communicate with servers on the internet across a large geographical area.</p><img src='../../../images/wan.jpg' width='500'",
+            "content": "Earlier, we discussed that a LAN (Local Area Network) is the local network where devices like your phone, laptop, or printer communicate. For example, in a home, café, or office, we learned how to find your local IP using the `ifconfig'. But what about your public IP address?</p>This is the IP that the outside world sees when you connect to the internet.</p><p>When your device sends a request to the internet, it goes through your router. Your router has a WAN (Wide Area Network) IP address, which is typically the same as your public IP. This IP is assigned by your ISP (Internet Service Provider) and allows your router, and by extension, your entire local network to communicate with servers on the internet across a large geographical area.</p><img src='../../../images/wan.jpg' width='500'",
             "completed": false
           },
           {
-            "id": 36,
+            "id": 49,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl - Public IP",
@@ -1487,10 +1477,10 @@
             "completed": false
           },
           {
-            "id": 37,
+            "id": 50,
             "parent": "Networking",
             "section": "Checkpoint - The World Wide Web",
-            "title": "Knowledge Check #13",
+            "title": "Knowledge Check #19",
             "content_type": "multichoice",
             "questions": {
               "A": "GET requests store data in the server, while POST requests read data from the server",
@@ -1503,10 +1493,10 @@
             "completed": false
           },
           {
-            "id": 38,
+            "id": 51,
             "parent": "Networking",
             "section": "Checkpoint - The World Wide Web",
-            "title": "Knowledge Check #14",
+            "title": "Knowledge Check #20",
             "content_type": "multichoice",
             "questions": {
             "A": "The local IP address assigned to your device via DHCP",
@@ -1519,26 +1509,26 @@
             "completed": false
           },
           {
-             "id": 39,
+             "id": 52,
              "parent": "Networking",
              "section": "Checkpoint - The World Wide Web",
-             "title": "Knowledge Check #15",
+             "title": "Knowledge Check #21",
              "content_type": "multichoice",
              "questions": {
              "A": "curl is a Linux-only command that only downloads software packages",
              "B": "curl allows data transfer between servers using HTTP methods like GET and POST, and is commonly used to interact with APIs",
              "C": "curl is used exclusively to monitor IP address changes by your ISP",
               "D": "curl uploads your IP address to web browsers for tracking"
-        },
+          },
             "content": "<p>What is the purpose of the <b>curl</b> command in networking?</p><\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
           },
           {
-            "id": 40,
+            "id": 53,
             "parent": "Networking",
             "section": "Checkpoint - The World Wide Web",
-            "title": "Knowledge Check #16",
+            "title": "Knowledge Check #22",
             "content_type": "multichoice",
             "questions": {
               "A": "Your router assigns a private IP to websites so your devices can connect",
