@@ -1,7 +1,19 @@
+<<<<<<< HEAD
 # Database config
 includes/database.inc.php
 /includes/database.inc.php
 database.inc.php
+=======
+<<<<<<< HEAD
+includes/database.inc.php
+/includes/database.inc.php
+database.inc.php
+=======
+# Database config
+includes/database.inc.php
+/includes/database.inc.php
+database.inc.php
+>>>>>>> 7164a2f52d5ab7124aa09aca498ee75e8e6c0972
 
 # Environment variables
 .env
@@ -37,4 +49,9 @@ Thumbs.db
 *.log
 npm-debug.log*
 yarn-debug.log*
+<<<<<<< HEAD
 yarn-error.log*
+=======
+yarn-error.log*
+>>>>>>> react
+>>>>>>> 7164a2f52d5ab7124aa09aca498ee75e8e6c0972

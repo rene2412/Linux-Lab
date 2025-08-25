@@ -1,68 +1,150 @@
 {
-    "lessons": [
-      {
-        "id": 1,
-        "section": "Prelude",
-        "title": "Introduction to Bash",
-        "content": "Bash (Bourne Again Shell) is a command programming language interpreter, that executes commands read from the standard input or from a file. It's the default shell on most Linux distributions and macOS. The shell is the program that reads and executes commands via the command line that affects your entire machine.</p> Bash Scripting is a scripting language, which means that it was specically designed to automate tasks for system admins, software engineers, IT, and Cyber Security on Linux machines. In addition, since Bash scripts have the ability to modify system files, hackers use Bash scripts to perform attacks which could allow them to compromise your system. Overall, learning Bash Scripting could open the door for better career oppurtunites, enhance your programming skills, and give you a better understaning of Linux.",
-        "tips": [
-        "WARNING: This section of Linux-Lab assumes you already know a programming language (Preferably in Python, C, or C++). If not then prepare for a fast paced enviroment as this section will use concepts that will make more sense for an experienced programmer."
-        ],
-        "load_in_editor": true
-      },
-      {
-        "id": 2,
-        "section": "Shebang, Printing, & $Variables",
-        "title": "Hello World",
-        "difficulty": "Beginner",
-        "content": "Every Bash script begins with the <b>shebang</b> character sequence: #!. Followed by the absolute path that the interpreter uses to execute the script: <code>#!/bin/bash.</code><br><br>To print to the screen, we follow the same command used in the Linux command line: <b>echo</b>. The difference is that echo can now take different parameters like strings, chars, ints, arrays, and more.<br><br>For the first lesson here, lets print to the screen: \"Hello World\".",
-        "tips": [
-        "Make sure your script file has executable permissions: use `chmod +x script.sh`. In this enviorement you wont need to, but if you are programming on your own machine, you will need to allow user execution permissions.",
-        "Use double quotes (`\"`) around strings to preserve spaces and interpret variables correctly."
-        ],
-        "load_in_editor": true
-      },
-      {
-        "id": 3,
-        "section": "Shebang, Printing, & $Variables",
-        "title": "$Variables",
-        "difficulty": "Beginner",
-        "content": "Since Bash is a scripting language, variables are not type-strict. You don't declare them with a data type — you simply assign them using the equals sign (`=`), and reference them using the dollar sign (`$`). Bash is not type-strict, everything is stored as a string by default. It's only interpreted as a number when used in an arithmetic context.<br><br>Let's write a program that demonstrates how you can create and reference variables in Bash:<br><br><code>food=\"Pizza\"<br>echo \"I like, $food\"</code><br><br>Note: The Bash interperter knows that food is a string variable because it is not used in an arthmethic context (we wil discuss about this in the next lesson). The variable (whether it is a string, int, char, etc) is extracted or referenced in the echo paramater, in this case the variable food represents a string. Also, there should be no spaces around the equals sign when assigning a value. In addition, double quotes are recommended to preserve spacing and interpret variable values properly.",
-        "tips": [
-          "Variable assignment must not have spaces around the `=`. For example: `x=5`, not `x = 5`.",
-          "All variables are treated as strings by default unless used in arithmetic expressions.",
-          "Variable names should start with a letter or underscore, not a number."
-        ],
-        "load_in_editor": true
-      },
-      {
-        "id": 4,
-        "section": "Concatenation",
-        "title": "Concatenation",
-        "difficulty": "Beginner",
-        "content": "Since Bash treats everything as a string by default, concatenating variables is straightforward. You can merge strings, characters, and even integers by placing them side by side inside double quotes, with no spaces between them. The result can be stored in a new variable or passed directly to functions like echo. Note that integers are not added—they're treated as plain text during concatenation.",
-        "code_example": "#!/bin/bash\n#Example 1: Concatenating 2 string variables\nfirst=\"Kali\";\nsecond=\"Linux\";\ncombined=\"$first$second\";\necho \"$combined\";\n\n#Example 2: Concatenating strings with a space\ngreeting=\"Hello,\";\nname=\"User!\";\nmessage=\"$greeting $name\";\necho \"$message\";\n\n#Example 3: Concatenating integers as strings\na=10;\nb=20;\nresult=\"$a$b\";\necho \"$result\";\n\n#Example 4: Concatenation with echo\nstring=\"Bash Scripting\";\necho \"We like, $string!\"",
-        "tips": [
-          "Use double quotes to ensure variables expand properly: \"$var1$var2\".",
-          "You don't need a + sign—just write variables next to each other.",
-          "Make sure there are no spaces between variables if you want a seamless merge."
-        ],
-        "load_in_editor": true
-      },
-      {
-        "id": 5,
-        "section": "Arithmetic Operations & Logic",
-        "title": "Arithmetic Operations",
-        "difficulty": "Beginner",
-        "content": "In Bash, we can perform arithmetic operations using different methods such as the <b>$(( ))</b> syntax, the <code>let</code> command, or the <code>expr</code> command (though not recommended). These operations include addition, subtraction, multiplication, division, and modulus. Bash only supports integer arithmetic by default, however there are additonal paramters we can add to retreive decimal values with <b>bc</b> (Basic Calculator).<br><br>Let's take a look at an example of how arithmetic operations look like. Run the program to view the output.\n\n",
-        "code_example": "#!/bin/bash\n\n#Declaring our variables\na=10\nb=5\n\n#Addition\nsum=$((a + b))\necho \"Sum: $sum\"\n\n#Multiplication\nproduct=$((a * b))\necho \"Product: $product\"\n\n#Division\nquotient=$((a / b))\necho \"Quotient: $quotient\"\n\n#Modulus\nmodulus=$((a % b))\necho \"Modulus: $modulus\"\n\n#Floating Point Math\nc=34.157\nd=23.567\n#This syntax computes the decimal addition, rounds to 2 decimal places, and then sends to standard output\n#Then '| bc' takes that output and pipes it to bc (a command line program)\ndecimal=$(echo \"scale=2; $c / $d\" | bc)\necho \"Floating Point: $decimal\"",
-        "tips": [
-          "<b>#</b> represent single line comments in Bash, which is familar if you are a python programmer",
-          "Use <code>$(( ))</code> for inline arithmetic, e.g., <code>result=$((3 + 2))</code>",
-          "The <code>let</code> command also works: <code>let result=5*2</code>"
-        ],
-        "load_in_editor": true
-      }      
-    ]
+  "lessons": [
+    {
+      "id": 1,
+      "section": "Prelude",
+      "title": "Introduction to Bash",
+      "type": "article",
+      "content": "Bash (Bourne Again Shell) is a command programming language interpreter, that executes commands read from the standard input or from a file. It's the default shell on most Linux distributions and macOS. The shell is the program that reads and executes commands via the command line that affects your entire machine.</p> Bash Scripting is a scripting language, which means that it was specically designed to automate tasks for system admins, software engineers, IT, and Cyber Security. In addition, since Bash scripts have the ability to modify system files, hackers use Bash scripts to perform attacks which could allow them to compromise your system. Overall, learning Bash Scripting could open the door for better career oppurtunites, enhance your programming skills, and give you a better understaning of Linux.",
+      "tips": [
+      "WARNING: This section of Linux-Lab assumes you already know a programming language (Preferably in Python, C, or C++). If not then prepare for a fast paced enviroment as this section will use concepts that will make more sense for an experienced programmer."
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 2,
+      "section": "Shebang, Printing, & $Variables",
+      "title": "Hello World",
+      "difficulty": "Beginner",
+      "content": "Every Bash script begins with the <b>shebang</b> character sequence: #!. Followed by the absolute path that the interpreter uses to execute the script: <code>#!/bin/bash.</code><br><br>To print to the screen, we follow the same command used in the Linux command line: <b>echo</b>. The difference is that echo can now take different parameters like strings, chars, ints, arrays, and more.<br><br>For the first lesson here, lets print to the screen: \"Hello World\".",
+      "type": "interactive",
+      "tips": [
+      "Make sure your script file has executable permissions: use `chmod +x script.sh`. In this enviorement you wont need to, but if you are programming on your own machine, you will need to allow user execution permissions.",
+      "Use double quotes (`\"`) around strings to preserve spaces and interpret variables correctly."
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 3,
+      "section": "Shebang, Printing, & $Variables",
+      "title": "$Variables",
+      "difficulty": "Beginner",
+      "content": "Since Bash is a scripting language, variables are not type-strict. You don't declare them with a data type — you simply assign them using the equals sign (`=`), and reference them using the dollar sign (`$`). Bash is not type-strict, everything is stored as a string by default. It's only interpreted as a number when used in an arithmetic context.<br><br>Let's write a program that demonstrates how you can create and reference variables in Bash:<br><br><code>food=\"Pizza\"<br>echo \"I like, $food\"</code><br><br>Note: The Bash interperter knows that food is a string variable because it is not used in an arthmethic context (we wil discuss about this in the next lesson). The variable (whether it is a string, int, char, etc) is extracted or referenced in the echo paramater, in this case the variable food represents a string. Also, there should be no spaces around the equals sign when assigning a value. In addition, double quotes are recommended to preserve spacing and interpret variable values properly.",
+      "type": "article",
+      "tips": [
+        "Variable assignment must not have spaces around the `=`. For example: `x=5`, not `x = 5`.",
+        "All variables are treated as strings by default unless used in arithmetic expressions.",
+        "Variable names should start with a letter or underscore, not a number."
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 4,
+      "section": "Concatenation",
+      "title": "Concatenation",
+      "difficulty": "Beginner",
+      "content": "Since Bash treats everything as a string by default, concatenating variables is straightforward. You can merge strings, characters, and even integers by placing them side by side inside double quotes, with no spaces between them. The result can be stored in a new variable or passed directly to functions like echo. Note that integers are not added—they're treated as plain text during concatenation.",
+      "code_example": "#!/bin/bash\n#Example 1: Concatenating 2 string variables\nfirst=\"Kali\";\nsecond=\"Linux\";\ncombined=\"$first$second\";\necho \"$combined\";\n\n#Example 2: Concatenating strings with a space\ngreeting=\"Hello,\";\nname=\"User!\";\nmessage=\"$greeting $name\";\necho \"$message\";\n\n#Example 3: Concatenating integers as strings\na=10;\nb=20;\nresult=\"$a$b\";\necho \"$result\";\n\n#Example 4: Concatenation with echo\nstring=\"Bash Scripting\";\necho \"We like, $string!\"",
+      "type": "article",
+      "tips": [
+        "Use double quotes to ensure variables expand properly: \"$var1$var2\".",
+        "You don't need a + sign—just write variables next to each other.",
+        "Make sure there are no spaces between variables if you want a seamless merge."
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 5,
+      "section": "Arithmetic Operations & Logic",
+      "title": "Arithmetic Operations",
+      "difficulty": "Beginner",
+      "content": "In Bash, we can perform arithmetic operations using different methods such as the <b>$(( ))</b> syntax, the <code>let</code> command, or the <code>expr</code> command (though not recommended). These operations include addition, subtraction, multiplication, division, and modulus. Bash only supports integer arithmetic by default, however there are additonal paramters we can add to retreive decimal values with <b>bc</b> (Basic Calculator).<br><br>Let's take a look at an example of how arithmetic operations look like. Run the program to view the output.\n\n",
+      "code_example": "#!/bin/bash\n\n#Declaring our variables\na=10\nb=5\n\n#Addition\nsum=$((a + b))\necho \"Sum: $sum\"\n\n#Multiplication\nproduct=$((a * b))\necho \"Product: $product\"\n\n#Division\nquotient=$((a / b))\necho \"Quotient: $quotient\"\n\n#Modulus\nmodulus=$((a % b))\necho \"Modulus: $modulus\"\n\n#Floating Point Math\nc=34.157\nd=23.567\n#This syntax computes the decimal addition, rounds to 2 decimal places, and then sends to standard output\n#Then '| bc' takes that output and pipes it to bc (a command line program)\ndecimal=$(echo \"scale=2; $c / $d\" | bc)\necho \"Floating Point: $decimal\"",
+      "type": "article",
+      "tips": [
+        "<b>#</b> represent single line comments in Bash, which is familar if you are a python programmer",
+        "Use <code>$(( ))</code> for inline arithmetic, e.g., <code>result=$((3 + 2))</code>",
+        "The <code>let</code> command also works: <code>let result=5*2</code>"
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 6,
+      "section": "Arithmetic Operations & Logic",
+      "title": "User Input",
+      "difficulty": "Beginner",
+      "content": "Bash scrpting makes it straight forward to read input from the user. To accomplish this, we can use the <b>read</b> command to prompt the user for input and then store the response in a variable.<br><br>Additionaly we can use the <b>-p</b> flag to prompt the user, which would display a message before waiting for input to continue. Though this approach requires a bit more syntax.<br><br>If the user input is expected to contain sensitive information like a password, we can use the <b>-s</b> flag to hide the users response.<br><br>Let's take a look at some coding examples in the editor. Go ahead and run the program, and feel free to mess around with the code to get a better understanding of the syntax and flow.",
+      "code_example": "#!/bin/bash\n\n #Example 1 - Basic read command\necho \"Please Enter Your Name:\"\nread name\necho \"Welcome, $name\"\n\n#Example 2 - Prompting with -p\nread -p \"Enter Your Age:\" age\necho \"$name is $age years old!\"\n\n#Example 3 - Prompting with the -s(secure) and -p flag\nread -sp \"Enter your password: \" password\necho \"Password entered: $password\"\n\n#Example 4 - Reading in multiple variables\nread -p \"Enter three words: \" word1 word2 word3\necho \"Word 1: $word1\"\necho \"Word 2: $word2\"\necho \"Word 3: $word3\"",
+      "type": "article",
+      "tips": [
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 7,
+      "section": "Multiple Choice",
+      "title": "Quiz #1",
+      "difficulty": "Beginner",
+      "content": "something here",
+      "type": "mutliple-choice",
+      "tips": [
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 8,
+      "section": "Multiple Choice",
+      "title": "Quiz #2",
+      "difficulty": "Beginner",
+      "content": "something here",
+      "type": "mutliple-choice",
+      "tips": [
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 9,
+      "section": "Multiple Choice",
+      "title": "Quiz #3",
+      "difficulty": "Beginner",
+      "content": "something here",
+      "type": "mutliple-choice",
+      "tips": [
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 10,
+      "section": "Labs",
+      "title": "Lab #1 - Calculator",
+      "difficulty": "Beginner",
+      "content": "something here",
+      "type": "interactive",
+      "tips": [
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 11,
+      "section": "Labs",
+      "title": "Lab #2 - Calender",
+      "difficulty": "Beginner",
+      "content": "something here",
+      "type": "interactive",
+      "tips": [
+      ],
+      "load_in_editor": true
+    },
+    {
+      "id": 12,
+      "section": "Logic",
+      "title": "Conditionals",
+      "difficulty": "Beginner",
+      "content": "",
+      "type": "article",
+      "tips": [
+      ],
+      "load_in_editor": true
+    }                                                                                
+  ]
 }
-      
