@@ -9,7 +9,7 @@ import { Card, CardHeader, CardInfo } from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import CommandLine from '../../components/ui/CommandLine';
 import { useGSAP } from '@gsap/react';
-import { useLenis } from '../../context/LenisContext';
+import { useLenis } from 'lenis/react';
 import BackgroundImage from '../../components/ui/BackgroundImage';
 import SectionFade from '../../components/ui/SectionFade';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,7 +29,7 @@ const MODULES = [
       price: 'Free',
     },
     buttonText: 'Begin Journey',
-    cliText: ['Hello World', 'This is Foundations'],
+    cliText: ['Hello World', 'This is Foundations', 'Can you hear the music?'],
     href: SITE_URL_FOUNDATIONS,
   },
   {
@@ -49,7 +49,7 @@ const MODULES = [
   {
     title: 'Scripting',
     description:
-      'Move like a complete pro and unlock this idk im just yapping something related to bash scripting or what not like test or custom or scripts and what not.',
+      'Automate everything you have learned to become cracked. Scripting, scripting away finising this certifies you as a Linux guru. Currently in progress though but check back soon!',
     info: {
       size: '25+ Lessons',
       time: '2hr',
@@ -69,6 +69,7 @@ export default function Modules() {
 
   useGSAP(
     () => {
+      if (!lenis) return;
       Observer.create({
         target: container.current,
         onMove: e => {
@@ -131,7 +132,7 @@ export default function Modules() {
         });
       });
     },
-    { scope: container }
+    { scope: container, dependencies: [lenis] }
   );
 
   return (
@@ -140,9 +141,9 @@ export default function Modules() {
       ref={container}
       className="relative mt-20 min-h-fit overflow-x-hidden py-20"
     >
-      <BackgroundImage src="media/bg5.png" alt="abstract dither" />
+      <BackgroundImage src="media/bg8.webp" alt="abstract dither" />
       <SectionFade variant="top" />
-      <SectionFade variant="bottom" className="!h-0" />
+      <SectionFade variant="bottom" className="" />
       <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-center text-white">
         <ScrambleScroll>Where will you begin?</ScrambleScroll>
       </h1>

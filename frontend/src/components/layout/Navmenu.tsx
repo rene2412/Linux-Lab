@@ -10,6 +10,7 @@ import { typewriterCycle } from '../../utils/animations/textCycle';
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
 import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN } from '../../utils/data';
 import Anchor from '../ui/Anchor';
+import { useLenis } from 'lenis/react';
 
 gsap.registerPlugin(SplitText, TextPlugin, ScrambleTextPlugin);
 
@@ -26,11 +27,13 @@ export default function Navmenu({ className = ' ' }) {
   const { isOpen, setIsOpen } = useNavbar();
   const [firstOpen, setFirstOpen] = useState<boolean>(false);
   const container = useRef<HTMLElement>(null);
+  const lenis = useLenis();
 
   // open animation
   useGSAP(
     () => {
       if (isOpen) {
+        lenis?.stop();
         gsap.set(container.current, { display: 'flex', clipPath: 'inset(0)' });
         const tl = gsap.timeline({ paused: false });
         gsap.set('.navbar__header', { opacity: 0 });
@@ -108,6 +111,7 @@ export default function Navmenu({ className = ' ' }) {
   useGSAP(
     () => {
       if (firstOpen && !isOpen) {
+        lenis?.start();
         const tl = gsap.timeline();
         tl.fromTo(
           '.navbar__bg2',

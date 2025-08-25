@@ -12,7 +12,7 @@ export default function BackgroundImage({
   return (
     <div
       aria-hidden
-      className={`pointer-events-none select-none absolute  top-0 -z-10 h-full w-full overflow-visible opacity-3 ${className}`}
+      className={`pointer-events-none select-none absolute  top-0 -z-10 h-full w-full overflow-visible opacity-5 ${className}`}
     >
       <img
         src={src}

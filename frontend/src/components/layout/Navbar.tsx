@@ -1,5 +1,5 @@
 import type React from 'react';
-import tuxImage from '../../assets/tux.png';
+import tuxImage from '../../assets/tux.webp';
 import Button from '../ui/Button';
 import { useNavbar } from '../../context/navContext';
 // import { ArrowRight } from 'lucide-react';
@@ -14,6 +14,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <img
       src={tuxImage}
+      alt='Linux-Lab logo a sitting penguin'
       className={`h-auto max-h-full w-32 max-w-full object-contain ${className}`}
     ></img>
   );

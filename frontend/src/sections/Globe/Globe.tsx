@@ -54,9 +54,9 @@ export default function Globe() {
       <div className="absolute bottom-0 z-10 h-1/4 w-full bg-gradient-to-t from-black to-black/0"></div>
       <div className="img__container globe absolute top-[53lvh] left-0 z-0 h-full w-full">
         <img
-          src="media/earth.png"
+          src="media/earth.webp"
           alt="earth dither"
-          className="mx-auto h-auto max-w-full"
+          className="mx-auto mix-blend-color-burn h-auto max-w-full"
         ></img>
       </div>
       <p className="text lg:text-heading-h4 text-heading-h7 font-spencer relative z-10 mx-auto hidden h-full w-full max-w-xs flex-col items-center justify-center text-center text-white mix-blend-exclusion lg:mx-0 lg:flex lg:max-w-none lg:flex-row">

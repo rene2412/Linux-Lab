@@ -55,7 +55,7 @@ export default function Benefits() {
   return (
     <div className="relative overflow-x-hidden">
       <BackgroundImage
-        src="media/bg2.png"
+        src="media/bg2.webp"
         alt="abstract dither"
       ></BackgroundImage>
       <SectionFade variant="top" className="" />
@@ -90,7 +90,7 @@ export default function Benefits() {
             </p>
           </FadeIn>
           <img
-            src="media/tux8.png"
+            src="media/tux8.webp"
             alt="a pixelated version of the Linux mascot tux, sitting down"
             className="my-32 mix-blend-lighten"
           ></img>
@@ -116,7 +116,7 @@ export default function Benefits() {
           </Statistic>
           <div className="col-span-2 col-start-6 row-start-2 mx-auto hidden aspect-square h-full w-full lg:block">
             <img
-              src="media/tux8.png"
+              src="media/tux8.webp"
               alt="a pixelated version of the Linux mascot tux, sitting down"
               className="h-full w-full object-contain mix-blend-lighten"
             ></img>

@@ -1,3 +1,4 @@
+import { SITE_URL_FOUNDATIONS, SITE_URL_NETWORKING } from '../../utils/data';
 import Marquee from './Marquee';
 import ScrambleScroll from './ScrambleScroll';
 import ScrambleText from './ScrambleText';
@@ -21,7 +22,7 @@ export default function Footer() {
           <NavLinkList title="Quick Links" data={FOOTER_DATA.quickLinks} />
           <NavLinkList title="Modules" data={FOOTER_DATA.modules} />
           <NavLinkList title="Socials" data={FOOTER_DATA.social} />
-          <NavLinkList title="Legal" data={FOOTER_DATA.other} />
+          <NavLinkList title="Misc" data={FOOTER_DATA.other} />
         </nav>
       </div>
       <div className="mt-auto flex w-full flex-col justify-end gap-2">
@@ -87,17 +88,14 @@ const FOOTER_DATA = {
     { name: 'Modules', href: '#modules' },
   ],
   modules: [
-    { name: 'Foundations', href: '#' },
-    { name: 'Networking', href: '#' },
-    { name: 'Bash Scripting', href: '#' },
+    { name: 'Foundations', href: SITE_URL_FOUNDATIONS },
+    { name: 'Networking', href: SITE_URL_NETWORKING },
   ],
   social: [
-    { name: 'yt', href: '' },
-    { name: 'linkedin', href: '' },
+    { name: 'Email', href: 'mailto:' },
   ],
   other: [
-    { name: 'Terms of Use', href: '#' },
-    { name: 'Privacy Policy', href: '#' },
+    { name: 'Page Credits', href: 'https://herbart.dev' },
   ],
   copyright: '© Linux-Lab 2025',
 };

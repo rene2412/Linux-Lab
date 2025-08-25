@@ -71,8 +71,8 @@ export function CardInfoItem({
 }) {
   return (
     <span className={`flex gap-1 ${className}`}>
-      <dt className="font-black">{term}:</dt>
-      <dd>{children}</dd>
+      <p className="font-black">{term}:</p>
+      <p>{children}</p>
     </span>
   );
 }

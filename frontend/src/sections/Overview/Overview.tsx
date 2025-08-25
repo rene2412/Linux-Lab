@@ -27,19 +27,13 @@ const OVERVIEW_LINKS = [
     name: 'Foundations',
     content: [
       <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Everything starts somewhere. In Linux, everything is a file - and understanding this core philosophy is where your journey begins. From the command line to the filesystem, we'll break down the building blocks.
       </p>,
       <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Master the terminal, navigate directories like a pro, and learn the essential commands that make Linux tick. No fluff, just the fundamentals that'll set you up for everything else.
       </p>,
       <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        By the end, you'll be comfortable moving around your system and understand why Linux users swear by the command line. It's not magic - it's just really, really powerful.
       </p>,
     ],
   },
@@ -47,40 +41,21 @@ const OVERVIEW_LINKS = [
     name: 'Networking',
     content: [
       <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        The internet isn't magic - it's just computers talking to each other. And Linux? It speaks fluent internet. Learn how data flows, what IP addresses really are, and why protocols matter.
       </p>,
       <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        From ping to curl, we'll cover the networking commands that let you diagnose connections, fetch data, and understand what's happening under the hood when you hit "send".
       </p>,
       <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        You'll go from wondering "how does this work?" to confidently troubleshooting network issues and leveraging Linux's networking power. The web will never look the same.
       </p>,
     ],
   },
   {
-    name: 'Bash Scripting',
+    name: 'Scripting',
     content: [
-      <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-      </p>,
-      <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-      </p>,
-      <p>
-        Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate
-        libero et velit interdum, ac aliquet odio mattis. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-      </p>,
+      <p>I couldve sworn something went here?... Coming soon please check back soon!</p>,
+      // <p>However scripting is powerful level up waht you already know and be that Linux Guru!</p>,
     ],
   },
 ];
@@ -226,7 +201,7 @@ export default function Overview() {
 
   return (
     <div ref={container} className="relative">
-      <BackgroundImage src="media/bg.png" alt="abstract dither" />
+      <BackgroundImage src="media/bg.webp" alt="abstract dither" />
       <SectionFade variant="top" />
       <SectionFade variant="bottom" className="" />
 

@@ -9,24 +9,33 @@ import BlockCaret from '../../components/ui/BlockCaret';
 import TextPlugin from 'gsap/TextPlugin';
 import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN } from '../../utils/data';
 import Anchor from '../../components/ui/Anchor';
+import { useLenis } from 'lenis/react';
 
 gsap.registerPlugin(GSDevTools, ScrambleTextPlugin, TextPlugin);
 
 export default function Hero() {
   const container = useRef(null);
-  // const lenis = useLenis();
+  const lenis = useLenis();
   useGSAP(
     () => {
-      const tl = gsap.timeline({ paused: false });
+      if (!lenis) return;
+      const tl = gsap.timeline({
+        paused: false,
+      });
 
       // text sequence
-      tl.to('.cli__prompt', {
-        scrambleText: {
-          text: '{original}',
-        },
-        duration: 0.8,
-        ease: 'none',
-      })
+      tl.from('.cli__prompt', { opacity: 0, ease: 'poewer4.out' })
+        .to(
+          '.cli__prompt',
+          {
+            scrambleText: {
+              text: '{original}',
+            },
+            duration: 0.8,
+            ease: 'none',
+          },
+          '<'
+        )
         .to('.textCycle', {
           text: './ linux-lab.sh',
           delay: 1,
@@ -68,6 +77,7 @@ export default function Hero() {
           },
           '<+=0.05'
         )
+        .set('.card__container', { clipPath: 'none' })
         .from(
           '.card__container',
           {
@@ -130,13 +140,16 @@ export default function Hero() {
             duration: 0.8,
             yPercent: 60,
             ease: 'power4.out',
+            onComplete: () => {
+              lenis?.start();
+            },
           },
           '<+=0.15'
         );
 
       // GSDevTools.create({ animation: tl });
     },
-    { scope: container, dependencies: [] }
+    { scope: container, dependencies: [lenis] }
   );
   return (
     <div ref={container} className="relative overflow-x-hidden pb-12">
@@ -162,7 +175,6 @@ export default function Hero() {
           </span>
         </span>
       </div>
-      {/* <BackgroundImage src="media/bg.png" alt="img" className='opacity-9' /> */}
       <section className="mx-4 grid-cols-12 grid-rows-none text-white lg:mx-5 lg:grid lg:gap-x-5">
         <div className="header col-span-10 col-start-2 flex items-center justify-center overflow-hidden leading-tight text-nowrap lg:justify-between">
           <h1 className="tracking-sans-wide text__hero text-hero-lg hidden lg:block">
@@ -172,10 +184,10 @@ export default function Hero() {
             Linux-Lab
           </h1>
         </div>
-        <div className="card__container shadow-highlight/50 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] lg:h-[65vh]">
+        <div className="card__container shadow-highlight/20 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] lg:h-[65vh]">
           <img
             className="absolute top-0 left-0 z-0 h-full w-full object-cover select-none"
-            src="media/asciibh.png"
+            src="media/asciibh.webp"
             alt="black hole monochrome"
           />
           {/* background darken imgae*/}

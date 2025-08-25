@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import React, { useRef, useState } from 'react';
-import { useLenis } from '../../context/LenisContext';
+import { useLenis } from 'lenis/react';
+import React, { useRef, useState, useEffect } from 'react';
 
 export default function Marquee({
   className,
@@ -12,7 +12,16 @@ export default function Marquee({
 }) {
   const container = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
+  const [marqueeWidth, setMarqueeWidth] = useState(0);
   const lenis = useLenis();
+
+  useEffect(() => {
+    if (!loading && container.current) {
+      const width = container.current.querySelector('.marquee__item')?.clientWidth || 0;
+      setMarqueeWidth(width);
+    }
+  }, [loading, children]);
+
   useGSAP(
     () => {
       if (loading) {
@@ -21,9 +30,9 @@ export default function Marquee({
         });
       }
 
-      if (!loading && container.current) {
-        const half =
-          container.current.querySelector('.marquee__item')?.clientWidth || 0;
+      if(!lenis)return;
+      if (!loading && container.current && marqueeWidth > 0) {
+        const half = marqueeWidth;
         // console.log(half);
         const wrap = gsap.utils.wrap(-half, 0);
 
@@ -41,7 +50,8 @@ export default function Marquee({
         const CONST_VEL = 1;
         let direction = 1;
         function move() {
-          if (lenis.direction != 0) {
+          if(!lenis)return;
+          if (lenis?.direction != 0) {
             direction = lenis.direction;
           }
             xSet(
@@ -59,7 +69,7 @@ export default function Marquee({
         move();
       }
     },
-    { dependencies: [loading], scope: container }
+    { dependencies: [loading, lenis, marqueeWidth], scope: container }
   );
 
   return (

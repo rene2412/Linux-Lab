@@ -7,8 +7,9 @@ export default function MediaLarge() {
       <SectionFade variant="bottom" />
       <div className="-z-10 h-full w-full">
         <img
-          src="media/asciibh.png"
+          src="media/asciibh.webp"
           className="h-full w-full object-cover"
+          alt="A ascii blackhole"
         ></img>
       </div>
     </section>

@@ -13,20 +13,20 @@ export default function About() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const images = [
-    { src: 'media/bg.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg2.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg3.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg4.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg5.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg6.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg7.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg8.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg9.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg10.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg11.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg12.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg13.png', alt: 'abstract dither pattern' },
-    { src: 'media/bg14.png', alt: 'abstract dither pattern' },
+    { src: 'media/bg.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg2.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg3.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg4.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg5.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg6.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg7.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg8.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg9.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg10.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg11.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg12.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg13.webp', alt: 'abstract dither pattern' },
+    { src: 'media/bg14.webp', alt: 'abstract dither pattern' },
   ];
 
   useGSAP(
@@ -108,7 +108,7 @@ export default function About() {
           Linux-Lab
         </ScrambleScroll>
       </h1>
-      <div className="pin__wrapper h-[200lvh] overflow-y-hidden">
+      <div className="pin__wrapper h-[200lvh] overflow-hidden">
         <div className="pin__content mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
           <div className="pin__img col-span-3 col-start-2 mt-auto mix-blend-hard-light sm:mt-0 xl:col-span-4 xl:col-start-2">
             <img
