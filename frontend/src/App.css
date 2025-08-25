@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Spencer';
+  src: url('/fonts/spencer-regular-webfont.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/dmsansvariable.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Jersey25';
+  src: url('/fonts/Jersey25.ttf') format('truetype');
+  font-display: swap;
+}
+
+@theme {
+  --font-spencer: 'Spencer', system-ui;
+  --font-sans:
+    'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-jersey: 'Jersey25', monospace;
+
+  --color-dark: #000000;
+  --color-highlight: rgb(41, 255, 34);
+  --color-highlight-half: rgba(41, 255, 34, 0.5);
+  --color-highlight-quarter: rgb(41, 255, 34, 0.25);
+
+  --tracking-sans-normal: -0.06em;
+  --tracking-sans-wide: -0.04em;
+  --tracking-spencer-normal: 0em;
+  --tracking-spencer-tight: -0.03em;
+
+  --text-heading-h1: 14.75rem;
+  --text-heading-h2: 11.312rem;
+  --text-heading-h3: 8.625rem;
+  --text-heading-h4: 6.562rem;
+  --text-heading-h5: 5rem;
+  --text-heading-h6: 3.812rem;
+  --text-heading-h7: 2.938rem;
+  --text-heading-xl: 2.25rem;
+  --text-heading-lg: 1.688rem;
+  --text-heading-slg: 1.312rem;
+
+  --text-h1: 6.562rem;
+  --text-h2: 5rem;
+  --text-h3: 3.812rem;
+  --text-h4: 2.938rem;
+  --text-h5: 2.25rem;
+  --text-xl: 1.688rem;
+  --text-lg: 1.312rem;
+  --text-base: 1rem;
+  --text-sm: 0.75rem;
+  --text-xs: 0.562rem;
+
+  --leading-tighter: 1.1em;
+  --leading-tighten: 1.2em;
+
+  --animate-cursor-blink: cursor-blink step-start 0.9s 0.5s infinite;
+
+  @keyframes cursor-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+}
