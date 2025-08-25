@@ -1040,7 +1040,6 @@ function process_mv(&$fileSystem, $currentDirectory, $oldname, $newname): string
     // Perform the move/rename
     $targetLevel[$targetName] = $sourceLevel[$sourceName];
     unset($sourceLevel[$sourceName]);
-    return "Successfully moved '$oldname' to '$newname'.";
 }
 
 function process_refresh() : string {
@@ -1084,7 +1083,6 @@ function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
     // Remove the file
     unset($currentLevel[$argument]);
     $GLOBALS['commandSuccess'] = true;
-    return "File '$argument' has been removed.\n"; // Removed incorrect session save
 }
 
 function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
@@ -1161,7 +1159,6 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
     // Remove the target (file or now-empty directory)
     unset($currentLevel[$argument]);
 
-    return "'$argument' has been removed recursively.\n";
 }
 
  // Helper function to recursively delete a directory's contents.
@@ -1845,21 +1842,97 @@ function process_wc(&$fileSystem, $currentDirectory, $flag, $file) {
             $currentLevel = &$currentLevel[$part]; // Maintain reference
         }
     
+        if (is_array($currentLevel[$file]) && !isset($currentLevel[$file]['file'])) {
+            return "Error: '$file' is a directory.\n";
+        }
+
+        if ($file === "*.txt") { 
+            $line_count = 0;
+            $word_count = 0;
+            $char_count = 0;
+
+            $fileName = [];
+            $file_line_count = [];
+            $file_word_count = [];
+            $file_char_count = []; 
+            
+            
+            foreach ($currentLevel as $name => $entry) {
+                if (str_ends_with($name, ".txt") && isset($entry['file']['content'])) { 
+                    $lines = $entry['file']['content'];
+                    $fileName[] = $name;       
+                    $individual_line_count = 0;
+                    $individual_word_count = 0;
+                    $individual_char_count = 0;
+                    foreach ($lines as $line) {
+                        $line_count += 1;
+                        $word_count += str_word_count($line);
+                        $char_count += strlen($line) + 1;
+                        $individual_line_count += 1;  
+                        $individual_word_count += str_word_count($line);
+                        $individual_char_count += strlen($line) + 1;
+                       }
+                        $file_line_count[] = $individual_line_count;
+                        $file_word_count[] = $individual_word_count;
+                        $file_char_count[] = $individual_char_count;
+                   }                    
+            }
+            if ($char_count > 0) $char_count--;
+            
+            if (empty($flag)) {
+                $output = "";
+                for ($i = 0; $i < count($fileName); $i++) {
+                    $output .= "$file_line_count[$i]\t$file_word_count[$i]\t$file_char_count[$i]\t$fileName[$i]\n"; 
+            }
+            $output .= "$line_count\t$word_count\t$char_count\ttotal";
+            return $output;
+        }
+
+            
+                elseif ($flag === "-l") {
+                    $output = "";
+                    for ($i = 0; $i < count($fileName); $i++) {
+                        $output .= "$file_line_count[$i] $fileName[$i]\n";
+                }
+                $output .= "$line_count total";
+                return $output;
+            }
+                elseif ($flag === "-w") {
+                    for ($i = 0; $i < count($fileName); $i++) {
+                        $output .= "$file_word_count[$i] $fileName[$i]\n";
+                    }
+                    $output .= "$word_count total";
+                    return $output;
+            }
+                elseif ($flag === "-c") {
+                    for ($i = 0; $i < count($fileName); $i++) {
+                        $output .= "$file_char_count[$i] $fileName[$i]\n";
+                    }
+                    $output .= "$char_count total"; 
+                    return $output;
+                }    
+                else return "Error: Flag Is Not Supported";
+    }
+      
         // Check if the file exists
         if (!array_key_exists($file, $currentLevel)) {
             return "Error: File '$file' not found.\n";
         }
-    
-        // Check if the target is a directory
-        if ((!str_ends_with($file, ".txt"))) {
-            return "Error: '$file' is a directory";
-        } 
+
         $lines = $currentLevel[$file]['file']['content'];
-        $count = 0;
+        $line_count = 0;
+        $word_count = 0;
+        $char_count = 0;
         foreach($lines as $line) {
-            $count++;
+            $word_count += str_word_count($line);
+            $char_count += strlen($line);
+            $line_count++;
         }
-        return $count;
+        if (empty($flag)) return "$line_count $word_count $char_count $file";
+        elseif ($flag === "-l") return "$line_count $file";
+        elseif ($flag === "-w") return "$word_count $file";
+        elseif ($flag === "-c") return "$char_count $file"; 
+        else return "Error: Flag Is Not Supported";
     }
 
 function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
@@ -2113,7 +2186,6 @@ if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"]; 
  }
 
-//fetch the current module
 error_log("Lesson ID: $lessonID");
 error_log("Answer: " . GetMultChoiceAnswer($lessonID));
  //multi-choice and mysql handshake (madness) 
@@ -2244,30 +2316,42 @@ if ($lessonID === 75 && GetMultChoiceAnswer($lessonID)  === "C") {
 }
 
 if ($module === "networking") {
-    if ($lessonID === 9 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+    if ($lessonID === 6 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
     if ($userId) {
-        network_update_mysql($pdo, $userId, 9, 10);
-        network_updateUserProgress($pdo, $userId, 9);
+        network_update_mysql($pdo, $userId, 6, 7);
+        network_updateUserProgress($pdo, $userId, 6);
     }
 }
 
-if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
     if ($userId) {
-        network_update_mysql($pdo, $userId, 10, 11);
-        network_updateUserProgress($pdo, $userId, 10);
+        network_update_mysql($pdo, $userId, 7, 8);
+        network_updateUserProgress($pdo, $userId, 7);
         }
     }
-    if ($lessonID === 11 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+    if ($lessonID === 8 && GetNetworkMultChoiceAnswer($lessonID) === 'D') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 11, 12);
-            network_updateUserProgress($pdo, $userId, 11);
+            network_update_mysql($pdo, $userId, 8, 9);
+            network_updateUserProgress($pdo, $userId, 8);
         }
     }
 
-    if ($lessonID === 12 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+    if ($lessonID === 14 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 12, 13);
-            network_updateUserProgress($pdo, $userId, 12);
+            network_update_mysql($pdo, $userId, 14, 15);
+            network_updateUserProgress($pdo, $userId, 14);
+        }
+    }
+    if ($lessonID === 15 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 15, 16);
+            network_updateUserProgress($pdo, $userId, 15);
+        }
+    }
+    if ($lessonID === 16 && GetNetworkMultChoiceAnswer($lessonID) === 'D') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 16, 17);
+            network_updateUserProgress($pdo, $userId, 16);
         }
     }
     if ($lessonID === 17 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
@@ -2276,61 +2360,49 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             network_updateUserProgress($pdo, $userId, 17);
         }
     }
-    if ($lessonID === 18 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+    if ($lessonID === 23 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 18, 19);
-            network_updateUserProgress($pdo, $userId, 18);
+            network_update_mysql($pdo, $userId, 23, 24);
+            network_updateUserProgress($pdo, $userId, 23);
         }
     }
-    if ($lessonID === 19 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
+    if ($lessonID === 24 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 19, 20);
-            network_updateUserProgress($pdo, $userId, 19);
+            network_update_mysql($pdo, $userId, 24, 25);
+            network_updateUserProgress($pdo, $userId, 24);
         }
     }
-    if ($lessonID === 20 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
-        if ($userId) {
-            network_update_mysql($pdo, $userId, 20, 21);
-            network_updateUserProgress($pdo, $userId, 20);
-        }
-    }
-    if ($lessonID === 25 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+    if ($lessonID === 25 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
         if ($userId) {
             network_update_mysql($pdo, $userId, 25, 26);
             network_updateUserProgress($pdo, $userId, 25);
         }
     }
-    if ($lessonID === 26 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+    if ($lessonID === 35 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 26, 27);
-            network_updateUserProgress($pdo, $userId, 26);
+            network_update_mysql($pdo, $userId, 35, 36);
+            network_updateUserProgress($pdo, $userId, 35);
         }
     }
-    if ($lessonID === 27 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+    if ($lessonID === 36 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 27, 28);
-            network_updateUserProgress($pdo, $userId, 27);
+            network_update_mysql($pdo, $userId, 36, 37);
+            network_updateUserProgress($pdo, $userId, 36);
         }
     }
-    if ($lessonID === 28 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
-        if ($userId) {
-            network_update_mysql($pdo, $userId, 28, 29);
-            network_updateUserProgress($pdo, $userId, 28);
-        }
-    }
-   if ($lessonID === 37 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+   if ($lessonID === 37 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
     if ($userId) {
         network_update_mysql($pdo, $userId, 37, 38);
         network_updateUserProgress($pdo, $userId, 37);
         }
     }
-    if ($lessonID === 38 && GetNetworkMultChoiceAnswer($lessonID) === 'D') {
+    if ($lessonID === 38 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
         if ($userId) {
             network_update_mysql($pdo, $userId, 38, 39);
             network_updateUserProgress($pdo, $userId, 38);
         }
     }
-    if ($lessonID === 39 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+    if ($lessonID === 39 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
         if ($userId) {
             network_update_mysql($pdo, $userId, 39, 40);
             network_updateUserProgress($pdo, $userId, 39);
@@ -2338,10 +2410,41 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
     }
     if ($lessonID === 40 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
         if ($userId) {
-            network_update_mysql($pdo, $userId, 40, 40);
+            network_update_mysql($pdo, $userId, 40, 41);
             network_updateUserProgress($pdo, $userId, 40);
         }
     }
+      if ($lessonID === 41 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 41, 42);
+            network_updateUserProgress($pdo, $userId, 41);
+        }
+    }
+    if ($lessonID === 50 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 50, 51);
+            network_updateUserProgress($pdo, $userId, 50);
+        }
+    }
+    if ($lessonID === 51 && GetNetworkMultChoiceAnswer($lessonID) === 'D') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 51, 52);
+            network_updateUserProgress($pdo, $userId, 51);
+        }
+    }
+    if ($lessonID === 52 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 52, 53);
+            network_updateUserProgress($pdo, $userId, 52);
+        }
+    }
+    if ($lessonID === 53 && GetNetworkMultChoiceAnswer($lessonID) === 'C') {
+        if ($userId) {
+            network_update_mysql($pdo, $userId, 53, 54);
+            network_updateUserProgress($pdo, $userId, 53);
+        }
+    }
+
 }
 
  switch ($cmd) {
@@ -2375,20 +2478,11 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
             $normalizedJson = trim($json);
            
     if (strtolower($normalizedJson) === strtolower($normalizedCommand)) {
-            //we need change and override the is completed key variable in the json file to true
-            //Update the completed status in the JSON data
             $jsonData['basics'][1]['completed'] = true;
-             // Convert the updated data back to JSON
             $updatedJsonString = json_encode($jsonData, JSON_PRETTY_PRINT);
-            // Write the updated JSON back to the file
             file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-            //if we are in this first lesson then send the bool
-            //file_put_contents('src/testAPI/lessons.json', $updatedJsonString);
-            //chmod('src/testAPI/lessons.json', 0666);
-            //if we are in this first lesson l AND the user gets it right then send the bool
            if ($lessonID === 6  && ($GetLine === "Hello World!" || $Getline === "\"Hello World!\"" || $Getline === "'Hello World!'"))  {
                  $isCorrect = true;
-            //update to mysql here the users updated progress and their current lesson 
             if ($userId !== null) {
             update_mysql($pdo, $userId, 6, 7);            
             updateUserProgress($pdo, $userId, 6);
@@ -2847,12 +2941,34 @@ if ($lessonID === 10 && GetNetworkMultChoiceAnswer($lessonID) === 'B') {
         }
         break;
     case 'wc':
+            if (count($args) > 3) return "Error: Too many <wc> arguments in this enviroment";
             if (count($args) === 2) {
                 $output = process_wc($fileSystem, $currentDir, "", $arg);
-
-                break;
+                if ($lessonID === 78 && $arg === "Declaration.txt") {
+                    $isCorrect = true;
+                    if ($userId) {
+                        update_mysql($pdo, $userId, 78, 79);
+                        updateUserProgress($pdo, $userId, 78);
+                    }
+                }
+                if ($lessonID === 80 && $arg === "*.txt" && !str_contains($output, '0')) {
+                     $isCorrect = true;   
+                    if ($userId) {
+                        update_mysql($pdo, $userId, 80, 81);
+                        updateUserProgress($pdo, $userId, 80);   
+                    }
+                }
             }
+            if (count($args) === 3) {
                 $output = process_wc($fileSystem, $currentDir, $arg, $arg2);
+                    if ($lessonID === 79 && !str_contains($output, '0') && ($arg === "-l" || $arg === "-w" || $arg === "-c") && $arg2 === "Kennedy.txt") {
+                        $isCorrect = true;
+                        if ($userId) {
+                            update_mysql($pdo, $userId, 79, 80);
+                            updateUserProgress($pdo, $userId, 79);
+                        }
+                    }
+            }
             break;
     case 'chmod':
         $output = process_chmod($fileSystem, $currentDir, "no_sudo", $arg, $arg2);
@@ -2962,11 +3078,11 @@ case 'python3':
     case 'ip':
             if ($arg === "route") {
                 $output = process_ip_route();
-                if ($lessonID === 15) {
+                if ($lessonID === 13) {
                     $isCorrect = true;
                 if ($userId) {
-                    network_update_mysql($pdo, $userId, 15, 16);
-                    network_updateUserProgress($pdo, $userId, 15);
+                    network_update_mysql($pdo, $userId, 13, 14);
+                    network_updateUserProgress($pdo, $userId, 13);
                 }
             }
                 break;
@@ -2975,11 +3091,11 @@ case 'python3':
             break;
     case 'ifconfig': 
         $output = process_ifconfig();
-        if ($lessonID === 3) {
+        if ($lessonID === 5) {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 3, 4);
-                network_updateUserProgress($pdo, $userId, 3);
+                network_update_mysql($pdo, $userId, 5, 6);
+                network_updateUserProgress($pdo, $userId, 5);
             }
         } 
         break;
@@ -2988,8 +3104,8 @@ case 'python3':
         if ($arg === "google.com") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 16, 17);
-                network_updateUserProgress($pdo, $userId, 16);
+                network_update_mysql($pdo, $userId, 13, 14);
+                network_updateUserProgress($pdo, $userId, 13);
             }
         }
 	    break;
@@ -2997,7 +3113,7 @@ case 'python3':
         $command = implode(' ', array_map('strtolower', $args));
         $shell = shell_exec($command);
         $output = $shell;
-        if ($lessonID === 8 && $command === "nslookup google.com") {
+        if ($lessonID === 12 && $command === "nslookup google.com") {
             $isCorrect = true;
             if ($userId) {
                 network_update_mysql($pdo, $userId, 8, 9);

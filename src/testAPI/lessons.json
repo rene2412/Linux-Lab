@@ -1,8 +1,8 @@
 {
     "The Basics": [
         {
-            "section__size": 85,
-            "interactive__size": 53,
+            "section__size": 83,
+            "interactive__size": 56,
             "section__completed": false
         },
         {
@@ -38,7 +38,7 @@
             "section": "Prelude",
             "title": "The Command Line",
             "content_type": "article",
-            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task via the <b>shell</b>\/p><p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the interactive learning will take place. The terminal is placed at your right side of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge and experience with Linux grows, you will begin using your computer in powerful ways. Tasks that take dozens of clicks in a graphical interface can be done with a single command.</p><p>For now, we must understand how the <b>filesystem</b> works, because that's where all your files and programs live.</p><img src='../../../images/linuxCl.gif' width='500'><br><br>",
+            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task via the <b>shell</b>.<p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the interactive learning will take place. The terminal is placed at your right side (or bottom if you are on mobile) of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge and experience with Linux grows, you will begin using your computer in powerful ways. Tasks that take dozens of clicks in a graphical interface can be done with a single command.</p><p>For now, we must understand how the <b>filesystem</b> works, because that's where all your files and programs live.</p><img src='../../../images/linuxCl.gif' width='500'><br><br>",
             "completed": false
         },
         {
@@ -105,7 +105,7 @@
             "section": "File Navigation",
             "title": "cd",
             "content_type": "interactive",
-            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><p>Documents\/ Pictures\/ Projects\/ Videos\/<\/p><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the cd command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
+            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><code>Documents\/ Pictures\/ Projects\/ Videos\/</code><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the <b>cd</b> command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
             "answer": "cd Documents\/",
             "completed": false
         },
@@ -115,7 +115,7 @@
             "section": "File Navigation",
             "title": "cat",
             "content_type": "interactive",
-            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the cat command (concatenate), followed by the file name.<\/p><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
+            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the <b>cat</b> command (concatenate), followed by the file name.<\/p><code>cat fileName</code><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
             "answer": "cat hello.txt",
             "completed": true
         },
@@ -252,7 +252,7 @@
             "section": "File Modifications",
             "title": "rmdir",
             "content_type": "interactive",
-            "content": "<p>To remove a directory is a bit more complex and dangerous!.<\/p><p> To remove a empty directory we can use <b>rmdir<\/b>. Let's try it out by going into our Projects\/ directory (from the root directory) and removing project1\/ from it<\/p><code> rmdir project1\/ <\/code> <p>Note: If the directory was not empty then we would have to delete all the content manually with rm and rmdir.<\/p> <p> However that is inconvienent, to know how to do it with one command we can move on to the next lesson<\/p>",
+            "content": "<p>To remove a directory is a bit more complex and dangerous!<\/p><p> To remove a empty directory we can use <b>rmdir<\/b>. Let's try it out by going into our Projects\/ directory (from the root directory) and removing project1\/ from it.<\/p><code> rmdir project1\/ <\/code> <p>Note: If the directory was not empty then we would have to delete all the content manually with rm and rmdir.<\/p> <p> However that is inconvienent, to know how to do it with one command we can move on to the next lesson<\/p>.",
             "answer": "rmdir project1\/",
             "completed": false
         },
@@ -863,35 +863,53 @@
             "id": 78,
             "parent": "The Basics",
             "section": "Extra",
-            "title": "Extra",
-            "content_type": "article",
-            "content": "By now we have covered most of the core Linux commands that you will need, but there are still some convient commands that would be beneficial so lets quicky go over them.",
+            "title": "wc",
+            "content_type": "interactive",
+            "content": "If you have made it this far consider yourself a Linux command line guru. By now we have covered most of the core Linux commands that you will need, but there are still some convienient commands that would be beneficial so lets quickly go over them.</p>Ever wondered how many lines, words, or characters a file has? Well of course Linux has a command that makes it super easy to do just that with the command <b>wc</b> (word count).</p><code>wc [option] [file]</code>As you can see the <b>wc</b> command can take in a optional flag argument. But for now lets just take a look at a simple example.</p>By default, if you give <b>wc</b> no flag arguments it will display the number of lines, number of words, and the number of characters of the desired file(s). Traverse to the Documents/ directory to see some magic happen.</p>The Declaration of Independence is pretty long and is the perfect target to see this in action, lets try out by running this command:<code>wc Declaration.txt</code>As stated before, the output is pretty cool. You get all the lines, words, and characters from a file with a very simple command!",
             "completed": false
         },
         {
             "id": 79,
             "parent": "The Basics",
             "section": "Extra",
-            "title": "wc",
+            "title": "wc -flag",
             "content_type": "interactive",
-            "content": "Ever wondered how many lines a file has? Well of course Linux has a command that makes it super easy to do just that.</p>",
+            "content": "Let's add some flags now to specify on what exactly we want, there are 3 main flags we will look at.<ul><b>-l</b>: The <b>-l</b> flag will return back the number of lines in the file(s)<ul><ul><b>-w</b>: The <b>-w</b> flag will return back the number of words in the file(s)</ul><ul><b>-c</b>: The <b>-c</b> flag will return back the number of characters in the file(s)</ul>Sticking in Documents/, go ahead and use any <b>wc</b> command with a flag on the comnmand line. This time lets take a look at Kennedy.txt<code>wc -l Kennedy.txt</code><code>wc -w Kennedy.txt</code><code>wc -c Kennedy.txt</code>",
             "completed": false
         },
         {
             "id": 80,
             "parent": "The Basics",
             "section": "Extra",
-            "title": "Piping |",
-            "content_type": "article",
-            "content": "\"Do one thing and do it well, and work together through pipes.\" ",
+            "title": "wc*",
+            "content_type": "interactive",
+            "content": "Remember that wildcard character? Well it showcases its convieniency with commands like these.</p>In the same Documents/ directory lets find all the lines, words, and characters in the .txt files.<code>wc *.txt</code> Note: You can still add the flags as we discussed earlier like: <code>wc -l *.txt</code><code>wc -c *.txt</code><code>wc *w *.txt</code>How awesome is that?",
             "completed": false
         },
         {
             "id": 81,
             "parent": "The Basics",
+            "section": "Extra",
+            "title": "Piping |",
+            "content_type": "article",
+            "content": "\"Do one thing and do it well, and work together through pipes.\"</p>This is the most advanced command and technique we will touch, but sadly it wont work in our simulated envrioment. However, it is so important that we have to mention it. So what are pipes?</p>Pipes let you chain commands together, taking the output of one command and feeding it as input to the next. Think of it like a factory assembly line where each station does one specific job, then passes the work to the next station.</p>The pipe symbol `|` is responsible for connecting the commands together: <code>command1 | command2 | command3</code><h3>Example #1 - Count files in a directory</h3><code>ls | wc -l</code> This command will find all the files in the directory and return back the count</p><h3>Example #2 - Unique sorted lines of a file</h3><code>cat file.txt | sort | uniq</code> This command will display the sorted content in file.txt and remove duplicates keeping it unique.<h3>Example #3 - Find .log files containing \"error\" and sorting the results</h3><code>find ./ -name  \"*.log\" | grep \"error\" | sort </code> In our current directory, this would find all the log files, look for all instances of error, and sort the results.</p>Piping can get pretty complex but can deal some really powerful results. I strongly suggest opening up your own terminal on your machine and practicing. The best way to understand pipes is to play with them!",
+            "completed": false
+        },
+        {
+            "id": 82,
+            "parent": "The Basics",
+            "section": "Extra",
+            "title": "man",
+            "content_type": "article",
+             "content": "Before we wrap it up for this section, we have to mention the command <b>man</b>. The command <b>man</b> is your new best friend, this is the Linux manual for every single command. It will give you an explanation for what every command does and how to use it.<code>man [command]</code> Switch out [command] for any command like: ls, grep, chmod. etc. It wont work on this environment since it does display the information in a fancy way, but please check it out on your terminal.</p>Let this be your GPS for your map throughout your Linux journey.",
+            "completed": false
+        },
+        {
+            "id": 83,
+            "parent": "The Basics",
             "section": "Final",
             "title": "Closing thoughts",
-            "content_type": "interactive",
+            "content_type": "article",
             "content": "Congratulations on completing the \"Command Line\" section of Linux-Lab! Although we didn't touch every single command, we hoped that this section gave you a good understanding of the Linux Command Line and how you will apply it to your profession or craft.</p> However, the learning of the command line is not done yet! Come and check out our \"Networking\" section where you will learn how the internet works and apply that theory towards the Linux Command Line.<a href='https://linux-lab.live/Linux-Lab/src/pages/lesson_page/lesson.html?module=Networking'> <b><u>Networking In Linux</b></u>, we hope to see you there!</a><h3>Additional Resource:</h3>If you are interested in learning more and in depth about the Linux Command Line here is a great resource!</p>Shotts, William E. Jr.. The Linux Command Line: A Complete Introduction. United States, No Starch Press, 2012. <img src='../../../images/LCML.jpg'", 
             "completed": false
         }
@@ -1055,7 +1073,7 @@
             "title": "Knowledge Check #5",
             "content_type": "multichoice",
             "questions": {
-                "A": "The network portion is 192.168.1 and the host portion is 100",
+                "A": "The network portion is 100 and the network portion is 192.168.1",
                 "B": "The network portion is 192 and the host portion is 168.1.100",
                 "C": "The network portion is 192.168.1 and the host portion is 100",
                 "D": "The entire address 192.168.1.100 is the host portion"
@@ -1099,10 +1117,17 @@
         {
             "id": 17,
             "parent": "Networking",
-            "section": "Checkpoint - Subnetting",
+            "section": "Subnetting",
             "title": "Knowledge Check #8",
-            "content_type": "interactive",
-            "content": "Your boss is asking you to store the <b>ifconfig</b> output in a address.txt file, and is asking you to store the <b>ip route</b> output in a routing.txt file. Traverse to the Networking/ directory as that is where the files will live in. Remember, how we <b>redirect</b> output",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "The default gateway is your computer's IP address that lets you connect to Wi-Fi",
+                "B": "The default gateway is the device that routes traffic from your local network to other networks, like the internet",
+                "C": "The default gateway is the list of all possible paths packets can take inside your computer",
+                "D": "The default gateway is the IP address of the website you are trying to visit"
+            },
+            "content": "<p>What is the role of the default gateway in a network?</p><div class=\"question__container\"></div>",
+            "answer": "B",
             "completed": false
         },
         {
@@ -1539,7 +1564,16 @@
             "content": "<p>How does your router connect your local network to the internet using a WAN IP?</p><\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-          }                                                          
+          }, 
+          {
+            "id": 54,
+            "parent": "Networking",
+            "section": "Final",
+            "title": "Closing thoughts",
+            "content_type": "article",
+            "content": "That will conclude our introduction to networking via the Linux command line. We hoped that you enjoyed the content and learned some valuable things about how the internet works.</p>Networking is a monster and deserves to be studied in more greater detail, we are in the process of creating a section that combines both networking and programming in Python and C++. So be in the lookout for that!</p>Overall, thank you for sticking through it with us and we hope to see you again!", 
+            "completed": false
+          }                                                                                        
     ],
     "basics": {
         "1": {
