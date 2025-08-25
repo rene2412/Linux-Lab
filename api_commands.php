@@ -1161,7 +1161,6 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
     // Remove the target (file or now-empty directory)
     unset($currentLevel[$argument]);
 
-    return "'$argument' has been removed recursively.\n";
 }
 
  // Helper function to recursively delete a directory's contents.
