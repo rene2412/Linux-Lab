@@ -1,3 +1,57 @@
+<<<<<<< HEAD
+# Database config
 includes/database.inc.php
 /includes/database.inc.php
 database.inc.php
+=======
+<<<<<<< HEAD
+includes/database.inc.php
+/includes/database.inc.php
+database.inc.php
+=======
+# Database config
+includes/database.inc.php
+/includes/database.inc.php
+database.inc.php
+>>>>>>> 7164a2f52d5ab7124aa09aca498ee75e8e6c0972
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+# frontend/public/fonts
+
+# TypeScript
+*.tsbuildinfo
+.tmp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+<<<<<<< HEAD
+yarn-error.log*
+=======
+yarn-error.log*
+>>>>>>> react
+>>>>>>> 7164a2f52d5ab7124aa09aca498ee75e8e6c0972

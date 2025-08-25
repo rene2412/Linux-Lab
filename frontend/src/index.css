@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+body{
+  background-color: black;
+}
+
+
+.text-hero {
+  font-size: clamp(2rem, 2.89vw, 4rem);
+}
+
+.text-hero-lg {
+  font-size: clamp(1rem, 5.9vw, 99rem);
+}
+
+.text-hero-lg-serif {
+  font-size: clamp(3.75rem, 6.5vw, 99rem);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
