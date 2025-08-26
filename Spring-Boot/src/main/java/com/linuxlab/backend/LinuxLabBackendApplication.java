@@ -9,5 +9,4 @@ public class LinuxLabBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LinuxLabBackendApplication.class, args);
 	}
-
 }

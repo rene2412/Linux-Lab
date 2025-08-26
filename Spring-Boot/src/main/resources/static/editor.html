@@ -484,32 +484,22 @@
 </head>
 <body>
     <div class="matrix-bg" id="matrixBg"></div>
-    
-    <div class="header">
-        <div class="bash-symbol">$</div>
-        <!--<img src=".././../../../images/bash.png" alt="Bash Logo" class="bash-logo"> -->
-        <h1>Bash Scripting</h1>
-        <div class="terminal-info">
-            <span> Ubuntu 22.04 LTS</span>
-            <span id="currentTime"></span>
-        </div>
-    </div>
-
     <div class="container">
         <div class="split-container">
             <div class="lesson-panel">
-                <div class="lesson-header">
-                    <div class="lesson-title">Interactive Bash Lessons</div>
-                    <!-- This is where the title of the current lesson will be shown -->
-                    <h2 id="lessonTitle"></h2>
+                <div class="dropdown">
+                    <div class="dropdown-bar">
+                        <span class="select">Loading...</span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="bash-lessons">
+                    </ul>
                 </div>
-            
-                <!-- Main lesson content area -->
+                <script src="bash_lessons.js"></script>
                 <div class="lesson-content" id="lessonContent">
                     <!-- Lesson content will be dynamically loaded here -->
                 </div>
             
-                <!-- Buttons to navigate -->
                 <div class="lesson-navigation">
                     <button class="nav-btn nav-prev" onclick="previousLesson()">
                         <span>◀</span>
@@ -529,42 +519,26 @@
             
             <div class="editor-panel">
                 <div class="editor-header">
-                    <div class="editor-title">
-                        <span>script.sh</span>
-                    </div>
-                    
                     <div class="editor-controls">
                         <button class="btn btn-run" onclick="runCode()">
-                            <span>▶</span>
                             <span>Run</span>
                         </button>
                         
                         <button class="btn btn-save" onclick="saveFile()">
-                            <span>💾</span>
                             <span>Save</span>
                         </button>
-                        
-                        <button class="btn btn-load" onclick="loadFile()">
-                            <span>📁</span>
-                            <span>Load</span>
-                        </button>
-                        
                         <button class="btn btn-clear" onclick="clearEditor()">
-                            <span>🗑</span>
                             <span>Clear</span>
-                        </button>
+                            <span>
                     </div>
                 </div>
                 
                 <div class="editor-wrapper">
-                    <div id="editor">#!/bin/bash
-echo "🐧 Welcome to Linux Bash Scripting!"
-</div>
+                    <div id="editor">#!/bin/bash</div>  
                 </div>
                 
                 <div class="output" id="output">
                     <div class="output-header">
-                        <span>Terminal Output</span>
                         <div class="loading-animation" id="loadingSpinner" style="display: none;"></div>
                     </div>
                     <div class="output-content" id="outputContent"></div>
@@ -582,9 +556,6 @@ echo "🐧 Welcome to Linux Bash Scripting!"
                             <span>Bash: <span class="status-value">5.1.16</span></span>
                         </div>
                     </div>
-                    <div class="status-right">
-                        <span class="terminal-prompt">$bash_shell_scripting</script></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -592,9 +563,11 @@ echo "🐧 Welcome to Linux Bash Scripting!"
 
     <input type="file" class="file-input" id="fileInput" accept=".sh,.bash,.txt" onchange="handleFileLoad()">
 
+    <!-- External Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ext-language_tools.js"></script>
     
+<<<<<<< HEAD
     <script>
 
         // Initialize Matrix Rain Effect
@@ -947,5 +920,9 @@ function previousLesson() {
         updateStatus();
         loadLessons();
     </script>
+=======
+    <!-- Main Script -->
+    <script src="script.js"></script>
+>>>>>>> 341bca599cd7056eafab22171dc40113bd1df31e
 </body>
 </html>

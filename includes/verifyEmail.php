@@ -7,7 +7,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 use \SendGrid\Mail\Mail;
 
-    
+
 if (!isset($_SESSION["user_email"])) {
     header("Location: signup.php");
     exit();
