@@ -2553,7 +2553,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
                 break;
             }
             $output = process_ls_l($fileSystem, $currentDir);
-            if ($lessonID === 62) {
+	    if ($lessonID === 62) {
                 $isCorrect = true;
                 if ($userId !== null) {
                 update_mysql($pdo, $userId, 62, 63);  
@@ -2580,6 +2580,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
            }
        }
         $output = process_ls($fileSystem, $currentDir);
+	    $output .= $lessonID . "\n";
         break;
     case 'cd':
         if  (count($args) > 2) {
@@ -2704,7 +2705,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
                 $isCorrect = true;
                 if ($userId !== null) {
                      update_mysql($pdo, $userId, 9, 10); 
-                    updateUserProgress($pdo, $userId, 10);
+                    updateUserProgress($pdo, $userId, 9);
             }
         }
             $output = process_pwd($currentDir);
@@ -2942,14 +2943,14 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
             if (count($args) > 3) return "Error: Too many <wc> arguments in this enviroment";
             if (count($args) === 2) {
                 $output = process_wc($fileSystem, $currentDir, "", $arg);
-                if ($lessonID === 78 && $arg === "Declaration.txt") {
+		if ($lessonID === 78 && $arg === "Declaration.txt" && $currentDir === "/Documents") {
                     $isCorrect = true;
                     if ($userId) {
                         update_mysql($pdo, $userId, 78, 79);
                         updateUserProgress($pdo, $userId, 78);
                     }
                 }
-                if ($lessonID === 80 && $arg === "*.txt" && !str_contains($output, '0')) {
+                if ($lessonID === 80 && $arg === "*.txt" && $currentDir === "/Documents") {
                      $isCorrect = true;   
                     if ($userId) {
                         update_mysql($pdo, $userId, 80, 81);
@@ -2959,7 +2960,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
             }
             if (count($args) === 3) {
                 $output = process_wc($fileSystem, $currentDir, $arg, $arg2);
-                    if ($lessonID === 79 && !str_contains($output, '0') && ($arg === "-l" || $arg === "-w" || $arg === "-c") && $arg2 === "Kennedy.txt") {
+                    if ($lessonID === 79 && $currentDir === "/Documents" && ($arg === "-l" || $arg === "-w" || $arg === "-c") && $arg2 === "Kennedy.txt") {
                         $isCorrect = true;
                         if ($userId) {
                             update_mysql($pdo, $userId, 79, 80);
