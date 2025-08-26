@@ -23,9 +23,11 @@
   padding: var(--spce-xlg);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   height: 450px;
-  width: 350px;
+  min-height: fit-content;
+  width: 375px;
   color: var(--text-color-inactive);  
   gap: var(--spce-sm);
   box-shadow: 0px 0px 100px -30px var(--color-highlight);
@@ -65,7 +67,6 @@
 
 .auth__form{
   align-self: stretch;
-  flex: 1;
 }
 
 .auth__form button{
@@ -79,11 +80,13 @@
   transition: transform 0.2s ease;
 }
 
-.login--guest:hover{
-  transform: scale(1.1);
-}
 .login--guest:active{
-  transform: scale(0.9);
+  transform: scale(0.97);
+}
+
+.login__button{
+  width: 100%;
+
 }
 
 #signup__form{
@@ -117,6 +120,18 @@
   gap: var(--spce-sm);
   /* flex:1; */
 }
+
+.auth__forgot{
+  border: none;
+  outline: none;
+  width: fit-content;
+  background-color: transparent;
+  margin: 0 !important;
+  color: var(--text-color-secondary) ;
+  text-decoration: underline;
+
+}
+
 .auth__card__content--reset h3{
   color: var(--text-color-main);
 
@@ -139,4 +154,41 @@
 .auth__card__subtext{
   text-align: center;
   color: var(--text-color-main);
+}
+
+/* Separator */
+.separator{
+  color: var(--text-color-secondary);
+
+}
+
+/* GOOGLE */
+.google__anchor{
+
+  text-decoration: none;
+  width: 100%;
+
+}
+
+.google__image{
+  width: 20px;
+  height: 20px;
+}
+
+.google__button{
+  padding: var(--spce-sm);
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: var(--radius-med);
+  outline: none;
+  border: none;
+}
+
+
+.google__button:hover{
+  opacity: 0.93;
 }

@@ -78,15 +78,16 @@ body {
     border-radius: var(--radius-med);
     padding: var(--spce-sm);
     align-self: center;
-    transition: transform 0.3s ease, box-shadow 0.1s ease ;
+    transform-origin: center;
+    transition: transform 0.1s ease, box-shadow 0.1s ease ;
 }
 
 .styled-button:hover{
-    transform: scale(1.05);
+    opacity: 0.93 !important;
 }
 .styled-button:active{
-    transform: scale(0.9);
-    box-shadow: inset 0 8px 100px rgba(0, 0, 0, 0.191);
+    transform: scale(0.98);
+    /* box-shadow: inset 0 8px 100px rgba(0, 0, 0, 0.191); */
 }
 
 .green{

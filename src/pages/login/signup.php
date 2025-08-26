@@ -27,11 +27,15 @@ require_once "../../../includes/signup_view.inc.php";
                     <input required type="password" id="pwd-signup" class="input--single" name="pwd" placeholder="Password">
                     <button class="styled-button">Signup</button>
                 </form>
-                <a href="./login.php" class="login--guest">Login instead</a>
             </div>
             <?php 
                 check_signup_errors();
             ?>
+            <div>
+                <a href="../lesson_page/lesson.html" class="login--guest">Guest</a>
+                |
+                <a href="./login.php" class="login--guest">Login</a>
+            </div>
             </div>
         </div>
     </div>

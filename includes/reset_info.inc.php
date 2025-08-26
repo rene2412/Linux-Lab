@@ -20,20 +20,24 @@
                 <h2 class="auth__top__logo"><a href="../landing_page/landing_page.html">Linux-Lab</a></h2>
             </div>
             <div class="auth__card__content auth__card__content--reset">
-                <h3>Reset Password</h3>
                 <form class="form" action="reset_password.inc.php" method="POST" >
+                    <h2 style="color:white" > Verify your email</h2>
                     <label for="email">E-mail</label>
                     <input class="input--single" type="text" id="email" name="email" placeholder="E-Mail">
-                    <button class="styled-button">Send Email</button>
+                    <button class="styled-button" style="width:100%">Send Email</button>
                 </form>
-                <div class="auth__card__content--reset__links">
-                    <a class="login--guest" href="../src/pages/login/login.php">Login instead</a>
-                    <a class="login--guest" href="../src/pages/login/signup.php">Signup instead</a>
-                </div>
                 <?php
                     check_reset_password_errors();
                     ?>
             </div>
+                <div class="auth__card__content--reset__links">
+                    <div>
+                    <!-- <a class="login--guest" href="../src/pages/login/login.php">Login</a>
+                    |
+                    <a class="login--guest" href="../src/pages/login/signup.php">Signup</a> -->
+
+                    </div>
+                </div>
         </div>
     </div>
 </body>
