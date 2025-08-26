@@ -281,15 +281,15 @@
 }
 
 .navbar__link{
-    transition: transform 0.3s ease;
+    transition: transform 0.1s ease;
     position: relative;
 }
 
 .navbar__link:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 .navbar__link:active{
-    transform: scale(0.9);
+    transform: scale(0.97);
 }
 
 .navbar--link--desktop:hover::before {
