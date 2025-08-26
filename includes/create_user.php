@@ -32,10 +32,10 @@ try {
 			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
 		}
 	 
-	 header("Location: ../src/pages/landing_page/landing_page.html");
+	 header("Location: ../src/pages/dashboard/dashboard.html");	
 	 $pdo = null;
 	 $stmt = null;
-     $pwd = null;	 
+     	 $pwd = null;	 
 	 die();
 
 	} catch (PDOException $e) {

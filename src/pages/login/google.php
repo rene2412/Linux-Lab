@@ -88,7 +88,7 @@ try {
 			$json_response = json_encode($response);
 			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
 		}
-	    header("Location: ../../../src/pages/landing_page/landing_page.html");
+  	    header("Location: ../../../src/pages/landing_page/landing_page.html");	
 	    $pdo = null;
 	    $stmt = null;	 
 	    die();

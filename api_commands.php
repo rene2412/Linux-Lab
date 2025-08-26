@@ -2518,8 +2518,6 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
             $username = "guest";
         } 
         $output = $username;
-        $output .= "\n" . $lessonID;
-        $output .= "\n" . $fullCmd;
         if ($lessonID === 8) {
             $isCorrect = true;
             if ($userId) {
