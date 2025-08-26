@@ -12,7 +12,7 @@
     $client = new Google\Client;
     $client->setClientId($_ENV["CLIENT_ID"]);
     $client->setClientSecret($_ENV["CLIENT_SECRET"]);
-    $client->setRedirectUri("http://localhost/Linux-Lab/src/pages/login/google.php");
+    $client->setRedirectUri("https://linux-lab.live/src/pages/login/google.php");
 
    function TrimUsername(string $email) {
     return explode('@', $email)[0];

@@ -15,7 +15,7 @@ if (isset($_SESSION["send_email"])) {
 
     require_once "database.inc.php";
 
-    $url = "http://localhost/Linux-Lab/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "https://linux-lab.live/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
     $expires = date("U") + 1800;
     
     // SQL Queries
