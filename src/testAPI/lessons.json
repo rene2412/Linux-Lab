@@ -20,7 +20,7 @@
             "section": "Prelude",
             "title": "What Is Linux?",
             "content_type": "article",
-            "content": "Linux is a free and open-source operating system based on Unix (an older but groundbreaking operating system from the 1970s). From what started as a hobby project by a college student in 1991 named Linus Torvalds, is now powering most of the digital world.<br><br>Here's what is currently running Linux right now:<br>• The servers behind Netflix, Google, and Amazon<br>• Your Android phone<br>• Your car's infotainment system (Tesla, BMW, Toyota, etc.)<br>• The router connecting you to the internet<br>• Most smart TVs and IoT devices<br><br>In the workplace, Linux skills are essential for:<br>• Software developers and engineers<br>• System administrators and DevOps teams<br>• Cybersecurity professionals<br>• Hackers<br>• Data scientists and analysts<br><br>The reason Linux is everywhere? It's reliable, secure, customizable, and completely free. While Windows costs hundreds of dollars per license, Linux costs nothing and can be modified for any purpose.<br><br>That's why when companies need systems that absolutely cannot fail, like running a bank or launching rockets, they choose Linux.",
+            "content": "Linux is a free and open-source operating system based on Unix (an older but groundbreaking operating system from the 1970s). From what started as a hobby project by a college student in 1991 named Linus Torvalds, is now powering most of the digital world.<br><br>Here's what is currently running Linux right now:<br>\u2022 The servers behind Netflix, Google, and Amazon<br>\u2022 Your Android phone<br>\u2022 Your car's infotainment system (Tesla, BMW, Toyota, etc.)<br>\u2022 The router connecting you to the internet<br>\u2022 Most smart TVs and IoT devices<br><br>In the workplace, Linux skills are essential for:<br>\u2022 Software developers and engineers<br>\u2022 System administrators and DevOps teams<br>\u2022 Cybersecurity professionals<br>\u2022 Hackers<br>\u2022 Data scientists and analysts<br><br>The reason Linux is everywhere? It's reliable, secure, customizable, and completely free. While Windows costs hundreds of dollars per license, Linux costs nothing and can be modified for any purpose.<br><br>That's why when companies need systems that absolutely cannot fail, like running a bank or launching rockets, they choose Linux.",
             "completed": false
         },
         {
@@ -29,7 +29,7 @@
             "section": "Prelude",
             "title": "Linux Architecture",
             "content_type": "article",
-            "content": "There are 5 main components that make Linux work: Applications, Kernel, Shell, Utilities, and Hardware. As you can see from the image below, these components work with each other to create the Linux operating system. Let's see how they work:<br><br><img src='../../../images/Linux-Architecture.png' width='500'><br><br><b>Kernel</b> - The Linux kernel is the core of the operating system and lays down the foundation for how software communicates with hardware. The kernel has 4 main jobs:<br><ul><li><b>Memory Management:</b> Keeps track of the device's memory and decides where and how to store content</li><li><b>Process Management:</b> Determines which process or program can use the CPU (Central Processing Unit) for a certain time</li><li><b>Device Drivers:</b> Acts as a translator between hardware devices (like keyboards, mice, printers) and the software</li><li><b>System Calls:</b> Provides a way for programs to request services from the operating system</li></ul><br><b>Shell</b> - This is your command line interface! The shell takes the commands you type and translates them into instructions the kernel can understand. Popular shells include Bash, Zsh, and Fish.<br><br><b>Applications</b> - These are the programs you actually use, like web browsers, text editors, and games. They run on top of the operating system.<br><br><b>Utilities</b> - Built-in command line tools that help you manage your system.<br><br><b>Hardware</b> - The physical components like CPU, RAM, hard drives, and network cards that everything else depends on.<br><br>Think of it like a restaurant: Hardware is the kitchen, Kernel is the head chef coordinating everything, Shell is the waiter taking your orders, Utilities are the cooking tools, and Applications are the meals you actually enjoy!<br><br> For this section of Linux Lab we will work with the Linux shell and utilities.",
+            "content": "There are 5 main components that make Linux work: Applications, Kernel, Shell, Utilities, and Hardware. As you can see from the image below, these components work with each other to create the Linux operating system. Let's see how they work:<br><br><img src='..\/..\/..\/images\/Linux-Architecture.png' width='500'><br><br><b>Kernel<\/b> - The Linux kernel is the core of the operating system and lays down the foundation for how software communicates with hardware. The kernel has 4 main jobs:<br><ul><li><b>Memory Management:<\/b> Keeps track of the device's memory and decides where and how to store content<\/li><li><b>Process Management:<\/b> Determines which process or program can use the CPU (Central Processing Unit) for a certain time<\/li><li><b>Device Drivers:<\/b> Acts as a translator between hardware devices (like keyboards, mice, printers) and the software<\/li><li><b>System Calls:<\/b> Provides a way for programs to request services from the operating system<\/li><\/ul><br><b>Shell<\/b> - This is your command line interface! The shell takes the commands you type and translates them into instructions the kernel can understand. Popular shells include Bash, Zsh, and Fish.<br><br><b>Applications<\/b> - These are the programs you actually use, like web browsers, text editors, and games. They run on top of the operating system.<br><br><b>Utilities<\/b> - Built-in command line tools that help you manage your system.<br><br><b>Hardware<\/b> - The physical components like CPU, RAM, hard drives, and network cards that everything else depends on.<br><br>Think of it like a restaurant: Hardware is the kitchen, Kernel is the head chef coordinating everything, Shell is the waiter taking your orders, Utilities are the cooking tools, and Applications are the meals you actually enjoy!<br><br> For this section of Linux Lab we will work with the Linux shell and utilities.",
             "completed": false
         },
         {
@@ -38,7 +38,7 @@
             "section": "Prelude",
             "title": "The Command Line",
             "content_type": "article",
-            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task via the <b>shell</b>.<p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the interactive learning will take place. The terminal is placed at your right side (or bottom if you are on mobile) of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge and experience with Linux grows, you will begin using your computer in powerful ways. Tasks that take dozens of clicks in a graphical interface can be done with a single command.</p><p>For now, we must understand how the <b>filesystem</b> works, because that's where all your files and programs live.</p><img src='../../../images/linuxCl.gif' width='500'><br><br>",
+            "content": "<code>example_user@LinuxLab:\/$<\/code><p>The Linux command line allows users to input commands to their computers operating system that executes a task via the <b>shell<\/b>.<p>In other words, the command line allows you speak to your computer at a powerful level!<\/p>This all happens in a text based user interface called the <b>terminal<\/b>. We at Linux-Lab made you your own personal terminal where the interactive learning will take place. The terminal is placed at your right side (or bottom if you are on mobile) of your screem and it may look like something straight out of a hollywood hacking scene.<\/p><p>As your knowledge and experience with Linux grows, you will begin using your computer in powerful ways. Tasks that take dozens of clicks in a graphical interface can be done with a single command.<\/p><p>For now, we must understand how the <b>filesystem<\/b> works, because that's where all your files and programs live.<\/p><img src='..\/..\/..\/images\/linuxCl.gif' width='500'><br><br>",
             "completed": false
         },
         {
@@ -47,7 +47,7 @@
             "section": "Prelude",
             "title": "The Filesystem",
             "content_type": "article",
-            "content": "<p>The core philosophy in Linux is that <b>everything is a file</b>. This means that every file, folder (directory), and even hardware devices are treated as file-like objects to allow for fast and easy navigation throughout your system.</p><p>A <b>directory</b> is just the Linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories, and so on.</p><p>This looping technique is called <b>recursion</b>, which is exactly how the filesystem works - like Russian nesting dolls, but for your computer files!</p><p>Let's take a look at how it visually works with this example below:</p><img src='../../../images/fileSystem.gif' width='500'><br><br><p>Think of it like a family tree:</p><ul><li><b>Root (/):</b> The very top of everything - like the great-great-grandparent</li><li><b>Directories:</b> Like family branches - they can have children (more directories or files)</li><li><b>Files:</b> The end points - they contain your actual data</li></ul><p>Every file and directory has a unique <b>path</b> that tells you exactly where to find it. For example: <code>/home/user/Documents/my_file.txt</code></p><p>This path is like giving someone directions to your house - it starts from the root (/) and follows the directories until it reaches your file.</p><p>With that in mind, we can begin introducing commands we have all been waiting for.",
+            "content": "<p>The core philosophy in Linux is that <b>everything is a file<\/b>. This means that every file, folder (directory), and even hardware devices are treated as file-like objects to allow for fast and easy navigation throughout your system.<\/p><p>A <b>directory<\/b> is just the Linux term for a folder. Directories can contain files and sub-directories, which could contain more files and sub-directories, and so on.<\/p><p>This looping technique is called <b>recursion<\/b>, which is exactly how the filesystem works - like Russian nesting dolls, but for your computer files!<\/p><p>Let's take a look at how it visually works with this example below:<\/p><img src='..\/..\/..\/images\/fileSystem.gif' width='500'><br><br><p>Think of it like a family tree:<\/p><ul><li><b>Root (\/):<\/b> The very top of everything - like the great-great-grandparent<\/li><li><b>Directories:<\/b> Like family branches - they can have children (more directories or files)<\/li><li><b>Files:<\/b> The end points - they contain your actual data<\/li><\/ul><p>Every file and directory has a unique <b>path<\/b> that tells you exactly where to find it. For example: <code>\/home\/user\/Documents\/my_file.txt<\/code><\/p><p>This path is like giving someone directions to your house - it starts from the root (\/) and follows the directories until it reaches your file.<\/p><p>With that in mind, we can begin introducing commands we have all been waiting for.",
             "completed": false
         },
         {
@@ -74,9 +74,9 @@
             "id": 8,
             "parent": "The Basics",
             "section": "File Navigation",
-            "title": "whoami", 
+            "title": "whoami",
             "content_type": "interactive",
-            "content": "On Linux, we can display to the terminal who the current logged on user is through a simple command.</p> <code> whoami </code> So.... who are you?",
+            "content": "On Linux, we can display to the terminal who the current logged on user is through a simple command.<\/p> <code> whoami <\/code> So.... who are you?",
             "completed": false
         },
         {
@@ -105,7 +105,7 @@
             "section": "File Navigation",
             "title": "cd",
             "content_type": "interactive",
-            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><code>Documents\/ Pictures\/ Projects\/ Videos\/</code><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the <b>cd</b> command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
+            "content": "<p>As we can see via the ouput ls gave, our content inside the current directory (which was the root directory) showed:<\/p><code>Documents\/ Pictures\/ Projects\/ Videos\/<\/code><p>Content marked with the backlash '\/' are your directories (folders) which can contain other directories and folders<\/p><p> To see what is inside, lets go into our Documents\/ directory with the <b>cd<\/b> command, which stands for \"change directory\".<code>cd Documents\/<\/code>",
             "answer": "cd Documents\/",
             "completed": false
         },
@@ -115,7 +115,7 @@
             "section": "File Navigation",
             "title": "cat",
             "content_type": "interactive",
-            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the <b>cat</b> command (concatenate), followed by the file name.<\/p><code>cat fileName</code><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
+            "content": "<p>Now that we are in our Documents directory, we can see that it contains directories and files that end in .txt<\/p><p>To access the content in these files we can use the <b>cat<\/b> command (concatenate), followed by the file name.<\/p><code>cat fileName<\/code><p>Lets try it out by seeing what is inside 'hello.txt', it could be a roaring surprise!<\/p><code>cat hello.txt<\/code>",
             "answer": "cat hello.txt",
             "completed": true
         },
@@ -125,7 +125,7 @@
             "section": "File Navigation",
             "title": "clear",
             "content_type": "interactive",
-            "content": "By now things are starting to get kinda messy in our terminal screen, no worries though. Linux makes it easy to <b>clear</b> our screen.</p> Lets run the <b>clear</b> command to achieve that! <code>clear</code>",
+            "content": "By now things are starting to get kinda messy in our terminal screen, no worries though. Linux makes it easy to <b>clear<\/b> our screen.<\/p> Lets run the <b>clear<\/b> command to achieve that! <code>clear<\/code>",
             "completed": true
         },
         {
@@ -144,9 +144,9 @@
             "section": "File Navigation",
             "title": "Absolute Path vs Relative Path",
             "content_type": "article",
-            "content": "It would be pretty inefficient if we wanted to navigate around the filesystem if our target source file lived in a far directory. We would probably have to use cd and cd .. a lot to reach our destination. However, this is where <b>absolute</b> and <b>relative</b> paths come into play.<ul><li>An <b>absolute path</b> is the full path to a file or directory from the root directory. It always starts with a forward slash (/) and shows the entire path tree. Example: <code>/home/user/documents/file.txt</code></li><li>A <b>relative path</b> refers to a location relative to your current working directory. It does not start with a slash and is shorter to write. Example: <code>../documents/file.txt</code></li></ul><p>Knowing when to use absolute vs relative paths is key for scripting, navigating efficiently, and writing reliable software.</p> <img src='../../../images/abs_relative.jpg' width='500'>",
+            "content": "It would be pretty inefficient if we wanted to navigate around the filesystem if our target source file lived in a far directory. We would probably have to use cd and cd .. a lot to reach our destination. However, this is where <b>absolute<\/b> and <b>relative<\/b> paths come into play.<ul><li>An <b>absolute path<\/b> is the full path to a file or directory from the root directory. It always starts with a forward slash (\/) and shows the entire path tree. Example: <code>\/home\/user\/documents\/file.txt<\/code><\/li><li>A <b>relative path<\/b> refers to a location relative to your current working directory. It does not start with a slash and is shorter to write. Example: <code>..\/documents\/file.txt<\/code><\/li><\/ul><p>Knowing when to use absolute vs relative paths is key for scripting, navigating efficiently, and writing reliable software.<\/p> <img src='..\/..\/..\/images\/abs_relative.jpg' width='500'>",
             "answer": "",
-            "completed": false 
+            "completed": false
         },
         {
             "id": 16,
@@ -212,9 +212,9 @@
             "section": "Checkpoint - File Navigation",
             "title": "Lab #1",
             "content_type": "interactive",
-            "content": "There is a 'LetItHappen.txt' file that contains the lyrics to a Tame Impala song. The file lives inside file in our /Lyrics directory, that lives inside the /Documents directory.</p> Write the command using the <b>absolute</b> path that will display the content of 'LetItHappen.txt'</p>Remember: To see the contents of a file we can use the <b>cat</b>, and every absolute path begins by starting at the root directory via '<b>/</b>'. ",
+            "content": "There is a 'LetItHappen.txt' file that contains the lyrics to a Tame Impala song. The file lives inside file in our \/Lyrics directory, that lives inside the \/Documents directory.<\/p> Write the command using the <b>absolute<\/b> path that will display the content of 'LetItHappen.txt'<\/p>Remember: To see the contents of a file we can use the <b>cat<\/b>, and every absolute path begins by starting at the root directory via '<b>\/<\/b>'. ",
             "answer": "",
-            "completed": false 
+            "completed": false
         },
         {
             "id": 21,
@@ -242,7 +242,7 @@
             "section": "File Modifications",
             "title": "rm",
             "content_type": "interactive",
-            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed by the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>TIP: Since we are now deleting content through the command line, you can use a custom command (not a real Linux command) we implemented called: <code>refresh</code>This will restore the simulated filesytem back to its default state. However this is not a real feature, so if you delete content from the command line on your machine MAKE SURE you dont need it. There is no retrieving it, once its gone, its gone!:)",
+            "content": "<p>Now that we know how to add to the filesysem, we can also remove from the filesystem, lets start with files<\/p><p><p> Firstly, it is important to note that when we delete something from the command line, it is impossible to get the content back so always double check what you want to delete.<\/p>To delete a file we use the <b>rm<\/b> command (remove) followed by the file name<\/p><p>Lets try this out by going into our Documents\/ directory and deleting the penguin.txt file<code>rm penguin.txt<\/code>TIP: Since we are now deleting content through the command line, you can use a custom command (not a real Linux command) we implemented called: <code>refresh<\/code>This will restore the simulated filesytem back to its default state. However this is not a real feature, so if you delete content from the command line on your machine MAKE SURE you dont need it. There is no retrieving it, once its gone, its gone!:)",
             "answer": "rm penguin.txt",
             "completed": false
         },
@@ -302,10 +302,10 @@
             "section": "File Modifications",
             "title": "cp",
             "content_type": "interactive",
-            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp</b> (copy) command to achieve this and the syntax looks a lot like the mv command.</p><code>cp [file] path/to/source</code><p> Traverse to the /Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ../Projects</code> Note: The source path can either be absolute or relative, your choice!",
-            "answer": "cp hello.txt ../Projects",
+            "content": "Linux makes it very easy to copy files around on the command line. We can use the <b>cp<\/b> (copy) command to achieve this and the syntax looks a lot like the mv command.<\/p><code>cp [file] path\/to\/source<\/code><p> Traverse to the \/Documents directory to look at the copy command in action. Let's copy 'hello.txt' into our Projects directory at one go!<code>cp hello.txt ..\/Projects<\/code> Note: The source path can either be absolute or relative, your choice!",
+            "answer": "cp hello.txt ..\/Projects",
             "completed": false
-        }, 
+        },
         {
             "id": 30,
             "parent": "The Basics",
@@ -492,14 +492,14 @@
             "content": "<p>Back in our root directory lets now look for a directory named \"project1\" that lives in Projects\/<\/p><code>find Projects\/ -name \"project1\"<\/code>",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
-        }, 
+        },
         {
             "id": 46,
             "parent": "The Basics",
             "section": "Searching & Filtering",
             "title": "sort",
             "content_type": "interactive",
-            "content": "The <b>sort</b> command is one of the more powerful commands in Linux, it allows us to sort content of a file and see the output based on the parameters we give it. By default <b>sort</b> arranges lines alphabetically in ascending order. Which means that if numbers are in the file, <b>sort</b> will treat the numbers as strings and only sort by the first digit of a number.<br><code>sort -flag filename</code>Like with other commands, the flag here is optional so lets just first look at a simple example.<br><br>In our Documents/ directory, lets take a look of our grocery list. Then, we will use this simple sort command and observe what happens, try it out! <code>sort grocery_list.txt </code>", 
+            "content": "The <b>sort<\/b> command is one of the more powerful commands in Linux, it allows us to sort content of a file and see the output based on the parameters we give it. By default <b>sort<\/b> arranges lines alphabetically in ascending order. Which means that if numbers are in the file, <b>sort<\/b> will treat the numbers as strings and only sort by the first digit of a number.<br><code>sort -flag filename<\/code>Like with other commands, the flag here is optional so lets just first look at a simple example.<br><br>In our Documents\/ directory, lets take a look of our grocery list. Then, we will use this simple sort command and observe what happens, try it out! <code>sort grocery_list.txt <\/code>",
             "answer": "",
             "completed": false
         },
@@ -509,10 +509,10 @@
             "section": "Searching & Filtering",
             "title": "sort -flag",
             "content_type": "interactive",
-            "content": "We can now mess around by adding flags to the <b>sort</b> command to add an additional layer of filtering. Here are a few major ones:<ul><li><b>-r</b>: Reverses the order of the sort output.</li><li><b>-n</b>: Sorts numbers numerically instead of alphabetically (so 2 comes before 10).</li><li><b>-u</b>: Removes duplicate lines so only unique results are shown.</li></ul> Go ahead and try out the reverse flag in grocery_list.txt<code>sort -r grocery_list.txt</code>",
+            "content": "We can now mess around by adding flags to the <b>sort<\/b> command to add an additional layer of filtering. Here are a few major ones:<ul><li><b>-r<\/b>: Reverses the order of the sort output.<\/li><li><b>-n<\/b>: Sorts numbers numerically instead of alphabetically (so 2 comes before 10).<\/li><li><b>-u<\/b>: Removes duplicate lines so only unique results are shown.<\/li><\/ul> Go ahead and try out the reverse flag in grocery_list.txt<code>sort -r grocery_list.txt<\/code>",
             "answer": "find Projects\/ -name \"project1\"",
             "completed": false
-        }, 
+        },
         {
             "id": 48,
             "parent": "The Basics",
@@ -693,7 +693,7 @@
             "section": "File Permissions",
             "title": "Alphabetic Mode",
             "content_type": "article",
-            "content": "The Linux permisions can be expressed in 2 ways, one being the <b>Alphabetic</b> mode which we have been working with already but lets take a closer look.</p>Up to now, we know that in order to see the permissions of a file, directory, or program we have to read the permissions for that owener's, group's, or other's dashes, but the placement of the dashes do matter. For example, lets look at this image for a quick quick example. <img src='../../../images/file_permissions_alpha.png' width='500px'> As mentioned earlier a few times, the vert first dash is not relevant to the permissions, it just simply tells us if its a file or directory.</p> Therefore, we split the next 9 dashes into the 3 groups as mentioned before. The first dash always represents the <b>read</b> permissions. If the permission has the <b>r</b>, we know permissions are valid. However, if was a dash that means it does not have read permissions.  In fact the dash for the owner's, group's, and other's mean the same thing, that this body does not have this permission.</p> The second dash represnts the <b>write</b> permission, which states if this body is able to write to this file. If there is a <b>w</b> then writing permisions are valid. Otherwise, it would be invalid and represented with the dash.</p>Liekwise, the last permission for a body represents the execution permission. Meaning if this body is allowed to run this program or file. If they are allowed then it will be represented with <b>x</b>, otherwise it's not allowed and will be represented with a dash",
+            "content": "The Linux permisions can be expressed in 2 ways, one being the <b>Alphabetic<\/b> mode which we have been working with already but lets take a closer look.<\/p>Up to now, we know that in order to see the permissions of a file, directory, or program we have to read the permissions for that owener's, group's, or other's dashes, but the placement of the dashes do matter. For example, lets look at this image for a quick quick example. <img src='..\/..\/..\/images\/file_permissions_alpha.png' width='500px'> As mentioned earlier a few times, the vert first dash is not relevant to the permissions, it just simply tells us if its a file or directory.<\/p> Therefore, we split the next 9 dashes into the 3 groups as mentioned before. The first dash always represents the <b>read<\/b> permissions. If the permission has the <b>r<\/b>, we know permissions are valid. However, if was a dash that means it does not have read permissions.  In fact the dash for the owner's, group's, and other's mean the same thing, that this body does not have this permission.<\/p> The second dash represnts the <b>write<\/b> permission, which states if this body is able to write to this file. If there is a <b>w<\/b> then writing permisions are valid. Otherwise, it would be invalid and represented with the dash.<\/p>Liekwise, the last permission for a body represents the execution permission. Meaning if this body is allowed to run this program or file. If they are allowed then it will be represented with <b>x<\/b>, otherwise it's not allowed and will be represented with a dash",
             "completed": false
         },
         {
@@ -702,16 +702,16 @@
             "section": "File Permissions",
             "title": "Octal Mode",
             "content_type": "article",
-            "content": "The 2nd way we can represent Linux permissions is through a numeric or <b>octal</b> mode. The <b>octal</b> mode allows us to simplify permissions by using numbers instead of letters!<br><br>Each permission type has a numeric value:<br><ul><li><b>r (read)</b> = 4</li><li><b>w (write)</b> = 2</li><li><b>x (execute)</b> = 1</li></ul>We add these numbers together to form a single digit for each group: <b>owner</b>, <b>group</b>, and <b>others</b>.<br><br>For example:<br><ul><li><code>rwx</code> = 4 + 2 + 1 = 7</li><li><code>rw-</code> = 4 + 2 + 0 = 6</li><li><code>r--</code> = 4 + 0 + 0 = 4</li></ul><br>When written in octal mode, permissions are represented as three digits, one for each body. For instance:<br><ul><li><b>777</b> = rwx for owner, rwx for group, rwx for others</li><li><b>644</b> = rw- for owner, r-- for group, r-- for others</li><li><b>755</b> = rwx for owner, r-x for group, r-x for others</li></ul><img src='../../../images/octal.png' width=500px> Overall, this makes octal mode the more efficient and cleaner approach to set permissions in Linux, especially when setting permissions with the <b>chmod</b> command.",
+            "content": "The 2nd way we can represent Linux permissions is through a numeric or <b>octal<\/b> mode. The <b>octal<\/b> mode allows us to simplify permissions by using numbers instead of letters!<br><br>Each permission type has a numeric value:<br><ul><li><b>r (read)<\/b> = 4<\/li><li><b>w (write)<\/b> = 2<\/li><li><b>x (execute)<\/b> = 1<\/li><\/ul>We add these numbers together to form a single digit for each group: <b>owner<\/b>, <b>group<\/b>, and <b>others<\/b>.<br><br>For example:<br><ul><li><code>rwx<\/code> = 4 + 2 + 1 = 7<\/li><li><code>rw-<\/code> = 4 + 2 + 0 = 6<\/li><li><code>r--<\/code> = 4 + 0 + 0 = 4<\/li><\/ul><br>When written in octal mode, permissions are represented as three digits, one for each body. For instance:<br><ul><li><b>777<\/b> = rwx for owner, rwx for group, rwx for others<\/li><li><b>644<\/b> = rw- for owner, r-- for group, r-- for others<\/li><li><b>755<\/b> = rwx for owner, r-x for group, r-x for others<\/li><\/ul><img src='..\/..\/..\/images\/octal.png' width=500px> Overall, this makes octal mode the more efficient and cleaner approach to set permissions in Linux, especially when setting permissions with the <b>chmod<\/b> command.",
             "completed": true
-        },        
+        },
         {
             "id": 65,
             "parent": "The Basics",
             "section": "File Permissions",
             "title": "chmod",
             "content_type": "article",
-            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>As discussed earlier, there are two ways to specify permissions:<\/p><h4>Alphabetic Mode:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Octal Mode:<\/\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p></b>However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission",
+            "content": "<p>Now that we have some level of understanding of how permissions work in Linux, suppose we didn't have access to read, write, or execute a file, how could we solve this?<\/p><p>The <b>chmod<\/b> (change mode) command allows us to modify file permissions. The basic syntax is:<\/p><code>chmod [options] mode file<\/code><p>As discussed earlier, there are two ways to specify permissions:<\/p><h4>Alphabetic Mode:<\/h4><ul><li><b>u<\/b>: user\/owner<\/li><li><b>g<\/b>: group<\/li><li><b>o<\/b>: others<\/li><li><b>a<\/b>: all (equivalent to ugo)<\/li><li><b>+<\/b>: add permission<\/li><li><b>-<\/b>: remove permission<\/li><li><b>=<\/b>: set exact permission<\/li><li><b>r<\/b>: read permission<\/li><li><b>w<\/b>: write permission<\/li><li><b>x<\/b>: execute permission<\/li><\/ul><h4>Examples:<\/h4><ul><li><code>chmod u+x script.sh<\/code> - Add execute permission for the owner<\/li><li><code>chmod go-w file.txt<\/code> - Remove write permission for group and others<\/li><li><code>chmod a=r document.pdf<\/code> - Set read-only permission for everyone<\/li><\/ul><h4>Octal Mode:<\/\/p><ul><li><b>4<\/b>: read permission<\/li><li><b>2<\/b>: write permission<\/li><li><b>1<\/b>: execute permission<\/li><\/ul><p>We add these numbers for each category (owner, group, others):<\/p><ul><li><code>chmod 755 script.sh<\/code> - Owner: rwx (7), Group: r-x (5), Others: r-x (5)<\/li><li><code>chmod 644 file.txt<\/code> - Owner: rw- (6), Group: r-- (4), Others: r-- (4)<\/li><li><code>chmod 600 private.key<\/code> - Owner: rw- (6), Group: --- (0), Others: --- (0)<\/li><\/ul><p>Common permission patterns:<\/p><ul><li><b>755<\/b>: Standard for executable files (rwxr-xr-x)<\/li><li><b>644<\/b>: Standard for data files (rw-r--r--)<\/li><li><b>700<\/b>: Private executable files (rwx------)<\/li><li><b>600<\/b>: Private data files (rw-------)<\/li><\/ul><p><\/b>However, if you need to change permissions for files you don't own, you'll need to use the <b> sudo <\/b> command to override the existing permission",
             "completed": false
         },
         {
@@ -739,7 +739,7 @@
             "section": "File Permissions",
             "title": "chmod: change group permissions",
             "content_type": "interactive",
-            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<code>sudo chmod g+w sales_report.txt</code>Try it and then use ls -l again to see how the permissions have changed!",
+            "content": "Let's explore how to change group permissions for files.<\/p><p>In the same Work\/ directory that we were just in, run ls -l to see the current files again<\/p><p>Take a look at 'sales_report.txt' - notice how the group doesn't have write permissions for this file, so members of the group can read it but can't make changes!<\/p><p>Let's fix this by adding group write permissions. Similar to how we modified user permissions, we'll use chmod but with the 'g' option instead of 'u' to target the group permissions.<code>sudo chmod g+w sales_report.txt<\/code>Try it and then use ls -l again to see how the permissions have changed!",
             "answer": "sudo chmod g+w sales_report.txt",
             "completed": false
         },
@@ -856,7 +856,7 @@
             "section": "Checkpoint - File Permissions",
             "title": "Lab #10",
             "content_type": "interactive",
-            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'.<img src='../../../images/chart.jpg' height='300px' width='450px'",
+            "content": "<p>Sticking in the same Work\/ directory, in <b>octal<\/b> mode, write a command that preserves the user permissions, removes read permissions but also adds write and execute permissions for the group and others, in 'sales_report.txt'.<img src='..\/..\/..\/images\/chart.jpg' height='300px' width='450px'",
             "completed": false
         },
         {
@@ -865,7 +865,7 @@
             "section": "Extra",
             "title": "wc",
             "content_type": "interactive",
-            "content": "If you have made it this far consider yourself a Linux command line guru. By now we have covered most of the core Linux commands that you will need, but there are still some convienient commands that would be beneficial so lets quickly go over them.</p>Ever wondered how many lines, words, or characters a file has? Well of course Linux has a command that makes it super easy to do just that with the command <b>wc</b> (word count).</p><code>wc [option] [file]</code>As you can see the <b>wc</b> command can take in a optional flag argument. But for now lets just take a look at a simple example.</p>By default, if you give <b>wc</b> no flag arguments it will display the number of lines, number of words, and the number of characters of the desired file(s). Traverse to the Documents/ directory to see some magic happen.</p>The Declaration of Independence is pretty long and is the perfect target to see this in action, lets try out by running this command:<code>wc Declaration.txt</code>As stated before, the output is pretty cool. You get all the lines, words, and characters from a file with a very simple command!",
+            "content": "If you have made it this far consider yourself a Linux command line guru. By now we have covered most of the core Linux commands that you will need, but there are still some convienient commands that would be beneficial so lets quickly go over them.<\/p>Ever wondered how many lines, words, or characters a file has? Well of course Linux has a command that makes it super easy to do just that with the command <b>wc<\/b> (word count).<\/p><code>wc [option] [file]<\/code>As you can see the <b>wc<\/b> command can take in a optional flag argument. But for now lets just take a look at a simple example.<\/p>By default, if you give <b>wc<\/b> no flag arguments it will display the number of lines, number of words, and the number of characters of the desired file(s). Traverse to the Documents\/ directory to see some magic happen.<\/p>The Declaration of Independence is pretty long and is the perfect target to see this in action, lets try out by running this command:<code>wc Declaration.txt<\/code>As stated before, the output is pretty cool. You get all the lines, words, and characters from a file with a very simple command!",
             "completed": false
         },
         {
@@ -874,7 +874,7 @@
             "section": "Extra",
             "title": "wc -flag",
             "content_type": "interactive",
-            "content": "Let's add some flags now to specify on what exactly we want, there are 3 main flags we will look at.<ul><b>-l</b>: The <b>-l</b> flag will return back the number of lines in the file(s)<ul><ul><b>-w</b>: The <b>-w</b> flag will return back the number of words in the file(s)</ul><ul><b>-c</b>: The <b>-c</b> flag will return back the number of characters in the file(s)</ul>Sticking in Documents/, go ahead and use any <b>wc</b> command with a flag on the comnmand line. This time lets take a look at Kennedy.txt<code>wc -l Kennedy.txt</code><code>wc -w Kennedy.txt</code><code>wc -c Kennedy.txt</code>",
+            "content": "Let's add some flags now to specify on what exactly we want, there are 3 main flags we will look at.<ul><b>-l<\/b>: The <b>-l<\/b> flag will return back the number of lines in the file(s)<ul><ul><b>-w<\/b>: The <b>-w<\/b> flag will return back the number of words in the file(s)<\/ul><ul><b>-c<\/b>: The <b>-c<\/b> flag will return back the number of characters in the file(s)<\/ul>Sticking in Documents\/, go ahead and use any <b>wc<\/b> command with a flag on the comnmand line. This time lets take a look at Kennedy.txt<code>wc -l Kennedy.txt<\/code><code>wc -w Kennedy.txt<\/code><code>wc -c Kennedy.txt<\/code>",
             "completed": false
         },
         {
@@ -883,7 +883,7 @@
             "section": "Extra",
             "title": "wc*",
             "content_type": "interactive",
-            "content": "Remember that wildcard character? Well it showcases its convieniency with commands like these.</p>In the same Documents/ directory lets find all the lines, words, and characters in the .txt files.<code>wc *.txt</code> Note: You can still add the flags as we discussed earlier like: <code>wc -l *.txt</code><code>wc -c *.txt</code><code>wc *w *.txt</code>How awesome is that?",
+            "content": "Remember that wildcard character? Well it showcases its convieniency with commands like these.<\/p>In the same Documents\/ directory lets find all the lines, words, and characters in the .txt files.<code>wc *.txt<\/code> Note: You can still add the flags as we discussed earlier like: <code>wc -l *.txt<\/code><code>wc -c *.txt<\/code><code>wc *w *.txt<\/code>How awesome is that?",
             "completed": false
         },
         {
@@ -892,7 +892,7 @@
             "section": "Extra",
             "title": "Piping |",
             "content_type": "article",
-            "content": "\"Do one thing and do it well, and work together through pipes.\"</p>This is the most advanced command and technique we will touch, but sadly it wont work in our simulated envrioment. However, it is so important that we have to mention it. So what are pipes?</p>Pipes let you chain commands together, taking the output of one command and feeding it as input to the next. Think of it like a factory assembly line where each station does one specific job, then passes the work to the next station.</p>The pipe symbol `|` is responsible for connecting the commands together: <code>command1 | command2 | command3</code><h3>Example #1 - Count files in a directory</h3><code>ls | wc -l</code> This command will find all the files in the directory and return back the count</p><h3>Example #2 - Unique sorted lines of a file</h3><code>cat file.txt | sort | uniq</code> This command will display the sorted content in file.txt and remove duplicates keeping it unique.<h3>Example #3 - Find .log files containing \"error\" and sorting the results</h3><code>find ./ -name  \"*.log\" | grep \"error\" | sort </code> In our current directory, this would find all the log files, look for all instances of error, and sort the results.</p>Piping can get pretty complex but can deal some really powerful results. I strongly suggest opening up your own terminal on your machine and practicing. The best way to understand pipes is to play with them!",
+            "content": "\"Do one thing and do it well, and work together through pipes.\"<\/p>This is the most advanced command and technique we will touch, but sadly it wont work in our simulated envrioment. However, it is so important that we have to mention it. So what are pipes?<\/p>Pipes let you chain commands together, taking the output of one command and feeding it as input to the next. Think of it like a factory assembly line where each station does one specific job, then passes the work to the next station.<\/p>The pipe symbol `|` is responsible for connecting the commands together: <code>command1 | command2 | command3<\/code><h3>Example #1 - Count files in a directory<\/h3><code>ls | wc -l<\/code> This command will find all the files in the directory and return back the count<\/p><h3>Example #2 - Unique sorted lines of a file<\/h3><code>cat file.txt | sort | uniq<\/code> This command will display the sorted content in file.txt and remove duplicates keeping it unique.<h3>Example #3 - Find .log files containing \"error\" and sorting the results<\/h3><code>find .\/ -name  \"*.log\" | grep \"error\" | sort <\/code> In our current directory, this would find all the log files, look for all instances of error, and sort the results.<\/p>Piping can get pretty complex but can deal some really powerful results. I strongly suggest opening up your own terminal on your machine and practicing. The best way to understand pipes is to play with them!",
             "completed": false
         },
         {
@@ -901,7 +901,7 @@
             "section": "Extra",
             "title": "man",
             "content_type": "article",
-             "content": "Before we wrap it up for this section, we have to mention the command <b>man</b>. The command <b>man</b> is your new best friend, this is the Linux manual for every single command. It will give you an explanation for what every command does and how to use it.<code>man [command]</code> Switch out [command] for any command like: ls, grep, chmod. etc. It wont work on this environment since it does display the information in a fancy way, but please check it out on your terminal.</p>Let this be your GPS for your map throughout your Linux journey.",
+            "content": "Before we wrap it up for this section, we have to mention the command <b>man<\/b>. The command <b>man<\/b> is your new best friend, this is the Linux manual for every single command. It will give you an explanation for what every command does and how to use it.<code>man [command]<\/code> Switch out [command] for any command like: ls, grep, chmod. etc. It wont work on this environment since it does display the information in a fancy way, but please check it out on your terminal.<\/p>Let this be your GPS for your map throughout your Linux journey.",
             "completed": false
         },
         {
@@ -910,7 +910,7 @@
             "section": "Final",
             "title": "Closing thoughts",
             "content_type": "article",
-            "content": "Congratulations on completing the \"Command Line\" section of Linux-Lab! Although we didn't touch every single command, we hoped that this section gave you a good understanding of the Linux Command Line and how you will apply it to your profession or craft.</p> However, the learning of the command line is not done yet! Come and check out our \"Networking\" section where you will learn how the internet works and apply that theory towards the Linux Command Line.<a href='https://linux-lab.live/Linux-Lab/src/pages/lesson_page/lesson.html?module=Networking'> <b><u>Networking In Linux</b></u>, we hope to see you there!</a><h3>Additional Resource:</h3>If you are interested in learning more and in depth about the Linux Command Line here is a great resource!</p>Shotts, William E. Jr.. The Linux Command Line: A Complete Introduction. United States, No Starch Press, 2012. <img src='../../../images/LCML.jpg'", 
+            "content": "Congratulations on completing the \"Command Line\" section of Linux-Lab! Although we didn't touch every single command, we hoped that this section gave you a good understanding of the Linux Command Line and how you will apply it to your profession or craft.<\/p> However, the learning of the command line is not done yet! Come and check out our \"Networking\" section where you will learn how the internet works and apply that theory towards the Linux Command Line.<a href='https:\/\/linux-lab.live\/Linux-Lab\/src\/pages\/lesson_page\/lesson.html?module=Networking'> <b><u>Networking In Linux<\/b><\/u>, we hope to see you there!<\/a><h3>Additional Resource:<\/h3>If you are interested in learning more and in depth about the Linux Command Line here is a great resource!<\/p>Shotts,\u00a0William E. Jr..\u00a0The Linux Command Line: A Complete Introduction.\u00a0United States,\u00a0No Starch Press,\u00a02012. <img src='..\/..\/..\/images\/LCML.jpg'",
             "completed": false
         }
     ],
@@ -926,7 +926,7 @@
             "section": "Prelude",
             "title": "Networking",
             "content_type": "article",
-            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.<img src='../../../images/netWork.gif' width='500'>",
+            "content": "<p>In Computer Science, <b>Networking<\/b> refers to the connection of computers communicating to each other to produce emails, streaming, websites, gaming, messages, and the rest of the <b>internet<\/b> services we all enjoy today!<\/p><p>Learning all the nuances of how Networking actually works like the OSI Model, protocols, routers, switching - requires a dedicated course to obtain the knowledge and certification.<\/p>However for this networking section, we will just introduce the basic networking theory. And apply it to the command line to use powerful networking Linux commands.<img src='..\/..\/..\/images\/netWork.gif' width='500'>",
             "completed": false
         },
         {
@@ -938,14 +938,14 @@
             "content": "Every device on the internet has an address that is used to identify where that device lives. For example, your house has an address that allows shipments, friends, or family to locate your house that returns a shortest path.<\/p><p>Well your computer, smartphone, television, and other devices carry their own address called an <b>IP address<\/b> (which is short for a Internet Protocol address) and their role allows a device to communicate through the internet. However, your IP address will differ whether you are on a Local Area Network (LAN) or a Wide Area Network (WAN). For now, we will just look at your LAN IP address, which is just 4 sets of digits like:<code>192.168.1.1<\/code><p>Simply put, a Local Area Network is the local grouping of connected computers that are responsible for fetching and sending out data. Some LAN's use wires like an ethernet cable for speed (typically seen in a office or home setting), and others use a wireless method using radiowaves like WIFI (typically seen in a cafe, school, or building setting). You are most likely on a LAN right now!<\/p><img src='..\/..\/..\/images\/Home_LAN_local_area_network_example_diagram.png' width='500'>",
             "answer": "",
             "completed": false
-        }, 
+        },
         {
             "id": 3,
             "parent": "Networking",
             "section": "IP Addresses",
             "title": "IPV4 vs IPV6",
             "content_type": "article",
-            "content": "Since 1983, the internet used the standard 32 bit integer (we will discuss this later) IP address to identify devices on the internet. <code>192.1.0.255</code>You probably have seen this already in your life since it's still used today, however as technology advanced and more people began using the internet, we faced a big problem. We ran out of IP addresses!</p>How did we combat this? Well simple, we just made the IP address bigger!</p>On June 12, 2012, IPV6 (Internet Protocal Version 6) was officialy launched worldwide.<code>2001:db8::ff00:42:832</code>Instead of the original 32 bit address IPV4 used, IPV6 uses an outstanding 128 bits! But how much bigger is that? Let's find out in the next lesson.",
+            "content": "Since 1983, the internet used the standard 32 bit integer (we will discuss this later) IP address to identify devices on the internet. <code>192.1.0.255<\/code>You probably have seen this already in your life since it's still used today, however as technology advanced and more people began using the internet, we faced a big problem. We ran out of IP addresses!<\/p>How did we combat this? Well simple, we just made the IP address bigger!<\/p>On June 12, 2012, IPV6 (Internet Protocal Version 6) was officialy launched worldwide.<code>2001:db8::ff00:42:832<\/code>Instead of the original 32 bit address IPV4 used, IPV6 uses an outstanding 128 bits! But how much bigger is that? Let's find out in the next lesson.",
             "answer": "",
             "completed": false
         },
@@ -955,7 +955,7 @@
             "section": "IP Addresses",
             "title": "How does an IP address work?",
             "content_type": "article",
-            "content": "We have talked about how IP address use 32 bits or 128 bits, but what exactly does that mean?</p>Bits are just 1's and 0's, and is the way how computers communicate and process information, also known as <b>binary</b>.</p>In binary, we read from right to left and every digit goes by a power of 2. The first digit starting on the right is: 2¹ which is 2, then the next will be 2² which is 4, followed by 2³ which 8 and so on. <img src='../../../images/binary.png'>  </p>For ip addreses, they range between 0-255 and are seperated by the period('.') which is known as an <b>octet</b>. Each octet will hold 8 bits, and the bits (if you do the math) will return back the decimal value of that octet. Since there are 4 octets and each octet contains 8 bits, that means the entire address contains 32 bits! Hence why IPV4 is a 32 bit address! Let's take a look at a IPV4 address as an example. <img src='../../../images/ip.png'> From the example, we can see how it works, the octets are split into their binary value which will all add up back to the human readable decimal value.</p> As mentioned earlier, IPV4 ran its course since it only provided 4,294,967,296 (2<sup>32</sup>) possible unqie addresses. At the time this was seen as enough but the internet and technology exploded, which gave rise to IPV6.</p>For IPV6, its ip address uses a slightly more complex system but its roughly the same idea. Since its a 128 bits, that means it provides 2(<sup>132</sup>) is a number so big its enough to fill every star in the universe with 5.4 quadrillion grains of sand, so I think we are safe for now.",
+            "content": "We have talked about how IP address use 32 bits or 128 bits, but what exactly does that mean?<\/p>Bits are just 1's and 0's, and is the way how computers communicate and process information, also known as <b>binary<\/b>.<\/p>In binary, we read from right to left and every digit goes by a power of 2. The first digit starting on the right is: 2\u00b9 which is 2, then the next will be 2\u00b2 which is 4, followed by 2\u00b3 which 8 and so on. <img src='..\/..\/..\/images\/binary.png'>  <\/p>For ip addreses, they range between 0-255 and are seperated by the period('.') which is known as an <b>octet<\/b>. Each octet will hold 8 bits, and the bits (if you do the math) will return back the decimal value of that octet. Since there are 4 octets and each octet contains 8 bits, that means the entire address contains 32 bits! Hence why IPV4 is a 32 bit address! Let's take a look at a IPV4 address as an example. <img src='..\/..\/..\/images\/ip.png'> From the example, we can see how it works, the octets are split into their binary value which will all add up back to the human readable decimal value.<\/p> As mentioned earlier, IPV4 ran its course since it only provided 4,294,967,296 (2<sup>32<\/sup>) possible unqie addresses. At the time this was seen as enough but the internet and technology exploded, which gave rise to IPV6.<\/p>For IPV6, its ip address uses a slightly more complex system but its roughly the same idea. Since its a 128 bits, that means it provides 2(<sup>132<\/sup>) is a number so big its enough to fill every star in the universe with 5.4 quadrillion grains of sand, so I think we are safe for now.",
             "completed": false
         },
         {
@@ -967,7 +967,7 @@
             "content": "On Linux, we can see our LAN IP address through the command line via this command: <code>ifconfig<\/code><p>The output is cryptic and overwehelming but lets only focus on the last chunk since it gives us the information we care about the most. There will be some concepts we have yet to explore but we will go through it later on to make sense of this mess.<\/p><code><pre>wlp3s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500\n    inet 192.168.1.203  netmask 255.255.255.0  broadcast 192.168.1.255\n    inet6 2600:1010:a121:9b5b:1aa1:9da1:8698:3a0  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 2600:1010:a121:9b5b:3d70:e6fc:ffb1:8eab  prefixlen 64  scopeid 0x0&lt;global&gt;\n    inet6 fe80::243a:9f1c:31c6:1048  prefixlen 64  scopeid 0x20&lt;link&gt;\n    ether 50:e4:78:73:48:fd  txqueuelen 1000  (Ethernet)<\/pre><\/code><p><strong>Breakdown:<\/strong><\/p><ul><li><code>wlp3s0<\/code>: Network interface name (your Wi-Fi device).<\/li><li><code>flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;<\/code>: Interface is active and supports broadcasting and multicasting.<\/li><li><code>mtu 1500<\/code>: Maximum packet size the interface can handle (We will look at how packets work later on).<\/li><li><code>inet 192.168.1.203<\/code>: The holy grail of the command! This is your local IPv4 address (LAN IP).<\/li><li><code>netmask 255.255.255.0<\/code>: Subnet mask that divides network and host portions of the IP.<\/li><li><code>broadcast 192.168.1.255<\/code>: Address to send packets to all devices on the LAN.<\/li><li><code>inet6<\/code>: IPV6 address assigned to your interface.<\/li><li><code>ether 50:e4:78:73:48:fd<\/code>: MAC (hardware) address of your network device.<\/li><\/ul><p>This command helps you see your device's IP configuration and network status.<\/p>",
             "answer": "",
             "completed": false
-        },     
+        },
         {
             "id": 6,
             "parent": "Networking",
@@ -991,12 +991,12 @@
             "title": "Knowledge Check #2",
             "content_type": "multichoice",
             "questions": {
-              "A": "IPv4 uses 32-bit addresses while IPv6 uses 128-bit addresses",
-              "B": "IPv4 is newer than IPv6",
-              "C": "IPv4 supports more devices than IPv6",
-              "D": "IPv4 and IPv6 are the same protocol"
+                "A": "IPv4 uses 32-bit addresses while IPv6 uses 128-bit addresses",
+                "B": "IPv4 is newer than IPv6",
+                "C": "IPv4 supports more devices than IPv6",
+                "D": "IPv4 and IPv6 are the same protocol"
             },
-            "content": "<p>What's the difference between IPv4 and IPv6?</p><div class=\"question__container\"></div>",
+            "content": "<p>What's the difference between IPv4 and IPv6?<\/p><div class=\"question__container\"><\/div>",
             "answer": "A",
             "completed": false
         },
@@ -1007,22 +1007,22 @@
             "title": "Knowledge Check #3",
             "content_type": "multichoice",
             "questions": {
-              "A": "Computers use binary to process IP addresses internally, even though we see them in decimal",
-              "B": "Binary is only used when IP addresses are transmitted over fiber optic cables",
-              "C": "Routers convert IP addresses to binary only when they malfunction",
-              "D": "Computers use binary to process IP addresses internally, even though we see them in decimal"
+                "A": "Computers use binary to process IP addresses internally, even though we see them in decimal",
+                "B": "Binary is only used when IP addresses are transmitted over fiber optic cables",
+                "C": "Routers convert IP addresses to binary only when they malfunction",
+                "D": "Computers use binary to process IP addresses internally, even though we see them in decimal"
             },
-            "content": "<p>How does binary work with IP addresses?</p><div class=\"question__container\"></div>",
+            "content": "<p>How does binary work with IP addresses?<\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
             "completed": false
-        },     
+        },
         {
             "id": 9,
             "parent": "Networking",
             "section": "Subnetting",
             "title": "Classes",
             "content_type": "article",
-            "content": "<p>Right now would be a good time to mention that your ip address isn't just a random set of numbers between 0-255, they are a reflection of what kinda Network you are in!</p><p>Back in the early days of the internet, engineers created a system called <b>Network Classes</b> to organize IP addresses based on network size. Think of it like organizing neighborhoods - some are small residential streets, others are massive cities!</p><p>There are three main classes you'll encounter:</p><p><b>Class A Networks (1.0.0.0 - 126.255.255.255)</b><br>These are the <b>massive</b> networks. If your IP starts with a number between 1-126, you're on a huge network that can support around 16 million devices. These are typically used by large corporations or internet service providers.<br><code>Example: 10.5.100.50</code></p><p><b>Class B Networks (128.0.0.0 - 191.255.255.255)</b><br>The <b>medium-sized</b> networks. If your IP starts with 128-191, you're on a network that can handle about 65,000 devices. Perfect for universities or medium-sized companies.<br><code>Example: 172.16.10.25</code></p><p><b>Class C Networks (192.0.0.0 - 223.255.255.255)</b><br>The <b>small</b> networks! If your IP starts with 192-223, you're on a small network with about 254 devices max. This is what you'll see at home, small offices, or cafes.<br><code>Example: 192.168.1.100</code> (Looks familiar, right?)</p><p>Here's the cool part: just by looking at the first number of any IP address, you can instantly tell what size network you're dealing with!</p><p>But here's the problem that led to subnetting - what if you need something in between? What if 254 devices is too small, but 65,000 is way too big? That's where subnetting comes to the rescue, which we'll explore next!</p>",
+            "content": "<p>Right now would be a good time to mention that your ip address isn't just a random set of numbers between 0-255, they are a reflection of what kinda Network you are in!<\/p><p>Back in the early days of the internet, engineers created a system called <b>Network Classes<\/b> to organize IP addresses based on network size. Think of it like organizing neighborhoods - some are small residential streets, others are massive cities!<\/p><p>There are three main classes you'll encounter:<\/p><p><b>Class A Networks (1.0.0.0 - 126.255.255.255)<\/b><br>These are the <b>massive<\/b> networks. If your IP starts with a number between 1-126, you're on a huge network that can support around 16 million devices. These are typically used by large corporations or internet service providers.<br><code>Example: 10.5.100.50<\/code><\/p><p><b>Class B Networks (128.0.0.0 - 191.255.255.255)<\/b><br>The <b>medium-sized<\/b> networks. If your IP starts with 128-191, you're on a network that can handle about 65,000 devices. Perfect for universities or medium-sized companies.<br><code>Example: 172.16.10.25<\/code><\/p><p><b>Class C Networks (192.0.0.0 - 223.255.255.255)<\/b><br>The <b>small<\/b> networks! If your IP starts with 192-223, you're on a small network with about 254 devices max. This is what you'll see at home, small offices, or cafes.<br><code>Example: 192.168.1.100<\/code> (Looks familiar, right?)<\/p><p>Here's the cool part: just by looking at the first number of any IP address, you can instantly tell what size network you're dealing with!<\/p><p>But here's the problem that led to subnetting - what if you need something in between? What if 254 devices is too small, but 65,000 is way too big? That's where subnetting comes to the rescue, which we'll explore next!<\/p>",
             "answer": "",
             "completed": false
         },
@@ -1032,7 +1032,7 @@
             "section": "Subnetting",
             "title": "Subnets",
             "content_type": "article",
-            "content": "<p>We have discussed that network classes give us three fixed sizes: huge (Class A), medium (Class B), or small (Class C). But what happens when none of these sizes fit what you actually need? Well we kinda figured it through <b>subnetting</b>.</p><p><b>Subnetting</b> refers to the network process of taking one big network and chopping it up into smaller, more manageable pieces.</p><p>Think of subnetting like this: imagine you own a large apartment building (your original network). Instead of having one massive space where everyone lives together, you divide it into separate floors or apartments. Each apartment becomes its own <b>subnet</b>(a smaller network within the bigger one).</p><p>Why would you want to do this?</b></p><p><b>Organization:</b> You can separate different groups. Put the accounting department on one subnet, engineering on another. Just like putting different departments on different floors of a building!</p><p><b>Security:</b> You can control who talks to whom. Maybe the guest WiFi subnet can't access the company servers subnet.</p><p><b>Performance:</b> Smaller networks mean less traffic congestion. Instead of 1000 devices all shouting at once, you have groups of 50 devices in organized subnets.</p><p><b>Efficiency:</b> No more wasting IP addresses! Instead of giving a small company an entire Class B network (65,000 addresses) when they only need 500, you can create custom-sized subnets.</p><p>Here's a simple example: Let's say you have the network <code>192.168.1.0</code> (normally 254 devices). With subnetting, you could split this into:</p><ul><li><code>192.168.1.0</code> - Subnet for employees (126 devices)</li><li><code>192.168.1.128</code> - Subnet for guests (126 devices)</li></ul><p>Same building, but now it's organized into two separate apartments!</p><p>The magic happens with something called a <b>subnet mask</b>, which tells your computer: \"Hey, these IP addresses are in your neighborhood, but those other ones are in a different subnet.\"",
+            "content": "<p>We have discussed that network classes give us three fixed sizes: huge (Class A), medium (Class B), or small (Class C). But what happens when none of these sizes fit what you actually need? Well we kinda figured it through <b>subnetting<\/b>.<\/p><p><b>Subnetting<\/b> refers to the network process of taking one big network and chopping it up into smaller, more manageable pieces.<\/p><p>Think of subnetting like this: imagine you own a large apartment building (your original network). Instead of having one massive space where everyone lives together, you divide it into separate floors or apartments. Each apartment becomes its own <b>subnet<\/b>(a smaller network within the bigger one).<\/p><p>Why would you want to do this?<\/b><\/p><p><b>Organization:<\/b> You can separate different groups. Put the accounting department on one subnet, engineering on another. Just like putting different departments on different floors of a building!<\/p><p><b>Security:<\/b> You can control who talks to whom. Maybe the guest WiFi subnet can't access the company servers subnet.<\/p><p><b>Performance:<\/b> Smaller networks mean less traffic congestion. Instead of 1000 devices all shouting at once, you have groups of 50 devices in organized subnets.<\/p><p><b>Efficiency:<\/b> No more wasting IP addresses! Instead of giving a small company an entire Class B network (65,000 addresses) when they only need 500, you can create custom-sized subnets.<\/p><p>Here's a simple example: Let's say you have the network <code>192.168.1.0<\/code> (normally 254 devices). With subnetting, you could split this into:<\/p><ul><li><code>192.168.1.0<\/code> - Subnet for employees (126 devices)<\/li><li><code>192.168.1.128<\/code> - Subnet for guests (126 devices)<\/li><\/ul><p>Same building, but now it's organized into two separate apartments!<\/p><p>The magic happens with something called a <b>subnet mask<\/b>, which tells your computer: \"Hey, these IP addresses are in your neighborhood, but those other ones are in a different subnet.\"",
             "answer": "",
             "completed": false
         },
@@ -1042,7 +1042,7 @@
             "section": "Subnetting",
             "title": "Subnet Masks",
             "content_type": "article",
-            "content": "<p>Alright, so we know subnetting lets us divide big networks into smaller ones. But how does your computer actually know where one subnet ends and another begins? That's where the <b>subnet mask</b> comes in</p><p>Remember when we looked at the <b>ifconfig</b> command and saw that cryptic? <code>netmask 255.255.255.0</code>Well, that's your subnet mask in action!</p><p>Think of a subnet mask like a postal system. When you write an address, you have a street address (like \"123 Main Street\") and a city (like \"Springfield\"). The subnet mask tells your computer: \"Here's the city part (network), and here's the street address part (host).\"</p><p>Let's break down the most common subnet mask: <code>255.255.255.0</code></p><p>In binary this looks like:<br><code>11111111.11111111.11111111.00000000</code></p><p>Here's the rule: wherever you see <b>255</b> (or <b>11111111</b> in binary), that part represents the <b>network portion</b>. Wherever you see <b>0</b> (or <b>00000000</b> in binary), that's the <b>host portion</b>.</p><p>So for an IP address like <b>192.168.1.100</b> with subnet mask <b>255.255.255.0</b>:</p><ul><li><b>Network part:</b> <code>192.168.1</code> (this is like your \"city\")</li><li><b>Host part:</b> <code>100</code> (this is like your \"street address\")</li></ul><p>This means any device with an IP starting with <code>192.168.1.___</code> is in the same subnet, meaning they're all in the same \"city\" and can talk to each other directly!</p><p>But a device with an IP like: <code>192.168.2.50</code> That's in a different \"city\" (different subnet), so it will need <b>defualt gateway</b> or router to communicate.</p><p>You'll also see subnet masks written in <b>CIDR notation</b> like <b>/24</b>. This just means \"the first 24 bits are the network portion.\" Since <b>255.255.255.0</b> has 24 ones in binary, it's the same as <b>/24</b>.<p>Next time you run <b>ifconfig</b>, you'll know exactly what that netmask is telling you about your network neighborhood!</p>",
+            "content": "<p>Alright, so we know subnetting lets us divide big networks into smaller ones. But how does your computer actually know where one subnet ends and another begins? That's where the <b>subnet mask<\/b> comes in<\/p><p>Remember when we looked at the <b>ifconfig<\/b> command and saw that cryptic? <code>netmask 255.255.255.0<\/code>Well, that's your subnet mask in action!<\/p><p>Think of a subnet mask like a postal system. When you write an address, you have a street address (like \"123 Main Street\") and a city (like \"Springfield\"). The subnet mask tells your computer: \"Here's the city part (network), and here's the street address part (host).\"<\/p><p>Let's break down the most common subnet mask: <code>255.255.255.0<\/code><\/p><p>In binary this looks like:<br><code>11111111.11111111.11111111.00000000<\/code><\/p><p>Here's the rule: wherever you see <b>255<\/b> (or <b>11111111<\/b> in binary), that part represents the <b>network portion<\/b>. Wherever you see <b>0<\/b> (or <b>00000000<\/b> in binary), that's the <b>host portion<\/b>.<\/p><p>So for an IP address like <b>192.168.1.100<\/b> with subnet mask <b>255.255.255.0<\/b>:<\/p><ul><li><b>Network part:<\/b> <code>192.168.1<\/code> (this is like your \"city\")<\/li><li><b>Host part:<\/b> <code>100<\/code> (this is like your \"street address\")<\/li><\/ul><p>This means any device with an IP starting with <code>192.168.1.___<\/code> is in the same subnet, meaning they're all in the same \"city\" and can talk to each other directly!<\/p><p>But a device with an IP like: <code>192.168.2.50<\/code> That's in a different \"city\" (different subnet), so it will need <b>defualt gateway<\/b> or router to communicate.<\/p><p>You'll also see subnet masks written in <b>CIDR notation<\/b> like <b>\/24<\/b>. This just means \"the first 24 bits are the network portion.\" Since <b>255.255.255.0<\/b> has 24 ones in binary, it's the same as <b>\/24<\/b>.<p>Next time you run <b>ifconfig<\/b>, you'll know exactly what that netmask is telling you about your network neighborhood!<\/p>",
             "answer": "",
             "completed": false
         },
@@ -1052,10 +1052,10 @@
             "section": "Subnetting",
             "title": "Default Gateway",
             "content_type": "article",
-            "content": "<p>We found out that when we try to access a service outside of our network, we need the default gateway to route us out of local network and find the outside network we want to speak to.</p><p>Think of your <b>default gateway</b> like the front door of your apartment building. When you want to visit someone who lives in your building (same subnet), you can walk directly to their door. But when you want to visit someone in a different building (different network), you have to go through the front door and out into the street!</p><p>Your default gateway is typically your router, and it does the job. That little box sitting in your home or office that connects your local network to the internet. It usually has an IP address like <code>192.168.1.1</code> or <code>192.168.0.1</code></p><p><b>Here's how it works:</b></p><p>Let's say your computer (<b>192.168.1.100</b>) wants to visit Google (<b>142.250.72.206</b>). Your computer first checks: \"Is Google in my subnet?\"</p><p>Using the subnet mask <b>255.255.255.0</b>, your computer realizes:</p><ul><li>My network: <code>192.168.1.x</code></li><li>Google's network: <code>142.250.72.x</code></li><li>These don't match - Google is NOT in my neighborhood!</li></ul><p>So your computer says: \"I need to go through the front door!\" and sends the request to the default gateway (<b>192.168.1.1</b>). The gateway then says: \"No problem, I'll find the path to Google for you!\" and routes your request out to the internet.</p><p>On the command line we can see this process taking place with the Linux command:<code>ip route</code>",
+            "content": "<p>We found out that when we try to access a service outside of our network, we need the default gateway to route us out of local network and find the outside network we want to speak to.<\/p><p>Think of your <b>default gateway<\/b> like the front door of your apartment building. When you want to visit someone who lives in your building (same subnet), you can walk directly to their door. But when you want to visit someone in a different building (different network), you have to go through the front door and out into the street!<\/p><p>Your default gateway is typically your router, and it does the job. That little box sitting in your home or office that connects your local network to the internet. It usually has an IP address like <code>192.168.1.1<\/code> or <code>192.168.0.1<\/code><\/p><p><b>Here's how it works:<\/b><\/p><p>Let's say your computer (<b>192.168.1.100<\/b>) wants to visit Google (<b>142.250.72.206<\/b>). Your computer first checks: \"Is Google in my subnet?\"<\/p><p>Using the subnet mask <b>255.255.255.0<\/b>, your computer realizes:<\/p><ul><li>My network: <code>192.168.1.x<\/code><\/li><li>Google's network: <code>142.250.72.x<\/code><\/li><li>These don't match - Google is NOT in my neighborhood!<\/li><\/ul><p>So your computer says: \"I need to go through the front door!\" and sends the request to the default gateway (<b>192.168.1.1<\/b>). The gateway then says: \"No problem, I'll find the path to Google for you!\" and routes your request out to the internet.<\/p><p>On the command line we can see this process taking place with the Linux command:<code>ip route<\/code>",
             "answer": "",
             "completed": false
-        }, 
+        },
         {
             "id": 13,
             "parent": "Networking",
@@ -1078,7 +1078,7 @@
                 "C": "The network portion is 192.168.1 and the host portion is 100",
                 "D": "The entire address 192.168.1.100 is the host portion"
             },
-            "content": "<p>Given the IP address 192.168.1.100 with subnet mask 255.255.255.0, what are the network and host portions?</p><div class=\"question__container\"></div>",
+            "content": "<p>Given the IP address 192.168.1.100 with subnet mask 255.255.255.0, what are the network and host portions?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
         },
@@ -1094,7 +1094,7 @@
                 "C": "Only when connecting to secure websites using HTTPS",
                 "D": "When your computer is running low on available IP addresses"
             },
-            "content": "<p>When does your computer use the default gateway?</p><div class=\"question__container\"></div>",
+            "content": "<p>When does your computer use the default gateway?<\/p><div class=\"question__container\"><\/div>",
             "answer": "A",
             "completed": false
         },
@@ -1110,7 +1110,7 @@
                 "C": "It tests the speed of your internet connection",
                 "D": "It shows your computer's routing table and how traffic is directed to different networks"
             },
-            "content": "<p>What does the 'ip route' command show you?</p><div class=\"question__container\"></div>",
+            "content": "<p>What does the 'ip route' command show you?<\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
             "completed": false
         },
@@ -1126,7 +1126,7 @@
                 "C": "The default gateway is the list of all possible paths packets can take inside your computer",
                 "D": "The default gateway is the IP address of the website you are trying to visit"
             },
-            "content": "<p>What is the role of the default gateway in a network?</p><div class=\"question__container\"></div>",
+            "content": "<p>What is the role of the default gateway in a network?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
         },
@@ -1211,7 +1211,7 @@
             "content": "<p>What does the nslookup command do?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-        }, 
+        },
         {
             "id": 25,
             "parent": "Networking",
@@ -1244,7 +1244,7 @@
             "section": "Transfering",
             "title": "Protocols",
             "content_type": "article",
-            "content": "<p>Suppose you are at a party and you meet someone new, the instinct for both parties is to shake each other's hands and greet. This process could be seen as a <b>protocol</b>, meaning that both parties engaged in societal rules and guidelines to greet each other. The internet works the same way.</p><p>In networking, a <b>protocol</b> is a set of rules and standards that govern how devices communicate with each other over a network. Just like social protocols help people interact smoothly, network protocols ensure that different computers, servers, and devices can understand each other and exchange information reliably.</p><h2>Why Do We Need Protocols?</h2><p>Imagine trying to have a conversation where one person speaks English, another speaks French, and a third speaks Japanese - without any common language or translation rules, communication would be impossible. Network protocols solve this problem by establishing:</p><ul><li><strong>Common Language</strong>: How data should be formatted and structured</li><li><strong>Timing Rules</strong>: When to send data and when to wait</li><li><strong>Error Handling</strong>: What to do when something goes wrong</li><li><strong>Connection Management</strong>: How to start and end communications</li></ul><h2>How Protocols Work</h2><p>Think of protocols as layers of rules, like a formal dinner party:</p><ol><li><strong>Physical Layer</strong>: Like having proper seating arrangements - how the actual connection is made</li><li><strong>Data Layer</strong>: Like using the right utensils - how information is packaged</li><li><strong>Application Layer</strong>: Like following conversation etiquette - how programs interact</li></ol>",
+            "content": "<p>Suppose you are at a party and you meet someone new, the instinct for both parties is to shake each other's hands and greet. This process could be seen as a <b>protocol<\/b>, meaning that both parties engaged in societal rules and guidelines to greet each other. The internet works the same way.<\/p><p>In networking, a <b>protocol<\/b> is a set of rules and standards that govern how devices communicate with each other over a network. Just like social protocols help people interact smoothly, network protocols ensure that different computers, servers, and devices can understand each other and exchange information reliably.<\/p><h2>Why Do We Need Protocols?<\/h2><p>Imagine trying to have a conversation where one person speaks English, another speaks French, and a third speaks Japanese - without any common language or translation rules, communication would be impossible. Network protocols solve this problem by establishing:<\/p><ul><li><strong>Common Language<\/strong>: How data should be formatted and structured<\/li><li><strong>Timing Rules<\/strong>: When to send data and when to wait<\/li><li><strong>Error Handling<\/strong>: What to do when something goes wrong<\/li><li><strong>Connection Management<\/strong>: How to start and end communications<\/li><\/ul><h2>How Protocols Work<\/h2><p>Think of protocols as layers of rules, like a formal dinner party:<\/p><ol><li><strong>Physical Layer<\/strong>: Like having proper seating arrangements - how the actual connection is made<\/li><li><strong>Data Layer<\/strong>: Like using the right utensils - how information is packaged<\/li><li><strong>Application Layer<\/strong>: Like following conversation etiquette - how programs interact<\/li><\/ol>",
             "answer": "",
             "completed": false
         },
@@ -1254,17 +1254,17 @@
             "section": "Transfering",
             "title": "HTTP (Hypertext Transfer Protocal",
             "content_type": "article",
-            "content": "<p>We have all seen it before, HTTP (Hypertext Transfer Protocol) is the protocol across the web. It works by underlying rules and guidelines that operate over other fundamental protocols like TCP and UDP.</p><h2>What is HTTP?</h2><p>HTTP is the foundation of data communication on the World Wide Web. Every time you click a link, submit a form, or load a webpage, your browser is using HTTP to communicate with web servers. Think of it as the postal system of the internet, it defines how messages are formatted and transmitted between your browser (the client) and websites (the servers).</p><h2>HTTP's Protocol Stack</h2><p>HTTP doesn't work alone, it relies on lower-level protocols to actually transport data:</p><ul><li><strong>TCP (Transmission Control Protocol)</strong>: Provides reliable, ordered delivery of HTTP messages</li><li><strong>UDP (User Datagram Protocol)</strong>: Sometimes used for faster, but less reliable communication</li><li><strong>IP (Internet Protocol)</strong>: Handles routing messages across the internet</li></ul><p>HTTP sits on top of these protocols, focusing on the structure and meaning of web communication while letting TCP/UDP handle the actual data transmission.</p><h2>How HTTP Works</h2><p>HTTP follows a simple request-response model:</p><ol><li><strong>Request</strong>: Your browser sends a request to a web server asking for a specific resource (like a webpage, image, or video)</li><li><strong>Response</strong>: The server processes the request and sends back the requested resource along with a status code</li><li><strong>Display</strong>: Your browser receives the response and displays the content to you</li></ol><h2>HTTP Status Codes</h2><p>When a server responds, it includes a status code to indicate what happened:</p><ul><li><strong>200 OK</strong>: Everything worked perfectly</li><li><strong>404 Not Found</strong>: The requested page doesn't exist</li><li><strong>500 Internal Server Error</strong>: Something went wrong on the server</li><li><strong>301 Moved Permanently</strong>: The page has moved to a new location</li></ul><h2>So we can conclude that <b>sockets</b> are the foundation to create a connection, but how will data flow across the connection? Well this is where <b>TCP</b> & <b>UDP</b> come into play." ,
+            "content": "<p>We have all seen it before, HTTP (Hypertext Transfer Protocol) is the protocol across the web. It works by underlying rules and guidelines that operate over other fundamental protocols like TCP and UDP.<\/p><h2>What is HTTP?<\/h2><p>HTTP is the foundation of data communication on the World Wide Web. Every time you click a link, submit a form, or load a webpage, your browser is using HTTP to communicate with web servers. Think of it as the postal system of the internet, it defines how messages are formatted and transmitted between your browser (the client) and websites (the servers).<\/p><h2>HTTP's Protocol Stack<\/h2><p>HTTP doesn't work alone, it relies on lower-level protocols to actually transport data:<\/p><ul><li><strong>TCP (Transmission Control Protocol)<\/strong>: Provides reliable, ordered delivery of HTTP messages<\/li><li><strong>UDP (User Datagram Protocol)<\/strong>: Sometimes used for faster, but less reliable communication<\/li><li><strong>IP (Internet Protocol)<\/strong>: Handles routing messages across the internet<\/li><\/ul><p>HTTP sits on top of these protocols, focusing on the structure and meaning of web communication while letting TCP\/UDP handle the actual data transmission.<\/p><h2>How HTTP Works<\/h2><p>HTTP follows a simple request-response model:<\/p><ol><li><strong>Request<\/strong>: Your browser sends a request to a web server asking for a specific resource (like a webpage, image, or video)<\/li><li><strong>Response<\/strong>: The server processes the request and sends back the requested resource along with a status code<\/li><li><strong>Display<\/strong>: Your browser receives the response and displays the content to you<\/li><\/ol><h2>HTTP Status Codes<\/h2><p>When a server responds, it includes a status code to indicate what happened:<\/p><ul><li><strong>200 OK<\/strong>: Everything worked perfectly<\/li><li><strong>404 Not Found<\/strong>: The requested page doesn't exist<\/li><li><strong>500 Internal Server Error<\/strong>: Something went wrong on the server<\/li><li><strong>301 Moved Permanently<\/strong>: The page has moved to a new location<\/li><\/ul><h2>So we can conclude that <b>sockets<\/b> are the foundation to create a connection, but how will data flow across the connection? Well this is where <b>TCP<\/b> & <b>UDP<\/b> come into play.",
             "answer": "",
             "completed": false
-        },   
+        },
         {
             "id": 29,
             "parent": "Networking",
             "section": "Transfering",
             "title": "Sockets",
             "content_type": "article",
-            "content": "<p>This is where Networking gets serious, especially if you are interested in network programming.</p><p>A socket is the 2-way endpoint between a client and server. Meaning that before any data is sent over the internet, a 2-way connection must be established. So, how does it work?<p>Think of a socket as a telephone connection between two parties. Just like you need to dial a number and wait for the other person to pick up before you can have a conversation, computers need to establish a socket connection before they can exchange data.</p><p>A socket combines:</p><ul><li><strong>IP Address</strong>: The \"phone number\" that identifies the specific computer</li><li><strong>Port Number</strong>: The specific \"extension\" or service on that computer.</li><li><strong>Protocol</strong>: The \"language\" they'll use to communicate.</li></ul><h2>Socket Connnection Steps</h3><ol><li><strong>Server Setup</strong>: The server creates a socket and \"listens\" on a specific port (like waiting by the phone)</li><li><strong>Client Request</strong>: The client creates a socket and attempts to connect to the server's IP address and port</li><li><strong>Connection Established</strong>: If successful, both sides now have a direct communication channel</li><li><strong>Data Exchange</strong>: Information flows back and forth through this established connection</li><li><strong>Connection Closed</strong>: Either side can terminate the connection when finished</li></ol>",
+            "content": "<p>This is where Networking gets serious, especially if you are interested in network programming.<\/p><p>A socket is the 2-way endpoint between a client and server. Meaning that before any data is sent over the internet, a 2-way connection must be established. So, how does it work?<p>Think of a socket as a telephone connection between two parties. Just like you need to dial a number and wait for the other person to pick up before you can have a conversation, computers need to establish a socket connection before they can exchange data.<\/p><p>A socket combines:<\/p><ul><li><strong>IP Address<\/strong>: The \"phone number\" that identifies the specific computer<\/li><li><strong>Port Number<\/strong>: The specific \"extension\" or service on that computer.<\/li><li><strong>Protocol<\/strong>: The \"language\" they'll use to communicate.<\/li><\/ul><h2>Socket Connnection Steps<\/h3><ol><li><strong>Server Setup<\/strong>: The server creates a socket and \"listens\" on a specific port (like waiting by the phone)<\/li><li><strong>Client Request<\/strong>: The client creates a socket and attempts to connect to the server's IP address and port<\/li><li><strong>Connection Established<\/strong>: If successful, both sides now have a direct communication channel<\/li><li><strong>Data Exchange<\/strong>: Information flows back and forth through this established connection<\/li><li><strong>Connection Closed<\/strong>: Either side can terminate the connection when finished<\/li><\/ol>",
             "answer": "",
             "completed": false
         },
@@ -1274,7 +1274,7 @@
             "section": "Transfering",
             "title": "TCP (Transmission Control Protocol)",
             "content_type": "article",
-            "content": "<p><b>TCP (Transmission Control Protocol)</b> is one of the more popular techniques used to transfer data across a socket (the internet). It works by establishing a reliable, connection-oriented communication channel between two devices.</p><h2>What Makes TCP Special?</h2><p>Think of TCP like a registered mail service - it guarantees that your package (data) will arrive at its destination in the correct order and in perfect condition. If something goes wrong during delivery, TCP will detect the problem and resend the data automatically.</p><h2>Key Features of TCP</h2><ul><li><strong>Reliable Delivery</strong>: TCP ensures that all data sent actually reaches its destination</li><li><strong>Ordered Data</strong>: Messages arrive in the exact same order they were sent</li><li><strong>Error Detection</strong>: TCP can detect corrupted or missing data</li><li><strong>Flow Control</strong>: It prevents overwhelming the receiving device with too much data at once</li><li><strong>Connection-Oriented</strong>: A connection must be established before any data transfer begins</li></ul><h2>The Three-Way Handshake</h2><p>Before any data can be sent, TCP establishes a connection through a process called the three-way handshake:</p><ol><li><strong>SYN</strong>: Client says \"I want to connect\"</li><li><strong>SYN-ACK</strong>: Server responds \"OK, I'm ready to connect\"</li><li><strong>ACK</strong>: Client confirms \"Great, let's start communicating\"</li></ol><p>This is like two people agreeing to have a phone conversation before they start talking.</p><h2>How TCP Ensures Reliability</h2><p>TCP uses several mechanisms to guarantee reliable data transfer:</p><ul><li><strong>Sequence Numbers</strong>: Each piece of data gets a number so the receiver knows the correct order</li><li><strong>Acknowledgments</strong>: The receiver confirms when data arrives successfully</li><li><strong>Retransmission</strong>: If data doesn't arrive or gets corrupted, TCP automatically resends it</li><li><strong>Checksums</strong>: Built-in error detection to catch corrupted data</li></ul><h2>When is TCP Used?</h2><p>TCP is perfect for applications where accuracy is more important than speed:</p><ul><li>Web browsing (HTTP/HTTPS)</li><li>Email transmission</li><li>File transfers</li><li>Online banking</li><li>Any application where losing data would be a problem</li></ul><img src='..\/..\/..\/images\/tcp_handshake.jpeg' width='550' height='450'>",
+            "content": "<p><b>TCP (Transmission Control Protocol)<\/b> is one of the more popular techniques used to transfer data across a socket (the internet). It works by establishing a reliable, connection-oriented communication channel between two devices.<\/p><h2>What Makes TCP Special?<\/h2><p>Think of TCP like a registered mail service - it guarantees that your package (data) will arrive at its destination in the correct order and in perfect condition. If something goes wrong during delivery, TCP will detect the problem and resend the data automatically.<\/p><h2>Key Features of TCP<\/h2><ul><li><strong>Reliable Delivery<\/strong>: TCP ensures that all data sent actually reaches its destination<\/li><li><strong>Ordered Data<\/strong>: Messages arrive in the exact same order they were sent<\/li><li><strong>Error Detection<\/strong>: TCP can detect corrupted or missing data<\/li><li><strong>Flow Control<\/strong>: It prevents overwhelming the receiving device with too much data at once<\/li><li><strong>Connection-Oriented<\/strong>: A connection must be established before any data transfer begins<\/li><\/ul><h2>The Three-Way Handshake<\/h2><p>Before any data can be sent, TCP establishes a connection through a process called the three-way handshake:<\/p><ol><li><strong>SYN<\/strong>: Client says \"I want to connect\"<\/li><li><strong>SYN-ACK<\/strong>: Server responds \"OK, I'm ready to connect\"<\/li><li><strong>ACK<\/strong>: Client confirms \"Great, let's start communicating\"<\/li><\/ol><p>This is like two people agreeing to have a phone conversation before they start talking.<\/p><h2>How TCP Ensures Reliability<\/h2><p>TCP uses several mechanisms to guarantee reliable data transfer:<\/p><ul><li><strong>Sequence Numbers<\/strong>: Each piece of data gets a number so the receiver knows the correct order<\/li><li><strong>Acknowledgments<\/strong>: The receiver confirms when data arrives successfully<\/li><li><strong>Retransmission<\/strong>: If data doesn't arrive or gets corrupted, TCP automatically resends it<\/li><li><strong>Checksums<\/strong>: Built-in error detection to catch corrupted data<\/li><\/ul><h2>When is TCP Used?<\/h2><p>TCP is perfect for applications where accuracy is more important than speed:<\/p><ul><li>Web browsing (HTTP\/HTTPS)<\/li><li>Email transmission<\/li><li>File transfers<\/li><li>Online banking<\/li><li>Any application where losing data would be a problem<\/li><\/ul><img src='..\/..\/..\/images\/tcp_handshake.jpeg' width='550' height='450'>",
             "answer": "",
             "completed": false
         },
@@ -1284,7 +1284,7 @@
             "section": "Transfering",
             "title": "UDP (User Datagram Protocol",
             "content_type": "article",
-            "content": "<p><b>UDP (User Datagram Protocol)</b> is a fast and lightweight technique used to transfer data across a socket (the internet). It works by sending data quickly without establishing a formal connection or guaranteeing delivery.</p><h2>What Makes UDP Different?</h2><p>Think of UDP like dropping postcards in a mailbox - you send them quickly and hope they arrive, but you don't get confirmation of delivery. UDP prioritizes speed over reliability, making it perfect for situations where losing a little data isn't catastrophic.</p><h2>Key Features of UDP</h2><ul><li><strong>Fast Delivery</strong>: No connection setup means data can be sent immediately</li><li><strong>Connectionless</strong>: No need to establish a connection before sending data</li><li><strong>Lightweight</strong>: Minimal overhead means more bandwidth for actual data</li><li><strong>No Guarantees</strong>: Data might arrive out of order, duplicated, or not at all</li><li><strong>Simple</strong>: Fewer features mean less complexity and faster processing</li></ul><h2>How UDP Works</h2><p>UDP's approach is straightforward:</p><ol><li><strong>Package Data</strong>: Wrap the data in a UDP header with basic information</li><li><strong>Send Immediately</strong>: Fire the data packet toward its destination</li><li><strong>Move On</strong>: Don't wait for confirmation - just keep sending more data</li></ol><p>There's no handshake, no acknowledgments, and no retransmission if something goes wrong.</p><h2>UDP vs TCP: The Trade-off</h2><p>While TCP is like a careful conversation with confirmations, UDP is like shouting across a crowded room:</p><ul><li><strong>Speed</strong>: UDP is much faster because it skips reliability checks</li><li><strong>Efficiency</strong>: Less overhead means more actual data gets transmitted</li><li><strong>Risk</strong>: Some data packets might get lost or arrive in the wrong order</li></ul><h2>When is UDP Used?</h2><p>UDP is perfect for applications where speed matters more than perfect accuracy:</p><ul><li>Online gaming (a few missed frames won't ruin the experience)</li><li>Video streaming (better to skip a corrupted frame than pause the video)</li><li>Voice calls (brief audio dropouts are preferable to delays)</li><li>DNS lookups (quick queries that can be easily repeated if needed)</li><li>Live broadcasts (real-time data where delays would be worse than minor losses)</li></ul><img src='../../../images/udp.webp'>",
+            "content": "<p><b>UDP (User Datagram Protocol)<\/b> is a fast and lightweight technique used to transfer data across a socket (the internet). It works by sending data quickly without establishing a formal connection or guaranteeing delivery.<\/p><h2>What Makes UDP Different?<\/h2><p>Think of UDP like dropping postcards in a mailbox - you send them quickly and hope they arrive, but you don't get confirmation of delivery. UDP prioritizes speed over reliability, making it perfect for situations where losing a little data isn't catastrophic.<\/p><h2>Key Features of UDP<\/h2><ul><li><strong>Fast Delivery<\/strong>: No connection setup means data can be sent immediately<\/li><li><strong>Connectionless<\/strong>: No need to establish a connection before sending data<\/li><li><strong>Lightweight<\/strong>: Minimal overhead means more bandwidth for actual data<\/li><li><strong>No Guarantees<\/strong>: Data might arrive out of order, duplicated, or not at all<\/li><li><strong>Simple<\/strong>: Fewer features mean less complexity and faster processing<\/li><\/ul><h2>How UDP Works<\/h2><p>UDP's approach is straightforward:<\/p><ol><li><strong>Package Data<\/strong>: Wrap the data in a UDP header with basic information<\/li><li><strong>Send Immediately<\/strong>: Fire the data packet toward its destination<\/li><li><strong>Move On<\/strong>: Don't wait for confirmation - just keep sending more data<\/li><\/ol><p>There's no handshake, no acknowledgments, and no retransmission if something goes wrong.<\/p><h2>UDP vs TCP: The Trade-off<\/h2><p>While TCP is like a careful conversation with confirmations, UDP is like shouting across a crowded room:<\/p><ul><li><strong>Speed<\/strong>: UDP is much faster because it skips reliability checks<\/li><li><strong>Efficiency<\/strong>: Less overhead means more actual data gets transmitted<\/li><li><strong>Risk<\/strong>: Some data packets might get lost or arrive in the wrong order<\/li><\/ul><h2>When is UDP Used?<\/h2><p>UDP is perfect for applications where speed matters more than perfect accuracy:<\/p><ul><li>Online gaming (a few missed frames won't ruin the experience)<\/li><li>Video streaming (better to skip a corrupted frame than pause the video)<\/li><li>Voice calls (brief audio dropouts are preferable to delays)<\/li><li>DNS lookups (quick queries that can be easily repeated if needed)<\/li><li>Live broadcasts (real-time data where delays would be worse than minor losses)<\/li><\/ul><img src='..\/..\/..\/images\/udp.webp'>",
             "completed": false
         },
         {
@@ -1296,7 +1296,7 @@
             "content": "The <b>traceroute<\/b> command allows us to see actual path the data packets take to reach a destination across a network. It shows each hop (router) the packet passes through, along with the time it takes to reach each one. This is useful for diagnosing network delays or identifying where a connection might be failing.<br> The syntax for <b>traceroute<\/b> is: <code>traceroute example_website.com<\/code> Lets try out an example on the terminal: <code>traceroute google.com<\/code> Breakdown of the output: <pre><ul><li><b>Hop Number:<\/b> The number at the start of each line (e.g. 1, 2, 3) shows the hop count.<\/li><li><b>IP Address:<\/b> The IP of the router or device at that hop (e.g. 192.168.1.1).<\/li><li><b>Time:<\/b> The time (in milliseconds) it took for the packet to reach that hop. Multiple times show retries.<\/li><li><b>*:<\/b> A star means no response was received from that hop (could be blocked or timed out).<\/li><\/ul><p>This helps you spot slow or failing routes in a network.<\/p>",
             "answer": "",
             "completed": false
-        },   
+        },
         {
             "id": 33,
             "parent": "Networking",
@@ -1306,14 +1306,14 @@
             "content": " The <b>telnet<\/b> command is a tcp client based command that allows us to manually connect to a remote host on a specific port. In other words, the command allows us to check if a service (like a web server, SSH server, or mail server) is running and reachcable on that port.<\/p> Syntax: <code>telnet [example.com] [port]<\/code> Let's try a basic example by testing if we can reach google and <b>listen<\/b> on port 80. <code>telnet google.com 80<\/code><p>Breakdown:<\/p><ul><li><b>Trying 2607:f8b0:4005:810::200e... <\/b> - This shows the IP address telnet is trying to reach (IPv6 or IPv4).<\/li><li><b>Connected to google.com.<\/b> \u2014 Success! A TCP connection to port 80 is established. <\/li><\/ul><br>If the connection is successful, you're now manually connected to Google\u2019s web server over TCP. At this point, you could type an HTTP request (we will discuss later), or simply close the connection. Overall, this is useful for quickly testing if a port is open and listening.",
             "answer": "",
             "completed": false
-        },    
+        },
         {
             "id": 34,
             "parent": "Networking",
             "section": "Transfering",
-            "title": "netstat/ss",
+            "title": "netstat\/ss",
             "content_type": "interactive",
-            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat</b> command, but the modern and faster alternative is <b>ss</b>.<p><p><b>Try out the command in the command line and we will breakdown the output</b><br><code>ss -tuln</code><br>This command shows all TCP, UDP, and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:</b><ul><li><b>Netid</b>: The protocol being used (e.g. tcp, udp)</li><li><b>State</b>: Connection state (e.g. LISTEN, ESTABLISHED)</li><li><b>Recv-Q</b>: Bytes received and queued</li><li><b>Send-Q</b>: Bytes waiting to be sent</li><li><b>Local Address:Port</b>: Your IP address and port</li><li><b>Peer Address:Port</b>: The remote IP address and port (if connected)</li></ul><p><p> Using <b>ss</b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It’s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss</b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
+            "content": "The Linux command line allows you to inspect active ports and sockets using socket statistics tools.<p><p>You can use the older <b>netstat<\/b> command, but the modern and faster alternative is <b>ss<\/b>.<p><p><b>Try out the command in the command line and we will breakdown the output<\/b><br><code>ss -tuln<\/code><br>This command shows all TCP, UDP, and ports that are currently listening, in numeric format.<p><p><b>Output Breakdown:<\/b><ul><li><b>Netid<\/b>: The protocol being used (e.g. tcp, udp)<\/li><li><b>State<\/b>: Connection state (e.g. LISTEN, ESTABLISHED)<\/li><li><b>Recv-Q<\/b>: Bytes received and queued<\/li><li><b>Send-Q<\/b>: Bytes waiting to be sent<\/li><li><b>Local Address:Port<\/b>: Your IP address and port<\/li><li><b>Peer Address:Port<\/b>: The remote IP address and port (if connected)<\/li><\/ul><p><p> Using <b>ss<\/b> helps you check which services are currently listening on your machine, making it easier to identify running servers or background processes. It\u2019s also a valuable tool for auditing open ports to ensure no unnecessary services are exposed, which is important for system security. Additionally, <b>ss<\/b> allows you to debug port binding and network issues by showing exactly which IPs and ports are in use, helping you pinpoint configuration problems quickly.<p>",
             "answer": "",
             "completed": false
         },
@@ -1324,12 +1324,12 @@
             "title": "Knowledge Check #12",
             "content_type": "multichoice",
             "questions": {
-              "A": "TCP is faster and connectionless, while UDP is slower but more reliable",
-              "B": "TCP ensures reliable, ordered delivery with connection setup, while UDP is fast but unreliable",
-              "C": "TCP and UDP both guarantee delivery but use different encryption methods",
-              "D": "TCP is used for web browsing only, while UDP is used for all other internet applications"
+                "A": "TCP is faster and connectionless, while UDP is slower but more reliable",
+                "B": "TCP ensures reliable, ordered delivery with connection setup, while UDP is fast but unreliable",
+                "C": "TCP and UDP both guarantee delivery but use different encryption methods",
+                "D": "TCP is used for web browsing only, while UDP is used for all other internet applications"
             },
-            "content": "<p>What is the main difference between TCP and UDP protocols?</p><div class=\"question__container\"></div>",
+            "content": "<p>What is the main difference between TCP and UDP protocols?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
         },
@@ -1372,12 +1372,12 @@
             "title": "Knowledge Check #15",
             "content_type": "multichoice",
             "questions": {
-              "A": "Telnet displays local network connections, while Netstat connects to remote services",
-              "B": "Telnet connects to and tests remote services, while Netstat displays local network connections and statistics",
-              "C": "Both Telnet and Netstat perform the same function but work on different operating systems",
-              "D": "Telnet encrypts network data, while Netstat compresses it for faster transmission"
+                "A": "Telnet displays local network connections, while Netstat connects to remote services",
+                "B": "Telnet connects to and tests remote services, while Netstat displays local network connections and statistics",
+                "C": "Both Telnet and Netstat perform the same function but work on different operating systems",
+                "D": "Telnet encrypts network data, while Netstat compresses it for faster transmission"
             },
-            "content": "<p>What is the main difference between Telnet and Netstat?</p><div class=\"question__container\"></div>",
+            "content": "<p>What is the main difference between Telnet and Netstat?<\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
         },
@@ -1388,192 +1388,192 @@
             "title": "Knowledge Check #16",
             "content_type": "multichoice",
             "questions": {
-              "A": "They are used to identify physical cables between computers",
-              "B": "They assign unique IDs to different websites",
-              "C": "They allow a computer to distinguish between different types of network traffic",
-              "D": "They are the same as IP addresses"
+                "A": "They are used to identify physical cables between computers",
+                "B": "They assign unique IDs to different websites",
+                "C": "They allow a computer to distinguish between different types of network traffic",
+                "D": "They are the same as IP addresses"
             },
             "content": "<p>What is the main purpose of ports in networking?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 40,
             "parent": "Networking",
             "section": "Checkpoint - Transfering",
             "title": "Knowledge Check #17",
             "content_type": "multichoice",
             "questions": {
-              "A": "Port numbers used for encryption only",
-              "B": "Port numbers used for internal debugging",
-              "C": "Ports in the range 0–1023 that are reserved for common services",
-              "D": "Port numbers used only in gaming servers"
+                "A": "Port numbers used for encryption only",
+                "B": "Port numbers used for internal debugging",
+                "C": "Ports in the range 0\u20131023 that are reserved for common services",
+                "D": "Port numbers used only in gaming servers"
             },
             "content": "<p>What are 'well-known ports'?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 41,
             "parent": "Networking",
             "section": "Checkpoint - Transfering",
             "title": "Knowledge Check #18",
             "content_type": "multichoice",
             "questions": {
-              "A": "An IP address assigned to a domain",
-              "B": "A temporary file created during file transfer",
-              "C": "A two-way communication endpoint defined by protocol, IPs, and ports",
-              "D": "A DNS entry for connecting to a server"
+                "A": "An IP address assigned to a domain",
+                "B": "A temporary file created during file transfer",
+                "C": "A two-way communication endpoint defined by protocol, IPs, and ports",
+                "D": "A DNS entry for connecting to a server"
             },
             "content": "<p>Which of the following best describes a network socket?<\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 42,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "HTTP vs HTTPS",
             "content_type": "article",
-            "content": "We have gone over HTTP already, but what is its counterpart HTTPS?</p><h2>What is HTTPS?</h2><p>HTTPS (HyperText Transfer Protocol Secure) is essentially HTTP with a security layer added on top. Think of HTTP as sending a postcard through the mail - anyone handling it can read your message. HTTPS is like sealing that same message in an encrypted envelope that only the intended recipient can open.</p><h2>Encryption</h2><p>The main difference between HTTP and HTTPS is that HTTPS encrypts all data traveling between your browser and the web server. This means:</p><ul><li><strong>HTTP</strong>: Data travels in plain text that anyone can intercept and read</li><li><strong>HTTPS</strong>: Data is scrambled using encryption, making it unreadable to eavesdroppers</li></ul><h2>How HTTPS Works</h2><p>HTTPS uses SSL/TLS (Secure Sockets Layer/Transport Layer Security) to create a secure connection:</p><ol><li><strong>Handshake</strong>: Your browser and the server agree on encryption methods</li><li><strong>Certificate Exchange</strong>: The server proves its identity with a digital certificate</li><li><strong>Key Exchange</strong>: Both sides create a shared secret key for encryption</li><li><strong>Secure Communication</strong>: All data is encrypted using the shared key</li></ol><h2>Visual Indicators</h2><p>You can easily identify HTTPS websites:</p><ul><li><strong>Lock Icon</strong>: Appears in your browser's address bar</li><li><strong>Green Address Bar</strong>: Some browsers show enhanced visual security indicators</li><li><strong>URL Prefix</strong>: Starts with \"https://\" instead of \"http://\"</li><li><strong>Port Number</strong>: Uses port 443 instead of port 80</li></ul><h2>Why HTTPS Matters</h2></p><ul><li><strong>Eavesdropping</strong>: Prevents others from reading your data</li><li><strong>Man-in-the-Middle Attacks</strong>: Ensures you're communicating with the real website</li><li><strong>Data Tampering</strong>: Detects if information has been modified during transmission</li></ul><p><strong>Essential for:</strong></p><ul><li>Online banking and financial transactions</li><li>Shopping and credit card information</li><li>Login credentials and passwords</li><li>Personal information and private communications</li></ul><h2>The Cost of Security</h2><p>HTTPS does have some trade-offs:</p><ul><li><strong>Slightly Slower</strong>: Encryption/decryption takes processing power</li><li><strong>More Complex</strong>: Requires SSL certificates and proper configuration</li><li><strong>Additional Overhead</strong>: Extra data in each request for security headers</li></ul><p>However, modern computers and networks make these costs minimal, which is why most websites now use HTTPS by default.</p><img src='../../../images/https.png'>",
+            "content": "We have gone over HTTP already, but what is its counterpart HTTPS?<\/p><h2>What is HTTPS?<\/h2><p>HTTPS (HyperText Transfer Protocol Secure) is essentially HTTP with a security layer added on top. Think of HTTP as sending a postcard through the mail - anyone handling it can read your message. HTTPS is like sealing that same message in an encrypted envelope that only the intended recipient can open.<\/p><h2>Encryption<\/h2><p>The main difference between HTTP and HTTPS is that HTTPS encrypts all data traveling between your browser and the web server. This means:<\/p><ul><li><strong>HTTP<\/strong>: Data travels in plain text that anyone can intercept and read<\/li><li><strong>HTTPS<\/strong>: Data is scrambled using encryption, making it unreadable to eavesdroppers<\/li><\/ul><h2>How HTTPS Works<\/h2><p>HTTPS uses SSL\/TLS (Secure Sockets Layer\/Transport Layer Security) to create a secure connection:<\/p><ol><li><strong>Handshake<\/strong>: Your browser and the server agree on encryption methods<\/li><li><strong>Certificate Exchange<\/strong>: The server proves its identity with a digital certificate<\/li><li><strong>Key Exchange<\/strong>: Both sides create a shared secret key for encryption<\/li><li><strong>Secure Communication<\/strong>: All data is encrypted using the shared key<\/li><\/ol><h2>Visual Indicators<\/h2><p>You can easily identify HTTPS websites:<\/p><ul><li><strong>Lock Icon<\/strong>: Appears in your browser's address bar<\/li><li><strong>Green Address Bar<\/strong>: Some browsers show enhanced visual security indicators<\/li><li><strong>URL Prefix<\/strong>: Starts with \"https:\/\/\" instead of \"http:\/\/\"<\/li><li><strong>Port Number<\/strong>: Uses port 443 instead of port 80<\/li><\/ul><h2>Why HTTPS Matters<\/h2><\/p><ul><li><strong>Eavesdropping<\/strong>: Prevents others from reading your data<\/li><li><strong>Man-in-the-Middle Attacks<\/strong>: Ensures you're communicating with the real website<\/li><li><strong>Data Tampering<\/strong>: Detects if information has been modified during transmission<\/li><\/ul><p><strong>Essential for:<\/strong><\/p><ul><li>Online banking and financial transactions<\/li><li>Shopping and credit card information<\/li><li>Login credentials and passwords<\/li><li>Personal information and private communications<\/li><\/ul><h2>The Cost of Security<\/h2><p>HTTPS does have some trade-offs:<\/p><ul><li><strong>Slightly Slower<\/strong>: Encryption\/decryption takes processing power<\/li><li><strong>More Complex<\/strong>: Requires SSL certificates and proper configuration<\/li><li><strong>Additional Overhead<\/strong>: Extra data in each request for security headers<\/li><\/ul><p>However, modern computers and networks make these costs minimal, which is why most websites now use HTTPS by default.<\/p><img src='..\/..\/..\/images\/https.png'>",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 43,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "GET vs POST",
             "content_type": "article",
-            "content": "While we surface around a website, we interact with the browser's HTTP methods, which are requests from a client to a server. These requests come in different forms, but the most commom requests are <b/>GET</b> and <b>POST</b> methods.</p><li><b>GET</b> - A <b>GET</b> request is a type of http request that retrieves web pages, displays local session information like a username, and 3rd party data in the form API's (will discuss more about API's later). For example, whenever you click on a web page that displays content, you are sending a get request to the server that responds back with your desired content. To achieve fast lookups for web content, <b>GET</b> requests enter the URL and are visible so your browser can cache the content (a computers way to temporarily remembering). For instance, you are currently working on the 'Networking' section module on our Linux Lab website. If you look at the URL you will see something like: <code>https://linux-lab.live/src/pages/lesson_page/lesson.html?module=Networking</code>This displays the source path of where the code lives in the server, but at the tail end you will see 'module=Networking' which is the <b>GET</b> request you send to the server that flips between different modules, resulting in the content you currently see right now.</li><li><b>POST</b> - A <b>POST</b> request is another type of http request that is responsible for adding data to the server in a secure manner. The most common POST request is when you enter a credit or debit card to make a transactional purchase, or when you enter your email, username, and password to sign up/ log in on a web application.</li><img src='../../../images/getPost.webp' width='500'>",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            "content": "While we surface around a website, we interact with the browser's HTTP methods, which are requests from a client to a server. These requests come in different forms, but the most commom requests are <b\/>GET<\/b> and <b>POST<\/b> methods.<\/p><li><b>GET<\/b> - A <b>GET<\/b> request is a type of http request that retrieves web pages, displays local session information like a username, and 3rd party data in the form API's (will discuss more about API's later). For example, whenever you click on a web page that displays content, you are sending a get request to the server that responds back with your desired content. To achieve fast lookups for web content, <b>GET<\/b> requests enter the URL and are visible so your browser can cache the content (a computers way to temporarily remembering). For instance, you are currently working on the 'Networking' section module on our Linux Lab website. If you look at the URL you will see something like: <code>https:\/\/linux-lab.live\/src\/pages\/lesson_page\/lesson.html?module=Networking<\/code>This displays the source path of where the code lives in the server, but at the tail end you will see 'module=Networking' which is the <b>GET<\/b> request you send to the server that flips between different modules, resulting in the content you currently see right now.<\/li><li><b>POST<\/b> - A <b>POST<\/b> request is another type of http request that is responsible for adding data to the server in a secure manner. The most common POST request is when you enter a credit or debit card to make a transactional purchase, or when you enter your email, username, and password to sign up\/ log in on a web application.<\/li><img src='..\/..\/..\/images\/getPost.webp' width='500'>",
             "completed": false
-          }, 
-          {
+        },
+        {
             "id": 44,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl",
             "content_type": "interactive",
-            "content": "The most powerful network Linux command that is used to extract web content, modify web content, and even hack, is the <b>curl</b> command.</p>The <b>curl</b> command works by transferring data to or from a server and operates on top of HTTP methods like GET, POST, and even interact with API's.</p> Using the <b>curl</b> command can get complicated since it can do many things and takes in a lot of parameters, but here is the basic syntax: <code>curl [options] [URL..]</code> Like with other Linux commands we have come across, [options] is an optional argument that does filtering and modifications, we will use it later on.</p> For now, let's take a look at a basic example, we will use the <b>curl</b> command to extract the HTML code (the code websites use to structure their websites) from Oracle and output it in the terminal. Try iy out! <code>curl https://www.oracle.com</code>",
+            "content": "The most powerful network Linux command that is used to extract web content, modify web content, and even hack, is the <b>curl<\/b> command.<\/p>The <b>curl<\/b> command works by transferring data to or from a server and operates on top of HTTP methods like GET, POST, and even interact with API's.<\/p> Using the <b>curl<\/b> command can get complicated since it can do many things and takes in a lot of parameters, but here is the basic syntax: <code>curl [options] [URL..]<\/code> Like with other Linux commands we have come across, [options] is an optional argument that does filtering and modifications, we will use it later on.<\/p> For now, let's take a look at a basic example, we will use the <b>curl<\/b> command to extract the HTML code (the code websites use to structure their websites) from Oracle and output it in the terminal. Try iy out! <code>curl https:\/\/www.oracle.com<\/code>",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 45,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl - Headers",
             "content_type": "interactive",
-             "content": "Before we enter a webpage and view all the content, your browser sends chunks of information that will be needed for the user. This information will include the following: <li><b>User-Agent</b> – Identifies the browser, version, and operating system being used.</li> <li><b>Accept</b> – Tells the server what content types (like HTML, JSON, XML) the client can understand.</li> <li><b>Host</b> – Specifies the domain name of the server the client wants to connect to.</li> <li><b>Connection</b> – Indicates whether the client wants to keep the connection open or close it after the response.</li><li><b>expires</b> - The expiration date and time when the browser will consider this version of the web page 'old' and will fetch a new copy</li><li><b>cache-control</b> - The permission details that decides if the content can only be cached to your browser (private), or can be cached to 3rd parties to enhance the performance time for everyone using the website (public).</li> Let's run through a headers example using the curl command with an option command.</p> <code>curl -I https://www.google.com</code> We added the '-I' flag here which stands for 'HEAD Request' which tells curl to not extract the full HTML content, but rather just the headers. Try it out!",
+            "content": "Before we enter a webpage and view all the content, your browser sends chunks of information that will be needed for the user. This information will include the following: <li><b>User-Agent<\/b> \u2013 Identifies the browser, version, and operating system being used.<\/li> <li><b>Accept<\/b> \u2013 Tells the server what content types (like HTML, JSON, XML) the client can understand.<\/li> <li><b>Host<\/b> \u2013 Specifies the domain name of the server the client wants to connect to.<\/li> <li><b>Connection<\/b> \u2013 Indicates whether the client wants to keep the connection open or close it after the response.<\/li><li><b>expires<\/b> - The expiration date and time when the browser will consider this version of the web page 'old' and will fetch a new copy<\/li><li><b>cache-control<\/b> - The permission details that decides if the content can only be cached to your browser (private), or can be cached to 3rd parties to enhance the performance time for everyone using the website (public).<\/li> Let's run through a headers example using the curl command with an option command.<\/p> <code>curl -I https:\/\/www.google.com<\/code> We added the '-I' flag here which stands for 'HEAD Request' which tells curl to not extract the full HTML content, but rather just the headers. Try it out!",
             "completed": false
-          }, 
-          {
+        },
+        {
             "id": 46,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "API's - Application Programming Interface",
             "content_type": "article",
-            "content": "An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications use to request and exchange information, enabling developers to build complex features by integrating with other systems or services. They act as a bridge between different software components, simplifying development and promoting modularity.<br><br>One of the most popular types of APIs is the REST API, which follows the REST (Representational State Transfer) architectural style designed specifically for web services. REST APIs use standard HTTP methods and are known for being simple, scalable, and stateless.<br><br>Key characteristics of REST APIs include:<ul><li><b>Use of standard HTTP methods:</b> Such as GET to retrieve data, POST to create new data, PUT to update existing data, and DELETE to remove data.</li><li><b>Statelessness:</b> Each request from client to server must contain all the information needed to understand and process it, with no client context stored on the server between requests.</li><li><b>Resource-Based:</b> Resources (like users, products, or orders) are identified using URLs (Uniform Resource Locators).</li><li><b>Multiple Data Formats:</b> While JSON is the most commonly used format, REST APIs can also send and receive XML, HTML, or plain text.</li><li><b>Scalability and Simplicity:</b> The design of REST APIs supports easy scaling of applications and straightforward implementation.</li></ul><br>Overall, APIs, and especially REST APIs, play a crucial role in modern software development by enabling seamless integration between different applications and services over the web.",
+            "content": "An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate and interact with each other. APIs define the methods and data formats that applications use to request and exchange information, enabling developers to build complex features by integrating with other systems or services. They act as a bridge between different software components, simplifying development and promoting modularity.<br><br>One of the most popular types of APIs is the REST API, which follows the REST (Representational State Transfer) architectural style designed specifically for web services. REST APIs use standard HTTP methods and are known for being simple, scalable, and stateless.<br><br>Key characteristics of REST APIs include:<ul><li><b>Use of standard HTTP methods:<\/b> Such as GET to retrieve data, POST to create new data, PUT to update existing data, and DELETE to remove data.<\/li><li><b>Statelessness:<\/b> Each request from client to server must contain all the information needed to understand and process it, with no client context stored on the server between requests.<\/li><li><b>Resource-Based:<\/b> Resources (like users, products, or orders) are identified using URLs (Uniform Resource Locators).<\/li><li><b>Multiple Data Formats:<\/b> While JSON is the most commonly used format, REST APIs can also send and receive XML, HTML, or plain text.<\/li><li><b>Scalability and Simplicity:<\/b> The design of REST APIs supports easy scaling of applications and straightforward implementation.<\/li><\/ul><br>Overall, APIs, and especially REST APIs, play a crucial role in modern software development by enabling seamless integration between different applications and services over the web.",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 47,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl - API's",
             "content_type": "interactive",
-            "content": "Let's use the curl command to fetch the current stock for google using an API! <code>curl https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&\napikey=VVPWAF4272QM01N9</code> You can switch out the 'GOOG' to match any stock symbol, like 'MSFT' for Micrsoft, 'TSLA' for Tesla, and so on. Try it out!",
+            "content": "Let's use the curl command to fetch the current stock for google using an API! <code>curl https:\/\/www.alphavantage.co\/query?function=GLOBAL_QUOTE&symbol=GOOG&\napikey=VVPWAF4272QM01N9<\/code> You can switch out the 'GOOG' to match any stock symbol, like 'MSFT' for Micrsoft, 'TSLA' for Tesla, and so on. Try it out!",
             "completed": false
-          },  
-          {
+        },
+        {
             "id": 48,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "WAN (Wide Area Network)",
             "content_type": "article",
-            "content": "Earlier, we discussed that a LAN (Local Area Network) is the local network where devices like your phone, laptop, or printer communicate. For example, in a home, café, or office, we learned how to find your local IP using the `ifconfig'. But what about your public IP address?</p>This is the IP that the outside world sees when you connect to the internet.</p><p>When your device sends a request to the internet, it goes through your router. Your router has a WAN (Wide Area Network) IP address, which is typically the same as your public IP. This IP is assigned by your ISP (Internet Service Provider) and allows your router, and by extension, your entire local network to communicate with servers on the internet across a large geographical area.</p><img src='../../../images/wan.jpg' width='500'",
+            "content": "Earlier, we discussed that a LAN (Local Area Network) is the local network where devices like your phone, laptop, or printer communicate. For example, in a home, caf\u00e9, or office, we learned how to find your local IP using the `ifconfig'. But what about your public IP address?<\/p>This is the IP that the outside world sees when you connect to the internet.<\/p><p>When your device sends a request to the internet, it goes through your router. Your router has a WAN (Wide Area Network) IP address, which is typically the same as your public IP. This IP is assigned by your ISP (Internet Service Provider) and allows your router, and by extension, your entire local network to communicate with servers on the internet across a large geographical area.<\/p><img src='..\/..\/..\/images\/wan.jpg' width='500'",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 49,
             "parent": "Networking",
             "section": "The World Wide Web",
             "title": "curl - Public IP",
             "content_type": "interactive",
-            "content": "Outside of work related devices, public Ip's are dynamic, meaning they are changing to provide efficiency. To currently see our public IP, we can use the curl command to fetch our current public IP we can use the command line</p><code>curl ifconfig.me</code> This command is pretty clever, it sends a HTTP GET request to your own device. It tells the server \"Hey server, what IP do you see from me?\". The server responds back with your public IP, try it out!",
+            "content": "Outside of work related devices, public Ip's are dynamic, meaning they are changing to provide efficiency. To currently see our public IP, we can use the curl command to fetch our current public IP we can use the command line<\/p><code>curl ifconfig.me<\/code> This command is pretty clever, it sends a HTTP GET request to your own device. It tells the server \"Hey server, what IP do you see from me?\". The server responds back with your public IP, try it out!",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 50,
             "parent": "Networking",
             "section": "Checkpoint - The World Wide Web",
             "title": "Knowledge Check #19",
             "content_type": "multichoice",
             "questions": {
-              "A": "GET requests store data in the server, while POST requests read data from the server",
-              "B": "POST requests send data to the server, while GET requests retrieve data from the server and show it in the browser",
-              "C": "GET is used for login forms and payments, while POST is used for loading webpages",
-              "D": "There is no difference, both methods are used to view HTML content"
+                "A": "GET requests store data in the server, while POST requests read data from the server",
+                "B": "POST requests send data to the server, while GET requests retrieve data from the server and show it in the browser",
+                "C": "GET is used for login forms and payments, while POST is used for loading webpages",
+                "D": "There is no difference, both methods are used to view HTML content"
             },
-            "content": "<p>Which statement best describes the difference between HTTP GET and POST requests?</p><\/p><div class=\"question__container\"><\/div>",
+            "content": "<p>Which statement best describes the difference between HTTP GET and POST requests?<\/p><\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 51,
             "parent": "Networking",
             "section": "Checkpoint - The World Wide Web",
             "title": "Knowledge Check #20",
             "content_type": "multichoice",
             "questions": {
-            "A": "The local IP address assigned to your device via DHCP",
-            "B": "The internal network address used in a LAN",
-            "C": "The IP address your browser uses to identify itself to your router",
-            "D": "The public IP address visible to servers you connect to over the internet"
+                "A": "The local IP address assigned to your device via DHCP",
+                "B": "The internal network address used in a LAN",
+                "C": "The IP address your browser uses to identify itself to your router",
+                "D": "The public IP address visible to servers you connect to over the internet"
             },
-            "content": "<p>What does the following command retrieve?<br><code>curl ifconfig.me</code></p><\/p><div class=\"question__container\"><\/div>",
+            "content": "<p>What does the following command retrieve?<br><code>curl ifconfig.me<\/code><\/p><\/p><div class=\"question__container\"><\/div>",
             "answer": "D",
             "completed": false
-          },
-          {
-             "id": 52,
-             "parent": "Networking",
-             "section": "Checkpoint - The World Wide Web",
-             "title": "Knowledge Check #21",
-             "content_type": "multichoice",
-             "questions": {
-             "A": "curl is a Linux-only command that only downloads software packages",
-             "B": "curl allows data transfer between servers using HTTP methods like GET and POST, and is commonly used to interact with APIs",
-             "C": "curl is used exclusively to monitor IP address changes by your ISP",
-              "D": "curl uploads your IP address to web browsers for tracking"
-          },
-            "content": "<p>What is the purpose of the <b>curl</b> command in networking?</p><\/p><div class=\"question__container\"><\/div>",
+        },
+        {
+            "id": 52,
+            "parent": "Networking",
+            "section": "Checkpoint - The World Wide Web",
+            "title": "Knowledge Check #21",
+            "content_type": "multichoice",
+            "questions": {
+                "A": "curl is a Linux-only command that only downloads software packages",
+                "B": "curl allows data transfer between servers using HTTP methods like GET and POST, and is commonly used to interact with APIs",
+                "C": "curl is used exclusively to monitor IP address changes by your ISP",
+                "D": "curl uploads your IP address to web browsers for tracking"
+            },
+            "content": "<p>What is the purpose of the <b>curl<\/b> command in networking?<\/p><\/p><div class=\"question__container\"><\/div>",
             "answer": "B",
             "completed": false
-          },
-          {
+        },
+        {
             "id": 53,
             "parent": "Networking",
             "section": "Checkpoint - The World Wide Web",
             "title": "Knowledge Check #22",
             "content_type": "multichoice",
             "questions": {
-              "A": "Your router assigns a private IP to websites so your devices can connect",
-              "B": "Your local IP address is broadcast to public networks for internet access",
-              "C": "Your router uses a WAN IP assigned by your ISP to communicate with the internet, and this is often your public IP",
-              "D": "Your browser directly connects to every device on the internet using your device’s internal IP"
+                "A": "Your router assigns a private IP to websites so your devices can connect",
+                "B": "Your local IP address is broadcast to public networks for internet access",
+                "C": "Your router uses a WAN IP assigned by your ISP to communicate with the internet, and this is often your public IP",
+                "D": "Your browser directly connects to every device on the internet using your device\u2019s internal IP"
             },
-            "content": "<p>How does your router connect your local network to the internet using a WAN IP?</p><\/p><div class=\"question__container\"><\/div>",
+            "content": "<p>How does your router connect your local network to the internet using a WAN IP?<\/p><\/p><div class=\"question__container\"><\/div>",
             "answer": "C",
             "completed": false
-          }, 
-          {
+        },
+        {
             "id": 54,
             "parent": "Networking",
             "section": "Final",
             "title": "Closing thoughts",
             "content_type": "article",
-            "content": "That will conclude our introduction to networking via the Linux command line. We hoped that you enjoyed the content and learned some valuable things about how the internet works.</p>Networking is a monster and deserves to be studied in more greater detail, we are in the process of creating a section that combines both networking and programming in Python and C++. So be in the lookout for that!</p>Overall, thank you for sticking through it with us and we hope to see you again!", 
+            "content": "That will conclude our introduction to networking via the Linux command line. We hoped that you enjoyed the content and learned some valuable things about how the internet works.<\/p>Networking is a monster and deserves to be studied in more greater detail, we are in the process of creating a section that combines both networking and programming in Python and C++. So be in the lookout for that!<\/p>Overall, thank you for sticking through it with us and we hope to see you again!",
             "completed": false
-          }                                                                                        
+        }
     ],
     "basics": {
         "1": {
@@ -1583,6 +1583,11 @@
             "completed": true
         },
         "6": {
+            "completed": true
+        }
+    },
+    "File Navigation": {
+        "7": {
             "completed": true
         }
     }
