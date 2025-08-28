@@ -2052,26 +2052,26 @@ function send_user_progress(PDO $pdo, int $userId) : array {
         return $answer;
     }
 
-    function network_update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
-    if ($userId === null) return;
-    $stmt = $pdo->prepare("
-        INSERT INTO network_user_progress (user_id, lesson_id, lessons_completed, current_lesson)
-        VALUES (?, ?, 1, ?) 
-        ON DUPLICATE KEY UPDATE 
-        lessons_completed = CASE 
-        WHEN lessons_completed = 0 THEN 1  -- Ensure it starts at 1
-        WHEN lesson_id <> VALUES(lesson_id) THEN lessons_completed + 1 
-        ELSE lessons_completed 
-    END, 
-    current_lesson = VALUES(current_lesson),
-     lesson_id = VALUES(lesson_id) 
-");
-try {
-    $stmt->execute([$userId, $lessonId, $nextLesson]);
-} catch (PDOException $e) {
-   error_log("SQL Error: " . $e->getMessage());
+    function network_update_mysql(PDO $pdo, ?int $userId, int $lessonId, int $nextLesson) : void {
+        if ($userId === null) return;
+        $stmt = $pdo->prepare("
+            INSERT INTO network_user_progress (user_id, lesson_id, lessons_completed, current_lesson)
+            VALUES (?, ?, 1, ?) 
+            ON DUPLICATE KEY UPDATE 
+            lessons_completed = CASE 
+            WHEN lessons_completed = 0 THEN 1  -- Ensure it starts at 1
+            WHEN current_lesson <> VALUES(current_lesson) THEN lessons_completed + 1  
+            ELSE lessons_completed 
+        END, 
+        current_lesson = VALUES(current_lesson),  
+        lesson_id = VALUES(lesson_id)
+        ");
+    try {
+        $stmt->execute([$userId, $lessonId, $nextLesson]);
+    } catch (PDOException $e) {
+       error_log("SQL Error: " . $e->getMessage());
     }
-}
+    }
 
 function network_updateUserProgress($pdo, $userId, $lesson_id) : void {
 if ($userId === null) return;

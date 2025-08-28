@@ -18,7 +18,7 @@ $lessons_completed = 0;
 $current_lesson = "Not Started";
 $lessonName = "Overview";
 $current_section = "Prelude"; // Default to first section
-$current_module = "The Basics"; // Default module
+$current_module = "Command Line"; // Default module
 error_log("username: $username\n");
 error_log("userID: $user_id\n");
 
@@ -48,7 +48,7 @@ if ($user_id === null) {
                     ],
                 "modules" => [
                     [
-                        "name" => "The Basics",
+                        "name" => "Command Line",
                         "completed" => 0,
                         "total" => 83
                     ],
@@ -85,7 +85,7 @@ if ($user_id === null) {
                 ],
             "modules" => [
                 [
-                    "name" => "The Basics",
+                    "name" => "Command Line",
                     "completed" => 0,
                     "total" => 83
                 ],
@@ -109,15 +109,15 @@ if ($user_id === null) {
     elseif ($_SERVER["REQUEST_METHOD"] === "GET") {
         
         // Get the module from URL parameter or session
-        $requested_module = $_GET['module'] ?? $_SESSION["input"] ?? "The Basics";
+        $requested_module = $_GET['module'] ?? $_SESSION["input"] ?? "Command Line";
         
         if ($requested_module === "Networking") {
             $current_module = "Networking";
             $lessonName = "Networking";
             $current_section = "Intro To Networking";
         } else {
-            $current_module = "The Basics";
-            $lessonName = "The Command Line";
+            $current_module = "Command Line";
+            $lessonName = "Overview";
             $current_section = "Prelude";
         }
         
@@ -133,7 +133,7 @@ if ($user_id === null) {
             ],
             "modules" => [
                 [
-                    "name" => "The Basics",
+                    "name" => "Command Line",
                     "completed" => 0,
                     "total" => 83
                 ],
