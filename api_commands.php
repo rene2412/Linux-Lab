@@ -1946,7 +1946,7 @@ function update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : v
             WHEN current_lesson <> VALUES(current_lesson) THEN lessons_completed + 1  
             ELSE lessons_completed 
         END, 
-        current_lesson = VALUES(current_lesson)  
+        current_lesson = VALUES(current_lesson),  
         lesson_id = VALUES(lesson_id)
         ");
     try {

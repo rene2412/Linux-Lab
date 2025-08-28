@@ -36,14 +36,14 @@ if ($user_id === null) { //&& $_SERVER["REQUEST_METHOD"] === "POST") {
                 ],
             "modules" => [
                 [
-                    "name" => "The Basics",
-                    "completed" => 0,
-                    "total" => 50
+                    "name" => "Command Line",
+                    "completed" => 83,
+                    "total" => 54
                 ],
                 [
                     "name" => "Networking",
                     "completed" => 0,
-                    "total" => 40
+                    "total" => 54
                 ],
                 [
                     "name" => "Bash Scripting",
@@ -118,7 +118,7 @@ if ($lessonId) {
     $sql2 = $pdo->prepare("SELECT title FROM networking_lessons WHERE id = ?");
     try {
         $sql2->execute([$lessonId]);
-        $lessonName = $sql2->fetchColumn() ?? "The Command Line";
+        $lessonName = $sql2->fetchColumn() ?? "Overview";
     } catch (PDOException $e) {
         $lessonName = "Error fetching lesson: " . $e->getMessage();
     }
@@ -162,14 +162,14 @@ $response = [
         ],
     "modules" => [
         [
-            "name" => "The Basics",
+            "name" => "Command Line",
             "completed" => $lessons_completed,
-            "total" => 50
+            "total" => 56
         ],
         [
             "name" => "Networking",
             "completed" => $networking_lessons_completed,
-            "total" => 30
+            "total" => 22
         ],
         [
             "name" => "Bash Scripting",

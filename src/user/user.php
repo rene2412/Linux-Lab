@@ -135,7 +135,7 @@ if ($user_id === null) {
                 [
                     "name" => "The Basics",
                     "completed" => 0,
-                    "total" => 56
+                    "total" => 83
                 ],
                 [
                     "name" => "Networking",
@@ -286,7 +286,7 @@ function sendAPI($api) : array {
         "username" => $username,
         "isLoggedIn" => $logged,
         "currentModule" => [
-            "name" => "The Command Line",
+            "name" => "Command Line",
             "currentSection" => $current_section,
             "lessonId" => $lessonId,
             "lessonName" => $lessonName,
@@ -294,7 +294,7 @@ function sendAPI($api) : array {
         ],
          "modules" => [
         [
-            "name" => "The Command Line",
+            "name" => "Command Line",
             "completed" => $lessons_completed,
             "total" => 56
         ],
