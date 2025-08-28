@@ -80,9 +80,10 @@ export default function Overview() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
-          start: 'bottom bottom',
+          start: 'bottom+=5% bottom',
           end: 'bottom top',
           scrub: true,
+          // markers:true,
         },
       });
 

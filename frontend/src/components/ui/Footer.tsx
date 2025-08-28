@@ -31,14 +31,12 @@ export default function Footer() {
         </span>
         <Marquee className="bg-highlight shadow-highlight font-spencer h-fit !text-black shadow-[0px_0px_120px]">
           <span className="mx-2">
-            Dove nested towers, the hour was Strike the street, quicksilver moon
-            Carriage across the fog Two-step to lamp lights cellar tune The
-            laughs come hard in "Auld Lang Syne" The glass was raised, the fired
-            rose The fullness of the wine, the dim last toasting While at port,
-            adieu or die A choke of grief, heart hardened, I Beyond belief, a
-            broken man, too tough to cry Surf's up, mm-mm, mm-mm, mm-mm Aboard a
-            tidal wave Come about hard and join The young and often spring you
-            gave I heard the word Wonderful thing A children's song
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
           </span>
         </Marquee>
       </div>

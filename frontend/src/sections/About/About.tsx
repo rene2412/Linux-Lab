@@ -13,20 +13,16 @@ export default function About() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const images = [
-    { src: 'media/bg.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg2.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg3.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg4.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg5.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg6.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg7.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg8.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg9.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg10.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg11.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg12.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg13.webp', alt: 'abstract dither pattern' },
-    { src: 'media/bg14.webp', alt: 'abstract dither pattern' },
+    { src: 'media/ascii_logos/l1a.webp', alt: 'MintOS Logo' },
+    { src: 'media/ascii_logos/l2a.webp', alt: 'CachyOS Logo' },
+    { src: 'media/ascii_logos/l3a.webp', alt: 'MX Linux Logo' },
+    { src: 'media/ascii_logos/l4a.webp', alt: 'EndeavourOS Logo' },
+    { src: 'media/ascii_logos/l5a.webp', alt: 'Debian Logo' },
+    { src: 'media/ascii_logos/l6a.webp', alt: 'Pop! OS Logo' },
+    { src: 'media/ascii_logos/l7a.webp', alt: 'Manjaro Logo' },
+    { src: 'media/ascii_logos/l8a.webp', alt: 'Ubuntu Logo' },
+    { src: 'media/ascii_logos/l9a.webp', alt: 'Fedora Logo' },
+    { src: 'media/ascii_logos/l10a.webp', alt: 'Zorin Logo' },
   ];
 
   useGSAP(
@@ -99,7 +95,7 @@ export default function About() {
     <section
       id="about"
       ref={container}
-      className="mx-4 my-auto mt-40 h-fit overflow-x-hidden relative sm:min-h-lvh"
+      className="relative mx-4 my-auto mt-40 h-fit overflow-x-hidden sm:min-h-lvh"
     >
       <h1 className="text-h5 lg:text-heading-h6 xl:text-heading-h5 tracking-sans-normal text-white">
         <ScrambleScroll>About the </ScrambleScroll>
@@ -109,12 +105,12 @@ export default function About() {
         </ScrambleScroll>
       </h1>
       <div className="pin__wrapper h-[200lvh] overflow-hidden">
-        <div className="pin__content mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
+        <div className="pin__content relative mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end overflow-hidden sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
           <div className="pin__img col-span-3 col-start-2 mt-auto mix-blend-hard-light sm:mt-0 xl:col-span-4 xl:col-start-2">
             <img
               src={images[currentImageIndex].src}
               key={currentImageIndex}
-              className="aspect-square object-cover mix-blend-lighten"
+              className="aspect-square object-cover mix-blend-lighten brightness-200"
               alt={images[currentImageIndex].alt}
             />
           </div>
