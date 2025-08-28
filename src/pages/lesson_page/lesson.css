@@ -505,7 +505,7 @@ code{
 @media (min-width: 320px){
     .sidebar{
         /* background-color: blue; */
-        max-width: 300px;
+        /* max-width: 300px; */
     }
 }
 

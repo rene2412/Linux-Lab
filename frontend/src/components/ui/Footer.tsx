@@ -16,7 +16,7 @@ export default function Footer() {
           <ScrambleScroll className="font-spencer text-heading-h5 lg:text-heading-h4 leading-none">
             Linux-Lab
           </ScrambleScroll>
-          <span className="text-center">Surely right?</span>
+          <span className="text-center">Based, in California</span>
         </div>
         <nav className="col-span-6 col-start-7 mx-4 mt-10 grid h-fit grid-cols-2 grid-rows-2 gap-x-4 gap-y-10 sm:my-auto lg:col-start-8 lg:col-span-4">
           <NavLinkList title="Quick Links" data={FOOTER_DATA.quickLinks} />
@@ -93,7 +93,7 @@ const FOOTER_DATA = {
     { name: 'Email', href: 'mailto:' },
   ],
   other: [
-    { name: 'Page Credits', href: 'https://herbart.dev' },
+    { name: 'Misc', href: 'https://www.youtube.com/watch?v=4JZ-o3iAJv4' },
   ],
   copyright: '© Linux-Lab 2025',
 };
