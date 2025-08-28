@@ -17,7 +17,7 @@ session_start();
             </div>
             <div class="auth__card__content auth__form">
                 <form class="" style="width:100%" action="verify_code.php" method="POST">
-                    <label for="code">Verification Code: Please Check Your Email!</label>
+                    <label for="code">E-mail Verification Code:</label>
                     <input class="input--single" placeholder="0000" type="text" id="code" name="code" required>
                     <button class="styled-button" type="submit">Verify</button>
                 </form>
