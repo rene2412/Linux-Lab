@@ -24,7 +24,7 @@ gsap.registerPlugin(
 
 const OVERVIEW_LINKS = [
   {
-    name: 'Foundations',
+    name: 'Command Line',
     content: [
       <p>
         Everything starts somewhere. In Linux, everything is a file - and understanding this core philosophy is where your journey begins. From the command line to the filesystem, we'll break down the building blocks.
@@ -52,7 +52,7 @@ const OVERVIEW_LINKS = [
     ],
   },
   {
-    name: 'Scripting',
+    name: 'Bash Scripting',
     content: [
       <p>I couldve sworn something went here?... Coming soon please check back soon!</p>,
       // <p>However scripting is powerful level up waht you already know and be that Linux Guru!</p>,

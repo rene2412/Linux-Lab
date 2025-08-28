@@ -19,7 +19,7 @@ gsap.registerPlugin(Observer, InertiaPlugin, ScrollTrigger);
 
 const MODULES = [
   {
-    title: 'Foundations',
+    title: 'Command Line',
     description:
       'Lets take it back to the start from learning about what the file system is? Why was it made this way? How do I create delete edit and move around this space? Weve got you covered.',
     info: {
@@ -47,7 +47,7 @@ const MODULES = [
     href: SITE_URL_NETWORKING,
   },
   {
-    title: 'Scripting',
+    title: 'Bash Scripting',
     description:
       'Automate everything you have learned to become cracked. Scripting, scripting away finising this certifies you as a Linux guru. Currently in progress though but check back soon!',
     info: {

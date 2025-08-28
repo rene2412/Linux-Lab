@@ -225,11 +225,15 @@ export default function Hero() {
       </section>
       <Marquee className="marquee__container mt-2 text-white">
         <span className="font-spencer md:text-heading-h6 text-heading-h7 mx-4 flex gap-8">
-          <span>Foundations</span> <span>Networking</span>
+          <span>Command Line</span> <span>Networking</span>
           <span>Bash Scripting</span>
-          <span>Foundations</span> <span>Networking</span>
+          <span>Command Line</span> <span>Networking</span>
           <span>Bash Scripting</span>
-          <span>Foundations</span> <span>Networking</span>
+          <span>Command Line</span> <span>Networking</span>
+          <span>Bash Scripting</span>
+          <span>Command Line</span> <span>Networking</span>
+          <span>Bash Scripting</span>
+          <span>Command Line</span> <span>Networking</span>
           <span>Bash Scripting</span>
         </span>
       </Marquee>
