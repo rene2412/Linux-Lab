@@ -15,7 +15,7 @@ export default class Navigation {
     //   svg: "../../pages/assets/SVGs/Home.svg",
     // },
     {
-      title: "The Basics",
+      title: "Command Line",
       link: "../../pages/lesson_page/lesson.html",
       tag: "lesson.html",
       svg: "../../pages/assets/SVGs/Console.svg",

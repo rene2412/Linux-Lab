@@ -100,6 +100,12 @@ export default class VanillaTerminal {
     e.preventDefault();
     this.terminal.scrollTop = this.terminal.scrollHeight - this.terminal.clientHeight;
     
+    // Handle paste commands (Ctrl+V or Cmd+V)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
+      this.paste();
+      return;
+    }
+    
     const handler = this.keyHandler[e.key];
     if (handler) {
       handler(e);
@@ -270,6 +276,27 @@ export default class VanillaTerminal {
     this.inputRight = this.temp.slice(this.caretPos, this.temp.length);
     this.temp = this.inputLeft + value + this.inputRight;
     this.commandHistory[this.commandHistoryIndex] = this.temp;
+  }
+
+  async paste() {
+    try {
+      const clipboardText = await navigator.clipboard.readText();
+      if (clipboardText) {
+        // Insert the entire string at current caret position
+        this.inputLeft = this.temp.slice(0, this.caretPos);
+        this.inputRight = this.temp.slice(this.caretPos, this.temp.length);
+        this.temp = this.inputLeft + clipboardText + this.inputRight;
+        this.commandHistory[this.commandHistoryIndex] = this.temp;
+        
+        // Move caret to end of pasted content
+        this.caretPos += clipboardText.length;
+        
+        // Render the updated display
+        this.renderCaret();
+      }
+    } catch (error) {
+      console.warn('Failed to read clipboard:', error);
+    }
   }
 
   renderCaret() {
