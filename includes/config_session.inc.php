@@ -11,7 +11,7 @@ ini_set("session.use_strict_mode", 1);
 
 //the arguments that the session cookie will hold
 session_set_cookie_params([
-	"lifetime" => 1800, //set the session to be 30 mins
+	"lifetime" => 0, //set the session to be 30 mins
 	"domain" => "localhost", //limits the cookies range to this domain 
 	"path" => "/", //cookies are valid across the website
 	"secure" => false, //cookies are only valid with https

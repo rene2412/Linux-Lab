@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   
-   $username = $_POST["username"];
-   $email = $_POST["email"];  
-   $pwd = $_POST["pwd"];
-
+      $username = $_POST["username"];
+      $email = $_POST["email"];  
+      $pwd = $_POST["pwd"];
 
        require_once 'database.inc.php';
        require_once 'signup_model.inc.php';
@@ -19,11 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        $errors["empty_input"] = "Fill In All Fields!";    
        }
 
-
        if (!is_email_valid($email)) {
            $errors["invalid_email"] = "Invalid E-Mail!";      
        }
-  
        if (username_is_taken($pdo, $username)) {
            $errors["username_taken"] = "Username is taken. Please choose another!";       
        }
@@ -33,12 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        if (email_is_registered($pdo, $email)) {
            $errors["email_taken"] = "Email already registered. Please choose another!";       
        }
-
-
        if (is_passsword_valid($pwd) === false) {
-           $errors["password_ invalid"] = "Invalid Password!";
+           $errors["password_ invalid"] = "Invalid Password! Must contain at least: 1 upper, lower, special, and digit.";
        }
-
 
    if ($errors) {
        $_SESSION["errors_signup"] = $errors;

@@ -20,24 +20,24 @@ require_once __DIR__. "/../../../vendor/autoload.php";
             <div class="auth__top">
                 <h2 class="auth__top__logo"><a href="../landing_page/landing_page.html">Linux-Lab</a></h2>
             </div>
-            <div class="auth__switch">
-            </div>
             <div class="auth__form auth__form--login  ">
                 <form id="login__form" action="../../../includes/login.inc.php" method="post" class="">
                     <label for="username" class="input__label">Username:</label>
                     <input required class="input--single" type="text" id="username" name="username" placeholder="Username">
                     <label for="pwd" class="input__label">Password:</label>
                     <input required type="password" class="input--single" name="pwd" id="pwd" placeholder="Password">
-                    <button class="styled-button">Login</button>
-                    <a href="../lesson_page/lesson.html" class="login--guest">Continue as guest</a>
-                    <a href="./signup.php" class="login--guest">Signup instead</a>
+                    <a class="auth__forgot" href="../../../includes/reset_info.inc.php" >
+                        Forgot Password?
+                    </a>
+                    <button class="styled-button login__button">Login</button>
                 </form>
                 <?php 
                 check_login_errors();
                 ?>
             </div>
+            <p class="separator">Or</p>
             <?php 
-               session_start();
+            //    session_start();
                $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
                $dotenv->load();
                
@@ -51,11 +51,13 @@ require_once __DIR__. "/../../../vendor/autoload.php";
 
                 $auth_url = $client->createAuthUrl();            
 		?>
-            <a href="<?= htmlspecialchars($auth_url) ?>">
-            <button>Sign In With Google</button></a>
-            <form action="../../../includes/reset_info.inc.php" method="post">
-                <button class="styled-button auth__forgot">Reset Password</button>
-            </form>
+            <a class="google__anchor" href="<?= htmlspecialchars($auth_url) ?>">
+            <button class="google__button"> <img class="google__image" alt="Google Logo" src="../assets/SVGs/google.png" /> Sign In With Google</button></a>
+            <div>
+                <a href="../lesson_page/lesson.html" class="login--guest">Guest</a>
+                |
+                <a href="./signup.php" class="login--guest">Signup </a>
+            </div>
         </div>
     </div>
 
