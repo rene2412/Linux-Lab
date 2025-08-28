@@ -5,11 +5,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 430px;
+    width: 450px;
+    max-height: 500px;
     padding: var(--spce-med);
     transform: translateX(-50%) translateY(-50%);
     transition: all 1s ease-out;
     border-radius: var(--radius-med);
+    border-color: var(--text-color-main);
 }
 
 
@@ -35,6 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--text-color-main);
 }
 
 .setting__button--close{
@@ -60,6 +63,10 @@
     border: solid 2px var(--color-error);
     color: var(--color-error);
     font-weight: 800;
+}
+
+.setting__form__title{
+    color:var(--text-color-main)
 }
 
 

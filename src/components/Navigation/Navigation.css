@@ -125,6 +125,7 @@
 }
 
 .sidebar__button--settings{
+    outline: none;
     display: flex;
     justify-content: stretch;
     align-items: stretch;
@@ -200,7 +201,6 @@
     height: 100%;
     background-color: var(--color-overlay);
     color: var(--text-color-main);
-    padding: var(--spce-med)var(--spce-lg)var(--spce-med)var(--spce-lg);
     margin: 0;
 }
 
@@ -211,13 +211,29 @@
     background-color: var(--color-overlay);
 }
 
+.user-dropdown--logout a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: var(--spce-med)var(--spce-lg)var(--spce-med)var(--spce-lg);
+
+
+}
+
 .sidebar__bottom__dropdown >*:hover{
-    background-color: rgba(255, 255, 255, 0.19);
+    /* background-color: rgba(255, 255, 255, 0.19); */
+    opacity: 0.9;
 }
 
 
 .sidebar__button--user{
     font-size: var(--text-size-xl);
+    width: 100%;
+    text-align: start;
+}
+.sidebar__button--user a{
+    display: inline-block;
+    width: 100%;
 }
 
 .sidebar__bottom--user__container{
@@ -230,11 +246,12 @@
     text-align: left;
     color: var(--text-color-main);
     font-size: var(--text-size-xl);
-    transition: transform 0.1s ease;
+    /* transition: transform 0.1s ease; */
     transform-origin: center;
 }
 .sidebar__button--user--auth:hover{
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
+    opacity: 0.8;
 }
 
 

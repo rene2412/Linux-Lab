@@ -2,6 +2,7 @@ import VanillaTerminal from "./termC/term.js";
 import { NavigationLesson } from "../../components/NavigationLesson/index.js";
 import getUserCookie from "../../utils/getUserCookie.js";
 import Navigation from "../../components/Navigation/Navigation.js";
+import SettingModal from "../../components/SettingModal/SettingModal.js";
 
 const sectionLesson = document.querySelector(".section--lesson");
 const noti = document.querySelector('.notification');
@@ -559,3 +560,5 @@ if (userObj) {
   terminal.mount("#terminal__container");
   const nav = new Navigation(".sidebar__container", false, userObj, false);
 }
+
+const modal = new SettingModal();

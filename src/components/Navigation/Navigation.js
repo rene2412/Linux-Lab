@@ -8,17 +8,11 @@ export default class Navigation {
       svg: "../../pages/assets/SVGs/Control Panel.svg",
       tag: "dashboard.html",
     },
-    {
-      title: "Home",
-      link: "../../pages/landing_page/landing_page.html",
-      tag: "landing_page.html",
-      svg: "../../pages/assets/SVGs/Home.svg",
-    },
     // {
-    //   title: "Terminal",
-    //   link: "../../pages/lesson_page/lesson.html",
-    //   tag: "lesson.html",
-    //   svg: "../../pages/assets/SVGs/Console.svg",
+    //   title: "Home",
+    //   link: "../../../",
+    //   tag: "landing_page.html",
+    //   svg: "../../pages/assets/SVGs/Home.svg",
     // },
     {
       title: "The Basics",
@@ -36,18 +30,18 @@ export default class Navigation {
       isModule: true,
       moduleTag: "Networking",
     },
-    {
-      title: "About",
-      link: "../../pages/about_us/about_us.html",
-      tag: "about_us.html",
-      svg: "../../pages/assets/SVGs/Info Squared.svg",
-    },
-    {
-      title: "Contact",
-      link: "../../pages/contact_page/contact.html",
-      tag: "contact.html",
-      svg: "../../pages/assets/SVGs/Address Book.svg",
-    },
+    // {
+    //   title: "About",
+    //   link: "../../pages/about_us/about_us.html",
+    //   tag: "about_us.html",
+    //   svg: "../../pages/assets/SVGs/Info Squared.svg",
+    // },
+    // {
+    //   title: "Contact",
+    //   link: "../../pages/contact_page/contact.html",
+    //   tag: "contact.html",
+    //   svg: "../../pages/assets/SVGs/Address Book.svg",
+    // },
   ];
 
   path = "";
@@ -101,7 +95,8 @@ export default class Navigation {
     this.sidebarBtnClose.addEventListener("click", this.closeSidebar);
     if (this.isLoggedIn) {
       this.userButton.addEventListener("click", this.handleUserButtonClick);
-      this.userSetting.addEventListener('click',()=>{
+      this.userSetting.addEventListener('click',(e)=>{
+        console.log(e);
         const event = new CustomEvent('modalopen',{
           detail:{data:'modal open fired from navigation setting button'},
           bubbles:true,
@@ -237,7 +232,7 @@ export default class Navigation {
     sidebar.innerHTML = `
             <div class="sidebar__top">
                 <div class="sidebar__header">
-                    <h2 class="sidebar__logo">Linux-Lab</h2>
+                    <h2 class="sidebar__logo"><a href="../../../">Linux-Lab</a></h2>
                     <button type="button" class="button sidebar__button sidebar__button--close"><img src="../../pages/assets/SVGs/Close.svg" /></button>
                 </div>
                 <nav class="sidebar__links">
@@ -253,8 +248,8 @@ export default class Navigation {
                 <div class="sidebar__bottom--user__container">
                 ${sidebarUser}
                 </div>
-                <button type="button" class="sidebar__button--settings">
-                    <img class="sidebar__img--settings" src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
+                <button type="button" class="sidebar__button--settings  ${!this.isLoggedIn && 'hidden'}">
+                    <img class="sidebar__img--settings " src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
                 </button>  
             </div>
         `;
