@@ -44,14 +44,13 @@ require_once __DIR__. "/../../../vendor/autoload.php";
                $client = new Google\Client;
                $client->setClientId($_ENV["CLIENT_ID"]);
                $client->setClientSecret($_ENV["CLIENT_SECRET"]);
-               $client->setRedirectUri("http://localhost/Linux-Lab/src/pages/login/google.php");
+               $client->setRedirectUri("https://linux-lab.live/src/pages/login/google.php");
 
                 $client->addScope("email");
                 $client->addScope("profile");
 
-                $auth_url = $client->createAuthUrl();
-            
-                ?>
+                $auth_url = $client->createAuthUrl();            
+		?>
             <a href="<?= htmlspecialchars($auth_url) ?>">
             <button>Sign In With Google</button></a>
             <form action="../../../includes/reset_info.inc.php" method="post">
