@@ -28,6 +28,7 @@ frontend/.vite/
 frontend/.env
 frontend/.env.local
 frontend/.env.production
+node_modules/
 # frontend/public/fonts
 
 # TypeScript
