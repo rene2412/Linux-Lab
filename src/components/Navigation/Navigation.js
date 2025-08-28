@@ -8,12 +8,6 @@ export default class Navigation {
       svg: "../../pages/assets/SVGs/Control Panel.svg",
       tag: "dashboard.html",
     },
-    // {
-    //   title: "Home",
-    //   link: "../../../",
-    //   tag: "landing_page.html",
-    //   svg: "../../pages/assets/SVGs/Home.svg",
-    // },
     {
       title: "Command Line",
       link: "../../pages/lesson_page/lesson.html",

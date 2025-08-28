@@ -18,7 +18,7 @@ require_once __DIR__. "/../../../vendor/autoload.php";
     <div class="auth__container">
         <div class="auth__card animation--popup">
             <div class="auth__top">
-                <h2 class="auth__top__logo"><a href="../landing_page/landing_page.html">Linux-Lab</a></h2>
+                <h2 class="auth__top__logo"><a href="../../../">Linux-Lab</a></h2>
             </div>
             <div class="auth__form auth__form--login  ">
                 <form id="login__form" action="../../../includes/login.inc.php" method="post" class="">

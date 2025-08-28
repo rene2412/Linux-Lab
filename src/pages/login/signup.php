@@ -15,7 +15,7 @@ require_once "../../../includes/signup_view.inc.php";
     <div class="auth__container">
         <div class="auth__card animation--popup">
             <div class="auth__top">
-                <h2 class="auth__top__logo"><a href="../landing_page/landing_page.html">Linux-Lab</a></h2>
+                <h2 class="auth__top__logo"><a href="../../../">Linux-Lab</a></h2>
             </div>
             <div class="auth__card__content">
                 <form id="signup__form" action="../../../includes/signup.inc.php" method="post" >

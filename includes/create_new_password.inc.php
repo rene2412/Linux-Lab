@@ -23,7 +23,7 @@ else {
     <div class="auth__container">
         <div class="auth__card animation--popup">
             <div class="auth__top">
-                <h2 class="auth__top__logo"><a href="../src/pages/landing_page/landing_page.html">Linux-Lab</a></h2>
+                <h2 class="auth__top__logo"><a href="../">Linux-Lab</a></h2>
             </div>
             <div class="auth__card__content auth__card__content--reset">
                 <h3>Create New Password</h3>
