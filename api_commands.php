@@ -2580,7 +2580,6 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
            }
        }
         $output = process_ls($fileSystem, $currentDir);
-	    $output .= $lessonID . "\n";
         break;
     case 'cd':
         if  (count($args) > 2) {

@@ -23,12 +23,12 @@ $response = [
         [
             "name" => "The Basics",
             "completed" => 0,
-            "total" => 65
+            "total" => 56
         ],
         [
             "name" => "Networking",
             "completed" => 0,
-            "total" => 21
+            "total" => 22
         ],
         [
             "name" => "Bash Scripting",

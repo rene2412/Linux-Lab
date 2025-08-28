@@ -16,7 +16,7 @@ $logged = false; // Default to false for guests
 $lessonId = 1;
 $lessons_completed = 0;
 $current_lesson = "Not Started";
-$lessonName = "The Command Line";
+$lessonName = "Overview";
 $current_section = "Prelude"; // Default to first section
 $current_module = "The Basics"; // Default module
 error_log("username: $username\n");
@@ -50,12 +50,12 @@ if ($user_id === null) {
                     [
                         "name" => "The Basics",
                         "completed" => 0,
-                        "total" => 65
+                        "total" => 83
                     ],
                     [
                         "name" => "Networking",
                         "completed" => 0,
-                        "total" => 21
+                        "total" => 54
                     ],
                     [
                         "name" => "Bash Scripting",
@@ -87,12 +87,12 @@ if ($user_id === null) {
                 [
                     "name" => "The Basics",
                     "completed" => 0,
-                    "total" => 65
+                    "total" => 83
                 ],
                 [
                     "name" => "Networking",
                     "completed" => 0,
-                    "total" => 21
+                    "total" => 54
                 ],
                 [
                     "name" => "Bash Scripting",
@@ -135,12 +135,12 @@ if ($user_id === null) {
                 [
                     "name" => "The Basics",
                     "completed" => 0,
-                    "total" => 65
+                    "total" => 56
                 ],
                 [
                     "name" => "Networking",
                     "completed" => 0,
-                    "total" => 21
+                    "total" => 54
                 ],
                 [
                     "name" => "Bash Scripting",
@@ -232,7 +232,7 @@ if ($lessonId) {
     $sql2 = $pdo->prepare("SELECT lesson_name FROM lessons WHERE id = ?");
     try {
         $sql2->execute([$lessonId]);
-        $lessonName = $sql2->fetchColumn() ?? "The Command Line";
+        $lessonName = $sql2->fetchColumn() ?? "Overview";
     } catch (PDOException $e) {
         $lessonName = "Error fetching lesson: " . $e->getMessage();
     }
@@ -286,7 +286,7 @@ function sendAPI($api) : array {
         "username" => $username,
         "isLoggedIn" => $logged,
         "currentModule" => [
-            "name" => "The Basics",
+            "name" => "The Command Line",
             "currentSection" => $current_section,
             "lessonId" => $lessonId,
             "lessonName" => $lessonName,
@@ -294,14 +294,14 @@ function sendAPI($api) : array {
         ],
          "modules" => [
         [
-            "name" => "The Basics",
+            "name" => "The Command Line",
             "completed" => $lessons_completed,
-            "total" => 50
+            "total" => 56
         ],
         [
             "name" => "Networking",
             "completed" => $networking_lessons_completed,
-           "total" => 30
+           "total" => 22
         ],
         [
             "name" => "Bash Scripting",

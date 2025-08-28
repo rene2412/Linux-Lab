@@ -17,20 +17,25 @@ session_start();
             </div>
             <div class="auth__card__content auth__form">
                 <form class="" style="width:100%" action="verify_code.php" method="POST">
-                    <label for="code">Verification Code:</label>
-                    <input class="input--single" placeholder="00000" type="text" id="code" name="code" required>
+                    <label for="code">Verification Code: Please Check Your Email!</label>
+                    <input class="input--single" placeholder="0000" type="text" id="code" name="code" required>
                     <button class="styled-button" type="submit">Verify</button>
                 </form>
-            </div>
+
+                   <?php if (isset($_SESSION["verify_error"])): ?>
+                    <p style="color:red; margin-top:10px;">
+                    <?= htmlspecialchars($_SESSION['verify_error']); ?>
+                    </p>
+                <?php unset($_SESSION['verify_error']); ?>
+                    <?php endif; ?>
+                   </div>
             <div>
-                <a href="../src/pages/lesson_page/landing_page.html" class="login--guest">Guest</a>
-                |
-                <a href="../src/pages/login/login.php" class="login--guest">Login</a>
+                <a href="../src/pages/login/login.php" class="login--guest">Back to Login</a>
             </div>
             </div>
         </div>
     </div>
-    <?php 
+    <?php
         if (isset($_SESSION["verify_error"])) {
             echo "<p style='color:red'>" . $_SESSION['verify_error'] . "</p>";
             unset($_SESSION['verify_error']); 
