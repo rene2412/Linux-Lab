@@ -62,7 +62,6 @@ if (isset($_POST["reset-password-submit"])) {
     $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
     $stmt = $pdo->prepare($sql); 
     $stmt->execute([$tokenEmail]); 
-    echo "Password has been updated successfully!\n";
     header("Location: ../src/pages/login/login.php?");
     exit();
 

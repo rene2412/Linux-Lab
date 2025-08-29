@@ -17,7 +17,16 @@ if (isset($_SESSION["send_email"])) {
 
     $url = "https://linux-lab.live/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
     $expires = date("U") + 1800;
-    
+   
+    $sql = "SELECT * FROM pwdReset WHERE pwdResetEmail = ? AND pwdResetExpires > ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userEmail, date("U")]);
+    $existing = $stmt->fetch();
+if ($existing) {
+    // Already requested and still valid, don’t send another
+    header("Location: email_sent.html");
+    exit();
+}
     // SQL Queries
     $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
     $stmt = $pdo->prepare($sql);
@@ -39,7 +48,7 @@ if (isset($_SESSION["send_email"])) {
         $stmt->execute([$userEmail, $selector, $hashedToken, $expires]);
              error_log("INSERT executed");
     }
-    
+   
     $apiKey = $_ENV["SENDGRID_API_KEY"];
     $sendgrid = new \SendGrid($apiKey);
     $email = new Mail();
@@ -50,7 +59,7 @@ if (isset($_SESSION["send_email"])) {
     
     try {
     $response = $sendgrid->send($email);
-    error_log("✅ Email status code: " . $response->statusCode());
+    error_log("Email status code: " . $response->statusCode());
     header("Location: email_sent.html");
     exit();
 }
