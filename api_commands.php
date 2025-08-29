@@ -2019,7 +2019,7 @@ function send_user_progress(PDO $pdo, int $userId) : array {
         $data = json_decode(file_get_contents("src/testAPI/lessons.json"), true);
     
         foreach ($data as $section => $lessons) {
-             if ($section === "The Basics") {
+             if ($section === "Command Line") {
                 foreach ($lessons as $lesson) {
                     if (isset($lesson['id']) && $lesson['id'] === $lesson_id) {
                         if (isset($lesson['answer'])) {
