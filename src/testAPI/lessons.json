@@ -440,8 +440,8 @@
             "section": "Searching & Filtering",
             "title": "grep -n \"pattern\" file",
             "content_type": "interactive",
-            "content": "<p>As mentioned before, the grep command can take in optional flags. One of these optional flags is '-n'.<\/p><p> The -n flag will output the number line(s) the pattern was in, lets take a look at this with an example.<\/p>In the same Documents\/ directory lets observe how many times \"in\" appears in Declaration.txt, which contains the United States Declaration of Independece<\/p><code>grep -n \"in\" Declaration.txt<\/code>",
-            "answer": "grep -n \"in\" Declaration.txt",
+            "content": "<p>As mentioned before, the grep command can take in optional flags. One of these optional flags is '-n'.<\/p><p> The -n flag will output the number line(s) the pattern was in, lets take a look at this with an example.<\/p>In the same Documents\/ directory lets observe how many times \"British\" appears in Declaration.txt, which contains the United States Declaration of Independece<\/p><code>grep -n \"British\" Declaration.txt<\/code>",
+            "answer": "grep -n \"British\" Declaration.txt",
             "completed": false
         },
         {

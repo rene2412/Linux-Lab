@@ -2843,7 +2843,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
                       updateUserProgress($pdo, $userId, 39);
                   }
             }
-            if ($lessonID === 40 && $flag === "-n" && $pattern === "in" && $file === "Declaration.txt" && !str_starts_with($output, "Error:")) {
+            if ($lessonID === 40 && $flag === "-n" && $pattern === "British" && $file === "Declaration.txt" && !str_starts_with($output, "Error:")) {
                 $isCorrect = true;
                 if ($userId !== null) {
                     update_mysql($pdo, $userId, 40, 41);
