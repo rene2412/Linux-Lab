@@ -1055,13 +1055,12 @@ function process_refresh() : string {
     return "File system has been reset to default.\n";
 }
 
-function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
+function process_rm(&$fileSystem, &$currentDirectory, $argument) {
     $GLOBALS['commandSuccess'] = false;
     // Trim and split the current directory path
     $currentDirectory = rtrim($currentDirectory, "/");
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
     $currentLevel = &$fileSystem["/"]; // Reference to root
-
     // Traverse to the current directory
     foreach ($path as $part) {
         if (!isset($currentLevel[$part]) || !is_array($currentLevel[$part])) {
@@ -1069,17 +1068,14 @@ function process_rm(&$fileSystem, &$currentDirectory, $argument): string {
         }
         $currentLevel = &$currentLevel[$part]; // Maintain reference
     }
-
     // Check if the file exists
     if (!array_key_exists($argument, $currentLevel)) {
         return "Error: File '$argument' not found.\n";
     }
-
     // Check if the target is a directory
     if ((!str_ends_with($argument, ".txt"))) {
         return "Error: '$argument' is a directory. Use 'rmdir' to remove directories.\n";
     }
-
     // Remove the file
     unset($currentLevel[$argument]);
     $GLOBALS['commandSuccess'] = true;
@@ -2133,6 +2129,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['guestLessonId'] = $lessonID;
     //fetch the current module from the global session
     $module = $_SESSION["module"];
+    if (empty($module)) {
+        $module = "basics";
+    }
     error_log("Current Module: $module");
 
     // Improved argument parsing with quote handling
@@ -2316,6 +2315,7 @@ if ($lessonID === 75 && GetMultChoiceAnswer($lessonID)  === "C") {
 }
 
 if ($module === "networking") {
+    error_log("HERE!");
     if ($lessonID === 6 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
     if ($userId) {
         network_update_mysql($pdo, $userId, 6, 7);

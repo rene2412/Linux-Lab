@@ -325,7 +325,7 @@ function sendAPI($api) : array {
     if ($user_id === null) {
         if ($guestInput === "The Basics") {
             require_once "guest.php";
-            $_SESSION["module"] = "basics";
+            $_SESSION["module"] = "Command Line";
             $module = $_SESSION["module"];
             $basics = $_SESSION['guestBasics'];
             echo json_encode($basics); 
@@ -363,7 +363,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
     elseif ($input === "The Basics") {
-        $_SESSION["module"] = "basics";
+        $_SESSION["module"] = "Command Line";
         $module = $_SESSION["module"];
         error_log("MODULE: $module");
         // UPDATE database with new module
