@@ -56,8 +56,8 @@
             "section": "Hello World",
             "title": "echo",
             "content_type": "interactive",
-            "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command, followed by a string of text we want to print. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"Hello World\"<\/code>",
-            "answer": "echo Hello World",
+            "content": "<p>It's traditional in computer science to start with a simple \"Hello World\" program<\/p>In Linux we can print to the screen using the <b>echo<\/b> command, followed by a string of text we want to print. Try it out by printing \"Hello World\" to the screen!\n<code> echo \"Hello World!\"<\/code>",
+            "answer": "echo Hello World!",
             "completed": false
         },
         {
