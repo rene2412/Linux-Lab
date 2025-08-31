@@ -148,7 +148,8 @@ export default function Navmenu({ className = ' ' }) {
   return (
     <menu
       ref={container}
-      className={`fixed top-0 left-0 hidden h-dvh w-full flex-col bg-black/90 text-white backdrop-blur-md md:!hidden ${className}`}
+      className={`fixed overflow-y-scroll top-0 left-0 hidden h-dvh w-full flex-col bg-black/90 text-white backdrop-blur-md md:!hidden ${className}`}
+      id='navmenu'
     >
       <div className="navbar__bg absolute top-0 left-0 -z-10 h-full w-full"></div>
       <div className="navbar__bg2 bg-highlight absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center backdrop-blur-xl">

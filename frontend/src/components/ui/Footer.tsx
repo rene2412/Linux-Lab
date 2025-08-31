@@ -37,6 +37,8 @@ export default function Footer() {
             Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
             Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
             Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
+            Linux-Lab is here. Linux-Lab is there. Linux-Lab is alive.
           </span>
         </Marquee>
       </div>
@@ -90,7 +92,7 @@ const FOOTER_DATA = {
     { name: 'Networking', href: SITE_URL_NETWORKING },
   ],
   social: [
-    { name: 'Email', href: 'mailto:' },
+    { name: 'Email', href: 'mailto:Linuxlab012@gmail.com' },
   ],
   other: [
     { name: 'Misc', href: 'https://www.youtube.com/watch?v=4JZ-o3iAJv4' },

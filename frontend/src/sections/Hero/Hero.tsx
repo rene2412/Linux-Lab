@@ -3,15 +3,15 @@ import Marquee from '../../components/ui/Marquee';
 import GSDevTools from 'gsap/GSDevTools';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
+import { Suspense, useRef } from 'react';
 import ScrambleTextPlugin from 'gsap/ScrambleTextPlugin';
 import BlockCaret from '../../components/ui/BlockCaret';
 import TextPlugin from 'gsap/TextPlugin';
 import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN } from '../../utils/data';
 import Anchor from '../../components/ui/Anchor';
 import { useLenis } from 'lenis/react';
-import { Canvas } from '@react-three/fiber';
 import Experience from '../../components/ui/Experience';
+import { Canvas } from '@react-three/fiber';
 
 gsap.registerPlugin(GSDevTools, ScrambleTextPlugin, TextPlugin);
 
@@ -186,14 +186,21 @@ export default function Hero() {
             Linux-Lab
           </h1>
         </div>
-        <div className="card__container lg:outline-2 outline-white shadow-highlight/20 lg:shadow-highlight/0  relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] lg:h-[65vh]">
+        <div className="card__container shadow-highlight/20 lg:shadow-highlight/0 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] outline-white lg:h-[65vh] lg:outline-2">
           <Canvas
             dpr={1}
             camera={{ near: 0.1, far: 2000, fov: 20, position: [0, 0, -220] }}
-            className="!absolute hidden lg:block !inset-0  !z-0 !h-full !w-full contrast-100 brightness-170 bg-black"
-            resize={{offsetSize:true}}
+            className="!absolute !inset-0 !z-0 hidden !h-full !w-full bg-black brightness-170 contrast-100 lg:block"
+            resize={{ offsetSize: true }}
           >
-            <Experience />
+            <Suspense
+              fallback={
+                <group>
+                </group>
+              }
+            >
+              <Experience />
+            </Suspense>
           </Canvas>
           <img
             className="absolute top-0 left-0 -z-10 h-full w-full object-cover select-none"
@@ -214,7 +221,7 @@ export default function Hero() {
                 From command line basics, to networking we got you covered for
                 free and in browser.
               </span>
-              <div className="buttons__hero flex w-full origin-bottom-right items-center justify-stretch gap-4 rounded-sm lg:w-md lg:bg-black/10 lg:p-4 ">
+              <div className="buttons__hero flex w-full origin-bottom-right items-center justify-stretch gap-4 rounded-sm lg:w-md lg:bg-black/10 lg:p-4">
                 <Anchor
                   href={SITE_URL_FOUNDATIONS}
                   className="xl:text-heading-slg w-full py-4"

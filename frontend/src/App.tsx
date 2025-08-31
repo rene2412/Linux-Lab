@@ -12,7 +12,7 @@ import Modules from './sections/Modules/Modules';
 import MediaLarge from './sections/MediaLarge/MediaLarge';
 import Footer from './components/ui/Footer';
 import { ReactLenis, useLenis } from 'lenis/react';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import gsap from 'gsap';
 
 function App() {
@@ -20,10 +20,9 @@ function App() {
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
-  const lenis = useLenis(() => {
-  });
+  const lenis = useLenis(() => {});
   window.scrollTo(0, 0);
-  lenis?.scrollTo(0,{immediate:true});
+  lenis?.scrollTo(0, { immediate: true });
   lenis?.stop();
 
   useEffect(() => {
@@ -38,10 +37,14 @@ function App() {
     return () => gsap.ticker.remove(update);
   }, []);
 
-
   return (
-    <ReactLenis root>
-      <main className="bg-dark  selection:bg-highlight relative min-h-svh selection:text-black">
+    <ReactLenis
+      options={{
+        prevent: node => node.id === 'navmenu',
+      }}
+      root
+    >
+      <main className="bg-dark selection:bg-highlight relative min-h-svh selection:text-black">
         <NavbarProvider>
           <Navbar className="z-10" />
           <Navmenu className="z-20" />
