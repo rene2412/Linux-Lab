@@ -104,7 +104,7 @@ export default function About() {
           Linux-Lab
         </ScrambleScroll>
       </h1>
-      <div className="pin__wrapper h-[200lvh] overflow-hidden">
+      <div className="pin__wrapper h-[200lvh] md:overflow-hidden">
         <div className="pin__content relative mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end overflow-hidden sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
           <div className="pin__img col-span-3 col-start-2 mt-auto mix-blend-hard-light sm:mt-0 xl:col-span-4 xl:col-start-2">
             <img
@@ -114,13 +114,12 @@ export default function About() {
               alt={images[currentImageIndex].alt}
             />
           </div>
-          <h2 className="text-heading-lg split pin__text md:text-heading-xl leading-tighten tracking-sans-wide lg:text-heading-h7 col-span-4 my-10 text-white sm:col-span-6 sm:col-start-7">
+          <h2 className="text-heading-lg max-w-3xl split pin__text md:text-heading-xl leading-tighten tracking-sans-wide lg:text-heading-h7 col-span-4 my-10 text-white sm:col-span-6 sm:col-start-7">
             <span className="text-highlight">Linux</span>-Lab is a web based
             learning platform meant to teach people from all knowledge levels
-            about <span className="text-highlight">Linux</span>. We want to take
+            about <span className="text-highlight">Linux</span>. We take
             an interactive approach to learning that doesn't really exist for{' '}
-            <span className="text-highlight">Linux </span> currently. That is
-            the reason for this project. Welcome.
+            <span className="text-highlight">Linux </span> currently. We hope you enjoy. Welcome.
           </h2>
         </div>
       </div>
