@@ -104,7 +104,7 @@ export default function About() {
           Linux-Lab
         </ScrambleScroll>
       </h1>
-      <div className="pin__wrapper h-[200lvh] md:overflow-hidden">
+      <div className="pin__wrapper h-[200lvh] overflow-hidden">
         <div className="pin__content relative mt-10 grid h-lvh grid-cols-4 grid-rows-2 items-center gap-5 self-end justify-self-end overflow-hidden sm:grid-cols-12 sm:grid-rows-1 lg:gap-5">
           <div className="pin__img col-span-3 col-start-2 mt-auto mix-blend-hard-light sm:mt-0 xl:col-span-4 xl:col-start-2">
             <img
