@@ -159,7 +159,7 @@ export default function Modules() {
               onMouseLeave={() => {
                 setActiveIndex(null);
               }}
-              className="module__card group h-fit min-h-fit max-w-md grow-1 space-y-6"
+              className="module__card group h-fit min-h-fit max-h-fit max-w-md grow-1 space-y-6"
             >
               <CardHeader>{module.title}</CardHeader>
               <p className="desc tracking-sans-normal text-white">
