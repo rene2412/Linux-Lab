@@ -10,6 +10,8 @@ import TextPlugin from 'gsap/TextPlugin';
 import { SITE_URL_FOUNDATIONS, SITE_URL_LOGIN } from '../../utils/data';
 import Anchor from '../../components/ui/Anchor';
 import { useLenis } from 'lenis/react';
+import { Canvas } from '@react-three/fiber';
+import Experience from '../../components/ui/Experience';
 
 gsap.registerPlugin(GSDevTools, ScrambleTextPlugin, TextPlugin);
 
@@ -184,9 +186,17 @@ export default function Hero() {
             Linux-Lab
           </h1>
         </div>
-        <div className="card__container shadow-highlight/20 relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] lg:h-[65vh]">
+        <div className="card__container lg:outline-2 outline-white shadow-highlight/20 lg:shadow-highlight/0  relative col-span-10 col-start-2 row-start-2 h-[73lvh] max-h-full min-h-fit max-w-full overflow-clip rounded-sm bg-black shadow-[0_0_180px] lg:h-[65vh]">
+          <Canvas
+            dpr={1}
+            camera={{ near: 0.1, far: 2000, fov: 20, position: [0, 0, -220] }}
+            className="!absolute hidden lg:block !inset-0  !z-0 !h-full !w-full contrast-100 brightness-170 bg-black"
+            resize={{offsetSize:true}}
+          >
+            <Experience />
+          </Canvas>
           <img
-            className="absolute top-0 left-0 z-0 h-full w-full object-cover select-none"
+            className="absolute top-0 left-0 -z-10 h-full w-full object-cover select-none"
             src="media/asciibh.webp"
             alt="black hole monochrome"
           />
@@ -204,7 +214,7 @@ export default function Hero() {
                 From command line basics, to networking we got you covered for
                 free and in browser.
               </span>
-              <div className="buttons__hero flex w-full origin-bottom-right items-center justify-stretch gap-4 rounded-sm lg:w-md lg:bg-black/90 lg:p-4 lg:backdrop-blur-xl">
+              <div className="buttons__hero flex w-full origin-bottom-right items-center justify-stretch gap-4 rounded-sm lg:w-md lg:bg-black/10 lg:p-4 ">
                 <Anchor
                   href={SITE_URL_FOUNDATIONS}
                   className="xl:text-heading-slg w-full py-4"
