@@ -159,7 +159,7 @@ export default function Modules() {
               onMouseLeave={() => {
                 setActiveIndex(null);
               }}
-              className="module__card group h-[70lvh] min-h-fit max-w-md grow-1 space-y-6"
+              className="module__card group h-fit min-h-fit max-w-md grow-1 space-y-6"
             >
               <CardHeader>{module.title}</CardHeader>
               <p className="desc tracking-sans-normal text-white">
@@ -242,7 +242,7 @@ function ModuleCarousel({ className = '' }: { className?: string }) {
             <SplideSlide key={module.title} className="">
               <Card
                 active={index === activeIndex}
-                className={`mx-auto h-[70lvh] min-h-fit max-w-md space-y-6`}
+                className={`mx-auto  h-fit min-h-fit max-w-md space-y-6`}
               >
                 <CardHeader>{module.title}</CardHeader>
                 <p className="desc tracking-sans-normal text-white">
