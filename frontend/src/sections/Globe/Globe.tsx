@@ -59,13 +59,13 @@ export default function Globe() {
           className="mx-auto mix-blend-color-burn h-auto max-w-full"
         ></img>
       </div>
-      <p className="text lg:text-heading-h4 text-heading-h7 font-spencer relative z-10 mx-auto hidden h-full w-full max-w-xs flex-col items-center justify-center text-center text-white mix-blend-exclusion lg:mx-0 lg:flex lg:max-w-none lg:flex-row">
+      <p className="text lg:text-heading-h4 text-heading-h7 font-spencer relative z-10 mx-auto hidden h-full w-full max-w-xs flex-col items-center justify-center text-center text-white  lg:mx-0 lg:flex lg:max-w-none lg:flex-row">
         <ScrambleScroll className="">Welcome to the world of</ScrambleScroll>
         <span className="lg:flex">&nbsp;</span>
         <ScrambleScroll className="text-highlight"> Linux </ScrambleScroll>
         <span className="lg:flex">&nbsp;!</span>
       </p>
-      <span className="text text-mobile text-heading-h6 font-spencer relative z-10 flex h-full w-full items-center justify-center pb-30 text-white mix-blend-exclusion">
+      <span className="text text-mobile text-heading-h6 font-spencer relative z-10 flex h-full w-full items-center justify-center pb-30 text-white ">
         <span className="text-center">
           <span className="">Welcome to the world of</span>
           <span className="lg:flex">&nbsp;</span>

@@ -23,8 +23,8 @@ const MODULES = [
     description:
       'Lets take it back to the start from learning about what the file system is? Why was it made this way? How do I create delete edit and move around this space? Weve got you covered.',
     info: {
-      size: '70+ Lessons',
-      time: '2+hr',
+      size: '80+ Lessons',
+      time: '4+hr',
       difficulty: 'Beginner',
       price: 'Free',
     },
@@ -37,8 +37,8 @@ const MODULES = [
     description:
       'Oh the internet, what does it mean? what does it really do? could we ever know? yes and you are here to learn all about the basics and interacting with it through the command line.',
     info: {
-      size: '25+ Lessons',
-      time: '1hr 30m',
+      size: '50+ Lessons',
+      time: '2hr',
       difficulty: 'Beginner → Intermediate',
       price: 'Free',
     },
@@ -49,15 +49,15 @@ const MODULES = [
   {
     title: 'Bash Scripting',
     description:
-      'Automate everything you have learned to become cracked. Scripting, scripting away finising this certifies you as a Linux guru. Currently in progress though but check back soon!',
+      'Automate everything you have learned to become cracked. Script away... finising this certifies you as a Linux guru. Currently in progress though but check back soon!',
     info: {
-      size: '25+ Lessons',
-      time: '2hr',
+      size: '??',
+      time: '??',
       difficulty: 'Intermediate → Advanced',
       price: 'Free',
     },
     buttonText: 'Coming Soon',
-    cliText: ['AUTOMATION', 'Very Cool!'],
+    cliText: ['AUTOMATION', 'Its good for you'],
   },
 ];
 

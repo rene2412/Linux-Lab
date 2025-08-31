@@ -227,7 +227,7 @@ export default function Overview() {
                   key={item.name}
                 >
                   <button
-                    className="font-spencer group text-heading-h5 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full cursor-pointer touch-manipulation leading-none"
+                    className="font-spencer group text-heading-h6 tracking-spencer-tight sm:text-heading-h4 lg:text-heading-h3 relative h-full w-full cursor-pointer touch-manipulation leading-none"
                     type="button"
                     onClick={e => {
                       openModal(e);
