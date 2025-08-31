@@ -2,6 +2,11 @@ import { CanvasTexture, Color, NearestFilter, RepeatWrapping, Texture, Uniform }
 import { Effect } from 'postprocessing';
 
 const fragment = `
+#ifdef GL_ES
+precision highp float;
+precision highp int;
+#endif
+
 uniform sampler2D uCharacters;
 uniform float uCharactersCount;
 uniform float uCellSize;
