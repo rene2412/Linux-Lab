@@ -169,7 +169,7 @@ $response = [
         [
             "name" => "Networking",
             "completed" => $networking_lessons_completed,
-            "total" => 22
+            "total" => 30
         ],
         [
             "name" => "Bash Scripting",

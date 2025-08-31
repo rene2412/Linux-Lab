@@ -223,7 +223,6 @@ $fileSystem = [
                         "Apples",
                         "Strawberries",
                         "Carrorts",
-                        "Spinach"
                     ]
                 ]
             ],
@@ -2048,7 +2047,8 @@ function send_user_progress(PDO $pdo, int $userId) : array {
         return $answer;
     }
 
-    function network_update_mysql(PDO $pdo, ?int $userId, int $lessonId, int $nextLesson) : void {
+ 
+    function network_update_mysql(PDO $pdo, int $userId, int $lessonId, int $nextLesson) : void {
         if ($userId === null) return;
         $stmt = $pdo->prepare("
             INSERT INTO network_user_progress (user_id, lesson_id, lessons_completed, current_lesson)
@@ -2066,8 +2066,8 @@ function send_user_progress(PDO $pdo, int $userId) : array {
         $stmt->execute([$userId, $lessonId, $nextLesson]);
     } catch (PDOException $e) {
        error_log("SQL Error: " . $e->getMessage());
-    }
-    }
+   }
+}
 
 function network_updateUserProgress($pdo, $userId, $lesson_id) : void {
 if ($userId === null) return;
@@ -2188,7 +2188,7 @@ if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
 error_log("Lesson ID: $lessonID");
 error_log("Answer: " . GetMultChoiceAnswer($lessonID));
  //multi-choice and mysql handshake (madness) 
-if ($module === "basics") {
+if ($module === "Command Line") {
  if ($lessonID === 17 && GetMultChoiceAnswer($lessonID)  === "B") {
     if ($userId !== null) {
          update_mysql($pdo, $userId, 17, 18);
@@ -3065,11 +3065,11 @@ case 'python3':
         break;
 	case 'ping':
         $output = process_ping($arg);
-        if ($lessonID === 6 && ($arg === "google.com" || $arg === "142.250.72.206")) {
+        if ($lessonID === 20 && ($arg === "google.com" || $arg === "142.250.72.206")) {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 6, 7);
-                network_updateUserProgress($pdo, $userId, 6);
+                network_update_mysql($pdo, $userId, 20, 21);
+                network_updateUserProgress($pdo, $userId, 20);
             }
         } 
         break;
@@ -3102,8 +3102,8 @@ case 'python3':
         if ($arg === "google.com") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 13, 14);
-                network_updateUserProgress($pdo, $userId, 13);
+                network_update_mysql($pdo, $userId, 32, 33);
+                network_updateUserProgress($pdo, $userId, 32);
             }
         }
 	    break;
@@ -3114,8 +3114,8 @@ case 'python3':
         if ($lessonID === 12 && $command === "nslookup google.com") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 8, 9);
-                network_updateUserProgress($pdo, $userId, 8);
+                network_update_mysql($pdo, $userId, 33, 34);
+                network_updateUserProgress($pdo, $userId, 33);
             }
         }
         break;
@@ -3129,8 +3129,8 @@ case 'python3':
         if ($lessonID === 24 && $command === "ss -tuln") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 24, 25);
-                network_updateUserProgress($pdo, $userId, 24);
+                network_update_mysql($pdo, $userId, 34, 35);
+                network_updateUserProgress($pdo, $userId, 34);
             }
         }
 
@@ -3141,11 +3141,11 @@ case 'python3':
         $command = implode(' ', array_map('strtolower', $args));
         $shell = shell_exec($command);
         $output = $shell;
-        if ($lessonID === 22 && $command === "telnet google.com 80") {
+        if ($lessonID === 33 && $command === "telnet google.com 80") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 22, 23);
-                network_updateUserProgress($pdo, $userId, 22);
+                network_update_mysql($pdo, $userId, 33, 34);
+                network_updateUserProgress($pdo, $userId, 33);
             }
         }
         break;
@@ -3153,32 +3153,32 @@ case 'python3':
         $command = implode(' ', $args);
         $shell = shell_exec(implode(' ', $args));
         $output = $shell;
-        if ($lessonID === 31 && $command === "curl https://www.oracle.com") {
+        if ($lessonID === 44 && $command === "curl https://www.oracle.com") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 31, 32);
-                network_updateUserProgress($pdo, $userId, 31); 
+                network_update_mysql($pdo, $userId, 44, 45);
+                network_updateUserProgress($pdo, $userId, 44); 
             }
         }
-        if ($lessonID === 32 && $command === "curl -I https://www.google.com") {
+        if ($lessonID === 45 && $command === "curl -I https://www.google.com") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 32, 33);
-                network_updateUserProgress($pdo, $userId, 32); 
+                network_update_mysql($pdo, $userId, 45, 46);
+                network_updateUserProgress($pdo, $userId, 45); 
             }
         }
-        if ($lessonID === 34 && $command === "curl https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=VVPWAF4272QM01N9") {
+        if ($lessonID === 47 && $command === "curl \"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=GOOG&apikey=F6T0RZ35871XB7OY\"") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 34, 35);
-                network_updateUserProgress($pdo, $userId, 34); 
+                network_update_mysql($pdo, $userId, 47, 48);
+                network_updateUserProgress($pdo, $userId, 47); 
             }
         }
-        if ($lessonID === 36 && $command === "curl ifconfig.me") {
+        if ($lessonID === 49 && $command === "curl ifconfig.me") {
             $isCorrect = true;
             if ($userId) {
-                network_update_mysql($pdo, $userId, 36, 37);
-                network_updateUserProgress($pdo, $userId, 36); 
+                network_update_mysql($pdo, $userId, 49, 50);
+                network_updateUserProgress($pdo, $userId, 49); 
             }
         }
         break;

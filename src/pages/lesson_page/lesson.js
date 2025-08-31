@@ -260,6 +260,9 @@ class LessonNav {
 
   render = (e) => {
     const lessons = e.detail.lessons;
+    console.log(lessons);
+    console.log("Hello");
+
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
     const lessonStatus = e.detail.lessonsCompleted;
