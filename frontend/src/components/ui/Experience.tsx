@@ -24,7 +24,7 @@ export default function Experience() {
   const config = {
     characters: ".:,'-^=*+?!|0#X%WM@",
     color: 'white',
-    fontSize: 75,
+    fontSize: 69,
     cellSize: 3,
     radius: 50,
     invert: false,
