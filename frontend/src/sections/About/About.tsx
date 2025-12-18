@@ -119,7 +119,7 @@ export default function About() {
             learning platform meant to teach people from all knowledge levels
             about <span className="text-highlight">Linux</span>. We take
             an interactive approach to learning that doesn't really exist for{' '}
-            <span className="text-highlight">Linux </span> currently. We hope you enjoy. Welcome.
+            <span className="text-highlight">Linux </span> currently. We hope you enjoy.
           </h2>
         </div>
       </div>

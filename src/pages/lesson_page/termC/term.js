@@ -2,48 +2,49 @@ export default class VanillaTerminal {
   constructor(options = {}) {
     // Default options
     this.options = {
-      apiEndpoint: '../api_commands.php',
-      username: 'guest_user',
-      hostname: 'LinuxLab',
-      ...options
+      apiEndpoint: "../api_commands.php",
+      username: "guest_user",
+      hostname: "LinuxLab",
+      ...options,
     };
 
     // Initial state
-    this.currentDirectory = options.initialDirectory || '/';
-    this.temp = '';
+    this.currentDirectory = options.initialDirectory || "/";
+    this.temp = "";
     this.caretPos = 0;
-    this.inputLeft = '';
-    this.inputRight = '';
+    this.inputLeft = "";
+    this.inputRight = "";
     // history index at 1 is the latest
     // edge case: cannot be empty array
     this.commandHistoryIndex = 1;
-    this.commandHistory = ['',''];
-    this.commandHistoryClean = ['',''];
+    this.commandHistory = ["", ""];
+    this.commandHistoryClean = ["", ""];
 
     // DOM elements (will be set in mount())
     this.terminal = null;
     this.commandLine = null;
     this.command = null;
     this.history = null;
-    this.lessonId=1;
+    this.lessonId = 1;
 
     // Key handlers
     this.keyHandler = {
-      'Backspace': (e) => this.backspace(e),
-      'Meta': () => this.specialKeys(),
-      'Enter': () => this.enter(),
-      'ArrowLeft': (e) => this.caretMovePos(e),
-      'ArrowRight': (e) => this.caretMovePos(e),
-      'ArrowUp': () => this.arrowUp(),
-      'ArrowDown': () => this.arrowDown(),
+      Backspace: (e) => this.backspace(e),
+      Meta: () => this.specialKeys(),
+      Enter: () => this.enter(),
+      ArrowLeft: (e) => this.caretMovePos(e),
+      ArrowRight: (e) => this.caretMovePos(e),
+      ArrowUp: () => this.arrowUp(),
+      ArrowDown: () => this.arrowDown(),
     };
 
     // Bound methods to maintain 'this' context
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.handleTerminalClick = this.handleTerminalClick.bind(this);
   }
 
-  setLesson(lesson){
+  setLesson(lesson) {
     this.lessonId = lesson;
   }
 
@@ -65,14 +66,15 @@ export default class VanillaTerminal {
     `;
 
     // Set DOM references
-    this.terminal = container.querySelector('.terminal');
-    this.commandLine = container.querySelector('.command-line');
-    this.command = container.querySelector('.input');
-    this.history = container.querySelector('.history');
+    this.terminal = container.querySelector(".terminal");
+    this.commandLine = container.querySelector(".command-line");
+    this.command = container.querySelector(".input");
+    this.history = container.querySelector(".history");
 
     // Add event listeners
-    this.terminal.addEventListener('click', this.handleTerminalClick);
-    this.command.addEventListener('keydown', this.handleKeyDown);
+    this.terminal.addEventListener("click", this.handleTerminalClick);
+    this.command.addEventListener("keydown", this.handleKeyDown);
+    this.command.addEventListener("input", this.handleInput);
 
     return true;
   }
@@ -80,10 +82,11 @@ export default class VanillaTerminal {
   // Remove the terminal and clean up event listeners
   unmount() {
     if (this.terminal) {
-      this.terminal.removeEventListener('click', this.handleTerminalClick);
-      this.command.removeEventListener('keydown', this.handleKeyDown);
+      this.terminal.removeEventListener("click", this.handleTerminalClick);
+      this.command.removeEventListener("keydown", this.handleKeyDown);
+      this.command.removeEventListener("input", this.handleInput);
       this.terminal.parentNode.removeChild(this.terminal);
-      
+
       // Reset DOM references
       this.terminal = null;
       this.commandLine = null;
@@ -96,24 +99,35 @@ export default class VanillaTerminal {
     this.command.focus();
   }
 
+  handleInput(e) {
+    console.log("Input event:", e.data);
+    this.inputText(e.data);
+    this.caretPos += 1;
+    this.renderCaret();
+  }
+
   handleKeyDown(e) {
-    e.preventDefault();
-    this.terminal.scrollTop = this.terminal.scrollHeight - this.terminal.clientHeight;
-    
+    // e.preventDefault();
+    this.terminal.scrollTop =
+      this.terminal.scrollHeight - this.terminal.clientHeight;
+
     // Handle paste commands (Ctrl+V or Cmd+V)
-    if ((e.ctrlKey || e.metaKey) && e.key === 'v') {
+    if ((e.ctrlKey || e.metaKey) && e.key === "v") {
+      e.preventDefault();
       this.paste();
       return;
     }
-    
+
     const handler = this.keyHandler[e.key];
     if (handler) {
+      e.preventDefault();
       handler(e);
-    } else if (e.key.length === 1 && !e.altKey) {
-      this.inputText(e.key);
-      this.caretPos += 1;
     }
-    
+    // else if (e.key.length === 1 && !e.altKey) {
+    //   this.inputText(e.key);
+    //   this.caretPos += 1;
+    // }
+
     this.renderCaret();
   }
 
@@ -125,55 +139,64 @@ export default class VanillaTerminal {
     let actualPrevCommand = this.temp;
     let commandToSend = this.temp.trim();
 
-    if (commandToSend === this.commandHistory.at(this.commandHistory.length - 2) || commandToSend === "") {
-      this.commandHistory[this.commandHistoryIndex] = this.commandHistoryClean[this.commandHistoryIndex];
+    if (
+      commandToSend ===
+        this.commandHistory.at(this.commandHistory.length - 2) ||
+      commandToSend === ""
+    ) {
+      this.commandHistory[this.commandHistoryIndex] =
+        this.commandHistoryClean[this.commandHistoryIndex];
       this.temp = "";
       this.commandHistoryIndex = this.commandHistory.length - 1;
     } else {
-      this.commandHistoryClean[this.commandHistoryClean.length - 1] = commandToSend;
+      this.commandHistoryClean[this.commandHistoryClean.length - 1] =
+        commandToSend;
       this.commandHistoryClean.push("");
       this.commandHistory[this.commandHistory.length - 1] = commandToSend;
       this.commandHistory.push("");
-      this.commandHistory[this.commandHistoryIndex] = this.commandHistoryClean[this.commandHistoryIndex];
+      this.commandHistory[this.commandHistoryIndex] =
+        this.commandHistoryClean[this.commandHistoryIndex];
       this.temp = "";
       this.commandHistoryIndex = this.commandHistory.length - 1;
     }
 
     // Send the command to the backend API
     fetch(this.options.apiEndpoint, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `command=${encodeURIComponent(commandToSend)}&lessonId=${encodeURIComponent(this.lessonId)}`,
+      body: `command=${encodeURIComponent(
+        commandToSend
+      )}&lessonId=${encodeURIComponent(this.lessonId)}`,
     })
-    .then(response => response.json())
-    
-    .then(data => {
-      // console.log(data)
-      this.output(actualPrevCommand, data.output);
-      this.updatePrompt(data.currentDirectory);
+      .then((response) => response.json())
 
-      if(data.commandSuccess) {
-        const successEvent = new CustomEvent('command-success', {
-          // detail object 
-          detail:{
-            command: commandToSend,
-            output: data.output
-          }
-        });
-        document.dispatchEvent(successEvent);
-      }
-      this.temp = "";
-      this.caretPos = 0;
-      this.renderCaret();
-    })
-    
-    .catch(error => {
-      console.error('Error:', error);
-      // Handle error gracefully - maybe output to terminal
-      this.output(actualPrevCommand, `Error: Could not process command`);
-    });
+      .then((data) => {
+        // console.log(data)
+        this.output(actualPrevCommand, data.output);
+        this.updatePrompt(data.currentDirectory);
+
+        if (data.commandSuccess) {
+          const successEvent = new CustomEvent("command-success", {
+            // detail object
+            detail: {
+              command: commandToSend,
+              output: data.output,
+            },
+          });
+          document.dispatchEvent(successEvent);
+        }
+        this.temp = "";
+        this.caretPos = 0;
+        this.renderCaret();
+      })
+
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle error gracefully - maybe output to terminal
+        this.output(actualPrevCommand, `Error: Could not process command`);
+      });
   }
 
   output(command, result) {
@@ -190,18 +213,18 @@ export default class VanillaTerminal {
     prevOutput.classList.toggle("history-output");
 
     const prompt = `<span class="prompt">${this.options.username}@${this.options.hostname}:${this.currentDirectory}$</span>`;
-    const actualPrevCommand = command.replace(/ /g, '&nbsp');
+    const actualPrevCommand = command.replace(/ /g, "&nbsp");
 
     prevCommand.innerHTML = prompt + `${actualPrevCommand}`;
     prevOutput.innerText = result;
 
     this.history.appendChild(prevCommand);
-    
+
     // Only append output if there's a command
     if (command) {
       this.history.appendChild(prevOutput);
     }
-    
+
     this.terminal.scrollTop = this.terminal.scrollHeight;
   }
 
@@ -211,10 +234,10 @@ export default class VanillaTerminal {
 
   updatePrompt(newDirectory) {
     this.currentDirectory = newDirectory;
-    
+
     // Update visible prompt in command line
     if (this.commandLine) {
-      const promptElement = this.commandLine.querySelector('.prompt');
+      const promptElement = this.commandLine.querySelector(".prompt");
       if (promptElement) {
         promptElement.textContent = `${this.options.username}@${this.options.hostname}:${this.currentDirectory}$`;
       }
@@ -222,7 +245,8 @@ export default class VanillaTerminal {
   }
 
   arrowUp() {
-    if (this.commandHistory.length === 0 || this.commandHistoryIndex === 0) return;
+    if (this.commandHistory.length === 0 || this.commandHistoryIndex === 0)
+      return;
     this.commandHistoryIndex -= 1;
     this.temp = this.commandHistory.at(this.commandHistoryIndex);
     this.caretPos = this.temp.length;
@@ -253,7 +277,7 @@ export default class VanillaTerminal {
       this.commandHistory[this.commandHistoryIndex] = this.temp;
       return;
     }
-    
+
     // meta+del (clear command)
     if (e.ctrlKey) {
       this.temp = "";
@@ -261,7 +285,7 @@ export default class VanillaTerminal {
       this.commandHistory[this.commandHistoryIndex] = this.temp;
       return;
     }
-    
+
     if (this.caretPos > 0) {
       this.inputLeft = this.temp.slice(0, this.caretPos - 1);
       this.inputRight = this.temp.slice(this.caretPos, this.temp.length);
@@ -287,21 +311,21 @@ export default class VanillaTerminal {
         this.inputRight = this.temp.slice(this.caretPos, this.temp.length);
         this.temp = this.inputLeft + clipboardText + this.inputRight;
         this.commandHistory[this.commandHistoryIndex] = this.temp;
-        
+
         // Move caret to end of pasted content
         this.caretPos += clipboardText.length;
-        
+
         // Render the updated display
         this.renderCaret();
       }
     } catch (error) {
-      console.warn('Failed to read clipboard:', error);
+      console.warn("Failed to read clipboard:", error);
     }
   }
 
   renderCaret() {
     let char, cursor;
-    
+
     if (this.temp === "") {
       this.caretPos = 0;
       char = " ";
@@ -313,13 +337,13 @@ export default class VanillaTerminal {
       } else {
         char = this.temp.charAt(this.caretPos);
       }
-      
+
       this.inputLeft = this.temp.slice(0, this.caretPos);
       this.inputRight = this.temp.slice(this.caretPos + 1, this.temp.length);
 
-      const displayLeft = this.inputLeft.replace(/ /g, '&nbsp;');
-      const displayRight = this.inputRight.replace(/ /g, '&nbsp;');
-      
+      const displayLeft = this.inputLeft.replace(/ /g, "&nbsp;");
+      const displayRight = this.inputRight.replace(/ /g, "&nbsp;");
+
       cursor = `<span class="caret-block">${char}</span>`;
       this.command.innerHTML = displayLeft + cursor + displayRight;
     }
@@ -331,8 +355,8 @@ export default class VanillaTerminal {
   }
 
   setCommandHistory(history) {
-    this.commandHistory = [...history, ''];
-    this.commandHistoryClean = [...history, ''];
+    this.commandHistory = [...history, ""];
+    this.commandHistoryClean = [...history, ""];
     this.commandHistoryIndex = this.commandHistory.length - 1;
   }
 
