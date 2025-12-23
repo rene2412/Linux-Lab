@@ -6,7 +6,7 @@ session_start();
 ob_clean();
 // Set the content type to JSON
 header('Content-Type: application/json');
-require_once "../../includes/database.inc.php";
+//require_once "../../includes/database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
 global $pdo;
 $username = $_SESSION["user_username"] ?? "guest"; // Get stored username

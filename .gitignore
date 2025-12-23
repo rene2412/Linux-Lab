@@ -23,7 +23,6 @@ database.inc.php
 
 # Frontend
 frontend/node_modules/
-frontend/dist/
 frontend/.vite/
 frontend/.env
 frontend/.env.local

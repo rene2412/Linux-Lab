@@ -2,7 +2,7 @@
 session_start();
 error_reporting(E_ALL & ~E_WARNING);
 //require 'includes/config_session.inc.php';
-require_once "includes/database.inc.php";
+//require_once "includes/database.inc.php";
 //session_unset();
 require_once "network.php";
 // Debugging: Log the request method and POST data
@@ -25,13 +25,28 @@ $fileSystem = [
                 "modified" => "2025-02-27 01:24:04",
                 "size" => 648,
             ],
+            "Subfolder" => [
+                "oldHomework.txt" => [
+                    "file" => [
+                    "permissions" => "-rw-r--r--",
+                    "owner" => "user",
+                    "group" => "group",
+                    "created" => "2025-02-27 07:24:04",
+                    "modified" => "2025-02-28 09:25:04",
+                    "size" => 254,
+                    "content" => [
+                            "2 + 2 = 4"
+                        ]      
+                    ]
+                ]
+            ],  
             "Shakespeare.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
                     "owner" => "user",
                     "group" => "group",
-                    "created" => "2025-02-27 01:24:04",
-                    "modified" => "2025-02-27 01:24:04",
+                    "created" => "2025-07-23 01:24:04",
+                    "modified" => "2025-07-25 03:24:04",
                     "size" => 648,
                     "content" => [
                         "Shall I compare thee to a summer's day?",
@@ -51,6 +66,7 @@ $fileSystem = [
                     ]      
                 ]
             ],
+
             "Declaration.txt" => [
                 "file" => [
                     "permissions" => "-rw-r--r--",
@@ -538,7 +554,7 @@ function process_ls($fileSystem, $currentDirectory): string {
 
 function format_directory_contents(array $contents): string {
     if (empty($contents)) {
-        return "This directory is empty.\n";
+        return "";
     }
     $output = [];
     foreach ($contents as $name => $content) {
@@ -581,7 +597,6 @@ function process_touch(&$fileSystem, $currentDirectory, $arg) {
         $GLOBALS['commandSuccess'] = true;
         return "";
     }
-
 
     // Remove trailing slash if present
     $currentDirectory = rtrim($currentDirectory, "/");
@@ -1119,7 +1134,7 @@ function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
     // Otherwise remove the empty directory or file
     unset($currentLevel[$argument]);
     $GLOBALS['commandSuccess'] = true;
-    return "'$argument' has been removed.\n";
+    return "";
 }
 
 function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
@@ -1153,7 +1168,7 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
 
     // Remove the target (file or now-empty directory)
     unset($currentLevel[$argument]);
-
+    return "";
 }
 
  // Helper function to recursively delete a directory's contents.
