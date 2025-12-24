@@ -1054,6 +1054,8 @@ function process_mv(&$fileSystem, $currentDirectory, $oldname, $newname): string
     // Perform the move/rename
     $targetLevel[$targetName] = $sourceLevel[$sourceName];
     unset($sourceLevel[$sourceName]);
+      $GLOBALS['commandSuccess'] = true;
+    return "";
 }
 
 function process_refresh() : string {
@@ -1071,6 +1073,7 @@ function process_refresh() : string {
 
 function process_rm(&$fileSystem, &$currentDirectory, $argument) {
     $GLOBALS['commandSuccess'] = false;
+
     // Trim and split the current directory path
     $currentDirectory = rtrim($currentDirectory, "/");
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -1103,6 +1106,8 @@ function process_rmdir(&$fileSystem, &$currentDirectory, $argument): string {
     }
     //ignore the arguement trail slash
     $argument = rtrim($argument, "/");
+    $parts = explode("/", $argument);
+    $argument = end($parts);
     // Trim and split the current directory path
     $currentDirectory = rtrim($currentDirectory, "/");
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -1142,7 +1147,9 @@ function process_rm_rf(&$fileSystem, &$currentDirectory, $argument): string {
     if ($argument === "..") {
         return "Error: Cannot remove parent directory.\n";
     }
-
+    $argument = rtrim($argument, "/");
+    $parts = explode("/", $argument);
+    $argument = end($parts);
     // Trim and split the current directory path
     $currentDirectory = rtrim($currentDirectory, "/");
     $path = array_filter(explode("/", $currentDirectory), 'strlen');
@@ -2663,7 +2670,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
                 updateUserProgress($pdo, $userId, 7);
             }
         }
-            $output  = process_date();
+            $output = process_date();
             break;
     case 'cat':
             if (count($args) > 4) {

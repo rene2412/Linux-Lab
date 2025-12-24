@@ -4,8 +4,8 @@ require __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-use \SendGrid\Mail\Mail;
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if (isset($_SESSION["send_email"])) {
 
@@ -48,24 +48,27 @@ if ($existing) {
         $stmt->execute([$userEmail, $selector, $hashedToken, $expires]);
              error_log("INSERT executed");
     }
-   
-    $apiKey = $_ENV["SENDGRID_API_KEY"];
-    $sendgrid = new \SendGrid($apiKey);
-    $email = new Mail();
-    $email->setFrom("no-reply@linux-lab.live", "Linux Lab");
-    $email->setSubject("Reset Your Password");
-    $email->addTo($userEmail);
-    $email->addContent("text/html", "Here is your reset link: <a href='$url'>$url</a>");   
-    
+    $email = new PHPMailer(true);
     try {
-    $response = $sendgrid->send($email);
-    error_log("Email status code: " . $response->statusCode());
-    header("Location: email_sent.html");
-    exit();
-}
-
+        $email->isSMTP();
+        $email->Host = "email-smtp.us-west-1.amazonaws.com";
+        $email->SMTPAuth = true;
+        $email->Username = $_ENV['SMTP_USERNAME'];
+        $email->Password = $_ENV['SMTP_PASSWORD'];
+        $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $email->Port = 587;
+        
+        $email->setFrom("no-reply@linux-lab.live", "Linux Lab");
+        $email->addAddress($userEmail);
+        $email->isHTML(true);
+        $email->Subject = "Reset Your Password";
+        $email->Body = "Here is your reset link: <a href='$url'>$url</a>";   
+        $email->send();
+        header("Location: email_sent.html");
+        exit();
+    }
    catch (Exception $e) {
-        error_log("SendGrid Error: " . $e->getMessage());
+        error_log("PHP Mailer Error: " . $email->ErrorInfo);
     }
 }
 
