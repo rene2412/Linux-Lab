@@ -1,12 +1,14 @@
 <?php
 // Start output buffering to catch any warnings
 ob_start();
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
 // Clear any warnings from session_start
 ob_clean();
 // Set the content type to JSON
 header('Content-Type: application/json');
-//require_once "../../includes/database.inc.php";
+require_once "../../includes/database.inc.php";
 error_reporting(E_ALL & ~E_WARNING); 
 global $pdo;
 $username = $_SESSION["user_username"] ?? "guest"; // Get stored username

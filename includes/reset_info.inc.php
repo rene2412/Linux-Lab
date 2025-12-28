@@ -1,6 +1,8 @@
 <?php
-    require_once "config_session.inc.php";
-    require_once "reset_password_view.inc.php";
+	if (session_status() === PHP_SESSION_NONE) {
+    		session_start();
+	}
+	require_once "reset_password_view.inc.php";
 ?>
 
 <!DOCTYPE html>

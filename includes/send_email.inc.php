@@ -51,14 +51,19 @@ if ($existing) {
     $email = new PHPMailer(true);
     try {
         $email->isSMTP();
-        $email->Host = "email-smtp.us-west-1.amazonaws.com";
+        $email->Host = "smtp.gmail.com";
         $email->SMTPAuth = true;
-        $email->Username = $_ENV['SMTP_USERNAME'];
+        $email->Username = "linuxlab012@gmail.com";
         $email->Password = $_ENV['SMTP_PASSWORD'];
         $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $email->Port = 587;
-        
-        $email->setFrom("no-reply@linux-lab.live", "Linux Lab");
+	
+	$email->SMTPDebug = 2;
+	$email->Debugoutput = 'error_log';
+	$email->Timeout = 10;
+		
+
+        $email->setFrom("linuxlab012@gmail.com", "Linux Lab");
         $email->addAddress($userEmail);
         $email->isHTML(true);
         $email->Subject = "Reset Your Password";

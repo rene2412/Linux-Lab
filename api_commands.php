@@ -1,9 +1,10 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
 error_reporting(E_ALL & ~E_WARNING);
 //require 'includes/config_session.inc.php';
-//require_once "includes/database.inc.php";
-//session_unset();
+require_once "includes/database.inc.php";
 require_once "network.php";
 // Debugging: Log the request method and POST data
 error_log("Request Method: " . $_SERVER['REQUEST_METHOD']);
@@ -772,7 +773,7 @@ function process_mkdir(&$fileSystem, $currentDirectory, $newdir): string {
     // Create the new directory
     $currentLevel[$newdir] = [];
     $GLOBALS['commandSuccess'] = true;
-    return "\n";
+    return "";
 }
 
 function process_cat(&$fileSystem, $dir, $file, $args, $targetFile) : string {
