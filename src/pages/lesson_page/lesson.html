@@ -4,10 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning | Linux-Lab</title>
+    <meta name="description" content="Learn Linux commands and concepts with hands-on interactive lessons and a real terminal. Practice shell commands, file management, networking, and more.">
+    <meta name="keywords" content="Linux, terminal, command line, shell, bash, learn Linux, interactive tutorial, CLI, Unix, programming">
+    <meta name="author" content="Linux-Lab">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Interactive Linux Lessons | Linux-Lab">
+    <meta property="og:description" content="Master Linux with hands-on lessons and a real interactive terminal. Learn commands, scripting, and system administration.">
+    <meta property="og:image" content="/oglinux.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Interactive Linux Lessons | Linux-Lab">
+    <meta name="twitter:description" content="Master Linux with hands-on lessons and a real interactive terminal.">
+
     <link rel="stylesheet" href="./lesson.css">
     <link rel="icon" type="image/x-icon" href="../assets/SVGs/favicon.ico">
+    <link rel="canonical" href="https://linux-lab.dev/lesson">
 </head>
 <body>
+    <main>
+
     <!-- SIDEBAR -->
     <div class="sidebar__container ">
     </div>
@@ -22,9 +41,9 @@
             <span>
 <a href="../login/login.php">Login</a> to save progress. 
             </span>
-            <button class="notification__close">Got it</button> </div>
+            <button type="button" class="notification__close">Close</button> </div>
             <div class="top">
-                <button type="button" class="sidebar__button--open sidebar__button"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
+                <button aria-label="toggle-sidebar" type="button" class="sidebar__button--open sidebar__button"><img aria-hidden="true" class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>
                 <aside class="lesson__nav">
                    
                     <div class="lesson__nav__dropdown hidden">
@@ -32,7 +51,7 @@
                         </ul>
                     </div>
                 </aside>
-                <img src="../assets/SVGs/Tux.svg.png" alt="tux the penguin" class="svg" id="tuxlogo">
+                <img src="../assets/SVGs/tuxsmall.png" alt="tux the penguin" class="svg" id="tuxlogo">
             </div>
             <article class="lesson">
                 <h1 class="lesson__title">Loading...</h1>
@@ -57,6 +76,7 @@
 
         <div class="section--terminal" id="terminal__container">
     </div>
+    </main>
 
     <script src="./lesson.js" type="module"></script>
 </body>
