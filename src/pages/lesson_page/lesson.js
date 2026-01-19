@@ -260,8 +260,8 @@ class LessonNav {
 
   render = (e) => {
     const lessons = e.detail.lessons;
-    console.log(lessons);
-    console.log("Hello");
+    // console.log(lessons);
+    // console.log("Hello");
 
     const lesson = e.detail.user.currentLessonId;
     const section = e.detail.user.currentSection;
@@ -516,7 +516,7 @@ class lessonDisplay {
   showSuccessMessage() {
     const successMessage = `
             <div class="overlay--success">
-                <img src="../assets/SVGs/Tux.svg.png" alt="tux" class="logo">
+                <img src="../assets/SVGs/tuxsmall.png" alt="tux" class="logo">
                 <h3 class="overlay__message">Well done!</h3> 
             </div>
             `;

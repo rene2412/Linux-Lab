@@ -1,95 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap");
 
 body {
-  font-family: 'Fira Code', monospace;
+  font-family: Arial, Helvetica, sans-serif "system-ui", "Fira Code", monospace;
   -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-user-color);
-    scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-user-color);
+  scroll-behavior: smooth;
 }
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-:root{
-    --color-user-color: #000000;
-    --color-terminal: var(--color-user-color);
-    --color-background: #223549;
-    --color-background-light: #ffffff13;
-    --color-background-dark: rgb(0, 0, 0);
-    --color-highlight: #299c3c;
-    --color-inactive: #8b8c8d;
-    --color-overlay: #7272723a;
-    --color-secondary: #d9d9d9;
-    --color-error: #e82121;
+:root {
+  --color-user-color: #000000;
+  --color-terminal: var(--color-user-color);
+  --color-background: rgb(26, 26, 26);
+  --color-background-light: #ffffff13;
+  --color-background-dark: rgb(26, 26, 26);
+  --color-highlight: #299c3c;
+  --color-inactive: #8b8c8d;
+  --color-overlay: #7272723a;
+  --color-secondary: #d9d9d9;
+  --color-error: #e82121;
 
-    --text-color-main: rgba(255, 255, 255, 0.95);
-    --text-color-secondary: rgba(173, 173, 173, 0.95);
-    --text-color-inactive: rgba(104, 104, 104, 0.95);
+  --text-color-main: rgba(255, 255, 255, 0.95);
+  --text-color-secondary: rgba(173, 173, 173, 0.95);
+  --text-color-inactive: rgba(104, 104, 104, 0.95);
 
-    --text-size-s: 0.875rem;
-    --text-size-base: 1rem;
-    --text-size-lg: 1.25rem;
-    --text-size-xl: 1.5rem;
-    --text-size-2xl: 1.7rem;
+  --text-size-s: 0.875rem;
+  --text-size-base: 1rem;
+  --text-size-md: 1.125rem;
+  --text-size-lg: 1.25rem;
+  --text-size-xl: 1.5rem;
+  --text-size-2xl: 1.7rem;
 
-    --spce-xsm: 0.325rem;
-    --spce-sm: 0.625rem;
-    --spce-med: 1.0625rem;
-    --spce-xmed: 1.5rem;
-    --spce-lg: 1.875rem;
-    --spce-xlg: 2rem;
+  --spce-xsm: 0.325rem;
+  --spce-sm: 0.625rem;
+  --spce-med: 1.0625rem;
+  --spce-xmed: 1.5rem;
+  --spce-lg: 1.875rem;
+  --spce-xlg: 2rem;
 
-    --spce-pad-base: 0.5rem;
-    --pad-lg:4.5rem;
-    --radius-med: 10px;
-    --radius-sm: 3px;
-    --blur-base: 3px;
-    --border-base: 2px;
+  --spce-pad-base: 0.5rem;
+  --pad-lg: 4.5rem;
+  --radius-med: 10px;
+  --radius-lg: 1.3rem;
+  --radius-sm: 3px;
+  --blur-base: 3px;
+  --border-base: 2px;
 
-    --nav-height: 70px;
-    --sidebar-width:340px;
-    --text-line-height:1.5;
+  --nav-height: 70px;
+  --sidebar-width: 340px;
+  --text-line-height: 1.5;
 }
 
-.no-select{
-    user-select: none;
+.no-select {
+  user-select: none;
 }
 
-.hidden.hidden{
-    display: none;
+.hidden.hidden {
+  display: none;
 }
 
-.svg{
-    height: 3rem;
+.svg {
+  height: 3rem;
 }
 
-.logo{
-    height: 3rem;
+.logo {
+  height: 3rem;
 }
 
-.styled-button{
-    background-color: var(--color-highlight);
-    color: var(--text-color-main);
-    border: none;
-    border-radius: var(--radius-med);
-    padding: var(--spce-sm);
-    align-self: center;
-    transform-origin: center;
-    /* transition: transform 0.1s ease, box-shadow 0.1s ease ; */
+.styled-button {
+  background-color: var(--color-highlight);
+  color: var(--text-color-main);
+  border: rgba(255, 255, 255, 0.199) solid 1px;
+  border-radius: var(--radius-med);
+  padding: var(--spce-sm);
+  align-self: center;
+  transform-origin: center;
+  transition: transform 0.15s ease ;
+  min-width: 4rem;
+  font-weight: 500;
+  color: white;
+  will-change: transform;
+
 }
 
-.styled-button:hover{
-    opacity: 0.93 !important;
+.styled-button:hover {
+  opacity: 0.95 !important;
+  /* transform: scale(1.05); */
+
 }
-.styled-button:active{
-    transform: scale(0.98);
-    /* box-shadow: inset 0 8px 100px rgba(0, 0, 0, 0.191); */
+.styled-button:active {
+  transform: scale(0.98);
+  /* box-shadow: inset 0 8px 100px rgba(0, 0, 0, 0.191); */
 }
 
-.green{
-    color: lime;
+.green {
+  color: lime;
 }

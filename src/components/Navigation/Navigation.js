@@ -40,18 +40,26 @@ export default class Navigation {
 
   path = "";
 
-  userDropdownIsOpen=false;
+  userDropdownIsOpen = false;
 
   // need to set this up
   isLoggedIn = false;
-  constructor(container, isLoggedIn = false, data, showNavbar=true, sidebarBtnOpenClass=".sidebar__button--open"){
+  constructor(
+    container,
+    isLoggedIn = false,
+    data,
+    showNavbar = true,
+    sidebarBtnOpenClass = ".sidebar__button--open",
+  ) {
     this.showNavbar = showNavbar;
     this.data = data;
     this.isLoggedIn = isLoggedIn;
     this.container = document.querySelector(container);
     this.fullPath = window.location.pathname;
     this.path = this.fullPath.substring(this.fullPath.lastIndexOf("/") + 1);
-    this.moduleParam = new URLSearchParams(window.location.search).get('module');
+    this.moduleParam = new URLSearchParams(window.location.search).get(
+      "module",
+    );
     this.date = new Date();
     this.sidebarBtnOpenClass = sidebarBtnOpenClass;
     this.render();
@@ -80,8 +88,8 @@ export default class Navigation {
     this.navbarDate = document.querySelector(".navbar__date");
     if (this.isLoggedIn) {
       this.userButton = document.querySelector(".sidebar__button--user--auth");
-      this.userDropdown = document.querySelector('.sidebar__bottom__dropdown');
-      this.userSetting= document.querySelector('.sidebar__button--settings');
+      this.userDropdown = document.querySelector(".sidebar__bottom__dropdown");
+      this.userSetting = document.querySelector(".sidebar__button--settings");
     }
   }
   setListeners() {
@@ -89,72 +97,76 @@ export default class Navigation {
     this.sidebarBtnClose.addEventListener("click", this.closeSidebar);
     if (this.isLoggedIn) {
       this.userButton.addEventListener("click", this.handleUserButtonClick);
-      this.userSetting.addEventListener('click',(e)=>{
+      this.userSetting.addEventListener("click", (e) => {
         console.log(e);
-        const event = new CustomEvent('modalopen',{
-          detail:{data:'modal open fired from navigation setting button'},
-          bubbles:true,
-        })
+        const event = new CustomEvent("modalopen", {
+          detail: { data: "modal open fired from navigation setting button" },
+          bubbles: true,
+        });
         document.dispatchEvent(event);
-      })
+      });
     }
-    document.addEventListener('click',this.handleDocumentClick);
-    
+    document.addEventListener("click", this.handleDocumentClick);
+
     // Add event listeners for module switching
-    document.addEventListener('click', this.handleModuleLinkClick);
+    document.addEventListener("click", this.handleModuleLinkClick);
   }
 
-  handleDocumentClick = (e)=>{
-    if(this.userDropdownIsOpen){
+  handleDocumentClick = (e) => {
+    if (this.userDropdownIsOpen) {
       this.closeUserDropdown();
     }
-    if(!this.sidebar.contains(e.target) && this.sidebar.classList.contains('sidebar--open')){
+    if (
+      !this.sidebar.contains(e.target) &&
+      this.sidebar.classList.contains("sidebar--open")
+    ) {
       this.closeSidebar();
     }
-  }
+  };
 
-  openUserDropdown(){
-    this.userDropdown.classList.remove('hidden');
+  openUserDropdown() {
+    this.userDropdown.classList.remove("hidden");
     this.userDropdownIsOpen = true;
   }
 
-  closeUserDropdown(){
-    this.userDropdown.classList.add('hidden');
+  closeUserDropdown() {
+    this.userDropdown.classList.add("hidden");
     this.userDropdownIsOpen = false;
   }
 
   handleUserButtonClick = (e) => {
     // make sure this doesnt instanly close the dropdown
-    e.stopPropagation()
-    if(this.userDropdownIsOpen){this.closeUserDropdown()}
-    else this.openUserDropdown();
+    e.stopPropagation();
+    if (this.userDropdownIsOpen) {
+      this.closeUserDropdown();
+    } else this.openUserDropdown();
   };
 
   handleModuleLinkClick = async (e) => {
     // Check if clicked element is a module link
-    if (e.target.closest('.module-link')) {
+    if (e.target.closest(".module-link")) {
       e.preventDefault();
-      const moduleLink = e.target.closest('.module-link');
+      const moduleLink = e.target.closest(".module-link");
       const moduleName = moduleLink.dataset.module;
-      
+
       try {
         // Send POST request to switch module
-        const response = await fetch('../../user/user.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
-          body: moduleName
+        const response = await fetch("../../user/user.php", {
+          method: "POST",
+          headers: { "Content-Type": "text/plain" },
+          body: moduleName,
         });
-        
+
         if (response.ok) {
           // Close sidebar
           this.closeSidebar();
           // Redirect to lesson page after successful module switch
           window.location.href = `../../pages/lesson_page/lesson.html?module=${encodeURIComponent(moduleName)}`;
         } else {
-          console.error('Failed to switch module');
+          console.error("Failed to switch module");
         }
       } catch (error) {
-        console.error('Error switching module:', error);
+        console.error("Error switching module:", error);
       }
     }
   };
@@ -175,7 +187,10 @@ export default class Navigation {
       let cssClass = "";
       if (elem.isModule) {
         // Check URL param for module matching
-        if (this.moduleParam && elem.moduleTag.toLowerCase() === this.moduleParam.toLowerCase()) {
+        if (
+          this.moduleParam &&
+          elem.moduleTag.toLowerCase() === this.moduleParam.toLowerCase()
+        ) {
           cssClass = "link--active";
         } else if (!this.moduleParam && elem.moduleTag === "The Basics") {
           // Default to The Basics when no module param
@@ -184,19 +199,19 @@ export default class Navigation {
       } else if (this.path === elem.tag) {
         cssClass = "link--active";
       }
-      
-      if(elem.title ==='Dashboard' && !this.isLoggedIn)return '';
-      
-      const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, '-')}`;
+
+      if (elem.title === "Dashboard" && !this.isLoggedIn) return "";
+
+      const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, "-")}`;
 
       // Handle module links differently
       if (elem.isModule) {
         return `
-                <li class="navbar__link ${cssClass} ${itemClass}"><a href="#" class="module-link" data-module="${elem.moduleTag}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
+                <li class="navbar__link ${cssClass} ${itemClass}"><a href="#" class="module-link" data-module="${elem.moduleTag}">${elem.title} <img src="${elem.svg}" alt="${elem.title}"/></a></li>
                 `;
       } else {
         return `
-                <li class="navbar__link ${cssClass} ${itemClass}"><a href="${elem.link}">${elem.title}</a><Img src="${elem.svg}" alt="${elem.title}"/></li>
+                <li class="navbar__link ${cssClass} ${itemClass}"><a href="${elem.link}">${elem.title}  <img src="${elem.svg}" alt="${elem.title}"/></a></li>
                 `;
       }
     });
@@ -211,13 +226,14 @@ export default class Navigation {
 
     // conditonal rendering for user button
     let sidebarUser = `<button class="sidebar__button--user${cssClass}"><a href="../../pages/login/login.php">Login</a></button>`;
-    if (this.isLoggedIn) sidebarUser = `<button class="sidebar__button--user${cssClass}"><span class="green">@</span>${this.data.username}</button>`;
+    if (this.isLoggedIn)
+      sidebarUser = `<button class="sidebar__button--user${cssClass}"><span class="green">@</span>${this.data.username}</button>`;
 
     //User Dropdown elements
-    let userDropdownElem = (`
+    let userDropdownElem = `
         <!-- <button class="user-dropdown--profile">Profile</button> Profile functionality not implemented -->
         <button class="user-dropdown--logout"><a href="../../user/logout.php" >Logout</a></button>
-    `);
+    `;
 
     // create sidebar markup
     const sidebar = document.createElement("div");
@@ -227,7 +243,7 @@ export default class Navigation {
             <div class="sidebar__top">
                 <div class="sidebar__header">
                     <h2 class="sidebar__logo"><a href="../../../">Linux-Lab</a></h2>
-                    <button type="button" class="button sidebar__button sidebar__button--close"><img src="../../pages/assets/SVGs/Close.svg" /></button>
+                    <button type="button" aria-label="Close Sidebar" class="button sidebar__button sidebar__button--close"><img aria-hidden="true" alt="Closing X" src="../../pages/assets/SVGs/Close.svg" /></button>
                 </div>
                 <nav class="sidebar__links">
                     <ul>
@@ -242,8 +258,8 @@ export default class Navigation {
                 <div class="sidebar__bottom--user__container">
                 ${sidebarUser}
                 </div>
-                <button type="button" class="sidebar__button--settings  ${!this.isLoggedIn && 'hidden'}">
-                    <img class="sidebar__img--settings " src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
+                <button aria-label="User Settings" type="button" class="sidebar__button--settings  ${!this.isLoggedIn && "hidden"}">
+                    <img aria-hidden class="sidebar__img--settings " src="../assets/SVGs/Settings.svg " class="svg" alt="cog">
                 </button>  
             </div>
         `;
@@ -257,10 +273,10 @@ export default class Navigation {
       if (this.path === elem.tag) {
         cssClass = "link--active--desktop";
       }
-      
-      const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, '-')}`;
-      if(elem.moduleTag){
-        return`
+
+      const itemClass = `nav__link--${elem.title.toLowerCase().replace(/\s+/g, "-")}`;
+      if (elem.moduleTag) {
+        return `
                 <li class="navbar__link navbar--link--desktop ${cssClass} ${itemClass}"><a href="#" class="module-link" data-module="${elem.moduleTag}">${elem.title}</a></li>
 
         `;
@@ -271,10 +287,10 @@ export default class Navigation {
                 `;
     });
     const nav = document.createElement("nav");
-    if(!this.showNavbar) nav.classList.add('hidden');
+    if (!this.showNavbar) nav.classList.add("hidden");
     // handle sidebar button
     let sidebarButton = `<button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>`;
-    if(this.sidebarBtnOpenClass && !this.showNavbar){
+    if (this.sidebarBtnOpenClass && !this.showNavbar) {
       sidebarButton = "";
     }
     nav.classList.add("navbar");
