@@ -2781,7 +2781,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
             if ($lessonID === 28 && $arg === "hello.txt" && ($arg2 === "../Projects/" || $arg2 === "../Projects") && $GLOBALS['commandSuccess']) {
                 $isCorrect = true;
                 if ($userId !== null) {
-                    update_mysql($pdo, $userId, 28, 28);            
+                    update_mysql($pdo, $userId, 28, 29);            
                     updateUserProgress($pdo, $userId, 29);
                 }
             } 

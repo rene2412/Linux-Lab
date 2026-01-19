@@ -4,8 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use GuzzleHttp\Client;
 
 if (isset($_SESSION["send_email"])) {
 
@@ -17,64 +16,71 @@ if (isset($_SESSION["send_email"])) {
 
     $url = "https://linux-lab.live/includes/create_new_password.inc.php?selector=" . $selector . "&validator=" . bin2hex($token);
     $expires = date("U") + 1800;
-   
+
+    // Check existing request
     $sql = "SELECT * FROM pwdReset WHERE pwdResetEmail = ? AND pwdResetExpires > ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$userEmail, date("U")]);
     $existing = $stmt->fetch();
-if ($existing) {
-    // Already requested and still valid, don’t send another
-    header("Location: email_sent.html");
-    exit();
-}
-    // SQL Queries
-    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
-    $stmt = $pdo->prepare($sql);
-
-    if (!$stmt) {
-        die("Debug: SQL DELETE failed: " . implode(", ", $pdo->errorInfo()));
-    } else {
-        $stmt->execute([$userEmail]);
-    }
-
-    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) 
-    VALUES (?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-
-    if (!$stmt) {
-        die("Debug: SQL INSERT failed: " . implode(", ", $pdo->errorInfo()));
-    } else {
-        $hashedToken = password_hash($token, PASSWORD_DEFAULT); 
-        $stmt->execute([$userEmail, $selector, $hashedToken, $expires]);
-             error_log("INSERT executed");
-    }
-    $email = new PHPMailer(true);
-    try {
-        $email->isSMTP();
-        $email->Host = "smtp.gmail.com";
-        $email->SMTPAuth = true;
-        $email->Username = "linuxlab012@gmail.com";
-        $email->Password = $_ENV['SMTP_PASSWORD'];
-        $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $email->Port = 587;
-	
-	$email->SMTPDebug = 2;
-	$email->Debugoutput = 'error_log';
-	$email->Timeout = 10;
-		
-
-        $email->setFrom("linuxlab012@gmail.com", "Linux Lab");
-        $email->addAddress($userEmail);
-        $email->isHTML(true);
-        $email->Subject = "Reset Your Password";
-        $email->Body = "Here is your reset link: <a href='$url'>$url</a>";   
-        $email->send();
+    if ($existing) {
         header("Location: email_sent.html");
         exit();
     }
-   catch (Exception $e) {
-        error_log("PHP Mailer Error: " . $email->ErrorInfo);
-    }
-}
 
+    // Delete old token
+    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$userEmail]);
+
+    // Insert new token
+    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) 
+            VALUES (?, ?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $hashedToken = password_hash($token, PASSWORD_DEFAULT); 
+    $stmt->execute([$userEmail, $selector, $hashedToken, $expires]);
+
+    // ==== Resend API ====
+    $client = new Client([
+        'base_uri' => 'https://api.resend.com/',
+        'headers' => [
+            'Authorization' => 'Bearer ' . $_ENV['RESEND_API_KEY'],
+            'Content-Type' => 'application/json',
+        ]
+    ]);
+
+    $data = [
+        "from" => "Linux Lab <no-reply@linux-lab.live>",
+        "to" => $userEmail,
+        "subject" => "Reset Your Password",
+        "html" => '
+        <!DOCTYPE html>
+        <html>
+          <body style="margin:0; font-family: Arial, sans-serif; background-color:#0b0f19; color:#fff;">
+            <div style="max-width:600px; margin:auto; padding:30px; background:#111827; border-radius:12px; text-align:center;">
+              <img src="https://freepngimg.com/thumb/penguin/75902-tux-kernel-racer-penguins-linux-penguin.png" 
+                   alt="Linux Lab Mascot" style="width:120px; margin-bottom:20px;">
+              <h1 style="color:#00ff9c; margin-bottom:10px;">Reset Your Password</h1>
+              <p style="font-size:16px; color:#e5e7eb;">
+                Click the button below to reset your Linux Lab password.
+              </p>
+              <a href="' . $url . '" 
+                 style="display:inline-block; margin-top:20px; padding:14px 24px; background:#00ff9c; color:#000; font-weight:bold; text-decoration:none; border-radius:8px;">
+                Reset Password
+              </a>
+              <p style="font-size:12px; color:#9ca3af; margin-top:40px;">
+                Linux Lab — Learn Linux the real way<br>
+                linux-lab.live
+              </p>
+            </div>
+          </body>
+        </html>'
+    ];
+
+    $response = $client->post('emails', [
+        'body' => json_encode($data)
+    ]);
+
+    header("Location: email_sent.html");
+    exit();  
+}
 
