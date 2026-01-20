@@ -289,7 +289,7 @@ export default class Navigation {
     const nav = document.createElement("nav");
     if (!this.showNavbar) nav.classList.add("hidden");
     // handle sidebar button
-    let sidebarButton = `<button type="button" class="sidebar__button--open"><img class="svg" src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="idk"></button>`;
+    let sidebarButton = `<button type="button" aria-label="open sidebar" class="sidebar__button--open"><img class="svg" aria-hidden src="../assets/SVGs/sidebar-left-svgrepo-com.svg" alt="..."></button>`;
     if (this.sidebarBtnOpenClass && !this.showNavbar) {
       sidebarButton = "";
     }
@@ -297,7 +297,7 @@ export default class Navigation {
     nav.innerHTML = `
     ${sidebarButton}
             <div class="navbar__left">
-                <img src="../assets/SVGs/Tux.svg.png" class="logo" alt="Linux-Lab logo">
+                <img src="../assets/SVGs/tuxsmall.png" class="logo" alt="Linux-Lab logo">
             </div> 
             <div class="navbar__right">
                 <ul class="navbar__links">

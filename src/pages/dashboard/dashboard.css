@@ -1,167 +1,175 @@
-@import url('../../styles/index.css');
-@import url('../../components/Navigation/Navigation.css');
+@import url("../../styles/index.css");
+@import url("../../components/Navigation/Navigation.css");
 
-*{
+* {
+  color: var(--text-color-main);
+}
+
+.navigation__contaner {
+  background-color: var(--color-background);
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+.layout {
+  display: flex;
+  max-width: 100vw;
+  width: 100vw;
+  height: calc(100vh - var(--nav-height));
+  background-color: var(--color-background);
+}
+
+.dashboard__container {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.setting__container{
+
+}
+
+.dashboard__cards {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(326px, 0.8fr));
+  justify-content: center;
+  gap: var(--spce-lg);
+  padding: var(--spce-lg);
+  padding-top: var(--spce-med);
+}
+
+.dashboard__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spce-lg);
+}
+
+.greeting__text {
+  padding-top: var(--spce-med);
+  font-size: var(--text-size-2xl);
+  align-self: center;
+  font-family: "Fira-Code", monospace;
+  /* margin-left: var(--spce-lg); */
+}
+
+.dashboard__card {
+  border: solid rgba(255, 255, 255, 0.301) 1px;
+  border-radius: var(--radius-med);
+  background-color: var(--color-background-dark);
+  display: flex;
+  flex-direction: column;
+  /* min-width: 362px; */
+  height: fit-content;
+  padding: var(--spce-med);
+  transition: transform 0.1s ease;
+}
+
+.dashboard__card:hover {
+  transform: scale(1.01);
+}
+
+.card__content {
+  padding: var(--spce-xsm) var(--spce-med) var(--spce-xsm) var(--spce-med);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card__title {
+  font-weight: 600;
+  font-size: var(--text-size-lg);
+}
+
+.card__ul {
+  list-style: none;
+}
+
+.card__subtitle a {
+  font-size: var(--text-size-lg);
+  color: var(--text-color-secondary);
+}
+
+.card__text {
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-base);
+}
+
+.card__message {
+  color: var(--text-color-main);
+  text-align: center;
+  font-size: var(--text-size-xl);
+  margin-top: var(--spce-med);
+  margin-bottom: var(--spce-med);
+}
+
+.card__button {
+  width: 100%;
+  margin-top: var(--spce-med);
+  padding: 0;
+}
+
+.card__button a {
+  display: inline-block;
+  padding: 10px 0 10px 0;
+}
+
+.dashboard__card--progress {
+  min-height: 316px;
+}
+
+.card__content--progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spce-xsm);
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.card__progress-bar {
+  font-family: "Fira Code", "Gill Sans MT", Calibri, "Trebuchet MS", monospace;
+}
+
+.card__link:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .sidebar__placeholder {
+    width: var(--sidebar-width);
+    height: 100%;
+  }
+
+  .sidebar {
+    transform: translate(0);
+    box-shadow: none;
+    border-right: solid 1px rgba(255, 255, 255, 0.151);
+  }
+
+  .sidebar__button--close {
+    display: none;
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__date.navbar__date {
+    display: block;
     color: var(--text-color-main);
-}
-
-.layout{
-    display: flex;
-    max-width: 100vw;
-    width: 100vw;
-    height: calc(100vh - var(--nav-height) );
-}
-
-.dashboard__container{
-    flex: 1;
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-}
-
-
-.dashboard__cards{
-    width: 100%;
-    max-width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(326px,0.8fr));
-    justify-content: center;
-    gap: var(--spce-lg);
-    padding: var(--spce-lg);
-    padding-top: var(--spce-med);
-}
-
-
-.dashboard__column{
-    display: flex;
-    flex-direction: column;
-    gap: var(--spce-lg);
-
-}
-
-.greeting__text{
-    padding-top: var(--spce-med);
-    font-size: var(--text-size-2xl);
-    align-self: center;
-    /* margin-left: var(--spce-lg); */
-}
-
-.dashboard__card{
-    border: solid var(--border-base);
-    border-radius: var(--radius-med);
-    background-color: var(--color-background-dark);
-    display: flex;
-    flex-direction: column;
-    /* min-width: 362px; */
-    height: fit-content;
-    padding: var(--spce-med);
-    transition: transform 0.1s ease;
-}
-
-.dashboard__card:hover{
-    transform: scale(1.01) ;
-}
-
-
-.card__content{
-    padding: var(--spce-xsm)var(--spce-med)var(--spce-xsm)var(--spce-med);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-
-.card__title{
-    font-weight: 600;
-    font-size: var(--text-size-lg);
-}
-
-.card__ul{
-    list-style: none;
-}
-
-.card__subtitle a{
-    font-size: var(--text-size-lg);
-    color: var(--text-color-secondary);
-}
-
-.card__text{
-    color: var(--text-color-secondary);
     font-size: var(--text-size-base);
-}
+    font-family: "Fira-code", monospace;
+  }
 
-
-.card__message{
-    color: var(--text-color-main);
-    text-align: center;
-    font-size: var(--text-size-xl);
-    margin-top: var(--spce-med);
-    margin-bottom: var(--spce-med);
-}
-
-.card__button{
-    width: 100%;
-    margin-top: var(--spce-med);
-    padding: 0;
-}
-
-.card__button a{
-    display: inline-block;
-    padding: 10px 0 10px 0;
-}
-
-.dashboard__card--progress{
-    min-height: 316px;
-}
-
-.card__content--progress{
-    display: flex;
-    flex-direction: column;
-    gap: var(--spce-xsm);
-    justify-content: center;
-    align-items: center;
-    flex:1;
-}
-
-.card__progress-bar{
-    font-family:'Fira Code', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.card__link:hover{
-    text-decoration: underline;
-}
-
-
-@media (min-width:768px){
-
-    .sidebar__placeholder{
-        width: var(--sidebar-width);
-        height: 100%;
-    }
-
-    .sidebar{
-        transform: translate(0);
-        box-shadow: none;
-    }
-
-    .sidebar__button--close{
-        display: none;
-    }
-
-    .navbar__links{
-        display: none;
-    }
-
-    .navbar__date.navbar__date{
-        display: block;
-        color: var(--text-color-main);
-        font-size: var(--text-size-base);
-    }
-
-    .greeting__text{
-        align-self: flex-start;
-        margin-left: var(--spce-lg);
-    }
+  .greeting__text {
+    align-self: flex-start;
+    margin-left: var(--spce-lg);
+  }
 }
