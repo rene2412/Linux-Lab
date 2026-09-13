@@ -36,11 +36,13 @@ require_once __DIR__. "/../../../vendor/autoload.php";
                 ?>
             </div>
             <p class="separator">Or</p>
+            
             <?php 
+            /*
             //    session_start();
                $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
                $dotenv->load();
-               
+            
                $client = new Google\Client;
                $client->setClientId($_ENV["CLIENT_ID"]);
                $client->setClientSecret($_ENV["CLIENT_SECRET"]);
@@ -50,7 +52,9 @@ require_once __DIR__. "/../../../vendor/autoload.php";
                 $client->addScope("profile");
 
                 $auth_url = $client->createAuthUrl();            
-		?>
+                */
+            ?>
+        
             <a class="google__anchor" href="<?= htmlspecialchars($auth_url) ?>">
             <button class="google__button"> <img class="google__image" alt="Google Logo" src="../assets/SVGs/google.png" /> Sign In With Google</button></a>
             <div>

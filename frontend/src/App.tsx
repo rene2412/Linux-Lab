@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import './App.css';
 import { Navbar } from './components/layout';
 import Navmenu from './components/layout/Navmenu';
@@ -12,7 +12,6 @@ import Modules from './sections/Modules/Modules';
 import MediaLarge from './sections/MediaLarge/MediaLarge';
 import Footer from './components/ui/Footer';
 import { ReactLenis, useLenis } from 'lenis/react';
-import { useEffect } from 'react';
 import gsap from 'gsap';
 
 function App() {

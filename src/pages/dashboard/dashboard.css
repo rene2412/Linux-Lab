@@ -109,6 +109,33 @@ body {
   margin-bottom: var(--spce-med);
 }
 
+.feedback__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--spce-xsm);
+  margin-bottom: var(--spce-sm);
+}
+
+#feedback-message-count,
+#feedback-message-warning,
+#general-comments-message-count,
+#general-comments-message-warning {
+  font-size: var(--text-size-sm);
+  margin: 0;
+  text-align: left;
+}
+
+#feedback-message-warning,
+#general-comments-message-warning {
+  color: #fca5a5;
+}
+
+.feedback__input--error {
+  border-color: rgba(252, 165, 165, 0.9);
+  box-shadow: 0 0 0 1px rgba(252, 165, 165, 0.45);
+}
+
 .card__button {
   width: 100%;
   margin-top: var(--spce-med);
@@ -139,6 +166,168 @@ body {
 
 .card__link:hover {
   text-decoration: underline;
+}
+
+.feedback__form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.feedback__history-label {
+  color: var(--text-color-secondary);
+  font-size: var(--text-size-sm);
+  margin: 0 0 var(--spce-xsm);
+}
+
+.feedback__history {
+  width: 100%;
+  margin-bottom: var(--spce-sm);
+  padding: var(--spce-xsm);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-med);
+  background: var(--color-background);
+  color: var(--text-color-main);
+  font: inherit;
+}
+
+.rating {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--spce-med);
+}
+
+.rating__stars {
+  display: flex;
+  justify-content: center;
+  gap: var(--spce-xsm);
+  margin-top: var(--spce-xsm);
+}
+
+.rating__star {
+  padding: 0;
+  border: 0;
+  background: var(--color-background);
+  color: transparent;
+  cursor: pointer;
+  font-size: var(--text-size-2xl);
+  line-height: 1;
+  -webkit-text-stroke: 1px #d4af37;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.rating__star:hover,
+.rating__star:focus-visible,
+.rating__star--selected {
+  color: var(--color-highlight);
+}
+
+.rating__star:hover,
+.rating__star:focus-visible {
+  transform: translateY(-2px);
+}
+
+.feedback__input {
+  width: 100%;
+  min-height: 120px;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: var(--spce-xsm);
+  border: 1px solid rgba(255, 255, 255, 0.301);
+  border-radius: var(--radius-med);
+  background-color: var(--color-background);
+  color: var(--text-color-main);
+  font: inherit;
+}
+
+.feedback__input::placeholder {
+  color: var(--text-color-secondary);
+}
+
+.dashboard__card--feedback .card__message {
+  min-height: 1.5em;
+  margin-bottom: 0;
+}
+
+.dashboard__card--general-comments .card__message {
+  min-height: 1.5em;
+  margin-bottom: 0;
+}
+
+.feedback__submit {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.rating-confirm-modal {
+  margin: auto;
+  width: min(92vw, 440px);
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-med);
+  background: var(--color-background-dark);
+  color: var(--text-color-main);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.rating-confirm-modal::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.rating-confirm-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spce-med);
+  padding: var(--spce-lg);
+}
+
+.rating-confirm-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spce-med);
+}
+
+.rating-confirm-modal__header h3 {
+  color: var(--text-color-main);
+  font-size: var(--text-size-xl);
+}
+
+.rating-confirm-modal__button,
+.rating-confirm-modal__close {
+  font: inherit;
+}
+
+.rating-confirm-modal__close {
+  border: 0;
+  background: transparent;
+  color: var(--text-color-main);
+  font-size: var(--text-size-2xl);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.rating-confirm-modal__content p {
+  color: var(--text-color-secondary);
+  line-height: 1.6;
+}
+
+.rating-confirm-modal__actions {
+  display: flex;
+  gap: var(--spce-sm);
+  justify-content: flex-end;
+  margin-top: var(--spce-sm);
+}
+
+.rating-confirm-modal__button {
+  min-width: 120px;
+}
+
+.rating-confirm-modal__button--cancel {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-color-main);
 }
 
 @media (min-width: 768px) {

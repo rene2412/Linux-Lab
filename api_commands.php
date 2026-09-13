@@ -2570,9 +2570,14 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
         }
         break;
     case 'ls':
-        if ($arg === '-l') {
-            if (count($args) > 2) {
-                $output = "Error: Invalid ls -l command";
+        if ($arg === '-l' || $arg === '-la') {
+	   
+	   $totalChars = 0;
+	   for ($i = 0; $i < strlen($arg); $i++) {
+		   $totalChars ++;	
+	   }
+	   if ($totalChars > 3) {
+                $output = $totalChars . ": " . "Error: Invalid LS command";
                 break;
             }
             $output = process_ls_l($fileSystem, $currentDir);
@@ -2585,7 +2590,7 @@ if ($lessonID === 7 && GetNetworkMultChoiceAnswer($lessonID) === 'A') {
         }
             break;
         }
-        if (count($args) > 1) {
+        if (count($args) > 2) {
             $output = "Error: Invalid ls command";
             break;
         }    
