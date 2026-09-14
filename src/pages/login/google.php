@@ -1,100 +1,91 @@
    <?php
-   session_start();
-   require_once __DIR__. "/../../../vendor/autoload.php";
-   require_once "../../../includes/database.inc.php";
-   require_once "../../../includes/signup_contr.inc.php";
-   require_once "../../../includes/signup.inc.php";
-   require_once "../../../includes/signup_model.inc.php";
-   require_once "../../../includes/login_model.inc.php";
+session_start();
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
-    $dotenv->load();
-    $client = new Google\Client;
-    $client->setClientId($_ENV["CLIENT_ID"]);
-    $client->setClientSecret($_ENV["CLIENT_SECRET"]);
-    $client->setRedirectUri("https://linux-lab.live/src/pages/login/google.php");
+require_once __DIR__ . "/../../../vendor/autoload.php";
+require_once "../../../includes/database.inc.php";
+require_once "../../../includes/signup_contr.inc.php";
+require_once "../../../includes/signup.inc.php";
+require_once "../../../includes/signup_model.inc.php";
+require_once "../../../includes/login_model.inc.php";
 
-   function TrimUsername(string $email) {
+function TrimUsername(string $email): string {
     return explode('@', $email)[0];
-   }
+}
 
-    if (! isset($_GET["code"])) {
-        exit("Login Failed!");
-    }
-    $_SESSION["auth_type"] = "google";
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+$dotenv->load();
+
+$client = new Google\Client();
+$client->setClientId($_ENV["CLIENT_ID"]);
+$client->setClientSecret($_ENV["CLIENT_SECRET"]);
+$client->setRedirectUri("https://linux-lab.live/src/pages/login/google.php");
+
+if (!isset($_GET["code"])) {
+    exit("Login Failed!");
+}
+
+$_SESSION["auth_type"] = "google";
+
+try {
     $token = $client->fetchAccessTokenWithAuthCode($_GET["code"]);
+    if (isset($token["error"])) {
+        exit("Google OAuth token error: " . $token["error"]);
+    }
+
     $client->setAccessToken($token["access_token"]);
     $oauth = new Google\Service\Oauth2($client);
     $userinfo = $oauth->userinfo->get();
 
-    $firstName = explode(' ', trim($userinfo->name))[0];
     $userEmail = $userinfo->email;
-    $_SESSION['user_username'] = $firstName;
+    $firstName = explode(' ', trim($userinfo->name))[0] ?? "User";
+
     $_SESSION['email'] = $userEmail;
+    $_SESSION['user_username'] = $firstName;
 
     if (email_is_registered($pdo, $userEmail)) {
-        session_set_cookie_params([
-        'lifetime' => 0, // session cookie (dies on browser close)
-        'path' => '/',
-        'domain' => '', 
-        'secure' => false,
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]);
+        $username = GetUsernameByEmail($pdo, $userEmail);
+        $result = GetUser($pdo, $username);
 
-    $username = GetUsernameByEmail($pdo, $userEmail);
-    $result = GetUser($pdo, $username); 
-    $_SESSION["user_id"] = $result["id"];
-    $newUsername = TrimUsername($userEmail);
-    $_SESSION["user_username"] = $newUsername;
-    $_SESSION["last_regeneration"] = time();
-try {
-    $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
-    $stmt->execute([$_SESSION["user_id"]]);
-    if ($_SESSION["user_id"] !== null) {
-        require_once '../../../includes/cookies.inc.php';
-        $json_response = json_encode($response);
-        setcookie('user_info', $json_response,  0 , "/"); // Expires when browser closes
-    }
-    header('Location: ../../../src/pages/dashboard/dashboard.html');
-    $pdo = null;
-    $statement = null;
-    die();
-    }   catch (PDOException $e) {
-         echo "Caught exception: " . $e->getMessage();
-    }
-}
-
-    try {
-        $result = create_user($pdo, "Google", $userEmail, $userEmail);
-		$newSessionId = session_create_id();		
-	    $sessionId = $newSessionId . "_" . $result["id"];
-		session_id($sessionId);
-		$_SESSION["user_id"] = $result["id"];
-        $newUsername = TrimUsername($userEmail);
-		$_SESSION["user_username"] = $newUsername;
-		$_SESSION["last_regeneration"] = time();
-		$user_id = $_SESSION["user_id"];
-
-        //for current module
-		$sql = $pdo->prepare("INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson, current_module) VALUES (?, ?, ?, ?, ?)");
-		$sql->execute([$user_id, 0, 0, 0, 'The Basics']);
-		//set user is logged
-		$stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
-        $stmt->execute([$_SESSION["user_id"]]);
-
-		if ($_SESSION["user_id"] !== null) {
-			require_once '../../../includes/cookies.inc.php';
-			$json_response = json_encode($response);
-			setcookie('user_info', $json_response, 0, "/"); // Expires when browser closes
-		}
-		
-    	    header('Location: ../../../src/pages/dashboard/dashboard.html');
-	    $pdo = null;
-	    $stmt = null;	 
-	    die();
-
-	} catch (PDOException $e) {
-        echo "Caught exception: " . $e->getMessage();
+        if (!$result || !isset($result['id'])) {
+            die("User lookup failed after Google login.");
         }
+
+        $_SESSION['user_id'] = (int) $result['id'];
+        $_SESSION['user_username'] = TrimUsername($userEmail);
+        $_SESSION['last_regeneration'] = time();
+
+        $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+
+        require_once '../../../includes/cookies.inc.php';
+        setcookie('user_info', json_encode($response), 0, '/');
+
+        header('Location: ../../../src/pages/dashboard/dashboard.html');
+        exit;
+    }
+
+    $result = create_user($pdo, "Google", $userEmail, $userEmail);
+    if (!$result || !isset($result['id'])) {
+        die("User creation failed after Google login.");
+    }
+
+    $_SESSION['user_id'] = (int) $result['id'];
+    $_SESSION['user_username'] = TrimUsername($userEmail);
+    $_SESSION['last_regeneration'] = time();
+
+    $user_id = $_SESSION['user_id'];
+    $sql = $pdo->prepare("INSERT INTO user_progress (user_id, lesson_id, lessons_completed, current_lesson, current_module) VALUES (?, ?, ?, ?, ?)");
+    $sql->execute([$user_id, 0, 0, 0, 'The Basics']);
+
+    $stmt = $pdo->prepare("UPDATE users SET is_logged_in = 1 WHERE id = ?");
+    $stmt->execute([$user_id]);
+
+    require_once '../../../includes/cookies.inc.php';
+    setcookie('user_info', json_encode($response), 0, '/');
+
+    header('Location: ../../../src/pages/dashboard/dashboard.html');
+    exit;
+} catch (Exception $e) {
+    echo "Caught exception: " . $e->getMessage();
+}
 
