@@ -1,7 +1,7 @@
 import { Navigation } from "../../components/Navigation/index.js";
 import {SettingModal} from "../../components/SettingModal/index.js"
 
-const API_BASE_URL = "https://linux-lab.live";
+const API_BASE_URL = "http://localhost";
 const RATING_API_URL = `${API_BASE_URL}/api/rating`;
 const RESUBMIT_RATING_API_URL = `${API_BASE_URL}/api/rating/resubmit`;
 const COMMENTS_API_URL = `${API_BASE_URL}/api/comments`;
