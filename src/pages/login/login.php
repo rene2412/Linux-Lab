@@ -38,8 +38,7 @@ require_once __DIR__. "/../../../vendor/autoload.php";
             <p class="separator">Or</p>
             
             <?php 
-            /*
-            //    session_start();
+	       session_start();
                $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
                $dotenv->load();
             
@@ -52,7 +51,6 @@ require_once __DIR__. "/../../../vendor/autoload.php";
                 $client->addScope("profile");
 
                 $auth_url = $client->createAuthUrl();            
-                */
             ?>
         
             <a class="google__anchor" href="<?= htmlspecialchars($auth_url) ?>">

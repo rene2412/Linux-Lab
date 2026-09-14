@@ -1,4 +1,4 @@
-#!/home/rene/Linux-Lab/feedback/.venv/bin/python3
+#!/var/www/html/rating/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

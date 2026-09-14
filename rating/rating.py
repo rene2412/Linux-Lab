@@ -9,14 +9,17 @@ app = Flask(__name__)
 CORS(app)
 MAX_REVIEW_LENGTH = 1000
 
-
 def format_db_timestamp(value):
     if value is None:
         return None
-    if isinstance(value, datetime):
-        return value.strftime('%d-%m-%Y')
-    return datetime.strptime(str(value), '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y')
-
+    if isinstance(value, str):
+        try:
+            return datetime.strptime(value, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d')
+        except ValueError:
+            return value
+    if hasattr(value, "strftime"):
+        return value.strftime('%Y-%m-%d')
+    return str(value)
 
 def get_current_date():
     return datetime.now().date()
@@ -46,7 +49,7 @@ def submit_rating():
             host='localhost',
             database='Linux_Lab',
             user='labuser',
-            password='your_password_here'
+            password='messiGoat'
         )
         if connection.is_connected():
             cursor = connection.cursor()
@@ -99,7 +102,7 @@ def resubmit_rating():
             host='localhost',
             database='Linux_Lab',
             user='labuser',
-            password='your_password_here'
+            password='messiGoat'
         )
         if connection.is_connected():
             cursor = connection.cursor()
@@ -118,7 +121,7 @@ def resubmit_rating():
                         'message': 'You have exceeded your daily submission limit. Please try again later.'
                     }), 400
 
-            query = "UPDATE ratings SET stars = %s, review = %s, last_review = NOW() WHERE user_id = %s"
+            query = "UPDATE ratings SET stars = %s, review = %s WHERE user_id = %s"
             values = (rating, message, user_id)
             cursor.execute(query, values)
             connection.commit()
@@ -160,7 +163,7 @@ def show_rating():
             host='localhost',
             database='Linux_Lab',
             user='labuser',
-            password='your_password_here'
+            password='messiGoat'
         )
         if connection.is_connected():
             cursor = connection.cursor()

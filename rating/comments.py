@@ -36,12 +36,13 @@ def validate_comment_text(comment):
 @app.route('/api/comments', methods=['POST'])
 def submit_comment():
     print("Received request to submit comment.")
-    data = request.get_json() or {}
-    username = data.get('username')
+    data = request.get_json(silent=True) or {}
     user_id = data.get('user_id')
     comment = data.get('comment')
+
     if comment is None:
         comment = data.get('comments')
+
     if isinstance(comment, str):
         comment = comment.strip()
 
@@ -52,8 +53,6 @@ def submit_comment():
     if not valid:
         return jsonify({'status': 'error', 'message': message}), 400
 
-    print(f"Comment: {comment}, User: {username}, User ID: {user_id}")
-
     connection = None
     cursor = None
     try:
@@ -61,20 +60,24 @@ def submit_comment():
             host='localhost',
             database='Linux_Lab',
             user='labuser',
-            password='your_password_here'
+            password='messiGoat'
         )
+
         if connection.is_connected():
             cursor = connection.cursor()
-            query = "INSERT INTO user_global_comments (user_id, username, comment) VALUES (%s, %s, %s)"
-            values = (user_id, username, comment)
+            query = "INSERT INTO comments (user_id, comments) VALUES (%s, %s)"
+            values = (user_id, comment)
             cursor.execute(query, values)
             connection.commit()
+            print(f"User ID: {user_id}, Comment: {comment}")
             return jsonify({'status': 'success', 'message': 'Comment received!'})
 
         return jsonify({'status': 'error', 'message': 'Could not connect to database.'}), 500
+
     except Error as e:
         print(f"Error while connecting to MySQL: {e}")
-        return jsonify({'status': 'error', 'message': 'Failed to submit comment.'})
+        return jsonify({'status': 'error', 'message': 'Failed to submit comment.'}), 500
+
     finally:
         if cursor is not None:
             cursor.close()
@@ -95,18 +98,18 @@ def comment_history():
             host='localhost',
             database='Linux_Lab',
             user='labuser',
-            password='your_password_here'
+            password='messiGoat'
         )
+
         if connection.is_connected():
             cursor = connection.cursor()
-            query = "SELECT id, username, comment, modified FROM user_global_comments WHERE user_id = %s ORDER BY modified DESC"
+            query = "SELECT id, user_id, comments, created_at FROM comments WHERE user_id = %s ORDER BY created_at DESC"
             cursor.execute(query, (user_id,))
             rows = cursor.fetchall()
 
             history = [
                 {
                     'id': row[0],
-                    'username': row[1],
                     'comment': row[2],
                     'modified': format_db_timestamp(row[3])
                 }
@@ -116,9 +119,11 @@ def comment_history():
             return jsonify({'status': 'success', 'history': history})
 
         return jsonify({'status': 'error', 'message': 'Could not connect to database.'}), 500
+
     except Error as e:
         print(f"Error while connecting to MySQL: {e}")
-        return jsonify({'status': 'error', 'message': 'Failed to retrieve comment history.'})
+        return jsonify({'status': 'error', 'message': 'Failed to retrieve comment history.'}), 500
+
     finally:
         if cursor is not None:
             cursor.close()
@@ -127,4 +132,4 @@ def comment_history():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5000, debug=False, use_reloader=False)

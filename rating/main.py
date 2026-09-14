@@ -17,6 +17,5 @@ app.add_url_rule('/api/rating/show', view_func=show_rating, methods=['GET', 'POS
 app.add_url_rule('/api/comments', view_func=submit_comment, methods=['POST'])
 app.add_url_rule('/api/comments/history', view_func=comment_history, methods=['GET'])
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
